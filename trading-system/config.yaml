@@ -1,0 +1,48 @@
+# ------------------------------------------------------------------
+# Trading bot configuration
+# mode: paper  -> live market data, simulated money (safe, default)
+# mode: live   -> real orders with your API keys (your risk)
+# ------------------------------------------------------------------
+mode: paper
+exchange: binance          # any ccxt exchange id: binance, bybit, kraken, okx...
+symbols:
+  - BTC/USDT
+  - ETH/USDT
+timeframe: 5m              # signal timeframe (1m, 5m, 15m...)
+poll_interval_sec: 15      # how often the engine refreshes data
+history_candles: 200       # candles kept in memory for indicators
+
+starting_balance: 10000    # paper mode starting equity (USDT)
+
+# Set to true only when you have read the README section on live
+# trading and accept that all losses are yours.
+i_understand_live_trading_risk: false
+
+fees:
+  taker_bps: 10            # 0.10% taker fee (Binance spot default)
+  slippage_bps: 2          # assumed slippage per market order
+
+strategy:
+  name: regime_combo       # regime_combo | momentum_breakout | mean_reversion
+  ema_fast: 20
+  ema_slow: 50
+  atr_period: 14
+  trend_threshold: 1.0     # |ema_fast - ema_slow| / ATR above this = trending
+  breakout_lookback: 20    # candles for the breakout high
+  volume_mult: 1.5         # volume must exceed this x its 20-candle average
+  bb_period: 20
+  bb_std: 2.0
+  rsi_period: 14
+  rsi_oversold: 30
+
+risk:
+  risk_per_trade_pct: 0.5  # % of equity lost if the stop is hit
+  stop_atr_mult: 1.5       # stop distance in ATRs
+  take_profit_r: 2.0       # take profit at N x the risked distance
+  max_position_pct: 25     # max % of equity in a single position
+  max_open_positions: 2
+  max_daily_loss_pct: 3.0  # trading halts for the day past this drawdown
+  cooldown_candles: 3      # wait this many candles after a losing trade
+
+logging:
+  dir: logs                # trade + equity CSVs are written here
