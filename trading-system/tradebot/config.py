@@ -27,6 +27,8 @@ def load_config(path="config.yaml"):
 
     if cfg.mode not in ("paper", "live"):
         raise SystemExit(f"config error: mode must be 'paper' or 'live', got {cfg.mode!r}")
+    if cfg.get("platform", "ccxt") not in ("ccxt", "mt5"):
+        raise SystemExit(f"config error: platform must be 'ccxt' or 'mt5', got {cfg.platform!r}")
     if cfg.timeframe not in TIMEFRAME_SEC:
         raise SystemExit(f"config error: unsupported timeframe {cfg.timeframe!r}")
 
@@ -36,7 +38,10 @@ def load_config(path="config.yaml"):
                 "live mode requires 'i_understand_live_trading_risk: true' in config.yaml.\n"
                 "Read the README's live trading section first."
             )
-        if not os.getenv("EXCHANGE_API_KEY") or not os.getenv("EXCHANGE_API_SECRET"):
+        # MT5 authenticates through the logged-in terminal, not API keys
+        if cfg.get("platform", "ccxt") == "ccxt" and (
+            not os.getenv("EXCHANGE_API_KEY") or not os.getenv("EXCHANGE_API_SECRET")
+        ):
             raise SystemExit("live mode requires EXCHANGE_API_KEY and EXCHANGE_API_SECRET in .env")
 
     return cfg

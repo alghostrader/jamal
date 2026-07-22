@@ -4,8 +4,9 @@
 # mode: live   -> real orders with your API keys (your risk)
 # ------------------------------------------------------------------
 mode: paper
-exchange: binance          # any ccxt exchange id: binance, bybit, kraken, okx...
-symbols:
+platform: ccxt             # ccxt = crypto exchange | mt5 = MetaTrader 5 (Windows, see MT5-SETUP.md)
+exchange: binance          # any ccxt exchange id: binance, bybit, kraken, okx... (ignored for mt5)
+symbols:                   # for mt5 use your broker's exact names, e.g. [BTCUSD, ETHUSD]
   - BTC/USDT
   - ETH/USDT
 timeframe: 5m              # signal timeframe (1m, 5m, 15m...)

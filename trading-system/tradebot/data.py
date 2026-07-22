@@ -42,6 +42,14 @@ class MarketData:
         return df.drop_duplicates(subset="time").reset_index(drop=True)
 
 
+def make_data(cfg):
+    """Data feed for the configured platform: ccxt exchange or MetaTrader 5."""
+    if cfg.get("platform", "ccxt") == "mt5":
+        from .mt5_adapter import MT5Data
+        return MT5Data(cfg)
+    return MarketData(cfg)
+
+
 def load_csv(path):
     """Load candles from CSV with columns: time, open, high, low, close, volume."""
     df = pd.read_csv(path)

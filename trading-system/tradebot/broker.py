@@ -101,6 +101,10 @@ class PaperBroker:
             p.qty * prices.get(s, p.entry_price) for s, p in self.positions.items()
         )
 
+    def reconcile(self, symbol, ts):
+        """Hook for brokers whose positions can close server-side (MT5)."""
+        return None
+
     def _log(self, ts, symbol, side, qty, price, fee, pnl, reason):
         if self._log_path:
             with open(self._log_path, "a", newline="") as f:
@@ -149,5 +153,8 @@ class LiveBroker(PaperBroker):
 
 def make_broker(cfg, log_dir=None):
     if cfg.mode == "live":
+        if cfg.get("platform", "ccxt") == "mt5":
+            from .mt5_adapter import MT5Broker
+            return MT5Broker(cfg, log_dir)
         return LiveBroker(cfg, log_dir)
     return PaperBroker(cfg, log_dir)

@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from .backtest import summarize
 from .broker import make_broker
 from .config import timeframe_seconds
-from .data import MarketData
+from .data import make_data
 from .risk import RiskManager
 from .strategy import make_strategy
 
@@ -25,7 +25,7 @@ def now_utc():
 class Engine:
     def __init__(self, cfg, data=None):
         self.cfg = cfg
-        self.data = data or MarketData(cfg)
+        self.data = data or make_data(cfg)
         self.strategy = make_strategy(cfg)
         self.tf_sec = timeframe_seconds(cfg)
         self.risk = RiskManager(cfg, self.tf_sec)
@@ -69,6 +69,10 @@ class Engine:
         price = float(df["close"].iloc[-1])
         self.prices[symbol] = price
         ts = now_utc()
+
+        pnl = self.broker.reconcile(symbol, ts)
+        if pnl is not None:
+            self.risk.on_trade_closed(symbol, pnl, ts)
 
         pos = self.broker.positions.get(symbol)
         if pos is not None:

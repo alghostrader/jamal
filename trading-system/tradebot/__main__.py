@@ -40,8 +40,8 @@ def main():
         print_report(args.csv, run_backtest(cfg, df, args.symbol or "CSV/DATA"))
         return
 
-    from .data import MarketData
-    data = MarketData(cfg)
+    from .data import make_data
+    data = make_data(cfg)
     for symbol in [args.symbol] if args.symbol else cfg.symbols:
         print(f"fetching {args.days}d of {cfg.timeframe} candles for {symbol}...")
         df = data.history(symbol, args.days)

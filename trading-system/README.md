@@ -3,7 +3,8 @@
 An automated trading system that watches crypto markets in real time, finds
 entry opportunities, sizes positions by risk, executes trades, and enforces
 hard risk limits. Runs against any [ccxt](https://github.com/ccxt/ccxt)
-exchange (Binance, Bybit, Kraken, OKX, ...).
+exchange (Binance, Bybit, Kraken, OKX, ...) — or against **MetaTrader 5**
+via its official Python API (Windows; see [MT5-SETUP.md](MT5-SETUP.md)).
 
 **Default mode is paper trading**: live market data, simulated money,
 realistic fees and slippage. Live trading is opt-in and double-gated.
