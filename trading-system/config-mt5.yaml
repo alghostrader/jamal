@@ -1,0 +1,49 @@
+# ------------------------------------------------------------------
+# MetaTrader 5 preset: gold + majors, 15m signals.
+# Usage (Windows, from the trading-system folder):
+#   venv\Scripts\python -m tradebot --config config-mt5.yaml backtest --days 60
+#   venv\Scripts\python -m tradebot --config config-mt5.yaml run
+# ------------------------------------------------------------------
+mode: paper                # switch to live ONLY with the terminal on a DEMO account
+platform: mt5
+exchange: binance          # ignored when platform is mt5
+symbols:                   # must match your broker's Market Watch names exactly
+  - XAUUSD                 # gold (some brokers call it GOLD or XAUUSD.r)
+  - EURUSD
+  - GBPUSD
+timeframe: 15m             # spreads eat 5m scalps on forex/gold; 15m is saner
+poll_interval_sec: 15
+history_candles: 200
+
+starting_balance: 10000    # paper mode only; live uses the account balance
+
+i_understand_live_trading_risk: false
+
+fees:
+  taker_bps: 2             # rough spread cost on majors for paper simulation
+  slippage_bps: 1
+
+strategy:
+  name: regime_combo       # regime_combo | momentum_breakout | mean_reversion
+  ema_fast: 20
+  ema_slow: 50
+  atr_period: 14
+  trend_threshold: 1.0
+  breakout_lookback: 20
+  volume_mult: 1.5
+  bb_period: 20
+  bb_std: 2.0
+  rsi_period: 14
+  rsi_oversold: 30
+
+risk:
+  risk_per_trade_pct: 0.5
+  stop_atr_mult: 1.5
+  take_profit_r: 2.0
+  max_position_pct: 25
+  max_open_positions: 2
+  max_daily_loss_pct: 3.0
+  cooldown_candles: 3
+
+logging:
+  dir: logs
