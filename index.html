@@ -1,0 +1,254 @@
+<title>IPTV Portfolio — Daily SEO Dashboard</title>
+<style>
+  .viz-root{color-scheme:light;
+    --surface:#fcfcfb;--card:#ffffff;--line:#e7e6e2;--ink:#0b0b0b;--ink2:#52514e;--ink3:#8a8983;
+    --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--up:#008300;--down:#c22f22;--acc:#2a78d6}
+  @media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .viz-root{color-scheme:dark;
+    --surface:#1a1a19;--card:#222221;--line:#383734;--ink:#ffffff;--ink2:#c3c2b7;--ink3:#8a897f;
+    --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--up:#39b54a;--down:#ef8d82;--acc:#3987e5}}
+  :root[data-theme="dark"] .viz-root{color-scheme:dark;
+    --surface:#1a1a19;--card:#222221;--line:#383734;--ink:#ffffff;--ink2:#c3c2b7;--ink3:#8a897f;
+    --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--up:#39b54a;--down:#ef8d82;--acc:#3987e5}
+  body{margin:0}
+  .viz-root{background:var(--surface);color:var(--ink);font:14px/1.5 ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 20px 70px}
+  h1{font-size:20px;font-weight:750;letter-spacing:-.01em;margin:0}
+  .meta{color:var(--ink3);font-size:12.5px;margin:3px 0 16px}
+  nav{display:flex;gap:6px;margin-bottom:20px;border-bottom:1px solid var(--line)}
+  nav button{background:none;border:none;border-bottom:2px solid transparent;color:var(--ink2);
+    font:600 13.5px inherit;font-family:inherit;padding:8px 14px;cursor:pointer}
+  nav button.on{color:var(--ink);border-bottom-color:var(--acc)}
+  nav button:focus-visible,.copybtn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+  section{display:none} section.on{display:block}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin-bottom:24px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .thead{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .swatch{width:10px;height:10px;border-radius:3px;flex:none}
+  .s1{background:var(--s1)}.s2{background:var(--s2)}.s3{background:var(--s3)}.s4{background:var(--s4)}
+  .tname{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink2)}
+  .tnum{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+  .tunit{font-size:11px;font-weight:500;color:var(--ink3);margin-left:6px}
+  .trow{font-size:12px;color:var(--ink2);margin-top:3px}.trow.muted{color:var(--ink3)}
+  .d{font-variant-numeric:tabular-nums;font-weight:600}.d.up{color:var(--up)}.d.down{color:var(--down)}.d.flat{color:var(--ink3)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:20px}
+  .card h2{font-size:14px;font-weight:650;margin:0 0 2px}
+  .card .sub{font-size:12px;color:var(--ink3);margin:0 0 12px}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink2);margin-bottom:8px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  #chartbox{position:relative}
+  #tip{position:absolute;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:7px;
+    padding:7px 10px;font-size:12px;display:none;box-shadow:0 2px 10px rgba(0,0,0,.12);white-space:nowrap;z-index:2}
+  svg text{fill:var(--ink3);font:10.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+  svg .dl{font:11px ui-sans-serif,-apple-system,sans-serif;font-weight:650}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;font-variant-numeric:tabular-nums}
+  th{color:var(--ink3);font-weight:600;text-align:right;padding:6px 8px;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+  td:nth-child(2),td:nth-child(3),th:nth-child(2),th:nth-child(3){text-align:left}
+  tr:last-child td{border-bottom:none}
+  .overflow{overflow-x:auto}
+  .lcl{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink2)} .lcl li{margin-bottom:6px}
+  .pcard .phead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+  .copybtn{background:var(--acc);color:#fff;border:none;border-radius:7px;padding:7px 14px;
+    font:600 12.5px inherit;font-family:inherit;cursor:pointer}
+  .copybtn.ok{background:var(--up)}
+  .ptext{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+    font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow-x:auto;
+    max-height:340px;overflow-y:auto;margin:0;color:var(--ink2)}
+</style>
+<div class="viz-root"><div class="wrap">
+  <h1>IPTV Portfolio — Daily SEO Dashboard</h1>
+  <p class="meta">Full audit 2026-07-28 · GSC window 2026-06-26 → 2026-07-26 (lags ~2 days) · DataForSEO backlinks/keywords/SERP · updated on request (say "update the dashboard")</p>
+  <nav>
+    <button class="on" data-tab="data">📊 Data</button>
+    <button data-tab="prompts">📝 Fix Prompts</button>
+    <button data-tab="plan">🗺 Plan</button>
+  </nav>
+  <section id="data" class="on">
+    <div class="tiles"><div class="tile"><div class="thead"><span class="swatch s1"></span><span class="tname">iptvesp.com</span></div>
+      <div class="tnum">122<span class="tunit">clicks / 7d</span></div>
+      <div class="trow"><span class="d down">▼ −3</span> vs prior week · 1187 impressions</div>
+      <div class="trow muted">backlinks 40 · top-100 kw 9</div></div><div class="tile"><div class="thead"><span class="swatch s2"></span><span class="tname">primeiptv-france.com</span></div>
+      <div class="tnum">20<span class="tunit">clicks / 7d</span></div>
+      <div class="trow"><span class="d up">▲ +12</span> vs prior week · 473 impressions</div>
+      <div class="trow muted">backlinks 2 · top-100 kw 4</div></div><div class="tile"><div class="thead"><span class="swatch s3"></span><span class="tname">iptvned.com</span></div>
+      <div class="tnum">2<span class="tunit">clicks / 7d</span></div>
+      <div class="trow"><span class="d up">▲ +2</span> vs prior week · 180 impressions</div>
+      <div class="trow muted">backlinks 15 · top-100 kw 15</div></div><div class="tile"><div class="thead"><span class="swatch s4"></span><span class="tname">iptvpix.com</span></div>
+      <div class="tnum">0<span class="tunit">clicks / 7d</span></div>
+      <div class="trow"><span class="d flat">±0</span> vs prior week · 0 impressions</div>
+      <div class="trow muted">backlinks 40 · top-100 kw —</div></div></div>
+    <div class="card"><h2>Daily clicks — last 30 days</h2><p class="sub">Focus sites. Hover for exact values.</p>
+      <div class="legend" id="legend"></div>
+      <div id="chartbox"><svg id="chart" width="100%" height="260" role="img" aria-label="Daily clicks line chart"></svg><div id="tip"></div></div></div>
+    <div class="card"><h2>All properties</h2><p class="sub">7-day sums, current vs prior week. "—" = not in the API index.</p>
+      <div class="overflow"><table><thead><tr><th>site</th><th>clicks 7d</th><th>prior 7d</th><th>impr. 7d</th><th>backlinks</th><th>ref. dom.</th><th>top-100 kw</th></tr></thead>
+      <tbody><tr><td>iptvesp.com</td><td>122</td><td>125</td><td>1187</td><td>40</td><td>37</td><td>9</td></tr><tr><td>primeiptv-france.com</td><td>20</td><td>8</td><td>473</td><td>2</td><td>2</td><td>4</td></tr><tr><td>iptvned.com</td><td>2</td><td>0</td><td>180</td><td>15</td><td>13</td><td>15</td></tr><tr><td>iptvpix.com</td><td>0</td><td>0</td><td>0</td><td>40</td><td>34</td><td>—</td></tr><tr><td>smarters-live.com</td><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td><td>—</td></tr><tr><td>iptvshqiptar.com</td><td>0</td><td>0</td><td>0</td><td>9</td><td>8</td><td>—</td></tr></tbody></table></div></div>
+    <div class="card"><h2>Live checks — 2026-07-28</h2><ul class="lcl"><li><b>Live SERP &quot;iptvpix&quot; (FR):</b> iptvpix.com best position 17 (/blog)</li></ul></div>
+  </section>
+  <section id="prompts">
+    <div class="card"><h2>How to use</h2><p class="sub" style="margin:0">Each prompt below is generated from today's verified findings — already-fixed items are not in it. Click <b>Copy prompt</b>, paste into a Claude Code session in the site's repository, and it will fix + verify each item. After deploying, ask me to "update the dashboard" and the next prompts will contain only what remains.</p></div>
+    <div class="card pcard"><div class="phead"><h2>ALL SITES (one prompt)</h2>
+      <button class="copybtn" data-copy>Copy prompt</button></div>
+      <pre class="ptext">You are a senior full-stack engineer fixing verified SEO defects across six websites (shared Next.js template family on Vercel). Findings verified live on 2026-07-28. Per-site sections follow; within each, work top-down. One commit per item. Never touch robots.txt, canonicals, hreflang, existing redirects, or checkout noindex.
+
+================ iptvesp.com ================
+1. LINK HYGIENE (P2). 3 internal link target(s) still route through redirects: blog/iptv-espana-sin-cortes, blog/iptv-firestick-espana, blog/iptv-m3u-espana.
+   Steps: curl -sI each URL to get its final destination, update the hrefs in the linking components/posts to that final URL, deploy, re-crawl to confirm zero internal links returning 3xx.
+
+================ iptvned.com ================
+1. PERFORMANCE — homepage TBT regression (P1). Latest lab: Perf 87, TBT 524 ms (was 280 ms on 11 Jul).
+   Steps: (a) git log the homepage + shared layout since 11 Jul; (b) identify the client component/script added with the content wave; (c) revert it or load it via next/dynamic; (d) deploy; (e) verify live Lighthouse mobile TBT &lt; 300 ms twice.
+
+2. TITLES (P1). 8 pages exceed 60 characters: abonnementen (77 chars); welke-iptv-app (68 chars); blog/iptv-proefaccount-nederland (68 chars); blog/iptv-op-iphone-ipad-nederland (68 chars); blog/iptv-strafbaar-nederland (65 chars); blog/iptv-op-apple-tv-nederland (65 chars); blog/iptv-op-lg-smart-tv-nederland (63 chars); / (63 chars).
+   Steps: rewrite each title keyword-first to &lt;= 60 chars including the template suffix; deploy; verify with a crawl (0 titles &gt; 60).
+
+3. LEGAL CLUSTER (P1). Interlinking is nearly complete; still under-linked within the cluster: /blog/iptv-illegaal-gevolgen-nederland.
+   Steps: add &gt;= 2 contextual links to each from the sibling legal pages and /blog/iptv-opgerold-nederland; verify from the crawl edge list.
+
+4. WWW REDIRECT (P1). www.iptvned.com currently returns 307 -&gt; https://iptvned.com/ — temporary. In Vercel -&gt; Settings -&gt; Domains set the www redirect to permanent (308). Verify: curl -sI returns 308.
+
+================ iptvpix.com ================
+1. PERFORMANCE — homepage (P1). Latest lab: Perf 75, LCP 3.5 s, TBT 586 ms. This template never received the hydration treatment that fixed iptvned (sibling now LCP ~1.4 s).
+   Steps: server components for hero/pricing/FAQ/testimonials; next/dynamic below the fold; single analytics stack; trim the ~500 KB RSC payload. Verify live: LCP &lt; 2.5 s AND TBT &lt; 300 ms.
+
+2. TITLES (P2). 5 pages &gt; 60 chars (mostly the newest posts): blog/lien-m3u-iptv-explication (105); blog/faut-il-un-vpn-pour-iptv (104); blog/meilleure-box-android-iptv-2026 (85); blog/iptv-nvidia-shield-tv-2026 (82); blog/iptv-ps4-ps5-xbox-france (78). Rewrite keyword-first to &lt;= 60; verify by crawl.
+
+3. LINK HYGIENE (P2). 9 internal link targets route through redirects: blog/amende-iptv-france, blog/comment-installer-iptv-smarters, blog/comment-installer-iptv-sur-firestick, blog/france-iptv-m3u, blog/iptv-fire-tv-stick-2026, blog/iptv-legal-en-france, blog/iptv-legal-france, blog/iptv-samsung-smart-tv-tizen, blog/tv-iptv-france. Update hrefs to final URLs; verify zero 3xx link targets.
+
+4. OWNER TASK — suppression watch. Today&#x27;s live probe: brand query &quot;iptvpix&quot; ranks the site at best position 17 (/blog). Check GSC UI -&gt; Manual Actions + Security Issues if not yet done. Do NOT restructure the site further over this — the tech is clean; this resolves with time/authority or not at all (mid-August verdict).
+
+================ primeiptv-france.com ================
+1. WWW REDIRECT (P1). www.primeiptv-france.com returns 307 -&gt; https://primeiptv-france.com/ — temporary. Vercel -&gt; Settings -&gt; Domains: set permanent (308). Verify with curl -sI.
+
+2. NOTHING ELSE OPEN — titles clean, links clean, CWV 95+. Keep publishing guides; this is the FR flagship: point new FR content and all outreach links here.
+
+================ iptvshqiptar.com ================
+1. FAVICON (P2). /favicon.ico returns 404 (the &lt;link rel=&quot;icon&quot;&gt; route works; legacy fetchers don&#x27;t). Add a real favicon.ico to public/. Verify: curl -sI returns 200.
+
+2. OWNER TASK — add iptvshqiptar.com to Google Search Console (Domain property, DNS TXT), submit sitemap.xml, and add the monitoring service account. It is the only active site with zero measurement.
+Baseline (verified today): 20 pages, 0 broken links, 0 orphans, all titles &lt;= 60, correct canonicals and host redirects — nothing else to fix.
+
+================ smarters-live.com ================
+1. TITLES (P1). The rebuilt site has 15 pages with titles &gt; 60 chars: football-ete-2026 (98); tarifs (71); boitier-iptv (69); blog/iptv-vs-satellite-cable-comparatif-2026 (68); blog/vitesse-internet-iptv-guide-2026 (67); blog/iptv-sans-coupure-freeze-solutions-2026 (67); blog/iptv-android-smartphone-tablette-2026 (67); application-iptv (67); blog/iptv-fire-stick-2026 (64); blog/regarder-sport-premium-moins-cher (63); revendeur-iptv (62); faq (62); blog/iptv-pc-ordinateur-windows-mac-2026 (62); cgv (61); blog/iptv-vs-bouquet-premium-2026 (61).
+   Rewrite keyword-first to &lt;= 60 chars including suffix; deploy; verify by crawl.
+
+2. CONTEXT — this site was rebuilt (38 pages now; www-canonical, which is correct and consistent). Run the family checks after the title pass: descriptions &lt;= 160, JSON-LD assets resolve, Lighthouse &gt;= 90 on home + 1 post. Owner: add it to GSC + the monitoring service account (currently minimal data).</pre></div><div class="card pcard"><div class="phead"><h2>iptvesp.com</h2>
+      <button class="copybtn" data-copy>Copy prompt</button></div>
+      <pre class="ptext">You are a senior full-stack engineer fixing verified SEO defects on iptvesp.com (Next.js on Vercel). Work through the numbered items in order. One commit per item: fix(iptvesp): &lt;item&gt; [daily-2026-07-28]. After deploying each item run its verification and only then move on. Do not touch robots.txt, canonicals, hreflang, existing redirects, or checkout noindex — they are verified correct.
+
+1. LINK HYGIENE (P2). 3 internal link target(s) still route through redirects: blog/iptv-espana-sin-cortes, blog/iptv-firestick-espana, blog/iptv-m3u-espana.
+   Steps: curl -sI each URL to get its final destination, update the hrefs in the linking components/posts to that final URL, deploy, re-crawl to confirm zero internal links returning 3xx.</pre></div><div class="card pcard"><div class="phead"><h2>iptvned.com</h2>
+      <button class="copybtn" data-copy>Copy prompt</button></div>
+      <pre class="ptext">You are a senior full-stack engineer fixing verified SEO defects on iptvned.com (Next.js on Vercel). Work through the numbered items in order. One commit per item: fix(iptvned): &lt;item&gt; [daily-2026-07-28]. After deploying each item run its verification and only then move on. Do not touch robots.txt, canonicals, hreflang, existing redirects, or checkout noindex — they are verified correct.
+
+1. PERFORMANCE — homepage TBT regression (P1). Latest lab: Perf 87, TBT 524 ms (was 280 ms on 11 Jul).
+   Steps: (a) git log the homepage + shared layout since 11 Jul; (b) identify the client component/script added with the content wave; (c) revert it or load it via next/dynamic; (d) deploy; (e) verify live Lighthouse mobile TBT &lt; 300 ms twice.
+
+2. TITLES (P1). 8 pages exceed 60 characters: abonnementen (77 chars); welke-iptv-app (68 chars); blog/iptv-proefaccount-nederland (68 chars); blog/iptv-op-iphone-ipad-nederland (68 chars); blog/iptv-strafbaar-nederland (65 chars); blog/iptv-op-apple-tv-nederland (65 chars); blog/iptv-op-lg-smart-tv-nederland (63 chars); / (63 chars).
+   Steps: rewrite each title keyword-first to &lt;= 60 chars including the template suffix; deploy; verify with a crawl (0 titles &gt; 60).
+
+3. LEGAL CLUSTER (P1). Interlinking is nearly complete; still under-linked within the cluster: /blog/iptv-illegaal-gevolgen-nederland.
+   Steps: add &gt;= 2 contextual links to each from the sibling legal pages and /blog/iptv-opgerold-nederland; verify from the crawl edge list.
+
+4. WWW REDIRECT (P1). www.iptvned.com currently returns 307 -&gt; https://iptvned.com/ — temporary. In Vercel -&gt; Settings -&gt; Domains set the www redirect to permanent (308). Verify: curl -sI returns 308.</pre></div><div class="card pcard"><div class="phead"><h2>iptvpix.com</h2>
+      <button class="copybtn" data-copy>Copy prompt</button></div>
+      <pre class="ptext">You are a senior full-stack engineer fixing verified SEO defects on iptvpix.com (Next.js on Vercel). Work through the numbered items in order. One commit per item: fix(iptvpix): &lt;item&gt; [daily-2026-07-28]. After deploying each item run its verification and only then move on. Do not touch robots.txt, canonicals, hreflang, existing redirects, or checkout noindex — they are verified correct.
+
+1. PERFORMANCE — homepage (P1). Latest lab: Perf 75, LCP 3.5 s, TBT 586 ms. This template never received the hydration treatment that fixed iptvned (sibling now LCP ~1.4 s).
+   Steps: server components for hero/pricing/FAQ/testimonials; next/dynamic below the fold; single analytics stack; trim the ~500 KB RSC payload. Verify live: LCP &lt; 2.5 s AND TBT &lt; 300 ms.
+
+2. TITLES (P2). 5 pages &gt; 60 chars (mostly the newest posts): blog/lien-m3u-iptv-explication (105); blog/faut-il-un-vpn-pour-iptv (104); blog/meilleure-box-android-iptv-2026 (85); blog/iptv-nvidia-shield-tv-2026 (82); blog/iptv-ps4-ps5-xbox-france (78). Rewrite keyword-first to &lt;= 60; verify by crawl.
+
+3. LINK HYGIENE (P2). 9 internal link targets route through redirects: blog/amende-iptv-france, blog/comment-installer-iptv-smarters, blog/comment-installer-iptv-sur-firestick, blog/france-iptv-m3u, blog/iptv-fire-tv-stick-2026, blog/iptv-legal-en-france, blog/iptv-legal-france, blog/iptv-samsung-smart-tv-tizen, blog/tv-iptv-france. Update hrefs to final URLs; verify zero 3xx link targets.
+
+4. OWNER TASK — suppression watch. Today&#x27;s live probe: brand query &quot;iptvpix&quot; ranks the site at best position 17 (/blog). Check GSC UI -&gt; Manual Actions + Security Issues if not yet done. Do NOT restructure the site further over this — the tech is clean; this resolves with time/authority or not at all (mid-August verdict).</pre></div><div class="card pcard"><div class="phead"><h2>primeiptv-france.com</h2>
+      <button class="copybtn" data-copy>Copy prompt</button></div>
+      <pre class="ptext">You are a senior full-stack engineer fixing verified SEO defects on primeiptv-france.com (Next.js on Vercel). Work through the numbered items in order. One commit per item: fix(primeiptv-france): &lt;item&gt; [daily-2026-07-28]. After deploying each item run its verification and only then move on. Do not touch robots.txt, canonicals, hreflang, existing redirects, or checkout noindex — they are verified correct.
+
+1. WWW REDIRECT (P1). www.primeiptv-france.com returns 307 -&gt; https://primeiptv-france.com/ — temporary. Vercel -&gt; Settings -&gt; Domains: set permanent (308). Verify with curl -sI.
+
+2. NOTHING ELSE OPEN — titles clean, links clean, CWV 95+. Keep publishing guides; this is the FR flagship: point new FR content and all outreach links here.</pre></div><div class="card pcard"><div class="phead"><h2>iptvshqiptar.com</h2>
+      <button class="copybtn" data-copy>Copy prompt</button></div>
+      <pre class="ptext">You are a senior full-stack engineer fixing verified SEO defects on iptvshqiptar.com (Next.js on Vercel). Work through the numbered items in order. One commit per item: fix(iptvshqiptar): &lt;item&gt; [daily-2026-07-28]. After deploying each item run its verification and only then move on. Do not touch robots.txt, canonicals, hreflang, existing redirects, or checkout noindex — they are verified correct.
+
+1. FAVICON (P2). /favicon.ico returns 404 (the &lt;link rel=&quot;icon&quot;&gt; route works; legacy fetchers don&#x27;t). Add a real favicon.ico to public/. Verify: curl -sI returns 200.
+
+2. OWNER TASK — add iptvshqiptar.com to Google Search Console (Domain property, DNS TXT), submit sitemap.xml, and add the monitoring service account. It is the only active site with zero measurement.
+Baseline (verified today): 20 pages, 0 broken links, 0 orphans, all titles &lt;= 60, correct canonicals and host redirects — nothing else to fix.</pre></div><div class="card pcard"><div class="phead"><h2>smarters-live.com</h2>
+      <button class="copybtn" data-copy>Copy prompt</button></div>
+      <pre class="ptext">You are a senior full-stack engineer fixing verified SEO defects on smarters-live.com (Next.js on Vercel). Work through the numbered items in order. One commit per item: fix(smarters-live): &lt;item&gt; [daily-2026-07-28]. After deploying each item run its verification and only then move on. Do not touch robots.txt, canonicals, hreflang, existing redirects, or checkout noindex — they are verified correct.
+
+1. TITLES (P1). The rebuilt site has 15 pages with titles &gt; 60 chars: football-ete-2026 (98); tarifs (71); boitier-iptv (69); blog/iptv-vs-satellite-cable-comparatif-2026 (68); blog/vitesse-internet-iptv-guide-2026 (67); blog/iptv-sans-coupure-freeze-solutions-2026 (67); blog/iptv-android-smartphone-tablette-2026 (67); application-iptv (67); blog/iptv-fire-stick-2026 (64); blog/regarder-sport-premium-moins-cher (63); revendeur-iptv (62); faq (62); blog/iptv-pc-ordinateur-windows-mac-2026 (62); cgv (61); blog/iptv-vs-bouquet-premium-2026 (61).
+   Rewrite keyword-first to &lt;= 60 chars including suffix; deploy; verify by crawl.
+
+2. CONTEXT — this site was rebuilt (38 pages now; www-canonical, which is correct and consistent). Run the family checks after the title pass: descriptions &lt;= 160, JSON-LD assets resolve, Lighthouse &gt;= 90 on home + 1 post. Owner: add it to GSC + the monitoring service account (currently minimal data).</pre></div>
+  </section>
+  <section id="plan">
+<div class="card"><h2>Where each site stands — 2026-07-28</h2>
+<div class="overflow"><table>
+<thead><tr><th>site</th><th>phase</th><th>this week's job</th><th>status today</th></tr></thead><tbody>
+<tr><td>iptvesp.com</td><td>GROW 📈</td><td>Fix /suscripciones speed, then push mejor/listas posts to page 1</td><td>122 clicks/7d · susc LCP 2.1 s</td></tr>
+<tr><td>primeiptv-france.com</td><td>FLAGSHIP 🏁</td><td>All new FR content + outreach links point here</td><td>20 clicks/7d · titles ✓ links ✓ CWV 94</td></tr>
+<tr><td>iptvned.com</td><td>REBUILD 🔧</td><td>Kill the TBT regression; finish legal cluster; retitle 8 pages</td><td>home TBT 524 ms · 15 kw in top-100</td></tr>
+<tr><td>iptvpix.com</td><td>WATCH ⏳</td><td>Perf pass + hygiene only; verdict mid-August</td><td>brand SERP pos 17 · 0 impressions</td></tr>
+<tr><td>smarters-live.com</td><td>BASELINE 🧱</td><td>Retitle 15 pages; add to GSC</td><td>rebuilt: 38 pages live</td></tr>
+<tr><td>iptvshqiptar.com</td><td>BASELINE 🧱</td><td>Favicon + add to GSC</td><td>20 pages · tech clean</td></tr>
+</tbody></table></div></div>
+<div class="card"><h2>Standing strategy (changes only when we decide it)</h2>
+<ul class="lcl">
+<li><b>FR flagship = primeiptv.</b> Impressions ×3 then +12 clicks W/W after the July fixes — it converts effort into visibility. All French links/content investment goes here until further notice.</li>
+<li><b>iptvesp = protect &amp; monetise.</b> 84% of clicks ride one Telegram post; the follow-up cluster is live and interlinked. Priority is the /suscripciones page: fast, indexed (since 15 Jul), and linked from every Telegram-family post.</li>
+<li><b>iptvpix = time-boxed watch.</b> Clean tech + full indexation + zero impressions since 18 Jul = domain-level suppression. No further restructuring; mid-August: recover or deprioritize.</li>
+<li><b>iptvned = replace the dead news query</b> with the legal-B2B evergreen cluster (only NL site with 15 top-100 keywords — the raw material is there).</li>
+<li><b>Authority is the portfolio ceiling:</b> 0–40 backlinks per domain vs competitors' hundreds. Outreach target: +10 referring domains per priority page (primeiptv MAG-box &amp; kids guides, esp mejor/listas, ned legal landing).</li>
+<li><b>Ops:</b> title length is part of publishing (guard in CI); GSC/DataForSEO credentials due for rotation when convenient.</li>
+</ul></div>
+</section>
+</div></div>
+<script>
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("nav button").forEach(x=>x.classList.remove("on"));
+  document.querySelectorAll("section").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); document.getElementById(b.dataset.tab).classList.add("on");
+}));
+document.querySelectorAll("[data-copy]").forEach(btn=>btn.addEventListener("click",async ()=>{
+  const txt = btn.closest(".pcard").querySelector(".ptext").textContent;
+  try{ await navigator.clipboard.writeText(txt); }
+  catch(e){ const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); }
+  const old=btn.textContent; btn.textContent="Copied ✓"; btn.classList.add("ok");
+  setTimeout(()=>{btn.textContent=old; btn.classList.remove("ok");},1600);
+}));
+const DATA = {"dates": ["06-26", "06-27", "06-28", "06-29", "06-30", "07-01", "07-02", "07-03", "07-04", "07-05", "07-06", "07-07", "07-08", "07-09", "07-10", "07-11", "07-12", "07-13", "07-14", "07-15", "07-16", "07-17", "07-18", "07-19", "07-20", "07-21", "07-22", "07-23", "07-24", "07-25"], "series": [[13, 13, 10, 3, 14, 7, 11, 6, 16, 12, 6, 15, 11, 14, 7, 29, 21, 20, 18, 17, 12, 16, 21, 27, 15, 21, 14, 18, 10, 17], [0, 2, 1, 1, 0, 0, 3, 1, 0, 0, 0, 2, 0, 0, 1, 0, 0, 3, 1, 1, 0, 0, 3, 3, 0, 4, 1, 2, 5, 5], [1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], "names": ["iptvesp", "primeiptv-france", "iptvned", "iptvpix"]};
+const COLORS = ["var(--s1)","var(--s2)","var(--s3)","var(--s4)"];
+const svg=document.getElementById("chart"),box=document.getElementById("chartbox"),tip=document.getElementById("tip"),legend=document.getElementById("legend");
+DATA.names.forEach((n,i)=>{legend.innerHTML+=`<span><i class="swatch s${i+1}" style="width:10px;height:10px;border-radius:3px;display:inline-block"></i>${n}</span>`;});
+function draw(){
+  const W=box.clientWidth,Hh=260,padL=34,padR=74,padT=12,padB=26,n=DATA.dates.length;
+  const maxY=Math.max(4,...DATA.series.flat());
+  const x=i=>padL+(W-padL-padR)*(n===1?0:i/(n-1)), y=v=>padT+(Hh-padT-padB)*(1-v/maxY);
+  let s="";
+  for(let t=0;t<=4;t++){const v=Math.round(maxY*t/4),yy=y(v);
+    s+=`<line x1="${padL}" x2="${W-padR}" y1="${yy}" y2="${yy}" stroke="var(--line)"/>`;
+    s+=`<text x="${padL-6}" y="${yy+3.5}" text-anchor="end">${v}</text>`;}
+  const st=Math.max(1,Math.floor(n/6));
+  for(let i=0;i<n;i+=st) s+=`<text x="${x(i)}" y="${Hh-8}" text-anchor="middle">${DATA.dates[i]}</text>`;
+  DATA.series.forEach((ser,si)=>{
+    s+=`<polyline points="${ser.map((v,i)=>`${x(i)},${y(v)}`).join(" ")}" fill="none" stroke="${COLORS[si]}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    s+=`<circle cx="${x(n-1)}" cy="${y(ser[n-1])}" r="3.5" fill="${COLORS[si]}"/>`;});
+  const ends=DATA.series.map((ser,si)=>({si,y:y(ser[n-1])})).sort((a,b)=>a.y-b.y);
+  let ly=-20; ends.forEach(e=>{const yy=Math.max(e.y,ly+14); ly=yy;
+    s+=`<text class="dl" x="${W-padR+8}" y="${yy+4}" style="fill:${COLORS[e.si]}">${DATA.names[e.si]}</text>`;});
+  s+=`<line id="xh" y1="${padT}" y2="${Hh-padB}" stroke="var(--ink3)" stroke-dasharray="3 3" style="display:none"/>`;
+  svg.innerHTML=s;
+  svg.onmousemove=ev=>{
+    const r=svg.getBoundingClientRect(); let i=Math.round((ev.clientX-r.left-padL)/((W-padL-padR)/(n-1)));
+    i=Math.max(0,Math.min(n-1,i));
+    const xh=document.getElementById("xh"); xh.setAttribute("x1",x(i)); xh.setAttribute("x2",x(i)); xh.style.display="";
+    tip.style.display="block";
+    tip.innerHTML=`<b>${DATA.dates[i]}</b><br>`+DATA.names.map((nm,si)=>`<span style="color:${COLORS[si]}">●</span> ${nm}: <b>${DATA.series[si][i]}</b>`).join("<br>");
+    tip.style.left=Math.min(Math.max(x(i)+12,0),W-tip.offsetWidth-4)+"px"; tip.style.top=(padT+6)+"px";};
+  svg.onmouseleave=()=>{tip.style.display="none";const xh=document.getElementById("xh"); if(xh)xh.style.display="none";};
+}
+draw(); addEventListener("resize",draw);
+</script>
