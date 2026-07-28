@@ -1,15 +1,15 @@
-<!-- pipeline:gitconn-064736 -->
+<!-- pipeline:6sites-095057 -->
 <title>IPTV Portfolio — Daily SEO Dashboard</title>
 <style>
   .viz-root{color-scheme:light;
     --surface:#fcfcfb;--card:#ffffff;--line:#e7e6e2;--ink:#0b0b0b;--ink2:#52514e;--ink3:#8a8983;
-    --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--up:#008300;--down:#c22f22;--acc:#2a78d6}
+    --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#c0448f;--s6:#4a3aa7;--up:#008300;--down:#c22f22;--acc:#2a78d6}
   @media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .viz-root{color-scheme:dark;
     --surface:#1a1a19;--card:#222221;--line:#383734;--ink:#ffffff;--ink2:#c3c2b7;--ink3:#8a897f;
-    --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--up:#39b54a;--down:#ef8d82;--acc:#3987e5}}
+    --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#9085e9;--up:#39b54a;--down:#ef8d82;--acc:#3987e5}}
   :root[data-theme="dark"] .viz-root{color-scheme:dark;
     --surface:#1a1a19;--card:#222221;--line:#383734;--ink:#ffffff;--ink2:#c3c2b7;--ink3:#8a897f;
-    --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--up:#39b54a;--down:#ef8d82;--acc:#3987e5}
+    --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#9085e9;--up:#39b54a;--down:#ef8d82;--acc:#3987e5}
   body{margin:0}
   .viz-root{background:var(--surface);color:var(--ink);font:14px/1.5 ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
   .wrap{max-width:980px;margin:0 auto;padding:24px 20px 70px}
@@ -25,7 +25,7 @@
   .tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
   .thead{display:flex;align-items:center;gap:8px;margin-bottom:8px}
   .swatch{width:10px;height:10px;border-radius:3px;flex:none}
-  .s1{background:var(--s1)}.s2{background:var(--s2)}.s3{background:var(--s3)}.s4{background:var(--s4)}
+  .s1{background:var(--s1)}.s2{background:var(--s2)}.s3{background:var(--s3)}.s4{background:var(--s4)}.s5{background:var(--s5)}.s6{background:var(--s6)}
   .tname{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink2)}
   .tnum{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
   .tunit{font-size:11px;font-weight:500;color:var(--ink3);margin-left:6px}
@@ -78,8 +78,14 @@
       <div class="trow muted">backlinks 15 · top-100 kw 15</div></div><div class="tile"><div class="thead"><span class="swatch s4"></span><span class="tname">iptvpix.com</span></div>
       <div class="tnum">0<span class="tunit">clicks / 7d</span></div>
       <div class="trow"><span class="d flat">±0</span> vs prior week · 0 impressions</div>
-      <div class="trow muted">backlinks 40 · top-100 kw —</div></div></div>
-    <div class="card"><h2>Daily clicks — last 30 days</h2><p class="sub">Focus sites. Hover for exact values.</p>
+      <div class="trow muted">backlinks 40 · top-100 kw —</div></div><div class="tile"><div class="thead"><span class="swatch s5"></span><span class="tname">smarters-live.com</span></div>
+      <div class="tnum">0<span class="tunit">clicks / 7d</span></div>
+      <div class="trow"><span class="d down">▼ −1</span> vs prior week · 2 impressions</div>
+      <div class="trow muted">backlinks 2 · top-100 kw —</div></div><div class="tile"><div class="thead"><span class="swatch s6"></span><span class="tname">iptvshqiptar.com</span></div>
+      <div class="tnum">0<span class="tunit">clicks / 7d</span></div>
+      <div class="trow"><span class="d flat">±0</span> vs prior week · 0 impressions</div>
+      <div class="trow muted">backlinks 9 · top-100 kw —</div></div></div>
+    <div class="card"><h2>Daily clicks — last 30 days</h2><p class="sub">All six active sites. Hover for exact values.</p>
       <div class="legend" id="legend"></div>
       <div id="chartbox"><svg id="chart" width="100%" height="260" role="img" aria-label="Daily clicks line chart"></svg><div id="tip"></div></div></div>
     <div class="card"><h2>All properties</h2><p class="sub">7-day sums, current vs prior week. "—" = not in the API index.</p>
@@ -220,8 +226,8 @@ document.querySelectorAll("[data-copy]").forEach(btn=>btn.addEventListener("clic
   const old=btn.textContent; btn.textContent="Copied ✓"; btn.classList.add("ok");
   setTimeout(()=>{btn.textContent=old; btn.classList.remove("ok");},1600);
 }));
-const DATA = {"dates": ["06-26", "06-27", "06-28", "06-29", "06-30", "07-01", "07-02", "07-03", "07-04", "07-05", "07-06", "07-07", "07-08", "07-09", "07-10", "07-11", "07-12", "07-13", "07-14", "07-15", "07-16", "07-17", "07-18", "07-19", "07-20", "07-21", "07-22", "07-23", "07-24", "07-25"], "series": [[13, 13, 10, 3, 14, 7, 11, 6, 16, 12, 6, 15, 11, 14, 7, 29, 21, 20, 18, 17, 12, 16, 21, 27, 15, 21, 14, 18, 10, 17], [0, 2, 1, 1, 0, 0, 3, 1, 0, 0, 0, 2, 0, 0, 1, 0, 0, 3, 1, 1, 0, 0, 3, 3, 0, 4, 1, 2, 5, 5], [1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], "names": ["iptvesp", "primeiptv-france", "iptvned", "iptvpix"]};
-const COLORS = ["var(--s1)","var(--s2)","var(--s3)","var(--s4)"];
+const DATA = {"dates": ["06-26", "06-27", "06-28", "06-29", "06-30", "07-01", "07-02", "07-03", "07-04", "07-05", "07-06", "07-07", "07-08", "07-09", "07-10", "07-11", "07-12", "07-13", "07-14", "07-15", "07-16", "07-17", "07-18", "07-19", "07-20", "07-21", "07-22", "07-23", "07-24", "07-25"], "series": [[13, 13, 10, 3, 14, 7, 11, 6, 16, 12, 6, 15, 11, 14, 7, 29, 21, 20, 18, 17, 12, 16, 21, 27, 15, 21, 14, 18, 10, 17], [0, 2, 1, 1, 0, 0, 3, 1, 0, 0, 0, 2, 0, 0, 1, 0, 0, 3, 1, 1, 0, 0, 3, 3, 0, 4, 1, 2, 5, 5], [1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], "names": ["iptvesp", "primeiptv-france", "iptvned", "iptvpix", "smarters-live", "iptvshqiptar"]};
+const COLORS = ["var(--s1)","var(--s2)","var(--s3)","var(--s4)","var(--s5)","var(--s6)"];
 const svg=document.getElementById("chart"),box=document.getElementById("chartbox"),tip=document.getElementById("tip"),legend=document.getElementById("legend");
 DATA.names.forEach((n,i)=>{legend.innerHTML+=`<span><i class="swatch s${i+1}" style="width:10px;height:10px;border-radius:3px;display:inline-block"></i>${n}</span>`;});
 function draw(){
