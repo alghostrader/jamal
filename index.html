@@ -105,10 +105,17 @@
   :root[data-theme="dark"] .viz-root .chg.info{background:#16233f;color:#7fb0f5}
   :root[data-theme="dark"] .viz-root .chg.down{background:#3a1f1c;color:#ef8d82}
   .freshpill{display:inline-block;background:var(--acc);color:#fff;font:600 11px ui-monospace,Menlo,monospace;padding:3px 9px;border-radius:20px;margin-left:2px}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .hchip{font:600 11px ui-sans-serif,-apple-system,sans-serif;padding:4px 9px;border-radius:6px;white-space:nowrap}
+  .hchip.ok{background:#eafaf0;color:#137a43}.hchip.bad{background:#f9e9e7;color:#b3372e}
+  @media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .viz-root .hchip.ok{background:#123524;color:#5fce93}
+    :root:where(:not([data-theme="light"])) .viz-root .hchip.bad{background:#3a1f1c;color:#ef8d82}}
+  :root[data-theme="dark"] .viz-root .hchip.ok{background:#123524;color:#5fce93}
+  :root[data-theme="dark"] .viz-root .hchip.bad{background:#3a1f1c;color:#ef8d82}
 </style>
 <div class="viz-root"><div class="wrap">
   <h1>IPTV Portfolio — Daily SEO Dashboard</h1>
-  <p class="meta">Last updated <span class="freshpill">2026-07-29 13:16 UTC</span> · GSC window 2026-04-28 → 2026-07-27 (lags ~2 days) · DataForSEO backlinks/keywords/SERP · re-run on request (say "update the dashboard")</p>
+  <p class="meta">Last updated <span class="freshpill">2026-07-29 13:23 UTC</span> · GSC window 2026-04-28 → 2026-07-27 (lags ~2 days) · DataForSEO backlinks/keywords/SERP · re-run on request (say "update the dashboard")</p>
   <nav>
     <button class="on" data-tab="data">📊 Data</button>
     <button data-tab="sites">🗂 Sites</button>
@@ -117,7 +124,7 @@
     <button data-tab="plan">🗺 Plan</button>
   </nav>
   <section id="data" class="on">
-    <div class="card chgcard"><h2>🔄 What changed this update</h2><p class="sub">Since last update (2026-07-29 morning run) — 10 change(s).</p><ul class="chglist"><li class="chg good">iptvesp.com: clicks/7d 113 → 114 (+1)</li><li class="chg good">iptvesp.com: redirect-links 2 → 0 ✓ fixed</li><li class="chg good">primeiptv-france.com: clicks/7d 18 → 21 (+3)</li><li class="chg good">iptvned.com: clicks/7d 3 → 5 (+2)</li><li class="chg good">iptvpix.com: redirect-links 2 → 0 ✓ fixed</li><li class="chg good">iptvpix brand-query SERP: position 23 → 16 ✓ improving</li><li class="chg info">iptvesp.com: 49 → 47 pages (-2)</li><li class="chg info">primeiptv-france.com: 78 → 83 pages (+5)</li><li class="chg info">iptvpix.com: 55 → 53 pages (-2)</li><li class="chg info">smarters-live.com: 38 → 47 pages (+9)</li></ul></div>
+    <div class="card chgcard"><h2>🔄 What changed this update</h2><p class="sub" style="margin:0">No measurable change since last update (2026-07-29 13:16 UTC). Traffic and crawl findings are steady — that is normal on a same-day re-run (GSC lags ~2 days and weekly numbers move slowly).</p></div>
     <div class="tiles"><div class="tile"><div class="thead"><span class="swatch s1"></span><span class="tname">iptvesp.com</span></div>
       <div class="tnum">114<span class="tunit">clicks / 7d</span></div>
       <div class="trow"><span class="d down">▼ −12</span> vs prior week · 1114 impressions</div>
@@ -155,7 +162,8 @@
           <div class="sec"><span class="stl">TOP-100 KEYWORDS</span><span class="stv">9</span></div>
           <div class="chartblk"><div class="barlabel">WEEKLY CLICKS · LIVE</div><div class="bars"><div class="bar"><span class="bv">117</span><div class="bt " style="height:92%"></div><span class="bl">wk to 07-13</span></div><div class="bar"><span class="bv">126</span><div class="bt hot" style="height:100%"></div><span class="bl">wk to 07-20</span></div><div class="bar"><span class="bv">114</span><div class="bt " style="height:90%"></div><span class="bl">wk to 07-27</span></div></div></div>
           <p class="narr">The growth engine: 548 clicks / 5,661 impressions over 90 days, led by the Telegram cluster. Last two weeks 126 → 114: a dip worth watching. Money-page queries are beginning to surface — protect the winner and speed up /suscripciones.</p>
-          <div class="rectitle">RECOMMENDATIONS</div><ul class="recs"><li><span class="tag tp0">P0</span><span>Fix /suscripciones speed — LCP 1.9 s / Perf 78; re-test after the fix</span></li><li><span class="tag tdo">DO</span><span>Add a conversion module (pricing + CTA) inside the Telegram post — it holds most of the traffic</span></li><li><span class="tag tdo">DO</span><span>Chase &quot;iptv española&quot; (4,400/mo) — expand /blog/iptv-espana and point internal links at it</span></li></ul>
+          <div class="rectitle">VERIFIED CLEAN TODAY · 6/6</div><div class="hchips"><span class="hchip ok">✓ Titles ≤60</span><span class="hchip ok">✓ No redirect-links</span><span class="hchip ok">✓ No orphans</span><span class="hchip ok">✓ Canonicals</span><span class="hchip ok">✓ No broken links</span><span class="hchip ok">✓ www 308</span></div>
+          <div class="rectitle">ONGOING PRIORITIES <span style="text-transform:none;letter-spacing:0;font-weight:400">(strategy — stays until we change direction)</span></div><ul class="recs"><li><span class="tag tp0">P0</span><span>Fix /suscripciones speed — LCP 1.9 s / Perf 78; re-test after the fix</span></li><li><span class="tag tdo">DO</span><span>Add a conversion module (pricing + CTA) inside the Telegram post — it holds most of the traffic</span></li><li><span class="tag tdo">DO</span><span>Chase &quot;iptv española&quot; (4,400/mo) — expand /blog/iptv-espana and point internal links at it</span></li></ul>
         </div><div class="scard">
           <div class="schead"><div><div class="sname">primeiptv-france.com</div><div class="sdesc">France — the flagship</div></div>
             <span class="badge b-flag">★ FLAGSHIP</span></div>
@@ -163,7 +171,8 @@
           <div class="sec"><span class="stl">HOMEPAGE CWV</span><span class="stv">90</span></div>
           <div class="chartblk"><div class="barlabel">WEEKLY IMPRESSIONS · LIVE</div><div class="bars"><div class="bar"><span class="bv">95</span><div class="bt " style="height:20%"></div><span class="bl">wk to 07-13</span></div><div class="bar"><span class="bv">398</span><div class="bt " style="height:86%"></div><span class="bl">wk to 07-20</span></div><div class="bar"><span class="bv">460</span><div class="bt hot" style="height:100%"></div><span class="bl">wk to 07-27</span></div></div></div>
           <p class="narr">The flagship, and Google is responding: 1,752 impressions over 90 days with weekly impressions accelerating. Brand demand is appearing. The one gap: only 2 referring domains — momentum is running on content alone, so links are the unlock.</p>
-          <div class="rectitle">RECOMMENDATIONS</div><ul class="recs"><li><span class="tag tp0">P0</span><span>Concentrate French content, links and cross-references here — it is the flagship</span></li><li><span class="tag tp0">P0</span><span>Build links to the MAG-box and definition guides — all within striking distance; 2 referring domains is the bottleneck</span></li><li><span class="tag tkpi">KPI</span><span>600+ impressions/week by mid-August</span></li></ul>
+          <div class="rectitle">VERIFIED CLEAN TODAY · 6/6</div><div class="hchips"><span class="hchip ok">✓ Titles ≤60</span><span class="hchip ok">✓ No redirect-links</span><span class="hchip ok">✓ No orphans</span><span class="hchip ok">✓ Canonicals</span><span class="hchip ok">✓ No broken links</span><span class="hchip ok">✓ www 308</span></div>
+          <div class="rectitle">ONGOING PRIORITIES <span style="text-transform:none;letter-spacing:0;font-weight:400">(strategy — stays until we change direction)</span></div><ul class="recs"><li><span class="tag tp0">P0</span><span>Concentrate French content, links and cross-references here — it is the flagship</span></li><li><span class="tag tp0">P0</span><span>Build links to the MAG-box and definition guides — all within striking distance; 2 referring domains is the bottleneck</span></li><li><span class="tag tkpi">KPI</span><span>600+ impressions/week by mid-August</span></li></ul>
         </div><div class="scard">
           <div class="schead"><div><div class="sname">iptvned.com</div><div class="sdesc">Netherlands — news spike fading</div></div>
             <span class="badge b-warn">▼ FADING</span></div>
@@ -171,7 +180,8 @@
           <div class="sec"><span class="stl">TOP-100 KEYWORDS</span><span class="stv">15</span></div>
           <div class="chartblk"><div class="barlabel">WEEKLY CLICKS · LIVE</div><div class="bars"><div class="bar"><span class="bv">0</span><div class="bt " style="height:3%"></div><span class="bl">wk to 07-13</span></div><div class="bar"><span class="bv">0</span><div class="bt " style="height:3%"></div><span class="bl">wk to 07-20</span></div><div class="bar"><span class="bv">5</span><div class="bt hot" style="height:100%"></div><span class="bl">wk to 07-27</span></div></div></div>
           <p class="narr">The news spike has faded: 40 clicks over 90 days, impressions still flowing (~165/wk) but nothing ranks high enough to earn clicks. 15 keywords sit in the top 100 — the legal-B2B cluster and links are the way back.</p>
-          <div class="rectitle">RECOMMENDATIONS</div><ul class="recs"><li><span class="tag tp0">P0</span><span>Diagnose homepage TBT regression (682 ms; was 280 ms) — diff the content-wave deploy</span></li><li><span class="tag tdo">DO</span><span>Interlink the 3 legal-B2B posts with the legal landing — the replacement play for the fading news query</span></li><li><span class="tag tdo">DO</span><span>Add links from the opgerold post to the legal cluster while it still has authority</span></li><li><span class="tag tdo">DO</span><span>Start NL link building — 13 referring domains won&#x27;t move &quot;iptv nederland&quot; from #63</span></li></ul>
+          <div class="rectitle">VERIFIED CLEAN TODAY · 6/6</div><div class="hchips"><span class="hchip ok">✓ Titles ≤60</span><span class="hchip ok">✓ No redirect-links</span><span class="hchip ok">✓ No orphans</span><span class="hchip ok">✓ Canonicals</span><span class="hchip ok">✓ No broken links</span><span class="hchip ok">✓ www 308</span></div>
+          <div class="rectitle">ONGOING PRIORITIES <span style="text-transform:none;letter-spacing:0;font-weight:400">(strategy — stays until we change direction)</span></div><ul class="recs"><li><span class="tag tp0">P0</span><span>Diagnose homepage TBT regression (682 ms; was 280 ms) — diff the content-wave deploy</span></li><li><span class="tag tdo">DO</span><span>Interlink the 3 legal-B2B posts with the legal landing — the replacement play for the fading news query</span></li><li><span class="tag tdo">DO</span><span>Add links from the opgerold post to the legal cluster while it still has authority</span></li><li><span class="tag tdo">DO</span><span>Start NL link building — 13 referring domains won&#x27;t move &quot;iptv nederland&quot; from #63</span></li></ul>
         </div><div class="scard">
           <div class="schead"><div><div class="sname">iptvpix.com</div><div class="sdesc">France — clean tech, no traffic</div></div>
             <span class="badge b-bad">⚠ SUSPECTED SUPPRESSION</span></div>
@@ -179,7 +189,8 @@
           <div class="sec"><span class="stl">BACKLINKS</span><span class="stv">40</span></div>
           <div class="chartblk"><div class="barlabel">WEEKLY CLICKS · LIVE</div><div class="bars"><div class="bar"><span class="bv">0</span><div class="bt " style="height:3%"></div><span class="bl">wk to 07-13</span></div><div class="bar"><span class="bv">0</span><div class="bt " style="height:3%"></div><span class="bl">wk to 07-20</span></div><div class="bar"><span class="bv">0</span><div class="bt " style="height:3%"></div><span class="bl">wk to 07-27</span></div></div></div>
           <p class="narr">Technically clean, 40 backlinks — the most in the portfolio — yet 25 clicks over 90 days and zero recent impressions. Live brand-query probe: position 16 (/), homepage absent. This reads as algorithmic suppression, not a technical fault. Mid-August verdict: recover or deprioritize.</p>
-          <div class="rectitle">RECOMMENDATIONS</div><ul class="recs"><li><span class="tag tp0">P0</span><span>Homepage perf pass (Perf 88, LCP 1.6 s, TBT 424 ms) — apply the iptvned recipe</span></li><li><span class="tag towner">OWNER</span><span>Check GSC Manual Actions + Security Issues — suppression, not a code fault</span></li><li><span class="tag twatch">WATCH</span><span>Mid-August verdict: recover or deprioritize</span></li></ul>
+          <div class="rectitle">VERIFIED CLEAN TODAY · 6/6</div><div class="hchips"><span class="hchip ok">✓ Titles ≤60</span><span class="hchip ok">✓ No redirect-links</span><span class="hchip ok">✓ No orphans</span><span class="hchip ok">✓ Canonicals</span><span class="hchip ok">✓ No broken links</span><span class="hchip ok">✓ www 308</span></div>
+          <div class="rectitle">ONGOING PRIORITIES <span style="text-transform:none;letter-spacing:0;font-weight:400">(strategy — stays until we change direction)</span></div><ul class="recs"><li><span class="tag tp0">P0</span><span>Homepage perf pass (Perf 88, LCP 1.6 s, TBT 424 ms) — apply the iptvned recipe</span></li><li><span class="tag towner">OWNER</span><span>Check GSC Manual Actions + Security Issues — suppression, not a code fault</span></li><li><span class="tag twatch">WATCH</span><span>Mid-August verdict: recover or deprioritize</span></li></ul>
         </div><div class="scard">
           <div class="schead"><div><div class="sname">smarters-live.com</div><div class="sdesc">France — rebuilt, minimal data</div></div>
             <span class="badge b-neutral">◔ UNMEASURED</span></div>
@@ -187,7 +198,8 @@
           <div class="sec"><span class="stl">BACKLINKS / REF. DOMAINS</span><span class="stv">2 / 2</span></div>
           <div class="chartblk"><div class="barlabel">WEEKLY CLICKS · LIVE</div><div class="bars"><div class="bar"><span class="bv">0</span><div class="bt " style="height:3%"></div><span class="bl">wk to 07-13</span></div><div class="bar"><span class="bv">1</span><div class="bt hot" style="height:100%"></div><span class="bl">wk to 07-20</span></div><div class="bar"><span class="bv">0</span><div class="bt " style="height:3%"></div><span class="bl">wk to 07-27</span></div></div></div>
           <p class="narr">Rebuilt to 47 pages (www-canonical, correct). Near-zero search presence so far (2 clicks / 90d). Decision pending: fold into primeiptv or invest as its own property. Retitle the over-length pages and add it to Search Console either way.</p>
-          <div class="rectitle">RECOMMENDATIONS</div><ul class="recs"><li><span class="tag towner">OWNER</span><span>Decide: fold into primeiptv (recommended) or invest as its own site</span></li><li><span class="tag tdo">DO</span><span>Add to Search Console + monitoring service account</span></li></ul>
+          <div class="rectitle">VERIFIED CLEAN TODAY · 6/6</div><div class="hchips"><span class="hchip ok">✓ Titles ≤60</span><span class="hchip ok">✓ No redirect-links</span><span class="hchip ok">✓ No orphans</span><span class="hchip ok">✓ Canonicals</span><span class="hchip ok">✓ No broken links</span><span class="hchip ok">✓ www/HTTPS</span></div>
+          <div class="rectitle">ONGOING PRIORITIES <span style="text-transform:none;letter-spacing:0;font-weight:400">(strategy — stays until we change direction)</span></div><ul class="recs"><li><span class="tag towner">OWNER</span><span>Decide: fold into primeiptv (recommended) or invest as its own site</span></li><li><span class="tag tdo">DO</span><span>Add to Search Console + monitoring service account</span></li></ul>
         </div><div class="scard">
           <div class="schead"><div><div class="sname">iptvshqiptar.com</div><div class="sdesc">Albania — new, not yet in GSC</div></div>
             <span class="badge b-neutral">◔ UNMEASURED</span></div>
@@ -195,7 +207,8 @@
           <div class="sec"><span class="stl">BACKLINKS / REF. DOMAINS</span><span class="stv">8 / 7</span></div>
           <div class="chartblk"><div class="barlabel">WEEKLY CLICKS · LIVE</div><div class="nodata">no Search Console data yet</div></div>
           <p class="narr">New Albanian-market site, technically clean (20 pages, correct canonicals/redirects) with 8 backlinks already. Not yet in Search Console, so no click/impression data — verifying it in GSC is the first move before anything else.</p>
-          <div class="rectitle">RECOMMENDATIONS</div><ul class="recs"><li><span class="tag towner">OWNER</span><span>Add to Google Search Console (DNS TXT) + submit sitemap — no measurement yet</span></li><li><span class="tag twatch">WATCH</span><span>Baseline clean; revisit once GSC data lands</span></li></ul>
+          <div class="rectitle">VERIFIED CLEAN TODAY · 7/7</div><div class="hchips"><span class="hchip ok">✓ Titles ≤60</span><span class="hchip ok">✓ No redirect-links</span><span class="hchip ok">✓ No orphans</span><span class="hchip ok">✓ Canonicals</span><span class="hchip ok">✓ No broken links</span><span class="hchip ok">✓ www 308</span><span class="hchip ok">✓ Favicon</span></div>
+          <div class="rectitle">ONGOING PRIORITIES <span style="text-transform:none;letter-spacing:0;font-weight:400">(strategy — stays until we change direction)</span></div><ul class="recs"><li><span class="tag towner">OWNER</span><span>Add to Google Search Console (DNS TXT) + submit sitemap — no measurement yet</span></li><li><span class="tag twatch">WATCH</span><span>Baseline clean; revisit once GSC data lands</span></li></ul>
         </div></div></section>
   <section id="keywords"><div class="card"><h2>Keyword targeting — volume vs. where you rank</h2><p class="sub" style="margin:6px 0 0">These are the high-volume money terms each site should own — pulled from DataForSEO (Google Ads volumes, live SERP positions). Across the portfolio, <b>181,550 searches/month</b> are in scope over 27 target terms, and only <b>0</b> currently rank in the top 100. The single biggest is <b>"iptv smarters pro" (49,500/mo, France)</b> — targeted by nobody. Fix Prompts now carry these targets per site.</p></div><div class="kgrid"><div class="card kcard"><div class="phead"><h2>iptvesp.com</h2><span class="klabel">🇪🇸 Spain</span></div>
           <p class="sub" style="margin:2px 0 10px">Primary target: <b>iptv españa</b> (4,400/mo) · 8,130/mo addressable across 5 terms</p>
@@ -470,4 +483,4 @@ function draw(){
 }
 draw(); addEventListener("resize",draw);
 </script>
-<!-- pipeline:1785330994-changes -->
+<!-- pipeline:1785331445-health -->
