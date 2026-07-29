@@ -149,6 +149,11 @@ One reviewed JSON file drives all pages — `data/legal-by-country.json`:
 > Paste into a Claude Code session in the **primeiptv-france.com** repo. Keep the data file owner-verified — do not invent legal facts.
 
 ```
+>>> TARGET WEBSITE: primeiptv-france.com <<<
+Before writing any code, switch to the primeiptv-france.com project/repo in this workspace. Every
+path and route below is relative to THAT project. Do NOT modify any other site (smarters-live,
+iptvesp, iptvned, iptvpix, iptvshqiptar) — only primeiptv-france.com.
+
 You are a senior Next.js engineer building a linkable SEO asset on primeiptv-france.com
 (Next.js App Router on Vercel). Build an "Is IPTV legal in [country]?" checker. Follow this spec exactly.
 

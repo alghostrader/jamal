@@ -136,6 +136,11 @@ Two reviewed JSON files drive everything.
 > Paste into a Claude session opened on the **smarters-live.com** repo.
 
 ```
+>>> TARGET WEBSITE: smarters-live.com <<<
+Before writing any code, switch to the smarters-live.com project/repo in this workspace. Every
+path and route below is relative to THAT project. Do NOT modify any other site (primeiptv,
+iptvesp, iptvned, iptvpix, iptvshqiptar) — only smarters-live.com.
+
 You are a senior Next.js engineer building a linkable SEO asset on smarters-live.com
 (Next.js App Router on Vercel, French, www-canonical). Build an IPTV Player / Device
 Compatibility Checker: users pick their device and get the recommended app(s), install path,
