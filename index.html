@@ -93,10 +93,22 @@
   .krank{font:600 11px ui-monospace,Menlo,monospace;padding:2px 7px;border-radius:20px;white-space:nowrap}
   .krank.good{background:#eafaf0;color:#1b7f4d}.krank.ok{background:#e7eefb;color:#1f6feb}
   .krank.far{background:#fbf0da;color:#8a5a00}.krank.miss{background:var(--line);color:var(--ink3)}
+  .chgcard{border-left:3px solid var(--acc)}
+  .chglist{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+  .chg{font-size:13px;padding:7px 11px;border-radius:7px;font-variant-numeric:tabular-nums}
+  .chg.good{background:#eafaf0;color:#137a43}.chg.info{background:#e7eefb;color:#1f5fbf}.chg.down{background:#f9e9e7;color:#b3372e}
+  :root[data-theme="dark"] .viz-root .chg.good,.viz-root .chg.good{}
+  @media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .viz-root .chg.good{background:#123524;color:#5fce93}
+    :root:where(:not([data-theme="light"])) .viz-root .chg.info{background:#16233f;color:#7fb0f5}
+    :root:where(:not([data-theme="light"])) .viz-root .chg.down{background:#3a1f1c;color:#ef8d82}}
+  :root[data-theme="dark"] .viz-root .chg.good{background:#123524;color:#5fce93}
+  :root[data-theme="dark"] .viz-root .chg.info{background:#16233f;color:#7fb0f5}
+  :root[data-theme="dark"] .viz-root .chg.down{background:#3a1f1c;color:#ef8d82}
+  .freshpill{display:inline-block;background:var(--acc);color:#fff;font:600 11px ui-monospace,Menlo,monospace;padding:3px 9px;border-radius:20px;margin-left:2px}
 </style>
 <div class="viz-root"><div class="wrap">
   <h1>IPTV Portfolio — Daily SEO Dashboard</h1>
-  <p class="meta">Full audit 2026-07-29 · GSC window 2026-04-28 → 2026-07-27 (lags ~2 days) · DataForSEO backlinks/keywords/SERP · updated on request (say "update the dashboard")</p>
+  <p class="meta">Last updated <span class="freshpill">2026-07-29 13:16 UTC</span> · GSC window 2026-04-28 → 2026-07-27 (lags ~2 days) · DataForSEO backlinks/keywords/SERP · re-run on request (say "update the dashboard")</p>
   <nav>
     <button class="on" data-tab="data">📊 Data</button>
     <button data-tab="sites">🗂 Sites</button>
@@ -105,6 +117,7 @@
     <button data-tab="plan">🗺 Plan</button>
   </nav>
   <section id="data" class="on">
+    <div class="card chgcard"><h2>🔄 What changed this update</h2><p class="sub">Since last update (2026-07-29 morning run) — 10 change(s).</p><ul class="chglist"><li class="chg good">iptvesp.com: clicks/7d 113 → 114 (+1)</li><li class="chg good">iptvesp.com: redirect-links 2 → 0 ✓ fixed</li><li class="chg good">primeiptv-france.com: clicks/7d 18 → 21 (+3)</li><li class="chg good">iptvned.com: clicks/7d 3 → 5 (+2)</li><li class="chg good">iptvpix.com: redirect-links 2 → 0 ✓ fixed</li><li class="chg good">iptvpix brand-query SERP: position 23 → 16 ✓ improving</li><li class="chg info">iptvesp.com: 49 → 47 pages (-2)</li><li class="chg info">primeiptv-france.com: 78 → 83 pages (+5)</li><li class="chg info">iptvpix.com: 55 → 53 pages (-2)</li><li class="chg info">smarters-live.com: 38 → 47 pages (+9)</li></ul></div>
     <div class="tiles"><div class="tile"><div class="thead"><span class="swatch s1"></span><span class="tname">iptvesp.com</span></div>
       <div class="tnum">114<span class="tunit">clicks / 7d</span></div>
       <div class="trow"><span class="d down">▼ −12</span> vs prior week · 1114 impressions</div>
@@ -457,4 +470,4 @@ function draw(){
 }
 draw(); addEventListener("resize",draw);
 </script>
-<!-- pipeline:1785327953-update -->
+<!-- pipeline:1785330994-changes -->
