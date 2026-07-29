@@ -1,0 +1,170 @@
+<title>iptvned.com — SEO</title>
+<style>
+  .viz-root{color-scheme:light;
+    --surface:#fcfcfb;--card:#ffffff;--line:#e7e6e2;--ink:#0b0b0b;--ink2:#52514e;--ink3:#8a8983;
+    --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#c0448f;--s6:#4a3aa7;--up:#008300;--down:#c22f22;--acc:#2a78d6}
+  @media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .viz-root{color-scheme:dark;
+    --surface:#1a1a19;--card:#222221;--line:#383734;--ink:#ffffff;--ink2:#c3c2b7;--ink3:#8a897f;
+    --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#9085e9;--up:#39b54a;--down:#ef8d82;--acc:#3987e5}}
+  :root[data-theme="dark"] .viz-root{color-scheme:dark;
+    --surface:#1a1a19;--card:#222221;--line:#383734;--ink:#ffffff;--ink2:#c3c2b7;--ink3:#8a897f;
+    --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#9085e9;--up:#39b54a;--down:#ef8d82;--acc:#3987e5}
+  body{margin:0}
+  .viz-root{background:var(--surface);color:var(--ink);font:14px/1.5 ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 20px 70px}
+  h1{font-size:20px;font-weight:750;letter-spacing:-.01em;margin:0}
+  .meta{color:var(--ink3);font-size:12.5px;margin:3px 0 16px}
+  nav{display:flex;gap:6px;margin-bottom:20px;border-bottom:1px solid var(--line)}
+  nav button{background:none;border:none;border-bottom:2px solid transparent;color:var(--ink2);
+    font:600 13.5px inherit;font-family:inherit;padding:8px 14px;cursor:pointer}
+  nav button.on{color:var(--ink);border-bottom-color:var(--acc)}
+  nav button:focus-visible,.copybtn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+  section{display:none} section.on{display:block}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin-bottom:24px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .thead{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .swatch{width:10px;height:10px;border-radius:3px;flex:none}
+  .s1{background:var(--s1)}.s2{background:var(--s2)}.s3{background:var(--s3)}.s4{background:var(--s4)}.s5{background:var(--s5)}.s6{background:var(--s6)}
+  .tname{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink2)}
+  .tnum{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+  .tunit{font-size:11px;font-weight:500;color:var(--ink3);margin-left:6px}
+  .trow{font-size:12px;color:var(--ink2);margin-top:3px}.trow.muted{color:var(--ink3)}
+  .d{font-variant-numeric:tabular-nums;font-weight:600}.d.up{color:var(--up)}.d.down{color:var(--down)}.d.flat{color:var(--ink3)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:20px}
+  .card h2{font-size:14px;font-weight:650;margin:0 0 2px}
+  .card .sub{font-size:12px;color:var(--ink3);margin:0 0 12px}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink2);margin-bottom:8px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  #chartbox{position:relative}
+  #tip{position:absolute;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:7px;
+    padding:7px 10px;font-size:12px;display:none;box-shadow:0 2px 10px rgba(0,0,0,.12);white-space:nowrap;z-index:2}
+  svg text{fill:var(--ink3);font:10.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+  svg .dl{font:11px ui-sans-serif,-apple-system,sans-serif;font-weight:650}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;font-variant-numeric:tabular-nums}
+  th{color:var(--ink3);font-weight:600;text-align:right;padding:6px 8px;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+  td:nth-child(2),td:nth-child(3),th:nth-child(2),th:nth-child(3){text-align:left}
+  tr:last-child td{border-bottom:none}
+  .overflow{overflow-x:auto}
+
+  .scards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .scard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:12px}
+  .schead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .sname{font:600 15px ui-monospace,SFMono-Regular,Menlo,monospace}
+  .sdesc{font-size:12px;color:var(--ink3);margin-top:2px}
+  .badge{font:600 10.5px ui-sans-serif,-apple-system,sans-serif;letter-spacing:.03em;padding:5px 9px;border-radius:20px;white-space:nowrap;flex:none}
+  .b-good{background:#1b7f4d;color:#fff}.b-flag{background:#1f6feb;color:#fff}
+  .b-warn{background:#c96a1e;color:#fff}.b-bad{background:#b3372e;color:#fff}
+  .b-neutral{background:#d9a406;color:#241c00}
+  .stats{display:flex;gap:18px;flex-wrap:wrap;padding-top:2px}
+  .st{display:flex;flex-direction:column;gap:2px}
+  .stl{font:10px ui-monospace,Menlo,monospace;letter-spacing:.05em;color:var(--ink3);text-transform:uppercase}
+  .stv{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+  .sec{border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:2px}
+  .chartblk{border-top:1px solid var(--line);padding-top:10px}
+  .barlabel{font:10px ui-monospace,Menlo,monospace;letter-spacing:.05em;color:var(--ink3);text-transform:uppercase;margin-bottom:8px}
+  .bars{display:flex;gap:14px;align-items:flex-end;height:96px}
+  .bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:5px}
+  .bv{font:600 12px ui-sans-serif,sans-serif;font-variant-numeric:tabular-nums}
+  .bt{width:100%;max-width:56px;background:var(--s1);opacity:.5;border-radius:4px 4px 0 0;min-height:3px}
+  .bt.hot{opacity:1}
+  .bl{font:10px ui-monospace,Menlo,monospace;color:var(--ink3)}
+  .nodata{font-size:12px;color:var(--ink3);font-style:italic;padding:10px 0}
+  .narr{font-size:12.5px;line-height:1.5;color:var(--ink2);margin:0;border-left:2px solid var(--line);padding-left:11px}
+  .rectitle{font:10px ui-monospace,Menlo,monospace;letter-spacing:.05em;color:var(--ink3);text-transform:uppercase;border-top:1px solid var(--line);padding-top:12px}
+  .recs{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .recs li{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;line-height:1.45;color:var(--ink2)}
+  .tag{font:600 9.5px ui-monospace,Menlo,monospace;letter-spacing:.03em;padding:3px 5px;border-radius:4px;flex:none;margin-top:1px;min-width:30px;text-align:center}
+  .tp0{background:var(--p0-bg,#f9e9e7);color:#b3372e}.tdo{background:var(--line);color:var(--ink2)}
+  .topen{background:#e7eefb;color:#1f6feb}.tkpi{background:#eafaf0;color:#1b7f4d}
+  .twatch{background:var(--line);color:var(--ink3)}.towner{background:#fbf0da;color:#8a5a00}
+  .lcl{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink2)} .lcl li{margin-bottom:6px}
+  .pcard .phead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+  .copybtn{background:var(--acc);color:#fff;border:none;border-radius:7px;padding:7px 14px;
+    font:600 12.5px inherit;font-family:inherit;cursor:pointer}
+  .copybtn.ok{background:var(--up)}
+  .ptext{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+    font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow-x:auto;
+    max-height:340px;overflow-y:auto;margin:0;color:var(--ink2)}
+  .kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .kcard .phead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:0}
+  .klabel{font:600 11px ui-sans-serif,-apple-system,sans-serif;color:var(--ink3);white-space:nowrap;flex:none}
+  .krank{font:600 11px ui-monospace,Menlo,monospace;padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .krank.good{background:#eafaf0;color:#1b7f4d}.krank.ok{background:#e7eefb;color:#1f6feb}
+  .krank.far{background:#fbf0da;color:#8a5a00}.krank.miss{background:var(--line);color:var(--ink3)}
+  .chgcard{border-left:3px solid var(--acc)}
+  .chglist{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+  .chg{font-size:13px;padding:7px 11px;border-radius:7px;font-variant-numeric:tabular-nums}
+  .chg.good{background:#eafaf0;color:#137a43}.chg.info{background:#e7eefb;color:#1f5fbf}.chg.down{background:#f9e9e7;color:#b3372e}
+  :root[data-theme="dark"] .viz-root .chg.good,.viz-root .chg.good{}
+  @media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .viz-root .chg.good{background:#123524;color:#5fce93}
+    :root:where(:not([data-theme="light"])) .viz-root .chg.info{background:#16233f;color:#7fb0f5}
+    :root:where(:not([data-theme="light"])) .viz-root .chg.down{background:#3a1f1c;color:#ef8d82}}
+  :root[data-theme="dark"] .viz-root .chg.good{background:#123524;color:#5fce93}
+  :root[data-theme="dark"] .viz-root .chg.info{background:#16233f;color:#7fb0f5}
+  :root[data-theme="dark"] .viz-root .chg.down{background:#3a1f1c;color:#ef8d82}
+  .freshpill{display:inline-block;background:var(--acc);color:#fff;font:600 11px ui-monospace,Menlo,monospace;padding:3px 9px;border-radius:20px;margin-left:2px}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .hchip{font:600 11px ui-sans-serif,-apple-system,sans-serif;padding:4px 9px;border-radius:6px;white-space:nowrap}
+  .hchip.ok{background:#eafaf0;color:#137a43}.hchip.bad{background:#f9e9e7;color:#b3372e}
+  @media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .viz-root .hchip.ok{background:#123524;color:#5fce93}
+    :root:where(:not([data-theme="light"])) .viz-root .hchip.bad{background:#3a1f1c;color:#ef8d82}}
+  :root[data-theme="dark"] .viz-root .hchip.ok{background:#123524;color:#5fce93}
+  :root[data-theme="dark"] .viz-root .hchip.bad{background:#3a1f1c;color:#ef8d82}
+
+  .sitelist{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  .siterow{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);text-decoration:none;color:var(--ink)}
+  .siterow:hover{border-color:var(--acc)}
+  .srname{font:600 13px ui-monospace,Menlo,monospace;min-width:155px}
+  .srmeta{font-size:12px;color:var(--ink2);min-width:105px;font-variant-numeric:tabular-nums}
+  .srtop{font-size:12px;color:var(--ink3);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .srarrow{color:var(--ink3);font-weight:700;font-size:15px}
+  .slink{color:inherit;text-decoration:none;border-bottom:1px dashed var(--ink3)}
+  .backlink{display:inline-block;margin-bottom:10px;color:var(--acc);text-decoration:none;font-size:13px;font-weight:600}
+  .backlink:hover{text-decoration:underline}
+  .sitenav{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 20px}
+  .sitenav a{font:600 12px ui-monospace,Menlo,monospace;padding:5px 10px;border:1px solid var(--line);border-radius:20px;text-decoration:none;color:var(--ink2)}
+  .sitenav a:hover{border-color:var(--acc)}
+  .sitenav a.cur{background:var(--acc);color:#fff;border-color:var(--acc)}
+  .scard{max-width:100%}
+  @media(max-width:640px){.siterow{flex-wrap:wrap}.srname,.srmeta{min-width:0}.srtop{flex-basis:100%;white-space:normal}}
+</style>
+<div class="viz-root"><div class="wrap">
+<a class="backlink" href="index.html">← All websites</a><h1>iptvned.com</h1><p class="meta">Netherlands — news spike fading · updated 2026-07-29 16:12 UTC</p><div class="sitenav"><a href="index.html">🏠 Portfolio</a><a href="iptvesp.html">iptvesp</a><a href="primeiptv-france.html">primeiptv-france</a><a href="iptvned.html" class="cur">iptvned</a><a href="iptvpix.html">iptvpix</a><a href="smarters-live.html">smarters-live</a><a href="iptvshqiptar.html">iptvshqiptar</a></div><div class="scard">
+          <div class="schead"><div><div class="sname">iptvned.com</div><div class="sdesc">Netherlands — news spike fading</div></div>
+            <span class="badge b-warn">▼ FADING</span></div>
+          <div class="stats"><div class="st"><span class="stl">CLICKS 90D</span><span class="stv">40</span></div><div class="st"><span class="stl">IMPR. 90D</span><span class="stv">2,154</span></div><div class="st"><span class="stl">CTR</span><span class="stv">1.9%</span></div></div>
+          <div class="sec"><span class="stl">TOP-100 KEYWORDS</span><span class="stv">15</span></div>
+          <div class="chartblk"><div class="barlabel">WEEKLY CLICKS · LIVE</div><div class="bars"><div class="bar"><span class="bv">0</span><div class="bt " style="height:3%"></div><span class="bl">wk to 07-13</span></div><div class="bar"><span class="bv">0</span><div class="bt " style="height:3%"></div><span class="bl">wk to 07-20</span></div><div class="bar"><span class="bv">5</span><div class="bt hot" style="height:100%"></div><span class="bl">wk to 07-27</span></div></div></div>
+          <p class="narr">The news spike has faded: 40 clicks over 90 days, impressions still flowing (~165/wk) but nothing ranks high enough to earn clicks. 15 keywords sit in the top 100 — the legal-B2B cluster and links are the way back.</p>
+          <div class="rectitle">VERIFIED CLEAN TODAY · 6/6</div><div class="hchips"><span class="hchip ok">✓ Titles ≤60</span><span class="hchip ok">✓ No redirect-links</span><span class="hchip ok">✓ No orphans</span><span class="hchip ok">✓ Canonicals</span><span class="hchip ok">✓ No broken links</span><span class="hchip ok">✓ www 308</span></div>
+          <div class="rectitle">ONGOING PRIORITIES <span style="text-transform:none;letter-spacing:0;font-weight:400">(strategy — stays until we change direction)</span></div><ul class="recs"><li><span class="tag tp0">P0</span><span>Diagnose homepage TBT regression (682 ms; was 280 ms) — diff the content-wave deploy</span></li><li><span class="tag tdo">DO</span><span>Interlink the 3 legal-B2B posts with the legal landing — the replacement play for the fading news query</span></li><li><span class="tag tdo">DO</span><span>Add links from the opgerold post to the legal cluster while it still has authority</span></li><li><span class="tag tdo">DO</span><span>Start NL link building — 13 referring domains won&#x27;t move &quot;iptv nederland&quot; from #63</span></li></ul>
+        </div><div class="card"><h2>🎯 Keyword targets</h2><p class="sub">Primary: <b>iptv nederland</b> (12,100/mo) · 25,500/mo addressable across 5 terms</p><div class="overflow"><table><thead><tr><th>target keyword</th><th>volume/mo</th><th>current rank</th></tr></thead><tbody><tr><td>iptv nederland</td><td>12,100</td><td><span class="krank miss">not in top 100</span></td></tr><tr><td>iptv kopen</td><td>6,600</td><td><span class="krank miss">not in top 100</span></td></tr><tr><td>iptv aanbieders</td><td>3,600</td><td><span class="krank miss">not in top 100</span></td></tr><tr><td>iptv abonnement</td><td>1,900</td><td><span class="krank miss">not in top 100</span></td></tr><tr><td>beste iptv</td><td>1,300</td><td><span class="krank miss">not in top 100</span></td></tr></tbody></table></div></div><div class="card pcard"><div class="phead"><h2>📝 Fix Prompt — iptvned.com</h2><button class="copybtn" data-copy>Copy prompt</button></div><pre class="ptext">&gt;&gt;&gt; TARGET WEBSITE: iptvned.com &lt;&lt;&lt;
+Before writing any code, switch to the iptvned.com project/repo in this workspace. Every path, route and commit below applies to THAT project only. Do NOT modify any other site in the portfolio.
+
+You are a senior full-stack engineer fixing verified SEO defects on iptvned.com (Next.js on Vercel). Work through the numbered items in order. One commit per item: fix(iptvned): &lt;item&gt; [daily-2026-07-29]. After deploying each item run its verification and only then move on. Do not touch robots.txt, canonicals, hreflang, existing redirects, or checkout noindex — they are verified correct.
+
+1. PERFORMANCE — homepage TBT regression (P1). Latest lab: Perf 83, TBT 682 ms (was 280 ms on 11 Jul).
+   Steps: (a) git log the homepage + shared layout since 11 Jul; (b) identify the client component/script added with the content wave; (c) revert it or load it via next/dynamic; (d) deploy; (e) verify live Lighthouse mobile TBT &lt; 300 ms twice.
+
+2. PERFORMANCE — /installatie LCP 3.0 s (P2). Same hydration render-delay as the homepage — apply the same fix; verify LCP &lt; 2.5 s.
+
+3. KEYWORD TARGETS (strategic — the money terms this site should own).
+   Build or strengthen a dedicated, internally-linked page for each of these, biggest volume first. Primary target: &quot;iptv nederland&quot; (12,100/mo).
+     - &quot;iptv nederland&quot; — 12,100/mo — not in top 100
+     - &quot;iptv kopen&quot; — 6,600/mo — not in top 100
+     - &quot;iptv aanbieders&quot; — 3,600/mo — not in top 100
+     - &quot;iptv abonnement&quot; — 1,900/mo — not in top 100
+     - &quot;beste iptv&quot; — 1,300/mo — not in top 100
+   Rules: one strong page per term (title + H1 keyword-first, 700+ words, schema, 2+ internal links pointing in); do NOT spin up new posts under 300/mo unless they have clear buy-intent; re-check positions after the next crawl.</pre></div>
+</div></div>
+<script>
+document.querySelectorAll("[data-copy]").forEach(btn=>btn.addEventListener("click",async ()=>{
+  const txt = btn.closest(".pcard").querySelector(".ptext").textContent;
+  try{ await navigator.clipboard.writeText(txt); }
+  catch(e){ const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); }
+  const old=btn.textContent; btn.textContent="Copied ✓"; btn.classList.add("ok");
+  setTimeout(()=>{btn.textContent=old; btn.classList.remove("ok");},1600);
+}));
+</script>
