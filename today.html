@@ -217,16 +217,39 @@
   .sitelist .siterow:nth-child(4){animation-delay:.15s}.sitelist .siterow:nth-child(5){animation-delay:.2s}.sitelist .siterow:nth-child(6){animation-delay:.25s}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
+  .spk{display:block}
+  .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+  .tmetric{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid var(--line2)}
+  .tmetric:first-of-type{border-top:none}
+  .tmL{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .tmName{font:600 12px ui-sans-serif,-apple-system,sans-serif;color:var(--ink2)}
+  .tmVal{font-size:18px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .tmDelta{font:700 11px ui-monospace,Menlo,monospace}
+  .tmDelta.up{color:var(--up)}.tmDelta.down{color:var(--down)}.tmDelta.flat{color:var(--ink3)}
+  .spkwrap{flex:none;width:150px}
+  .alert{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;padding:10px 13px;border-radius:10px;margin-bottom:8px;font-weight:600}
+  .alert:last-child{margin-bottom:0}
+  .alert .ai{flex:none;font-weight:800}
+  .alert.crit{background:#fbe9e7;color:#b3372e}.alert.warn{background:#fcefdc;color:#9a5a00}.alert.good{background:#e7f6ee;color:#0a7d3f}
+  :root[data-theme="dark"] .viz-root .alert.crit{background:#3a1f1c;color:#ef8d82}
+  :root[data-theme="dark"] .viz-root .alert.warn{background:#33260f;color:#e2a83c}
+  :root[data-theme="dark"] .viz-root .alert.good{background:#12331f;color:#5fce8f}
+  @media (prefers-color-scheme:dark){
+    :root:where(:not([data-theme="light"])) .viz-root .alert.crit{background:#3a1f1c;color:#ef8d82}
+    :root:where(:not([data-theme="light"])) .viz-root .alert.warn{background:#33260f;color:#e2a83c}
+    :root:where(:not([data-theme="light"])) .viz-root .alert.good{background:#12331f;color:#5fce8f}}
+  .alertcard{border-left:4px solid var(--down)}
   @media(max-width:640px){
     .wrap{padding:18px 14px 70px}
     h1{font-size:22px}
     .siterow{flex-wrap:wrap}.srname,.srmeta{min-width:0}.srtop{flex-basis:100%;white-space:normal}
     .sitenav{top:6px}
+    .spkwrap{width:110px}
   }
 </style>
 
 <div class="viz-root"><div class="wrap">
-<a class="backlink" href="./">← Portfolio home</a><h1>🚀 Today — Daily SEO Plan</h1><p class="meta">Rebuilt 2026-07-30 03:17 UTC · one prioritised prompt for all 6 sites · re-run: say "update the dashboard"</p><div class="sitenav"><a href="./">🏠 Portfolio</a><a href="today" class="cur">🚀 Today</a><a href="iptvesp">iptvesp</a><a href="primeiptv-france">primeiptv-france</a><a href="iptvned">iptvned</a><a href="iptvpix">iptvpix</a><a href="smarters-live">smarters-live</a><a href="iptvshqiptar">iptvshqiptar</a></div><div class="card"><h2>🚀 Today's plan — 2026-07-30 03:17 UTC</h2><p class="sub">One prioritised battle plan across all 6 sites, rebuilt on every audit. Copy the master prompt below into your session and work top-down.</p><ul class="lcl"><li><b>P1 · Indexing quick wins</b> — submit iptvpix + iptvshqiptar sitemaps in GSC and Request Indexing. Fastest traffic unlock.</li><li><b>P2 · Grow the earner</b> — iptvesp /suscripciones speed + push "iptv españa".</li><li><b>P3 · Publish content</b> — iptvesp: aplicacion iptv (1,600/mo); primeiptv-france: iptv 4k (1,600/mo); iptvned: iptv app (1,900/mo)…</li><li><b>P4 · Authority</b> — free links, most-starved first: primeiptv-france &amp; smarters-live (2 ref domains each).</li><li><b>P5 · Technical</b> — cleanup any remaining findings (mostly clean today).</li></ul></div><div class="card pcard"><div class="phead"><h2>📋 Master daily prompt — all sites</h2><button class="copybtn" data-copy>Copy prompt</button></div><pre class="ptext" style="max-height:520px">DAILY SEO EXECUTION PLAN — 2026-07-30 03:17 UTC
+<a class="backlink" href="./">← Portfolio home</a><h1>🚀 Today — Daily SEO Plan</h1><p class="meta">Rebuilt 2026-07-30 03:43 UTC · one prioritised prompt for all 6 sites · re-run: say "update the dashboard"</p><div class="sitenav"><a href="./">🏠 Portfolio</a><a href="today" class="cur">🚀 Today</a><a href="trends">📈 Trends</a><a href="iptvesp">iptvesp</a><a href="primeiptv-france">primeiptv-france</a><a href="iptvned">iptvned</a><a href="iptvpix">iptvpix</a><a href="smarters-live">smarters-live</a><a href="iptvshqiptar">iptvshqiptar</a></div><div class="card"><h2>🚀 Today's plan — 2026-07-30 03:43 UTC</h2><p class="sub">One prioritised battle plan across all 6 sites, rebuilt on every audit. Copy the master prompt below into your session and work top-down.</p><ul class="lcl"><li><b>P1 · Indexing quick wins</b> — submit iptvpix + iptvshqiptar sitemaps in GSC and Request Indexing. Fastest traffic unlock.</li><li><b>P2 · Grow the earner</b> — iptvesp /suscripciones speed + push "iptv españa".</li><li><b>P3 · Publish content</b> — iptvesp: aplicacion iptv (1,600/mo); primeiptv-france: iptv 4k (1,600/mo); iptvned: iptv app (1,900/mo)…</li><li><b>P4 · Authority</b> — free links, most-starved first: primeiptv-france &amp; smarters-live (2 ref domains each).</li><li><b>P5 · Technical</b> — cleanup any remaining findings (mostly clean today).</li></ul></div><div class="card pcard"><div class="phead"><h2>📋 Master daily prompt — all sites</h2><button class="copybtn" data-copy>Copy prompt</button></div><pre class="ptext" style="max-height:520px">DAILY SEO EXECUTION PLAN — 2026-07-30 03:43 UTC
 You are a senior SEO operator running SIX IPTV sites from ONE workspace. Each task names its TARGET
 WEBSITE — switch to that project before doing it, never touch another site&#x27;s files. Goal: rank and
 win traffic as fast as possible. Work the priorities top-down; P1 is the fastest path to traffic.

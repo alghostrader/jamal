@@ -217,16 +217,39 @@
   .sitelist .siterow:nth-child(4){animation-delay:.15s}.sitelist .siterow:nth-child(5){animation-delay:.2s}.sitelist .siterow:nth-child(6){animation-delay:.25s}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
+  .spk{display:block}
+  .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+  .tmetric{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid var(--line2)}
+  .tmetric:first-of-type{border-top:none}
+  .tmL{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .tmName{font:600 12px ui-sans-serif,-apple-system,sans-serif;color:var(--ink2)}
+  .tmVal{font-size:18px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .tmDelta{font:700 11px ui-monospace,Menlo,monospace}
+  .tmDelta.up{color:var(--up)}.tmDelta.down{color:var(--down)}.tmDelta.flat{color:var(--ink3)}
+  .spkwrap{flex:none;width:150px}
+  .alert{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;padding:10px 13px;border-radius:10px;margin-bottom:8px;font-weight:600}
+  .alert:last-child{margin-bottom:0}
+  .alert .ai{flex:none;font-weight:800}
+  .alert.crit{background:#fbe9e7;color:#b3372e}.alert.warn{background:#fcefdc;color:#9a5a00}.alert.good{background:#e7f6ee;color:#0a7d3f}
+  :root[data-theme="dark"] .viz-root .alert.crit{background:#3a1f1c;color:#ef8d82}
+  :root[data-theme="dark"] .viz-root .alert.warn{background:#33260f;color:#e2a83c}
+  :root[data-theme="dark"] .viz-root .alert.good{background:#12331f;color:#5fce8f}
+  @media (prefers-color-scheme:dark){
+    :root:where(:not([data-theme="light"])) .viz-root .alert.crit{background:#3a1f1c;color:#ef8d82}
+    :root:where(:not([data-theme="light"])) .viz-root .alert.warn{background:#33260f;color:#e2a83c}
+    :root:where(:not([data-theme="light"])) .viz-root .alert.good{background:#12331f;color:#5fce8f}}
+  .alertcard{border-left:4px solid var(--down)}
   @media(max-width:640px){
     .wrap{padding:18px 14px 70px}
     h1{font-size:22px}
     .siterow{flex-wrap:wrap}.srname,.srmeta{min-width:0}.srtop{flex-basis:100%;white-space:normal}
     .sitenav{top:6px}
+    .spkwrap{width:110px}
   }
 </style>
 
 <div class="viz-root"><div class="wrap">
-<a class="backlink" href="./">← All websites</a><h1>iptvned.com</h1><p class="meta">Netherlands — news spike fading · updated 2026-07-30 03:17 UTC</p><div class="sitenav"><a href="./">🏠 Portfolio</a><a href="today">🚀 Today</a><a href="iptvesp">iptvesp</a><a href="primeiptv-france">primeiptv-france</a><a href="iptvned" class="cur">iptvned</a><a href="iptvpix">iptvpix</a><a href="smarters-live">smarters-live</a><a href="iptvshqiptar">iptvshqiptar</a></div><div class="scard">
+<a class="backlink" href="./">← All websites</a><h1>iptvned.com</h1><p class="meta">Netherlands — news spike fading · updated 2026-07-30 03:43 UTC</p><div class="sitenav"><a href="./">🏠 Portfolio</a><a href="today">🚀 Today</a><a href="trends">📈 Trends</a><a href="iptvesp">iptvesp</a><a href="primeiptv-france">primeiptv-france</a><a href="iptvned" class="cur">iptvned</a><a href="iptvpix">iptvpix</a><a href="smarters-live">smarters-live</a><a href="iptvshqiptar">iptvshqiptar</a></div><div class="scard">
           <div class="schead"><div><div class="sname">iptvned.com</div><div class="sdesc">Netherlands — news spike fading</div></div>
             <span class="badge b-warn">▼ FADING</span></div>
           <div class="stats"><div class="st"><span class="stl">CLICKS 90D</span><span class="stv">40</span></div><div class="st"><span class="stl">IMPR. 90D</span><span class="stv">2,154</span></div><div class="st"><span class="stl">CTR</span><span class="stv">1.9%</span></div></div>
