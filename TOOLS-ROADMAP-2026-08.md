@@ -14,8 +14,8 @@
 | # | Tool | Site | Why there | Target queries | Status |
 |---|---|---|---|---|---|
 | 1 | **Device/app compatibility checker** (`/application-iptv`) | smarters-live | The app hub; feeds the 49,500/mo Smarters Pro play | application iptv (6,600), device long-tail | ✅ shipped 31 Jul — audit-verified (hub+9 devices live, SSG, FAQ/HowTo/Breadcrumb schema, sitemap ✓; funnel CTA lands on primeiptv /tarifs, 200 ✓) |
-| 2 | **Downloader codes list (legit apps) + Downloader tutorial** | smarters-live | Extends the app hub; huge Firestick intent | "downloader codes", "code downloader firestick" FR/EN long-tail | 🔨 spec issued (TOOL-SPEC-downloader-codes-2026-08.md) |
-| 3 | **Xtream ⇄ M3U URL generator** (client-side) | iptvesp | The "listas iptv" market (1,900/mo cluster); Spanish playlist intent | "convertir xtream a m3u", "generar lista m3u", "xtream codes a m3u" | queued |
+| 2 | **Downloader codes list (legit apps) + Downloader tutorial** | smarters-live | Extends the app hub; huge Firestick intent | "downloader codes", "code downloader firestick" FR/EN long-tail | ✅ shipped 31 Jul — audit-verified (/codes-downloader ItemList+FAQ, /utiliser-downloader-firestick HowTo, sitemap ✓, piracy-scan clean) |
+| 3 | **Xtream ⇄ M3U URL generator** (client-side) | iptvesp | The "listas iptv" market (1,900/mo cluster); Spanish playlist intent | "convertir xtream a m3u", "generar lista m3u", "xtream codes a m3u" | 🔨 spec issued (TOOL-SPEC-xtream-m3u-2026-08.md) |
 | 4 | **IPTV bandwidth calculator** ("Quel débit pour l'IPTV ?" — channels/quality → Mbps) | primeiptv | Upgrades its existing /guides/iptv-4k-debit-internet into an interactive asset | "debit iptv", "vitesse internet iptv", 4k requirements | queued |
 | 5 | **Legality checker** (`/iptv-legal`) | primeiptv | Spec ready; E-E-A-T + journalist-pitch credential | "iptv légal france/belgique/suisse…" | ⏸ waiting on owner legal facts (FR/BE/NL) |
 | 6 | **NL buyer's checklist** (interactive "waar let je op bij iptv kopen") | iptvned | Buy-intent tool for "iptv kopen" (6,600) | iptv kopen, iptv aanbieders | later |
