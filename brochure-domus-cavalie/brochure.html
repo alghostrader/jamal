@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Domus Cavalié Invest — Programme Apporteurs d'Affaires</title>
+<link rel="stylesheet" href="fonts_inline.css">
+<style>
+:root{
+  --green-900:#07201A;
+  --green-800:#0B2C22;
+  --green-700:#123A2C;
+  --green-600:#1B4B39;
+  --gold:#B08D4F;
+  --gold-soft:#C8A56B;
+  --gold-light:#E0C48D;
+  --cream:#FBF7F0;
+  --cream-2:#F3EADC;
+  --ink:#16302A;
+  --ink-soft:#4A5F58;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Jost',sans-serif;color:var(--ink);background:#8d8d8d}
+
+@page{size:A4;margin:0}
+
+.page{
+  width:210mm;height:297mm;position:relative;overflow:hidden;
+  background:var(--cream);page-break-after:always;
+}
+.page:last-child{page-break-after:auto}
+
+/* ---------- shared atoms ---------- */
+.frame{position:absolute;inset:9mm;border:0.4pt solid rgba(176,141,79,.45);pointer-events:none}
+.frame.dark{border-color:rgba(224,196,141,.32)}
+
+.pad{position:absolute;inset:0;padding:24mm 20mm 24mm}
+
+.eyebrow{
+  font-family:'Jost',sans-serif;font-weight:500;font-size:8pt;
+  letter-spacing:.30em;text-transform:uppercase;color:var(--gold);
+}
+.eyebrow.on-dark{color:var(--gold-light)}
+
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.14}
+h2{font-size:31pt;color:var(--green-800);letter-spacing:.005em}
+h2 em{font-style:italic;color:var(--gold)}
+h3{font-size:14.5pt;color:var(--green-800);font-weight:600;letter-spacing:.01em}
+
+.rule{width:16mm;height:0.9pt;background:var(--gold);margin:5.5mm 0 8mm}
+.rule.center{margin-left:auto;margin-right:auto}
+.rule.on-dark{background:var(--gold-light)}
+
+p{font-size:10.4pt;line-height:1.78;color:var(--ink-soft);font-weight:300}
+p strong{font-weight:500;color:var(--green-800)}
+.lead{font-size:12pt;line-height:1.74;color:var(--green-700);font-weight:300}
+
+.num-watermark{
+  position:absolute;top:16mm;right:19mm;
+  font-family:'Cormorant Garamond',serif;font-size:50pt;font-weight:300;
+  color:rgba(176,141,79,.20);letter-spacing:.02em;z-index:3;
+}
+
+.pfoot{
+  position:absolute;left:20mm;right:20mm;bottom:11mm;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:6.6pt;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(22,48,42,.42);font-weight:400;
+  border-top:0.4pt solid rgba(176,141,79,.35);padding-top:3mm;
+}
+.pfoot.on-dark{color:rgba(224,196,141,.55);border-top-color:rgba(224,196,141,.28)}
+
+/* ---------- dark pages ---------- */
+.dark-page{
+  background:
+    radial-gradient(120% 80% at 50% 0%, #14402F 0%, rgba(20,64,47,0) 62%),
+    linear-gradient(180deg,#0B2C22 0%,#07201A 100%);
+  color:var(--cream);
+}
+.dark-page h2{color:#F6EFE1}
+.dark-page h3{color:var(--gold-light)}
+.dark-page p{color:rgba(246,239,225,.74)}
+
+/* ---------- cover ---------- */
+.cover-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:24mm 22mm 17mm}
+.logo{width:35mm;height:35mm;border-radius:50%;object-fit:cover;display:block}
+.logo.sm{width:12mm;height:12mm}
+.cover-title{
+  font-family:'Cormorant Garamond',serif;font-weight:300;font-size:38pt;line-height:1.16;
+  color:#F7F1E4;text-align:center;letter-spacing:.005em;
+}
+.cover-title em{font-style:italic;color:var(--gold-light)}
+.cover-sub{
+  margin-top:7mm;text-align:center;font-size:10.2pt;font-weight:300;line-height:1.72;
+  color:rgba(246,239,225,.72);max-width:124mm;
+}
+.cover-photo{
+  width:114mm;height:76mm;object-fit:cover;object-position:center 42%;
+  border:0.8pt solid rgba(224,196,141,.55);
+}
+.cover-baseline{
+  font-size:7pt;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-light);
+  text-align:center;font-weight:400;
+}
+.cover-foot{
+  text-align:center;font-size:7.4pt;letter-spacing:.20em;text-transform:uppercase;
+  color:rgba(246,239,225,.55);line-height:2;
+}
+
+/* ---------- layout helpers ---------- */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:9mm}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+.stack-gap{margin-top:7mm}
+
+.card{
+  background:#fff;border:0.4pt solid rgba(176,141,79,.38);
+  padding:7mm 6.5mm;position:relative;
+}
+.card.on-dark{background:rgba(255,255,255,.045);border-color:rgba(224,196,141,.28)}
+.card .k{
+  font-family:'Cormorant Garamond',serif;font-size:20pt;color:var(--gold);
+  display:block;margin-bottom:3mm;font-weight:400;
+}
+.card h3{margin-bottom:3.5mm}
+.card p{font-size:9.4pt;line-height:1.68}
+
+/* pillars */
+.pillar{display:flex;gap:7mm;align-items:flex-start;padding:7mm 0;border-bottom:0.4pt solid rgba(176,141,79,.28)}
+.pillar:last-child{border-bottom:none}
+.pillar .idx{
+  font-family:'Cormorant Garamond',serif;font-size:17pt;color:var(--gold);
+  min-width:11mm;line-height:1.2;
+}
+.pillar .body h3{margin-bottom:2.6mm}
+.pillar .body p{font-size:9.8pt}
+
+/* timeline */
+.steps{position:relative;margin-top:9mm;padding-left:13mm}
+.steps:before{content:"";position:absolute;left:4.6mm;top:2mm;bottom:2mm;width:0.5pt;background:rgba(176,141,79,.5)}
+.step{position:relative;padding-bottom:8.4mm}
+.step:last-child{padding-bottom:0}
+.step .dot{
+  position:absolute;left:-13mm;top:0.4mm;width:9.6mm;height:9.6mm;border-radius:50%;
+  border:0.5pt solid var(--gold);background:var(--cream);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:11pt;color:var(--gold);
+}
+.step h3{font-size:13pt;margin-bottom:2mm}
+.step p{font-size:9.7pt;line-height:1.68}
+
+/* quote / edito */
+.signature{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16pt;color:var(--green-700);margin-top:8mm}
+.sign-role{font-size:7.4pt;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-top:2.5mm}
+
+.pull{
+  border-left:1.2pt solid var(--gold);padding:2mm 0 2mm 7mm;margin:11mm 0;
+  font-family:'Cormorant Garamond',serif;font-size:17pt;font-style:italic;
+  line-height:1.5;color:var(--green-700);
+}
+.pull.on-dark{color:var(--gold-light);border-left-color:var(--gold-light)}
+
+/* check list */
+.checks{list-style:none;margin-top:5mm}
+.checks li{
+  position:relative;padding-left:8mm;margin-bottom:5.4mm;
+  font-size:10pt;line-height:1.66;color:var(--ink-soft);font-weight:300;
+}
+.checks li:before{
+  content:"";position:absolute;left:0;top:2.1mm;width:3.1mm;height:3.1mm;
+  border:0.5pt solid var(--gold);transform:rotate(45deg);
+}
+.checks.on-dark li{color:rgba(246,239,225,.76)}
+.checks li b{font-weight:500;color:var(--green-800)}
+.checks.on-dark li b{color:#F6EFE1}
+
+/* two-column duty table */
+.duty{display:grid;grid-template-columns:1fr 1fr;border:0.4pt solid rgba(176,141,79,.4);margin-top:9mm}
+.duty > div{padding:8mm 7mm}
+.duty > div:first-child{border-right:0.4pt solid rgba(176,141,79,.4);background:rgba(255,255,255,.55)}
+.duty h3{font-size:13pt;margin-bottom:4.5mm}
+.duty ul{list-style:none}
+.duty li{font-size:9.4pt;line-height:1.6;color:var(--ink-soft);font-weight:300;padding-left:5mm;position:relative;margin-bottom:4mm}
+.duty li:before{content:"—";position:absolute;left:0;color:var(--gold)}
+
+.side-photo{width:100%;height:100%;object-fit:cover;object-position:center 45%}
+
+.note{
+  margin-top:auto;font-size:7pt;line-height:1.6;color:rgba(22,48,42,.45);
+  font-weight:300;border-top:0.4pt solid rgba(176,141,79,.3);padding-top:3.5mm;
+}
+.note.on-dark{color:rgba(246,239,225,.45);border-top-color:rgba(224,196,141,.25)}
+
+.contact-line{
+  display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:0.4pt solid rgba(224,196,141,.28);padding:4.6mm 0;
+}
+.contact-line .lab{font-size:7.2pt;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-light)}
+.contact-line .val{font-family:'Cormorant Garamond',serif;font-size:13pt;color:#F6EFE1}
+.contact-line .val.todo{color:rgba(246,239,225,.42);font-style:italic;font-size:11.5pt}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ 1 · COUVERTURE ══════════════════ -->
+<section class="page dark-page">
+  <div class="frame dark"></div>
+  <div class="cover-inner">
+    <img class="logo" src="assets/logo.jpg" alt="Domus Cavalié Invest">
+    <div style="margin-top:5mm" class="cover-baseline">Immobilier &nbsp;·&nbsp; Investissement &nbsp;·&nbsp; Patrimoine</div>
+
+    <div style="margin-top:15mm" class="eyebrow on-dark">Programme Partenaires</div>
+    <div class="rule center on-dark" style="margin:5mm auto 7mm"></div>
+    <h1 class="cover-title">Devenez apporteur<br>d'affaires à <em>Bali</em></h1>
+    <p class="cover-sub">
+      Valorisez votre réseau en proposant à vos contacts un investissement immobilier
+      accompagné de A à Z, aux côtés d'un opérateur reconnu et implanté localement.
+    </p>
+
+    <img class="cover-photo" style="margin-top:auto" src="assets/photo_villa.jpg" alt="Villa à Bali au coucher du soleil">
+
+    <div style="margin-top:auto" class="cover-foot">
+      Aymeric Cavalié — Conseiller en investissement immobilier<br>
+      Bali, Indonésie &nbsp;·&nbsp; En partenariat avec Balimmo
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 2 · ÉDITO ══════════════════ -->
+<section class="page">
+  <div class="frame"></div>
+  <div class="pad" style="display:flex;flex-direction:column">
+    <div class="num-watermark">01</div>
+    <div class="eyebrow">Le mot d'Aymeric Cavalié</div>
+    <div class="rule"></div>
+    <h2>Un investissement d'exception<br>mérite un <em>accompagnement</em> d'exception.</h2>
+
+    <p style="margin-top:9mm" class="lead">
+      Investir à Bali fait rêver. Mais à 12 000 kilomètres de chez soi, dans un cadre
+      juridique et fiscal que l'on ne maîtrise pas, le rêve ne tient que sur une chose :
+      la qualité des personnes qui vous accompagnent.
+    </p>
+
+    <p style="margin-top:6mm">
+      C'est précisément le rôle que j'ai choisi. Installé sur place, j'accompagne une
+      clientèle francophone dans la conception et la réalisation de son projet
+      immobilier à Bali — de la définition de la stratégie patrimoniale jusqu'à la
+      livraison de la villa et sa mise en exploitation locative.
+    </p>
+    <p style="margin-top:4mm">
+      Je ne travaille pas seul. Je m'appuie sur <strong>Balimmo</strong>, l'un des acteurs
+      de référence de l'investissement, de la construction et de la gestion locative pour
+      les investisseurs francophones à Bali. Une équipe de spécialistes présents
+      localement : juristes, architectes, conducteurs de travaux, gestionnaires locatifs.
+    </p>
+
+    <div class="pull">
+      « Mon métier n'est pas de vendre un bien.<br>
+      Il est de sécuriser un projet, puis de le faire vivre. »
+    </div>
+
+    <p>
+      Aujourd'hui, j'ouvre cet accompagnement à des partenaires professionnels.
+      Ce document vous explique, en quelques minutes, comment votre réseau peut devenir
+      une source de revenus complémentaires — sans changer de métier, sans prendre le
+      moindre risque opérationnel, et en offrant à vos contacts un niveau de service
+      dont vous serez fier.
+    </p>
+
+    <div class="signature" style="margin-top:auto">Aymeric Cavalié</div>
+    <div class="sign-role">Conseiller en investissement immobilier — Bali</div>
+
+    <div class="pfoot"><span>Domus Cavalié Invest</span><span>Programme Apporteurs d'Affaires</span><span>02</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════ 3 · POSITIONNEMENT ══════════════════ -->
+<section class="page">
+  <div class="frame"></div>
+  <div class="pad" style="display:flex;flex-direction:column">
+    <div class="num-watermark">02</div>
+    <div class="eyebrow">Qui je suis</div>
+    <div class="rule"></div>
+    <h2>Un conseiller, <em>pas</em> un vendeur.</h2>
+
+    <p style="margin-top:8mm" class="lead">
+      Un agent commercial présente un produit. Un conseiller construit une stratégie,
+      choisit les bons interlocuteurs, contrôle l'exécution et rend des comptes.
+      C'est la différence que vos contacts ressentiront dès le premier rendez-vous.
+    </p>
+
+    <div style="margin-top:9mm">
+      <div class="pillar">
+        <div class="idx">I</div>
+        <div class="body">
+          <h3>Expertise locale</h3>
+          <p>Présent à Bali, je connais les quartiers, les typologies de biens, les
+          niveaux de prix réels et les opérateurs sérieux. Un investisseur à distance
+          ne peut pas obtenir cette lecture du marché depuis la France.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="idx">II</div>
+        <div class="body">
+          <h3>Conseil personnalisé</h3>
+          <p>Objectifs patrimoniaux, horizon de détention, budget, fiscalité, usage
+          personnel ou pur rendement : la stratégie est définie avant de parler du
+          moindre bien. Aucun projet standard, aucune vente forcée.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="idx">III</div>
+        <div class="body">
+          <h3>Accompagnement de A à Z</h3>
+          <p>Structuration juridique, sécurisation du foncier, suivi de construction,
+          ameublement, mise en location et reporting : un seul interlocuteur du premier
+          échange jusqu'aux premiers revenus locatifs.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pull" style="margin-top:auto;margin-bottom:0">
+      « Chaque client que vous me confiez<br>est traité comme si vous me l'aviez présenté en personne. »
+    </div>
+
+    <div class="pfoot"><span>Domus Cavalié Invest</span><span>Programme Apporteurs d'Affaires</span><span>03</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════ 4 · BALIMMO ══════════════════ -->
+<section class="page dark-page">
+  <div class="frame dark"></div>
+  <div class="pad" style="display:flex;flex-direction:column">
+    <div class="num-watermark" style="color:rgba(224,196,141,.18)">03</div>
+    <div class="eyebrow on-dark">Le partenaire</div>
+    <div class="rule on-dark"></div>
+    <h2 style="color:#F6EFE1">Balimmo, une <em style="color:var(--gold-light)">signature</em><br>reconnue à Bali.</h2>
+
+    <p style="margin-top:8mm;max-width:150mm" class="lead" >
+      La solidité d'un projet à l'étranger tient à la solidité de l'opérateur qui
+      l'exécute. Je travaille en collaboration avec Balimmo, l'un des acteurs de
+      référence de l'investissement, de la construction et de la gestion locative
+      pour les investisseurs francophones à Bali.
+    </p>
+
+    <div class="grid-3" style="margin-top:10mm">
+      <div class="card on-dark">
+        <span class="k">01</span>
+        <h3>Investissement</h3>
+        <p>Sélection et sourcing des opportunités, analyse de rentabilité, montage
+        juridique adapté au droit indonésien.</p>
+      </div>
+      <div class="card on-dark">
+        <span class="k">02</span>
+        <h3>Construction</h3>
+        <p>Conception architecturale, maîtrise d'œuvre et suivi de chantier par des
+        équipes présentes sur place.</p>
+      </div>
+      <div class="card on-dark">
+        <span class="k">03</span>
+        <h3>Gestion locative</h3>
+        <p>Mise en exploitation, commercialisation, entretien, comptabilité et
+        reporting propriétaire.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:auto">
+      <div class="eyebrow on-dark">Ce que cela change pour vos contacts</div>
+      <ul class="checks on-dark" style="margin-top:5mm">
+        <li><b>Une chaîne complète maîtrisée</b> — un seul groupe d'interlocuteurs de l'achat du terrain à la première nuitée louée.</li>
+        <li><b>Des équipes francophones sur place</b> — juristes, architectes, conducteurs de travaux, gestionnaires locatifs.</li>
+        <li><b>Une expérience éprouvée</b> — des projets livrés et exploités pour des investisseurs francophones.</li>
+        <li><b>De la transparence</b> — chiffrages, contrats et avancement de chantier documentés à chaque étape.</li>
+      </ul>
+    </div>
+
+    <div class="pfoot on-dark"><span>Domus Cavalié Invest</span><span>Programme Apporteurs d'Affaires</span><span>04</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════ 5 · PARCOURS A À Z ══════════════════ -->
+<section class="page">
+  <div class="frame"></div>
+  <div class="pad" style="display:flex;flex-direction:column">
+    <div class="num-watermark">04</div>
+    <div class="eyebrow">Le parcours investisseur</div>
+    <div class="rule"></div>
+    <h2>De la stratégie aux <em>premiers loyers</em>.</h2>
+
+    <p style="margin-top:7mm;max-width:150mm">
+      Six étapes, un seul interlocuteur. Voici très exactement ce que vivra la personne
+      que vous m'aurez présentée.
+    </p>
+
+    <div class="steps">
+      <div class="step"><div class="dot">1</div>
+        <h3>Découverte &amp; stratégie</h3>
+        <p>Entretien approfondi : objectifs, budget, horizon, fiscalité, usage envisagé. Aucune proposition avant d'avoir compris le projet.</p>
+      </div>
+      <div class="step"><div class="dot">2</div>
+        <h3>Sélection des opportunités</h3>
+        <p>Présentation de projets correspondant réellement à la stratégie définie, avec analyse de rentabilité et scénarios chiffrés.</p>
+      </div>
+      <div class="step"><div class="dot">3</div>
+        <h3>Sécurisation juridique</h3>
+        <p>Vérification du foncier et des autorisations, choix de la structure de détention, contrats revus par des juristes locaux.</p>
+      </div>
+      <div class="step"><div class="dot">4</div>
+        <h3>Construction &amp; suivi de chantier</h3>
+        <p>Conception, appels de fonds échelonnés, reporting régulier et photos d'avancement : l'investisseur suit son projet à distance, en confiance.</p>
+      </div>
+      <div class="step"><div class="dot">5</div>
+        <h3>Livraison &amp; ameublement</h3>
+        <p>Réception de la villa, décoration et équipement pensés pour la performance locative.</p>
+      </div>
+      <div class="step"><div class="dot">6</div>
+        <h3>Mise en exploitation</h3>
+        <p>Commercialisation, gestion locative quotidienne, entretien et reporting propriétaire. Le bien travaille, l'investisseur profite.</p>
+      </div>
+    </div>
+
+    <div class="pull" style="margin-top:auto;margin-bottom:0">
+      « Un seul interlocuteur,<br>du premier échange aux premiers revenus. »
+    </div>
+
+    <div class="pfoot"><span>Domus Cavalié Invest</span><span>Programme Apporteurs d'Affaires</span><span>05</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════ 6 · POURQUOI BALI ══════════════════ -->
+<section class="page">
+  <div class="frame"></div>
+  <div class="pad" style="display:flex;flex-direction:column">
+    <div class="num-watermark">05</div>
+    <div class="eyebrow">Pourquoi Bali</div>
+    <div class="rule"></div>
+    <h2>Une destination<br>qui <em>se raconte</em> facilement.</h2>
+
+    <div style="display:flex;gap:11mm;margin-top:9mm;align-items:flex-start">
+      <div style="flex:1">
+        <p>
+          Bali n'est pas une promesse à construire : c'est une destination que vos
+          contacts connaissent déjà. Cela rend la conversation naturelle — et
+          l'introduction évidente.
+        </p>
+        <ul class="checks" style="margin-top:7mm">
+          <li><b>Une demande touristique internationale</b> et une saisonnalité étalée sur l'année.</li>
+          <li><b>Un ticket d'entrée mesuré</b> au regard des standards français pour un bien d'exception.</li>
+          <li><b>Un actif à double usage</b> : rendement locatif et lieu de vie personnel.</li>
+          <li><b>Une exploitation déléguée</b> : l'investisseur n'a rien à gérer depuis la France.</li>
+        </ul>
+      </div>
+      <img src="assets/photo_portrait.jpg" alt="Villa contemporaine à Bali"
+           style="width:64mm;height:101mm;object-fit:cover;border:0.8pt solid rgba(176,141,79,.55)">
+    </div>
+
+    <ul class="checks" style="margin-top:8mm">
+      <li><b>Un cadre juridique spécifique</b> qui impose un accompagnement local — c'est précisément là que se joue la différence entre un bon et un mauvais investissement.</li>
+      <li><b>Un marché qui récompense la méthode</b> — l'emplacement, le constructeur et le montage retenus font toute la différence sur la rentabilité finale.</li>
+      <li><b>Une clientèle francophone en croissance</b>, à la recherche d'interlocuteurs fiables, présents sur place et transparents.</li>
+    </ul>
+
+    <div class="pull" style="margin-top:auto;margin-bottom:0">
+      « Le sujet n'est pas de convaincre : il est d'accompagner<br>
+      correctement ceux que le sujet intéresse déjà. »
+    </div>
+
+    <div class="pfoot"><span>Domus Cavalié Invest</span><span>Programme Apporteurs d'Affaires</span><span>06</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════ 7 · LE PROGRAMME ══════════════════ -->
+<section class="page dark-page">
+  <div class="frame dark"></div>
+  <div class="pad" style="display:flex;flex-direction:column">
+    <div class="num-watermark" style="color:rgba(224,196,141,.18)">06</div>
+    <div class="eyebrow on-dark">Le programme</div>
+    <div class="rule on-dark"></div>
+    <h2 style="color:#F6EFE1">Votre réseau a de la valeur.<br><em style="color:var(--gold-light)">Faites-la travailler.</em></h2>
+
+    <p style="margin-top:8mm;max-width:152mm" class="lead">
+      Le principe est simple : vous me présentez une personne de votre entourage
+      professionnel ou personnel intéressée par un investissement à Bali.
+      Je prends le relais et l'accompagne jusqu'au bout. Si le projet aboutit,
+      vous êtes rémunéré.
+    </p>
+
+    <div class="grid-3" style="margin-top:10mm">
+      <div class="card on-dark">
+        <span class="k">—</span>
+        <h3>Aucune compétence<br>requise</h3>
+        <p>Vous n'avez ni à conseiller, ni à chiffrer, ni à vendre. Vous introduisez, je fais le reste.</p>
+      </div>
+      <div class="card on-dark">
+        <span class="k">—</span>
+        <h3>Aucun investissement<br>de votre part</h3>
+        <p>Pas de droit d'entrée, pas d'objectif imposé, pas d'exclusivité. Votre activité principale reste la vôtre.</p>
+      </div>
+      <div class="card on-dark">
+        <span class="k">—</span>
+        <h3>Aucun risque<br>d'image</h3>
+        <p>Vos contacts sont pris en charge avec exigence. Votre recommandation vous valorise.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:auto">
+      <div class="eyebrow on-dark">À qui s'adresse ce programme</div>
+      <div class="grid-2" style="margin-top:5mm;gap:0 12mm">
+        <ul class="checks on-dark">
+          <li>Conseillers en gestion de patrimoine</li>
+          <li>Experts-comptables et avocats</li>
+          <li>Agents et conseillers immobiliers</li>
+          <li>Courtiers en financement et assurance</li>
+        </ul>
+        <ul class="checks on-dark">
+          <li>Dirigeants et chefs d'entreprise</li>
+          <li>Créateurs de contenu et communautés</li>
+          <li>Professionnels du voyage et de l'hôtellerie</li>
+          <li>Toute personne disposant d'un réseau qualifié</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pfoot on-dark"><span>Domus Cavalié Invest</span><span>Programme Apporteurs d'Affaires</span><span>07</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════ 8 · RÉMUNÉRATION ══════════════════ -->
+<section class="page">
+  <div class="frame"></div>
+  <div class="pad" style="display:flex;flex-direction:column">
+    <div class="num-watermark">07</div>
+    <div class="eyebrow">Votre rémunération</div>
+    <div class="rule"></div>
+    <h2>Un revenu complémentaire,<br><em>sans</em> charge de travail.</h2>
+
+    <p style="margin-top:7mm;max-width:150mm">
+      Chaque projet abouti donne lieu au versement d'une commission d'apport, définie
+      contractuellement avant toute mise en relation. Les montants en jeu sur ce type
+      d'opération font qu'une seule introduction réussie peut représenter une
+      rémunération significative.
+    </p>
+
+    <div class="grid-3" style="margin-top:9mm">
+      <div class="card">
+        <span class="k">01</span>
+        <h3>Transparente</h3>
+        <p>Le montant ou le pourcentage de votre commission est connu et écrit dès le départ. Aucune renégociation en cours de route.</p>
+      </div>
+      <div class="card">
+        <span class="k">02</span>
+        <h3>Contractualisée</h3>
+        <p>Un contrat d'apporteur d'affaires encadre la relation : mise en relation, exclusivité de l'apport, durée, modalités de versement.</p>
+      </div>
+      <div class="card">
+        <span class="k">03</span>
+        <h3>Sans plafond</h3>
+        <p>Aucune limite de nombre de dossiers. Les partenaires les plus actifs accèdent à des conditions renforcées.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:auto">
+      <div class="eyebrow">Nos engagements envers vous</div>
+      <ul class="checks" style="margin-top:5mm">
+        <li><b>Traçabilité de l'apport</b> — votre contact est enregistré à sa présentation ; votre antériorité est protégée.</li>
+        <li><b>Information continue</b> — vous êtes tenu informé de l'avancement du dossier, sans avoir à relancer.</li>
+        <li><b>Discrétion</b> — vos contacts ne sont jamais démarchés pour autre chose que le projet présenté.</li>
+        <li><b>Outils fournis</b> — supports de présentation, vidéos explicatives et réponses aux questions fréquentes.</li>
+      </ul>
+    </div>
+
+    <p class="note" style="margin-top:9mm">
+      Les conditions précises de rémunération (assiette, taux ou forfait, calendrier de
+      versement) sont détaillées dans le contrat d'apporteur d'affaires signé avant toute
+      mise en relation. Les revenus perçus dépendent des projets effectivement conclus
+      et ne peuvent faire l'objet d'aucune garantie.
+    </p>
+
+    <div class="pfoot"><span>Domus Cavalié Invest</span><span>Programme Apporteurs d'Affaires</span><span>08</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════ 9 · COMMENT ÇA MARCHE ══════════════════ -->
+<section class="page">
+  <div class="frame"></div>
+  <div class="pad" style="display:flex;flex-direction:column">
+    <div class="num-watermark">08</div>
+    <div class="eyebrow">Le fonctionnement</div>
+    <div class="rule"></div>
+    <h2>Quatre étapes.<br><em>Cinq minutes</em> de votre temps.</h2>
+
+    <div class="steps" style="margin-top:8mm">
+      <div class="step"><div class="dot">1</div>
+        <h3>Nous échangeons</h3>
+        <p>Un appel de trente minutes pour comprendre votre activité, votre réseau et valider ensemble que le programme a du sens pour vous.</p>
+      </div>
+      <div class="step"><div class="dot">2</div>
+        <h3>Nous formalisons</h3>
+        <p>Signature du contrat d'apporteur d'affaires et remise de votre kit partenaire : plaquette, vidéos, argumentaire, questions fréquentes.</p>
+      </div>
+      <div class="step"><div class="dot">3</div>
+        <h3>Vous introduisez</h3>
+        <p>Un message, un appel, une mise en relation par e-mail. Votre rôle s'arrête ici : je prends le relais sous 24 à 48 heures.</p>
+      </div>
+      <div class="step"><div class="dot">4</div>
+        <h3>Vous êtes rémunéré</h3>
+        <p>Le projet est accompagné jusqu'à sa conclusion. Votre commission est versée selon les modalités prévues au contrat.</p>
+      </div>
+    </div>
+
+    <div class="duty" style="margin-top:auto">
+      <div>
+        <h3>Ce que vous faites</h3>
+        <ul>
+          <li>Vous identifiez une personne intéressée</li>
+          <li>Vous la mettez en relation avec moi</li>
+          <li>Vous restez informé, sans effort</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Ce dont je m'occupe</h3>
+        <ul>
+          <li>Qualification et conseil stratégique</li>
+          <li>Sélection des projets et chiffrage</li>
+          <li>Juridique, construction, gestion locative</li>
+          <li>Suivi du client sur toute la durée du projet</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pfoot"><span>Domus Cavalié Invest</span><span>Programme Apporteurs d'Affaires</span><span>09</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════ 10 · CONTACT ══════════════════ -->
+<section class="page dark-page">
+  <div class="frame dark"></div>
+  <div class="pad" style="display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:28mm">
+    <img class="logo" src="assets/logo.jpg" alt="Domus Cavalié Invest">
+    <div class="eyebrow on-dark" style="margin-top:12mm">Devenons partenaires</div>
+    <div class="rule center on-dark"></div>
+    <h2 style="color:#F6EFE1;font-size:30pt">Parlons-en<br><em style="color:var(--gold-light)">trente minutes.</em></h2>
+    <p style="margin-top:7mm;max-width:126mm">
+      Le meilleur moyen de savoir si ce programme est fait pour vous est d'en discuter
+      de vive voix. Nous verrons ensemble votre réseau, vos contraintes et les
+      conditions de partenariat qui vous correspondent — sans engagement.
+    </p>
+
+    <div style="width:118mm;margin-top:12mm;text-align:left">
+      <div class="contact-line"><span class="lab">Téléphone / WhatsApp</span><span class="val todo">à compléter</span></div>
+      <div class="contact-line"><span class="lab">E-mail</span><span class="val todo">à compléter</span></div>
+      <div class="contact-line"><span class="lab">Site internet</span><span class="val todo">à compléter</span></div>
+      <div class="contact-line" style="border-bottom:none"><span class="lab">Localisation</span><span class="val">Bali, Indonésie</span></div>
+    </div>
+
+    <div style="margin-top:14mm" class="cover-baseline">Immobilier &nbsp;·&nbsp; Investissement &nbsp;·&nbsp; Patrimoine</div>
+    <div style="margin-top:5mm;font-size:8.6pt;color:rgba(246,239,225,.6);font-weight:300;letter-spacing:.02em">
+      Expertise locale &nbsp;·&nbsp; Conseil personnalisé &nbsp;·&nbsp; Accompagnement de A à Z
+    </div>
+
+    <p class="note on-dark" style="max-width:150mm;text-align:center">
+      Document à caractère informatif, non contractuel. Domus Cavalié Invest intervient
+      en qualité de conseil et d'intermédiaire en relation avec ses partenaires opérateurs.
+      Tout investissement immobilier comporte des risques, notamment de perte en capital,
+      d'illiquidité et de change ; les performances locatives ne sont pas garanties.
+    </p>
+
+    <div class="pfoot on-dark" style="justify-content:center"><span>Aymeric Cavalié — Domus Cavalié Invest — Bali, Indonésie</span></div>
+  </div>
+</section>
+
+</body>
+</html>
