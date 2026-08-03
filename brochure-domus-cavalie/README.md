@@ -21,13 +21,21 @@ d'apporteurs d'affaires pour l'accompagnement en investissement immobilier à Ba
 5. Le parcours investisseur en 6 étapes
 6. Pourquoi Bali
 7. Le programme apporteurs d'affaires
-8. Votre rémunération
+8. Votre rémunération — deux niveaux
 9. Le fonctionnement en 4 étapes
 10. Contact
 
-## À compléter avant diffusion
+## Grille de rémunération (page 8)
 
-Page 10 : téléphone / WhatsApp, e-mail, site internet (marqués « à compléter »).
+- **Niveau 1 — l'apport simple** : forfait de **1 000 €** par client transmis qui signe
+  un contrat. L'apporteur se limite à la mise en relation.
+- **Niveau 2 — l'apporteur formé** : après formation technique, l'apporteur assure
+  lui-même la présentation de l'offre et la sélection du projet ; il perçoit un
+  **pourcentage de la commission** d'Aymeric Cavalié. L'accompagnement du client, de la
+  signature à la livraison, reste dans tous les cas assuré par Aymeric Cavalié.
+
+Le pourcentage du niveau 2 n'est volontairement pas chiffré dans la plaquette : il est
+renvoyé au contrat d'apporteur d'affaires.
 
 ## Régénérer le PDF
 

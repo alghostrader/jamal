@@ -124,6 +124,36 @@ p strong{font-weight:500;color:var(--green-800)}
 .card h3{margin-bottom:3.5mm}
 .card p{font-size:9.4pt;line-height:1.68}
 
+/* rémunération — paliers */
+.tiers{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:7mm}
+.tier{
+  background:#fff;border:0.4pt solid rgba(176,141,79,.38);
+  padding:7.5mm 6.5mm;display:flex;flex-direction:column;
+}
+.tier.featured{
+  background:linear-gradient(180deg,#0B2C22 0%,#07201A 100%);
+  border-color:rgba(224,196,141,.35);
+}
+.tier-label{
+  font-size:7.4pt;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;
+}
+.tier.featured .tier-label{color:var(--gold-light)}
+.amount{
+  font-family:'Cormorant Garamond',serif;font-size:33pt;font-weight:300;line-height:1;
+  color:var(--green-800);margin-top:4mm;letter-spacing:-.01em;
+}
+.amount span{font-size:13pt;letter-spacing:.01em}
+.tier.featured .amount{color:#F6EFE1}
+.amount-sub{
+  font-size:8.2pt;line-height:1.45;color:var(--ink-soft);font-weight:300;
+  margin-top:2.5mm;padding-bottom:4mm;border-bottom:0.4pt solid rgba(176,141,79,.3);
+}
+.tier.featured .amount-sub{color:rgba(246,239,225,.6);border-bottom-color:rgba(224,196,141,.25)}
+.tier p{font-size:9.2pt;line-height:1.66;margin-top:5mm}
+.tier.featured p{color:rgba(246,239,225,.76)}
+.tier.featured p strong{color:var(--gold-light)}
+
 /* pillars */
 .pillar{display:flex;gap:7mm;align-items:flex-start;padding:7mm 0;border-bottom:0.4pt solid rgba(176,141,79,.28)}
 .pillar:last-child{border-bottom:none}
@@ -481,7 +511,8 @@ p strong{font-weight:500;color:var(--green-800)}
       Le principe est simple : vous me présentez une personne de votre entourage
       professionnel ou personnel intéressée par un investissement à Bali.
       Je prends le relais et l'accompagne jusqu'au bout. Si le projet aboutit,
-      vous êtes rémunéré.
+      vous êtes rémunéré. Et si vous souhaitez vous impliquer davantage,
+      je vous forme — votre rémunération suit.
     </p>
 
     <div class="grid-3" style="margin-top:10mm">
@@ -531,48 +562,59 @@ p strong{font-weight:500;color:var(--green-800)}
     <div class="num-watermark">07</div>
     <div class="eyebrow">Votre rémunération</div>
     <div class="rule"></div>
-    <h2>Un revenu complémentaire,<br><em>sans</em> charge de travail.</h2>
+    <h2>Deux niveaux,<br><em>deux</em> rémunérations.</h2>
 
-    <p style="margin-top:7mm;max-width:150mm">
-      Chaque projet abouti donne lieu au versement d'une commission d'apport, définie
-      contractuellement avant toute mise en relation. Les montants en jeu sur ce type
-      d'opération font qu'une seule introduction réussie peut représenter une
-      rémunération significative.
+    <p style="margin-top:6mm;max-width:158mm">
+      À vous de choisir votre degré d'implication : la simple mise en relation, ou la
+      présentation du projet une fois formé. Dans les deux cas, l'accompagnement du
+      client reste entre mes mains.
     </p>
 
-    <div class="grid-3" style="margin-top:9mm">
-      <div class="card">
-        <span class="k">01</span>
-        <h3>Transparente</h3>
-        <p>Le montant ou le pourcentage de votre commission est connu et écrit dès le départ. Aucune renégociation en cours de route.</p>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-label">Niveau 1 — L'apport simple</div>
+        <div class="amount">1 000 €</div>
+        <div class="amount-sub">par client transmis qui signe un contrat</div>
+        <p>
+          Vous me présentez votre contact, et votre rôle s'arrête là. Je prends en charge
+          la qualification, le conseil, la sélection du projet, la contractualisation puis
+          le suivi jusqu'à la livraison.<br><br>
+          <strong>Aucune compétence technique requise, aucun temps à y consacrer.</strong>
+        </p>
       </div>
-      <div class="card">
-        <span class="k">02</span>
-        <h3>Contractualisée</h3>
-        <p>Un contrat d'apporteur d'affaires encadre la relation : mise en relation, exclusivité de l'apport, durée, modalités de versement.</p>
-      </div>
-      <div class="card">
-        <span class="k">03</span>
-        <h3>Sans plafond</h3>
-        <p>Aucune limite de nombre de dossiers. Les partenaires les plus actifs accèdent à des conditions renforcées.</p>
+      <div class="tier featured">
+        <div class="tier-label">Niveau 2 — L'apporteur formé</div>
+        <div class="amount">% <span>de ma commission</span></div>
+        <div class="amount-sub">pour les partenaires qui présentent eux-mêmes le projet</div>
+        <p>
+          Vous souhaitez aller plus loin : je vous forme techniquement. Vous assurez
+          alors la présentation de l'offre et la sélection du projet adapté à votre
+          client — il ne reste qu'à formaliser le contrat. Vous percevez
+          <strong>un pourcentage de la commission qui m'est attribuée.</strong>
+          Je reprends le relais de la signature jusqu'à la livraison de la villa.
+        </p>
       </div>
     </div>
 
     <div style="margin-top:auto">
       <div class="eyebrow">Nos engagements envers vous</div>
-      <ul class="checks" style="margin-top:5mm">
-        <li><b>Traçabilité de l'apport</b> — votre contact est enregistré à sa présentation ; votre antériorité est protégée.</li>
-        <li><b>Information continue</b> — vous êtes tenu informé de l'avancement du dossier, sans avoir à relancer.</li>
-        <li><b>Discrétion</b> — vos contacts ne sont jamais démarchés pour autre chose que le projet présenté.</li>
-        <li><b>Outils fournis</b> — supports de présentation, vidéos explicatives et réponses aux questions fréquentes.</li>
-      </ul>
+      <div class="grid-2" style="margin-top:5mm;gap:0 11mm">
+        <ul class="checks">
+          <li><b>Transparence</b> — montant connu et écrit avant toute mise en relation.</li>
+          <li><b>Traçabilité de l'apport</b> — votre contact est enregistré dès sa présentation.</li>
+        </ul>
+        <ul class="checks">
+          <li><b>Sans plafond</b> — aucune limite de nombre de dossiers.</li>
+          <li><b>Outils fournis</b> — supports, vidéos et formation technique si vous le souhaitez.</li>
+        </ul>
+      </div>
     </div>
 
-    <p class="note" style="margin-top:9mm">
-      Les conditions précises de rémunération (assiette, taux ou forfait, calendrier de
-      versement) sont détaillées dans le contrat d'apporteur d'affaires signé avant toute
-      mise en relation. Les revenus perçus dépendent des projets effectivement conclus
-      et ne peuvent faire l'objet d'aucune garantie.
+    <p class="note" style="margin-top:7mm">
+      Montants s'entendant par dossier effectivement signé. Forfait du niveau 1,
+      pourcentage applicable au niveau 2, assiette de calcul et calendrier de versement
+      sont détaillés dans le contrat d'apporteur d'affaires. Les revenus perçus dépendent
+      des projets effectivement conclus et ne peuvent faire l'objet d'aucune garantie.
     </p>
 
     <div class="pfoot"><span>Domus Cavalié Invest</span><span>Programme Apporteurs d'Affaires</span><span>08</span></div>
@@ -595,7 +637,7 @@ p strong{font-weight:500;color:var(--green-800)}
       </div>
       <div class="step"><div class="dot">2</div>
         <h3>Nous formalisons</h3>
-        <p>Signature du contrat d'apporteur d'affaires et remise de votre kit partenaire : plaquette, vidéos, argumentaire, questions fréquentes.</p>
+        <p>Signature du contrat d'apporteur d'affaires et remise de votre kit partenaire : plaquette, vidéos, argumentaire, questions fréquentes. Si vous visez le niveau 2, nous programmons votre formation technique.</p>
       </div>
       <div class="step"><div class="dot">3</div>
         <h3>Vous introduisez</h3>
@@ -603,7 +645,7 @@ p strong{font-weight:500;color:var(--green-800)}
       </div>
       <div class="step"><div class="dot">4</div>
         <h3>Vous êtes rémunéré</h3>
-        <p>Le projet est accompagné jusqu'à sa conclusion. Votre commission est versée selon les modalités prévues au contrat.</p>
+        <p>Le projet est accompagné jusqu'à sa conclusion. Forfait de 1 000 € ou pourcentage de commission selon votre niveau, versé selon les modalités prévues au contrat.</p>
       </div>
     </div>
 
@@ -614,6 +656,7 @@ p strong{font-weight:500;color:var(--green-800)}
           <li>Vous identifiez une personne intéressée</li>
           <li>Vous la mettez en relation avec moi</li>
           <li>Vous restez informé, sans effort</li>
+          <li>Niveau 2 : vous présentez vous-même le projet</li>
         </ul>
       </div>
       <div>
@@ -646,9 +689,9 @@ p strong{font-weight:500;color:var(--green-800)}
     </p>
 
     <div style="width:118mm;margin-top:12mm;text-align:left">
-      <div class="contact-line"><span class="lab">Téléphone / WhatsApp</span><span class="val todo">à compléter</span></div>
-      <div class="contact-line"><span class="lab">E-mail</span><span class="val todo">à compléter</span></div>
-      <div class="contact-line"><span class="lab">Site internet</span><span class="val todo">à compléter</span></div>
+      <div class="contact-line"><span class="lab">Téléphone / WhatsApp</span><span class="val">+62 853 3377 7763</span></div>
+      <div class="contact-line"><span class="lab">E-mail</span><span class="val">aymeric@balimmo.fr</span></div>
+      <div class="contact-line"><span class="lab">Facebook &amp; Instagram</span><span class="val">Aymeric Cavalié Pro</span></div>
       <div class="contact-line" style="border-bottom:none"><span class="lab">Localisation</span><span class="val">Bali, Indonésie</span></div>
     </div>
 
