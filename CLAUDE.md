@@ -7,6 +7,15 @@ refresh it), that ALWAYS means a **complete, from-scratch audit of everything** 
 partial refresh, never reusing yesterday's data. Then update **every** piece of information
 on the dashboard that the fresh data touches. No stale claim may survive an update.
 
+### Where the toolchain lives (read this first)
+
+All audit scripts are committed at **`seo-tools/`** (see its README for the exact run
+sequence). The working copy goes in the session scratchpad, but the repo is the source of
+truth — the ephemeral workspace was recycled once (12 Aug 2026) and destroyed an
+uncommitted toolchain. **After changing any script, commit it back to `seo-tools/`.**
+Credentials are never committed: `dash/.env` (DataForSEO) and `gsc/sa.json` (Search
+Console service account) must be re-supplied by the owner after a recycle.
+
 ### The full-audit checklist (all of it, every time)
 
 1. **Crawl all 9 sites** — fresh BFS crawl (refresh sitemaps first). Never reuse an old crawl.
