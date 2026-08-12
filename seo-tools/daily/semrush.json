@@ -1,0 +1,111 @@
+{
+ "_note": "Owner-supplied Semrush Domain Overview values. Recovered from deployed HTML 12 Aug 2026.",
+ "_updated": "2026-08-03",
+ "iptvesp.com": {
+  "date": "2026-08-02",
+  "as_label": "Low authority",
+  "authority_score": 7,
+  "organic_traffic": 69,
+  "organic_keywords": 32,
+  "ok_delta": "+2",
+  "ref_domains": 102,
+  "backlinks": 182,
+  "ai_visibility": 0,
+  "ai_cited_pages": 4,
+  "ai_note": "ChatGPT 4"
+ },
+ "primeiptv-france.com": {
+  "date": "2026-08-02",
+  "as_label": "lacks organic",
+  "authority_score": 2,
+  "organic_traffic": 0,
+  "organic_keywords": 35,
+  "ok_delta": "",
+  "ref_domains": 14,
+  "backlinks": 23,
+  "ai_visibility": 0,
+  "ai_cited_pages": 3,
+  "ai_note": "ChatGPT 3"
+ },
+ "iptvned.com": {
+  "date": "2026-08-02",
+  "as_label": "Low authority",
+  "authority_score": 7,
+  "organic_traffic": 9,
+  "organic_keywords": 76,
+  "ok_delta": "-1",
+  "ref_domains": 30,
+  "backlinks": 38,
+  "ai_visibility": 14,
+  "ai_cited_pages": 9,
+  "ai_note": "ChatGPT 8 + AI Overview 1"
+ },
+ "iptvpix.com": {
+  "date": "2026-08-02",
+  "as_label": "lacks organic",
+  "authority_score": 2,
+  "organic_traffic": null,
+  "organic_keywords": null,
+  "ok_delta": "",
+  "ref_domains": 99,
+  "backlinks": 172
+ },
+ "smarters-live.com": {
+  "date": "2026-08-02",
+  "as_label": "lacks organic",
+  "authority_score": 2,
+  "organic_traffic": null,
+  "organic_keywords": null,
+  "ok_delta": "",
+  "ref_domains": 23,
+  "backlinks": 26,
+  "ai_visibility": 0,
+  "ai_cited_pages": 1,
+  "ai_note": "ChatGPT 1"
+ },
+ "iptvshqiptar.com": {
+  "date": "2026-08-02",
+  "authority_score": 0,
+  "organic_traffic": null,
+  "organic_keywords": null,
+  "ok_delta": "",
+  "ref_domains": 32,
+  "backlinks": 55
+ },
+ "smartersprofrance.fr": {
+  "date": "2026-08-02",
+  "as_label": "lacks organic",
+  "authority_score": 2,
+  "organic_traffic": null,
+  "organic_keywords": null,
+  "ok_delta": "",
+  "ref_domains": 2,
+  "backlinks": 4
+ },
+ "iptvfranceofficiel.fr": {
+  "date": "2026-08-02",
+  "as_label": "lacks organic",
+  "authority_score": 2,
+  "organic_traffic": 1,
+  "organic_keywords": 2,
+  "ok_delta": "",
+  "ref_domains": 3,
+  "backlinks": 7,
+  "ai_visibility": 14,
+  "ai_cited_pages": 6,
+  "ai_note": "ChatGPT 6, 1 mention"
+ },
+ "abonnementiptvofficiel.com": {
+  "date": "2026-08-02",
+  "as_label": "lacks organic",
+  "authority_score": 2,
+  "organic_traffic": 8,
+  "organic_keywords": 3,
+  "ok_delta": "",
+  "ref_domains": 24,
+  "backlinks": 32,
+  "ai_visibility": 0,
+  "ai_cited_pages": 1,
+  "ai_note": "ChatGPT 1"
+ }
+}

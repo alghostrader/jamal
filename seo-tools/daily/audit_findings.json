@@ -1,0 +1,149 @@
+{
+ "iptvesp.com": {
+  "pages": 51,
+  "titles_over60": [],
+  "redirect_links": [],
+  "linked404": {},
+  "orphans": [],
+  "canonical_mismatch": [],
+  "no_meta_desc": [],
+  "thin": [
+   "checkout",
+   "checkout",
+   "checkout",
+   "checkout",
+   "checkout",
+   "contacto",
+   "politica-de-reembolso"
+  ],
+  "favicon": 200,
+  "www_redirect": "308 -> https://iptvesp.com/"
+ },
+ "primeiptv-france.com": {
+  "pages": 86,
+  "titles_over60": [],
+  "redirect_links": [],
+  "linked404": {},
+  "orphans": [],
+  "canonical_mismatch": [],
+  "no_meta_desc": [],
+  "thin": [
+   "mentions-legales",
+   "politique-confidentialite"
+  ],
+  "favicon": 404,
+  "www_redirect": "308 -> https://primeiptv-france.com/"
+ },
+ "iptvned.com": {
+  "pages": 54,
+  "titles_over60": [],
+  "redirect_links": [],
+  "linked404": {},
+  "orphans": [],
+  "canonical_mismatch": [],
+  "no_meta_desc": [],
+  "thin": [
+   "afrekenen",
+   "afrekenen",
+   "afrekenen",
+   "afrekenen",
+   "afrekenen",
+   "contact",
+   "terugbetalingsbeleid"
+  ],
+  "favicon": 200,
+  "www_redirect": "308 -> https://iptvned.com/"
+ },
+ "iptvpix.com": {
+  "pages": 58,
+  "titles_over60": [],
+  "redirect_links": [],
+  "linked404": {},
+  "orphans": [],
+  "canonical_mismatch": [],
+  "no_meta_desc": [],
+  "thin": [
+   "checkout",
+   "checkout",
+   "checkout",
+   "checkout",
+   "checkout"
+  ],
+  "favicon": 200,
+  "www_redirect": "308 -> https://iptvpix.com/"
+ },
+ "smarters-live.com": {
+  "pages": 52,
+  "titles_over60": [],
+  "redirect_links": [],
+  "linked404": {},
+  "orphans": [],
+  "canonical_mismatch": [],
+  "no_meta_desc": [],
+  "thin": [
+   "faq",
+   "installation"
+  ],
+  "favicon": 404,
+  "apex": "308 -> https://www.smarters-live.com/",
+  "www": "200",
+  "www_redirect": "200"
+ },
+ "iptvshqiptar.com": {
+  "pages": 21,
+  "titles_over60": [],
+  "redirect_links": [],
+  "linked404": {},
+  "orphans": [],
+  "canonical_mismatch": [],
+  "no_meta_desc": [],
+  "thin": [
+   "checkout",
+   "checkout",
+   "checkout",
+   "checkout",
+   "checkout",
+   "kontakt"
+  ],
+  "favicon": 200,
+  "www_redirect": "308 -> https://iptvshqiptar.com/"
+ },
+ "smartersprofrance.fr": {
+  "pages": 39,
+  "titles_over60": [],
+  "redirect_links": [],
+  "linked404": {},
+  "orphans": [],
+  "canonical_mismatch": [],
+  "no_meta_desc": [],
+  "thin": [],
+  "favicon": 404,
+  "apex": "308 -> https://www.smartersprofrance.fr/",
+  "www": "200",
+  "www_redirect": "200"
+ },
+ "iptvfranceofficiel.fr": {
+  "pages": 44,
+  "titles_over60": [],
+  "redirect_links": [],
+  "linked404": {},
+  "orphans": [],
+  "canonical_mismatch": [],
+  "no_meta_desc": [],
+  "thin": [],
+  "favicon": 200,
+  "www_redirect": "308 -> https://iptvfranceofficiel.fr/"
+ },
+ "abonnementiptvofficiel.com": {
+  "pages": 44,
+  "titles_over60": [],
+  "redirect_links": [],
+  "linked404": {},
+  "orphans": [],
+  "canonical_mismatch": [],
+  "no_meta_desc": [],
+  "thin": [],
+  "favicon": 200,
+  "www_redirect": "308 -> https://abonnementiptvofficiel.com/"
+ }
+}

@@ -1,0 +1,6 @@
+*.env
+.env
+gsc/sa.json
+d_*/
+out/
+__pycache__/
