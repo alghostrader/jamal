@@ -14,7 +14,7 @@
   {
    "kw": "mejor iptv españa",
    "vol": 720,
-   "pos": 41,
+   "pos": 40,
    "url": "/"
   },
   {
@@ -31,7 +31,7 @@
   {
    "kw": "proveedor iptv",
    "vol": 480,
-   "pos": 44,
+   "pos": 38,
    "url": "/"
   }
  ],
@@ -54,12 +54,13 @@
   {
    "kw": "application iptv",
    "vol": 6600,
-   "pos": null
+   "pos": 65,
+   "url": "/"
   },
   {
    "kw": "abonnement iptv 12 mois",
    "vol": 4400,
-   "pos": 38,
+   "pos": 37,
    "url": "/"
   },
   {
@@ -158,7 +159,8 @@
   {
    "kw": "iptv shqiptare",
    "vol": 1600,
-   "pos": null
+   "pos": 16,
+   "url": "/"
   },
   {
    "kw": "iptv smarters pro",
@@ -270,7 +272,7 @@
   {
    "kw": "meilleur boitier iptv",
    "vol": 720,
-   "pos": 87,
+   "pos": 74,
    "page": "/boitier-iptv",
    "url": "/"
   },

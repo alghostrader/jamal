@@ -93,7 +93,7 @@
     "domain_rank": 0,
     "spam_score": 61,
     "ranked_top100": 13,
-    "targets_ranking": 1
+    "targets_ranking": 2
    },
    "iptvned.com": {
     "ref_domains": 16,
@@ -125,7 +125,7 @@
     "domain_rank": 0,
     "spam_score": 50,
     "ranked_top100": null,
-    "targets_ranking": 1
+    "targets_ranking": 2
    },
    "smartersprofrance.fr": {
     "ref_domains": null,

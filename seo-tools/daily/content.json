@@ -4,12 +4,12 @@
    {
     "path": "/blog/telegram-listas-iptv-espana",
     "title": "Listas IPTV España por Telegram gratis: guía y riesgos 2026",
-    "words": 4271
+    "words": 4263
    },
    {
     "path": "/blog/iptv-espana-fire-tv-stick-4k-max-2026",
     "title": "IPTV en Fire TV Stick 4K Max: instalación 2026",
-    "words": 4005
+    "words": 4012
    },
    {
     "path": "/blog/iptv-deportes-motor-espana",
@@ -24,7 +24,7 @@
    {
     "path": "/blog/iptv-roku-espana",
     "title": "IPTV en Roku España 2026: instalación y alternativas",
-    "words": 3145
+    "words": 3146
    },
    {
     "path": "/blog/iptv-en-pc-windows-espana",
@@ -39,7 +39,7 @@
    {
     "path": "/blog/guia-iptv-espana",
     "title": "IPTV España: guía completa 2026 para elegir plan",
-    "words": 2626
+    "words": 2629
    },
    {
     "path": "/blog/iptv-motociclismo-espana",
@@ -54,27 +54,27 @@
    {
     "path": "/blog/iptv-samsung-smart-tv-espana",
     "title": "IPTV en Samsung sin Smarters: apps y soluciones",
-    "words": 2363
-   },
-   {
-    "path": "/blog/iptv-telegram-gratis-2026",
-    "title": "IPTV Telegram gratis 2026: qué esperar antes de bajarla",
-    "words": 2276
+    "words": 2369
    },
    {
     "path": "/blog",
     "title": "Blog IPTV en España — guías y comparativas 2026 · IPTVESP",
-    "words": 2263
+    "words": 2323
+   },
+   {
+    "path": "/blog/iptv-telegram-gratis-2026",
+    "title": "IPTV Telegram gratis 2026: qué esperar antes de bajarla",
+    "words": 2277
    },
    {
     "path": "/blog/iptv-multipantalla-espana",
     "title": "IPTV multipantalla en España: ver en varias pantallas",
-    "words": 2186
+    "words": 2183
    },
    {
     "path": "/blog/riesgos-grupos-telegram-iptv",
     "title": "Grupos de Telegram con IPTV gratis: los riesgos reales",
-    "words": 2148
+    "words": 2150
    },
    {
     "path": "/blog/iptv-no-funciona",
@@ -89,7 +89,7 @@
    {
     "path": "/blog/alternativas-a-telegram-iptv",
     "title": "Alternativas a Telegram para IPTV en España",
-    "words": 1995
+    "words": 1989
    },
    {
     "path": "/blog/iptv-4k-espana",
@@ -99,7 +99,7 @@
    {
     "path": "/blog/iptv-gratis-es-fiable",
     "title": "IPTV gratis en España: ¿es fiable y seguro en 2026?",
-    "words": 1955
+    "words": 1947
    },
    {
     "path": "/blog/iptv-lg-smart-tv-espana",
@@ -109,22 +109,17 @@
    {
     "path": "/blog/iptv-kodi-espana",
     "title": "IPTV en Kodi: cómo instalar y configurar paso a paso",
-    "words": 1898
+    "words": 1889
    },
    {
     "path": "/blog/aplicacion-iptv",
     "title": "Aplicación IPTV: las mejores apps para España 2026",
-    "words": 1868
+    "words": 1865
    },
    {
     "path": "/blog/iptv-smarters-pro",
     "title": "IPTV Smarters Pro 2026: qué es y cómo funciona",
-    "words": 1850
-   },
-   {
-    "path": "/blog/iptv-firestick-espana",
-    "title": "IPTV Smarters Pro 2026: qué es y cómo funciona",
-    "words": 1850
+    "words": 1851
    },
    {
     "path": "/blog/iptv-vs-plataformas-premium-espana",
@@ -134,12 +129,7 @@
    {
     "path": "/blog/iptv-vlc",
     "title": "IPTV con VLC: cómo reproducir tu lista M3U paso a paso",
-    "words": 1747
-   },
-   {
-    "path": "/blog/iptv-legalidad-espana",
-    "title": "IPTV legal en España 2026: lo que dice la ley y el CNMC",
-    "words": 1733
+    "words": 1751
    },
    {
     "path": "/blog/iptv-android-tv-espana",
@@ -147,9 +137,19 @@
     "words": 1731
    },
    {
+    "path": "/blog/iptv-legalidad-espana",
+    "title": "IPTV legal en España 2026: lo que dice la ley y el CNMC",
+    "words": 1725
+   },
+   {
     "path": "/blog/iptv-box-espana",
     "title": "Cajas IPTV en España: MAG, Formuler y Android TV 2026",
-    "words": 1667
+    "words": 1676
+   },
+   {
+    "path": "/blog/vpn-para-iptv-espana",
+    "title": "¿Necesitas una VPN para IPTV en España?",
+    "words": 1665
    },
    {
     "path": "/blog/iptv-xiaomi-mi-tv-stick-espana",
@@ -239,6 +239,11 @@
     "covered": false
    },
    {
+    "kw": "iptv firestick",
+    "vol": 90,
+    "covered": false
+   },
+   {
     "kw": "iptv smarters pro",
     "vol": 14800,
     "covered": true
@@ -291,11 +296,6 @@
    {
     "kw": "iptv no funciona",
     "vol": 140,
-    "covered": true
-   },
-   {
-    "kw": "iptv firestick",
-    "vol": 90,
     "covered": true
    },
    {
