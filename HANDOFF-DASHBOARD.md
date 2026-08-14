@@ -49,6 +49,8 @@ hand-edited into HTML, and there is no database:
 | `daily/semrush.json` | per site: AS, traffic, keywords, ref_domains, backlinks, ai_* — **owner-pasted, never fetched** | SEMRUSH panels, AI-search card |
 | `daily/checkbox_state.json` | `{checked:[checkbox-ids]}` | pre-checked boxes on Backlinks (matrices + milestones) |
 | `daily/history.json` | daily snapshots `{date, sites{...}}` | Trends sparklines, change deltas |
+| `daily/goals.json` | `{set_on, goals:[{id,label,target,due}]}` — ids: `clicks`, `top10`, `prime_rd`, `earning` | **North Star card** on home (currents computed live; edit targets only when the owner asks) |
+| `daily/prev_snapshot.json` | auto-written by every `generate_v3.py` run | **"What changed this update"** diff on home — never edit by hand; commit it after each audit so the next diff has a baseline |
 
 **"Do this today"** is not data at all — `daily_plan()` in `generate_v3.py` computes the
 queue from findings/content state; steps auto-clear when the next crawl verifies work done.
