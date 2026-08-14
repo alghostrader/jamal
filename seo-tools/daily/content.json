@@ -64,7 +64,7 @@
    {
     "path": "/blog",
     "title": "Blog IPTV en España — guías y comparativas 2026 · IPTVESP",
-    "words": 2205
+    "words": 2263
    },
    {
     "path": "/blog/iptv-multipantalla-espana",
@@ -104,7 +104,7 @@
    {
     "path": "/blog/iptv-lg-smart-tv-espana",
     "title": "IPTV en LG Smart TV: webOS, apps y mejor configuración",
-    "words": 1938
+    "words": 1928
    },
    {
     "path": "/blog/iptv-kodi-espana",
@@ -122,6 +122,11 @@
     "words": 1850
    },
    {
+    "path": "/blog/iptv-firestick-espana",
+    "title": "IPTV Smarters Pro 2026: qué es y cómo funciona",
+    "words": 1850
+   },
+   {
     "path": "/blog/iptv-vs-plataformas-premium-espana",
     "title": "IPTV vs plataformas premium en España: comparativa 2026",
     "words": 1844
@@ -129,22 +134,27 @@
    {
     "path": "/blog/iptv-vlc",
     "title": "IPTV con VLC: cómo reproducir tu lista M3U paso a paso",
-    "words": 1752
-   },
-   {
-    "path": "/blog/iptv-android-tv-espana",
-    "title": "IPTV Smarters Pro en Android: TV box, móvil y Mi Box",
-    "words": 1729
+    "words": 1747
    },
    {
     "path": "/blog/iptv-legalidad-espana",
     "title": "IPTV legal en España 2026: lo que dice la ley y el CNMC",
-    "words": 1727
+    "words": 1733
+   },
+   {
+    "path": "/blog/iptv-android-tv-espana",
+    "title": "IPTV Smarters Pro en Android: TV box, móvil y Mi Box",
+    "words": 1731
    },
    {
     "path": "/blog/iptv-box-espana",
     "title": "Cajas IPTV en España: MAG, Formuler y Android TV 2026",
     "words": 1667
+   },
+   {
+    "path": "/blog/iptv-xiaomi-mi-tv-stick-espana",
+    "title": "Instalar IPTV en Xiaomi Mi TV Stick (2026)",
+    "words": 1651
    },
    {
     "path": "/blog/cuanto-cuesta-iptv-espana",
@@ -154,17 +164,17 @@
    {
     "path": "/blog/iptv-apple-tv-espana",
     "title": "IPTV en Apple TV España: guía instalación tvOS 2026",
-    "words": 1609
+    "words": 1610
    },
    {
     "path": "/blog/iptv-smart-tv-samsung-espana",
     "title": "IPTV en Samsung Smart TV: instalación y mejores apps",
-    "words": 1568
+    "words": 1577
    },
    {
     "path": "/blog/ss-iptv-smart-tv",
     "title": "SS IPTV Smart TV: instalar y configurar la app gratis",
-    "words": 1557
+    "words": 1559
    },
    {
     "path": "/blog/iptv-vodafone-orange-espana",
@@ -179,7 +189,7 @@
    {
     "path": "/blog/iptv-en-chromecast-espana",
     "title": "IPTV en Chromecast España: guía con Google TV 2026",
-    "words": 1522
+    "words": 1523
    },
    {
     "path": "/generador-m3u",
@@ -226,11 +236,6 @@
    {
     "kw": "mejor aplicacion iptv",
     "vol": 110,
-    "covered": false
-   },
-   {
-    "kw": "iptv firestick",
-    "vol": 90,
     "covered": false
    },
    {
@@ -289,6 +294,11 @@
     "covered": true
    },
    {
+    "kw": "iptv firestick",
+    "vol": 90,
+    "covered": true
+   },
+   {
     "kw": "como instalar iptv",
     "vol": 50,
     "covered": true
@@ -304,7 +314,7 @@
     "covered": true
    }
   ],
-  "n_articles": 40,
+  "n_articles": 42,
   "n_thin": 2
  },
  "primeiptv-france.com": {

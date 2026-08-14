@@ -1,11 +1,15 @@
 {
  "iptvesp.com": {
-  "pages": 51,
+  "pages": 53,
   "titles_over60": [],
-  "redirect_links": [],
+  "redirect_links": [
+   "blog/iptv-firestick-espana"
+  ],
   "linked404": {},
   "orphans": [],
-  "canonical_mismatch": [],
+  "canonical_mismatch": [
+   "blog/iptv-firestick-espana"
+  ],
   "no_meta_desc": [],
   "thin": [
    "checkout",
@@ -31,7 +35,7 @@
    "mentions-legales",
    "politique-confidentialite"
   ],
-  "favicon": 404,
+  "favicon": 200,
   "www_redirect": "308 -> https://primeiptv-france.com/"
  },
  "iptvned.com": {
@@ -84,7 +88,7 @@
    "faq",
    "installation"
   ],
-  "favicon": 404,
+  "favicon": 200,
   "apex": "308 -> https://www.smarters-live.com/",
   "www": "200",
   "www_redirect": "200"
@@ -117,7 +121,7 @@
   "canonical_mismatch": [],
   "no_meta_desc": [],
   "thin": [],
-  "favicon": 404,
+  "favicon": 200,
   "apex": "308 -> https://www.smartersprofrance.fr/",
   "www": "200",
   "www_redirect": "200"
