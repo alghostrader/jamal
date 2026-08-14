@@ -1,0 +1,10 @@
+{
+ "_note": "North-Star goals. Owner can change targets/dates anytime by telling Claude.",
+ "set_on": "2026-08-14",
+ "goals": [
+  {"id": "clicks", "label": "Portfolio clicks / week", "target": 1000, "due": "31 Oct"},
+  {"id": "top10", "label": "Targets in the top 10", "target": 10, "due": "31 Oct"},
+  {"id": "prime_rd", "label": "primeiptv ref. domains (Semrush)", "target": 30, "due": "30 Sep"},
+  {"id": "earning", "label": "Sites earning clicks / week", "target": 9, "due": "30 Sep"}
+ ]
+}

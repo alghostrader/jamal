@@ -14,6 +14,8 @@ CT = L("content.json", {})
 SEM = L("semrush.json", {})
 HIST = L("history.json", [])
 CHECKED = set(L("checkbox_state.json", {}).get("checked", []))
+PREV = L("prev_snapshot.json", None)
+GOALS = L("goals.json", {"goals": []})
 STYLE = open(os.path.join(BASE, "_styles.html")).read()
 
 ALL = [d for _, d, _ in SITES]
@@ -492,6 +494,160 @@ LINKS_JS = """<script>
 </script>"""
 
 # ---------------- home components ----------------
+def area_chart(vals, dates, w=560, h=210, color="var(--s1)", cid="ac", label="Traffic"):
+    vals = [v or 0 for v in vals]
+    if len(vals) < 2: return ""
+    n = len(vals); mx = max(vals) or 1
+    padL, padR, padT, padB = 8, 8, 12, 22
+    X = lambda i: padL + (w - padL - padR) * (i/(n-1))
+    Y = lambda v: padT + (h - padT - padB) * (1 - v/mx)
+    grid = ""
+    for t in range(4):
+        val = round(mx * (3-t) / 3); yy = padT + (h-padT-padB) * (t/3)
+        grid += (f'<line x1="{padL}" x2="{w-padR}" y1="{yy:.0f}" y2="{yy:.0f}" stroke="var(--line2)" stroke-width="1"/>'
+                 f'<text x="{padL}" y="{yy-3:.0f}" fill="var(--ink3)" font-size="9.5" font-family="ui-monospace,monospace">{val:,}</text>')
+    st = max(1, n // 6)
+    xlab = "".join(f'<text x="{X(i):.0f}" y="{h-6}" fill="var(--ink3)" font-size="9.5" text-anchor="middle" font-family="ui-monospace,monospace">{dates[i][5:]}</text>'
+                   for i in range(0, n, st))
+    line = " ".join(f"{X(i):.1f},{Y(v):.1f}" for i, v in enumerate(vals))
+    area = f'{padL},{Y(0):.1f} ' + line + f' {X(n-1):.1f},{Y(0):.1f}'
+    return (f'<svg width="100%" height="{h}" viewBox="0 0 {w} {h}" preserveAspectRatio="none" role="img" aria-label="{label}">'
+            f'<defs><linearGradient id="{cid}" x1="0" x2="0" y1="0" y2="1">'
+            f'<stop offset="0" stop-color="{color}" stop-opacity=".3"/><stop offset="1" stop-color="{color}" stop-opacity="0"/></linearGradient></defs>'
+            f'{grid}<polygon points="{area}" fill="url(#{cid})"/>'
+            f'<polyline points="{line}" fill="none" stroke="{color}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>'
+            f'<circle cx="{X(n-1):.1f}" cy="{Y(vals[-1]):.1f}" r="3.6" fill="{color}"/>{xlab}</svg>')
+
+def _port_series():
+    dates = []
+    for s in ALL:
+        ds = [x["date"] for x in daily_of(s)]
+        if len(ds) > len(dates): dates = ds
+    m = {d: 0 for d in dates}
+    for s in ALL:
+        for x in daily_of(s):
+            if x["date"] in m: m[x["date"]] += x["clicks"]
+    return dates, [m[d] for d in dates]
+
+def traffic_chart_card():
+    dates, vals = _port_series()
+    if len(vals) < 2: return ""
+    wk = sum(vals[-7:]); prev = sum(vals[-14:-7])
+    d = wk - prev
+    dtxt = f'<span class="tmDelta {"up" if d>=0 else "down"}">{"+" if d>=0 else ""}{d} vs prior week</span>'
+    return (f'<div class="card"><h2>{icon("trend")} Traffic — all 9 sites · 90 days</h2>'
+            f'<p class="sub">GSC clicks/day summed across the portfolio. Last 7 days: <b>{wk}</b> {dtxt}</p>'
+            f'{area_chart(vals, dates, cid="acport", label="Portfolio clicks")}</div>')
+
+def wk7(s):
+    d = daily_of(s)
+    return sum(x["clicks"] for x in d[-7:]) if d else 0
+
+def _cur_snapshot():
+    snap = {"_stamp": STAMP_TXT, "sites": {}}
+    for s in ALL:
+        sm = SEM.get(s) or {}
+        snap["sites"][s] = {
+            "clicks7d": wk7(s),
+            "sem_rd": sm.get("ref_domains"),
+            "dfs_rd": dfs_of(s).get("ref_domains"),
+            "top100": dfs_of(s).get("ranked_top100"),
+            "pages": F.get(s, {}).get("pages"),
+            "positions": {r["kw"]: r.get("pos") for r in KT.get(s, [])},
+        }
+    return snap
+CUR_SNAP = _cur_snapshot()
+
+def changes_card():
+    if not PREV:
+        return (f'<div class="card"><h2>{icon("refresh")} What changed this update</h2>'
+                '<p class="sub" style="margin:0">Baseline saved — from the next audit on, this panel lists exactly what moved.</p></div>')
+    ch = []
+    for s in ALL:
+        a = PREV.get("sites", {}).get(s, {}); b = CUR_SNAP["sites"][s]
+        if not a: continue
+        short = s.replace(".com", "")
+        if b["clicks7d"] != a.get("clicks7d") and a.get("clicks7d") is not None:
+            d = b["clicks7d"] - a["clicks7d"]
+            ch.append(("good" if d > 0 else "down", f"{short}: clicks/7d {a['clicks7d']} -> {b['clicks7d']} ({'+' if d>0 else ''}{d})"))
+        for key, lbl in (("sem_rd", "ref. domains (Semrush)"), ("top100", "keywords in top 100")):
+            if b.get(key) is not None and a.get(key) is not None and b[key] != a[key]:
+                d = b[key] - a[key]
+                ch.append(("good" if d > 0 else "down", f"{short}: {lbl} {a[key]} -> {b[key]} ({'+' if d>0 else ''}{d})"))
+        pa, pb = a.get("positions", {}), b.get("positions", {})
+        for kw, np in pb.items():
+            if kw not in pa: continue
+            op = pa.get(kw)
+            if np and not op: ch.append(("good", f'{short}: "{kw}" ENTERED the top 100 at #{np}'))
+            elif op and not np: ch.append(("down", f'{short}: "{kw}" dropped out of the top 100 (was #{op})'))
+            elif np and op and np != op:
+                ch.append(("good" if np < op else "down", f'{short}: "{kw}" #{op} -> #{np}'))
+        if b.get("pages") and a.get("pages") and b["pages"] != a["pages"]:
+            d = b["pages"] - a["pages"]
+            ch.append(("info", f"{short}: {a['pages']} -> {b['pages']} pages ({'+' if d>0 else ''}{d})"))
+    prev_stamp = PREV.get("_stamp", "")
+    if not ch:
+        return (f'<div class="card"><h2>{icon("refresh")} What changed this update</h2>'
+                f'<p class="sub" style="margin:0">No measurable change since {H.escape(prev_stamp)} — normal on a same-day re-run.</p></div>')
+    order = {"good": 0, "info": 1, "down": 2}
+    ch.sort(key=lambda x: order[x[0]])
+    items = "".join(f'<li class="chg {k}">{H.escape(t)}</li>' for k, t in ch)
+    return (f'<div class="card"><h2>{icon("refresh")} What changed this update</h2>'
+            f'<p class="sub">Since {H.escape(prev_stamp)} — {len(ch)} change(s).</p>'
+            f'<ul class="chglist">{items}</ul></div>')
+
+def goals_card():
+    gs = GOALS.get("goals", [])
+    if not gs: return ""
+    def current(gid):
+        if gid == "clicks": return sum(wk7(s) for s in ALL)
+        if gid == "top10": return sum(1 for s in ALL for r in KT.get(s, []) if r.get("pos") and r["pos"] <= 10)
+        if gid == "prime_rd": return (SEM.get("primeiptv-france.com") or {}).get("ref_domains") or 0
+        if gid == "earning": return sum(1 for s in ALL if wk7(s) > 0)
+        return 0
+    tiles = ""
+    for g in gs:
+        cur, tgt = current(g["id"]), g["target"]
+        pct = max(2, min(100, round(100 * cur / tgt))) if tgt else 0
+        done = cur >= tgt
+        tiles += (f'<div class="goal"><span class="ovlabel">{H.escape(g["label"])}</span>'
+                  f'<span class="goalv">{cur:,}<span class="goalt"> / {tgt:,}</span>'
+                  + (' <span class="krank good">DONE ✓</span>' if done else '') + '</span>'
+                  f'<div class="ctryTrack"><div class="ctryFill" style="width:{pct}%"></div></div>'
+                  f'<span class="ovsub">{pct}% · due {H.escape(g["due"])}</span></div>')
+    return (f'<div class="card" style="border-left:4px solid var(--s3)"><h2>{icon("target")} North Star — the goals'
+            f'<span style="font-weight:400;color:var(--ink3);font-size:12px"> · set {H.escape(GOALS.get("set_on",""))}, change them anytime</span></h2>'
+            f'<div class="goalgrid">{tiles}</div></div>')
+
+def weekly_scorecard():
+    import datetime as _dt
+    dates, vals = _port_series()
+    if len(vals) < 14: return ""
+    imap = {}
+    for s in ALL:
+        for x in daily_of(s):
+            imap[x["date"]] = imap.get(x["date"], 0) + x["impressions"]
+    weeks = {}
+    for d, v in zip(dates, vals):
+        dt = _dt.date.fromisoformat(d)
+        monday = dt - _dt.timedelta(days=dt.weekday())
+        wkey = monday.isoformat()
+        weeks.setdefault(wkey, {"c": 0, "i": 0, "days": 0})
+        weeks[wkey]["c"] += v; weeks[wkey]["i"] += imap.get(d, 0); weeks[wkey]["days"] += 1
+    rows = sorted(weeks.items())[-10:]
+    prevc = None; out_rows = []
+    for wkey, w in rows:
+        d = (w["c"] - prevc) if prevc is not None else None
+        dtxt = "—" if d is None else f'<span class="tmDelta {"up" if d>=0 else "down"}">{"+" if d>0 else ""}{d}</span>'
+        partial = " <span style=\'color:var(--ink3)\'>(partial)</span>" if w["days"] < 7 else ""
+        out_rows.append(f'<tr><td>wk of {wkey[5:]}{partial}</td><td>{w["c"]:,}</td><td>{dtxt}</td><td>{w["i"]:,}</td></tr>')
+        if w["days"] == 7: prevc = w["c"]
+    body = "".join(reversed(out_rows))
+    return (f'<div class="card"><h2>{icon("chart")} Weekly scorecard — read down the column</h2>'
+            f'<p class="sub">Portfolio totals per ISO week (GSC). The clicks column should grow — that is the whole game.</p>'
+            f'<div class="overflow"><table><thead><tr><th>week</th><th>clicks</th><th>Δ</th><th>impressions</th></tr></thead>'
+            f'<tbody>{body}</tbody></table></div></div>')
+
 def action_strip():
     if not _steps: return ""
     chips = "".join(f'<a class="astep" href="today"><span class="an">{n}</span>'
@@ -672,9 +828,10 @@ for s in ALL:
 sitelist = (f'<div class="card"><h2>Websites</h2><p class="sub">Status · keywords in the top 100 · ranking targets. '
             f'Tap for the full page; {icon("ext")} opens the live site.</p><div class="sitelist">{rows}</div></div>')
 
-control = (f'<div class="grid2"><div>{authority_table()}{ai_search_card()}</div>'
+control = (f'<div class="grid2"><div>{traffic_chart_card()}{ai_search_card()}</div>'
            f'<div class="rail">{country_card()}{gauges_card()}{opportunity_card()}</div></div>')
-home_body = head + alerts_card() + action_strip() + control + rankings_board() + sitelist
+home_body = (head + alerts_card() + goals_card() + action_strip() + changes_card()
+             + control + rankings_board() + sitelist)
 open(os.path.join(OUT, "index.html"), "w").write(shell("IPTV Portfolio — SEO Dashboard", home_body, cur=None))
 
 today_body = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Today — the daily queue</h1>'
@@ -687,7 +844,7 @@ def trends_body():
     b = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Trends — are we winning?</h1>'
          f'<p class="meta">Authority and ranking history builds from {H.escape(HIST[0]["date"]) if HIST else "today"} onward. '
          + ("Search Console traffic is paused until the service-account key is restored." if GSC_OFF else "") + '</p>')
-    b += authority_table()
+    b += traffic_chart_card() + weekly_scorecard()
     cards = ""
     order = sorted(ALL, key=lambda s: -(dfs_of(s).get("ranked_top100") or 0))
     for s in order:
@@ -701,9 +858,13 @@ def trends_body():
                     f'<span class="tmVal">{val}</span></div><div class="spkwrap">{spark(series, color=col)}</div></div>')
         kt_rows = "".join(f'<tr><td>{H.escape(r["kw"])}</td><td>{r["vol"]:,}</td>'
                           f'<td>{"#"+str(r["pos"]) if r.get("pos") else "—"}</td></tr>' for r in KT.get(s, []))
+        clk = [x["clicks"] for x in daily_of(s)[-90:]]
+        impr = [x["impressions"] for x in daily_of(s)[-90:]]
         cards += (f'<div class="card"><div class="schead" style="margin-bottom:6px">'
                   f'<div class="sname"><a class="slink" href="{SLUG[s]}">{s}</a>{ext(s)}</div>'
                   f'<span class="badge b-{_sc.CONFIG[s]["tone"]}">{_sc.CONFIG[s]["badge"]} {_sc.CONFIG[s]["status"]}</span></div>'
+                  + (metric("Clicks · 90d", f"{sum(clk):,}", clk) if clk else "")
+                  + (metric("Impressions · 90d", f"{sum(impr):,}", impr) if impr else "")
                   + metric("Keywords in top 100", dfs.get("ranked_top100") if dfs.get("ranked_top100") is not None else "—", kw_hist or [0])
                   + metric("Referring domains", dfs.get("ref_domains") if dfs.get("ref_domains") is not None else "—", rd_hist or [0])
                   + (f'<div class="rectitle" style="border:none;padding-top:14px">KEYWORD TARGETS</div>'
@@ -876,7 +1037,11 @@ plan_body = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Plan — 
              '<li><b>Satellites stay in their lanes</b> — spf install/config, ifo premium/HDR, aio trial/deals. One keyword, one page, one site.</li>'
              '<li><b>Authority is the portfolio ceiling.</b> Referring domains per site are still in the single digits on the flagship — the Backlinks steps are the highest-leverage work available.</li>'
              '<li><b>AI search is a live channel.</b> ChatGPT already cites the portfolio; write every article so it can be cited (numbered steps, direct answers, tables).</li>'
-             '</ul></div>')
+             '</ul></div>'
+             f'<div class="card"><h2>{icon("gem")} Sales — the missing metric</h2>'
+             '<p class="sub" style="margin:0">The dashboard tracks visibility; the business runs on subscriptions. '
+             'Give Claude a weekly number per site (even approximate — "esp 6 sales, prime 2") and a revenue column '
+             'joins the Weekly scorecard, closing the loop from clicks to money.</p></div>')
 open(os.path.join(OUT, "plan.html"), "w").write(shell("Plan — IPTV Portfolio", plan_body, cur="plan"))
 
 # per-site pages
@@ -998,3 +1163,6 @@ for s in ALL:
     open(os.path.join(OUT, f"{SLUG[s]}.html"), "w").write(shell(f"{s} — SEO", body, cur=s, extra_js=COPY_JS))
 
 print("multi-page dashboard written to out/:", sorted(os.listdir(OUT)))
+
+json.dump(CUR_SNAP, open(os.path.join(BASE, "prev_snapshot.json"), "w"), indent=1)
+print("snapshot saved for next-audit diff")

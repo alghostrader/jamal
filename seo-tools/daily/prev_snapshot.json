@@ -1,0 +1,138 @@
+{
+ "_stamp": "2026-08-14 15:31 UTC",
+ "sites": {
+  "iptvesp.com": {
+   "clicks7d": 371,
+   "sem_rd": 110,
+   "dfs_rd": 36,
+   "top100": 18,
+   "pages": 53,
+   "positions": {
+    "iptv espa\u00f1a": 4,
+    "listas iptv": null,
+    "mejor iptv espa\u00f1a": 40,
+    "iptv smarters pro": null,
+    "listas iptv espa\u00f1a telegram": 1,
+    "proveedor iptv": 38
+   }
+  },
+  "primeiptv-france.com": {
+   "clicks7d": 32,
+   "sem_rd": 18,
+   "dfs_rd": 6,
+   "top100": 13,
+   "pages": 86,
+   "positions": {
+    "abonnement iptv": null,
+    "boitier iptv": null,
+    "iptv france": null,
+    "application iptv": 65,
+    "abonnement iptv 12 mois": 37,
+    "meilleur abonnement iptv": null,
+    "serveur iptv": null
+   }
+  },
+  "iptvned.com": {
+   "clicks7d": 7,
+   "sem_rd": 35,
+   "dfs_rd": 16,
+   "top100": 18,
+   "pages": 54,
+   "positions": {
+    "iptv nederland": null,
+    "iptv kopen": null,
+    "iptv aanbieders": null,
+    "iptv abonnement": null,
+    "beste iptv": null,
+    "iptv provider": null
+   }
+  },
+  "iptvpix.com": {
+   "clicks7d": 0,
+   "sem_rd": 107,
+   "dfs_rd": 35,
+   "top100": null,
+   "pages": 58,
+   "positions": {
+    "iptv france": null,
+    "meilleur abonnement iptv": null,
+    "iptv 4k": null,
+    "iptv m3u": null,
+    "telecharger iptv": null
+   }
+  },
+  "smarters-live.com": {
+   "clicks7d": 0,
+   "sem_rd": 25,
+   "dfs_rd": 5,
+   "top100": null,
+   "pages": 52,
+   "positions": {
+    "iptv smarters pro": null,
+    "iptv smarters": null,
+    "application iptv": null,
+    "iptv erreur de lecture": null
+   }
+  },
+  "iptvshqiptar.com": {
+   "clicks7d": 9,
+   "sem_rd": 44,
+   "dfs_rd": 7,
+   "top100": null,
+   "pages": 21,
+   "positions": {
+    "iptv shqiptare": 16,
+    "iptv smarters pro": null,
+    "iptv shqip": null,
+    "iptv shqiptar": 15,
+    "tv shqip live": null,
+    "iptv per smart tv": null,
+    "aplikacion per iptv": null
+   }
+  },
+  "smartersprofrance.fr": {
+   "clicks7d": 0,
+   "sem_rd": 4,
+   "dfs_rd": null,
+   "top100": 3,
+   "pages": 39,
+   "positions": {
+    "iptv smarters": null,
+    "configuration iptv smarters": null,
+    "smarters player lite": null,
+    "iptv smarters pro firestick": null,
+    "smarters player lite apk": null
+   }
+  },
+  "iptvfranceofficiel.fr": {
+   "clicks7d": 0,
+   "sem_rd": 3,
+   "dfs_rd": null,
+   "top100": null,
+   "pages": 44,
+   "positions": {
+    "iptv premium": null,
+    "iptv hdr": null,
+    "iptv 8k": null,
+    "meilleur iptv 4k": null,
+    "iptv full hd": null
+   }
+  },
+  "abonnementiptvofficiel.com": {
+   "clicks7d": 14,
+   "sem_rd": 55,
+   "dfs_rd": 4,
+   "top100": 1,
+   "pages": 44,
+   "positions": {
+    "test iptv gratuit": null,
+    "iptv pas cher": null,
+    "essai iptv 7 jours": 69,
+    "meilleur boitier iptv": 74,
+    "iptv moins cher": null,
+    "code promo iptv": null,
+    "iptv promo": null
+   }
+  }
+ }
+}
