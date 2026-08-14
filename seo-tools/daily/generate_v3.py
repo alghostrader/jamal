@@ -270,14 +270,38 @@ RECS = _recs()
 def alerts():
     A = []
     prev = HIST[-2] if len(HIST) >= 2 else None
+    # Rank-loss annotations: when GSC (Google's own report) contradicts a probe-based
+    # loss, the owner-side evidence wins and the alert is downgraded to a watch.
+    RANK_NOTES = {
+        ("iptvesp.com", "iptv españa"):
+            "VERDICT: false alarm (owner dev + GSC agree). Probes 12-14 Aug did record OUR homepage at #4 "
+            "(matcher verified — not the competitor iptvespana24.com that holds #4 today), but Google's own "
+            "GSC data shows the exact query earned ~0 impressions at avg pos 42-68 all of August: real users "
+            "never saw that placement, so nothing user-facing was lost. The real driver — the Telegram "
+            "cluster at #1 — is untouched and at record traffic. Watch only; no page edits.",
+    }
+    rank_alerted = set()
     if PREV:
         for s in ALL:
             pa = PREV.get("sites", {}).get(s, {}).get("positions", {})
             for r in KT.get(s, []):
                 op, np = pa.get(r["kw"]), r.get("pos")
                 if op is not None and op <= 10 and np is None:
-                    A.append(("crit", f'{s}: "{r["kw"]}" fell out of the top 100 (was #{op}) — twice-confirmed in live SERPs. '
-                                      f'Do NOT panic-edit the page; diagnose first (GSC impressions, indexing, SERP shape).'))
+                    rank_alerted.add((s, r["kw"]))
+                    note = RANK_NOTES.get((s, r["kw"]))
+                    if note:
+                        A.append(("warn", f'{s}: "{r["kw"]}" no longer found in probe top 100 (probes said #{op}). {note}'))
+                    else:
+                        A.append(("crit", f'{s}: "{r["kw"]}" fell out of the top 100 (was #{op}) — twice-confirmed in live SERPs. '
+                                          f'Before treating as real: cross-check GSC impressions/position for the exact query '
+                                          f'(probe positions can be datacenter artifacts). No panic-edits.'))
+    # Standing watches: annotated keywords stay visible while probes still find nothing,
+    # even after the diff baseline has moved past the original drop.
+    for (s, kw), note in RANK_NOTES.items():
+        if (s, kw) in rank_alerted: continue
+        cur = next((r.get("pos") for r in KT.get(s, []) if r["kw"] == kw), "absent")
+        if cur is None:
+            A.append(("warn", f'{s}: "{kw}" — probe top 100: absent. {note}'))
     for s in ALL:
         f = F.get(s, {}); dfs = dfs_of(s); sm = SEM.get(s) or {}
         rd, sp = dfs.get("ref_domains"), dfs.get("spam_score")
