@@ -1,11 +1,15 @@
 {
  "iptvesp.com": {
-  "pages": 53,
+  "pages": 55,
   "titles_over60": [],
-  "redirect_links": [],
+  "redirect_links": [
+   "blog/iptv-firestick-espana"
+  ],
   "linked404": {},
   "orphans": [],
-  "canonical_mismatch": [],
+  "canonical_mismatch": [
+   "blog/iptv-firestick-espana"
+  ],
   "no_meta_desc": [],
   "thin": [
    "checkout",

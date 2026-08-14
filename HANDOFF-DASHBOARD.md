@@ -50,7 +50,8 @@ hand-edited into HTML, and there is no database:
 | `daily/checkbox_state.json` | `{checked:[checkbox-ids]}` | pre-checked boxes on Backlinks (matrices + milestones) |
 | `daily/history.json` | daily snapshots `{date, sites{...}}` | Trends sparklines, change deltas |
 | `daily/goals.json` | `{set_on, goals:[{id,label,target,due}]}` — ids: `clicks`, `top10`, `prime_rd`, `earning` | **North Star card** on home (currents computed live; edit targets only when the owner asks) |
-| `daily/prev_snapshot.json` | auto-written by every `generate_v3.py` run | **"What changed this update"** diff on home — never edit by hand; commit it after each audit so the next diff has a baseline |
+| `daily/prev_snapshot.json` | the diff BASELINE — read by generate, never written by it | **"What changed this update"** diff on home. Generate writes `cur_snapshot.json`; AFTER the deploy is verified live, promote it (`cp cur_snapshot.json prev_snapshot.json`) and commit. Never promote before a verified deploy — re-runs within one audit must not destroy the diff. |
+| `briefs/<slug>/site-brief.md` | 9 site briefs (voice, lane, money pages, market) | read by the installed 5-skill SEO system (keyword-fanout-map → seo-content-writer → onpage-optimizer → internal-link-architect → ai-visibility-checker); each site's dashboard page shows its pipeline workflow card. ⚠️ fields await owner confirmation. Regenerate with `daily/build_briefs.py` only if the config changes — owner edits win over regeneration. |
 
 **"Do this today"** is not data at all — `daily_plan()` in `generate_v3.py` computes the
 queue from findings/content state; steps auto-clear when the next crawl verifies work done.

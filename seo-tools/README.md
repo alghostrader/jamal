@@ -49,6 +49,22 @@ DASH_STAMP="$(date -u '+%Y-%m-%d %H:%M UTC')" python3 generate_v3.py
 Then deploy `out/*.html` to the `dashboard` branch (Vercel serves it), adding a
 `<!-- pipeline:<marker> -->` comment to `index.html` and verifying the marker is live.
 
+**After the deploy is verified live:** promote the change-diff baseline —
+`cp daily/cur_snapshot.json daily/prev_snapshot.json` — and commit both. The
+generator reads `prev_snapshot.json` for the home page's "What changed" card and
+writes `cur_snapshot.json`; promoting only after a verified deploy means re-runs
+within one audit never destroy the diff.
+
+## Site briefs (the 5-skill content system)
+
+`briefs/<slug>/site-brief.md` — one per site, drafted by `daily/build_briefs.py`
+from crawl + audit data. The installed SEO skills (keyword-fanout-map,
+seo-content-writer, onpage-optimizer, internal-link-architect,
+ai-visibility-checker) read these files for voice, lane rules, money pages and
+market settings. Fields marked ⚠️ are inferred — the owner confirms them.
+Article production runs through the skill pipeline shown on each site's
+dashboard page; the classic one-shot prompt remains as a no-skills fallback.
+
 ## Rules baked into the pipeline
 
 - **Verified facts only.** Position drops are re-probed twice before being recorded.

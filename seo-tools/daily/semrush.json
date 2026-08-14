@@ -1,5 +1,5 @@
 {
- "_note": "Semrush values pulled LIVE via the Semrush MCP connector (no more manual pasting). AI-search fields still from the 2 Aug owner snapshot.",
+ "_note": "All Semrush values pulled LIVE via the Semrush MCP connector 14 Aug (evening re-pull). AI-search fields still from the 2 Aug owner snapshot.",
  "_updated": "2026-08-14",
  "iptvesp.com": {
   "date": "2026-08-14",
@@ -7,7 +7,7 @@
   "authority_score": 7,
   "organic_traffic": 262,
   "organic_keywords": 55,
-  "ok_delta": "+23 · 9 in top-3",
+  "ok_delta": "+23 \u00b7 9 in top-3",
   "ref_domains": 110,
   "backlinks": 192,
   "ai_visibility": 0,
@@ -34,8 +34,8 @@
   "organic_traffic": 8,
   "organic_keywords": 73,
   "ok_delta": "-3",
-  "ref_domains": 35,
-  "backlinks": 46,
+  "ref_domains": 36,
+  "backlinks": 47,
   "ai_visibility": 14,
   "ai_cited_pages": 9,
   "ai_note": "ChatGPT 8 + AI Overview 1"

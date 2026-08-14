@@ -85,7 +85,7 @@
     "domain_rank": 0,
     "spam_score": 55,
     "ranked_top100": 18,
-    "targets_ranking": 4
+    "targets_ranking": 3
    },
    "primeiptv-france.com": {
     "ref_domains": 6,
@@ -144,10 +144,10 @@
     "targets_ranking": 0
    },
    "abonnementiptvofficiel.com": {
-    "ref_domains": 4,
-    "backlinks": 4,
+    "ref_domains": 5,
+    "backlinks": 5,
     "domain_rank": 0,
-    "spam_score": 48,
+    "spam_score": 53,
     "ranked_top100": 1,
     "targets_ranking": 2
    }

@@ -2,7 +2,7 @@
 """IPTV portfolio SEO dashboard generator — multi-page static build.
 Rebuilt 12 Aug 2026 after container recycle. Degrades gracefully when GSC is unavailable."""
 import json, os, re as RE, math, html as H
-from _sites import SITES
+from _sites import SITES, DOM2SLUG
 
 STAMP = os.environ.get("DASH_STAMP", "")
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -68,6 +68,7 @@ ICONS = {
  "warn": '<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/>',
  "chart": '<path d="M3 3v18h18"/><path d="M8 17v-5M13 17V8M18 17v-8"/>',
  "ext": '<path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"/>',
+ "layers": '<path d="m12 2 9 5-9 5-9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
 }
 def icon(n): return (f'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
                      f'stroke-linecap="round" stroke-linejoin="round">{ICONS.get(n,"")}</svg>')
@@ -269,6 +270,14 @@ RECS = _recs()
 def alerts():
     A = []
     prev = HIST[-2] if len(HIST) >= 2 else None
+    if PREV:
+        for s in ALL:
+            pa = PREV.get("sites", {}).get(s, {}).get("positions", {})
+            for r in KT.get(s, []):
+                op, np = pa.get(r["kw"]), r.get("pos")
+                if op is not None and op <= 10 and np is None:
+                    A.append(("crit", f'{s}: "{r["kw"]}" fell out of the top 100 (was #{op}) — twice-confirmed in live SERPs. '
+                                      f'Do NOT panic-edit the page; diagnose first (GSC impressions, indexing, SERP shape).'))
     for s in ALL:
         f = F.get(s, {}); dfs = dfs_of(s); sm = SEM.get(s) or {}
         rd, sp = dfs.get("ref_domains"), dfs.get("spam_score")
@@ -390,6 +399,8 @@ def daily_plan():
                      "to all 9 properties). Until then the dashboard has no clicks/impressions data.")
     owner.append("iptvpix.com — GSC → Pages: how many 'Crawled – currently not indexed' remain? (weekly recovery check)")
     owner.append("Request indexing for any article published since the last audit")
+    owner.append("NEW: review the 9 site-briefs at seo-tools/briefs/ — confirm the ⚠️ fields (competitors, price "
+                 "positioning, CTA wording, author identity). The content skills read these files as law.")
     n += 1
     cards.append(infocard(n, "Owner tasks — you, in the browser",
         '<ul class="lcl" style="margin-top:8px">' + "".join(f"<li>{H.escape(t)}</li>" for t in owner) + "</ul>"))
@@ -415,7 +426,8 @@ def daily_plan():
             n += 1
             cards.append(pcard(n, f"Content — one article on {s}", nap,
                 note=f'Target: "{g["kw"]}" ({g["vol"]:,}/mo) — the biggest genuinely-uncovered gap in the portfolio. '
-                     f'Every site page also carries its own article prompt if you want to write several today.'))
+                     f'<b>Preferred path:</b> the 5-skill pipeline on the <a class="slink" href="{SLUG[s]}">{s}</a> page '
+                     f'(brief-driven, anti-cannibalization built in). This one-shot prompt is the no-skills fallback.'))
 
     n += 1
     cards.append(pcard(n, f"Links — next platform batch (all {NSITES} sites)", PLATFORM_BATCH,
@@ -696,8 +708,11 @@ def ai_search_card():
             + " · ".join(f'<a class="slink" href="{SLUG[s]}">{s.replace(".com","")}</a> {c}' for c, s in cited_only)
             + '</p>') if cited_only else ""
     return (f'<div class="card"><h2>{icon("zap")} AI search</h2>'
-            f'<p class="sub"><b>{total} pages cited</b> in AI answers (Semrush {H.escape(SEM.get("_updated",""))}) — nearly all by ChatGPT; '
-            f'Gemini &amp; AI Mode cite nobody in the niche yet. Structured guides + tools are what gets cited.</p>{tbl}{also}</div>')
+            f'<p class="sub"><b>{total} pages cited</b> in AI answers (Semrush owner snapshot 2 Aug) — nearly all by ChatGPT; '
+            f'Gemini &amp; AI Mode cite nobody in the niche yet. Structured guides + tools are what gets cited.</p>{tbl}{also}'
+            '<p class="sub" style="margin:8px 0 0">Cross-check 14 Aug: the DataForSEO LLM-mentions corpus (sampled popular prompts) records '
+            '<b>0 mentions</b> for all 9 domains — the niche is cited via long-tail questions, not popular prompts. '
+            'Run <code>/ai-visibility-checker</code> for a live per-query gap list.</p></div>')
 
 def authority_table():
     rows = ""
@@ -1038,6 +1053,19 @@ plan_body = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Plan — 
              '<li><b>Authority is the portfolio ceiling.</b> Referring domains per site are still in the single digits on the flagship — the Backlinks steps are the highest-leverage work available.</li>'
              '<li><b>AI search is a live channel.</b> ChatGPT already cites the portfolio; write every article so it can be cited (numbered steps, direct answers, tables).</li>'
              '</ul></div>'
+             f'<div class="card" style="border-left:4px solid var(--s2)"><h2>{icon("layers")} Content OS — the 5-skill pipeline</h2>'
+             '<p class="sub">Every article now ships through the installed skill system instead of one-shot prompts. '
+             'Each site page carries its ready-to-copy workflow with its reserved keyword.</p>'
+             '<div class="overflow"><table><thead><tr><th>step</th><th>skill</th><th>what it produces</th></tr></thead><tbody>'
+             '<tr><td>0</td><td><code>site-brief-builder</code></td><td>done — 9 briefs drafted at <code>seo-tools/briefs/&lt;site&gt;/site-brief.md</code> (⚠️-verify fields await the owner)</td></tr>'
+             '<tr><td>1</td><td><code>keyword-fanout-map</code></td><td>intent-clustered keyword map with live volumes (01-keyword-map.csv)</td></tr>'
+             '<tr><td>2</td><td><code>seo-content-writer</code></td><td>the article — citation-ready structure, voice from the brief</td></tr>'
+             '<tr><td>3</td><td><code>onpage-optimizer</code></td><td>title/meta/headings/schema pass on the draft</td></tr>'
+             '<tr><td>4</td><td><code>internal-link-architect</code></td><td>exact links in/out with anchors (money page prioritised)</td></tr>'
+             '<tr><td>5</td><td><code>ai-visibility-checker</code></td><td>AI-citation gap list — feeds the next cycle</td></tr>'
+             '</tbody></table></div>'
+             '<p class="sub" style="margin-top:8px">Guard rails stay in force: the reserved-keyword queue and the lane contract in each brief '
+             'mean the pipeline cannot cannibalize a sibling site. The dashboard audit remains the verifier of record.</p></div>'
              f'<div class="card"><h2>{icon("gem")} Sales — the missing metric</h2>'
              '<p class="sub" style="margin:0">The dashboard tracks visibility; the business runs on subscriptions. '
              'Give Claude a weekly number per site (even approximate — "esp 6 sales, prime 2") and a revenue column '
@@ -1142,10 +1170,31 @@ def content_section(s):
                 f'<div class="overflow"><table><thead><tr><th>keyword</th><th>vol/mo</th><th>status</th></tr></thead>'
                 f'<tbody>{kw_rows}</tbody></table></div></div>') if rec else ""
     nap = next_article_prompt(s)
-    nap_html = (f'<div class="card pcard"><div class="phead"><h2>{icon("pen")} Prompt — write the next article</h2>'
+    nap_html = (f'<div class="card pcard"><div class="phead"><h2>{icon("pen")} No skills installed? Classic one-shot prompt</h2>'
                 f'<button class="copybtn" data-copy>Copy prompt</button></div>'
                 f'<pre class="ptext">{H.escape(nap)}</pre></div>') if nap else ""
-    return arts_html + rec_html + nap_html
+    return arts_html + rec_html + skill_pipeline_card(s) + nap_html
+
+def skill_pipeline_card(s):
+    c = CT.get(s, {}); rec = c.get("recommend", [])
+    gap = next((r for r in rec if not r["covered"] and reserved_for(s, r["kw"])), None)
+    if not gap: return ""
+    lang, _ = LANG[s]
+    brief = f"seo-tools/briefs/{DOM2SLUG[s]}/site-brief.md"
+    vol = f"{gap['vol']:,}/mo" if gap["vol"] else "low volume, on-intent"
+    seq = (f'Write the next article for {s} with the 5-skill pipeline. Site brief: {brief} (in the jamal repo).\n\n'
+           f'1. /keyword-fanout-map  "{gap["kw"]}"  — country {CTRY[s][1]}, language {lang}, per the site brief.\n'
+           f'2. /seo-content-writer  — blog post from 01-keyword-map.csv + the brief. FIRST check no existing\n'
+           f'   article on {s} (or any same-market portfolio site) already targets "{gap["kw"]}" — if one does, STOP.\n'
+           f'3. /onpage-optimizer  — run on the draft before publishing (blog branch).\n'
+           f'4. /internal-link-architect  — target = the new URL on {s}; money page {MONEY[s]} gets priority anchors.\n'
+           f'5. Publish + sitemap.xml. The next dashboard audit verifies the page and its rank automatically.')
+    return (f'<div class="card pcard" style="border-left:4px solid var(--s2)"><div class="phead">'
+            f'<h2>{icon("layers")} Next article — 5-skill pipeline</h2>'
+            f'<button class="copybtn" data-copy>Copy workflow</button></div>'
+            f'<p class="sub">Reserved for this site: <b>{H.escape(gap["kw"])}</b> ({vol}). '
+            f'The skills read <code>{brief}</code> — voice, lane rules and money page come from there, not from memory.</p>'
+            f'<pre class="ptext">{H.escape(seq)}</pre></div>')
 
 for s in ALL:
     cfg = _sc.CONFIG[s]
@@ -1164,5 +1213,8 @@ for s in ALL:
 
 print("multi-page dashboard written to out/:", sorted(os.listdir(OUT)))
 
-json.dump(CUR_SNAP, open(os.path.join(BASE, "prev_snapshot.json"), "w"), indent=1)
-print("snapshot saved for next-audit diff")
+# The diff baseline (prev_snapshot.json) must survive re-runs within one audit:
+# generate writes cur_snapshot.json; the DEPLOY step promotes it to prev_snapshot.json
+# (cp cur_snapshot.json prev_snapshot.json) only after the new version is verified live.
+json.dump(CUR_SNAP, open(os.path.join(BASE, "cur_snapshot.json"), "w"), indent=1)
+print("snapshot saved to cur_snapshot.json — promote to prev_snapshot.json after deploy")

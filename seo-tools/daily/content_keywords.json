@@ -37,15 +37,15 @@
    "vol": 1300
   },
   {
+   "kw": "iptv vlc",
+   "vol": 720
+  },
+  {
    "kw": "iptv m3u",
    "vol": 590
   },
   {
    "kw": "iptv freebox",
-   "vol": 590
-  },
-  {
-   "kw": "iptv vlc",
    "vol": 590
   },
   {
@@ -61,15 +61,15 @@
    "vol": 480
   },
   {
-   "kw": "iptv android",
-   "vol": 480
-  },
-  {
    "kw": "comment installer iptv",
    "vol": 390
   },
   {
    "kw": "iptv sur pc",
+   "vol": 390
+  },
+  {
+   "kw": "iptv android",
    "vol": 390
   },
   {
@@ -155,16 +155,16 @@
    "vol": 390
   },
   {
+   "kw": "iptv vlc",
+   "vol": 320
+  },
+  {
    "kw": "mejor lista iptv",
    "vol": 320
   },
   {
    "kw": "iptv smart tv",
    "vol": 320
-  },
-  {
-   "kw": "iptv vlc",
-   "vol": 260
   },
   {
    "kw": "iptv de pago",
@@ -175,11 +175,11 @@
    "vol": 210
   },
   {
-   "kw": "iptv legal españa",
-   "vol": 170
+   "kw": "iptv no funciona",
+   "vol": 140
   },
   {
-   "kw": "iptv no funciona",
+   "kw": "iptv legal españa",
    "vol": 140
   },
   {
@@ -204,7 +204,7 @@
   },
   {
    "kw": "iptv samsung smart tv",
-   "vol": 20
+   "vol": 10
   }
  ],
  "nl": [
@@ -214,11 +214,11 @@
   },
   {
    "kw": "iptv kopen",
-   "vol": 6600
+   "vol": 8100
   },
   {
    "kw": "iptv aanbieders",
-   "vol": 3600
+   "vol": 4400
   },
   {
    "kw": "iptv app",
@@ -233,12 +233,12 @@
    "vol": 1000
   },
   {
-   "kw": "iptv provider",
+   "kw": "iptv 4k",
    "vol": 880
   },
   {
-   "kw": "iptv 4k",
-   "vol": 720
+   "kw": "iptv provider",
+   "vol": 880
   },
   {
    "kw": "beste iptv app",

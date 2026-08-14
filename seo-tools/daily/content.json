@@ -4,12 +4,12 @@
    {
     "path": "/blog/telegram-listas-iptv-espana",
     "title": "Listas IPTV España por Telegram gratis: guía y riesgos 2026",
-    "words": 4263
+    "words": 4273
    },
    {
     "path": "/blog/iptv-espana-fire-tv-stick-4k-max-2026",
     "title": "IPTV en Fire TV Stick 4K Max: instalación 2026",
-    "words": 4012
+    "words": 4005
    },
    {
     "path": "/blog/iptv-deportes-motor-espana",
@@ -24,12 +24,12 @@
    {
     "path": "/blog/iptv-roku-espana",
     "title": "IPTV en Roku España 2026: instalación y alternativas",
-    "words": 3146
+    "words": 3152
    },
    {
     "path": "/blog/iptv-en-pc-windows-espana",
     "title": "IPTV en PC y Windows 2026: cómo ver IPTV en el ordenador",
-    "words": 2882
+    "words": 2881
    },
    {
     "path": "/blog/iptv-sony-bravia-espana",
@@ -39,7 +39,7 @@
    {
     "path": "/blog/guia-iptv-espana",
     "title": "IPTV España: guía completa 2026 para elegir plan",
-    "words": 2629
+    "words": 2630
    },
    {
     "path": "/blog/iptv-motociclismo-espana",
@@ -52,29 +52,29 @@
     "words": 2564
    },
    {
-    "path": "/blog/iptv-samsung-smart-tv-espana",
-    "title": "IPTV en Samsung sin Smarters: apps y soluciones",
-    "words": 2369
-   },
-   {
     "path": "/blog",
     "title": "Blog IPTV en España — guías y comparativas 2026 · IPTVESP",
-    "words": 2323
+    "words": 2386
+   },
+   {
+    "path": "/blog/iptv-samsung-smart-tv-espana",
+    "title": "IPTV en Samsung sin Smarters: apps y soluciones",
+    "words": 2364
    },
    {
     "path": "/blog/iptv-telegram-gratis-2026",
     "title": "IPTV Telegram gratis 2026: qué esperar antes de bajarla",
-    "words": 2277
+    "words": 2281
    },
    {
     "path": "/blog/iptv-multipantalla-espana",
     "title": "IPTV multipantalla en España: ver en varias pantallas",
-    "words": 2183
+    "words": 2184
    },
    {
     "path": "/blog/riesgos-grupos-telegram-iptv",
     "title": "Grupos de Telegram con IPTV gratis: los riesgos reales",
-    "words": 2150
+    "words": 2144
    },
    {
     "path": "/blog/iptv-no-funciona",
@@ -89,7 +89,7 @@
    {
     "path": "/blog/alternativas-a-telegram-iptv",
     "title": "Alternativas a Telegram para IPTV en España",
-    "words": 1989
+    "words": 1993
    },
    {
     "path": "/blog/iptv-4k-espana",
@@ -99,7 +99,7 @@
    {
     "path": "/blog/iptv-gratis-es-fiable",
     "title": "IPTV gratis en España: ¿es fiable y seguro en 2026?",
-    "words": 1947
+    "words": 1945
    },
    {
     "path": "/blog/iptv-lg-smart-tv-espana",
@@ -109,7 +109,7 @@
    {
     "path": "/blog/iptv-kodi-espana",
     "title": "IPTV en Kodi: cómo instalar y configurar paso a paso",
-    "words": 1889
+    "words": 1891
    },
    {
     "path": "/blog/aplicacion-iptv",
@@ -119,7 +119,12 @@
    {
     "path": "/blog/iptv-smarters-pro",
     "title": "IPTV Smarters Pro 2026: qué es y cómo funciona",
-    "words": 1851
+    "words": 1850
+   },
+   {
+    "path": "/blog/iptv-firestick-espana",
+    "title": "IPTV Smarters Pro 2026: qué es y cómo funciona",
+    "words": 1850
    },
    {
     "path": "/blog/iptv-vs-plataformas-premium-espana",
@@ -127,9 +132,19 @@
     "words": 1844
    },
    {
+    "path": "/blog/epg-iptv-espana",
+    "title": "Cómo configurar la guía de programación (EPG) en IPTV",
+    "words": 1756
+   },
+   {
     "path": "/blog/iptv-vlc",
     "title": "IPTV con VLC: cómo reproducir tu lista M3U paso a paso",
-    "words": 1751
+    "words": 1750
+   },
+   {
+    "path": "/blog/iptv-legalidad-espana",
+    "title": "IPTV legal en España 2026: lo que dice la ley y el CNMC",
+    "words": 1733
    },
    {
     "path": "/blog/iptv-android-tv-espana",
@@ -137,19 +152,14 @@
     "words": 1731
    },
    {
-    "path": "/blog/iptv-legalidad-espana",
-    "title": "IPTV legal en España 2026: lo que dice la ley y el CNMC",
-    "words": 1725
+    "path": "/blog/vpn-para-iptv-espana",
+    "title": "¿Necesitas una VPN para IPTV en España?",
+    "words": 1670
    },
    {
     "path": "/blog/iptv-box-espana",
     "title": "Cajas IPTV en España: MAG, Formuler y Android TV 2026",
-    "words": 1676
-   },
-   {
-    "path": "/blog/vpn-para-iptv-espana",
-    "title": "¿Necesitas una VPN para IPTV en España?",
-    "words": 1665
+    "words": 1667
    },
    {
     "path": "/blog/iptv-xiaomi-mi-tv-stick-espana",
@@ -239,11 +249,6 @@
     "covered": false
    },
    {
-    "kw": "iptv firestick",
-    "vol": 90,
-    "covered": false
-   },
-   {
     "kw": "iptv smarters pro",
     "vol": 14800,
     "covered": true
@@ -274,13 +279,13 @@
     "covered": true
    },
    {
-    "kw": "iptv smart tv",
+    "kw": "iptv vlc",
     "vol": 320,
     "covered": true
    },
    {
-    "kw": "iptv vlc",
-    "vol": 260,
+    "kw": "iptv smart tv",
+    "vol": 320,
     "covered": true
    },
    {
@@ -289,13 +294,18 @@
     "covered": true
    },
    {
-    "kw": "iptv legal españa",
-    "vol": 170,
+    "kw": "iptv no funciona",
+    "vol": 140,
     "covered": true
    },
    {
-    "kw": "iptv no funciona",
+    "kw": "iptv legal españa",
     "vol": 140,
+    "covered": true
+   },
+   {
+    "kw": "iptv firestick",
+    "vol": 90,
     "covered": true
    },
    {
@@ -310,11 +320,11 @@
    },
    {
     "kw": "iptv samsung smart tv",
-    "vol": 20,
+    "vol": 10,
     "covered": true
    }
   ],
-  "n_articles": 42,
+  "n_articles": 44,
   "n_thin": 2
  },
  "primeiptv-france.com": {
@@ -784,6 +794,12 @@
     "covered": true
    },
    {
+    "kw": "iptv vlc",
+    "vol": 720,
+    "covered": true,
+    "sibling": "smarters-live.com"
+   },
+   {
     "kw": "iptv m3u",
     "vol": 590,
     "covered": true
@@ -793,12 +809,6 @@
     "vol": 590,
     "covered": true,
     "sibling": "iptvpix.com"
-   },
-   {
-    "kw": "iptv vlc",
-    "vol": 590,
-    "covered": true,
-    "sibling": "smarters-live.com"
    },
    {
     "kw": "iptv ne fonctionne plus",
@@ -812,11 +822,6 @@
     "covered": true
    },
    {
-    "kw": "iptv android",
-    "vol": 480,
-    "covered": true
-   },
-   {
     "kw": "comment installer iptv",
     "vol": 390,
     "covered": true
@@ -826,6 +831,11 @@
     "vol": 390,
     "covered": true,
     "sibling": "iptvpix.com"
+   },
+   {
+    "kw": "iptv android",
+    "vol": 390,
+    "covered": true
    },
    {
     "kw": "iptv box android",
@@ -1107,12 +1117,12 @@
    },
    {
     "kw": "iptv kopen",
-    "vol": 6600,
+    "vol": 8100,
     "covered": true
    },
    {
     "kw": "iptv aanbieders",
-    "vol": 3600,
+    "vol": 4400,
     "covered": true
    },
    {
@@ -1132,7 +1142,7 @@
    },
    {
     "kw": "iptv 4k",
-    "vol": 720,
+    "vol": 880,
     "covered": true
    },
    {
@@ -1475,6 +1485,12 @@
     "covered": true
    },
    {
+    "kw": "iptv vlc",
+    "vol": 720,
+    "covered": true,
+    "sibling": "smarters-live.com"
+   },
+   {
     "kw": "iptv m3u",
     "vol": 590,
     "covered": true
@@ -1483,12 +1499,6 @@
     "kw": "iptv freebox",
     "vol": 590,
     "covered": true
-   },
-   {
-    "kw": "iptv vlc",
-    "vol": 590,
-    "covered": true,
-    "sibling": "smarters-live.com"
    },
    {
     "kw": "iptv ne fonctionne plus",
@@ -1503,17 +1513,17 @@
     "sibling": "primeiptv-france.com"
    },
    {
-    "kw": "iptv android",
-    "vol": 480,
-    "covered": true
-   },
-   {
     "kw": "comment installer iptv",
     "vol": 390,
     "covered": true
    },
    {
     "kw": "iptv sur pc",
+    "vol": 390,
+    "covered": true
+   },
+   {
+    "kw": "iptv android",
     "vol": 390,
     "covered": true
    },
@@ -1843,6 +1853,11 @@
     "covered": true
    },
    {
+    "kw": "iptv vlc",
+    "vol": 720,
+    "covered": true
+   },
+   {
     "kw": "iptv m3u",
     "vol": 590,
     "covered": true
@@ -1852,11 +1867,6 @@
     "vol": 590,
     "covered": true,
     "sibling": "iptvpix.com"
-   },
-   {
-    "kw": "iptv vlc",
-    "vol": 590,
-    "covered": true
    },
    {
     "kw": "iptv ne fonctionne plus",
@@ -1870,17 +1880,17 @@
     "sibling": "primeiptv-france.com"
    },
    {
-    "kw": "iptv android",
-    "vol": 480,
-    "covered": true
-   },
-   {
     "kw": "comment installer iptv",
     "vol": 390,
     "covered": true
    },
    {
     "kw": "iptv sur pc",
+    "vol": 390,
+    "covered": true
+   },
+   {
+    "kw": "iptv android",
     "vol": 390,
     "covered": true
    },
