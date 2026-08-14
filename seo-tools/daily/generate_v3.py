@@ -272,13 +272,12 @@ def alerts():
     prev = HIST[-2] if len(HIST) >= 2 else None
     # Rank-loss annotations: when GSC (Google's own report) contradicts a probe-based
     # loss, the owner-side evidence wins and the alert is downgraded to a watch.
+    # A None value = suppress silently, no alert at all (verdict settled, owner informed).
+    # esp "iptv españa": resolved 15 Aug as a false alarm — probes recorded a datacenter-only
+    # #4 that GSC shows real users never saw (~0 impressions, avg pos 42-68 all August);
+    # nothing user-facing was lost. Do not re-alert on this keyword's probe churn.
     RANK_NOTES = {
-        ("iptvesp.com", "iptv españa"):
-            "VERDICT: false alarm (owner dev + GSC agree). Probes 12-14 Aug did record OUR homepage at #4 "
-            "(matcher verified — not the competitor iptvespana24.com that holds #4 today), but Google's own "
-            "GSC data shows the exact query earned ~0 impressions at avg pos 42-68 all of August: real users "
-            "never saw that placement, so nothing user-facing was lost. The real driver — the Telegram "
-            "cluster at #1 — is untouched and at record traffic. Watch only; no page edits.",
+        ("iptvesp.com", "iptv españa"): None,
     }
     rank_alerted = set()
     if PREV:
@@ -288,17 +287,19 @@ def alerts():
                 op, np = pa.get(r["kw"]), r.get("pos")
                 if op is not None and op <= 10 and np is None:
                     rank_alerted.add((s, r["kw"]))
-                    note = RANK_NOTES.get((s, r["kw"]))
-                    if note:
-                        A.append(("warn", f'{s}: "{r["kw"]}" no longer found in probe top 100 (probes said #{op}). {note}'))
+                    if (s, r["kw"]) in RANK_NOTES:
+                        note = RANK_NOTES[(s, r["kw"])]
+                        if note:
+                            A.append(("warn", f'{s}: "{r["kw"]}" no longer found in probe top 100 (probes said #{op}). {note}'))
+                        # None → settled false alarm, suppress silently
                     else:
                         A.append(("crit", f'{s}: "{r["kw"]}" fell out of the top 100 (was #{op}) — twice-confirmed in live SERPs. '
                                           f'Before treating as real: cross-check GSC impressions/position for the exact query '
                                           f'(probe positions can be datacenter artifacts). No panic-edits.'))
-    # Standing watches: annotated keywords stay visible while probes still find nothing,
-    # even after the diff baseline has moved past the original drop.
+    # Standing watches: annotated keywords with a visible note stay on the dashboard while
+    # probes still find nothing, even after the diff baseline moved past the original drop.
     for (s, kw), note in RANK_NOTES.items():
-        if (s, kw) in rank_alerted: continue
+        if (s, kw) in rank_alerted or not note: continue
         cur = next((r.get("pos") for r in KT.get(s, []) if r["kw"] == kw), "absent")
         if cur is None:
             A.append(("warn", f'{s}: "{kw}" — probe top 100: absent. {note}'))
