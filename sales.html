@@ -105,6 +105,8 @@
   .baltile.avail .v{color:var(--up)}
   .baltile.avail.neg{background:transparent;border-color:var(--red)}
   .baltile.avail.neg .v{color:var(--red)}
+  .baltile.cost{background:rgba(187,77,62,.10);border-color:var(--red)}
+  .baltile.cost .v{color:var(--red)}
   .payadd{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
   .payadd .pnote{flex:1;min-width:150px}
 
@@ -176,11 +178,11 @@
   <div class="card pad" id="payoutCard">
     <div class="phead">
       <h2 style="margin:0">Payouts &amp; balance</h2>
-      <span class="tiny muted" style="margin-left:auto">Available = sales − panel cost − payouts.</span>
+      <span class="tiny muted" style="margin-left:auto">Available = sales − payouts. Panel cost is what you owe providers.</span>
     </div>
     <div class="balrow">
       <div class="baltile"><div class="l">Total sales</div><div class="v" id="bTotal">€0</div></div>
-      <div class="baltile"><div class="l">Panel cost</div><div class="v" id="bPanel">€0</div></div>
+      <div class="baltile cost"><div class="l">Panel cost</div><div class="v" id="bPanel">€0</div></div>
       <div class="baltile"><div class="l">Paid out</div><div class="v" id="bPaid">€0</div></div>
       <div class="baltile avail"><div class="l">Available for payout</div><div class="v" id="bAvail">€0</div></div>
     </div>
@@ -362,7 +364,7 @@
   }
   function paidTotal(){return payouts.reduce(function(s,p){return s+(Number(p.amount)||0);},0);}
   function renderBalance(st){
-    var total=st.total,cost=st.panelCostTotal,paid=paidTotal(),avail=total-cost-paid;
+    var total=st.total,cost=st.panelCostTotal,paid=paidTotal(),avail=total-paid;
     $("#bTotal").textContent=euro(total);$("#bPanel").textContent=euro(cost);$("#bPaid").textContent=euro(paid);$("#bAvail").textContent=euro(avail);
     document.querySelector(".baltile.avail").classList.toggle("neg",avail<0);
     var pk=Object.keys(st.panelCostBy);
