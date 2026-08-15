@@ -97,7 +97,7 @@
     background-position:right 2px center}
   .empty{padding:44px;text-align:center;color:var(--ink3)}
   .phead{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-  .balrow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+  .balrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
   .baltile{background:var(--surface);border:1px solid var(--line);border-radius:var(--rs);padding:14px 16px}
   .baltile .l{font:600 10.5px ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
   .baltile .v{font-family:var(--serif);font-size:26px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums}
@@ -176,13 +176,15 @@
   <div class="card pad" id="payoutCard">
     <div class="phead">
       <h2 style="margin:0">Payouts &amp; balance</h2>
-      <span class="tiny muted" style="margin-left:auto">Payouts are deducted from total sales.</span>
+      <span class="tiny muted" style="margin-left:auto">Available = sales − panel cost − payouts.</span>
     </div>
     <div class="balrow">
       <div class="baltile"><div class="l">Total sales</div><div class="v" id="bTotal">€0</div></div>
+      <div class="baltile"><div class="l">Panel cost</div><div class="v" id="bPanel">€0</div></div>
       <div class="baltile"><div class="l">Paid out</div><div class="v" id="bPaid">€0</div></div>
       <div class="baltile avail"><div class="l">Available for payout</div><div class="v" id="bAvail">€0</div></div>
     </div>
+    <div id="panelCostBreak" class="tiny muted" style="margin:-8px 0 14px"></div>
     <div class="payadd">
       <input type="date" id="pDate" title="Payout date">
       <input type="number" step="0.01" id="pAmount" placeholder="Amount €">
@@ -288,6 +290,8 @@
   var STATUS_COLOR={paid:"var(--blue)",activated:"var(--acc)",renewed:"var(--up)",expired:"var(--red)"};
   var PRICE={iptvesp:{3:25,6:39,12:59,24:99}};
   function suggestPrice(s,m){return (PRICE[s]||{3:19,6:39,12:49,24:89})[m]||0;}
+  var PANEL_RATE=10; // € the provider charges per 12 months (per line)
+  function panelCost(s){return (Number(s.plan_months)||0)/12*PANEL_RATE;}
   function siteLabel(id){var s=SITES.find(function(x){return x[0]===id;});return s?s[1]:id;}
   function siteFlag(id){var s=SITES.find(function(x){return x[0]===id;});return s?s[2]:"🌐";}
 
@@ -317,9 +321,10 @@
   function stats(){
     var now=new Date();var mk=now.getUTCFullYear()+"-"+String(now.getUTCMonth()+1).padStart(2,"0");
     var dow=(now.getUTCDay()+6)%7;var wk=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()-dow);
-    var o={total:0,month:0,week:0,mCount:0,site:{},panel:{}};
+    var o={total:0,month:0,week:0,mCount:0,site:{},panel:{},panelCostTotal:0,panelCostBy:{}};
     sales.forEach(function(s){var p=Number(s.price_eur)||0;o.total+=p;o.site[s.site]=(o.site[s.site]||0)+p;
       if(s.panel)o.panel[s.panel]=(o.panel[s.panel]||0)+p;
+      var pc=panelCost(s);o.panelCostTotal+=pc;if(s.panel)o.panelCostBy[s.panel]=(o.panelCostBy[s.panel]||0)+pc;
       if((s.sale_date||"").indexOf(mk)===0){o.month+=p;o.mCount++;}
       var pp=(s.sale_date||"").split("-").map(Number);if(pp.length===3&&Date.UTC(pp[0],pp[1]-1,pp[2])>=wk)o.week+=p;});
     return o;
@@ -352,14 +357,16 @@
     expiring();
     var exp=sales.filter(function(s){return s.status!=="expired"&&s.end_date&&daysLeft(s.end_date)<=7;}).length;
     $("#kExp").textContent=exp;$("#kExpF").textContent=exp?"needs attention":"all good";
-    renderBalance(st.total);
+    renderBalance(st);
     renderRows();
   }
   function paidTotal(){return payouts.reduce(function(s,p){return s+(Number(p.amount)||0);},0);}
-  function renderBalance(total){
-    var paid=paidTotal(),avail=total-paid;
-    $("#bTotal").textContent=euro(total);$("#bPaid").textContent=euro(paid);$("#bAvail").textContent=euro(avail);
+  function renderBalance(st){
+    var total=st.total,cost=st.panelCostTotal,paid=paidTotal(),avail=total-cost-paid;
+    $("#bTotal").textContent=euro(total);$("#bPanel").textContent=euro(cost);$("#bPaid").textContent=euro(paid);$("#bAvail").textContent=euro(avail);
     document.querySelector(".baltile.avail").classList.toggle("neg",avail<0);
+    var pk=Object.keys(st.panelCostBy);
+    $("#panelCostBreak").textContent=pk.length?("To pay providers — "+pk.sort().map(function(k){return (PANELS[k]||k)+" "+euro(st.panelCostBy[k]);}).join("  ·  ")):"";
     var list=payouts.slice().sort(function(a,b){return (a.date<b.date?1:a.date>b.date?-1:b.id-a.id);});
     var tbl=$("#payTable"),tb=$("#payRows"),emp=$("#payEmpty");
     if(!list.length){tbl.style.display="none";emp.style.display="block";tb.innerHTML="";return;}
