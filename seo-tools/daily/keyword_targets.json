@@ -13,7 +13,7 @@
   {
    "kw": "mejor iptv españa",
    "vol": 720,
-   "pos": 40,
+   "pos": 39,
    "url": "/"
   },
   {
@@ -30,7 +30,7 @@
   {
    "kw": "proveedor iptv",
    "vol": 480,
-   "pos": 43,
+   "pos": 37,
    "url": "/"
   }
  ],
@@ -53,13 +53,12 @@
   {
    "kw": "application iptv",
    "vol": 6600,
-   "pos": 65,
-   "url": "/"
+   "pos": null
   },
   {
    "kw": "abonnement iptv 12 mois",
    "vol": 4400,
-   "pos": 38,
+   "pos": 39,
    "url": "/"
   },
   {
@@ -264,14 +263,14 @@
   {
    "kw": "essai iptv 7 jours",
    "vol": 90,
-   "pos": 67,
+   "pos": 64,
    "page": "/test-iptv",
    "url": "/"
   },
   {
    "kw": "meilleur boitier iptv",
    "vol": 720,
-   "pos": 86,
+   "pos": 94,
    "page": "/boitier-iptv",
    "url": "/"
   },

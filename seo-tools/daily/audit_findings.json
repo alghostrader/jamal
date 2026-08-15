@@ -1,15 +1,11 @@
 {
  "iptvesp.com": {
-  "pages": 55,
+  "pages": 54,
   "titles_over60": [],
-  "redirect_links": [
-   "blog/iptv-firestick-espana"
-  ],
+  "redirect_links": [],
   "linked404": {},
   "orphans": [],
-  "canonical_mismatch": [
-   "blog/iptv-firestick-espana"
-  ],
+  "canonical_mismatch": [],
   "no_meta_desc": [],
   "thin": [
    "checkout",
@@ -89,7 +85,7 @@
    "installation"
   ],
   "favicon": 200,
-  "apex": "308 -> https://www.smarters-live.com/",
+  "apex": "err ('Connection aborted.', ConnectionResetE",
   "www": "200",
   "www_redirect": "200"
  },

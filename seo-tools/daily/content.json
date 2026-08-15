@@ -122,11 +122,6 @@
     "words": 1850
    },
    {
-    "path": "/blog/iptv-firestick-espana",
-    "title": "IPTV Smarters Pro 2026: qué es y cómo funciona",
-    "words": 1850
-   },
-   {
     "path": "/blog/iptv-vs-plataformas-premium-espana",
     "title": "IPTV vs plataformas premium en España: comparativa 2026",
     "words": 1844
@@ -249,6 +244,11 @@
     "covered": false
    },
    {
+    "kw": "iptv firestick",
+    "vol": 90,
+    "covered": false
+   },
+   {
     "kw": "iptv smarters pro",
     "vol": 14800,
     "covered": true
@@ -304,11 +304,6 @@
     "covered": true
    },
    {
-    "kw": "iptv firestick",
-    "vol": 90,
-    "covered": true
-   },
-   {
     "kw": "como instalar iptv",
     "vol": 50,
     "covered": true
@@ -324,7 +319,7 @@
     "covered": true
    }
   ],
-  "n_articles": 44,
+  "n_articles": 43,
   "n_thin": 2
  },
  "primeiptv-france.com": {
