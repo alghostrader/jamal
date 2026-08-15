@@ -1,19 +1,19 @@
 {
- "_stamp": "2026-08-14 18:32 UTC",
+ "_stamp": "2026-08-15 05:26 UTC",
  "sites": {
   "iptvesp.com": {
    "clicks7d": 371,
    "sem_rd": 110,
    "dfs_rd": 36,
    "top100": 18,
-   "pages": 55,
+   "pages": 54,
    "positions": {
     "iptv espa\u00f1a": null,
     "listas iptv": null,
-    "mejor iptv espa\u00f1a": 40,
+    "mejor iptv espa\u00f1a": 39,
     "iptv smarters pro": null,
     "listas iptv espa\u00f1a telegram": 1,
-    "proveedor iptv": 43
+    "proveedor iptv": 37
    }
   },
   "primeiptv-france.com": {
@@ -26,8 +26,8 @@
     "abonnement iptv": null,
     "boitier iptv": null,
     "iptv france": null,
-    "application iptv": 65,
-    "abonnement iptv 12 mois": 38,
+    "application iptv": null,
+    "abonnement iptv 12 mois": 39,
     "meilleur abonnement iptv": null,
     "serveur iptv": null
    }
@@ -127,8 +127,8 @@
    "positions": {
     "test iptv gratuit": null,
     "iptv pas cher": null,
-    "essai iptv 7 jours": 67,
-    "meilleur boitier iptv": 86,
+    "essai iptv 7 jours": 64,
+    "meilleur boitier iptv": 94,
     "iptv moins cher": null,
     "code promo iptv": null,
     "iptv promo": null
