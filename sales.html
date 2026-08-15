@@ -91,6 +91,8 @@
   .tag.cli{background:var(--surface2);color:var(--ink3)}
   .del{color:var(--ink3);cursor:pointer;background:none;border:0;font-size:15px;padding:2px 6px}
   .del:hover{color:var(--red)}
+  .edit{color:var(--ink3);cursor:pointer;background:none;border:0;font-size:14px;padding:2px 6px}
+  .edit:hover{color:var(--acc)}
   .stsel{background:none;border:0;padding:0 18px 0 0;font:600 12px ui-sans-serif;cursor:pointer;
     background-position:right 2px center}
   .empty{padding:44px;text-align:center;color:var(--ink3)}
@@ -104,6 +106,7 @@
   .x{background:none;border:0;color:var(--ink3);font-size:18px;cursor:pointer}
   .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
   .frow.c3{grid-template-columns:1fr 1fr 1fr}
+  .frow.dc{grid-template-columns:150px 1fr}
   .fld{display:flex;flex-direction:column;gap:5px}
   .fld label{font:600 10.5px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
   .fld input,.fld select,.fld textarea{width:100%}
@@ -114,7 +117,7 @@
   .err{color:var(--red);font-size:12.5px}
 
   @media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}
-    .frow,.frow.c3,.ibo{grid-template-columns:1fr}.wrap{padding:22px 16px 80px}.bar .lbl{width:120px}}
+    .frow,.frow.c3,.frow.dc,.ibo{grid-template-columns:1fr}.wrap{padding:22px 16px 80px}.bar .lbl{width:120px}}
 </style>
 </head>
 <body>
@@ -178,16 +181,16 @@
 <!-- Add sale modal -->
 <div class="overlay" id="overlay">
   <div class="modal">
-    <h2>New sale <button class="x" id="closeModal">✕</button></h2>
+    <h2><span id="modalTitle">New sale</span> <button class="x" id="closeModal">✕</button></h2>
     <form id="saleForm">
-      <div class="frow">
+      <div class="frow dc">
         <div class="fld"><label>Date</label><input type="date" name="sale_date" id="fDate"></div>
         <div class="fld"><label>Client name *</label><input name="client_name" required placeholder="Nico"></div>
       </div>
       <div class="frow">
         <div class="fld"><label>WhatsApp</label><input name="whatsapp" placeholder="+34 …"></div>
         <div class="fld"><label>Language</label><select name="language">
-          <option value="es">Spanish</option><option value="nl">Dutch</option><option value="fr">French</option><option value="en">English</option>
+          <option value="es">Spanish</option><option value="nl">Dutch</option><option value="fr">French</option><option value="en">English</option><option value="sq">Shqip (Albanian)</option>
         </select></div>
       </div>
       <div class="frow">
@@ -216,7 +219,7 @@
       </div>
       <div class="frow ibo" id="iboBox" style="display:none">
         <div class="note">IBO Player — save these so you can renew it yourself later:</div>
-        <div class="fld"><label>MAC address</label><input name="mac_address" placeholder="00:1A:79:xx:xx:xx"></div>
+        <div class="fld"><label>MAC address</label><input name="mac_address" id="fMac" maxlength="17" inputmode="text" autocapitalize="characters" placeholder="00:1A:79:xx:xx:xx"></div>
         <div class="fld"><label>Device key</label><input name="device_key" placeholder="Device key"></div>
       </div>
       <div class="fld" style="margin-bottom:10px"><label>Notes</label><textarea name="notes" rows="2" placeholder="e.g. paid friends & family"></textarea></div>
@@ -254,6 +257,7 @@
   function todayStr(){return new Date().toISOString().slice(0,10);}
   function addMonths(d,m){var p=d.split("-").map(Number);var x=new Date(Date.UTC(p[0],p[1]-1,p[2]));x.setUTCMonth(x.getUTCMonth()+Number(m));return x.toISOString().slice(0,10);}
   function daysLeft(end){if(!end)return null;var n=new Date();var t=Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),n.getUTCDate());var p=end.split("-").map(Number);return Math.round((Date.UTC(p[0],p[1]-1,p[2])-t)/864e5);}
+  function formatMac(v){var h=(v||"").replace(/[^0-9a-fA-F]/g,"").toUpperCase().slice(0,12);var o=[];for(var i=0;i<h.length;i+=2)o.push(h.slice(i,i+2));return o.join(":");}
 
   function load(){try{var a=JSON.parse(localStorage.getItem(KEY));return Array.isArray(a)?a:[];}catch(e){return [];}}
   function save(a){localStorage.setItem(KEY,JSON.stringify(a));}
@@ -330,10 +334,11 @@
         '<td class="muted">'+(s.panel?esc(PANELS[s.panel]||s.panel):"—")+'</td>'+
         '<td style="white-space:nowrap"><div class="muted">'+(s.end_date?new Date(s.end_date+"T00:00:00Z").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric",timeZone:"UTC"}):"—")+'</div>'+dlc+'</td>'+
         '<td><select class="stsel" data-id="'+s.id+'" style="color:'+(STATUS_COLOR[s.status]||"var(--ink2)")+'">'+opts+'</select></td>'+
-        '<td style="text-align:right"><button class="del" data-id="'+s.id+'" title="Delete">✕</button></td>'+
+        '<td style="text-align:right;white-space:nowrap"><button class="edit" data-id="'+s.id+'" title="Edit">✎</button><button class="del" data-id="'+s.id+'" title="Delete">✕</button></td>'+
         '</tr>';
     }).join("");
     Array.prototype.forEach.call(tb.querySelectorAll(".stsel"),function(sel){sel.onchange=function(){setStatus(Number(sel.dataset.id),sel.value);};});
+    Array.prototype.forEach.call(tb.querySelectorAll(".edit"),function(b){b.onclick=function(){openEdit(Number(b.dataset.id));};});
     Array.prototype.forEach.call(tb.querySelectorAll(".del"),function(b){b.onclick=function(){del(Number(b.dataset.id));};});
   }
 
@@ -341,25 +346,34 @@
   function del(id){var r=sales.find(function(x){return x.id===id;});if(r&&confirm("Delete "+r.client_name+"'s sale?")){sales=sales.filter(function(x){return x.id!==id;});save(sales);render();}}
 
   // modal
-  var ov=$("#overlay"),form=$("#saleForm");
-  function openModal(){form.reset();$("#fDate").value=todayStr();$("#fPlan").value="12";$("#fSaleSite").value="iptvesp";$("#fApp").value="ibo";syncIbo();syncPrice();$("#formErr").textContent="";ov.classList.add("on");}
+  var ov=$("#overlay"),form=$("#saleForm"),editId=null;
+  function openModal(){editId=null;$("#modalTitle").textContent="New sale";form.reset();$("#fDate").value=todayStr();$("#fPlan").value="12";$("#fSaleSite").value="iptvesp";$("#fApp").value="ibo";syncIbo();syncPrice();$("#formErr").textContent="";ov.classList.add("on");}
+  function openEdit(id){var s=sales.find(function(x){return x.id===id;});if(!s)return;editId=id;$("#modalTitle").textContent="Edit sale";form.reset();
+    var set=function(n,v){var el=form.elements[n];if(el)el.value=(v==null?"":v);};
+    set("sale_date",s.sale_date);set("client_name",s.client_name);set("whatsapp",s.whatsapp);set("language",s.language||"es");
+    set("site",s.site);set("plan_months",s.plan_months);set("screens",s.screens||1);set("price_eur",s.price_eur);
+    set("payment_method",s.payment_method||"aovancy");set("app_used",s.app_used||"other");set("panel",s.panel||"dino");
+    set("status",s.status||"paid");set("mac_address",s.mac_address);set("device_key",s.device_key);set("notes",s.notes);
+    syncIbo();$("#formErr").textContent="";ov.classList.add("on");}
   function closeModal(){ov.classList.remove("on");}
   function syncIbo(){$("#iboBox").style.display=$("#fApp").value==="ibo"?"grid":"none";}
   function syncPrice(){$("#fPrice").value=suggestPrice($("#fSaleSite").value,Number($("#fPlan").value));}
   $("#addBtn").onclick=openModal;$("#closeModal").onclick=closeModal;$("#cancelBtn").onclick=closeModal;
   ov.onclick=function(e){if(e.target===ov)closeModal();};
   $("#fApp").onchange=syncIbo;$("#fSaleSite").onchange=syncPrice;$("#fPlan").onchange=syncPrice;
+  $("#fMac").oninput=function(){this.value=formatMac(this.value);};
   form.onsubmit=function(e){
-    e.preventDefault();var f=new Proxy(form,{get:function(t,k){var el=t.elements[k];return el?String(el.value).trim():"";}});
+    e.preventDefault();
     if(!form.elements.client_name.value.trim()){$("#formErr").textContent="Client name is required.";return;}
     var sale_date=form.elements.sale_date.value||todayStr();var months=Number(form.elements.plan_months.value);var ibo=form.elements.app_used.value==="ibo";
-    var rec={id:(sales.reduce(function(m,x){return Math.max(m,x.id);},0)+1),created_at:new Date().toISOString(),
-      sale_date:sale_date,client_name:form.elements.client_name.value.trim(),whatsapp:form.elements.whatsapp.value.trim()||null,
+    var data={sale_date:sale_date,client_name:form.elements.client_name.value.trim(),whatsapp:form.elements.whatsapp.value.trim()||null,
       site:form.elements.site.value,language:form.elements.language.value,plan_months:months,screens:Number(form.elements.screens.value)||1,
       price_eur:Number(form.elements.price_eur.value)||0,payment_method:form.elements.payment_method.value,app_used:form.elements.app_used.value,
       panel:form.elements.panel.value,mac_address:ibo?(form.elements.mac_address.value.trim()||null):null,device_key:ibo?(form.elements.device_key.value.trim()||null):null,
       status:form.elements.status.value,end_date:addMonths(sale_date,months),notes:form.elements.notes.value.trim()||null};
-    sales.push(rec);save(sales);closeModal();render();
+    if(editId!=null){var r=sales.find(function(x){return x.id===editId;});if(r){for(var k in data)r[k]=data[k];}}
+    else{data.id=sales.reduce(function(m,x){return Math.max(m,x.id);},0)+1;data.created_at=new Date().toISOString();sales.push(data);}
+    save(sales);closeModal();render();
   };
 
   // filters
