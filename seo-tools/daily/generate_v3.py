@@ -472,7 +472,7 @@ _steps = RE.findall(r"Step (\d+) · ([^<]+)", TODAY_HTML)
 def sidebar(cur):
     top = [("./", "home", "Portfolio", None), ("today", "zap", "Today", "today"),
            ("trends", "trend", "Trends", "trends"), ("links", "link", "Backlinks", "links"),
-           ("plan", "file", "Plan", "plan")]
+           ("plan", "file", "Plan", "plan"), ("sales", "gem", "Sales", "sales")]
     nav = "".join(f'<a class="navitem{" on" if cur==k else ""}" href="{h}"><span class="navicon">{icon(i)}</span>{l}</a>'
                   for h, i, l, k in top)
     sites = "".join(f'<a class="navitem site{" on" if cur==s else ""}" href="{SLUG[s]}">'
