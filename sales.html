@@ -393,12 +393,12 @@ const db = getFirestore(fbApp);
     }).join("");
   }
   function setStock(p){
-    var cur=Number(credits[p])||0;
-    var v=prompt("Total "+PANELS[p]+" credits you own now (bought):", fmtCred(cur));
+    var us=(creditsUsed()[p])||0, curRem=(Number(credits[p])||0)-us;
+    var v=prompt("Current "+PANELS[p]+" credits you have left right now:", fmtCred(curRem));
     if(v===null)return;
     v=Number(v);
     if(isNaN(v)||v<0){alert("Enter a number of 0 or more.");return;}
-    credits[p]=v; persist(); render();
+    credits[p]=v+us; persist(); render();
   }
   function addCredits(){
     var p=$("#stPanel").value, n=Number($("#stCredits").value);
