@@ -1,33 +1,33 @@
 {
- "_stamp": "2026-08-15 13:27 UTC",
+ "_stamp": "2026-08-16 12:44 UTC",
  "sites": {
   "iptvesp.com": {
-   "clicks7d": 378,
+   "clicks7d": 387,
    "sem_rd": 110,
    "dfs_rd": 36,
-   "top100": 18,
+   "top100": 21,
    "pages": 54,
    "positions": {
-    "iptv espa\u00f1a": null,
+    "iptv espa\u00f1a": 44,
     "listas iptv": null,
-    "mejor iptv espa\u00f1a": 37,
+    "mejor iptv espa\u00f1a": 39,
     "iptv smarters pro": null,
     "listas iptv espa\u00f1a telegram": 1,
-    "proveedor iptv": 37
+    "proveedor iptv": 41
    }
   },
   "primeiptv-france.com": {
-   "clicks7d": 30,
+   "clicks7d": 32,
    "sem_rd": 18,
    "dfs_rd": 6,
-   "top100": 13,
+   "top100": 14,
    "pages": 86,
    "positions": {
     "abonnement iptv": null,
     "boitier iptv": null,
     "iptv france": null,
     "application iptv": null,
-    "abonnement iptv 12 mois": 40,
+    "abonnement iptv 12 mois": 41,
     "meilleur abonnement iptv": null,
     "serveur iptv": null
    }
@@ -35,8 +35,8 @@
   "iptvned.com": {
    "clicks7d": 6,
    "sem_rd": 36,
-   "dfs_rd": 16,
-   "top100": 18,
+   "dfs_rd": 15,
+   "top100": 19,
    "pages": 54,
    "positions": {
     "iptv nederland": null,
@@ -64,8 +64,8 @@
   "smarters-live.com": {
    "clicks7d": 0,
    "sem_rd": 25,
-   "dfs_rd": 6,
-   "top100": null,
+   "dfs_rd": 7,
+   "top100": 1,
    "pages": 52,
    "positions": {
     "iptv smarters pro": null,
@@ -75,16 +75,16 @@
    }
   },
   "iptvshqiptar.com": {
-   "clicks7d": 10,
+   "clicks7d": 9,
    "sem_rd": 44,
    "dfs_rd": 7,
    "top100": null,
    "pages": 21,
    "positions": {
-    "iptv shqiptare": 16,
+    "iptv shqiptare": 20,
     "iptv smarters pro": null,
     "iptv shqip": null,
-    "iptv shqiptar": 17,
+    "iptv shqiptar": 16,
     "tv shqip live": null,
     "iptv per smart tv": null,
     "aplikacion per iptv": null
@@ -94,7 +94,7 @@
    "clicks7d": 0,
    "sem_rd": 4,
    "dfs_rd": null,
-   "top100": 3,
+   "top100": 6,
    "pages": 39,
    "positions": {
     "iptv smarters": null,
@@ -119,16 +119,16 @@
    }
   },
   "abonnementiptvofficiel.com": {
-   "clicks7d": 11,
+   "clicks7d": 13,
    "sem_rd": 55,
    "dfs_rd": 5,
-   "top100": 1,
+   "top100": 8,
    "pages": 44,
    "positions": {
     "test iptv gratuit": null,
     "iptv pas cher": null,
     "essai iptv 7 jours": 62,
-    "meilleur boitier iptv": 87,
+    "meilleur boitier iptv": 88,
     "iptv moins cher": null,
     "code promo iptv": null,
     "iptv promo": null
