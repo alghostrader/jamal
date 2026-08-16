@@ -116,6 +116,14 @@
   .mini{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;padding:0 6px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink2);cursor:pointer;text-decoration:none;font-size:15px;line-height:1}
   .mini:hover{border-color:var(--acc);color:var(--acc)}
   .min0{min-width:0}
+  .stockrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .stile{background:var(--surface);border:1px solid var(--line);border-radius:var(--rs);padding:14px 16px}
+  .stile .l{font:600 10.5px ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+  .stile .v{font-family:var(--serif);font-size:28px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums}
+  .stile .sub{font-size:11px;color:var(--ink3);margin-top:3px}
+  .stile.low{background:rgba(187,77,62,.10);border-color:var(--red)}.stile.low .v{color:var(--red)}
+  .stile.mid .v{color:var(--amber)}
+  .stile.ok .v{color:var(--up)}
 
   .overlay{position:fixed;inset:0;background:rgba(20,19,17,.45);backdrop-filter:blur(2px);
     display:none;align-items:flex-start;justify-content:center;padding:24px;overflow:auto;z-index:50}
@@ -209,7 +217,6 @@
       <span class="tiny muted" style="margin-left:auto">Available = sales − payouts. Panel cost is what you owe providers.</span>
     </div>
     <div class="balrow">
-      <div class="baltile"><div class="l">Total sales</div><div class="v" id="bTotal">€0</div></div>
       <div class="baltile cost"><div class="l">Panel cost</div><div class="v" id="bPanel">€0</div></div>
       <div class="baltile"><div class="l">Paid out</div><div class="v" id="bPaid">€0</div></div>
       <div class="baltile avail"><div class="l">Available for payout</div><div class="v" id="bAvail">€0</div></div>
@@ -228,6 +235,16 @@
       </table>
     </div>
     <div id="payEmpty" class="muted" style="font-size:13px">No payouts yet.</div>
+  </div>
+
+  <div class="card pad" id="stockCard">
+    <div class="phead"><h2 style="margin:0">Panel stock</h2><span class="tiny muted" style="margin-left:auto">1 credit = 12 months. Each sale uses credits automatically — top up before you run out.</span></div>
+    <div class="stockrow" id="stockRow"></div>
+    <div class="payadd" style="margin-top:14px">
+      <select id="stPanel"><option value="dino">Dino</option><option value="mega">Mega</option><option value="guys">Guys</option></select>
+      <input type="number" step="0.01" id="stCredits" placeholder="Credits bought">
+      <button class="btn primary" id="stAddBtn" type="button">+ Add credits</button>
+    </div>
   </div>
 
   <div class="card">
@@ -358,9 +375,26 @@ const db = getFirestore(fbApp);
   var PKEY="iptv_payouts_v1";
   function localSales(){try{var a=JSON.parse(localStorage.getItem(KEY));return Array.isArray(a)?a:[];}catch(e){return [];}}
   function localPayouts(){try{var a=JSON.parse(localStorage.getItem(PKEY));return Array.isArray(a)?a:[];}catch(e){return [];}}
-  var sales=[], payouts=[];
+  var sales=[], payouts=[], credits={};
   var docRef=null, unsub=null;
-  function persist(){ if(docRef){ setDoc(docRef,{sales:sales,payouts:payouts,updated_at:Date.now()}).catch(function(e){console.error("cloud save failed",e);}); } }
+  function persist(){ if(docRef){ setDoc(docRef,{sales:sales,payouts:payouts,credits:credits,updated_at:Date.now()}).catch(function(e){console.error("cloud save failed",e);}); } }
+  function fmtCred(n){var r=Math.round(n*100)/100; return (r%1===0)?String(r):String(r).replace(/(\.\d)0$/,"$1");}
+  function creditsUsed(){var u={}; sales.forEach(function(s){ if(s.panel){u[s.panel]=(u[s.panel]||0)+(Number(s.plan_months)||0)/12;} }); return u;}
+  function renderStock(){
+    var used=creditsUsed(), el=$("#stockRow");
+    el.innerHTML=Object.keys(PANELS).map(function(k){
+      var bought=Number(credits[k])||0, us=used[k]||0, rem=bought-us;
+      if(bought===0&&us===0) return '<div class="stile"><div class="l">'+PANELS[k]+'</div><div class="v" style="color:var(--ink3)">—</div><div class="sub">no activity</div></div>';
+      var cls=rem<2?"low":rem<5?"mid":"ok";
+      return '<div class="stile '+cls+'"><div class="l">'+PANELS[k]+'</div><div class="v">'+fmtCred(rem)+'</div>'+
+        '<div class="sub">'+fmtCred(us)+' used · '+fmtCred(bought)+' bought'+(rem<2?' · ⚠ top up':'')+'</div></div>';
+    }).join("");
+  }
+  function addCredits(){
+    var p=$("#stPanel").value, n=Number($("#stCredits").value);
+    if(!n||n<=0){$("#stCredits").focus();return;}
+    credits[p]=(Number(credits[p])||0)+n; persist(); $("#stCredits").value=""; render();
+  }
   function save(){ persist(); }
   function saveP(){ persist(); }
 
@@ -484,12 +518,13 @@ const db = getFirestore(fbApp);
     var exp=sales.filter(function(s){return s.status!=="expired"&&s.status!=="renewed"&&s.end_date&&daysLeft(s.end_date)>=0&&daysLeft(s.end_date)<=7;}).length;
     $("#kExp").textContent=exp;$("#kExpF").textContent=exp?"needs attention":"all good";
     renderBalance(st);
+    renderStock();
     if(curView==="clients")renderClients(); else renderRows();
   }
   function paidTotal(){return payouts.reduce(function(s,p){return s+(Number(p.amount)||0);},0);}
   function renderBalance(st){
     var total=st.total,cost=st.panelCostTotal,paid=paidTotal(),avail=total-paid;
-    $("#bTotal").textContent=euro(total);$("#bPanel").textContent=euro(cost);$("#bPaid").textContent=euro(paid);$("#bAvail").textContent=euro(avail);
+    $("#bPanel").textContent=euro(cost);$("#bPaid").textContent=euro(paid);$("#bAvail").textContent=euro(avail);
     document.querySelector(".baltile.avail").classList.toggle("neg",avail<0);
     var pk=Object.keys(st.panelCostBy);
     $("#panelCostBreak").textContent=pk.length?("To pay providers — "+pk.sort().map(function(k){return (PANELS[k]||k)+" "+euro(st.panelCostBy[k]);}).join("  ·  ")):"";
@@ -585,10 +620,11 @@ const db = getFirestore(fbApp);
   $("#viewSales").onclick=function(){setView("sales");};
   $("#viewClients").onclick=function(){setView("clients");};
   $("#pAddBtn").onclick=addPayout;$("#pDate").value=todayStr();
+  $("#stAddBtn").onclick=addCredits;
 
   // export / import
   $("#exportBtn").onclick=function(){
-    var blob=new Blob([JSON.stringify({sales:sales,payouts:payouts},null,2)],{type:"application/json"});
+    var blob=new Blob([JSON.stringify({sales:sales,payouts:payouts,credits:credits},null,2)],{type:"application/json"});
     var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="iptv-sales-backup.json";a.click();URL.revokeObjectURL(a.href);
   };
   $("#importBtn").onclick=function(){$("#importFile").click();};
@@ -600,7 +636,7 @@ const db = getFirestore(fbApp);
       var np=(data&&Array.isArray(data.payouts))?data.payouts:[];
       if(ns===null)throw 0;
       if((sales.length||payouts.length)&&!confirm("Replace this browser's data with the imported backup ("+ns.length+" sales, "+np.length+" payouts)?"))return;
-      sales=ns;payouts=np;save(sales);saveP(payouts);render();
+      sales=ns;payouts=np;credits=(data&&data.credits&&typeof data.credits==="object")?data.credits:{};save(sales);saveP(payouts);persist();render();
     }catch(err){alert("That file isn't a valid sales backup.");}};
     r.readAsText(file);e.target.value="";
   };
@@ -629,6 +665,7 @@ const db = getFirestore(fbApp);
         var d=snap.exists()?snap.data():null;
         sales=(d&&Array.isArray(d.sales))?d.sales:[];
         payouts=(d&&Array.isArray(d.payouts))?d.payouts:[];
+        credits=(d&&d.credits&&typeof d.credits==="object")?d.credits:{};
         if(autoExpire())persist();
         render();
         if(first){ first=false; if(!snap.exists()) offerMigration(); }
