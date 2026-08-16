@@ -132,6 +132,13 @@
   .ibo .note{grid-column:1/-1;font-size:11.5px;color:var(--acc);font-weight:600}
   .mact{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
   .err{color:var(--red);font-size:12.5px}
+  .authgate{position:fixed;inset:0;background:var(--surface);display:none;align-items:flex-start;justify-content:center;padding:60px 24px;overflow:auto;z-index:100}
+  .authgate.on{display:flex}
+  .authcard{width:100%;max-width:350px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh2);padding:28px;display:flex;flex-direction:column;gap:10px}
+  .authbrand{font-family:var(--serif);font-size:26px;font-weight:500;text-align:center}
+  .authsub{color:var(--ink3);font-size:12.5px;text-align:center;margin-bottom:6px}
+  .authcard .btn{width:100%;text-align:center;min-height:42px}
+  .authhint{color:var(--ink3);font-size:11px;text-align:center;margin-top:4px;line-height:1.5}
 
   @media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}
     .frow,.frow.c3,.frow.dc,.ibo,.balrow{grid-template-columns:1fr}.wrap{padding:22px 16px 80px}.bar .lbl{width:120px}}
@@ -139,6 +146,18 @@
 </head>
 <body>
 <div class="viz-root">
+<div id="authGate" class="authgate on">
+  <div class="authcard">
+    <div class="authbrand">IPTV Sales</div>
+    <div class="authsub">Sign in to sync your sales across all your devices.</div>
+    <input id="authEmail" type="email" placeholder="Email" autocomplete="username">
+    <input id="authPass" type="password" placeholder="Password" autocomplete="current-password">
+    <div class="err" id="authErr"></div>
+    <button class="btn primary" id="signInBtn">Sign in</button>
+    <button class="btn" id="createBtn">Create account</button>
+    <div class="authhint">First time? Type an email + password and tap “Create account”. Use the same ones on every device.</div>
+  </div>
+</div>
 <div class="wrap">
 
   <div class="head">
@@ -150,10 +169,11 @@
       <button class="btn" id="exportBtn" title="Download all sales as a JSON backup">Export</button>
       <button class="btn" id="importBtn" title="Restore sales from a JSON backup">Import</button>
       <button class="btn primary" id="addBtn">+ Add sale</button>
+      <button class="btn" id="signOutBtn" title="Sign out">Sign out</button>
       <input type="file" id="importFile" accept="application/json" hidden>
     </div>
   </div>
-  <div class="sub"><span id="storeNote">Paid subscriptions — saved in this browser.</span></div>
+  <div class="sub"><span id="storeNote">Synced to your account</span><span class="muted" id="authWho" style="margin-left:2px"></span></div>
 
   <div class="kpis">
     <div class="card kpi"><div class="kpiL">Revenue · all time</div><div class="kpiV" id="kRevAll">€0</div><div class="kpiF" id="kCount">0 sales</div></div>
@@ -276,7 +296,20 @@
   </div>
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyAI1eXkzlFca79XYLUS41WFTPPG2mL4BJI",
+  authDomain: "iptv-sales.firebaseapp.com",
+  projectId: "iptv-sales",
+  messagingSenderId: "547649027254",
+  appId: "1:547649027254:web:87d70cbfd54ff34164ba17"
+};
+const fbApp = initializeApp(firebaseConfig);
+const auth = getAuth(fbApp);
+const db = getFirestore(fbApp);
 (function(){
   "use strict";
   var KEY="iptv_sales_v1";
@@ -305,13 +338,14 @@
   function daysLeft(end){if(!end)return null;var n=new Date();var t=Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),n.getUTCDate());var p=end.split("-").map(Number);return Math.round((Date.UTC(p[0],p[1]-1,p[2])-t)/864e5);}
   function formatMac(v){var h=(v||"").replace(/[^0-9a-fA-F]/g,"").toUpperCase().slice(0,12);var o=[];for(var i=0;i<h.length;i+=2)o.push(h.slice(i,i+2));return o.join(":");}
 
-  function load(){try{var a=JSON.parse(localStorage.getItem(KEY));return Array.isArray(a)?a:[];}catch(e){return [];}}
-  function save(a){localStorage.setItem(KEY,JSON.stringify(a));}
-  var sales=load();
   var PKEY="iptv_payouts_v1";
-  function loadP(){try{var a=JSON.parse(localStorage.getItem(PKEY));return Array.isArray(a)?a:[];}catch(e){return [];}}
-  function saveP(a){localStorage.setItem(PKEY,JSON.stringify(a));}
-  var payouts=loadP();
+  function localSales(){try{var a=JSON.parse(localStorage.getItem(KEY));return Array.isArray(a)?a:[];}catch(e){return [];}}
+  function localPayouts(){try{var a=JSON.parse(localStorage.getItem(PKEY));return Array.isArray(a)?a:[];}catch(e){return [];}}
+  var sales=[], payouts=[];
+  var docRef=null, unsub=null;
+  function persist(){ if(docRef){ setDoc(docRef,{sales:sales,payouts:payouts,updated_at:Date.now()}).catch(function(e){console.error("cloud save failed",e);}); } }
+  function save(){ persist(); }
+  function saveP(){ persist(); }
 
   // populate selects
   function fillSites(sel,all){SITES.forEach(function(s){if(s[0]==="other"&&all==="filter")return;var o=document.createElement("option");o.value=s[0];o.textContent=s[2]+" "+s[1];sel.appendChild(o);});}
@@ -478,6 +512,38 @@
     r.readAsText(file);e.target.value="";
   };
 
+  // ---- cloud auth + sync ----
+  function showLogin(){ $("#authGate").classList.add("on"); }
+  function hideLogin(){ $("#authGate").classList.remove("on"); }
+  function offerMigration(){
+    var ls=localSales(), lp=localPayouts();
+    if((ls.length||lp.length) && confirm("This device has "+ls.length+" sale(s) saved locally from before cloud sync. Upload them to your account now?")){
+      sales=ls; payouts=lp; persist();
+    }
+  }
+  function authErr(e){ var m=(e&&e.code||"").replace("auth/",""); $("#authErr").textContent = m? ("Error: "+m.replace(/-/g," ")) : "Something went wrong."; }
+  $("#signInBtn").onclick=function(){ $("#authErr").textContent=""; signInWithEmailAndPassword(auth,$("#authEmail").value.trim(),$("#authPass").value).catch(authErr); };
+  $("#createBtn").onclick=function(){ $("#authErr").textContent=""; createUserWithEmailAndPassword(auth,$("#authEmail").value.trim(),$("#authPass").value).catch(authErr); };
+  $("#authPass").addEventListener("keydown",function(e){ if(e.key==="Enter") $("#signInBtn").click(); });
+  $("#signOutBtn").onclick=function(){ signOut(auth); };
+  onAuthStateChanged(auth, function(user){
+    if(user){
+      hideLogin(); $("#authWho").textContent=user.email||"";
+      docRef=doc(db,"trackers",user.uid);
+      if(unsub)unsub();
+      var first=true;
+      unsub=onSnapshot(docRef,function(snap){
+        var d=snap.exists()?snap.data():null;
+        sales=(d&&Array.isArray(d.sales))?d.sales:[];
+        payouts=(d&&Array.isArray(d.payouts))?d.payouts:[];
+        render();
+        if(first){ first=false; if(!snap.exists()) offerMigration(); }
+      }, function(err){ console.error(err); });
+    } else {
+      if(unsub){unsub();unsub=null;}
+      docRef=null; sales=[]; payouts=[]; render(); showLogin();
+    }
+  });
   render();
 })();
 </script>
