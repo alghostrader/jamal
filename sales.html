@@ -241,7 +241,7 @@
     <div class="phead"><h2 style="margin:0">Panel stock</h2><span class="tiny muted" style="margin-left:auto">1 credit = 12 months. Each sale uses credits automatically — top up before you run out.</span></div>
     <div class="stockrow" id="stockRow"></div>
     <div class="payadd" style="margin-top:14px">
-      <select id="stPanel"><option value="dino">Dino</option><option value="mega">Mega</option><option value="guys">Guys</option></select>
+      <select id="stPanel"><option value="dino">Dino</option><option value="mega">Mega</option><option value="max">Max</option></select>
       <input type="number" step="0.01" id="stCredits" placeholder="Credits bought">
       <button class="btn primary" id="stAddBtn" type="button">+ Add credits</button>
     </div>
@@ -309,7 +309,7 @@
           <option value="ibo">IBO Player</option><option value="smarters">IPTV Smarters Pro</option><option value="tivimate">TiViMate</option><option value="other">Other app</option>
         </select></div>
         <div class="fld"><label>Panel</label><select name="panel">
-          <option value="dino">Dino</option><option value="mega">Mega</option><option value="guys">Guys</option>
+          <option value="dino">Dino</option><option value="mega">Mega</option><option value="max">Max</option>
         </select></div>
         <div class="fld"><label>Status</label><select name="status">
           <option value="paid">Paid</option><option value="activated">Activated</option><option value="renewed">Renewed</option><option value="expired">Expired</option>
@@ -353,7 +353,8 @@ const db = getFirestore(fbApp);
     ["smartersprofrance","smartersprofrance.fr","🇫🇷"],["iptvfranceofficiel","iptvfranceofficiel.fr","🇫🇷"],
     ["abonnementiptvofficiel","abonnementiptvofficiel","🇫🇷"],["iptvshqiptar","iptvshqiptar.com","🇦🇱"],["other","Other","🌐"]
   ];
-  var PANELS={dino:"Dino",mega:"Mega",guys:"Guys"};
+  var PANELS={dino:"Dino",mega:"Mega",max:"Max"};
+  var STOCK_SEED={dino:0,mega:10,max:0};
   var APPS={ibo:"IBO Player",smarters:"IPTV Smarters Pro",tivimate:"TiViMate",other:"Other app"};
   var STATUSES={paid:"Paid",activated:"Activated",renewed:"Renewed",expired:"Expired"};
   var STATUS_COLOR={paid:"var(--blue)",activated:"var(--acc)",renewed:"var(--up)",expired:"var(--red)"};
@@ -666,7 +667,9 @@ const db = getFirestore(fbApp);
         sales=(d&&Array.isArray(d.sales))?d.sales:[];
         payouts=(d&&Array.isArray(d.payouts))?d.payouts:[];
         credits=(d&&d.credits&&typeof d.credits==="object")?d.credits:{};
-        if(autoExpire())persist();
+        var seeded=false;
+        if(d&&Object.keys(credits).length===0){ credits=Object.assign({},STOCK_SEED); seeded=true; }
+        if(autoExpire()||seeded)persist();
         render();
         if(first){ first=false; if(!snap.exists()) offerMigration(); }
       }, function(err){ console.error(err); });
