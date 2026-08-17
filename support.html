@@ -110,7 +110,7 @@
       <a class="btn" href="/sales">Sales tracker</a>
     </div>
   </div>
-  <div class="sub">Ready-to-send messages for your IPTV clients — pick a language, fill the blanks, copy.</div>
+  <div class="sub">Ready-to-send messages for your IPTV clients — pick a language, then a tool, copy.</div>
 
   <!-- language -->
   <div class="card pad" style="margin-bottom:16px">
@@ -121,6 +121,7 @@
         <button class="segbtn" data-lang="nl">Nederlands</button>
         <button class="segbtn" data-lang="fr">Français</button>
         <button class="segbtn" data-lang="en">English</button>
+        <button class="segbtn" data-lang="sq">Shqip</button>
       </div>
     </div>
     <div class="tiny muted" style="margin-top:8px">The message you copy will be written in this language.</div>
@@ -128,14 +129,28 @@
 
   <!-- tabs -->
   <div class="seg" id="tabSeg" style="margin-bottom:16px">
-    <button class="segbtn on" data-tab="creds">Credentials</button>
+    <button class="segbtn on" data-tab="replies">Ready answers</button>
+    <button class="segbtn" data-tab="creds">Credentials</button>
     <button class="segbtn" data-tab="pay">Payment</button>
     <button class="segbtn" data-tab="guide">Device guides</button>
     <button class="segbtn" data-tab="ref">Reference</button>
   </div>
 
+  <!-- READY ANSWERS -->
+  <div class="card pad tabpanel" id="tab-replies">
+    <h2>Ready answers</h2>
+    <div class="fld" style="max-width:420px;margin-bottom:4px">
+      <label>Pick the situation / question</label>
+      <select id="replySel"></select>
+    </div>
+    <div class="mact">
+      <button class="btn primary" id="copyReply">Copy answer</button>
+    </div>
+    <textarea id="replyOut" rows="16" readonly style="margin-top:12px"></textarea>
+  </div>
+
   <!-- CREDENTIALS -->
-  <div class="card pad tabpanel" id="tab-creds">
+  <div class="card pad tabpanel" id="tab-creds" style="display:none">
     <h2>Credentials &amp; activation</h2>
     <div class="phead">
       <div class="seg" id="credType">
@@ -162,17 +177,23 @@
   <!-- PAYMENT -->
   <div class="card pad tabpanel" id="tab-pay" style="display:none">
     <h2>Payment</h2>
-    <div class="frow dc">
-      <div class="fld"><label>Agreed price (€)</label><input type="number" id="payAmt" placeholder="e.g. 50" step="0.01"></div>
-      <div class="fld"><label>Matched payment link</label><input id="payLink" readonly placeholder="enter a price"></div>
+    <div class="phead">
+      <span class="tiny muted">Choose the plan length — the checkout link fills in automatically.</span>
+      <div class="seg" id="payDurSeg" style="margin-left:auto">
+        <button class="segbtn" data-dur="3">3 mo</button>
+        <button class="segbtn" data-dur="6">6 mo</button>
+        <button class="segbtn on" data-dur="12">12 mo</button>
+        <button class="segbtn" data-dur="24">24 mo</button>
+      </div>
     </div>
-    <div id="payNote" class="tiny muted" style="margin-top:8px"></div>
+    <div class="fld" style="margin-bottom:4px"><label>Checkout link</label><input id="payLink" readonly></div>
+    <div id="payNote" class="tiny" style="margin-top:8px"></div>
     <div class="mact">
       <button class="btn primary" id="copyPay">Copy message</button>
     </div>
-    <textarea id="payOut" rows="12" readonly style="margin-top:12px"></textarea>
+    <textarea id="payOut" rows="10" readonly style="margin-top:12px"></textarea>
     <details style="margin-top:16px">
-      <summary>All price → link options</summary>
+      <summary>All checkout links</summary>
       <div style="overflow-x:auto"><table id="payTableRef"></table></div>
     </details>
   </div>
@@ -211,22 +232,23 @@
         <h3>Contacts</h3>
         <div class="kv">
           <div class="row"><span class="k">WhatsApp support</span><span class="v"><a href="https://wa.me/351966739291" target="_blank" rel="noopener">+351 966 739 291</a></span></div>
-          <div class="row"><span class="k">PayPal (Friends &amp; Family)</span><span class="v">Oughia.karim@gmail.com</span></div>
-          <div class="row"><span class="k">Official site</span><span class="v"><a href="https://iptvsmarters-officiel.com/" target="_blank" rel="noopener">iptvsmarters-officiel.com</a></span></div>
         </div>
       </div>
       <div>
-        <h3>Sites — language, trial &amp; prices</h3>
+        <h3>Plans &amp; prices (what you quote)</h3>
         <div style="overflow-x:auto"><table>
-          <thead><tr><th>Site</th><th>Language</th><th>Trial</th><th>Prices (3/6/12/24 mo)</th></tr></thead>
+          <thead><tr><th>Plan</th><th>Price</th><th>Checkout link</th></tr></thead>
           <tbody>
-            <tr><td>iptvesp.com</td><td>Spanish</td><td>24h free</td><td>25 / 39 / 59 / 99 €</td></tr>
-            <tr><td>iptvned.com</td><td>Dutch</td><td>24h free</td><td>19 / 39 / 49 / 89 €</td></tr>
-            <tr><td>iptvpix.com</td><td>French (BE/CH)</td><td>7-day money-back</td><td>19 / 39 / 49 / 89 €</td></tr>
-            <tr><td>primeiptv-france.com</td><td>French (FR)</td><td>24h free</td><td>19 / 39 / 49 / 89 €</td></tr>
+            <tr><td>3 months</td><td>25 €</td><td>23 € link</td></tr>
+            <tr><td>6 months</td><td>39 €</td><td>34 € link</td></tr>
+            <tr><td>12 months</td><td>59 €</td><td>50 € link</td></tr>
+            <tr><td>24 months</td><td>99 €</td><td>60 € link</td></tr>
           </tbody>
         </table></div>
-        <div class="tiny muted" style="margin-top:12px">Always ask clients to pay PayPal as <b>Friends &amp; Family</b> (no fees) and to send a <b>payment screenshot</b> — access goes out right after the proof.</div>
+        <div class="tiny" style="color:var(--red);margin-top:8px">⚠ Quoted price and checkout amount don't match yet (esp. 24 mo: 99 € quoted vs 60 € link). Fix the mapping or add matching links.</div>
+        <h3 style="margin-top:18px">Sites → client language</h3>
+        <div class="tiny muted">iptvesp = Spanish · iptvned = Dutch · iptvpix = French (BE/CH) · primeiptv-france = French (FR) · iptvshqiptar = Albanian</div>
+        <div class="tiny muted" style="margin-top:10px">Payment = card checkout link only. Ask the client to send a <b>payment screenshot</b> — access goes out right after.</div>
       </div>
     </div>
   </div>
@@ -236,109 +258,227 @@
 
 <script>
   var $=function(s){return document.querySelector(s);};
-  var lang="es", credKind="trial";
+  var lang="es", credKind="trial", payDur="12";
 
-  // ---- fixed data ----
-  var PAYLINKS=[[23,"https://tinyurl.com/5n8srubm"],[30,"https://tinyurl.com/mpkmbzhe"],[34,"https://tinyurl.com/3c7fj2zh"],[40,"https://tinyurl.com/mrxhv946"],[48.72,"https://tinyurl.com/4jt7t5dd"],[50,"https://tinyurl.com/swfwwyj7"],[60,"https://tinyurl.com/3ndxu6b9"],[65,"https://tinyurl.com/3bpvedww"],[70,"https://tinyurl.com/5235fksn"],[75,"https://tinyurl.com/zhxu5kbu"],[80,"https://tinyurl.com/ychn3fd2"],[90,"https://tinyurl.com/yc4ar6hd"],[100,"https://tinyurl.com/yv5d8tk2"],[300,"https://tinyurl.com/45xdawvz"]];
+  // ---- payment links (aovancy card checkout) ----
+  var PAYLINKS={
+    20:"https://aovancy.com/checkout/a9b181b2-7377-4be1-9043-be2de7288e86",
+    23:"https://aovancy.com/checkout/9ce28615-95e3-4e9f-91ed-91196a6d0114",
+    30:"https://aovancy.com/checkout/5f8254f5-c206-4fd9-bbdf-ca825ef13aae",
+    34:"https://aovancy.com/checkout/ac096d6a-c932-4792-8b52-c9f18c3999bf",
+    40:"https://aovancy.com/checkout/07f07ea4-7e90-4055-8b4f-604d368a2356",
+    50:"https://aovancy.com/checkout/f5bddb6e-a4d5-4385-84bb-c3486015745b",
+    60:"https://aovancy.com/checkout/d3014cf5-e56d-4545-8e2a-de6dad9904c2"
+  };
+  var DUR={"3":23,"6":34,"12":50,"24":60};      // plan length -> checkout amount (link)
+  var QUOTED={"3":25,"6":39,"12":59,"24":99};   // plan length -> price you quote the client
 
+  // ---- message pieces ----
   function srvBlock(l){
-    var or={es:"o",nl:"of",fr:"ou",en:"or"}[l];
-    var lbl={es:"URL del servidor",nl:"Server-URL",fr:"URL du serveur",en:"Server URL"}[l];
+    var or={es:"o",nl:"of",fr:"ou",en:"or",sq:"ose"}[l];
+    var lbl={es:"URL del servidor",nl:"Server-URL",fr:"URL du serveur",en:"Server URL",sq:"URL e serverit"}[l];
     return lbl+": http://vpn.drk35cv.org\n"+or+" http://smart.cwdn.cx:80\n"+or+" http://line.dino.ws:80\n"+or+" http://line.rs4ott.com";
   }
   function credLines(l,u,p){
-    var lab={es:["Nombre de usuario","Contraseña"],nl:["Gebruikersnaam","Wachtwoord"],fr:["Username","Password"],en:["Username","Password"]}[l];
+    var lab={es:["Nombre de usuario","Contraseña"],nl:["Gebruikersnaam","Wachtwoord"],fr:["Username","Password"],en:["Username","Password"],sq:["Përdoruesi","Fjalëkalimi"]}[l];
     var sep=(l==="fr")?" : ":": ";
     return lab[0]+sep+(u||"________")+"\n"+lab[1]+sep+(p||"________");
   }
   function m3uBlock(l,m){
     if(!m) return "";
     var t={
-      es:"\n\n3\uFE0F\u20E3 Enlace M3U (opcional)\nSi tu dispositivo utiliza un enlace M3U:\n"+m,
-      nl:"\n\n3\uFE0F\u20E3 M3U-link (optioneel)\nAls je apparaat een M3U-link gebruikt:\n"+m,
-      fr:"\n\n3\uFE0F\u20E3 Lien M3U (facultatif)\nSi votre appareil utilise un lien M3U :\n"+m,
-      en:"\n\n3\uFE0F\u20E3 M3U link (optional)\nIf your device uses an M3U link:\n"+m
+      es:"\n\n3️⃣ Enlace M3U (opcional)\nSi tu dispositivo utiliza un enlace M3U:\n"+m,
+      nl:"\n\n3️⃣ M3U-link (optioneel)\nAls je apparaat een M3U-link gebruikt:\n"+m,
+      fr:"\n\n3️⃣ Lien M3U (facultatif)\nSi votre appareil utilise un lien M3U :\n"+m,
+      en:"\n\n3️⃣ M3U link (optional)\nIf your device uses an M3U link:\n"+m,
+      sq:"\n\n3️⃣ Lidhja M3U (opsionale)\nNëse pajisja juaj përdor një lidhje M3U:\n"+m
     };
     return t[l];
   }
 
   function trialMsg(l,u,p,m){
-    var head={es:"\u00A1Aqu\u00ED tienes tu prueba GRATIS de 24h! \uD83D\uDE42 Solo introduce estos datos en la app:",
-      nl:"Hier is je GRATIS proef van 24u! \uD83D\uDE42 Vul gewoon deze gegevens in de app in:",
-      fr:"Voici votre essai GRATUIT de 24h ! \uD83D\uDE42 Entrez simplement ces informations dans l'application :",
-      en:"Here's your FREE 24h trial! \uD83D\uDE42 Just enter these details in the app:"}[l];
-    var name={es:"Nombre / Nombre de la lista de reproducci\u00F3n: Puedes elegir el nombre que prefieras (p. ej., IPTV).",
+    var head={es:"¡Aquí tienes tu prueba GRATIS de 24h! 🙂 Solo introduce estos datos en la app:",
+      nl:"Hier is je GRATIS proef van 24u! 🙂 Vul gewoon deze gegevens in de app in:",
+      fr:"Voici votre essai GRATUIT de 24h ! 🙂 Entrez simplement ces informations dans l'application :",
+      en:"Here's your FREE 24h trial! 🙂 Just enter these details in the app:",
+      sq:"Ky është prova juaj FALAS 24-orëshe! 🙂 Thjesht futni këto të dhëna në aplikacion:"}[l];
+    var name={es:"Nombre / Nombre de la lista de reproducción: Puedes elegir el nombre que prefieras (p. ej., IPTV).",
       nl:"Naam / Naam van de afspeellijst: Je mag elke naam kiezen die je wilt (bijv. IPTV).",
       fr:"Nom / Nom de la playlist : Vous pouvez choisir le nom de votre choix (par exemple, IPTV).",
-      en:"Name / Playlist name: You can choose any name you like (e.g., IPTV)."}[l];
-    var close={es:"Cualquier duda durante la instalaci\u00F3n, escr\u00EDbeme por WhatsApp y te ayudo enseguida \uD83D\uDE42",
-      nl:"Heb je een vraag tijdens het installeren, stuur me een bericht op WhatsApp en ik help je meteen \uD83D\uDE42",
-      fr:"Si vous avez une question pendant l'installation, \u00E9crivez-moi sur WhatsApp et je vous aide tout de suite \uD83D\uDE42",
-      en:"Any question while installing, message me on WhatsApp and I'll help you right away \uD83D\uDE42"}[l];
+      en:"Name / Playlist name: You can choose any name you like (e.g., IPTV).",
+      sq:"Emri / Emri i listës: Mund të zgjidhni çdo emër që dëshironi (p.sh. IPTV)."}[l];
+    var close={es:"Cualquier duda durante la instalación, escríbeme por WhatsApp y te ayudo enseguida 🙂",
+      nl:"Heb je een vraag tijdens het installeren, stuur me een bericht op WhatsApp en ik help je meteen 🙂",
+      fr:"Si vous avez une question pendant l'installation, écrivez-moi sur WhatsApp et je vous aide tout de suite 🙂",
+      en:"Any question while installing, message me on WhatsApp and I'll help you right away 🙂",
+      sq:"Nëse keni ndonjë pyetje gjatë instalimit, më shkruani në WhatsApp dhe ju ndihmoj menjëherë 🙂"}[l];
     return head+"\n\n"+name+"\n\n"+credLines(l,u,p)+"\n\n"+srvBlock(l)+m3uBlock(l,m)+"\n\n"+close;
   }
 
   function paidMsg(l,u,p,m){
     var T={
-      es:{h:"Estimado cliente,\n\nGracias por elegir IPTV Smarters Pro. Agradecemos mucho su confianza \uD83D\uDE4F\n\nSiga los pasos a continuaci\u00F3n para activar su suscripci\u00F3n:\n\n1\uFE0F\u20E3 Descargue la aplicaci\u00F3n\nDescargue e instale la aplicaci\u00F3n IPTV Smarters Pro en su dispositivo (Smart TV, dispositivo Android, iPhone, TV box, PC, etc.).\n\n2\uFE0F\u20E3 A\u00F1ada su suscripci\u00F3n\nTras instalar la aplicaci\u00F3n, seleccione \u00ABIniciar sesi\u00F3n con la API de Xtream Codes\u00BB e introduzca:\n\nNombre / Nombre de la lista de reproducci\u00F3n: Puede elegir el nombre que prefiera (p. ej., IPTV).",
-        web:"\uD83C\uDF10 Sitio web oficial: https://iptvsmarters-officiel.com/",wa:"\uD83D\uDCDE \u00BFNecesita ayuda? Soporte WhatsApp: +351 966 739 291",
-        foot:"\u00A1Esperamos que disfrute de su suscripci\u00F3n IPTV! \uD83C\uDFAC\uD83D\uDCFA\nAtentamente, Su servicio de atenci\u00F3n al cliente"},
-      nl:{h:"Beste klant,\n\nBedankt dat u voor IPTV Smarters Pro heeft gekozen. We waarderen uw vertrouwen enorm \uD83D\uDE4F\n\nVolg de onderstaande stappen om uw abonnement te activeren:\n\n1\uFE0F\u20E3 Download de app\nDownload en installeer de IPTV Smarters Pro-app op uw apparaat (Smart TV, Android-apparaat, iPhone, tv-box, pc, enz.).\n\n2\uFE0F\u20E3 Voeg uw abonnement toe\nNadat u de app heeft ge\u00EFnstalleerd, selecteert u \"Inloggen met Xtream Codes API\" en voert u in:\n\nNaam / Naam van de afspeellijst: U mag elke naam kiezen die u wilt (bijv. IPTV).",
-        web:"\uD83C\uDF10 Offici\u00EBle website: https://iptvsmarters-officiel.com/",wa:"\uD83D\uDCDE Hulp nodig? WhatsApp-ondersteuning: +351 966 739 291",
-        foot:"We hopen dat u geniet van uw IPTV-abonnement! \uD83C\uDFAC\uD83D\uDCFA\nMet vriendelijke groet, Uw klantenservice"},
-      fr:{h:"Cher client,\n\nMerci d'avoir choisi IPTV Smarters Pro. Nous vous remercions de votre confiance \uD83D\uDE4F\n\nVeuillez suivre les \u00E9tapes ci-dessous pour activer votre abonnement :\n\n1\uFE0F\u20E3 T\u00E9l\u00E9chargez l'application\nT\u00E9l\u00E9chargez et installez l'application IPTV Smarters Pro sur votre appareil (Smart TV, appareil Android, iPhone, box TV, PC, etc.).\n\n2\uFE0F\u20E3 Ajoutez votre abonnement\nApr\u00E8s avoir install\u00E9 l'application, s\u00E9lectionnez \u00AB Se connecter avec l'API Xtream Codes \u00BB et saisissez :\n\nNom / Nom de la playlist : Vous pouvez choisir le nom de votre choix (par exemple, IPTV).",
-        web:"\uD83C\uDF10 Site web officiel : https://iptvsmarters-officiel.com/",wa:"\uD83D\uDCDE Besoin d'aide ? Assistance WhatsApp : +351 966 739 291",
-        foot:"Nous esp\u00E9rons que vous appr\u00E9cierez votre abonnement IPTV ! \uD83C\uDFAC\uD83D\uDCFA\nCordialement, Votre service client"},
-      en:{h:"Dear customer,\n\nThank you for choosing IPTV Smarters Pro. We truly appreciate your trust \uD83D\uDE4F\n\nPlease follow the steps below to activate your subscription:\n\n1\uFE0F\u20E3 Download the app\nDownload and install the IPTV Smarters Pro app on your device (Smart TV, Android device, iPhone, TV box, PC, etc.).\n\n2\uFE0F\u20E3 Add your subscription\nAfter installing the app, select \"Login with Xtream Codes API\" and enter:\n\nName / Playlist name: You can choose any name you like (e.g., IPTV).",
-        web:"\uD83C\uDF10 Official website: https://iptvsmarters-officiel.com/",wa:"\uD83D\uDCDE Need help? WhatsApp support: +351 966 739 291",
-        foot:"We hope you enjoy your IPTV subscription! \uD83C\uDFAC\uD83D\uDCFA\nBest regards, Your customer service"}
+      es:{h:"Estimado cliente,\n\nGracias por elegir nuestro servicio. Agradecemos mucho su confianza 🙏\n\nSiga los pasos a continuación para activar su suscripción:\n\n1️⃣ Descargue la aplicación\nDescargue e instale la aplicación IPTV Smarters Pro en su dispositivo (Smart TV, dispositivo Android, iPhone, TV box, PC, etc.).\n\n2️⃣ Añada su suscripción\nTras instalar la aplicación, seleccione «Iniciar sesión con la API de Xtream Codes» e introduzca:\n\nNombre / Nombre de la lista de reproducción: Puede elegir el nombre que prefiera (p. ej., IPTV).",
+        wa:"📞 ¿Necesita ayuda? Soporte WhatsApp: +351 966 739 291",
+        foot:"¡Esperamos que disfrute de su suscripción IPTV! 🎬📺\nAtentamente, Su servicio de atención al cliente"},
+      nl:{h:"Beste klant,\n\nBedankt dat u voor onze dienst heeft gekozen. We waarderen uw vertrouwen enorm 🙏\n\nVolg de onderstaande stappen om uw abonnement te activeren:\n\n1️⃣ Download de app\nDownload en installeer de IPTV Smarters Pro-app op uw apparaat (Smart TV, Android-apparaat, iPhone, tv-box, pc, enz.).\n\n2️⃣ Voeg uw abonnement toe\nNadat u de app heeft geïnstalleerd, selecteert u \"Inloggen met Xtream Codes API\" en voert u in:\n\nNaam / Naam van de afspeellijst: U mag elke naam kiezen die u wilt (bijv. IPTV).",
+        wa:"📞 Hulp nodig? WhatsApp-ondersteuning: +351 966 739 291",
+        foot:"We hopen dat u geniet van uw IPTV-abonnement! 🎬📺\nMet vriendelijke groet, Uw klantenservice"},
+      fr:{h:"Cher client,\n\nMerci d'avoir choisi notre service. Nous vous remercions de votre confiance 🙏\n\nVeuillez suivre les étapes ci-dessous pour activer votre abonnement :\n\n1️⃣ Téléchargez l'application\nTéléchargez et installez l'application IPTV Smarters Pro sur votre appareil (Smart TV, appareil Android, iPhone, box TV, PC, etc.).\n\n2️⃣ Ajoutez votre abonnement\nAprès avoir installé l'application, sélectionnez « Se connecter avec l'API Xtream Codes » et saisissez :\n\nNom / Nom de la playlist : Vous pouvez choisir le nom de votre choix (par exemple, IPTV).",
+        wa:"📞 Besoin d'aide ? Assistance WhatsApp : +351 966 739 291",
+        foot:"Nous espérons que vous apprécierez votre abonnement IPTV ! 🎬📺\nCordialement, Votre service client"},
+      en:{h:"Dear customer,\n\nThank you for choosing our service. We truly appreciate your trust 🙏\n\nPlease follow the steps below to activate your subscription:\n\n1️⃣ Download the app\nDownload and install the IPTV Smarters Pro app on your device (Smart TV, Android device, iPhone, TV box, PC, etc.).\n\n2️⃣ Add your subscription\nAfter installing the app, select \"Login with Xtream Codes API\" and enter:\n\nName / Playlist name: You can choose any name you like (e.g., IPTV).",
+        wa:"📞 Need help? WhatsApp support: +351 966 739 291",
+        foot:"We hope you enjoy your IPTV subscription! 🎬📺\nBest regards, Your customer service"},
+      sq:{h:"I nderuar klient,\n\nFaleminderit që zgjodhët shërbimin tonë. Ju vlerësojmë shumë besimin tuaj 🙏\n\nJu lutemi ndiqni hapat e mëposhtëm për të aktivizuar abonimin tuaj:\n\n1️⃣ Shkarkoni aplikacionin\nShkarkoni dhe instaloni aplikacionin IPTV Smarters Pro në pajisjen tuaj (Smart TV, pajisje Android, iPhone, TV box, PC, etj.).\n\n2️⃣ Shtoni abonimin tuaj\nPasi të instaloni aplikacionin, zgjidhni \"Hyr me Xtream Codes API\" dhe futni:\n\nEmri / Emri i listës: Mund të zgjidhni çdo emër që dëshironi (p.sh. IPTV).",
+        wa:"📞 Nevojë për ndihmë? Mbështetje WhatsApp: +351 966 739 291",
+        foot:"Shpresojmë që të shijoni abonimin tuaj IPTV! 🎬📺\nMe respekt, Shërbimi juaj i klientit"}
     }[l];
-    return T.h+"\n"+credLines(l,u,p)+"\n\n"+srvBlock(l)+m3uBlock(l,m)+"\n\n"+T.web+"\n\n"+T.wa+"\n\n"+T.foot;
+    return T.h+"\n"+credLines(l,u,p)+"\n\n"+srvBlock(l)+m3uBlock(l,m)+"\n\n"+T.wa+"\n\n"+T.foot;
   }
 
   function payMsg(l,link){
     var L=link||"________";
     var t={
-      es:"Para confirmar tu suscripci\u00F3n, puedes pagar de una de estas dos formas:\n\n\uD83D\uDCB3 Enlace de pago: "+L+"\n\nO por PayPal: Oughia.karim@gmail.com\n(Env\u00EDalo como \u00ABAmigos y familiares\u00BB para que no haya comisiones \uD83D\uDE4F)\n\nCuando lo hagas, env\u00EDame una captura del pago y te env\u00EDo tu acceso enseguida \uD83D\uDE42",
-      nl:"Om je abonnement te bevestigen, kun je op een van deze twee manieren betalen:\n\n\uD83D\uDCB3 Betaallink: "+L+"\n\nOf via PayPal: Oughia.karim@gmail.com\n(Stuur het als \"Vrienden en familie\" zodat er geen extra kosten zijn \uD83D\uDE4F)\n\nZodra het klaar is, stuur me een screenshot van de betaling en ik stuur je toegang meteen \uD83D\uDE42",
-      fr:"Pour confirmer votre abonnement, vous pouvez payer de l'une de ces deux fa\u00E7ons :\n\n\uD83D\uDCB3 Lien de paiement : "+L+"\n\nOu par PayPal : Oughia.karim@gmail.com\n(Envoyez-le en \u00AB Amis et famille \u00BB pour \u00E9viter les frais \uD83D\uDE4F)\n\nUne fois fait, envoyez-moi une capture d'\u00E9cran du paiement et je vous envoie vos acc\u00E8s tout de suite \uD83D\uDE42",
-      en:"To confirm your subscription, you can pay in one of these two ways:\n\n\uD83D\uDCB3 Payment link: "+L+"\n\nOr PayPal: Oughia.karim@gmail.com\n(Please send it as \"Friends & Family\" so there are no extra fees \uD83D\uDE4F)\n\nOnce done, send me a screenshot of the payment and I'll send your access right away \uD83D\uDE42"
+      es:"Para confirmar tu suscripción, aquí tienes tu enlace de pago:\n\n💳 "+L+"\n\nCuando lo hagas, envíame una captura del pago y te envío tu acceso enseguida 🙂",
+      nl:"Om je abonnement te bevestigen, hier is je betaallink:\n\n💳 "+L+"\n\nZodra het klaar is, stuur me een screenshot van de betaling en ik stuur je toegang meteen 🙂",
+      fr:"Pour confirmer votre abonnement, voici votre lien de paiement :\n\n💳 "+L+"\n\nUne fois fait, envoyez-moi une capture d'écran du paiement et je vous envoie vos accès tout de suite 🙂",
+      en:"To confirm your subscription, here is your payment link:\n\n💳 "+L+"\n\nOnce done, send me a screenshot of the payment and I'll send your access right away 🙂",
+      sq:"Për të konfirmuar abonimin tuaj, ky është linku juaj i pagesës:\n\n💳 "+L+"\n\nPasi ta kryeni, më dërgoni një pamje të ekranit të pagesës dhe ju dërgoj menjëherë aksesin tuaj 🙂"
     };
     return t[l];
   }
 
   var GUIDES={
     firestick:{
-      es:"\uD83D\uDCFA Instalar en Amazon Firestick / Fire TV\n\n1. En la pantalla de inicio del Firestick, ve a Buscar y escribe \"Downloader\". Instala la app Downloader.\n2. Ve a Ajustes \u2192 My Fire TV \u2192 Opciones de desarrollador y activa \"Instalar apps desconocidas\" para Downloader.\n3. Abre Downloader y escribe en la barra: iptvsmarters.com \u2014 \u00E1brelo, descarga IPTV Smarters Pro e inst\u00E1lalo.\n4. Abre la app y elige \"Iniciar sesi\u00F3n con la API de Xtream Codes\".\n5. Introduce el usuario, la contrase\u00F1a y la URL del servidor que te envi\u00E9. \u00A1Listo \u2705!",
-      nl:"\uD83D\uDCFA Installeren op Amazon Firestick / Fire TV\n\n1. Ga op het Firestick-startscherm naar Zoeken en typ \"Downloader\". Installeer de Downloader-app.\n2. Ga naar Instellingen \u2192 My Fire TV \u2192 Opties voor ontwikkelaars en zet \"Onbekende apps installeren\" AAN voor Downloader.\n3. Open Downloader en typ in de balk: iptvsmarters.com \u2014 open het, download IPTV Smarters Pro en installeer het.\n4. Open de app en kies \"Inloggen met Xtream Codes API\".\n5. Voer de gebruikersnaam, het wachtwoord en de server-URL in die ik je heb gestuurd. Klaar \u2705",
-      fr:"\uD83D\uDCFA Installer sur Amazon Firestick / Fire TV\n\n1. Sur l'\u00E9cran d'accueil du Firestick, allez dans Rechercher et tapez \u00AB Downloader \u00BB. Installez l'application Downloader.\n2. Allez dans Param\u00E8tres \u2192 My Fire TV \u2192 Options pour les d\u00E9veloppeurs et activez \u00AB Installer des applications inconnues \u00BB pour Downloader.\n3. Ouvrez Downloader et tapez dans la barre : iptvsmarters.com \u2014 ouvrez-le, t\u00E9l\u00E9chargez IPTV Smarters Pro puis installez-le.\n4. Ouvrez l'application et choisissez \u00AB Se connecter avec l'API Xtream Codes \u00BB.\n5. Saisissez le username, le password et l'URL du serveur que je vous ai envoy\u00E9s. Termin\u00E9 \u2705",
-      en:"\uD83D\uDCFA Install on Amazon Firestick / Fire TV\n\n1. From the Firestick home, go to Find \u2192 Search and type \"Downloader\". Install the Downloader app.\n2. Go to Settings \u2192 My Fire TV \u2192 Developer options and turn ON \"Install unknown apps\" for Downloader.\n3. Open Downloader, type in the bar: iptvsmarters.com \u2014 open it, download IPTV Smarters Pro and install it.\n4. Open the app and choose \"Login with Xtream Codes API\".\n5. Enter the username, password and server URL I sent you. Done \u2705"
+      es:"📺 Instalar en Amazon Firestick / Fire TV\n\n1. En la pantalla de inicio del Firestick, ve a Buscar y escribe \"Downloader\". Instala la app Downloader.\n2. Ve a Ajustes → My Fire TV → Opciones de desarrollador y activa \"Instalar apps desconocidas\" para Downloader.\n3. Abre Downloader y escribe en la barra: iptvsmarters.com — ábrelo, descarga IPTV Smarters Pro e instálalo.\n4. Abre la app y elige \"Iniciar sesión con la API de Xtream Codes\".\n5. Introduce el usuario, la contraseña y la URL del servidor que te envié. ¡Listo ✅!",
+      nl:"📺 Installeren op Amazon Firestick / Fire TV\n\n1. Ga op het Firestick-startscherm naar Zoeken en typ \"Downloader\". Installeer de Downloader-app.\n2. Ga naar Instellingen → My Fire TV → Opties voor ontwikkelaars en zet \"Onbekende apps installeren\" AAN voor Downloader.\n3. Open Downloader en typ in de balk: iptvsmarters.com — open het, download IPTV Smarters Pro en installeer het.\n4. Open de app en kies \"Inloggen met Xtream Codes API\".\n5. Voer de gebruikersnaam, het wachtwoord en de server-URL in die ik je heb gestuurd. Klaar ✅",
+      fr:"📺 Installer sur Amazon Firestick / Fire TV\n\n1. Sur l'écran d'accueil du Firestick, allez dans Rechercher et tapez « Downloader ». Installez l'application Downloader.\n2. Allez dans Paramètres → My Fire TV → Options pour les développeurs et activez « Installer des applications inconnues » pour Downloader.\n3. Ouvrez Downloader et tapez dans la barre : iptvsmarters.com — ouvrez-le, téléchargez IPTV Smarters Pro puis installez-le.\n4. Ouvrez l'application et choisissez « Se connecter avec l'API Xtream Codes ».\n5. Saisissez le username, le password et l'URL du serveur que je vous ai envoyés. Terminé ✅",
+      en:"📺 Install on Amazon Firestick / Fire TV\n\n1. From the Firestick home, go to Find → Search and type \"Downloader\". Install the Downloader app.\n2. Go to Settings → My Fire TV → Developer options and turn ON \"Install unknown apps\" for Downloader.\n3. Open Downloader, type in the bar: iptvsmarters.com — open it, download IPTV Smarters Pro and install it.\n4. Open the app and choose \"Login with Xtream Codes API\".\n5. Enter the username, password and server URL I sent you. Done ✅",
+      sq:"📺 Instalo në Amazon Firestick / Fire TV\n\n1. Në ekranin kryesor të Firestick, shkoni te Kërko dhe shkruani \"Downloader\". Instaloni aplikacionin Downloader.\n2. Shkoni te Cilësimet → My Fire TV → Opsionet e zhvilluesit dhe aktivizoni \"Instalo aplikacione të panjohura\" për Downloader.\n3. Hapni Downloader dhe shkruani në shirit: iptvsmarters.com — hapeni, shkarkoni IPTV Smarters Pro dhe instalojeni.\n4. Hapni aplikacionin dhe zgjidhni \"Hyr me Xtream Codes API\".\n5. Futni përdoruesin, fjalëkalimin dhe URL-në e serverit që ju dërgova. Gati ✅"
     },
     android:{
-      es:"\uD83D\uDCF1 Instalar en Android (m\u00F3vil, tablet o TV box)\n\n1. Abre Google Play Store.\n2. Busca \"IPTV Smarters Pro\" e inst\u00E1lalo.\n3. Abre la app y elige \"Iniciar sesi\u00F3n con la API de Xtream Codes\".\n4. Introduce el usuario, la contrase\u00F1a y la URL del servidor que te envi\u00E9. \u00A1Listo \u2705!",
-      nl:"\uD83D\uDCF1 Installeren op Android (telefoon, tablet of tv-box)\n\n1. Open de Google Play Store.\n2. Zoek \"IPTV Smarters Pro\" en installeer het.\n3. Open de app en kies \"Inloggen met Xtream Codes API\".\n4. Voer de gebruikersnaam, het wachtwoord en de server-URL in die ik je heb gestuurd. Klaar \u2705",
-      fr:"\uD83D\uDCF1 Installer sur Android (t\u00E9l\u00E9phone, tablette ou box TV)\n\n1. Ouvrez le Google Play Store.\n2. Recherchez \u00AB IPTV Smarters Pro \u00BB et installez-le.\n3. Ouvrez l'application et choisissez \u00AB Se connecter avec l'API Xtream Codes \u00BB.\n4. Saisissez le username, le password et l'URL du serveur que je vous ai envoy\u00E9s. Termin\u00E9 \u2705",
-      en:"\uD83D\uDCF1 Install on Android (phone, tablet or TV box)\n\n1. Open the Google Play Store.\n2. Search for \"IPTV Smarters Pro\" and install it.\n3. Open the app and choose \"Login with Xtream Codes API\".\n4. Enter the username, password and server URL I sent you. Done \u2705"
+      es:"📱 Instalar en Android (móvil, tablet o TV box)\n\n1. Abre Google Play Store.\n2. Busca \"IPTV Smarters Pro\" e instálalo.\n3. Abre la app y elige \"Iniciar sesión con la API de Xtream Codes\".\n4. Introduce el usuario, la contraseña y la URL del servidor que te envié. ¡Listo ✅!",
+      nl:"📱 Installeren op Android (telefoon, tablet of tv-box)\n\n1. Open de Google Play Store.\n2. Zoek \"IPTV Smarters Pro\" en installeer het.\n3. Open de app en kies \"Inloggen met Xtream Codes API\".\n4. Voer de gebruikersnaam, het wachtwoord en de server-URL in die ik je heb gestuurd. Klaar ✅",
+      fr:"📱 Installer sur Android (téléphone, tablette ou box TV)\n\n1. Ouvrez le Google Play Store.\n2. Recherchez « IPTV Smarters Pro » et installez-le.\n3. Ouvrez l'application et choisissez « Se connecter avec l'API Xtream Codes ».\n4. Saisissez le username, le password et l'URL du serveur que je vous ai envoyés. Terminé ✅",
+      en:"📱 Install on Android (phone, tablet or TV box)\n\n1. Open the Google Play Store.\n2. Search for \"IPTV Smarters Pro\" and install it.\n3. Open the app and choose \"Login with Xtream Codes API\".\n4. Enter the username, password and server URL I sent you. Done ✅",
+      sq:"📱 Instalo në Android (telefon, tablet ose TV box)\n\n1. Hapni Google Play Store.\n2. Kërkoni \"IPTV Smarters Pro\" dhe instalojeni.\n3. Hapni aplikacionin dhe zgjidhni \"Hyr me Xtream Codes API\".\n4. Futni përdoruesin, fjalëkalimin dhe URL-në e serverit që ju dërgova. Gati ✅"
     },
     ios:{
-      es:"\uD83D\uDCF1 Instalar en iPhone / iPad\n\n1. Abre la App Store.\n2. Busca \"IPTV Smarters Player\" (o \"Smarters Player Lite\") e inst\u00E1lalo.\n3. Abre la app y elige \"Iniciar sesi\u00F3n con la API de Xtream Codes\".\n4. Introduce el usuario, la contrase\u00F1a y la URL del servidor que te envi\u00E9. \u00A1Listo \u2705!",
-      nl:"\uD83D\uDCF1 Installeren op iPhone / iPad\n\n1. Open de App Store.\n2. Zoek \"IPTV Smarters Player\" (of \"Smarters Player Lite\") en installeer het.\n3. Open de app en kies \"Inloggen met Xtream Codes API\".\n4. Voer de gebruikersnaam, het wachtwoord en de server-URL in die ik je heb gestuurd. Klaar \u2705",
-      fr:"\uD83D\uDCF1 Installer sur iPhone / iPad\n\n1. Ouvrez l'App Store.\n2. Recherchez \u00AB IPTV Smarters Player \u00BB (ou \u00AB Smarters Player Lite \u00BB) et installez-le.\n3. Ouvrez l'application et choisissez \u00AB Se connecter avec l'API Xtream Codes \u00BB.\n4. Saisissez le username, le password et l'URL du serveur que je vous ai envoy\u00E9s. Termin\u00E9 \u2705",
-      en:"\uD83D\uDCF1 Install on iPhone / iPad\n\n1. Open the App Store.\n2. Search for \"IPTV Smarters Player\" (or \"Smarters Player Lite\") and install it.\n3. Open the app and choose \"Login with Xtream Codes API\".\n4. Enter the username, password and server URL I sent you. Done \u2705"
+      es:"📱 Instalar en iPhone / iPad\n\n1. Abre la App Store.\n2. Busca \"IPTV Smarters Player\" (o \"Smarters Player Lite\") e instálalo.\n3. Abre la app y elige \"Iniciar sesión con la API de Xtream Codes\".\n4. Introduce el usuario, la contraseña y la URL del servidor que te envié. ¡Listo ✅!",
+      nl:"📱 Installeren op iPhone / iPad\n\n1. Open de App Store.\n2. Zoek \"IPTV Smarters Player\" (of \"Smarters Player Lite\") en installeer het.\n3. Open de app en kies \"Inloggen met Xtream Codes API\".\n4. Voer de gebruikersnaam, het wachtwoord en de server-URL in die ik je heb gestuurd. Klaar ✅",
+      fr:"📱 Installer sur iPhone / iPad\n\n1. Ouvrez l'App Store.\n2. Recherchez « IPTV Smarters Player » (ou « Smarters Player Lite ») et installez-le.\n3. Ouvrez l'application et choisissez « Se connecter avec l'API Xtream Codes ».\n4. Saisissez le username, le password et l'URL du serveur que je vous ai envoyés. Terminé ✅",
+      en:"📱 Install on iPhone / iPad\n\n1. Open the App Store.\n2. Search for \"IPTV Smarters Player\" (or \"Smarters Player Lite\") and install it.\n3. Open the app and choose \"Login with Xtream Codes API\".\n4. Enter the username, password and server URL I sent you. Done ✅",
+      sq:"📱 Instalo në iPhone / iPad\n\n1. Hapni App Store.\n2. Kërkoni \"IPTV Smarters Player\" (ose \"Smarters Player Lite\") dhe instalojeni.\n3. Hapni aplikacionin dhe zgjidhni \"Hyr me Xtream Codes API\".\n4. Futni përdoruesin, fjalëkalimin dhe URL-në e serverit që ju dërgova. Gati ✅"
     },
     smarttv:{
-      es:"\uD83D\uDCFA Instalar en Smart TV Samsung / LG\n\n1. Abre la tienda de apps de tu TV (Samsung Apps / LG Content Store).\n2. Busca \"IBO Player\" (o \"SmartOne IPTV\") e inst\u00E1lalo.\n3. Abre la app: te mostrar\u00E1 tu direcci\u00F3n MAC y una clave de dispositivo. Env\u00EDamelas, o a\u00F1ade tu lista en la web que aparece en pantalla.\n4. Yo activo tu lista y aparecer\u00E1n los canales. \u00A1Listo \u2705!",
-      nl:"\uD83D\uDCFA Installeren op Samsung / LG Smart TV\n\n1. Open de app-winkel op je tv (Samsung Apps / LG Content Store).\n2. Zoek \"IBO Player\" (of \"SmartOne IPTV\") en installeer het.\n3. Open de app: hij toont je MAC-adres en een device key. Stuur mij die twee, of voeg je lijst toe op de website die op het scherm staat.\n4. Ik activeer je lijst en de zenders verschijnen. Klaar \u2705",
-      fr:"\uD83D\uDCFA Installer sur Smart TV Samsung / LG\n\n1. Ouvrez le magasin d'applications de votre TV (Samsung Apps / LG Content Store).\n2. Recherchez \u00AB IBO Player \u00BB (ou \u00AB SmartOne IPTV \u00BB) et installez-le.\n3. Ouvrez l'application : elle affiche votre adresse MAC et une cl\u00E9 d'appareil. Envoyez-les-moi, ou ajoutez votre liste sur le site affich\u00E9 \u00E0 l'\u00E9cran.\n4. J'active votre liste et les cha\u00EEnes apparaissent. Termin\u00E9 \u2705",
-      en:"\uD83D\uDCFA Install on Samsung / LG Smart TV\n\n1. Open the app store on your TV (Samsung Apps / LG Content Store).\n2. Search for \"IBO Player\" (or \"SmartOne IPTV\") and install it.\n3. Open the app \u2014 it shows your MAC address and a device key. Send me those two, or add your playlist on the website shown on screen.\n4. I'll activate your playlist and the channels will appear. Done \u2705"
+      es:"📺 Instalar en Smart TV Samsung / LG\n\n1. Abre la tienda de apps de tu TV (Samsung Apps / LG Content Store).\n2. Busca \"IBO Player\" (o \"SmartOne IPTV\") e instálalo.\n3. Abre la app: te mostrará tu dirección MAC y una clave de dispositivo. Envíamelas, o añade tu lista en la web que aparece en pantalla.\n4. Yo activo tu lista y aparecerán los canales. ¡Listo ✅!",
+      nl:"📺 Installeren op Samsung / LG Smart TV\n\n1. Open de app-winkel op je tv (Samsung Apps / LG Content Store).\n2. Zoek \"IBO Player\" (of \"SmartOne IPTV\") en installeer het.\n3. Open de app: hij toont je MAC-adres en een device key. Stuur mij die twee, of voeg je lijst toe op de website die op het scherm staat.\n4. Ik activeer je lijst en de zenders verschijnen. Klaar ✅",
+      fr:"📺 Installer sur Smart TV Samsung / LG\n\n1. Ouvrez le magasin d'applications de votre TV (Samsung Apps / LG Content Store).\n2. Recherchez « IBO Player » (ou « SmartOne IPTV ») et installez-le.\n3. Ouvrez l'application : elle affiche votre adresse MAC et une clé d'appareil. Envoyez-les-moi, ou ajoutez votre liste sur le site affiché à l'écran.\n4. J'active votre liste et les chaînes apparaissent. Terminé ✅",
+      en:"📺 Install on Samsung / LG Smart TV\n\n1. Open the app store on your TV (Samsung Apps / LG Content Store).\n2. Search for \"IBO Player\" (or \"SmartOne IPTV\") and install it.\n3. Open the app — it shows your MAC address and a device key. Send me those two, or add your playlist on the website shown on screen.\n4. I'll activate your playlist and the channels will appear. Done ✅",
+      sq:"📺 Instalo në Smart TV Samsung / LG\n\n1. Hapni dyqanin e aplikacioneve në TV-në tuaj (Samsung Apps / LG Content Store).\n2. Kërkoni \"IBO Player\" (ose \"SmartOne IPTV\") dhe instalojeni.\n3. Hapni aplikacionin — do t'ju shfaqë adresën MAC dhe një Device Key. Më dërgoni këto të dyja, ose shtoni listën tuaj në faqen e shfaqur në ekran.\n4. Unë e aktivizoj listën tuaj dhe kanalet do të shfaqen. Gati ✅"
     },
     computer:{
-      es:"\uD83D\uDCBB Ver en el ordenador (Windows / Mac)\n\nWindows:\n1. Descarga \"IPTV Smarters Pro\" para Windows desde iptvsmarters.com.\n2. Inst\u00E1lalo y \u00E1brelo, elige \"Iniciar sesi\u00F3n con la API de Xtream Codes\" e introduce los datos que te envi\u00E9.\n\nMac:\n1. En un Mac reciente (chip Apple), abre la App Store e instala \"IPTV Smarters Player\" (la app de iPhone/iPad funciona en Mac).\n2. O usa cualquier reproductor compatible con Xtream e introduce el usuario, la contrase\u00F1a y la URL del servidor. \u00A1Listo \u2705!",
-      nl:"\uD83D\uDCBB Kijken op de computer (Windows / Mac)\n\nWindows:\n1. Download \"IPTV Smarters Pro\" voor Windows via iptvsmarters.com.\n2. Installeer en open het, kies \"Inloggen met Xtream Codes API\" en voer de gegevens in die ik je stuurde.\n\nMac:\n1. Op een nieuwere Mac (Apple-chip): open de App Store en installeer \"IPTV Smarters Player\" (de iPhone/iPad-app werkt op Mac).\n2. Of gebruik een Xtream-compatibele speler en voer de gebruikersnaam, het wachtwoord en de server-URL in. Klaar \u2705",
-      fr:"\uD83D\uDCBB Regarder sur l'ordinateur (Windows / Mac)\n\nWindows :\n1. T\u00E9l\u00E9chargez \u00AB IPTV Smarters Pro \u00BB pour Windows depuis iptvsmarters.com.\n2. Installez-le et ouvrez-le, choisissez \u00AB Se connecter avec l'API Xtream Codes \u00BB et saisissez les informations que je vous ai envoy\u00E9es.\n\nMac :\n1. Sur un Mac r\u00E9cent (puce Apple), ouvrez l'App Store et installez \u00AB IPTV Smarters Player \u00BB (l'app iPhone/iPad fonctionne sur Mac).\n2. Ou utilisez un lecteur compatible Xtream et saisissez le username, le password et l'URL du serveur. Termin\u00E9 \u2705",
-      en:"\uD83D\uDCBB Watch on computer (Windows / Mac)\n\nWindows:\n1. Download \"IPTV Smarters Pro\" for Windows from iptvsmarters.com.\n2. Install and open it, choose \"Login with Xtream Codes API\", and enter the details I sent you.\n\nMac:\n1. On a newer Mac (Apple chip), open the App Store and install \"IPTV Smarters Player\" (the iPhone/iPad app runs on Mac).\n2. Or use any Xtream-compatible player and enter the username, password and server URL I sent you. Done \u2705"
+      es:"💻 Ver en el ordenador (Windows / Mac)\n\nWindows:\n1. Descarga \"IPTV Smarters Pro\" para Windows desde iptvsmarters.com.\n2. Instálalo y ábrelo, elige \"Iniciar sesión con la API de Xtream Codes\" e introduce los datos que te envié.\n\nMac:\n1. En un Mac reciente (chip Apple), abre la App Store e instala \"IPTV Smarters Player\" (la app de iPhone/iPad funciona en Mac).\n2. O usa cualquier reproductor compatible con Xtream e introduce el usuario, la contraseña y la URL del servidor. ¡Listo ✅!",
+      nl:"💻 Kijken op de computer (Windows / Mac)\n\nWindows:\n1. Download \"IPTV Smarters Pro\" voor Windows via iptvsmarters.com.\n2. Installeer en open het, kies \"Inloggen met Xtream Codes API\" en voer de gegevens in die ik je stuurde.\n\nMac:\n1. Op een nieuwere Mac (Apple-chip): open de App Store en installeer \"IPTV Smarters Player\" (de iPhone/iPad-app werkt op Mac).\n2. Of gebruik een Xtream-compatibele speler en voer de gebruikersnaam, het wachtwoord en de server-URL in. Klaar ✅",
+      fr:"💻 Regarder sur l'ordinateur (Windows / Mac)\n\nWindows :\n1. Téléchargez « IPTV Smarters Pro » pour Windows depuis iptvsmarters.com.\n2. Installez-le et ouvrez-le, choisissez « Se connecter avec l'API Xtream Codes » et saisissez les informations que je vous ai envoyées.\n\nMac :\n1. Sur un Mac récent (puce Apple), ouvrez l'App Store et installez « IPTV Smarters Player » (l'app iPhone/iPad fonctionne sur Mac).\n2. Ou utilisez un lecteur compatible Xtream et saisissez le username, le password et l'URL du serveur. Terminé ✅",
+      en:"💻 Watch on computer (Windows / Mac)\n\nWindows:\n1. Download \"IPTV Smarters Pro\" for Windows from iptvsmarters.com.\n2. Install and open it, choose \"Login with Xtream Codes API\", and enter the details I sent you.\n\nMac:\n1. On a newer Mac (Apple chip), open the App Store and install \"IPTV Smarters Player\" (the iPhone/iPad app runs on Mac).\n2. Or use any Xtream-compatible player and enter the username, password and server URL I sent you. Done ✅",
+      sq:"💻 Shiko në kompjuter (Windows / Mac)\n\nWindows:\n1. Shkarkoni \"IPTV Smarters Pro\" për Windows nga iptvsmarters.com.\n2. Instalojeni dhe hapeni, zgjidhni \"Hyr me Xtream Codes API\" dhe futni të dhënat që ju dërgova.\n\nMac:\n1. Në një Mac të ri (chip Apple), hapni App Store dhe instaloni \"IPTV Smarters Player\" (aplikacioni i iPhone/iPad funksionon në Mac).\n2. Ose përdorni çdo luajtës të pajtueshëm me Xtream dhe futni përdoruesin, fjalëkalimin dhe URL-në e serverit. Gati ✅"
     }
   };
+
+  // ---- ready answers ----
+  var REPLIES=[
+    {id:"prices",label:"Prices",
+      es:"Estos son los precios:\n\n3 meses: 25€\n6 meses: 39€\n12 meses: 59€\n24 meses: 99€\n\nLa activación tarda menos de 10 minutos y tienes 7 días de garantía. Dime qué duración te interesa y en qué dispositivo vas a ver, y te lo preparo.",
+      nl:"Dit zijn de prijzen:\n\n3 maanden: 25€\n6 maanden: 39€\n12 maanden: 59€\n24 maanden: 99€\n\nActiveren duurt minder dan 10 minuten en je krijgt 7 dagen garantie. Vertel me welke duur je wilt en op welk apparaat je gaat kijken, dan maak ik het klaar.",
+      fr:"Voici les tarifs :\n\n3 mois : 25€\n6 mois : 39€\n12 mois : 59€\n24 mois : 99€\n\nL'activation prend moins de 10 minutes et vous avez une garantie de 7 jours. Dites-moi quelle durée vous intéresse et sur quel appareil vous allez regarder, et je vous prépare tout.",
+      en:"Here are the prices:\n\n3 months: 25€\n6 months: 39€\n12 months: 59€\n24 months: 99€\n\nActivation takes under 10 minutes and you get a 7-day guarantee. Tell me which duration you're interested in and which device you'll watch on, and I'll get it ready.",
+      sq:"Këto janë çmimet:\n\n3 muaj: 25€\n6 muaj: 39€\n12 muaj: 59€\n24 muaj: 99€\n\nAktivizimi zgjat më pak se 10 minuta dhe keni 7 ditë garanci. Më thoni cilën kohëzgjatje dëshironi dhe në cilën pajisje do të shikoni, dhe jua përgatis."},
+    {id:"info",label:"What is it / full info",
+      es:"Hola y gracias por escribir.\n\nEs una suscripción IPTV con canales locales e internacionales, todo el deporte, cine, series, canales infantiles y de documentales, además de una biblioteca a la carta de películas y series. Funciona en Smart TV (Samsung, LG), Android box, Fire Stick, móvil, tablet y ordenador.\n\nPrecios:\n3 meses: 25€\n6 meses: 39€\n12 meses: 59€\n24 meses: 99€\n\nLa activación tarda menos de 10 minutos y tienes 7 días de garantía.",
+      nl:"Hallo en bedankt voor je bericht.\n\nHet is een IPTV-abonnement met lokale en internationale zenders, alle sport, film, series, kinder- en documentairezenders, plus een on-demand bibliotheek met films en series. Het werkt op Smart TV (Samsung, LG), Android box, Fire Stick, telefoon, tablet en computer.\n\nPrijzen:\n3 maanden: 25€\n6 maanden: 39€\n12 maanden: 59€\n24 maanden: 99€\n\nActiveren duurt minder dan 10 minuten en je krijgt 7 dagen garantie.",
+      fr:"Bonjour et merci de votre message.\n\nC'est un abonnement IPTV avec des chaînes locales et internationales, tout le sport, le cinéma, les séries, les chaînes jeunesse et documentaires, ainsi qu'une bibliothèque à la demande de films et séries. Il fonctionne sur Smart TV (Samsung, LG), box Android, Fire Stick, téléphone, tablette et ordinateur.\n\nTarifs :\n3 mois : 25€\n6 mois : 39€\n12 mois : 59€\n24 mois : 99€\n\nL'activation prend moins de 10 minutes et vous avez une garantie de 7 jours.",
+      en:"Hello and thanks for writing.\n\nIt's an IPTV subscription with local and international channels, full sport, cinema, series, kids and documentary channels, plus an on-demand library of films and series. It works on Smart TV (Samsung, LG), Android box, Fire Stick, phone, tablet and computer.\n\nPrices:\n3 months: 25€\n6 months: 39€\n12 months: 59€\n24 months: 99€\n\nActivation takes under 10 minutes and you get a 7-day guarantee.",
+      sq:"Përshëndetje dhe faleminderit që shkruat.\n\nËshtë një abonim IPTV me kanale lokale dhe ndërkombëtare, të gjithë sportin, kinemanë, serialet, kanalet për fëmijë dhe dokumentarë, plus një bibliotekë me kërkesë me filma dhe seriale. Funksionon në Smart TV (Samsung, LG), Android box, Fire Stick, telefon, tablet dhe kompjuter.\n\nÇmimet:\n3 muaj: 25€\n6 muaj: 39€\n12 muaj: 59€\n24 muaj: 99€\n\nAktivizimi zgjat më pak se 10 minuta dhe keni 7 ditë garanci."},
+    {id:"trial",label:"Free trial offer",
+      es:"¡Hola! Claro que sí, sin ningún compromiso.\n\nDime en qué dispositivo quieres ver (Smart TV Samsung o LG, Android box, Fire Stick, móvil, tablet u ordenador) y te preparo la prueba con los pasos exactos para ese dispositivo.\n\nEn cuanto me digas, la tienes lista en un par de minutos.",
+      nl:"Hallo! Natuurlijk, helemaal vrijblijvend.\n\nVertel me op welk apparaat je wilt kijken (Samsung of LG Smart TV, Android box, Fire Stick, telefoon, tablet of computer) en ik zet de proef klaar met de exacte stappen voor dat apparaat.\n\nZodra je het me zegt, is het binnen een paar minuten klaar.",
+      fr:"Bonjour ! Bien sûr, sans aucun engagement.\n\nDites-moi sur quel appareil vous voulez regarder (Smart TV Samsung ou LG, box Android, Fire Stick, téléphone, tablette ou ordinateur) et je prépare l'essai avec les étapes exactes pour cet appareil.\n\nDès que vous me le dites, c'est prêt en quelques minutes.",
+      en:"Hello! Of course, with no obligation at all.\n\nTell me which device you want to watch on (Samsung or LG Smart TV, Android box, Fire Stick, phone, tablet or computer) and I'll set up the trial with the exact steps for that device.\n\nAs soon as you tell me, it's ready in a couple of minutes.",
+      sq:"Përshëndetje! Sigurisht, pa asnjë detyrim.\n\nMë thoni në cilën pajisje doni të shikoni (Smart TV Samsung ose LG, Android box, Fire Stick, telefon, tablet ose kompjuter) dhe jua përgatis provën me hapat e saktë për atë pajisje.\n\nSapo të më thoni, është gati për pak minuta."},
+    {id:"payment",label:"How payment works",
+      es:"El pago es con tarjeta, mediante un enlace de pago que te envío. Es directo y seguro, como en cualquier tienda online, y guardas tu recibo.\n\nDime qué duración quieres y te envío el enlace. Cuando lo hagas, envíame una captura del recibo y activo tu suscripción en menos de 10 minutos.",
+      nl:"Betalen gaat met kaart, via een betaallink die ik je stuur. Het is direct en veilig, net als bij elke webshop, en je houdt je betaalbewijs.\n\nVertel me welke duur je wilt en ik stuur de link. Zodra het klaar is, stuur me een screenshot van het bewijs en ik activeer je abonnement binnen 10 minuten.",
+      fr:"Le paiement se fait par carte, via un lien de paiement que je vous envoie. C'est direct et sécurisé, comme dans n'importe quelle boutique en ligne, et vous gardez votre reçu.\n\nDites-moi quelle durée vous voulez et je vous envoie le lien. Une fois fait, envoyez-moi une capture du reçu et j'active votre abonnement en moins de 10 minutes.",
+      en:"Payment is by card, through a payment link I send you. It's direct and secure, just like any online shop, and you keep your receipt.\n\nTell me which duration you want and I'll send the link. Once it's done, send me a screenshot of the receipt and I'll activate your subscription in under 10 minutes.",
+      sq:"Pagesa bëhet me kartë, përmes një linku pagese që jua dërgoj. Është i drejtpërdrejtë dhe i sigurt, si në çdo dyqan online, dhe ju e ruani faturën tuaj.\n\nMë thoni cilën kohëzgjatje doni dhe jua dërgoj linkun. Pasi ta kryeni, më dërgoni një pamje të faturës dhe jua aktivizoj abonimin për më pak se 10 minuta."},
+    {id:"received",label:"Payment received",
+      es:"Pago recibido, muchas gracias. Dame dos minutos, preparo tu suscripción y te envío tus datos de acceso.",
+      nl:"Betaling ontvangen, hartelijk dank. Geef me twee minuten, ik maak je abonnement klaar en stuur je je inloggegevens.",
+      fr:"Paiement bien reçu, merci beaucoup. Donnez-moi deux minutes, je prépare votre abonnement et je vous envoie vos identifiants.",
+      en:"Payment received, thank you very much. Give me two minutes, I'll prepare your subscription and send you your login details.",
+      sq:"Pagesa u pranua, faleminderit shumë. Më jepni dy minuta, po e përgatis abonimin tuaj dhe jua dërgoj të dhënat e hyrjes."},
+    {id:"active",label:"Activated — restart app",
+      es:"Listo, ya está activada. Cierra la app por completo, vuelve a abrirla y dime si todo funciona bien.",
+      nl:"Klaar, het is geactiveerd. Sluit de app volledig af, open hem opnieuw en laat me weten of alles goed werkt.",
+      fr:"Voilà, c'est activé. Fermez complètement l'application, rouvrez-la et dites-moi si tout fonctionne bien.",
+      en:"Done, it's activated. Close the app completely, reopen it, and tell me if everything works properly.",
+      sq:"Gati, është aktivizuar. Mbylleni aplikacionin plotësisht, hapeni përsëri dhe më thoni nëse gjithçka funksionon mirë."},
+    {id:"ibo",label:"IBO Player (MAC setup)",
+      es:"Instala la app \"IBO Player\" en el dispositivo. Al abrirla, aparecen en pantalla una dirección MAC y una Device Key: envíame esas dos y yo subo tu lista desde mi lado, así no tienes que introducir nada.\n\nDescárgala desde el sitio oficial, iboplayer.com, porque hay muchas copias falsas con el mismo nombre e icono. La verdadera muestra \"iboplayer.com\" en su propia pantalla.\n\nY no te preocupes por la licencia: está incluida en tu suscripción, yo me encargo.",
+      nl:"Installeer de app \"IBO Player\" op het apparaat. Als je hem opent, verschijnen er een MAC-adres en een Device Key op het scherm: stuur mij die twee en ik upload je lijst van mijn kant, zodat jij niets hoeft in te voeren.\n\nDownload hem van de officiële site, iboplayer.com, want er zijn veel valse kopieën met dezelfde naam en icoon. De echte toont \"iboplayer.com\" op zijn eigen scherm.\n\nEn maak je geen zorgen over de licentie: die zit bij je abonnement inbegrepen, dat regel ik.",
+      fr:"Installez l'application \"IBO Player\" sur l'appareil. À l'ouverture, une adresse MAC et une Device Key apparaissent à l'écran : envoyez-moi ces deux-là et je téléverse votre liste de mon côté, comme ça vous n'avez rien à saisir.\n\nTéléchargez-la depuis le site officiel, iboplayer.com, car il existe beaucoup de fausses copies avec le même nom et la même icône. La vraie affiche \"iboplayer.com\" sur son propre écran.\n\nEt ne vous inquiétez pas pour la licence : elle est incluse dans votre abonnement, je m'en occupe.",
+      en:"Install the \"IBO Player\" app on the device. When you open it, a MAC address and a Device Key appear on screen: send me those two and I'll upload your playlist from my side, so you don't have to enter anything.\n\nDownload it from the official site, iboplayer.com, because there are many fake copies with the same name and icon. The genuine one shows \"iboplayer.com\" on its own screen.\n\nAnd don't worry about the licence: it's included in your subscription, I take care of it.",
+      sq:"Instaloni aplikacionin \"IBO Player\" në pajisje. Kur ta hapni, në ekran shfaqen një adresë MAC dhe një Device Key: më dërgoni këto të dyja dhe unë e ngarkoj listën tuaj nga ana ime, kështu që ju nuk keni pse të futni asgjë.\n\nShkarkojeni nga faqja zyrtare, iboplayer.com, sepse ka shumë kopje të rreme me të njëjtin emër dhe ikonë. Origjinali shfaq \"iboplayer.com\" në ekranin e vet.\n\nDhe mos u shqetësoni për licencën: është përfshirë në abonimin tuaj, unë kujdesem për të."},
+    {id:"firetv",label:"Fire TV install",
+      es:"En Fire TV la app no está en la tienda de Amazon, así que se instala de otra forma:\n\n1) Busca la app \"Downloader\" (icono naranja) en la tienda de Fire TV e instálala.\n2) Ajustes → Mi Fire TV → Opciones de desarrollador → Instalar apps desconocidas → activa Downloader.\n3) Abre Downloader y dime cuando estés en esa pantalla, te envío lo que tienes que escribir.\n4) Se descarga solo: pulsa \"Instalar\" y luego \"Abrir\".\n\nDime en qué paso estás y te guío.",
+      nl:"Op Fire TV staat de app niet in de Amazon-store, dus die installeer je op een andere manier:\n\n1) Zoek de app \"Downloader\" (oranje icoon) in de Fire TV-store en installeer hem.\n2) Instellingen → My Fire TV → Ontwikkelaarsopties → Onbekende apps installeren → zet Downloader aan.\n3) Open Downloader en laat me weten wanneer je op dat scherm bent, dan stuur ik wat je moet typen.\n4) Hij downloadt vanzelf: druk op \"Install\" en daarna \"Open\".\n\nLaat me weten bij welke stap je bent en ik help je erdoorheen.",
+      fr:"Sur Fire TV, l'application n'est pas dans la boutique Amazon, elle s'installe donc autrement :\n\n1) Cherchez l'application \"Downloader\" (icône orange) dans la boutique Fire TV et installez-la.\n2) Paramètres → Mon Fire TV → Options développeur → Installer applications inconnues → activez Downloader.\n3) Ouvrez Downloader et dites-moi quand vous êtes sur cet écran, je vous envoie ce qu'il faut taper.\n4) Le téléchargement se fait tout seul : appuyez sur \"Installer\" puis \"Ouvrir\".\n\nDites-moi à quelle étape vous êtes et je vous guide.",
+      en:"On Fire TV the app isn't in Amazon's store, so it's installed differently:\n\n1) Find the \"Downloader\" app (orange icon) in the Fire TV store and install it.\n2) Settings → My Fire TV → Developer Options → Install unknown apps → turn on Downloader.\n3) Open Downloader and tell me when you're on that screen, I'll send you what to type.\n4) It downloads by itself: press \"Install\", then \"Open\".\n\nTell me which step you're on and I'll walk you through it.",
+      sq:"Në Fire TV aplikacioni nuk gjendet në dyqanin e Amazon, prandaj instalohet ndryshe:\n\n1) Gjeni aplikacionin \"Downloader\" (ikona portokalli) në dyqanin e Fire TV dhe instalojeni.\n2) Cilësimet → My Fire TV → Opsionet e zhvilluesit → Instalo aplikacione të panjohura → aktivizoni Downloader.\n3) Hapni Downloader dhe më thoni kur të jeni në atë ekran, jua dërgoj çfarë të shkruani.\n4) Shkarkohet vetë: shtypni \"Install\", pastaj \"Open\".\n\nMë thoni në cilin hap jeni dhe ju udhëzoj."},
+    {id:"invalid",label:"Invalid login / can't connect",
+      es:"Casi siempre es un pequeño detalle en lo que se ha escrito. Comprueba tres cosas:\n\n1) El método: \"Iniciar sesión con la API de Xtream Codes\", no \"Cargar tu lista o archivo/URL\".\n2) La URL del servidor: solo la parte corta, sin /get.php, sin usuario ni contraseña y sin barra al final.\n3) Usuario y contraseña: sin espacios antes ni después, y cuidado con el autocorrector del móvil, que a veces pone la primera letra en mayúscula.\n\nEnvíame una captura de la pantalla donde introduces los datos y te digo exactamente qué falla.",
+      nl:"Het is bijna altijd een klein detail in wat er is ingetypt. Controleer drie dingen:\n\n1) De methode: \"Inloggen met Xtream Codes API\", niet \"Laad je afspeellijst of bestand/URL\".\n2) De server-URL: alleen het korte deel, zonder /get.php, zonder gebruikersnaam of wachtwoord en zonder schuine streep aan het eind.\n3) Gebruikersnaam en wachtwoord: geen spaties ervoor of erna, en let op de autocorrectie van je telefoon, die soms de eerste letter een hoofdletter maakt.\n\nStuur me een screenshot van het scherm waar je de gegevens invoert en ik zeg je precies wat er mis is.",
+      fr:"C'est presque toujours un petit détail dans ce qui a été saisi. Vérifiez trois choses :\n\n1) La méthode : \"Se connecter avec l'API Xtream Codes\", pas \"Charger votre playlist ou fichier/URL\".\n2) L'URL du serveur : seulement la partie courte, sans /get.php, sans identifiant ni mot de passe et sans barre oblique à la fin.\n3) Identifiant et mot de passe : aucun espace avant ou après, et attention à la correction automatique du téléphone, qui met parfois la première lettre en majuscule.\n\nEnvoyez-moi une capture de l'écran où vous saisissez les informations et je vous dis exactement ce qui ne va pas.",
+      en:"That's nearly always a small detail in what was typed. Check three things:\n\n1) The method: \"Login with Xtream Codes API\", not \"Load your Playlist or File/URL\".\n2) The server URL: only the short part, with no /get.php, no username or password and no trailing slash.\n3) Username and password: no spaces before or after, and watch your phone's autocorrect, which sometimes capitalises the first letter.\n\nSend me a screenshot of the screen where you enter the details and I'll tell you exactly what's wrong.",
+      sq:"Pothuajse gjithmonë është një detaj i vogël në atë që është shkruar. Kontrolloni tri gjëra:\n\n1) Metoda: \"Hyr me Xtream Codes API\", jo \"Ngarko listën ose skedarin/URL\".\n2) URL-ja e serverit: vetëm pjesa e shkurtër, pa /get.php, pa përdorues ose fjalëkalim dhe pa vijë të pjerrët në fund.\n3) Përdoruesi dhe fjalëkalimi: pa hapësira para ose pas, dhe kujdes me korrigjimin automatik të telefonit, që ndonjëherë e bën shkronjën e parë të madhe.\n\nMë dërgoni një pamje të ekranit ku i futni të dhënat dhe ju them saktësisht se çfarë nuk shkon."},
+    {id:"freezing",label:"Freezing on 4K",
+      es:"Si se corta sobre todo en los canales 4K, casi siempre es la velocidad que llega a la tele. La fibra llega al router, pero la pantalla solo recibe lo que el wifi deja pasar, y el 4K necesita unos 25-40 Mbps de forma constante.\n\nDos pruebas rápidas: pon el mismo canal en HD; si va perfecto, es el 4K y no la fuente. Y si puedes, conecta la tele con un cable de red, se nota mucho.\n\nDime qué canales exactamente y a qué hora, y reviso las fuentes desde mi lado.",
+      nl:"Als het vooral hapert op de 4K-zenders, is het bijna altijd de snelheid die de tv bereikt. De glasvezel komt tot aan de router, maar het scherm krijgt alleen wat de wifi doorlaat, en 4K heeft constant zo'n 25-40 Mbps nodig.\n\nTwee snelle tests: zet dezelfde zender op in HD — als die perfect is, ligt het aan de 4K en niet aan de bron. En als het kan, sluit de tv aan met een netwerkkabel, dat scheelt veel.\n\nZeg me precies welke zenders en hoe laat, dan controleer ik de bronnen aan mijn kant.",
+      fr:"Si ça coupe surtout sur les chaînes 4K, c'est presque toujours le débit qui arrive à la télé. La fibre arrive à la box, mais l'écran ne reçoit que ce que le wifi laisse passer, et la 4K a besoin d'environ 25-40 Mbps en permanence.\n\nDeux tests rapides : mettez la même chaîne en HD — si c'est parfait, c'est la 4K et pas la source. Et si vous pouvez, branchez la télé avec un câble réseau, ça change beaucoup.\n\nDites-moi quelles chaînes exactement et à quelle heure, et je vérifie les sources de mon côté.",
+      en:"If it breaks up mainly on the 4K channels, it's almost always the speed reaching the TV. The fibre reaches the router, but the screen only gets what the wifi lets through, and 4K needs around 25-40 Mbps constantly.\n\nTwo quick tests: put the same channel on in HD — if that's perfect, it's the 4K and not the source. And if you can, connect the TV with a network cable, it makes a big difference.\n\nTell me which channels exactly and what time, and I'll check the sources on my side.",
+      sq:"Nëse ndërpritet kryesisht në kanalet 4K, pothuajse gjithmonë është shpejtësia që arrin te televizori. Fibra arrin te routeri, por ekrani merr vetëm atë që lejon wifi-ja, dhe 4K ka nevojë për rreth 25-40 Mbps vazhdimisht.\n\nDy prova të shpejta: vendosni të njëjtin kanal në HD — nëse është perfekt, është 4K-ja dhe jo burimi. Dhe nëse mundeni, lidheni televizorin me një kabllo rrjeti, bën shumë ndryshim.\n\nMë thoni saktësisht cilat kanale dhe në çfarë ore, dhe i kontrolloj burimet nga ana ime."},
+    {id:"films",label:"Films / VOD not loading",
+      es:"Es una de dos cosas. Si se queda cargando sin parar, es el catálogo: la primera vez tiene que cargar miles de títulos y puede tardar varios minutos, así que deja la app abierta sin tocarla.\n\nSi una película se abre pero se queda en negro, cambia el reproductor en los ajustes de la app (VLC o reproductor externo): las películas usan un formato distinto al de los canales en directo.\n\nSi aun así no funciona, dímelo y reviso la fuente.",
+      nl:"Het is één van twee dingen. Als hij eindeloos blijft laden, is het de catalogus: de eerste keer moet hij duizenden titels laden en dat kan enkele minuten duren, dus laat de app open zonder hem aan te raken.\n\nAls een film opent maar zwart blijft, verander dan de speler in de app-instellingen (VLC of externe speler): films gebruiken een ander formaat dan de live zenders.\n\nWerkt het dan nog niet, laat het me weten en ik controleer de bron.",
+      fr:"C'est l'une de deux choses. Si ça tourne sans fin, c'est le catalogue : la première fois, il doit charger des milliers de titres et cela peut prendre plusieurs minutes, alors laissez l'application ouverte sans y toucher.\n\nSi un film s'ouvre mais reste noir, changez le lecteur dans les réglages de l'application (VLC ou lecteur externe) : les films utilisent un format différent des chaînes en direct.\n\nSi ça ne marche toujours pas, dites-le-moi et je vérifie la source.",
+      en:"It's one of two things. If it just spins forever, it's the catalogue: the first time it has to load thousands of titles and can take several minutes, so leave the app open without touching it.\n\nIf a film opens but stays black, change the player in the app settings (VLC or external player): films use a different format from the live channels.\n\nIf it still doesn't work, tell me and I'll check the source.",
+      sq:"Është njëra nga dy gjërat. Nëse thjesht ngarkon pafund, është katalogu: herën e parë duhet të ngarkojë mijëra tituj dhe mund të zgjasë disa minuta, prandaj lëreni aplikacionin hapur pa e prekur.\n\nNëse një film hapet por mbetet i zi, ndryshoni luajtësin te cilësimet e aplikacionit (VLC ose luajtës i jashtëm): filmat përdorin një format të ndryshëm nga kanalet live.\n\nNëse përsëri nuk funksionon, më thoni dhe e kontrolloj burimin."},
+    {id:"blocked",label:"Blocked by provider (server/DNS)",
+      es:"Prueba con otra URL de servidor, con el mismo usuario y contraseña:\n\nhttp://vpn.drk35cv.org\no http://smart.cwdn.cx:80\no http://line.dino.ws:80\no http://line.rs4ott.com\n\nNormalmente una de ellas entra enseguida. Y si sigue bloqueado, pon el DNS de tu tele o router en 1.1.1.1 y 8.8.8.8, que resuelve la mayoría de bloqueos del operador.",
+      nl:"Probeer een andere server-URL, met dezelfde gebruikersnaam en wachtwoord:\n\nhttp://vpn.drk35cv.org\nof http://smart.cwdn.cx:80\nof http://line.dino.ws:80\nof http://line.rs4ott.com\n\nMeestal komt er één meteen door. En als het nog steeds geblokkeerd is, zet dan de DNS van je tv of router op 1.1.1.1 en 8.8.8.8, dat lost de meeste blokkades van providers op.",
+      fr:"Essayez une autre URL de serveur, avec le même identifiant et mot de passe :\n\nhttp://vpn.drk35cv.org\nou http://smart.cwdn.cx:80\nou http://line.dino.ws:80\nou http://line.rs4ott.com\n\nEn général, l'une d'elles passe tout de suite. Et si c'est toujours bloqué, réglez le DNS de votre télé ou de votre box sur 1.1.1.1 et 8.8.8.8, ce qui résout la plupart des blocages des opérateurs.",
+      en:"Try a different server URL, with the same username and password:\n\nhttp://vpn.drk35cv.org\nor http://smart.cwdn.cx:80\nor http://line.dino.ws:80\nor http://line.rs4ott.com\n\nOne of them usually gets through straight away. And if it's still blocked, set your TV's or router's DNS to 1.1.1.1 and 8.8.8.8, which resolves most ISP blocks.",
+      sq:"Provoni një URL tjetër serveri, me të njëjtin përdorues dhe fjalëkalim:\n\nhttp://vpn.drk35cv.org\nose http://smart.cwdn.cx:80\nose http://line.dino.ws:80\nose http://line.rs4ott.com\n\nZakonisht njëra prej tyre kalon menjëherë. Dhe nëse ende është e bllokuar, vendosni DNS-në e televizorit ose routerit tuaj në 1.1.1.1 dhe 8.8.8.8, që zgjidh shumicën e bllokimeve të operatorit."},
+    {id:"screens",label:"How many screens / devices",
+      es:"Puedes instalarlo en todos los dispositivos que quieras (tele, móvil, tablet, ordenador) y cambiar entre ellos cuando quieras.\n\nLo que no se puede es ver en dos a la vez: cada suscripción permite una conexión simultánea. Para dos pantallas al mismo tiempo, serían dos suscripciones separadas, cada una con su propio código.",
+      nl:"Je kunt het op zoveel apparaten installeren als je wilt (tv, telefoon, tablet, computer) en er tussen wisselen wanneer je maar wilt.\n\nWat niet kan, is op twee tegelijk kijken: elk abonnement staat één gelijktijdige verbinding toe. Voor twee schermen tegelijk zijn dat twee aparte abonnementen, elk met zijn eigen code.",
+      fr:"Vous pouvez l'installer sur autant d'appareils que vous voulez (télé, téléphone, tablette, ordinateur) et passer de l'un à l'autre quand vous voulez.\n\nCe qui n'est pas possible, c'est de regarder sur deux en même temps : chaque abonnement autorise une seule connexion simultanée. Pour deux écrans en même temps, ce serait deux abonnements séparés, chacun avec son propre code.",
+      en:"You can install it on as many devices as you like (TV, phone, tablet, computer) and switch between them whenever you want.\n\nWhat isn't possible is watching on two at once: each subscription allows one simultaneous connection. For two screens at the same time, that would be two separate subscriptions, each with its own code.",
+      sq:"Mund ta instaloni në sa pajisje të doni (TV, telefon, tablet, kompjuter) dhe të kaloni mes tyre kurdo që doni.\n\nAjo që nuk është e mundur është të shikoni në dy njëkohësisht: çdo abonim lejon një lidhje të njëkohshme. Për dy ekrane në të njëjtën kohë, do të ishin dy abonime të veçanta, secili me kodin e vet."},
+    {id:"followup",label:"Follow-up after trial",
+      es:"¡Hola! ¿Pudiste probarlo? ¿Qué tal se veía?\n\nSi te convenció, dime qué duración prefieres y te lo dejo activado en un momento: mantienes los mismos datos de acceso y no tienes que reinstalar nada.\n\nY si algo no fue bien, dímelo con sinceridad, prefiero saberlo y arreglarlo.",
+      nl:"Hallo! Heb je het kunnen testen? Hoe zag het eruit?\n\nAls het je beviel, vertel me welke duur je voorkeur heeft en ik zet het zo geactiveerd: je houdt dezelfde inloggegevens en hoeft niets opnieuw te installeren.\n\nEn als er iets niet goed ging, zeg het me eerlijk — ik weet het liever en los het op.",
+      fr:"Bonjour ! Avez-vous pu le tester ? Comment c'était ?\n\nSi cela vous a convaincu, dites-moi quelle durée vous préférez et je vous l'active en un instant : vous gardez les mêmes identifiants et vous n'avez rien à réinstaller.\n\nEt si quelque chose ne s'est pas bien passé, dites-le-moi franchement — je préfère le savoir et le corriger.",
+      en:"Hello! Were you able to test it? How did it look?\n\nIf it convinced you, tell me which duration you prefer and I'll have it activated in a moment: you keep the same login details and don't have to reinstall anything.\n\nAnd if something didn't go well, tell me honestly — I'd rather know and fix it.",
+      sq:"Përshëndetje! A arritët ta provoni? Si dukej?\n\nNëse ju bindi, më thoni cilën kohëzgjatje preferoni dhe jua aktivizoj për një çast: mbani të njëjtat të dhëna hyrjeje dhe nuk keni pse të riinstaloni asgjë.\n\nDhe nëse diçka nuk shkoi mirë, më thoni sinqerisht — parapëlqej ta di dhe ta rregulloj."},
+    {id:"ending",label:"Trial ending today",
+      es:"¡Hola! Tu prueba termina hoy.\n\nSi quieres continuar, dímelo y amplío tu línea enseguida: nada que reinstalar, nada que reconfigurar, mantienes los mismos datos y los mismos ajustes.",
+      nl:"Hallo! Je proef eindigt vandaag.\n\nAls je wilt doorgaan, laat het me weten en ik verleng je lijn meteen: niets opnieuw installeren, niets opnieuw instellen, je houdt dezelfde gegevens en dezelfde instellingen.",
+      fr:"Bonjour ! Votre essai se termine aujourd'hui.\n\nSi vous souhaitez continuer, dites-le-moi et je prolonge votre ligne tout de suite : rien à réinstaller, rien à reconfigurer, vous gardez les mêmes identifiants et les mêmes réglages.",
+      en:"Hello! Your trial finishes today.\n\nIf you'd like to continue, tell me and I'll extend your line straight away: nothing to reinstall, nothing to reconfigure, you keep the same details and the same settings.",
+      sq:"Përshëndetje! Prova juaj përfundon sot.\n\nNëse dëshironi të vazhdoni, më thoni dhe jua zgjas linjën menjëherë: asgjë për të riinstaluar, asgjë për të rikonfiguruar, mbani të njëjtat të dhëna dhe të njëjtat cilësime."}
+  ];
 
   // ---- helpers ----
   function parseM3U(s){
@@ -350,18 +490,9 @@
     }
     return {u:u,p:p,m:m};
   }
-  function fmtEuro(n){ return (n%1===0)?String(n):n.toFixed(2).replace(/0$/,""); }
-  function closestLink(amt){
-    var best=null;
-    for(var i=0;i<PAYLINKS.length;i++){
-      if(PAYLINKS[i][0]===48.72) continue; // one-off amount: kept in the table, skipped for auto-match (49 -> 50, not 48.72)
-      if(best===null||Math.abs(PAYLINKS[i][0]-amt)<Math.abs(best[0]-amt)) best=PAYLINKS[i];
-    }
-    return best;
-  }
   function flash(btn){
     var old=btn.textContent, oc=btn.className;
-    btn.textContent="Copied \u2713"; btn.className=oc+" ok";
+    btn.textContent="Copied ✓"; btn.className=oc+" ok";
     setTimeout(function(){ btn.textContent=old; btn.className=oc; },1200);
   }
   function copyFrom(area,btn){
@@ -377,24 +508,25 @@
     $("#credOut").value = credKind==="paid" ? paidMsg(lang,u,p,m) : trialMsg(lang,u,p,m);
   }
   function renderPay(){
-    var amt=parseFloat($("#payAmt").value);
-    var link="", note="";
-    if(!isNaN(amt)&&amt>0){
-      var c=closestLink(amt); link=c[1];
-      note = (c[0]===amt) ? ("Exact link for \u20AC"+fmtEuro(amt)+".")
-        : ("No exact \u20AC"+fmtEuro(amt)+" link \u2014 using the closest: \u20AC"+fmtEuro(c[0])+".");
-    } else { note="Enter the agreed price to pick the matching payment link."; }
+    var charge=DUR[payDur], quoted=QUOTED[payDur], link=PAYLINKS[charge]||"";
     $("#payLink").value=link;
-    $("#payNote").textContent=note;
+    var warn=Math.abs(quoted-charge)>3;
+    $("#payNote").innerHTML="Plan <b>"+payDur+" months</b> — you quote <b>"+quoted+"€</b>, checkout link charges <b>"+charge+"€</b>."+
+      (warn?" <span style='color:var(--red)'>⚠ doesn't match — check this link before sending</span>":"");
     $("#payOut").value=payMsg(lang,link);
   }
   function renderGuide(){ $("#guideOut").value = GUIDES[$("#guideDev").value][lang]; }
-  function renderAll(){ renderCreds(); renderPay(); renderGuide(); }
+  function renderReply(){ var r=REPLIES[+$("#replySel").value]; $("#replyOut").value = r?r[lang]:""; }
+  function renderAll(){ renderReply(); renderCreds(); renderPay(); renderGuide(); }
 
-  // ---- payment table ----
+  // ---- build selects / tables ----
   (function(){
-    var rows="<thead><tr><th>Price</th><th>Payment link</th></tr></thead><tbody>";
-    for(var i=0;i<PAYLINKS.length;i++){ rows+="<tr><td>\u20AC"+fmtEuro(PAYLINKS[i][0])+"</td><td><a href=\""+PAYLINKS[i][1]+"\" target=\"_blank\" rel=\"noopener\">"+PAYLINKS[i][1]+"</a></td></tr>"; }
+    var opt="";
+    for(var i=0;i<REPLIES.length;i++){ opt+="<option value=\""+i+"\">"+REPLIES[i].label+"</option>"; }
+    $("#replySel").innerHTML=opt;
+    var amts=Object.keys(PAYLINKS).map(Number).sort(function(a,b){return a-b;});
+    var rows="<thead><tr><th>Amount</th><th>Checkout link</th></tr></thead><tbody>";
+    for(var j=0;j<amts.length;j++){ rows+="<tr><td>"+amts[j]+"€</td><td><a href=\""+PAYLINKS[amts[j]]+"\" target=\"_blank\" rel=\"noopener\">"+PAYLINKS[amts[j]]+"</a></td></tr>"; }
     $("#payTableRef").innerHTML=rows+"</tbody>";
   })();
 
@@ -409,18 +541,24 @@
     [].forEach.call(this.children,function(c){c.classList.toggle("on",c===b);});
     renderCreds();
   };
+  $("#payDurSeg").onclick=function(e){ var b=e.target.closest("[data-dur]"); if(!b)return;
+    payDur=b.getAttribute("data-dur");
+    [].forEach.call(this.children,function(c){c.classList.toggle("on",c===b);});
+    renderPay();
+  };
   $("#tabSeg").onclick=function(e){ var b=e.target.closest("[data-tab]"); if(!b)return;
     var tab=b.getAttribute("data-tab");
     [].forEach.call(this.children,function(c){c.classList.toggle("on",c===b);});
-    ["creds","pay","guide","ref"].forEach(function(t){ $("#tab-"+t).style.display = (t===tab)?"":"none"; });
+    ["replies","creds","pay","guide","ref"].forEach(function(t){ $("#tab-"+t).style.display=(t===tab)?"":"none"; });
   };
+  $("#replySel").onchange=renderReply;
   $("#m3uIn").oninput=function(){ var r=parseM3U(this.value);
     if(r.u)$("#cUser").value=r.u; if(r.p)$("#cPass").value=r.p; if(r.m)$("#cM3u").value=r.m;
     renderCreds();
   };
   ["cUser","cPass","cM3u"].forEach(function(id){ $("#"+id).oninput=renderCreds; });
-  $("#payAmt").oninput=renderPay;
   $("#guideDev").onchange=renderGuide;
+  $("#copyReply").onclick=function(){ copyFrom($("#replyOut"),this); };
   $("#copyCreds").onclick=function(){ copyFrom($("#credOut"),this); };
   $("#copyPay").onclick=function(){ copyFrom($("#payOut"),this); };
   $("#copyGuide").onclick=function(){ copyFrom($("#guideOut"),this); };
