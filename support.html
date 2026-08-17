@@ -183,7 +183,6 @@
         <button class="segbtn" data-dur="3">3 mo</button>
         <button class="segbtn" data-dur="6">6 mo</button>
         <button class="segbtn on" data-dur="12">12 mo</button>
-        <button class="segbtn" data-dur="24">24 mo</button>
       </div>
     </div>
     <div class="fld" style="margin-bottom:4px"><label>Checkout link</label><input id="payLink" readonly></div>
@@ -241,8 +240,7 @@
           <tbody>
             <tr><td>3 months</td><td>23 €</td></tr>
             <tr><td>6 months</td><td>34 €</td></tr>
-            <tr><td>12 months</td><td>50 €</td></tr>
-            <tr><td>24 months</td><td>60 €</td></tr>
+            <tr><td>12 months</td><td>60 €</td></tr>
           </tbody>
         </table></div>
         <h3 style="margin-top:18px">Sites → client language</h3>
@@ -269,8 +267,8 @@
     50:"https://aovancy.com/checkout/f5bddb6e-a4d5-4385-84bb-c3486015745b",
     60:"https://aovancy.com/checkout/d3014cf5-e56d-4545-8e2a-de6dad9904c2"
   };
-  var DUR={"3":23,"6":34,"12":50,"24":60};      // plan length -> checkout amount (link)
-  var QUOTED={"3":23,"6":34,"12":50,"24":60};   // plan length -> price you quote (matches the link now)
+  var DUR={"3":23,"6":34,"12":60};      // plan length -> checkout amount (link)
+  var QUOTED={"3":23,"6":34,"12":60};   // plan length -> price you quote (matches the link now)
 
   // ---- message pieces ----
   function srvBlock(l){
@@ -388,17 +386,17 @@
   // ---- ready answers ----
   var REPLIES=[
     {id:"prices",label:"Prices",
-      es:"Estos son los precios:\n\n3 meses: 23€\n6 meses: 34€\n12 meses: 50€\n24 meses: 60€\n\nLa activación tarda menos de 10 minutos y tienes 7 días de garantía. Dime qué duración te interesa y en qué dispositivo vas a ver, y te lo preparo.",
-      nl:"Dit zijn de prijzen:\n\n3 maanden: 23€\n6 maanden: 34€\n12 maanden: 50€\n24 maanden: 60€\n\nActiveren duurt minder dan 10 minuten en je krijgt 7 dagen garantie. Vertel me welke duur je wilt en op welk apparaat je gaat kijken, dan maak ik het klaar.",
-      fr:"Voici les tarifs :\n\n3 mois : 23€\n6 mois : 34€\n12 mois : 50€\n24 mois : 60€\n\nL'activation prend moins de 10 minutes et vous avez une garantie de 7 jours. Dites-moi quelle durée vous intéresse et sur quel appareil vous allez regarder, et je vous prépare tout.",
-      en:"Here are the prices:\n\n3 months: 23€\n6 months: 34€\n12 months: 50€\n24 months: 60€\n\nActivation takes under 10 minutes and you get a 7-day guarantee. Tell me which duration you're interested in and which device you'll watch on, and I'll get it ready.",
-      sq:"Këto janë çmimet:\n\n3 muaj: 23€\n6 muaj: 34€\n12 muaj: 50€\n24 muaj: 60€\n\nAktivizimi zgjat më pak se 10 minuta dhe keni 7 ditë garanci. Më thoni cilën kohëzgjatje dëshironi dhe në cilën pajisje do të shikoni, dhe jua përgatis."},
+      es:"Estos son los precios:\n\n3 meses: 23€\n6 meses: 34€\n12 meses: 60€\n\nLa activación tarda menos de 10 minutos y tienes 7 días de garantía. Dime qué duración te interesa y en qué dispositivo vas a ver, y te lo preparo.",
+      nl:"Dit zijn de prijzen:\n\n3 maanden: 23€\n6 maanden: 34€\n12 maanden: 60€\n\nActiveren duurt minder dan 10 minuten en je krijgt 7 dagen garantie. Vertel me welke duur je wilt en op welk apparaat je gaat kijken, dan maak ik het klaar.",
+      fr:"Voici les tarifs :\n\n3 mois : 23€\n6 mois : 34€\n12 mois : 60€\n\nL'activation prend moins de 10 minutes et vous avez une garantie de 7 jours. Dites-moi quelle durée vous intéresse et sur quel appareil vous allez regarder, et je vous prépare tout.",
+      en:"Here are the prices:\n\n3 months: 23€\n6 months: 34€\n12 months: 60€\n\nActivation takes under 10 minutes and you get a 7-day guarantee. Tell me which duration you're interested in and which device you'll watch on, and I'll get it ready.",
+      sq:"Këto janë çmimet:\n\n3 muaj: 23€\n6 muaj: 34€\n12 muaj: 60€\n\nAktivizimi zgjat më pak se 10 minuta dhe keni 7 ditë garanci. Më thoni cilën kohëzgjatje dëshironi dhe në cilën pajisje do të shikoni, dhe jua përgatis."},
     {id:"info",label:"What is it / full info",
-      es:"Hola y gracias por escribir.\n\nEs una suscripción IPTV con canales locales e internacionales, todo el deporte, cine, series, canales infantiles y de documentales, además de una biblioteca a la carta de películas y series. Funciona en Smart TV (Samsung, LG), Android box, Fire Stick, móvil, tablet y ordenador.\n\nPrecios:\n3 meses: 23€\n6 meses: 34€\n12 meses: 50€\n24 meses: 60€\n\nLa activación tarda menos de 10 minutos y tienes 7 días de garantía.",
-      nl:"Hallo en bedankt voor je bericht.\n\nHet is een IPTV-abonnement met lokale en internationale zenders, alle sport, film, series, kinder- en documentairezenders, plus een on-demand bibliotheek met films en series. Het werkt op Smart TV (Samsung, LG), Android box, Fire Stick, telefoon, tablet en computer.\n\nPrijzen:\n3 maanden: 23€\n6 maanden: 34€\n12 maanden: 50€\n24 maanden: 60€\n\nActiveren duurt minder dan 10 minuten en je krijgt 7 dagen garantie.",
-      fr:"Bonjour et merci de votre message.\n\nC'est un abonnement IPTV avec des chaînes locales et internationales, tout le sport, le cinéma, les séries, les chaînes jeunesse et documentaires, ainsi qu'une bibliothèque à la demande de films et séries. Il fonctionne sur Smart TV (Samsung, LG), box Android, Fire Stick, téléphone, tablette et ordinateur.\n\nTarifs :\n3 mois : 23€\n6 mois : 34€\n12 mois : 50€\n24 mois : 60€\n\nL'activation prend moins de 10 minutes et vous avez une garantie de 7 jours.",
-      en:"Hello and thanks for writing.\n\nIt's an IPTV subscription with local and international channels, full sport, cinema, series, kids and documentary channels, plus an on-demand library of films and series. It works on Smart TV (Samsung, LG), Android box, Fire Stick, phone, tablet and computer.\n\nPrices:\n3 months: 23€\n6 months: 34€\n12 months: 50€\n24 months: 60€\n\nActivation takes under 10 minutes and you get a 7-day guarantee.",
-      sq:"Përshëndetje dhe faleminderit që shkruat.\n\nËshtë një abonim IPTV me kanale lokale dhe ndërkombëtare, të gjithë sportin, kinemanë, serialet, kanalet për fëmijë dhe dokumentarë, plus një bibliotekë me kërkesë me filma dhe seriale. Funksionon në Smart TV (Samsung, LG), Android box, Fire Stick, telefon, tablet dhe kompjuter.\n\nÇmimet:\n3 muaj: 23€\n6 muaj: 34€\n12 muaj: 50€\n24 muaj: 60€\n\nAktivizimi zgjat më pak se 10 minuta dhe keni 7 ditë garanci."},
+      es:"Hola y gracias por escribir.\n\nEs una suscripción IPTV con canales locales e internacionales, todo el deporte, cine, series, canales infantiles y de documentales, además de una biblioteca a la carta de películas y series. Funciona en Smart TV (Samsung, LG), Android box, Fire Stick, móvil, tablet y ordenador.\n\nPrecios:\n3 meses: 23€\n6 meses: 34€\n12 meses: 60€\n\nLa activación tarda menos de 10 minutos y tienes 7 días de garantía.",
+      nl:"Hallo en bedankt voor je bericht.\n\nHet is een IPTV-abonnement met lokale en internationale zenders, alle sport, film, series, kinder- en documentairezenders, plus een on-demand bibliotheek met films en series. Het werkt op Smart TV (Samsung, LG), Android box, Fire Stick, telefoon, tablet en computer.\n\nPrijzen:\n3 maanden: 23€\n6 maanden: 34€\n12 maanden: 60€\n\nActiveren duurt minder dan 10 minuten en je krijgt 7 dagen garantie.",
+      fr:"Bonjour et merci de votre message.\n\nC'est un abonnement IPTV avec des chaînes locales et internationales, tout le sport, le cinéma, les séries, les chaînes jeunesse et documentaires, ainsi qu'une bibliothèque à la demande de films et séries. Il fonctionne sur Smart TV (Samsung, LG), box Android, Fire Stick, téléphone, tablette et ordinateur.\n\nTarifs :\n3 mois : 23€\n6 mois : 34€\n12 mois : 60€\n\nL'activation prend moins de 10 minutes et vous avez une garantie de 7 jours.",
+      en:"Hello and thanks for writing.\n\nIt's an IPTV subscription with local and international channels, full sport, cinema, series, kids and documentary channels, plus an on-demand library of films and series. It works on Smart TV (Samsung, LG), Android box, Fire Stick, phone, tablet and computer.\n\nPrices:\n3 months: 23€\n6 months: 34€\n12 months: 60€\n\nActivation takes under 10 minutes and you get a 7-day guarantee.",
+      sq:"Përshëndetje dhe faleminderit që shkruat.\n\nËshtë një abonim IPTV me kanale lokale dhe ndërkombëtare, të gjithë sportin, kinemanë, serialet, kanalet për fëmijë dhe dokumentarë, plus një bibliotekë me kërkesë me filma dhe seriale. Funksionon në Smart TV (Samsung, LG), Android box, Fire Stick, telefon, tablet dhe kompjuter.\n\nÇmimet:\n3 muaj: 23€\n6 muaj: 34€\n12 muaj: 60€\n\nAktivizimi zgjat më pak se 10 minuta dhe keni 7 ditë garanci."},
     {id:"trial",label:"Free trial offer",
       es:"¡Hola! Claro que sí, sin ningún compromiso.\n\nDime en qué dispositivo quieres ver (Smart TV Samsung o LG, Android box, Fire Stick, móvil, tablet u ordenador) y te preparo la prueba con los pasos exactos para ese dispositivo.\n\nEn cuanto me digas, la tienes lista en un par de minutos.",
       nl:"Hallo! Natuurlijk, helemaal vrijblijvend.\n\nVertel me op welk apparaat je wilt kijken (Samsung of LG Smart TV, Android box, Fire Stick, telefoon, tablet of computer) en ik zet de proef klaar met de exacte stappen voor dat apparaat.\n\nZodra je het me zegt, is het binnen een paar minuten klaar.",
