@@ -4,12 +4,12 @@
    {
     "path": "/blog/telegram-listas-iptv-espana",
     "title": "Listas IPTV España por Telegram gratis: guía y riesgos 2026",
-    "words": 4273
+    "words": 4263
    },
    {
     "path": "/blog/iptv-espana-fire-tv-stick-4k-max-2026",
     "title": "IPTV en Fire TV Stick 4K Max: instalación 2026",
-    "words": 4005
+    "words": 4012
    },
    {
     "path": "/blog/iptv-deportes-motor-espana",
@@ -24,12 +24,12 @@
    {
     "path": "/blog/iptv-roku-espana",
     "title": "IPTV en Roku España 2026: instalación y alternativas",
-    "words": 3152
+    "words": 3148
    },
    {
     "path": "/blog/iptv-en-pc-windows-espana",
     "title": "IPTV en PC y Windows 2026: cómo ver IPTV en el ordenador",
-    "words": 2881
+    "words": 2882
    },
    {
     "path": "/blog/iptv-sony-bravia-espana",
@@ -37,9 +37,14 @@
     "words": 2782
    },
    {
+    "path": "/blog",
+    "title": "Blog IPTV en España — guías y comparativas 2026 · IPTVESP",
+    "words": 2629
+   },
+   {
     "path": "/blog/guia-iptv-espana",
     "title": "IPTV España: guía completa 2026 para elegir plan",
-    "words": 2630
+    "words": 2625
    },
    {
     "path": "/blog/iptv-motociclismo-espana",
@@ -52,24 +57,19 @@
     "words": 2564
    },
    {
-    "path": "/blog",
-    "title": "Blog IPTV en España — guías y comparativas 2026 · IPTVESP",
-    "words": 2386
-   },
-   {
     "path": "/blog/iptv-samsung-smart-tv-espana",
     "title": "IPTV en Samsung sin Smarters: apps y soluciones",
-    "words": 2364
+    "words": 2367
    },
    {
     "path": "/blog/iptv-telegram-gratis-2026",
     "title": "IPTV Telegram gratis 2026: qué esperar antes de bajarla",
-    "words": 2281
+    "words": 2284
    },
    {
     "path": "/blog/iptv-multipantalla-espana",
     "title": "IPTV multipantalla en España: ver en varias pantallas",
-    "words": 2184
+    "words": 2179
    },
    {
     "path": "/blog/riesgos-grupos-telegram-iptv",
@@ -99,7 +99,7 @@
    {
     "path": "/blog/iptv-gratis-es-fiable",
     "title": "IPTV gratis en España: ¿es fiable y seguro en 2026?",
-    "words": 1945
+    "words": 1953
    },
    {
     "path": "/blog/iptv-lg-smart-tv-espana",
@@ -109,7 +109,7 @@
    {
     "path": "/blog/iptv-kodi-espana",
     "title": "IPTV en Kodi: cómo instalar y configurar paso a paso",
-    "words": 1891
+    "words": 1889
    },
    {
     "path": "/blog/aplicacion-iptv",
@@ -119,7 +119,7 @@
    {
     "path": "/blog/iptv-smarters-pro",
     "title": "IPTV Smarters Pro 2026: qué es y cómo funciona",
-    "words": 1850
+    "words": 1851
    },
    {
     "path": "/blog/iptv-vs-plataformas-premium-espana",
@@ -129,7 +129,7 @@
    {
     "path": "/blog/epg-iptv-espana",
     "title": "Cómo configurar la guía de programación (EPG) en IPTV",
-    "words": 1756
+    "words": 1750
    },
    {
     "path": "/blog/iptv-vlc",
@@ -137,24 +137,24 @@
     "words": 1750
    },
    {
-    "path": "/blog/iptv-legalidad-espana",
-    "title": "IPTV legal en España 2026: lo que dice la ley y el CNMC",
-    "words": 1733
-   },
-   {
     "path": "/blog/iptv-android-tv-espana",
     "title": "IPTV Smarters Pro en Android: TV box, móvil y Mi Box",
     "words": 1731
    },
    {
-    "path": "/blog/vpn-para-iptv-espana",
-    "title": "¿Necesitas una VPN para IPTV en España?",
-    "words": 1670
+    "path": "/blog/iptv-legalidad-espana",
+    "title": "IPTV legal en España 2026: lo que dice la ley y el CNMC",
+    "words": 1730
    },
    {
     "path": "/blog/iptv-box-espana",
     "title": "Cajas IPTV en España: MAG, Formuler y Android TV 2026",
     "words": 1667
+   },
+   {
+    "path": "/blog/vpn-para-iptv-espana",
+    "title": "¿Necesitas una VPN para IPTV en España?",
+    "words": 1664
    },
    {
     "path": "/blog/iptv-xiaomi-mi-tv-stick-espana",
@@ -170,6 +170,11 @@
     "path": "/blog/iptv-apple-tv-espana",
     "title": "IPTV en Apple TV España: guía instalación tvOS 2026",
     "words": 1610
+   },
+   {
+    "path": "/blog/iptv-pixelado-espana",
+    "title": "IPTV pixelado en España: por qué pasa y cómo arreglarlo",
+    "words": 1607
    },
    {
     "path": "/blog/iptv-smart-tv-samsung-espana",
@@ -195,6 +200,21 @@
     "path": "/blog/iptv-en-chromecast-espana",
     "title": "IPTV en Chromecast España: guía con Google TV 2026",
     "words": 1523
+   },
+   {
+    "path": "/blog/mejor-reproductor-iptv",
+    "title": "Mejor reproductor IPTV 2026: comparativa de aplicaciones",
+    "words": 1413
+   },
+   {
+    "path": "/blog/prueba-iptv-gratis",
+    "title": "Prueba IPTV gratis en España: test sin riesgos",
+    "words": 1178
+   },
+   {
+    "path": "/blog/descargar-iptv-smarters-pro",
+    "title": "Descargar IPTV Smarters Pro: guía de instalación",
+    "words": 1122
    },
    {
     "path": "/generador-m3u",
@@ -319,7 +339,7 @@
     "covered": true
    }
   ],
-  "n_articles": 43,
+  "n_articles": 47,
   "n_thin": 2
  },
  "primeiptv-france.com": {
@@ -412,7 +432,7 @@
    {
     "path": "/guides/iptv-arnaques-comment-eviter",
     "title": "Arnaques IPTV 2026 : 10 Pièges à Éviter",
-    "words": 2337
+    "words": 2329
    },
    {
     "path": "/comparatif/iptv-france-2026",
@@ -425,6 +445,11 @@
     "words": 2308
    },
    {
+    "path": "/blog",
+    "title": "Blog & Guides IPTV France 2026",
+    "words": 2300
+   },
+   {
     "path": "/guides/iptv-4k-france-2026",
     "title": "IPTV 4K France 2026 : Matériel & Réglages",
     "words": 2233
@@ -432,12 +457,7 @@
    {
     "path": "/guides/iptv-buffering-solutions",
     "title": "IPTV Buffering 2026 : 10 Solutions Anti-Coupure",
-    "words": 2214
-   },
-   {
-    "path": "/blog",
-    "title": "Blog & Guides IPTV France 2026",
-    "words": 2162
+    "words": 2200
    },
    {
     "path": "/guides/iptv-competitions-europeennes-streaming-2026",
@@ -490,14 +510,14 @@
     "words": 1861
    },
    {
-    "path": "/guides/chaines-enfants-jeunesse-iptv",
-    "title": "Chaînes Enfants IPTV 2026 : Catalogue Jeunesse",
-    "words": 1851
-   },
-   {
     "path": "/guides/iptv-4k-debit-internet",
     "title": "IPTV 4K : Quel Débit Internet en 2026 ?",
     "words": 1840
+   },
+   {
+    "path": "/guides/chaines-enfants-jeunesse-iptv",
+    "title": "Chaînes Enfants IPTV 2026 : Catalogue Jeunesse",
+    "words": 1827
    },
    {
     "path": "/guides/pourquoi-mon-iptv-coupe",
@@ -518,6 +538,11 @@
     "path": "/guides/iptv-vs-apps-streaming-gratuit",
     "title": "IPTV vs Agrégateur TV vs Bouquet Premium 2026",
     "words": 1715
+   },
+   {
+    "path": "/guides/meilleur-lecteur-iptv",
+    "title": "Meilleur lecteur IPTV 2026 : le comparatif",
+    "words": 1642
    },
    {
     "path": "/guides/comment-installer-iptv",
@@ -560,14 +585,14 @@
     "words": 1472
    },
    {
-    "path": "/guides",
-    "title": "Guides IPTV France 2026 : Tutoriels",
-    "words": 1391
-   },
-   {
     "path": "/installation/smart-tv-samsung",
     "title": "IPTV Smart TV Samsung 2026 : Installation 5 min",
     "words": 1386
+   },
+   {
+    "path": "/guides",
+    "title": "Guides IPTV France 2026 : Tutoriels",
+    "words": 1379
    },
    {
     "path": "/installation/android-tv-box",
@@ -605,6 +630,11 @@
     "words": 1331
    },
    {
+    "path": "/guides/essai-iptv-gratuit",
+    "title": "Essai IPTV gratuit : comment tester avant de payer",
+    "words": 1329
+   },
+   {
     "path": "/installation/iphone-ios",
     "title": "IPTV iPhone iPad 2026 : iOS Smarters Player",
     "words": 1325
@@ -618,6 +648,11 @@
     "path": "/installation/macos",
     "title": "IPTV macOS 2026 : Mac Smarters Pro & IINA",
     "words": 1296
+   },
+   {
+    "path": "/guides/telecharger-iptv-smarters-pro",
+    "title": "Télécharger IPTV Smarters Pro : le guide 2026",
+    "words": 1289
    },
    {
     "path": "/revendeur-iptv",
@@ -724,11 +759,6 @@
    {
     "kw": "serveur iptv",
     "vol": 480,
-    "covered": false
-   },
-   {
-    "kw": "telecharger iptv",
-    "vol": 320,
     "covered": false
    },
    {
@@ -843,6 +873,11 @@
     "covered": true
    },
    {
+    "kw": "telecharger iptv",
+    "vol": 320,
+    "covered": true
+   },
+   {
     "kw": "iptv mac",
     "vol": 320,
     "covered": true
@@ -883,7 +918,7 @@
     "covered": true
    }
   ],
-  "n_articles": 79,
+  "n_articles": 82,
   "n_thin": 0
  },
  "iptvned.com": {
@@ -1419,11 +1454,6 @@
     "covered": false
    },
    {
-    "kw": "telecharger iptv",
-    "vol": 320,
-    "covered": false
-   },
-   {
     "kw": "iptv erreur de lecture",
     "vol": 90,
     "covered": false
@@ -1531,6 +1561,12 @@
     "kw": "iptv apple tv",
     "vol": 320,
     "covered": true
+   },
+   {
+    "kw": "telecharger iptv",
+    "vol": 320,
+    "covered": true,
+    "sibling": "primeiptv-france.com"
    },
    {
     "kw": "iptv mac",
@@ -1787,11 +1823,6 @@
     "covered": false
    },
    {
-    "kw": "telecharger iptv",
-    "vol": 320,
-    "covered": false
-   },
-   {
     "kw": "iptv erreur de lecture",
     "vol": 90,
     "covered": false
@@ -1898,6 +1929,12 @@
     "kw": "iptv apple tv",
     "vol": 320,
     "covered": true
+   },
+   {
+    "kw": "telecharger iptv",
+    "vol": 320,
+    "covered": true,
+    "sibling": "primeiptv-france.com"
    },
    {
     "kw": "iptv mac",

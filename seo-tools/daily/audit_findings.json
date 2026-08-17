@@ -1,6 +1,6 @@
 {
  "iptvesp.com": {
-  "pages": 54,
+  "pages": 58,
   "titles_over60": [],
   "redirect_links": [],
   "linked404": {},
@@ -20,10 +20,12 @@
   "www_redirect": "308 -> https://iptvesp.com/"
  },
  "primeiptv-france.com": {
-  "pages": 86,
+  "pages": 89,
   "titles_over60": [],
   "redirect_links": [],
-  "linked404": {},
+  "linked404": {
+   "application-iptv": 3
+  },
   "orphans": [],
   "canonical_mismatch": [],
   "no_meta_desc": [],

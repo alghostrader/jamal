@@ -1,41 +1,41 @@
 {
- "_stamp": "2026-08-16 12:44 UTC",
+ "_stamp": "2026-08-17 06:21 UTC",
  "sites": {
   "iptvesp.com": {
-   "clicks7d": 387,
-   "sem_rd": 110,
-   "dfs_rd": 36,
+   "clicks7d": 420,
+   "sem_rd": 113,
+   "dfs_rd": 37,
    "top100": 21,
-   "pages": 54,
+   "pages": 58,
    "positions": {
-    "iptv espa\u00f1a": 44,
+    "iptv espa\u00f1a": null,
     "listas iptv": null,
     "mejor iptv espa\u00f1a": 39,
     "iptv smarters pro": null,
     "listas iptv espa\u00f1a telegram": 1,
-    "proveedor iptv": 41
+    "proveedor iptv": 43
    }
   },
   "primeiptv-france.com": {
-   "clicks7d": 32,
-   "sem_rd": 18,
+   "clicks7d": 38,
+   "sem_rd": 21,
    "dfs_rd": 6,
    "top100": 14,
-   "pages": 86,
+   "pages": 89,
    "positions": {
     "abonnement iptv": null,
     "boitier iptv": null,
     "iptv france": null,
     "application iptv": null,
-    "abonnement iptv 12 mois": 41,
+    "abonnement iptv 12 mois": 39,
     "meilleur abonnement iptv": null,
     "serveur iptv": null
    }
   },
   "iptvned.com": {
-   "clicks7d": 6,
-   "sem_rd": 36,
-   "dfs_rd": 15,
+   "clicks7d": 11,
+   "sem_rd": 37,
+   "dfs_rd": 16,
    "top100": 19,
    "pages": 54,
    "positions": {
@@ -49,8 +49,8 @@
   },
   "iptvpix.com": {
    "clicks7d": 0,
-   "sem_rd": 107,
-   "dfs_rd": 35,
+   "sem_rd": 109,
+   "dfs_rd": 36,
    "top100": null,
    "pages": 58,
    "positions": {
@@ -75,13 +75,13 @@
    }
   },
   "iptvshqiptar.com": {
-   "clicks7d": 9,
-   "sem_rd": 44,
+   "clicks7d": 6,
+   "sem_rd": 46,
    "dfs_rd": 7,
    "top100": null,
    "pages": 21,
    "positions": {
-    "iptv shqiptare": 20,
+    "iptv shqiptare": 16,
     "iptv smarters pro": null,
     "iptv shqip": null,
     "iptv shqiptar": 16,
@@ -119,16 +119,16 @@
    }
   },
   "abonnementiptvofficiel.com": {
-   "clicks7d": 13,
-   "sem_rd": 55,
-   "dfs_rd": 5,
+   "clicks7d": 15,
+   "sem_rd": 60,
+   "dfs_rd": 6,
    "top100": 8,
    "pages": 44,
    "positions": {
     "test iptv gratuit": null,
     "iptv pas cher": null,
     "essai iptv 7 jours": 62,
-    "meilleur boitier iptv": 88,
+    "meilleur boitier iptv": 83,
     "iptv moins cher": null,
     "code promo iptv": null,
     "iptv promo": null
