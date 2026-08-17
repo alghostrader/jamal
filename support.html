@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Support — IPTV Portfolio</title><!-- support tools: owned by the sales pipeline, static, no backend -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%23cc785c%22 d=%22M12 2l8 10-8 10-8-10z%22/%3E%3C/svg%3E">
+<style>
+  .viz-root{color-scheme:light;
+    --surface:#f5f4ee;--surface2:#ecebe3;--card:#ffffff;--line:#e4e2d8;--line2:#efeee7;
+    --ink:#191817;--ink2:#46443e;--ink3:#8b887d;
+    --acc:#cc785c;--acc2:#b8613f;--accsoft:#f7ece6;
+    --blue:#5f7a86;--amber:#c99a3b;--red:#bb4d3e;--up:#4f7a52;
+    --sh1:0 1px 2px rgba(25,24,23,.05);--sh2:0 4px 16px rgba(25,24,23,.08);
+    --r:14px;--rs:10px;--rp:999px;
+    --serif:ui-serif,Georgia,"Iowan Old Style","Times New Roman",serif}
+  @media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])) .viz-root{color-scheme:dark;
+    --surface:#1b1a17;--surface2:#242220;--card:#232120;--line:#38352f;--line2:#2b2926;
+    --ink:#f7f5ee;--ink2:#dbd7cb;--ink3:#aaa599;
+    --acc:#d98d6f;--acc2:#cc785c;--accsoft:#33261f;
+    --blue:#7f9aa8;--amber:#d6ab55;--red:#e0715c;--up:#6ea86f;
+    --sh1:0 1px 2px rgba(0,0,0,.3);--sh2:0 8px 26px rgba(0,0,0,.5)}}
+  :root[data-theme="dark"] .viz-root{color-scheme:dark;
+    --surface:#1b1a17;--surface2:#242220;--card:#232120;--line:#38352f;--line2:#2b2926;
+    --ink:#f7f5ee;--ink2:#dbd7cb;--ink3:#aaa599;
+    --acc:#d98d6f;--acc2:#cc785c;--accsoft:#33261f;
+    --blue:#7f9aa8;--amber:#d6ab55;--red:#e0715c;--up:#6ea86f;
+    --sh1:0 1px 2px rgba(0,0,0,.3);--sh2:0 8px 26px rgba(0,0,0,.5)}
+
+  *{box-sizing:border-box}
+  html,body{margin:0;max-width:100%;overflow-x:hidden;background:#f5f4ee}
+  @media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])) body{background:#1b1a17}}
+  :root[data-theme="dark"] body{background:#1b1a17}
+  .viz-root{background:var(--surface);color:var(--ink);
+    font:14.5px/1.6 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Inter,sans-serif;
+    min-height:100vh;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:30px 30px 90px}
+  a{color:var(--acc);text-decoration:none}
+  h1{font-family:var(--serif);font-size:34px;font-weight:500;letter-spacing:-.01em;margin:0;line-height:1.12}
+  h2{font-family:var(--serif);font-size:19px;font-weight:500;margin:0 0 14px}
+  h3{font-size:12px;font-weight:600;margin:0 0 8px;letter-spacing:.02em;color:var(--ink2)}
+  .sub{color:var(--ink3);font-size:12.5px;margin:9px 0 24px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .backlink{display:inline-flex;align-items:center;gap:6px;color:var(--ink3);font-size:12.5px}
+  .backlink:hover{color:var(--acc)}
+  .ic{width:1em;height:1em;flex:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;fill:none}
+
+  .head{display:flex;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:6px}
+  .head .actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:var(--card);color:var(--ink2);font:inherit;font-size:13px;
+    padding:8px 14px;border-radius:var(--rs);cursor:pointer;box-shadow:var(--sh1);transition:.15s}
+  .btn:hover{border-color:var(--acc);color:var(--ink)}
+  .btn.primary{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+  .btn.primary:hover{background:var(--acc2);color:#fff}
+  .btn.ok{background:var(--up);border-color:var(--up);color:#fff}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh1)}
+  .pad{padding:20px}
+  .muted{color:var(--ink3)}.tiny{font-size:11px}
+  .phead{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+
+  input,select,textarea{font:inherit;font-size:13.5px;color:var(--ink);background:var(--surface);
+    border:1px solid var(--line);border-radius:var(--rs);padding:8px 11px;outline:none}
+  input:focus,select:focus,textarea:focus{border-color:var(--acc)}
+  select{cursor:pointer;-webkit-appearance:none;appearance:none;padding-right:30px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b887d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 9px center}
+  textarea{width:100%;resize:vertical;line-height:1.55;font-size:13px;
+    font-family:ui-monospace,Menlo,Consolas,monospace}
+
+  .frow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:4px}
+  .frow.dc{grid-template-columns:1fr 1fr}
+  .fld{display:flex;flex-direction:column;gap:5px}
+  .fld label{font:600 10.5px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+  .fld input,.fld select,.fld textarea{width:100%}
+  .fld input,.fld select{min-height:42px}
+
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--rs);overflow:hidden;flex-wrap:wrap}
+  .segbtn{background:none;border:0;color:var(--ink3);font:inherit;font-size:12.5px;padding:8px 15px;cursor:pointer;white-space:nowrap}
+  .segbtn.on{background:var(--acc);color:#fff;font-weight:600}
+  .mact{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink3);padding:9px 10px;white-space:nowrap}
+  td{padding:9px 10px;border-top:1px solid var(--line2);vertical-align:top}
+  .refgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .kv{display:flex;flex-direction:column;gap:9px}
+  .kv .row{display:flex;flex-direction:column;gap:2px}
+  .kv .k{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+  .kv .v{font-size:13.5px;word-break:break-all}
+  code{font-family:ui-monospace,Menlo,monospace;background:var(--surface2);padding:1px 6px;border-radius:6px;font-size:12.5px}
+  details summary{cursor:pointer;color:var(--ink3);font-size:12px}
+  details[open] summary{margin-bottom:8px}
+
+  @media (max-width:760px){.frow,.frow.dc{grid-template-columns:1fr}.refgrid{grid-template-columns:1fr}
+    .wrap{padding:22px 16px 80px}}
+</style>
+</head>
+<body>
+<div class="viz-root">
+<div class="wrap">
+
+  <div class="head">
+    <div>
+      <a class="backlink" href="/"><svg class="ic" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>Portfolio</a>
+      <h1>Support tools</h1>
+    </div>
+    <div class="actions">
+      <a class="btn" href="/sales">Sales tracker</a>
+    </div>
+  </div>
+  <div class="sub">Ready-to-send messages for your IPTV clients — pick a language, fill the blanks, copy.</div>
+
+  <!-- language -->
+  <div class="card pad" style="margin-bottom:16px">
+    <div class="phead" style="margin-bottom:0">
+      <h2 style="margin:0">Language</h2>
+      <div class="seg" id="langSeg" style="margin-left:auto">
+        <button class="segbtn on" data-lang="es">Español</button>
+        <button class="segbtn" data-lang="nl">Nederlands</button>
+        <button class="segbtn" data-lang="fr">Français</button>
+        <button class="segbtn" data-lang="en">English</button>
+      </div>
+    </div>
+    <div class="tiny muted" style="margin-top:8px">The message you copy will be written in this language.</div>
+  </div>
+
+  <!-- tabs -->
+  <div class="seg" id="tabSeg" style="margin-bottom:16px">
+    <button class="segbtn on" data-tab="creds">Credentials</button>
+    <button class="segbtn" data-tab="pay">Payment</button>
+    <button class="segbtn" data-tab="guide">Device guides</button>
+    <button class="segbtn" data-tab="ref">Reference</button>
+  </div>
+
+  <!-- CREDENTIALS -->
+  <div class="card pad tabpanel" id="tab-creds">
+    <h2>Credentials &amp; activation</h2>
+    <div class="phead">
+      <div class="seg" id="credType">
+        <button class="segbtn on" data-type="trial">Trial (24h)</button>
+        <button class="segbtn" data-type="paid">Paid — full activation</button>
+      </div>
+      <span class="tiny muted" style="margin-left:auto">The fixed 4 server URLs are added automatically.</span>
+    </div>
+    <div class="fld" style="margin-bottom:12px">
+      <label>Paste the M3U / Xtream link (username &amp; password are read automatically)</label>
+      <textarea id="m3uIn" rows="2" placeholder="http://host:port/get.php?username=...&password=...&type=m3u_plus&output=ts"></textarea>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Username</label><input id="cUser" placeholder="username"></div>
+      <div class="fld"><label>Password</label><input id="cPass" placeholder="password"></div>
+      <div class="fld"><label>M3U link (optional)</label><input id="cM3u" placeholder="paste to include it"></div>
+    </div>
+    <div class="mact">
+      <button class="btn primary" id="copyCreds">Copy message</button>
+    </div>
+    <textarea id="credOut" rows="16" readonly style="margin-top:12px"></textarea>
+  </div>
+
+  <!-- PAYMENT -->
+  <div class="card pad tabpanel" id="tab-pay" style="display:none">
+    <h2>Payment</h2>
+    <div class="frow dc">
+      <div class="fld"><label>Agreed price (€)</label><input type="number" id="payAmt" placeholder="e.g. 50" step="0.01"></div>
+      <div class="fld"><label>Matched payment link</label><input id="payLink" readonly placeholder="enter a price"></div>
+    </div>
+    <div id="payNote" class="tiny muted" style="margin-top:8px"></div>
+    <div class="mact">
+      <button class="btn primary" id="copyPay">Copy message</button>
+    </div>
+    <textarea id="payOut" rows="12" readonly style="margin-top:12px"></textarea>
+    <details style="margin-top:16px">
+      <summary>All price → link options</summary>
+      <div style="overflow-x:auto"><table id="payTableRef"></table></div>
+    </details>
+  </div>
+
+  <!-- DEVICE GUIDES -->
+  <div class="card pad tabpanel" id="tab-guide" style="display:none">
+    <h2>Device setup guide</h2>
+    <div class="fld" style="max-width:340px">
+      <label>Device</label>
+      <select id="guideDev">
+        <option value="firestick">Amazon Firestick / Fire TV</option>
+        <option value="android">Android — phone / tablet / TV box</option>
+        <option value="ios">iPhone / iPad</option>
+        <option value="smarttv">Samsung / LG Smart TV</option>
+        <option value="computer">Computer (Windows / Mac)</option>
+      </select>
+    </div>
+    <div class="mact">
+      <button class="btn primary" id="copyGuide">Copy guide</button>
+    </div>
+    <textarea id="guideOut" rows="14" readonly style="margin-top:12px"></textarea>
+  </div>
+
+  <!-- REFERENCE -->
+  <div class="card pad tabpanel" id="tab-ref" style="display:none">
+    <h2>Quick reference</h2>
+    <div class="refgrid">
+      <div>
+        <h3>Server URLs (always these 4)</h3>
+        <div class="kv" style="margin-bottom:20px">
+          <div class="v"><code>http://vpn.drk35cv.org</code></div>
+          <div class="v"><code>http://smart.cwdn.cx:80</code></div>
+          <div class="v"><code>http://line.dino.ws:80</code></div>
+          <div class="v"><code>http://line.rs4ott.com</code></div>
+        </div>
+        <h3>Contacts</h3>
+        <div class="kv">
+          <div class="row"><span class="k">WhatsApp support</span><span class="v"><a href="https://wa.me/351966739291" target="_blank" rel="noopener">+351 966 739 291</a></span></div>
+          <div class="row"><span class="k">PayPal (Friends &amp; Family)</span><span class="v">Oughia.karim@gmail.com</span></div>
+          <div class="row"><span class="k">Official site</span><span class="v"><a href="https://iptvsmarters-officiel.com/" target="_blank" rel="noopener">iptvsmarters-officiel.com</a></span></div>
+        </div>
+      </div>
+      <div>
+        <h3>Sites — language, trial &amp; prices</h3>
+        <div style="overflow-x:auto"><table>
+          <thead><tr><th>Site</th><th>Language</th><th>Trial</th><th>Prices (3/6/12/24 mo)</th></tr></thead>
+          <tbody>
+            <tr><td>iptvesp.com</td><td>Spanish</td><td>24h free</td><td>25 / 39 / 59 / 99 €</td></tr>
+            <tr><td>iptvned.com</td><td>Dutch</td><td>24h free</td><td>19 / 39 / 49 / 89 €</td></tr>
+            <tr><td>iptvpix.com</td><td>French (BE/CH)</td><td>7-day money-back</td><td>19 / 39 / 49 / 89 €</td></tr>
+            <tr><td>primeiptv-france.com</td><td>French (FR)</td><td>24h free</td><td>19 / 39 / 49 / 89 €</td></tr>
+          </tbody>
+        </table></div>
+        <div class="tiny muted" style="margin-top:12px">Always ask clients to pay PayPal as <b>Friends &amp; Family</b> (no fees) and to send a <b>payment screenshot</b> — access goes out right after the proof.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+  var $=function(s){return document.querySelector(s);};
+  var lang="es", credKind="trial";
+
+  // ---- fixed data ----
+  var PAYLINKS=[[23,"https://tinyurl.com/5n8srubm"],[30,"https://tinyurl.com/mpkmbzhe"],[34,"https://tinyurl.com/3c7fj2zh"],[40,"https://tinyurl.com/mrxhv946"],[48.72,"https://tinyurl.com/4jt7t5dd"],[50,"https://tinyurl.com/swfwwyj7"],[60,"https://tinyurl.com/3ndxu6b9"],[65,"https://tinyurl.com/3bpvedww"],[70,"https://tinyurl.com/5235fksn"],[75,"https://tinyurl.com/zhxu5kbu"],[80,"https://tinyurl.com/ychn3fd2"],[90,"https://tinyurl.com/yc4ar6hd"],[100,"https://tinyurl.com/yv5d8tk2"],[300,"https://tinyurl.com/45xdawvz"]];
+
+  function srvBlock(l){
+    var or={es:"o",nl:"of",fr:"ou",en:"or"}[l];
+    var lbl={es:"URL del servidor",nl:"Server-URL",fr:"URL du serveur",en:"Server URL"}[l];
+    return lbl+": http://vpn.drk35cv.org\n"+or+" http://smart.cwdn.cx:80\n"+or+" http://line.dino.ws:80\n"+or+" http://line.rs4ott.com";
+  }
+  function credLines(l,u,p){
+    var lab={es:["Nombre de usuario","Contraseña"],nl:["Gebruikersnaam","Wachtwoord"],fr:["Username","Password"],en:["Username","Password"]}[l];
+    var sep=(l==="fr")?" : ":": ";
+    return lab[0]+sep+(u||"________")+"\n"+lab[1]+sep+(p||"________");
+  }
+  function m3uBlock(l,m){
+    if(!m) return "";
+    var t={
+      es:"\n\n3\uFE0F\u20E3 Enlace M3U (opcional)\nSi tu dispositivo utiliza un enlace M3U:\n"+m,
+      nl:"\n\n3\uFE0F\u20E3 M3U-link (optioneel)\nAls je apparaat een M3U-link gebruikt:\n"+m,
+      fr:"\n\n3\uFE0F\u20E3 Lien M3U (facultatif)\nSi votre appareil utilise un lien M3U :\n"+m,
+      en:"\n\n3\uFE0F\u20E3 M3U link (optional)\nIf your device uses an M3U link:\n"+m
+    };
+    return t[l];
+  }
+
+  function trialMsg(l,u,p,m){
+    var head={es:"\u00A1Aqu\u00ED tienes tu prueba GRATIS de 24h! \uD83D\uDE42 Solo introduce estos datos en la app:",
+      nl:"Hier is je GRATIS proef van 24u! \uD83D\uDE42 Vul gewoon deze gegevens in de app in:",
+      fr:"Voici votre essai GRATUIT de 24h ! \uD83D\uDE42 Entrez simplement ces informations dans l'application :",
+      en:"Here's your FREE 24h trial! \uD83D\uDE42 Just enter these details in the app:"}[l];
+    var name={es:"Nombre / Nombre de la lista de reproducci\u00F3n: Puedes elegir el nombre que prefieras (p. ej., IPTV).",
+      nl:"Naam / Naam van de afspeellijst: Je mag elke naam kiezen die je wilt (bijv. IPTV).",
+      fr:"Nom / Nom de la playlist : Vous pouvez choisir le nom de votre choix (par exemple, IPTV).",
+      en:"Name / Playlist name: You can choose any name you like (e.g., IPTV)."}[l];
+    var close={es:"Cualquier duda durante la instalaci\u00F3n, escr\u00EDbeme por WhatsApp y te ayudo enseguida \uD83D\uDE42",
+      nl:"Heb je een vraag tijdens het installeren, stuur me een bericht op WhatsApp en ik help je meteen \uD83D\uDE42",
+      fr:"Si vous avez une question pendant l'installation, \u00E9crivez-moi sur WhatsApp et je vous aide tout de suite \uD83D\uDE42",
+      en:"Any question while installing, message me on WhatsApp and I'll help you right away \uD83D\uDE42"}[l];
+    return head+"\n\n"+name+"\n\n"+credLines(l,u,p)+"\n\n"+srvBlock(l)+m3uBlock(l,m)+"\n\n"+close;
+  }
+
+  function paidMsg(l,u,p,m){
+    var T={
+      es:{h:"Estimado cliente,\n\nGracias por elegir IPTV Smarters Pro. Agradecemos mucho su confianza \uD83D\uDE4F\n\nSiga los pasos a continuaci\u00F3n para activar su suscripci\u00F3n:\n\n1\uFE0F\u20E3 Descargue la aplicaci\u00F3n\nDescargue e instale la aplicaci\u00F3n IPTV Smarters Pro en su dispositivo (Smart TV, dispositivo Android, iPhone, TV box, PC, etc.).\n\n2\uFE0F\u20E3 A\u00F1ada su suscripci\u00F3n\nTras instalar la aplicaci\u00F3n, seleccione \u00ABIniciar sesi\u00F3n con la API de Xtream Codes\u00BB e introduzca:\n\nNombre / Nombre de la lista de reproducci\u00F3n: Puede elegir el nombre que prefiera (p. ej., IPTV).",
+        web:"\uD83C\uDF10 Sitio web oficial: https://iptvsmarters-officiel.com/",wa:"\uD83D\uDCDE \u00BFNecesita ayuda? Soporte WhatsApp: +351 966 739 291",
+        foot:"\u00A1Esperamos que disfrute de su suscripci\u00F3n IPTV! \uD83C\uDFAC\uD83D\uDCFA\nAtentamente, Su servicio de atenci\u00F3n al cliente"},
+      nl:{h:"Beste klant,\n\nBedankt dat u voor IPTV Smarters Pro heeft gekozen. We waarderen uw vertrouwen enorm \uD83D\uDE4F\n\nVolg de onderstaande stappen om uw abonnement te activeren:\n\n1\uFE0F\u20E3 Download de app\nDownload en installeer de IPTV Smarters Pro-app op uw apparaat (Smart TV, Android-apparaat, iPhone, tv-box, pc, enz.).\n\n2\uFE0F\u20E3 Voeg uw abonnement toe\nNadat u de app heeft ge\u00EFnstalleerd, selecteert u \"Inloggen met Xtream Codes API\" en voert u in:\n\nNaam / Naam van de afspeellijst: U mag elke naam kiezen die u wilt (bijv. IPTV).",
+        web:"\uD83C\uDF10 Offici\u00EBle website: https://iptvsmarters-officiel.com/",wa:"\uD83D\uDCDE Hulp nodig? WhatsApp-ondersteuning: +351 966 739 291",
+        foot:"We hopen dat u geniet van uw IPTV-abonnement! \uD83C\uDFAC\uD83D\uDCFA\nMet vriendelijke groet, Uw klantenservice"},
+      fr:{h:"Cher client,\n\nMerci d'avoir choisi IPTV Smarters Pro. Nous vous remercions de votre confiance \uD83D\uDE4F\n\nVeuillez suivre les \u00E9tapes ci-dessous pour activer votre abonnement :\n\n1\uFE0F\u20E3 T\u00E9l\u00E9chargez l'application\nT\u00E9l\u00E9chargez et installez l'application IPTV Smarters Pro sur votre appareil (Smart TV, appareil Android, iPhone, box TV, PC, etc.).\n\n2\uFE0F\u20E3 Ajoutez votre abonnement\nApr\u00E8s avoir install\u00E9 l'application, s\u00E9lectionnez \u00AB Se connecter avec l'API Xtream Codes \u00BB et saisissez :\n\nNom / Nom de la playlist : Vous pouvez choisir le nom de votre choix (par exemple, IPTV).",
+        web:"\uD83C\uDF10 Site web officiel : https://iptvsmarters-officiel.com/",wa:"\uD83D\uDCDE Besoin d'aide ? Assistance WhatsApp : +351 966 739 291",
+        foot:"Nous esp\u00E9rons que vous appr\u00E9cierez votre abonnement IPTV ! \uD83C\uDFAC\uD83D\uDCFA\nCordialement, Votre service client"},
+      en:{h:"Dear customer,\n\nThank you for choosing IPTV Smarters Pro. We truly appreciate your trust \uD83D\uDE4F\n\nPlease follow the steps below to activate your subscription:\n\n1\uFE0F\u20E3 Download the app\nDownload and install the IPTV Smarters Pro app on your device (Smart TV, Android device, iPhone, TV box, PC, etc.).\n\n2\uFE0F\u20E3 Add your subscription\nAfter installing the app, select \"Login with Xtream Codes API\" and enter:\n\nName / Playlist name: You can choose any name you like (e.g., IPTV).",
+        web:"\uD83C\uDF10 Official website: https://iptvsmarters-officiel.com/",wa:"\uD83D\uDCDE Need help? WhatsApp support: +351 966 739 291",
+        foot:"We hope you enjoy your IPTV subscription! \uD83C\uDFAC\uD83D\uDCFA\nBest regards, Your customer service"}
+    }[l];
+    return T.h+"\n"+credLines(l,u,p)+"\n\n"+srvBlock(l)+m3uBlock(l,m)+"\n\n"+T.web+"\n\n"+T.wa+"\n\n"+T.foot;
+  }
+
+  function payMsg(l,link){
+    var L=link||"________";
+    var t={
+      es:"Para confirmar tu suscripci\u00F3n, puedes pagar de una de estas dos formas:\n\n\uD83D\uDCB3 Enlace de pago: "+L+"\n\nO por PayPal: Oughia.karim@gmail.com\n(Env\u00EDalo como \u00ABAmigos y familiares\u00BB para que no haya comisiones \uD83D\uDE4F)\n\nCuando lo hagas, env\u00EDame una captura del pago y te env\u00EDo tu acceso enseguida \uD83D\uDE42",
+      nl:"Om je abonnement te bevestigen, kun je op een van deze twee manieren betalen:\n\n\uD83D\uDCB3 Betaallink: "+L+"\n\nOf via PayPal: Oughia.karim@gmail.com\n(Stuur het als \"Vrienden en familie\" zodat er geen extra kosten zijn \uD83D\uDE4F)\n\nZodra het klaar is, stuur me een screenshot van de betaling en ik stuur je toegang meteen \uD83D\uDE42",
+      fr:"Pour confirmer votre abonnement, vous pouvez payer de l'une de ces deux fa\u00E7ons :\n\n\uD83D\uDCB3 Lien de paiement : "+L+"\n\nOu par PayPal : Oughia.karim@gmail.com\n(Envoyez-le en \u00AB Amis et famille \u00BB pour \u00E9viter les frais \uD83D\uDE4F)\n\nUne fois fait, envoyez-moi une capture d'\u00E9cran du paiement et je vous envoie vos acc\u00E8s tout de suite \uD83D\uDE42",
+      en:"To confirm your subscription, you can pay in one of these two ways:\n\n\uD83D\uDCB3 Payment link: "+L+"\n\nOr PayPal: Oughia.karim@gmail.com\n(Please send it as \"Friends & Family\" so there are no extra fees \uD83D\uDE4F)\n\nOnce done, send me a screenshot of the payment and I'll send your access right away \uD83D\uDE42"
+    };
+    return t[l];
+  }
+
+  var GUIDES={
+    firestick:{
+      es:"\uD83D\uDCFA Instalar en Amazon Firestick / Fire TV\n\n1. En la pantalla de inicio del Firestick, ve a Buscar y escribe \"Downloader\". Instala la app Downloader.\n2. Ve a Ajustes \u2192 My Fire TV \u2192 Opciones de desarrollador y activa \"Instalar apps desconocidas\" para Downloader.\n3. Abre Downloader y escribe en la barra: iptvsmarters.com \u2014 \u00E1brelo, descarga IPTV Smarters Pro e inst\u00E1lalo.\n4. Abre la app y elige \"Iniciar sesi\u00F3n con la API de Xtream Codes\".\n5. Introduce el usuario, la contrase\u00F1a y la URL del servidor que te envi\u00E9. \u00A1Listo \u2705!",
+      nl:"\uD83D\uDCFA Installeren op Amazon Firestick / Fire TV\n\n1. Ga op het Firestick-startscherm naar Zoeken en typ \"Downloader\". Installeer de Downloader-app.\n2. Ga naar Instellingen \u2192 My Fire TV \u2192 Opties voor ontwikkelaars en zet \"Onbekende apps installeren\" AAN voor Downloader.\n3. Open Downloader en typ in de balk: iptvsmarters.com \u2014 open het, download IPTV Smarters Pro en installeer het.\n4. Open de app en kies \"Inloggen met Xtream Codes API\".\n5. Voer de gebruikersnaam, het wachtwoord en de server-URL in die ik je heb gestuurd. Klaar \u2705",
+      fr:"\uD83D\uDCFA Installer sur Amazon Firestick / Fire TV\n\n1. Sur l'\u00E9cran d'accueil du Firestick, allez dans Rechercher et tapez \u00AB Downloader \u00BB. Installez l'application Downloader.\n2. Allez dans Param\u00E8tres \u2192 My Fire TV \u2192 Options pour les d\u00E9veloppeurs et activez \u00AB Installer des applications inconnues \u00BB pour Downloader.\n3. Ouvrez Downloader et tapez dans la barre : iptvsmarters.com \u2014 ouvrez-le, t\u00E9l\u00E9chargez IPTV Smarters Pro puis installez-le.\n4. Ouvrez l'application et choisissez \u00AB Se connecter avec l'API Xtream Codes \u00BB.\n5. Saisissez le username, le password et l'URL du serveur que je vous ai envoy\u00E9s. Termin\u00E9 \u2705",
+      en:"\uD83D\uDCFA Install on Amazon Firestick / Fire TV\n\n1. From the Firestick home, go to Find \u2192 Search and type \"Downloader\". Install the Downloader app.\n2. Go to Settings \u2192 My Fire TV \u2192 Developer options and turn ON \"Install unknown apps\" for Downloader.\n3. Open Downloader, type in the bar: iptvsmarters.com \u2014 open it, download IPTV Smarters Pro and install it.\n4. Open the app and choose \"Login with Xtream Codes API\".\n5. Enter the username, password and server URL I sent you. Done \u2705"
+    },
+    android:{
+      es:"\uD83D\uDCF1 Instalar en Android (m\u00F3vil, tablet o TV box)\n\n1. Abre Google Play Store.\n2. Busca \"IPTV Smarters Pro\" e inst\u00E1lalo.\n3. Abre la app y elige \"Iniciar sesi\u00F3n con la API de Xtream Codes\".\n4. Introduce el usuario, la contrase\u00F1a y la URL del servidor que te envi\u00E9. \u00A1Listo \u2705!",
+      nl:"\uD83D\uDCF1 Installeren op Android (telefoon, tablet of tv-box)\n\n1. Open de Google Play Store.\n2. Zoek \"IPTV Smarters Pro\" en installeer het.\n3. Open de app en kies \"Inloggen met Xtream Codes API\".\n4. Voer de gebruikersnaam, het wachtwoord en de server-URL in die ik je heb gestuurd. Klaar \u2705",
+      fr:"\uD83D\uDCF1 Installer sur Android (t\u00E9l\u00E9phone, tablette ou box TV)\n\n1. Ouvrez le Google Play Store.\n2. Recherchez \u00AB IPTV Smarters Pro \u00BB et installez-le.\n3. Ouvrez l'application et choisissez \u00AB Se connecter avec l'API Xtream Codes \u00BB.\n4. Saisissez le username, le password et l'URL du serveur que je vous ai envoy\u00E9s. Termin\u00E9 \u2705",
+      en:"\uD83D\uDCF1 Install on Android (phone, tablet or TV box)\n\n1. Open the Google Play Store.\n2. Search for \"IPTV Smarters Pro\" and install it.\n3. Open the app and choose \"Login with Xtream Codes API\".\n4. Enter the username, password and server URL I sent you. Done \u2705"
+    },
+    ios:{
+      es:"\uD83D\uDCF1 Instalar en iPhone / iPad\n\n1. Abre la App Store.\n2. Busca \"IPTV Smarters Player\" (o \"Smarters Player Lite\") e inst\u00E1lalo.\n3. Abre la app y elige \"Iniciar sesi\u00F3n con la API de Xtream Codes\".\n4. Introduce el usuario, la contrase\u00F1a y la URL del servidor que te envi\u00E9. \u00A1Listo \u2705!",
+      nl:"\uD83D\uDCF1 Installeren op iPhone / iPad\n\n1. Open de App Store.\n2. Zoek \"IPTV Smarters Player\" (of \"Smarters Player Lite\") en installeer het.\n3. Open de app en kies \"Inloggen met Xtream Codes API\".\n4. Voer de gebruikersnaam, het wachtwoord en de server-URL in die ik je heb gestuurd. Klaar \u2705",
+      fr:"\uD83D\uDCF1 Installer sur iPhone / iPad\n\n1. Ouvrez l'App Store.\n2. Recherchez \u00AB IPTV Smarters Player \u00BB (ou \u00AB Smarters Player Lite \u00BB) et installez-le.\n3. Ouvrez l'application et choisissez \u00AB Se connecter avec l'API Xtream Codes \u00BB.\n4. Saisissez le username, le password et l'URL du serveur que je vous ai envoy\u00E9s. Termin\u00E9 \u2705",
+      en:"\uD83D\uDCF1 Install on iPhone / iPad\n\n1. Open the App Store.\n2. Search for \"IPTV Smarters Player\" (or \"Smarters Player Lite\") and install it.\n3. Open the app and choose \"Login with Xtream Codes API\".\n4. Enter the username, password and server URL I sent you. Done \u2705"
+    },
+    smarttv:{
+      es:"\uD83D\uDCFA Instalar en Smart TV Samsung / LG\n\n1. Abre la tienda de apps de tu TV (Samsung Apps / LG Content Store).\n2. Busca \"IBO Player\" (o \"SmartOne IPTV\") e inst\u00E1lalo.\n3. Abre la app: te mostrar\u00E1 tu direcci\u00F3n MAC y una clave de dispositivo. Env\u00EDamelas, o a\u00F1ade tu lista en la web que aparece en pantalla.\n4. Yo activo tu lista y aparecer\u00E1n los canales. \u00A1Listo \u2705!",
+      nl:"\uD83D\uDCFA Installeren op Samsung / LG Smart TV\n\n1. Open de app-winkel op je tv (Samsung Apps / LG Content Store).\n2. Zoek \"IBO Player\" (of \"SmartOne IPTV\") en installeer het.\n3. Open de app: hij toont je MAC-adres en een device key. Stuur mij die twee, of voeg je lijst toe op de website die op het scherm staat.\n4. Ik activeer je lijst en de zenders verschijnen. Klaar \u2705",
+      fr:"\uD83D\uDCFA Installer sur Smart TV Samsung / LG\n\n1. Ouvrez le magasin d'applications de votre TV (Samsung Apps / LG Content Store).\n2. Recherchez \u00AB IBO Player \u00BB (ou \u00AB SmartOne IPTV \u00BB) et installez-le.\n3. Ouvrez l'application : elle affiche votre adresse MAC et une cl\u00E9 d'appareil. Envoyez-les-moi, ou ajoutez votre liste sur le site affich\u00E9 \u00E0 l'\u00E9cran.\n4. J'active votre liste et les cha\u00EEnes apparaissent. Termin\u00E9 \u2705",
+      en:"\uD83D\uDCFA Install on Samsung / LG Smart TV\n\n1. Open the app store on your TV (Samsung Apps / LG Content Store).\n2. Search for \"IBO Player\" (or \"SmartOne IPTV\") and install it.\n3. Open the app \u2014 it shows your MAC address and a device key. Send me those two, or add your playlist on the website shown on screen.\n4. I'll activate your playlist and the channels will appear. Done \u2705"
+    },
+    computer:{
+      es:"\uD83D\uDCBB Ver en el ordenador (Windows / Mac)\n\nWindows:\n1. Descarga \"IPTV Smarters Pro\" para Windows desde iptvsmarters.com.\n2. Inst\u00E1lalo y \u00E1brelo, elige \"Iniciar sesi\u00F3n con la API de Xtream Codes\" e introduce los datos que te envi\u00E9.\n\nMac:\n1. En un Mac reciente (chip Apple), abre la App Store e instala \"IPTV Smarters Player\" (la app de iPhone/iPad funciona en Mac).\n2. O usa cualquier reproductor compatible con Xtream e introduce el usuario, la contrase\u00F1a y la URL del servidor. \u00A1Listo \u2705!",
+      nl:"\uD83D\uDCBB Kijken op de computer (Windows / Mac)\n\nWindows:\n1. Download \"IPTV Smarters Pro\" voor Windows via iptvsmarters.com.\n2. Installeer en open het, kies \"Inloggen met Xtream Codes API\" en voer de gegevens in die ik je stuurde.\n\nMac:\n1. Op een nieuwere Mac (Apple-chip): open de App Store en installeer \"IPTV Smarters Player\" (de iPhone/iPad-app werkt op Mac).\n2. Of gebruik een Xtream-compatibele speler en voer de gebruikersnaam, het wachtwoord en de server-URL in. Klaar \u2705",
+      fr:"\uD83D\uDCBB Regarder sur l'ordinateur (Windows / Mac)\n\nWindows :\n1. T\u00E9l\u00E9chargez \u00AB IPTV Smarters Pro \u00BB pour Windows depuis iptvsmarters.com.\n2. Installez-le et ouvrez-le, choisissez \u00AB Se connecter avec l'API Xtream Codes \u00BB et saisissez les informations que je vous ai envoy\u00E9es.\n\nMac :\n1. Sur un Mac r\u00E9cent (puce Apple), ouvrez l'App Store et installez \u00AB IPTV Smarters Player \u00BB (l'app iPhone/iPad fonctionne sur Mac).\n2. Ou utilisez un lecteur compatible Xtream et saisissez le username, le password et l'URL du serveur. Termin\u00E9 \u2705",
+      en:"\uD83D\uDCBB Watch on computer (Windows / Mac)\n\nWindows:\n1. Download \"IPTV Smarters Pro\" for Windows from iptvsmarters.com.\n2. Install and open it, choose \"Login with Xtream Codes API\", and enter the details I sent you.\n\nMac:\n1. On a newer Mac (Apple chip), open the App Store and install \"IPTV Smarters Player\" (the iPhone/iPad app runs on Mac).\n2. Or use any Xtream-compatible player and enter the username, password and server URL I sent you. Done \u2705"
+    }
+  };
+
+  // ---- helpers ----
+  function parseM3U(s){
+    s=(s||"").trim(); var u="",p="",m="";
+    if(s){
+      var um=s.match(/[?&]username=([^&\s]+)/i); if(um)u=decodeURIComponent(um[1]);
+      var pm=s.match(/[?&]password=([^&\s]+)/i); if(pm)p=decodeURIComponent(pm[1]);
+      if(/https?:\/\//i.test(s)) m=s.split(/\s+/)[0];
+    }
+    return {u:u,p:p,m:m};
+  }
+  function fmtEuro(n){ return (n%1===0)?String(n):n.toFixed(2).replace(/0$/,""); }
+  function closestLink(amt){
+    var best=null;
+    for(var i=0;i<PAYLINKS.length;i++){
+      if(PAYLINKS[i][0]===48.72) continue; // one-off amount: kept in the table, skipped for auto-match (49 -> 50, not 48.72)
+      if(best===null||Math.abs(PAYLINKS[i][0]-amt)<Math.abs(best[0]-amt)) best=PAYLINKS[i];
+    }
+    return best;
+  }
+  function flash(btn){
+    var old=btn.textContent, oc=btn.className;
+    btn.textContent="Copied \u2713"; btn.className=oc+" ok";
+    setTimeout(function(){ btn.textContent=old; btn.className=oc; },1200);
+  }
+  function copyFrom(area,btn){
+    var t=area.value; if(!t){return;}
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){flash(btn);},function(){legacyCopy(area,btn);}); }
+    else legacyCopy(area,btn);
+  }
+  function legacyCopy(area,btn){ area.removeAttribute("readonly"); area.select(); try{document.execCommand("copy");flash(btn);}catch(e){} area.setAttribute("readonly","readonly"); window.getSelection&&window.getSelection().removeAllRanges(); }
+
+  // ---- renders ----
+  function renderCreds(){
+    var u=$("#cUser").value.trim(), p=$("#cPass").value.trim(), m=$("#cM3u").value.trim();
+    $("#credOut").value = credKind==="paid" ? paidMsg(lang,u,p,m) : trialMsg(lang,u,p,m);
+  }
+  function renderPay(){
+    var amt=parseFloat($("#payAmt").value);
+    var link="", note="";
+    if(!isNaN(amt)&&amt>0){
+      var c=closestLink(amt); link=c[1];
+      note = (c[0]===amt) ? ("Exact link for \u20AC"+fmtEuro(amt)+".")
+        : ("No exact \u20AC"+fmtEuro(amt)+" link \u2014 using the closest: \u20AC"+fmtEuro(c[0])+".");
+    } else { note="Enter the agreed price to pick the matching payment link."; }
+    $("#payLink").value=link;
+    $("#payNote").textContent=note;
+    $("#payOut").value=payMsg(lang,link);
+  }
+  function renderGuide(){ $("#guideOut").value = GUIDES[$("#guideDev").value][lang]; }
+  function renderAll(){ renderCreds(); renderPay(); renderGuide(); }
+
+  // ---- payment table ----
+  (function(){
+    var rows="<thead><tr><th>Price</th><th>Payment link</th></tr></thead><tbody>";
+    for(var i=0;i<PAYLINKS.length;i++){ rows+="<tr><td>\u20AC"+fmtEuro(PAYLINKS[i][0])+"</td><td><a href=\""+PAYLINKS[i][1]+"\" target=\"_blank\" rel=\"noopener\">"+PAYLINKS[i][1]+"</a></td></tr>"; }
+    $("#payTableRef").innerHTML=rows+"</tbody>";
+  })();
+
+  // ---- wiring ----
+  $("#langSeg").onclick=function(e){ var b=e.target.closest("[data-lang]"); if(!b)return;
+    lang=b.getAttribute("data-lang");
+    [].forEach.call(this.children,function(c){c.classList.toggle("on",c===b);});
+    renderAll();
+  };
+  $("#credType").onclick=function(e){ var b=e.target.closest("[data-type]"); if(!b)return;
+    credKind=b.getAttribute("data-type");
+    [].forEach.call(this.children,function(c){c.classList.toggle("on",c===b);});
+    renderCreds();
+  };
+  $("#tabSeg").onclick=function(e){ var b=e.target.closest("[data-tab]"); if(!b)return;
+    var tab=b.getAttribute("data-tab");
+    [].forEach.call(this.children,function(c){c.classList.toggle("on",c===b);});
+    ["creds","pay","guide","ref"].forEach(function(t){ $("#tab-"+t).style.display = (t===tab)?"":"none"; });
+  };
+  $("#m3uIn").oninput=function(){ var r=parseM3U(this.value);
+    if(r.u)$("#cUser").value=r.u; if(r.p)$("#cPass").value=r.p; if(r.m)$("#cM3u").value=r.m;
+    renderCreds();
+  };
+  ["cUser","cPass","cM3u"].forEach(function(id){ $("#"+id).oninput=renderCreds; });
+  $("#payAmt").oninput=renderPay;
+  $("#guideDev").onchange=renderGuide;
+  $("#copyCreds").onclick=function(){ copyFrom($("#credOut"),this); };
+  $("#copyPay").onclick=function(){ copyFrom($("#payOut"),this); };
+  $("#copyGuide").onclick=function(){ copyFrom($("#guideOut"),this); };
+
+  renderAll();
+</script>
+</body>
+</html>
