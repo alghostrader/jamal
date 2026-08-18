@@ -107,6 +107,11 @@
   .baltile.avail.neg .v{color:var(--red)}
   .baltile.cost{background:rgba(187,77,62,.10);border-color:var(--red)}
   .baltile.cost .v{color:var(--red)}
+  .netcard{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;background:rgba(79,122,82,.12);border:1px solid var(--up);border-radius:var(--rs);padding:16px 18px;margin-bottom:16px}
+  .netcard .l{font:600 10.5px ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+  .netcard .v{font-family:var(--serif);font-size:34px;font-weight:500;color:var(--up);font-variant-numeric:tabular-nums;margin-top:2px}
+  .netcard .brk{margin-left:auto;font-size:11.5px;color:var(--ink3);text-align:right}
+  .netcard.neg{background:transparent;border-color:var(--red)}.netcard.neg .v{color:var(--red)}
   .payadd{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
   .payadd .pnote{flex:1;min-width:150px}
   .seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--rs);overflow:hidden;flex:none}
@@ -217,6 +222,10 @@
     <div class="phead">
       <h2 style="margin:0">Payouts &amp; balance</h2>
       <span class="tiny muted" style="margin-left:auto">Available = sales − 7.5% fee − payouts. Panel cost is what you owe providers.</span>
+    </div>
+    <div class="netcard" id="netCard">
+      <div><div class="l">Net profit · since last payout</div><div class="v" id="bNet">€0</div></div>
+      <div class="brk" id="netBreak">sales − 7.5% fee − panel cost · resets to €0 after each payout</div>
     </div>
     <div class="balrow">
       <div class="baltile cost"><div class="l">Fee 7.5%</div><div class="v" id="bFee">€0</div></div>
@@ -535,9 +544,26 @@ const db = getFirestore(fbApp);
     if(curView==="clients")renderClients(); else renderRows();
   }
   function paidTotal(){return payouts.reduce(function(s,p){return s+(Number(p.amount)||0);},0);}
+  // Net profit accrued since the most recent payout (any payout resets it to 0).
+  // Sales made after the last payout are counted by their created_at timestamp.
+  function netProfit(){
+    var since=payouts.reduce(function(m,p){var t=p.created_at||"";return t>m?t:m;},"");
+    var g=0,pc=0,n=0;
+    sales.forEach(function(s){
+      var ct=s.created_at||"";
+      if(since!==""&&!(ct>since))return;   // skip sales made on/before the last payout
+      g+=Number(s.price_eur)||0; pc+=panelCost(s); n++;
+    });
+    var fee=g*FEE_RATE;
+    return {net:g-fee-pc,gross:g,fee:fee,panel:pc,count:n};
+  }
   function renderBalance(st){
     var total=st.total,cost=st.panelCostTotal,fee=total*FEE_RATE,paid=paidTotal(),avail=total-fee-paid;
     $("#bFee").textContent=euro(fee);$("#bPanel").textContent=euro(cost);$("#bPaid").textContent=euro(paid);$("#bAvail").textContent=euro(avail);
+    var np=netProfit();
+    $("#bNet").textContent=euro(np.net);
+    document.querySelector("#netCard").classList.toggle("neg",np.net<0);
+    $("#netBreak").textContent=np.count+" sale"+(np.count===1?"":"s")+" since last payout · "+euro(np.gross)+" − "+euro(np.fee)+" fee − "+euro(np.panel)+" panel";
     document.querySelector(".baltile.avail").classList.toggle("neg",avail<0);
     var pk=Object.keys(st.panelCostBy);
     $("#panelCostBreak").textContent=pk.length?("To pay providers — "+pk.sort().map(function(k){return (PANELS[k]||k)+" "+euro(st.panelCostBy[k]);}).join("  ·  ")):"";
