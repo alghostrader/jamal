@@ -161,6 +161,28 @@
   .authcard .btn{width:100%;text-align:center;min-height:42px}
   .authhint{color:var(--ink3);font-size:11px;text-align:center;margin-top:4px;line-height:1.5}
 
+  .app{display:flex;align-items:stretch;min-height:100vh}
+  .sidebar{width:212px;flex:none;position:sticky;top:0;height:100vh;overflow:auto;
+    background:var(--card);border-right:1px solid var(--line);padding:20px 12px;display:flex;flex-direction:column;gap:3px}
+  .sbrand{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:21px;font-weight:500;padding:2px 10px 16px}
+  .navitem{display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:0;background:none;
+    font:inherit;font-size:13.5px;color:var(--ink2);padding:9px 12px;border-radius:var(--rs);cursor:pointer;text-decoration:none}
+  .navitem:hover{background:var(--surface2);color:var(--ink)}
+  .navitem.on{background:var(--accsoft);color:var(--acc);font-weight:600}
+  .navitem .ic{width:17px;height:17px;flex:none}
+  .navsep{height:1px;background:var(--line);margin:11px 8px}
+  .sbspace{flex:1;min-height:14px}
+  .sbfoot{font-size:11px;color:var(--ink3);padding:4px 12px 8px;word-break:break-all}
+  .mainwrap{flex:1;min-width:0}
+  @media (max-width:820px){
+    .app{flex-direction:column}
+    .sidebar{width:auto;height:auto;position:static;flex-direction:row;flex-wrap:wrap;align-items:center;
+      gap:4px;border-right:0;border-bottom:1px solid var(--line);padding:10px 12px}
+    .sbrand{padding:0 10px 0 2px;font-size:17px}
+    .navsep{display:none}.sbspace{display:none}
+    .sbfoot{margin-left:auto;padding:0 8px}
+    .navitem{width:auto}
+  }
   @media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}
     .frow,.frow.c3,.frow.dc,.ibo,.balrow{grid-template-columns:1fr}.wrap{padding:22px 16px 80px}.bar .lbl{width:120px}}
 </style>
@@ -179,24 +201,36 @@
     <div class="authhint">First time? Type an email + password and tap “Create account”. Use the same ones on every device.</div>
   </div>
 </div>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sbrand"><svg class="ic" viewBox="0 0 24 24" style="width:20px;height:20px;color:var(--acc);stroke:none;fill:currentColor"><path d="M12 2l8 10-8 10-8-10z"/></svg>IPTV Sales</div>
+    <button class="navitem on" data-sec="overview" type="button"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>Overview</button>
+    <button class="navitem" data-sec="finance" type="button"><svg class="ic" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Finance</button>
+    <button class="navitem" data-sec="sales" type="button"><svg class="ic" viewBox="0 0 24 24"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>Sales</button>
+    <div class="navsep"></div>
+    <a class="navitem" href="/support"><svg class="ic" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.1 2.1-2-2 2.1-2.1z"/></svg>Support tools</a>
+    <a class="navitem" href="/"><svg class="ic" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Portfolio</a>
+    <div class="sbspace"></div>
+    <div class="sbfoot"><span id="authWho"></span></div>
+    <button class="navitem" id="signOutBtn" type="button"><svg class="ic" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>Sign out</button>
+  </aside>
+  <div class="mainwrap">
 <div class="wrap">
 
   <div class="head">
     <div>
-      <a class="backlink" href="/"><svg class="ic" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>Portfolio</a>
-      <h1>Sales</h1>
+      <h1 id="secTitle">Overview</h1>
+      <div class="sub"><span id="storeNote">Synced to your account</span></div>
     </div>
     <div class="actions">
-      <a class="btn" href="/support" title="Client message tools">Support tools</a>
       <button class="btn" id="exportBtn" title="Download all sales as a JSON backup">Export</button>
       <button class="btn" id="importBtn" title="Restore sales from a JSON backup">Import</button>
       <button class="btn primary" id="addBtn">+ Add sale</button>
-      <button class="btn" id="signOutBtn" title="Sign out">Sign out</button>
       <input type="file" id="importFile" accept="application/json" hidden>
     </div>
   </div>
-  <div class="sub"><span id="storeNote">Synced to your account</span><span class="muted" id="authWho" style="margin-left:2px"></span></div>
 
+  <div id="sec-overview">
   <div class="kpis">
     <div class="card kpi"><div class="kpiL">Revenue · all time</div><div class="kpiV" id="kRevAll">€0</div><div class="kpiF" id="kCount">0 sales</div></div>
     <div class="card kpi"><div class="kpiL">This month</div><div class="kpiV" id="kRevMonth">€0</div><div class="kpiF" id="kCountMonth">0 sales</div></div>
@@ -217,7 +251,9 @@
       <ul class="exp" id="expList" style="list-style:none;margin:0;padding:0"></ul>
     </div>
   </div>
+  </div><!-- /sec-overview -->
 
+  <div id="sec-finance" style="display:none">
   <div class="card pad" id="payoutCard">
     <div class="phead">
       <h2 style="margin:0">Payouts &amp; balance</h2>
@@ -258,7 +294,9 @@
       <button class="btn primary" id="stAddBtn" type="button">+ Add credits</button>
     </div>
   </div>
+  </div><!-- /sec-finance -->
 
+  <div id="sec-sales" style="display:none">
   <div class="card">
     <div class="toolbar">
       <div class="seg"><button class="segbtn on" id="viewSales" type="button">Sales</button><button class="segbtn" id="viewClients" type="button">Clients</button></div>
@@ -286,7 +324,10 @@
       </table>
     </div>
   </div>
-</div>
+  </div><!-- /sec-sales -->
+</div><!-- /wrap -->
+</div><!-- /mainwrap -->
+</div><!-- /app -->
 
 <!-- Add sale modal -->
 <div class="overlay" id="overlay">
@@ -664,6 +705,14 @@ const db = getFirestore(fbApp);
   $("#pAddBtn").onclick=addPayout;$("#pDate").value=todayStr();
   $("#stAddBtn").onclick=addCredits;
   $("#stockRow").onclick=function(e){var t=e.target.closest(".stile");if(t&&t.getAttribute("data-panel"))setStock(t.getAttribute("data-panel"));};
+  // sidebar section switching
+  var SEC_TITLES={overview:"Overview",finance:"Finance",sales:"Sales"};
+  function setSection(s){
+    ["overview","finance","sales"].forEach(function(t){var el=document.getElementById("sec-"+t);if(el)el.style.display=(t===s)?"":"none";});
+    [].forEach.call(document.querySelectorAll(".navitem[data-sec]"),function(b){b.classList.toggle("on",b.getAttribute("data-sec")===s);});
+    var h=document.getElementById("secTitle");if(h)h.textContent=SEC_TITLES[s]||"Sales";
+  }
+  [].forEach.call(document.querySelectorAll(".navitem[data-sec]"),function(b){b.onclick=function(){setSection(b.getAttribute("data-sec"));};});
 
   // export / import
   $("#exportBtn").onclick=function(){
