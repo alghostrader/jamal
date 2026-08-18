@@ -407,7 +407,12 @@
    {
     "path": "/guides/installer-iptv-apple-tv",
     "title": "Installer l'IPTV sur Apple TV : guide 2026",
-    "words": 2538
+    "words": 2541
+   },
+   {
+    "path": "/blog",
+    "title": "Blog & Guides IPTV France 2026",
+    "words": 2489
    },
    {
     "path": "/guides/iptv-gratuit-est-ce-fiable",
@@ -420,14 +425,14 @@
     "words": 2424
    },
    {
+    "path": "/guides/iptv-fire-tv-stick",
+    "title": "Installer l'IPTV sur Fire TV Stick : guide 2026",
+    "words": 2394
+   },
+   {
     "path": "/guides/configurer-epg-iptv",
     "title": "Configurer l'EPG IPTV : Guide des Programmes 2026",
     "words": 2374
-   },
-   {
-    "path": "/guides/iptv-fire-tv-stick",
-    "title": "Installer l'IPTV sur Fire TV Stick : guide 2026",
-    "words": 2373
    },
    {
     "path": "/guides/iptv-arnaques-comment-eviter",
@@ -442,12 +447,7 @@
    {
     "path": "/guides/comment-fonctionne-iptv",
     "title": "Comment Fonctionne l'IPTV ? Le Protocole Expliqué Simplement",
-    "words": 2308
-   },
-   {
-    "path": "/blog",
-    "title": "Blog & Guides IPTV France 2026",
-    "words": 2300
+    "words": 2299
    },
    {
     "path": "/guides/iptv-4k-france-2026",
@@ -487,7 +487,7 @@
    {
     "path": "/guides/xtream-codes-vs-m3u",
     "title": "Xtream Codes vs M3U : Quelle Différence pour votre IPTV ?",
-    "words": 1970
+    "words": 1969
    },
    {
     "path": "/guides/iptv-tivimate",
@@ -540,14 +540,14 @@
     "words": 1715
    },
    {
-    "path": "/guides/meilleur-lecteur-iptv",
-    "title": "Meilleur lecteur IPTV 2026 : le comparatif",
-    "words": 1642
-   },
-   {
     "path": "/guides/comment-installer-iptv",
     "title": "Comment Installer l'IPTV en 2026",
     "words": 1637
+   },
+   {
+    "path": "/guides/meilleur-lecteur-iptv",
+    "title": "Meilleur lecteur IPTV 2026 : le comparatif",
+    "words": 1634
    },
    {
     "path": "/guides/iptv-famille-controle-parental",
@@ -575,6 +575,11 @@
     "words": 1512
    },
    {
+    "path": "/guides/iptv-m3u",
+    "title": "IPTV M3U : c'est quoi et comment l'utiliser ?",
+    "words": 1500
+   },
+   {
     "path": "/guides/chaines-iptv-francaises-internationales",
     "title": "Chaînes IPTV Françaises & Internationales 2026",
     "words": 1486
@@ -585,14 +590,24 @@
     "words": 1472
    },
    {
+    "path": "/guides/iptv-samsung-smart-tv",
+    "title": "IPTV sur Samsung Smart TV : le guide 2026",
+    "words": 1401
+   },
+   {
     "path": "/installation/smart-tv-samsung",
     "title": "IPTV Smart TV Samsung 2026 : Installation 5 min",
     "words": 1386
    },
    {
+    "path": "/guides/iptv-smart-tv",
+    "title": "IPTV sur Smart TV : le guide complet 2026",
+    "words": 1385
+   },
+   {
     "path": "/guides",
     "title": "Guides IPTV France 2026 : Tutoriels",
-    "words": 1379
+    "words": 1382
    },
    {
     "path": "/installation/android-tv-box",
@@ -630,11 +645,6 @@
     "words": 1331
    },
    {
-    "path": "/guides/essai-iptv-gratuit",
-    "title": "Essai IPTV gratuit : comment tester avant de payer",
-    "words": 1329
-   },
-   {
     "path": "/installation/iphone-ios",
     "title": "IPTV iPhone iPad 2026 : iOS Smarters Player",
     "words": 1325
@@ -645,6 +655,16 @@
     "words": 1322
    },
    {
+    "path": "/guides/iptv-telegram",
+    "title": "IPTV Telegram : groupes, risques et alternatives",
+    "words": 1314
+   },
+   {
+    "path": "/guides/essai-iptv-gratuit",
+    "title": "Essai IPTV gratuit : comment tester avant de payer",
+    "words": 1307
+   },
+   {
     "path": "/installation/macos",
     "title": "IPTV macOS 2026 : Mac Smarters Pro & IINA",
     "words": 1296
@@ -652,7 +672,7 @@
    {
     "path": "/guides/telecharger-iptv-smarters-pro",
     "title": "Télécharger IPTV Smarters Pro : le guide 2026",
-    "words": 1289
+    "words": 1274
    },
    {
     "path": "/revendeur-iptv",
@@ -918,7 +938,7 @@
     "covered": true
    }
   ],
-  "n_articles": 82,
+  "n_articles": 86,
   "n_thin": 0
  },
  "iptvned.com": {
@@ -2685,8 +2705,8 @@
    },
    {
     "path": "/boitier-iptv",
-    "title": "Boîtier IPTV 2026 — Comparatif des meilleures IPTV box",
-    "words": 2767
+    "title": "Meilleur boîtier IPTV 2026 : le comparatif complet",
+    "words": 2766
    },
    {
     "path": "/blog/iptv-sport-automobile",

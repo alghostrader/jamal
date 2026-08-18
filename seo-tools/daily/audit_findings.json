@@ -20,11 +20,11 @@
   "www_redirect": "308 -> https://iptvesp.com/"
  },
  "primeiptv-france.com": {
-  "pages": 89,
+  "pages": 93,
   "titles_over60": [],
   "redirect_links": [],
   "linked404": {
-   "application-iptv": 3
+   "application-iptv": 7
   },
   "orphans": [],
   "canonical_mismatch": [],

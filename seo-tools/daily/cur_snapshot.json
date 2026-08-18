@@ -1,40 +1,40 @@
 {
- "_stamp": "2026-08-17 06:21 UTC",
+ "_stamp": "2026-08-18 08:06 UTC",
  "sites": {
   "iptvesp.com": {
    "clicks7d": 420,
-   "sem_rd": 113,
+   "sem_rd": 114,
    "dfs_rd": 37,
    "top100": 21,
    "pages": 58,
    "positions": {
     "iptv espa\u00f1a": null,
     "listas iptv": null,
-    "mejor iptv espa\u00f1a": 39,
+    "mejor iptv espa\u00f1a": 34,
     "iptv smarters pro": null,
     "listas iptv espa\u00f1a telegram": 1,
-    "proveedor iptv": 43
+    "proveedor iptv": 37
    }
   },
   "primeiptv-france.com": {
    "clicks7d": 38,
-   "sem_rd": 21,
-   "dfs_rd": 6,
+   "sem_rd": 22,
+   "dfs_rd": 8,
    "top100": 14,
-   "pages": 89,
+   "pages": 93,
    "positions": {
     "abonnement iptv": null,
     "boitier iptv": null,
     "iptv france": null,
     "application iptv": null,
-    "abonnement iptv 12 mois": 39,
+    "abonnement iptv 12 mois": 31,
     "meilleur abonnement iptv": null,
     "serveur iptv": null
    }
   },
   "iptvned.com": {
    "clicks7d": 11,
-   "sem_rd": 37,
+   "sem_rd": 38,
    "dfs_rd": 16,
    "top100": 19,
    "pages": 54,
@@ -49,7 +49,7 @@
   },
   "iptvpix.com": {
    "clicks7d": 0,
-   "sem_rd": 109,
+   "sem_rd": 110,
    "dfs_rd": 36,
    "top100": null,
    "pages": 58,
@@ -64,13 +64,13 @@
   "smarters-live.com": {
    "clicks7d": 0,
    "sem_rd": 25,
-   "dfs_rd": 7,
+   "dfs_rd": 8,
    "top100": 1,
    "pages": 52,
    "positions": {
     "iptv smarters pro": null,
     "iptv smarters": null,
-    "application iptv": null,
+    "application iptv": 73,
     "iptv erreur de lecture": null
    }
   },
@@ -120,15 +120,15 @@
   },
   "abonnementiptvofficiel.com": {
    "clicks7d": 15,
-   "sem_rd": 60,
-   "dfs_rd": 6,
+   "sem_rd": 61,
+   "dfs_rd": 7,
    "top100": 8,
    "pages": 44,
    "positions": {
     "test iptv gratuit": null,
     "iptv pas cher": null,
-    "essai iptv 7 jours": 62,
-    "meilleur boitier iptv": 83,
+    "essai iptv 7 jours": 51,
+    "meilleur boitier iptv": 75,
     "iptv moins cher": null,
     "code promo iptv": null,
     "iptv promo": null
