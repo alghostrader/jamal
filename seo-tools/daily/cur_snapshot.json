@@ -1,8 +1,8 @@
 {
- "_stamp": "2026-08-18 08:06 UTC",
+ "_stamp": "2026-08-18 09:02 UTC",
  "sites": {
   "iptvesp.com": {
-   "clicks7d": 420,
+   "clicks7d": 501,
    "sem_rd": 114,
    "dfs_rd": 37,
    "top100": 21,
@@ -10,14 +10,14 @@
    "positions": {
     "iptv espa\u00f1a": null,
     "listas iptv": null,
-    "mejor iptv espa\u00f1a": 34,
+    "mejor iptv espa\u00f1a": 35,
     "iptv smarters pro": null,
     "listas iptv espa\u00f1a telegram": 1,
     "proveedor iptv": 37
    }
   },
   "primeiptv-france.com": {
-   "clicks7d": 38,
+   "clicks7d": 46,
    "sem_rd": 22,
    "dfs_rd": 8,
    "top100": 14,
@@ -27,13 +27,13 @@
     "boitier iptv": null,
     "iptv france": null,
     "application iptv": null,
-    "abonnement iptv 12 mois": 31,
+    "abonnement iptv 12 mois": 29,
     "meilleur abonnement iptv": null,
     "serveur iptv": null
    }
   },
   "iptvned.com": {
-   "clicks7d": 11,
+   "clicks7d": 12,
    "sem_rd": 38,
    "dfs_rd": 16,
    "top100": 19,
@@ -70,12 +70,12 @@
    "positions": {
     "iptv smarters pro": null,
     "iptv smarters": null,
-    "application iptv": 73,
+    "application iptv": 76,
     "iptv erreur de lecture": null
    }
   },
   "iptvshqiptar.com": {
-   "clicks7d": 6,
+   "clicks7d": 8,
    "sem_rd": 46,
    "dfs_rd": 7,
    "top100": null,
@@ -84,7 +84,7 @@
     "iptv shqiptare": 16,
     "iptv smarters pro": null,
     "iptv shqip": null,
-    "iptv shqiptar": 16,
+    "iptv shqiptar": 15,
     "tv shqip live": null,
     "iptv per smart tv": null,
     "aplikacion per iptv": null
@@ -119,7 +119,7 @@
    }
   },
   "abonnementiptvofficiel.com": {
-   "clicks7d": 15,
+   "clicks7d": 16,
    "sem_rd": 61,
    "dfs_rd": 7,
    "top100": 8,
@@ -127,8 +127,8 @@
    "positions": {
     "test iptv gratuit": null,
     "iptv pas cher": null,
-    "essai iptv 7 jours": 51,
-    "meilleur boitier iptv": 75,
+    "essai iptv 7 jours": 52,
+    "meilleur boitier iptv": 76,
     "iptv moins cher": null,
     "code promo iptv": null,
     "iptv promo": null
