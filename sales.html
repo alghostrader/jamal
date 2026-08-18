@@ -221,7 +221,7 @@
   <div class="card pad" id="payoutCard">
     <div class="phead">
       <h2 style="margin:0">Payouts &amp; balance</h2>
-      <span class="tiny muted" style="margin-left:auto">Available = sales − 7.5% fee − payouts. Panel cost is what you owe providers.</span>
+      <span class="tiny muted" style="margin-left:auto">This cycle = sales since your last payout. Available = those sales − 7.5% fee; Net profit also subtracts panel cost. Resets after each payout.</span>
     </div>
     <div class="netcard" id="netCard">
       <div><div class="l">Net profit · since last payout</div><div class="v" id="bNet">€0</div></div>
@@ -548,25 +548,28 @@ const db = getFirestore(fbApp);
   // Sales made after the last payout are counted by their created_at timestamp.
   function netProfit(){
     var since=payouts.reduce(function(m,p){var t=p.created_at||"";return t>m?t:m;},"");
-    var g=0,pc=0,n=0;
+    var g=0,pc=0,n=0,panelBy={};
     sales.forEach(function(s){
       var ct=s.created_at||"";
       if(since!==""&&!(ct>since))return;   // skip sales made on/before the last payout
-      g+=Number(s.price_eur)||0; pc+=panelCost(s); n++;
+      g+=Number(s.price_eur)||0;
+      var c=panelCost(s); pc+=c; if(s.panel)panelBy[s.panel]=(panelBy[s.panel]||0)+c;
+      n++;
     });
     var fee=g*FEE_RATE;
-    return {net:g-fee-pc,gross:g,fee:fee,panel:pc,count:n};
+    return {net:g-fee-pc,gross:g,fee:fee,panel:pc,count:n,panelBy:panelBy,avail:g-fee};
   }
   function renderBalance(st){
-    var total=st.total,cost=st.panelCostTotal,fee=total*FEE_RATE,paid=paidTotal(),avail=total-fee-paid;
-    $("#bFee").textContent=euro(fee);$("#bPanel").textContent=euro(cost);$("#bPaid").textContent=euro(paid);$("#bAvail").textContent=euro(avail);
+    // Everything on this card is for the current cycle = sales since the last payout.
     var np=netProfit();
+    $("#bFee").textContent=euro(np.fee);$("#bPanel").textContent=euro(np.panel);
+    $("#bPaid").textContent=euro(paidTotal());$("#bAvail").textContent=euro(np.avail);
     $("#bNet").textContent=euro(np.net);
+    document.querySelector(".baltile.avail").classList.toggle("neg",np.avail<0);
     document.querySelector("#netCard").classList.toggle("neg",np.net<0);
     $("#netBreak").textContent=np.count+" sale"+(np.count===1?"":"s")+" since last payout · "+euro(np.gross)+" − "+euro(np.fee)+" fee − "+euro(np.panel)+" panel";
-    document.querySelector(".baltile.avail").classList.toggle("neg",avail<0);
-    var pk=Object.keys(st.panelCostBy);
-    $("#panelCostBreak").textContent=pk.length?("To pay providers — "+pk.sort().map(function(k){return (PANELS[k]||k)+" "+euro(st.panelCostBy[k]);}).join("  ·  ")):"";
+    var pk=Object.keys(np.panelBy);
+    $("#panelCostBreak").textContent=pk.length?("To pay providers — "+pk.sort().map(function(k){return (PANELS[k]||k)+" "+euro(np.panelBy[k]);}).join("  ·  ")):"";
     var list=payouts.slice().sort(function(a,b){return (a.date<b.date?1:a.date>b.date?-1:b.id-a.id);});
     var tbl=$("#payTable"),tb=$("#payRows"),emp=$("#payEmpty");
     if(!list.length){tbl.style.display="none";emp.style.display="block";tb.innerHTML="";return;}
