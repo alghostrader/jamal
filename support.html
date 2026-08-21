@@ -90,6 +90,9 @@
   .kv .k{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
   .kv .v{font-size:13.5px;word-break:break-all}
   code{font-family:ui-monospace,Menlo,monospace;background:var(--surface2);padding:1px 6px;border-radius:6px;font-size:12.5px}
+  code.copyable{cursor:pointer;border:1px solid transparent;transition:.12s;-webkit-user-select:none;user-select:none}
+  code.copyable:hover{background:var(--accsoft);color:var(--acc);border-color:var(--acc)}
+  code.copyable.ok{background:var(--up);color:#fff;border-color:var(--up)}
   details summary{cursor:pointer;color:var(--ink3);font-size:12px}
   details[open] summary{margin-bottom:8px}
 
@@ -221,20 +224,20 @@
     <h2>Quick reference</h2>
     <div class="refgrid">
       <div>
-        <h3>Server URLs (always these 4)</h3>
+        <h3>Server URLs (always these 4) <span class="tiny muted" style="font-weight:400;letter-spacing:0;text-transform:none">· click any to copy</span></h3>
         <div class="kv" style="margin-bottom:20px">
-          <div class="v"><code>http://vpn.drk35cv.org</code></div>
-          <div class="v"><code>http://smart.cwdn.cx:80</code></div>
-          <div class="v"><code>http://line.dino.ws:80</code></div>
-          <div class="v"><code>http://line.rs4ott.com</code></div>
+          <div class="v"><code class="copyable" data-copy="http://vpn.drk35cv.org" title="Click to copy">http://vpn.drk35cv.org</code></div>
+          <div class="v"><code class="copyable" data-copy="http://smart.cwdn.cx:80" title="Click to copy">http://smart.cwdn.cx:80</code></div>
+          <div class="v"><code class="copyable" data-copy="http://line.dino.ws:80" title="Click to copy">http://line.dino.ws:80</code></div>
+          <div class="v"><code class="copyable" data-copy="http://line.rs4ott.com" title="Click to copy">http://line.rs4ott.com</code></div>
         </div>
         <h3>Downloader codes (Fire TV)</h3>
         <div class="kv" style="margin-bottom:20px">
-          <div class="row"><span class="k">IBO Player</span><span class="v"><code>1171959</code></span></div>
+          <div class="row"><span class="k">IBO Player</span><span class="v"><code class="copyable" data-copy="1171959" title="Click to copy">1171959</code></span></div>
         </div>
         <h3>Contacts</h3>
         <div class="kv">
-          <div class="row"><span class="k">WhatsApp support</span><span class="v"><a href="https://wa.me/351966739291" target="_blank" rel="noopener">+351 966 739 291</a></span></div>
+          <div class="row"><span class="k">WhatsApp support</span><span class="v"><code class="copyable" data-copy="+351 966 739 291" title="Click to copy">+351 966 739 291</code></span></div>
         </div>
       </div>
       <div>
@@ -564,6 +567,14 @@
   $("#copyCreds").onclick=function(){ copyFrom($("#credOut"),this); };
   $("#copyPay").onclick=function(){ copyFrom($("#payOut"),this); };
   $("#copyGuide").onclick=function(){ copyFrom($("#guideOut"),this); };
+
+  // click-to-copy for Quick reference values
+  function copyStr(t){ var ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); var ok=false; try{ok=document.execCommand("copy");}catch(e){} document.body.removeChild(ta); return ok; }
+  function copyChip(el){ var t=el.getAttribute("data-copy"); if(!t)return;
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){flash(el);},function(){ if(copyStr(t))flash(el); }); }
+    else { if(copyStr(t))flash(el); }
+  }
+  $("#tab-ref").addEventListener("click",function(e){ var c=e.target.closest("code.copyable"); if(c)copyChip(c); });
 
   renderAll();
 </script>
