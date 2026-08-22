@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Support Replies</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#161310">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Replies">
+<link rel="manifest" href="/replies.webmanifest">
+<link rel="apple-touch-icon" href="/replies-icon-192.png">
+<link rel="icon" href="/replies-icon-192.png">
+<style>
+  :root{color-scheme:dark;
+    --bg:#161310;--surf:#211d17;--card:#262019;--card2:#2f281f;--line:#3a3228;--line2:#2c261e;
+    --ink:#f4efe6;--ink2:#cabfad;--ink3:#93897a;
+    --acc:#e08a68;--acc2:#cc785c;--accsoft:#3a271e;
+    --up:#6ea86f;--upsoft:#213026;--red:#e0715c;--amber:#d6ab55;
+    --r:16px;--rs:12px;--rp:999px}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
+    -webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+  body{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+  button,input,textarea,select{font:inherit;color:inherit}
+  a{color:var(--acc);text-decoration:none}
+
+  /* ---- sticky header ---- */
+  .top{position:sticky;top:0;z-index:20;background:rgba(22,19,16,.92);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);padding:calc(8px + env(safe-area-inset-top)) 12px 8px}
+  .toprow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px}
+  .brand .dot{width:22px;height:22px;border-radius:7px;background:var(--acc);flex:none;
+    display:flex;align-items:center;justify-content:center}
+  .brand .dot svg{width:14px;height:14px;stroke:#161310;fill:none;stroke-width:2.4}
+  .seg{display:inline-flex;background:var(--surf);border:1px solid var(--line);border-radius:var(--rp);padding:2px}
+  .seg button{background:none;border:0;color:var(--ink3);font-weight:700;font-size:13px;
+    padding:7px 13px;border-radius:var(--rp);min-height:34px}
+  .seg button.on{background:var(--acc);color:#161310}
+  .iconbtn{margin-left:auto;background:var(--surf);border:1px solid var(--line);color:var(--ink2);
+    width:40px;height:40px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;flex:none}
+  .iconbtn.on{background:var(--accsoft);border-color:var(--acc);color:var(--acc)}
+  .iconbtn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .searchwrap{position:relative}
+  .searchwrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:19px;height:19px;
+    stroke:var(--ink3);fill:none;stroke-width:2;pointer-events:none}
+  #q{width:100%;background:var(--surf);border:1px solid var(--line);border-radius:var(--rs);
+    padding:13px 40px 13px 40px;font-size:16px;min-height:48px}
+  #q:focus{outline:none;border-color:var(--acc)}
+  .clearq{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:0;
+    color:var(--ink3);width:34px;height:34px;font-size:20px;display:none}
+  .clearq.show{display:block}
+  .chips{display:flex;gap:7px;overflow-x:auto;margin-top:8px;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;background:var(--surf);border:1px solid var(--line);color:var(--ink2);
+    padding:7px 13px;border-radius:var(--rp);font-size:13.5px;font-weight:600;white-space:nowrap;min-height:34px}
+  .chip.on{background:var(--acc);border-color:var(--acc);color:#161310}
+
+  /* ---- content ---- */
+  .wrap{max-width:640px;margin:0 auto;padding:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:12px}
+  .chead{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .ctitle{font-weight:700;font-size:15.5px;flex:1;min-width:0}
+  .ctag{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink3);
+    background:var(--surf);border:1px solid var(--line);padding:2px 7px;border-radius:6px;white-space:nowrap}
+  .pin{background:none;border:0;color:var(--ink3);width:32px;height:32px;font-size:18px;flex:none}
+  .pin.on{color:var(--amber)}
+  .body{white-space:pre-wrap;word-break:break-word;background:var(--surf);border:1px solid var(--line2);
+    border-radius:var(--rs);padding:11px 12px;font-size:14.5px;line-height:1.5;color:var(--ink2);margin-bottom:10px}
+  .body .ph{color:var(--acc);background:var(--accsoft);border-radius:5px;padding:0 3px;font-weight:600}
+  .vars{display:grid;gap:8px;margin-bottom:10px}
+  .var label{display:block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+  .var input{width:100%;background:var(--surf);border:1px solid var(--line);border-radius:var(--rs);padding:11px 12px;font-size:16px;min-height:46px}
+  .var input:focus{outline:none;border-color:var(--acc)}
+  .copybtn{width:100%;min-height:52px;border:0;border-radius:var(--rs);background:var(--acc);color:#161310;
+    font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px}
+  .copybtn:disabled{background:var(--surf);color:var(--ink3);border:1px solid var(--line)}
+  .copybtn.ok{background:var(--up);color:#fff}
+  .copybtn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2.2}
+  .miss{font-size:12.5px;color:var(--amber);margin-top:7px;text-align:center}
+  .rowbtns{display:flex;gap:8px;margin-top:10px}
+  .rowbtns button{flex:1;min-height:44px;background:var(--surf);border:1px solid var(--line);color:var(--ink2);
+    border-radius:var(--rs);font-weight:600;font-size:14px}
+  .rowbtns .del{color:var(--red);border-color:#4a2b25}
+  .empty{text-align:center;color:var(--ink3);padding:50px 20px;font-size:15px}
+
+  /* ---- tools (credential parser + payment) ---- */
+  .tool{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--acc);border-radius:var(--r);padding:14px;margin-bottom:14px}
+  .tool h3{margin:0 0 4px;font-size:15px;display:flex;align-items:center;gap:7px}
+  .tool .hint{font-size:12.5px;color:var(--ink3);margin-bottom:10px}
+  .tool textarea{width:100%;min-height:96px;background:var(--surf);border:1px solid var(--line);border-radius:var(--rs);
+    padding:11px 12px;font-size:14px;font-family:ui-monospace,Menlo,monospace;resize:vertical}
+  .tool textarea:focus{outline:none;border-color:var(--acc)}
+  .tool select{width:100%;background:var(--surf);border:1px solid var(--line);border-radius:var(--rs);padding:12px;min-height:48px;font-size:16px;-webkit-appearance:none;appearance:none}
+  .warn{background:#3a201b;border:1px solid var(--red);color:#f0b4a8;border-radius:var(--rs);padding:9px 11px;font-size:13px;margin:10px 0;font-weight:600}
+  .okline{color:var(--up);font-size:12.5px;margin:8px 0}
+
+  /* ---- FAB / toast / auth ---- */
+  .fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;
+    background:var(--acc);color:#161310;border:0;font-size:30px;box-shadow:0 6px 20px rgba(0,0,0,.5);z-index:15;display:none}
+  .fab.show{display:block}
+  .toast{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:calc(24px + env(safe-area-inset-bottom));
+    background:var(--up);color:#fff;font-weight:700;padding:12px 20px;border-radius:var(--rp);opacity:0;pointer-events:none;
+    transition:.22s;z-index:40;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-end;justify-content:center;z-index:50}
+  .overlay.on{display:flex}
+  .sheet{background:var(--card);border:1px solid var(--line);border-radius:20px 20px 0 0;width:100%;max-width:640px;
+    max-height:92vh;overflow:auto;padding:18px 16px calc(24px + env(safe-area-inset-bottom))}
+  .sheet h2{margin:0 0 14px;font-size:19px;display:flex;justify-content:space-between;align-items:center}
+  .sheet .x{background:none;border:0;color:var(--ink3);font-size:24px;width:36px;height:36px}
+  .fld{margin-bottom:12px}
+  .fld label{display:block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+  .fld input,.fld textarea,.fld select{width:100%;background:var(--surf);border:1px solid var(--line);border-radius:var(--rs);padding:11px 12px;font-size:16px}
+  .fld textarea{min-height:120px;font-family:ui-monospace,Menlo,monospace;font-size:14px;resize:vertical}
+  .fld input:focus,.fld textarea:focus,.fld select:focus{outline:none;border-color:var(--acc)}
+  .langtabs{display:flex;gap:6px;margin-bottom:10px}
+  .langtabs button{flex:1;background:var(--surf);border:1px solid var(--line);color:var(--ink3);border-radius:var(--rs);padding:9px;font-weight:700;min-height:42px}
+  .langtabs button.on{background:var(--accsoft);border-color:var(--acc);color:var(--acc)}
+  .btn{min-height:50px;border-radius:var(--rs);font-weight:800;font-size:16px;border:1px solid var(--line);background:var(--surf);color:var(--ink);width:100%}
+  .btn.primary{background:var(--acc);color:#161310;border:0}
+  .btn.danger{color:var(--red);border-color:#4a2b25}
+
+  .authgate{position:fixed;inset:0;background:var(--bg);display:none;align-items:center;justify-content:center;padding:24px;z-index:100}
+  .authgate.on{display:flex}
+  .authcard{width:100%;max-width:340px;display:flex;flex-direction:column;gap:11px;text-align:center}
+  .authcard h1{font-size:24px;margin:0}
+  .authcard p{color:var(--ink3);font-size:13.5px;margin:0 0 4px}
+  .authcard input{background:var(--surf);border:1px solid var(--line);border-radius:var(--rs);padding:13px;font-size:16px;min-height:50px}
+  .authcard .btn{margin-top:2px}
+  .err{color:var(--red);font-size:13px;min-height:16px}
+</style>
+</head>
+<body>
+
+<div id="authGate" class="authgate on">
+  <form class="authcard" id="authForm">
+    <h1>Support Replies</h1>
+    <p>Sign in with your dashboard account.</p>
+    <input id="authEmail" type="email" placeholder="Email" autocomplete="username">
+    <input id="authPass" type="password" placeholder="Password" autocomplete="current-password">
+    <div class="err" id="authErr"></div>
+    <button class="btn primary" id="signInBtn" type="submit">Sign in</button>
+  </form>
+</div>
+
+<div class="top">
+  <div class="toprow">
+    <div class="brand"><span class="dot"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></svg></span>Replies</div>
+    <div class="seg" id="langSeg">
+      <button data-lang="es" class="on">ES</button><button data-lang="fr">FR</button><button data-lang="nl">NL</button>
+    </div>
+    <button class="iconbtn" id="editToggle" title="Edit mode"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+  </div>
+  <div class="searchwrap">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input id="q" type="search" enterkeyhint="search" autocomplete="off" placeholder="Paste what the client wrote…">
+    <button class="clearq" id="clearq" aria-label="clear">×</button>
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="wrap">
+  <div id="tools"></div>
+  <div id="list"></div>
+</div>
+
+<button class="fab" id="addFab" title="Add reply">+</button>
+<div class="toast" id="toast">Copied</div>
+
+<!-- Edit sheet -->
+<div class="overlay" id="editOv">
+  <div class="sheet">
+    <h2><span id="editTitle">New reply</span><button class="x" id="editClose">×</button></h2>
+    <div class="fld"><label>Category</label><select id="eCat"></select></div>
+    <div class="langtabs" id="eLangTabs">
+      <button data-l="es" class="on">Español</button><button data-l="fr">Français</button><button data-l="nl">Nederlands</button>
+    </div>
+    <div class="fld"><label>Title</label><input id="eTitle" placeholder="Short title"></div>
+    <div class="fld"><label>Body <span style="text-transform:none;color:var(--ink3)">— use {USER} {PASS} {HOST} {SERVER} for fill-in fields</span></label><textarea id="eBody"></textarea></div>
+    <div class="fld"><label>Keywords <span style="text-transform:none;color:var(--ink3)">— words clients use, comma separated</span></label><textarea id="eKw" style="min-height:70px"></textarea></div>
+    <button class="btn primary" id="eSave" style="margin-bottom:10px">Save</button>
+    <button class="btn danger" id="eDelete">Delete this reply</button>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+const firebaseConfig = { apiKey:"AIzaSyAI1eXkzlFca79XYLUS41WFTPPG2mL4BJI", authDomain:"iptv-sales.firebaseapp.com", projectId:"iptv-sales", messagingSenderId:"547649027254", appId:"1:547649027254:web:87d70cbfd54ff34164ba17" };
+const fbApp = initializeApp(firebaseConfig);
+const auth = getAuth(fbApp);
+const db = getFirestore(fbApp);
+
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+
+// ---------- categories ----------
+var CATS=[
+  {id:"trial",  es:"Prueba",es_all:"Prueba", fr:"Test", nl:"Test", en:"Trial"},
+  {id:"install",es:"Instalar y apps", fr:"Installer & apps", nl:"Installeren & apps"},
+  {id:"login",  es:"Problemas de acceso", fr:"Problèmes de connexion", nl:"Inlogproblemen"},
+  {id:"blocking",es:"Bloqueos y servidores", fr:"Blocages & serveurs", nl:"Blokkades & servers"},
+  {id:"films",  es:"Películas y series", fr:"Films & séries", nl:"Films & series"},
+  {id:"prices", es:"Precios", fr:"Prix", nl:"Prijzen"},
+  {id:"payment",es:"Pago", fr:"Paiement", nl:"Betaling"},
+  {id:"welcome",es:"Bienvenida", fr:"Bienvenue", nl:"Welkom"},
+  {id:"other",  es:"Otros", fr:"Autres", nl:"Overige"}
+];
+function catLabel(id){var c=CATS.find(function(x){return x.id===id;});return c?(c[lang]||c.es):id;}
+
+// ---------- variable labels ----------
+var VLAB={HOST:{es:"Host",fr:"Host",nl:"Host"},USER:{es:"Usuario",fr:"Utilisateur",nl:"Gebruiker"},
+  PASS:{es:"Contraseña",fr:"Mot de passe",nl:"Wachtwoord"},SERVER:{es:"Servidor",fr:"Serveur",nl:"Server"}};
+function vlabel(k){return (VLAB[k]&&VLAB[k][lang])||k;}
+
+// ---------- dino mirror block (shared) ----------
+var DINO="http://vpn.drk35cv.org\nhttp://smart.cwdn.cx:80\nhttp://line.dino.ws:80\nhttp://line.rs4ott.com";
+
+// ---------- SEED library ----------
+var SEED=[
+ {id:1,key:"trial_mega",cat:"trial",pin:false,use:0,
+  title:{es:"Prueba (servidor mega)",fr:"Test (serveur mega)",nl:"Test (mega-server)"},
+  kw:{es:"prueba,test,24 horas,gratis,probar,servidor mega",fr:"test,essai,24 heures,gratuit,serveur mega",nl:"test,proef,24 uur,gratis,mega server"},
+  body:{
+   es:`Aquí tienes la prueba de 24 horas:\n\nServidor: http://{HOST}.msgssmart.com\nUsuario: {USER}\nContraseña: {PASS}\n\nEntra con «Xtream Codes API» y pon solo esa dirección, sin nada detrás. Copia y pega los datos, que a veces el teclado pone mayúscula en la primera letra.\n\nSi con esa no te va, prueba con esta otra, mismo usuario y contraseña:\nhttp://{HOST}.msostvip.com\n\nSon 24 horas desde ahora. Cualquier cosa me dices.`,
+   fr:`Voici votre test de 24 heures :\n\nServeur : http://{HOST}.msgssmart.com\nUtilisateur : {USER}\nMot de passe : {PASS}\n\nConnectez-vous avec « Xtream Codes API » et mettez uniquement cette adresse, rien derrière. Copiez-collez les identifiants, le clavier met parfois une majuscule à la première lettre.\n\nSi cette adresse ne marche pas, essayez celle-ci avec les mêmes identifiants :\nhttp://{HOST}.msostvip.com\n\nC'est 24 heures à partir de maintenant. N'hésitez pas si vous avez besoin de quoi que ce soit.`,
+   nl:`Hier is je test van 24 uur:\n\nServer: http://{HOST}.msgssmart.com\nGebruikersnaam: {USER}\nWachtwoord: {PASS}\n\nLog in met «Xtream Codes API» en vul alleen dat adres in, zonder iets erachter. Kopieer en plak de gegevens, je toetsenbord maakt de eerste letter soms een hoofdletter.\n\nWerkt dat adres niet, probeer dan dit met dezelfde gegevens:\nhttp://{HOST}.msostvip.com\n\nHet loopt 24 uur vanaf nu. Laat het weten als je iets nodig hebt.`}},
+
+ {id:2,key:"trial_dino",cat:"trial",pin:false,use:0,
+  title:{es:"Prueba (servidor dino)",fr:"Test (serveur dino)",nl:"Test (dino-server)"},
+  kw:{es:"prueba,test,24 horas,gratis,probar,servidor dino",fr:"test,essai,24 heures,gratuit,serveur dino",nl:"test,proef,24 uur,gratis,dino server"},
+  body:{
+   es:`Aquí tienes la prueba de 24 horas:\n\nServidor: http://line.dndnscloud.ru\nUsuario: {USER}\nContraseña: {PASS}\n\nEntra con «Xtream Codes API» y pon solo esa dirección, sin nada detrás.\n\nSi no te cargara, cambia el servidor por uno de estos, con el mismo usuario y contraseña:\n`+DINO+`\n\nSon 24 horas desde ahora. Cualquier cosa me dices.`,
+   fr:`Voici votre test de 24 heures :\n\nServeur : http://line.dndnscloud.ru\nUtilisateur : {USER}\nMot de passe : {PASS}\n\nConnectez-vous avec « Xtream Codes API » et mettez uniquement cette adresse, rien derrière.\n\nSi ça ne charge pas, changez de serveur avec l'une de ces adresses, mêmes identifiants :\n`+DINO,
+   nl:`Hier is je test van 24 uur:\n\nServer: http://line.dndnscloud.ru\nGebruikersnaam: {USER}\nWachtwoord: {PASS}\n\nLog in met «Xtream Codes API» en vul alleen dat adres in, zonder iets erachter.\n\nLaadt het niet, wissel dan van server met een van deze adressen, dezelfde gegevens:\n`+DINO}},
+
+ {id:3,key:"two_screens",cat:"prices",pin:false,use:0,
+  title:{es:"Dos pantallas / una conexión",fr:"Deux écrans / une connexion",nl:"Twee schermen / één verbinding"},
+  kw:{es:"dos pantallas,dos dispositivos,a la vez,dos a la vez,dos moviles,mismo tiempo",fr:"deux écrans,deux appareils,en même temps,à la fois",nl:"twee schermen,twee apparaten,tegelijk,tegelijkertijd"},
+  body:{
+   es:`Lo puedes instalar en todos los aparatos que quieras, en la tele, en el móvil, en la tablet.\n\nLo único es que solo se puede ver en uno a la vez. Para ver en dos pantallas al mismo tiempo hacen falta dos códigos.`,
+   fr:`Vous pouvez l'installer sur autant d'appareils que vous voulez : la télé, le téléphone, la tablette.\n\nLa seule limite, c'est qu'on ne peut regarder que sur un seul à la fois. Pour deux écrans en même temps, il faut deux codes.`,
+   nl:`Je kunt het op zoveel apparaten installeren als je wilt: tv, telefoon, tablet.\n\nHet enige is dat je maar op één tegelijk kunt kijken. Voor twee schermen tegelijk heb je twee codes nodig.`}},
+
+ {id:4,key:"second_line",cat:"prices",pin:false,use:0,
+  title:{es:"Precio de la segunda línea",fr:"Prix de la deuxième ligne",nl:"Prijs van de tweede lijn"},
+  kw:{es:"segunda linea,segundo codigo,otra pantalla precio,segunda pantalla",fr:"deuxième ligne,deuxième code,deuxième écran prix",nl:"tweede lijn,tweede code,tweede scherm prijs"},
+  body:{
+   es:`La segunda línea va como una suscripción aparte, al mismo precio: 25 euros los 3 meses, 39 los 6, 59 los 12 y 99 los 24.\n\nAntes de gastártelo, piénsalo: si en casa no vais a ver dos cosas distintas a la vez, con un código te sobra.`,
+   fr:`La deuxième ligne, c'est un abonnement à part, au même tarif : 25 euros les 3 mois, 39 les 6, 59 les 12 et 99 les 24.\n\nAvant de dépenser ça, réfléchissez : si personne chez vous ne regarde deux choses différentes en même temps, un seul code suffit.`,
+   nl:`De tweede lijn is een apart abonnement, tegen dezelfde prijs: 25 euro voor 3 maanden, 39 voor 6, 59 voor 12 en 99 voor 24.\n\nDenk er even over na: als er bij jou thuis niet twee verschillende dingen tegelijk gekeken worden, is één code genoeg.`}},
+
+ {id:5,key:"which_app",cat:"install",pin:false,use:0,
+  title:{es:"Qué aplicación (Smart TV)",fr:"Quelle application (Smart TV)",nl:"Welke app (Smart TV)"},
+  kw:{es:"que aplicacion,app smart tv,ibo player,aplicacion tele,mac,device key",fr:"quelle application,app smart tv,ibo player,mac",nl:"welke app,smart tv app,ibo player,mac"},
+  body:{
+   es:`Te recomiendo «IBO Player», la original, la que lleva iboplayer.com en su propia pantalla. Cuidado con las copias, hay muchas parecidas y sus MAC no funcionan.\n\nLa licencia la pago yo, va incluida en la suscripción.\n\nAl abrirla te salen una dirección MAC y una Device Key. Me las mandas y te subo la lista desde aquí. Tú no escribes nada.`,
+   fr:`Je vous conseille « IBO Player », l'originale, celle qui affiche iboplayer.com sur son propre écran. Attention aux copies, il y en a beaucoup et leurs adresses MAC ne fonctionnent pas.\n\nLa licence, c'est moi qui la paie, elle est incluse dans l'abonnement.\n\nÀ l'ouverture, une adresse MAC et une Device Key s'affichent. Vous me les envoyez et je charge la liste de mon côté. Vous n'avez rien à taper.`,
+   nl:`Ik raad «IBO Player» aan, de originele, die iboplayer.com op zijn eigen scherm toont. Pas op met de kopieën, er zijn er veel en hun MAC-adressen werken niet.\n\nDe licentie betaal ik, die zit bij het abonnement in.\n\nAls je hem opent verschijnen er een MAC-adres en een Device Key. Die stuur je me en ik zet de lijst er van mijn kant op. Jij hoeft niets in te typen.`}},
+
+ {id:6,key:"firestick",cat:"install",pin:false,use:0,
+  title:{es:"Fire Stick",fr:"Fire Stick",nl:"Fire Stick"},
+  kw:{es:"fire stick,firestick,amazon,downloader,fire tv,codigo 1171959",fr:"fire stick,firestick,amazon,downloader",nl:"fire stick,firestick,amazon,downloader"},
+  body:{
+   es:`En el Fire Stick la aplicación no está en la tienda de Amazon, hay que bajarla aparte. Es fácil:\n\n1. Instala «Downloader» desde la tienda de Amazon.\n2. Entra en «Ajustes» > «Mi Fire TV» > «Opciones de desarrollador» y activa «Instalar aplicaciones desconocidas» para Downloader.\n3. Abre Downloader, escribe el código 1171959, dale a «Go» y cuando termine de bajar, «Instalar».\n\nCuando la tengas abierta me avisas y seguimos desde ahí.`,
+   fr:`Sur le Fire Stick, l'application n'est pas dans le store Amazon, il faut la télécharger à part. C'est simple :\n\n1. Installez « Downloader » depuis le store Amazon.\n2. Allez dans « Paramètres » > « My Fire TV » > « Options développeur » et activez « Installer des applications inconnues » pour Downloader.\n3. Ouvrez Downloader, tapez le code 1171959, faites « Go » et à la fin « Installer ».\n\nDites-moi quand c'est ouvert et on continue.`,
+   nl:`Op de Fire Stick staat de app niet in de Amazon-store, die moet je apart downloaden. Het is simpel:\n\n1. Installeer «Downloader» uit de Amazon-store.\n2. Ga naar «Instellingen» > «My Fire TV» > «Ontwikkelaarsopties» en zet «Onbekende apps installeren» aan voor Downloader.\n3. Open Downloader, typ de code 1171959, druk op «Go» en daarna op «Installeren».\n\nLaat het weten als hij open staat, dan gaan we verder.`}},
+
+ {id:7,key:"xtream",cat:"install",pin:false,use:0,
+  title:{es:"Qué es Xtream Codes API",fr:"C'est quoi Xtream Codes API",nl:"Wat is Xtream Codes API"},
+  kw:{es:"xtream codes es una app,que es xtream,xtream codes,como entro,api,como inicio sesion",fr:"xtream codes est une app,c'est quoi xtream,xtream codes,comment me connecter",nl:"xtream codes is een app,wat is xtream,xtream codes,hoe inloggen"},
+  body:{
+   es:`No es una aplicación. Es la forma de entrar que eliges dentro de la aplicación que ya tienes.\n\nCuando la abras te da a elegir cómo iniciar sesión: seleccionas «Xtream Codes API» y ahí metes el usuario, la contraseña y la dirección del servidor que te pasé.`,
+   fr:`Ce n'est pas une application. C'est la façon de se connecter, à choisir dans l'application que vous avez déjà.\n\nÀ l'ouverture, elle vous propose comment vous connecter : vous choisissez « Xtream Codes API » et vous entrez l'utilisateur, le mot de passe et l'adresse du serveur que je vous ai envoyés.`,
+   nl:`Dat is geen app. Het is de manier van inloggen die je kiest binnen de app die je al hebt.\n\nAls je hem opent krijg je de keuze hoe je wilt inloggen: kies «Xtream Codes API» en vul daar de gebruikersnaam, het wachtwoord en het serveradres in die ik je gestuurd heb.`}},
+
+ {id:8,key:"license",cat:"login",pin:false,use:0,
+  title:{es:"Licencia de la app vs suscripción",fr:"Licence de l'app vs abonnement",nl:"App-licentie vs abonnement"},
+  kw:{es:"licencia,licencia caducada,caducado,caduco,expirado,app caducada,licencia expirada",fr:"licence,licence expirée,expiré,app expirée",nl:"licentie,licentie verlopen,verlopen,app verlopen"},
+  body:{
+   es:`Eso que te sale es la licencia de la aplicación, no la suscripción. Tu línea sigue activa.\n\nMándame la dirección MAC y la Device Key que aparecen en esa misma pantalla y te la renuevo. La licencia la pago yo, a ti no te cuesta nada.`,
+   fr:`Ce message concerne la licence de l'application, pas l'abonnement. Votre ligne est toujours active.\n\nEnvoyez-moi l'adresse MAC et la Device Key affichées sur cet écran et je la renouvelle. La licence, c'est moi qui la paie, ça ne vous coûte rien.`,
+   nl:`Die melding gaat over de licentie van de app, niet over je abonnement. Je lijn loopt gewoon door.\n\nStuur me het MAC-adres en de Device Key van dat scherm, dan vernieuw ik hem. De licentie betaal ik, jou kost dat niets.`}},
+
+ {id:9,key:"login_fail",cat:"login",pin:false,use:0,
+  title:{es:"No entra / usuario incorrecto",fr:"Ne se connecte pas / utilisateur incorrect",nl:"Logt niet in / verkeerde gebruiker"},
+  kw:{es:"no me va,usuario incorrecto,no entra,contraseña incorrecta,no puedo entrar,datos incorrectos,no funciona",fr:"ne marche pas,utilisateur incorrect,ne se connecte pas,mot de passe incorrect,identifiants",nl:"werkt niet,verkeerde gebruiker,logt niet in,wachtwoord onjuist,inloggen lukt niet"},
+  body:{
+   es:`Lo más habitual es que el teclado meta una mayúscula en la primera letra del usuario, o un espacio al final sin querer.\n\nCopia y pega el usuario y la contraseña tal cual desde aquí, en vez de escribirlos a mano, y asegúrate de entrar por «Xtream Codes API».\n\nSi sigue igual, mándame una foto de la pantalla donde metes los datos y lo miro.`,
+   fr:`Le plus souvent, c'est le clavier qui met une majuscule à la première lettre de l'utilisateur, ou un espace en trop à la fin.\n\nCopiez-collez l'utilisateur et le mot de passe tels quels au lieu de les taper, et vérifiez que vous passez bien par « Xtream Codes API ».\n\nSi ça continue, envoyez-moi une photo de l'écran où vous entrez les identifiants.`,
+   nl:`Meestal maakt het toetsenbord de eerste letter van de gebruikersnaam een hoofdletter, of er staat per ongeluk een spatie achter.\n\nKopieer en plak de gegevens precies zoals ze zijn in plaats van ze te typen, en controleer dat je via «Xtream Codes API» inlogt.\n\nBlijft het misgaan, stuur me dan een foto van het scherm waar je de gegevens invult.`}},
+
+ {id:10,key:"blocking",cat:"blocking",pin:false,use:0,
+  title:{es:"Bloqueo del operador",fr:"Blocage par l'opérateur",nl:"Blokkade door provider"},
+  kw:{es:"no carga,lista no valida,bloqueado,no funciona,operador,dns,se ve bloqueado",fr:"ne charge pas,liste invalide,bloqué,opérateur,dns",nl:"laadt niet,lijst ongeldig,geblokkeerd,provider,dns"},
+  body:{
+   es:`Eso suele ser tu operador bloqueando el servidor. Se arregla en un minuto.\n\nCambia el servidor por otra de las direcciones que te pasé, con el mismo usuario y contraseña.\n\nY si con ninguna entra, ponle a la tele o al router los DNS 1.1.1.1 y 8.8.8.8, y prueba otra vez.`,
+   fr:`C'est en général votre opérateur qui bloque le serveur. Ça se règle en une minute.\n\nChangez de serveur avec l'une des autres adresses que je vous ai envoyées, mêmes identifiants.\n\nEt si aucune ne passe, mettez les DNS 1.1.1.1 et 8.8.8.8 sur la télé ou sur la box, puis réessayez.`,
+   nl:`Dat is meestal je provider die de server blokkeert. Dat is in een minuut opgelost.\n\nWissel van server met een van de andere adressen die ik je gestuurd heb, dezelfde gegevens.\n\nLukt het met geen enkele, zet dan op de tv of de router de DNS op 1.1.1.1 en 8.8.8.8 en probeer opnieuw.`}},
+
+ {id:11,key:"films",cat:"films",pin:false,use:0,
+  title:{es:"Películas y series que no arrancan",fr:"Films et séries qui ne démarrent pas",nl:"Films en series die niet starten"},
+  kw:{es:"se queda en el logo,pantalla negra,se cierra sola,peliculas no cargan,vod,series no van,cargando,se cierra",fr:"écran noir,se ferme seule,films ne chargent pas,vod,séries",nl:"zwart scherm,sluit vanzelf,films laden niet,vod,series"},
+  body:{
+   es:`Si se queda cargando sin fin, es el catálogo bajándose por primera vez: deja la aplicación abierta un par de minutos.\n\nSi se abre y se queda en negro, es el reproductor: entra en los ajustes de la aplicación y cámbialo a VLC o al externo.\n\nY si la aplicación se cierra sola, es que el catálogo es demasiado grande para ese aparato. Dímelo y te lo recorto desde mi lado.`,
+   fr:`Si ça charge sans fin, c'est le catalogue qui se télécharge pour la première fois : laissez l'application ouverte quelques minutes.\n\nSi ça s'ouvre sur un écran noir, c'est le lecteur : dans les réglages de l'application, passez sur VLC ou le lecteur externe.\n\nEt si l'application se ferme toute seule, c'est que le catalogue est trop lourd pour cet appareil. Dites-le-moi et je le réduis de mon côté.`,
+   nl:`Blijft hij laden, dan is dat de catalogus die voor het eerst binnenkomt: laat de app een paar minuten open staan.\n\nOpent hij op een zwart scherm, dan is het de speler: zet hem in de instellingen van de app op VLC of de externe speler.\n\nSluit de app vanzelf af, dan is de catalogus te zwaar voor dat apparaat. Laat het weten, dan maak ik hem van mijn kant kleiner.`}},
+
+ {id:12,key:"prices",cat:"prices",pin:false,use:0,
+  title:{es:"Precios y contenido",fr:"Prix et contenu",nl:"Prijzen en inhoud"},
+  kw:{es:"precio,precios,cuanto cuesta,tarifa,cuanto vale,que incluye,contenido",fr:"prix,tarif,combien ça coûte,contenu",nl:"prijs,prijzen,hoeveel kost,tarief,inhoud"},
+  body:{
+   es:`Los precios son 25 euros los 3 meses, 39 los 6 meses, 59 los 12 meses y 99 los 24 meses. Cada código es una pantalla.\n\nLlevas los canales de España y de fuera, todos los paquetes de deportes, cine, infantil y documentales, además de una biblioteca de películas y series.\n\nLa activación tarda menos de 10 minutos y tienes 7 días de garantía de devolución.`,
+   fr:`Les tarifs : 25 euros les 3 mois, 39 les 6 mois, 59 les 12 mois et 99 les 24 mois. Chaque code correspond à un écran.\n\nVous avez les chaînes françaises et étrangères, tous les bouquets sport, cinéma, jeunesse et documentaires, plus une bibliothèque de films et séries.\n\nL'activation prend moins de 10 minutes et vous avez 7 jours de garantie remboursement.`,
+   nl:`De prijzen: 25 euro voor 3 maanden, 39 voor 6 maanden, 59 voor 12 maanden en 99 voor 24 maanden. Elke code is één scherm.\n\nJe krijgt de Nederlandse en buitenlandse zenders, alle sportpakketten, film, kinderen en documentaires, plus een bibliotheek met films en series.\n\nActiveren duurt minder dan 10 minuten en je hebt 7 dagen geld-terug-garantie.`}},
+
+ {id:13,key:"payment",cat:"payment",pin:false,use:0,
+  title:{es:"Pago",fr:"Paiement",nl:"Betaling"},
+  kw:{es:"pago,como pago,como pagar,pagar,tarjeta,stripe,enlace de pago",fr:"paiement,comment payer,payer,carte,stripe,lien",nl:"betaling,hoe betalen,betalen,kaart,stripe,link"},
+  body:{
+   es:`El pago es con tarjeta, a través de un enlace que te paso yo. Va por Stripe, la misma pasarela que usan miles de tiendas: no te pido el número de tarjeta ni datos por WhatsApp, los metes tú en su web.\n\nCuando pagues, me mandas la captura del recibo y te lo activo en menos de 10 minutos.\n\nY tienes 7 días de garantía de devolución, así que el riesgo lo asumo yo.`,
+   fr:`Le paiement se fait par carte, via un lien que je vous envoie. Ça passe par Stripe, la même plateforme que des milliers de boutiques : je ne vous demande jamais votre numéro de carte sur WhatsApp, vous le saisissez vous-même sur leur site.\n\nUne fois payé, vous m'envoyez la capture du reçu et j'active en moins de 10 minutes.\n\nEt vous avez 7 jours de garantie remboursement, donc le risque est pour moi.`,
+   nl:`Betalen gaat met de kaart, via een link die ik je stuur. Dat loopt via Stripe, hetzelfde systeem dat duizenden webshops gebruiken: ik vraag nooit je kaartgegevens via WhatsApp, die vul je zelf op hun site in.\n\nZodra je betaald hebt, stuur je me een screenshot van het bewijs en activeer ik het binnen 10 minuten.\n\nEn je hebt 7 dagen geld-terug-garantie, dus het risico ligt bij mij.`}},
+
+ {id:14,key:"welcome",cat:"welcome",pin:false,use:0,
+  title:{es:"Mensaje de bienvenida",fr:"Message de bienvenue",nl:"Welkomstbericht"},
+  kw:{es:"bienvenida,datos,mis datos,activado,activada",fr:"bienvenue,identifiants,activé,activée",nl:"welkom,gegevens,geactiveerd"},
+  body:{
+   es:`Listo, ya tienes tu suscripción activada. Te dejo aquí lo importante para que no tengas que preguntarme luego:\n\nServidor: http://{SERVER}\nUsuario: {USER}\nContraseña: {PASS}\n\nSi algún día no te carga, cambia el servidor por otra de estas direcciones, con el mismo usuario y contraseña:\n`+DINO+`\n\nTres cosas que conviene saber:\n- Se puede instalar en varios aparatos, pero solo se ve en uno a la vez.\n- Si un día te dice que la licencia ha caducado, eso es la aplicación, no la suscripción. Me escribes y te la renuevo yo.\n- Tienes 7 días de garantía de devolución.\n\nCualquier cosa, aquí estoy.`,
+   fr:`C'est fait, votre abonnement est activé. Je vous mets l'essentiel ici pour que vous l'ayez sous la main :\n\nServeur : http://{SERVER}\nUtilisateur : {USER}\nMot de passe : {PASS}\n\nSi un jour ça ne charge pas, changez de serveur avec l'une de ces adresses, mêmes identifiants :\n`+DINO+`\n\nTrois choses à savoir :\n- Installable sur plusieurs appareils, mais on regarde sur un seul à la fois.\n- Si un message dit que la licence a expiré, c'est l'application, pas l'abonnement. Écrivez-moi et je la renouvelle.\n- Vous avez 7 jours de garantie remboursement.\n\nÀ votre disposition pour la moindre question.`,
+   nl:`Klaar, je abonnement staat actief. Ik zet het belangrijkste hier even op een rij:\n\nServer: http://{SERVER}\nGebruikersnaam: {USER}\nWachtwoord: {PASS}\n\nLaadt het ooit niet, wissel dan van server met een van deze adressen, dezelfde gegevens:\n`+DINO+`\n\nDrie dingen om te weten:\n- Je kunt het op meerdere apparaten installeren, maar je kijkt op één tegelijk.\n- Zegt een melding dat de licentie verlopen is, dan gaat dat over de app, niet over je abonnement. Stuur me een bericht en ik vernieuw hem.\n- Je hebt 7 dagen geld-terug-garantie.\n\nLaat het weten als je iets nodig hebt.`}}
+];
+var PAYSEED=[
+  {id:1,months:3, price:25,link:"",amount:null},
+  {id:2,months:6, price:39,link:"",amount:null},
+  {id:3,months:12,price:59,link:"",amount:null},
+  {id:4,months:24,price:99,link:"",amount:null}
+];
+var PAYLEAD={es:"Aquí tienes el enlace de pago:",fr:"Voici le lien de paiement :",nl:"Hier is de betaallink:"};
+var PLANLBL={es:function(m){return m+" meses";},fr:function(m){return m+" mois";},nl:function(m){return m+" maanden";}};
+
+// ---------- state ----------
+var LS_LIB="replies_lib_v1", LS_LANG="replies_lang_v1", LS_VARS="replies_vars_v1";
+var REPLIES=[], PAYPLANS=[];
+var lang=localStorage.getItem(LS_LANG)||"es";
+var cat="all", query="", editMode=false, editId=null, editLang="es";
+var VARS={}; try{VARS=JSON.parse(sessionStorage.getItem(LS_VARS))||{};}catch(e){VARS={};}
+var docRef=null, unsub=null, saveT=null;
+
+function loadCache(){ try{var c=JSON.parse(localStorage.getItem(LS_LIB)); if(c&&Array.isArray(c.replies)){REPLIES=c.replies; PAYPLANS=Array.isArray(c.payplans)?c.payplans:clone(PAYSEED);}}catch(e){} if(!REPLIES.length){REPLIES=clone(SEED);PAYPLANS=clone(PAYSEED);} }
+function clone(x){return JSON.parse(JSON.stringify(x));}
+function saveCache(){ localStorage.setItem(LS_LIB,JSON.stringify({replies:REPLIES,payplans:PAYPLANS})); }
+function persist(){ saveCache(); if(docRef){ if(saveT)clearTimeout(saveT); saveT=setTimeout(function(){ setDoc(docRef,{replies:REPLIES,payplans:PAYPLANS,replies_updated_at:Date.now()},{merge:true}).catch(function(e){console.error("save failed",e);}); },400); } }
+
+// ---------- helpers ----------
+function norm(s){return (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
+function esc(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+function tokens(body){var m=(body||"").match(/\{([A-Z_]+)\}/g)||[];var seen=[],out=[];m.forEach(function(t){var k=t.slice(1,-1);if(seen.indexOf(k)<0){seen.push(k);out.push(k);}});return out;}
+function fill(body){return (body||"").replace(/\{([A-Z_]+)\}/g,function(_,k){return (VARS[k]!=null&&VARS[k]!=="")?VARS[k]:("{"+k+"}");});}
+function ready(body){return tokens(body).every(function(k){return VARS[k]!=null&&VARS[k]!=="";});}
+function stripEmoji(s){return (s||"").replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\uFE0F\u200D]/gu,"");}
+
+// ---------- search scoring ----------
+function score(r){
+  if(!query)return 1;
+  var qn=norm(query), words=qn.split(/\s+/).filter(function(w){return w.length>1;});
+  var kw=norm(r.kw&&r.kw[lang]||""), ti=norm(r.title&&r.title[lang]||""), bo=norm(r.body&&r.body[lang]||"");
+  var s=0;
+  if(kw.indexOf(qn)>=0)s+=60; if(ti.indexOf(qn)>=0)s+=45; if(bo.indexOf(qn)>=0)s+=12;
+  words.forEach(function(w){ if(kw.indexOf(w)>=0)s+=9; if(ti.indexOf(w)>=0)s+=6; if(bo.indexOf(w)>=0)s+=2; });
+  return s;
+}
+
+// ---------- render ----------
+function toast(msg){var t=$("#toast");t.textContent=msg||"Copied";t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove("show");},1300);}
+function copyText(txt,btn){
+  var done=function(){ if(btn){var o=btn.innerHTML;btn.classList.add("ok");btn.innerHTML="✓ "+(lang==="fr"?"Copié":lang==="nl"?"Gekopieerd":"Copiado");setTimeout(function(){btn.classList.remove("ok");btn.innerHTML=o;},1200);} toast(lang==="fr"?"Copié":lang==="nl"?"Gekopieerd":"Copiado"); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,function(){legacy(txt);done();});}
+  else {legacy(txt);done();}
+}
+function legacy(t){var a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(a);}
+
+function renderChips(){
+  var html='<button class="chip'+(cat==="all"?" on":"")+'" data-cat="all">'+(lang==="fr"?"Tout":lang==="nl"?"Alles":"Todo")+'</button>';
+  CATS.forEach(function(c){ html+='<button class="chip'+(cat===c.id?" on":"")+'" data-cat="'+c.id+'">'+esc(catLabel(c.id))+'</button>'; });
+  $("#chips").innerHTML=html;
+}
+
+function bodyPreviewHTML(body){
+  return esc(body).replace(/\{([A-Z_]+)\}/g,function(_,k){
+    var v=VARS[k];
+    return (v!=null&&v!=="")?('<span>'+esc(v)+'</span>'):('<span class="ph">'+esc(vlabel(k))+'</span>');
+  });
+}
+function cardHTML(r){
+  var body=r.body[lang]||"", tks=tokens(body);
+  var varsHTML="";
+  if(tks.length){
+    varsHTML='<div class="vars">'+tks.map(function(k){
+      return '<div class="var"><label>'+esc(vlabel(k))+'</label><input data-vk="'+k+'" value="'+esc(VARS[k]||"")+'" autocapitalize="none" autocorrect="off" spellcheck="false"></div>';
+    }).join("")+'</div>';
+  }
+  var ok=ready(body), miss=tks.filter(function(k){return !(VARS[k]!=null&&VARS[k]!=="");});
+  var copyLabel=(lang==="fr"?"Copier":lang==="nl"?"Kopiëren":"Copiar");
+  var missMsg=miss.length?('<div class="miss">'+(lang==="fr"?"À remplir : ":lang==="nl"?"Nog invullen: ":"Rellena: ")+miss.map(vlabel).join(", ")+'</div>'):"";
+  var edit=editMode?('<div class="rowbtns"><button data-edit="'+r.id+'">'+(lang==="fr"?"Modifier":lang==="nl"?"Bewerken":"Editar")+'</button></div>'):"";
+  return '<div class="card" data-card="'+r.id+'">'+
+    '<div class="chead"><button class="pin'+(r.pin?" on":"")+'" data-pin="'+r.id+'" title="Pin">'+(r.pin?"★":"☆")+'</button>'+
+      '<div class="ctitle">'+esc(r.title[lang]||r.title.es)+'</div><span class="ctag">'+esc(catLabel(r.cat))+'</span></div>'+
+    '<div class="body">'+bodyPreviewHTML(body)+'</div>'+
+    varsHTML+
+    '<button class="copybtn" data-copy="'+r.id+'"'+(ok?"":" disabled")+'><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>'+copyLabel+'</button>'+
+    missMsg+edit+'</div>';
+}
+
+function renderTools(){
+  var el=$("#tools"); el.innerHTML="";
+  if(cat==="trial"){ el.innerHTML=credToolHTML(); wireCredTool(); }
+  else if(cat==="payment"){ el.innerHTML=payToolHTML(); wirePayTool(); }
+}
+
+function renderList(){
+  renderTools();
+  var arr=REPLIES.filter(function(r){ if(cat!=="all"&&r.cat!==cat)return false; return score(r)>0; });
+  if(query){ arr.sort(function(a,b){return score(b)-score(a);}); }
+  else { arr.sort(function(a,b){ if(!!b.pin-!!a.pin)return (b.pin?1:0)-(a.pin?1:0); if((b.use||0)!==(a.use||0))return (b.use||0)-(a.use||0); return (a.title[lang]||"").localeCompare(b.title[lang]||""); }); }
+  var el=$("#list");
+  if(!arr.length){ el.innerHTML='<div class="empty">'+(lang==="fr"?"Aucune réponse. Essayez d'autres mots.":lang==="nl"?"Geen antwoord. Probeer andere woorden.":"Ningún resultado. Prueba con otras palabras.")+'</div>'; return; }
+  el.innerHTML=arr.map(cardHTML).join("");
+}
+function render(){ renderChips(); renderList(); }
+
+// ---------- credential parser tool ----------
+function credToolHTML(){
+  return '<div class="tool"><h3>'+(lang==="fr"?"Coller les identifiants du panneau":lang==="nl"?"Panelgegevens plakken":"Pegar credenciales del panel")+'</h3>'+
+    '<div class="hint">'+(lang==="fr"?"Collez la sortie du panneau ou une URL m3u. Le message de test se construit tout seul.":lang==="nl"?"Plak de panel-uitvoer of een m3u-URL. Het testbericht wordt vanzelf opgebouwd.":"Pega la salida del panel o una URL m3u. El mensaje de prueba se arma solo.")+'</div>'+
+    '<textarea id="credIn" placeholder="Username: 7EG13381&#10;Password: J47HT2PS&#10;DNS (URL): http://...msostvip.com&#10;Samsung & LG DNS: http://...msgssmart.com"></textarea>'+
+    '<div id="credOut"></div></div>';
+}
+function parseCreds(raw){
+  raw=stripEmoji(raw||"");
+  var user="",pass="",host="",fam="";
+  var m3u=raw.match(/https?:\/\/([^\/\s]+)\/get\.php\?([^\s]+)/i);
+  if(m3u){
+    host=m3u[1];
+    var qs=m3u[2];
+    var mu=qs.match(/username=([^&\s]+)/i); if(mu)user=decodeURIComponent(mu[1]);
+    var mp=qs.match(/password=([^&\s]+)/i); if(mp)pass=decodeURIComponent(mp[1]);
+  } else {
+    var mu2=raw.match(/user(?:name)?\s*[:=]\s*([^\s]+)/i); if(mu2)user=mu2[1];
+    var mp2=raw.match(/pass(?:word)?\s*[:=]\s*([^\s]+)/i); if(mp2)pass=mp2[1];
+  }
+  // collect all hosts present
+  var hosts=[]; var hre=/https?:\/\/([^\/\s]+)/gi, hm;
+  while((hm=hre.exec(raw))){ if(hosts.indexOf(hm[1])<0)hosts.push(hm[1]); }
+  if(host&&hosts.indexOf(host)<0)hosts.push(host);
+  var mega=hosts.filter(function(h){return /msostvip\.com|msgssmart\.com/i.test(h);});
+  var dino=hosts.some(function(h){return /line\.dndnscloud\.ru/i.test(h);}) || /dndnscloud/i.test(host);
+  if(mega.length){ fam="mega"; var sub=mega[0].replace(/\.(msostvip|msgssmart)\.com.*/i,""); host=sub; }
+  else if(dino){ fam="dino"; host="line.dndnscloud.ru"; }
+  else if(host){ fam="generic"; }
+  return {user:user,pass:pass,host:host,fam:fam,hasData:!!(user||pass||host)};
+}
+function credMessage(p){
+  if(p.fam==="mega"){ var r=REPLIES.find(function(x){return x.key==="trial_mega";})||SEED[0];
+    return (r.body[lang]||r.body.es).replace(/\{HOST\}/g,p.host||"{HOST}").replace(/\{USER\}/g,p.user||"{USER}").replace(/\{PASS\}/g,p.pass||"{PASS}"); }
+  if(p.fam==="dino"){ var r2=REPLIES.find(function(x){return x.key==="trial_dino";})||SEED[1];
+    return (r2.body[lang]||r2.body.es).replace(/\{USER\}/g,p.user||"{USER}").replace(/\{PASS\}/g,p.pass||"{PASS}"); }
+  // generic
+  var head={es:"Aquí tienes la prueba de 24 horas:",fr:"Voici votre test de 24 heures :",nl:"Hier is je test van 24 uur:"}[lang];
+  var ul={es:"Usuario",fr:"Utilisateur",nl:"Gebruikersnaam"}[lang], pl={es:"Contraseña",fr:"Mot de passe",nl:"Wachtwoord"}[lang], sl={es:"Servidor",fr:"Serveur",nl:"Server"}[lang];
+  var tail={es:"Entra con «Xtream Codes API» y pon solo esa dirección, sin nada detrás.\n\nSon 24 horas desde ahora. Cualquier cosa me dices.",
+    fr:"Connectez-vous avec « Xtream Codes API » et mettez uniquement cette adresse, rien derrière.\n\nC'est 24 heures à partir de maintenant.",
+    nl:"Log in met «Xtream Codes API» en vul alleen dat adres in, zonder iets erachter.\n\nHet loopt 24 uur vanaf nu."}[lang];
+  return head+"\n\n"+sl+": http://"+(p.host||"{HOST}")+"\n"+ul+": "+(p.user||"{USER}")+"\n"+pl+": "+(p.pass||"{PASS}")+"\n\n"+tail;
+}
+function wireCredTool(){
+  var inp=$("#credIn"); if(!inp)return;
+  var run=function(){
+    var p=parseCreds(inp.value);
+    var out=$("#credOut");
+    if(!p.hasData){ out.innerHTML=""; return; }
+    var msg=credMessage(p);
+    var famLbl=p.fam==="mega"?"mega":p.fam==="dino"?"dino":(lang==="fr"?"générique":lang==="nl"?"algemeen":"genérico");
+    var complete=msg.indexOf("{")<0;
+    out.innerHTML='<div class="okline">'+(lang==="fr"?"Serveur ":lang==="nl"?"Server ":"Servidor ")+famLbl+' · '+(p.user?"✓ user":"user?")+' · '+(p.pass?"✓ pass":"pass?")+'</div>'+
+      '<div class="body" style="margin-top:8px">'+esc(msg)+'</div>'+
+      '<button class="copybtn" id="credCopy"'+(complete?"":" disabled")+'><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>'+(lang==="fr"?"Copier le message":lang==="nl"?"Bericht kopiëren":"Copiar mensaje")+'</button>'+
+      (complete?"":'<div class="miss">'+(lang==="fr"?"Il manque des données dans ce que vous avez collé.":lang==="nl"?"Er ontbreken gegevens in wat je plakte.":"Faltan datos en lo que has pegado.")+'</div>');
+    var cb=$("#credCopy"); if(cb&&complete)cb.onclick=function(){copyText(msg,cb);};
+  };
+  inp.oninput=run; run();
+}
+
+// ---------- payment tool ----------
+function payToolHTML(){
+  var opts=PAYPLANS.map(function(p){return '<option value="'+p.id+'">'+PLANLBL[lang](p.months)+' — '+p.price+' €</option>';}).join("");
+  return '<div class="tool"><h3>'+(lang==="fr"?"Lien de paiement":lang==="nl"?"Betaallink":"Enlace de pago")+'</h3>'+
+    '<select id="paySel"><option value="">'+(lang==="fr"?"Choisir un plan…":lang==="nl"?"Kies een plan…":"Elige un plan…")+'</option>'+opts+'<option value="custom">'+(lang==="fr"?"Montant libre…":lang==="nl"?"Vrij bedrag…":"Importe libre…")+'</option></select>'+
+    '<div id="payOut"></div></div>';
+}
+function payMessage(link){ var r=REPLIES.find(function(x){return x.key==="payment";})||SEED[12]; return (r.body[lang]||r.body.es)+"\n\n"+PAYLEAD[lang]+"\n"+link; }
+function wirePayTool(){
+  var sel=$("#paySel"); if(!sel)return;
+  sel.onchange=function(){
+    var out=$("#payOut"), v=sel.value;
+    if(!v){out.innerHTML="";return;}
+    if(v==="custom"){
+      out.innerHTML='<div class="fld" style="margin-top:10px"><label>'+(lang==="fr"?"Montant (€)":lang==="nl"?"Bedrag (€)":"Importe (€)")+'</label><input id="payAmt" type="number" inputmode="decimal" placeholder="0"></div>'+
+        '<div class="fld"><label>'+(lang==="fr"?"Lien de paiement":lang==="nl"?"Betaallink":"Enlace de pago")+'</label><input id="payLink" placeholder="https://..."></div><div id="payRes"></div>';
+      var upd=function(){ var lk=($("#payLink").value||"").trim(); var res=$("#payRes"); if(!lk){res.innerHTML='<div class="miss">'+(lang==="fr"?"Collez le lien.":lang==="nl"?"Plak de link.":"Pega el enlace.")+'</div>';return;} var msg=payMessage(lk); res.innerHTML=payBody(msg,lk); wirePayCopy(msg); };
+      $("#payAmt").oninput=upd; $("#payLink").oninput=upd; return;
+    }
+    var p=PAYPLANS.find(function(x){return String(x.id)===v;}); if(!p){out.innerHTML="";return;}
+    var warn="";
+    if(!p.link){ warn='<div class="warn">'+(lang==="fr"?"Aucun lien enregistré pour ce plan. Ajoutez-le en mode édition (crayon).":lang==="nl"?"Geen link opgeslagen voor dit plan. Voeg toe in bewerkmodus (potlood).":"No hay enlace guardado para este plan. Añádelo en modo edición (lápiz).")+'</div>'; }
+    else if(p.amount!=null&&Number(p.amount)!==Number(p.price)){ warn='<div class="warn">⚠ '+(lang==="fr"?"Le lien encaisse "+p.amount+" € mais le plan est à "+p.price+" €. Vérifiez avant d'envoyer.":lang==="nl"?"De link int "+p.amount+" € maar het plan is "+p.price+" €. Controleer voor je verstuurt.":"El enlace cobra "+p.amount+" € pero el plan es de "+p.price+" €. Revisa antes de enviar.")+'</div>'; }
+    if(!p.link){ out.innerHTML=warn+editLinkRow(p); wireLinkRow(p); return; }
+    var msg=payMessage(p.link);
+    out.innerHTML=warn+payBody(msg,p.link)+(editMode?editLinkRow(p):"");
+    wirePayCopy(msg); if(editMode)wireLinkRow(p);
+  };
+}
+function payBody(msg,link){ return '<div class="body" style="margin-top:10px">'+esc(msg)+'</div><button class="copybtn" id="payCopy"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>'+(lang==="fr"?"Copier":lang==="nl"?"Kopiëren":"Copiar")+'</button>'; }
+function wirePayCopy(msg){ var b=$("#payCopy"); if(b)b.onclick=function(){copyText(msg,b);}; }
+function editLinkRow(p){ return '<div class="fld" style="margin-top:12px"><label>'+(lang==="fr"?"Lien de ce plan":lang==="nl"?"Link van dit plan":"Enlace de este plan")+'</label><input id="plLink" value="'+esc(p.link||"")+'" placeholder="https://..."></div>'+
+  '<div class="fld"><label>'+(lang==="fr"?"Montant du lien (€)":lang==="nl"?"Bedrag van de link (€)":"Importe del enlace (€)")+'</label><input id="plAmt" type="number" inputmode="decimal" value="'+(p.amount!=null?p.amount:"")+'" placeholder="'+p.price+'"></div>'+
+  '<button class="btn" id="plSave">'+(lang==="fr"?"Enregistrer le lien":lang==="nl"?"Link opslaan":"Guardar enlace")+'</button>'; }
+function wireLinkRow(p){ var b=$("#plSave"); if(!b)return; b.onclick=function(){ p.link=($("#plLink").value||"").trim(); var a=$("#plAmt").value; p.amount=a===""?null:Number(a); persist(); toast(lang==="fr"?"Enregistré":lang==="nl"?"Opgeslagen":"Guardado"); $("#paySel").dispatchEvent(new Event("change")); }; }
+
+// ---------- events ----------
+$("#langSeg").onclick=function(e){var b=e.target.closest("[data-lang]");if(!b)return;lang=b.getAttribute("data-lang");localStorage.setItem(LS_LANG,lang);[].forEach.call(this.children,function(c){c.classList.toggle("on",c===b);});document.documentElement.lang=lang;render();};
+$("#chips").onclick=function(e){var b=e.target.closest("[data-cat]");if(!b)return;cat=b.getAttribute("data-cat");render();window.scrollTo(0,0);};
+$("#q").oninput=function(){query=this.value;$("#clearq").classList.toggle("show",!!query);renderList();};
+$("#clearq").onclick=function(){query="";$("#q").value="";this.classList.remove("show");renderList();$("#q").focus();};
+$("#editToggle").onclick=function(){editMode=!editMode;this.classList.toggle("on",editMode);$("#addFab").classList.toggle("show",editMode);render();};
+
+$("#list").addEventListener("input",function(e){var i=e.target.closest("[data-vk]");if(!i)return;var k=i.getAttribute("data-vk");VARS[k]=i.value;sessionStorage.setItem(LS_VARS,JSON.stringify(VARS));
+  // update all cards sharing this var without losing focus: refresh previews + copy state
+  refreshVars();
+});
+function refreshVars(){
+  [].forEach.call(document.querySelectorAll("#list [data-card]"),function(card){
+    var id=Number(card.getAttribute("data-card")); var r=REPLIES.find(function(x){return x.id===id;}); if(!r)return;
+    var body=r.body[lang]||""; var bd=card.querySelector(".body"); if(bd)bd.innerHTML=bodyPreviewHTML(body);
+    var ok=ready(body), cb=card.querySelector(".copybtn"); if(cb)cb.disabled=!ok;
+    var miss=tokens(body).filter(function(k){return !(VARS[k]!=null&&VARS[k]!=="");});
+    var mm=card.querySelector(".miss");
+    var txt=miss.length?((lang==="fr"?"À remplir : ":lang==="nl"?"Nog invullen: ":"Rellena: ")+miss.map(vlabel).join(", ")):"";
+    if(mm)mm.textContent=txt;
+  });
+}
+$("#list").addEventListener("click",function(e){
+  var c=e.target.closest("[data-copy]"); if(c){var r=REPLIES.find(function(x){return x.id===Number(c.getAttribute("data-copy"));}); if(r&&ready(r.body[lang]||"")){copyText(fill(r.body[lang]||""),c); r.use=(r.use||0)+1; persist();} return;}
+  var p=e.target.closest("[data-pin]"); if(p){var r2=REPLIES.find(function(x){return x.id===Number(p.getAttribute("data-pin"));}); if(r2){r2.pin=!r2.pin;persist();renderList();} return;}
+  var ed=e.target.closest("[data-edit]"); if(ed){openEdit(Number(ed.getAttribute("data-edit"))); return;}
+});
+
+// ---------- edit sheet ----------
+var eOv=$("#editOv");
+$("#eCat").innerHTML=CATS.map(function(c){return '<option value="'+c.id+'">'+esc(c.es)+'</option>';}).join("");
+function openAdd(){ editId=null; editLang="es"; $("#editTitle").textContent="New reply"; $("#eCat").value="other"; setLangTab(); $("#eDelete").style.display="none"; loadEditFields({title:{},body:{},kw:{}}); eOv.classList.add("on"); }
+function openEdit(id){ var r=REPLIES.find(function(x){return x.id===id;}); if(!r)return; editId=id; editLang=lang; $("#editTitle").textContent="Edit"; $("#eCat").value=r.cat; $("#eDelete").style.display=""; loadEditFields(r); setLangTab(); eOv.classList.add("on"); }
+var editData={title:{},body:{},kw:{}};
+function loadEditFields(r){ editData={title:Object.assign({},r.title),body:Object.assign({},r.body),kw:Object.assign({},r.kw)}; showLang(); }
+function showLang(){ $("#eTitle").value=editData.title[editLang]||""; $("#eBody").value=editData.body[editLang]||""; $("#eKw").value=editData.kw[editLang]||""; }
+function stashLang(){ editData.title[editLang]=$("#eTitle").value; editData.body[editLang]=$("#eBody").value; editData.kw[editLang]=$("#eKw").value; }
+function setLangTab(){ [].forEach.call($("#eLangTabs").children,function(b){b.classList.toggle("on",b.getAttribute("data-l")===editLang);}); }
+$("#eLangTabs").onclick=function(e){var b=e.target.closest("[data-l]");if(!b)return;stashLang();editLang=b.getAttribute("data-l");setLangTab();showLang();};
+$("#editClose").onclick=function(){eOv.classList.remove("on");};
+eOv.onclick=function(e){if(e.target===eOv)eOv.classList.remove("on");};
+$("#eSave").onclick=function(){ stashLang();
+  var t=editData.title, b=editData.body, k=editData.kw, catv=$("#eCat").value;
+  if(!(b.es||b.fr||b.nl)){ alert("Add a body."); return; }
+  ["es","fr","nl"].forEach(function(L){ if(!t[L])t[L]=t.es||t.fr||t.nl||"(untitled)"; if(!b[L])b[L]=b.es||b.fr||b.nl||""; if(!k[L])k[L]=k.es||""; });
+  if(editId==null){ var nid=REPLIES.reduce(function(m,x){return Math.max(m,x.id);},0)+1; REPLIES.push({id:nid,cat:catv,pin:false,use:0,title:t,body:b,kw:k}); }
+  else { var r=REPLIES.find(function(x){return x.id===editId;}); if(r){r.cat=catv;r.title=t;r.body=b;r.kw=k;} }
+  persist(); eOv.classList.remove("on"); render();
+};
+$("#eDelete").onclick=function(){ if(editId==null)return; if(!confirm("Delete this reply?"))return; REPLIES=REPLIES.filter(function(x){return x.id!==editId;}); persist(); eOv.classList.remove("on"); render(); };
+$("#addFab").onclick=openAdd;
+
+// ---------- auth + cloud ----------
+$("#authForm").onsubmit=function(e){ e.preventDefault(); $("#authErr").textContent=""; signInWithEmailAndPassword(auth,$("#authEmail").value.trim(),$("#authPass").value).catch(function(err){ $("#authErr").textContent="Sign-in failed: "+((err&&err.code||"").replace("auth/","").replace(/-/g," ")); }); };
+onAuthStateChanged(auth,function(user){
+  if(user){ $("#authGate").classList.remove("on"); docRef=doc(db,"trackers",user.uid);
+    if(unsub)unsub();
+    unsub=onSnapshot(docRef,function(snap){ var d=snap.exists()?snap.data():null;
+      if(d&&Array.isArray(d.replies)&&d.replies.length){ REPLIES=d.replies; PAYPLANS=Array.isArray(d.payplans)?d.payplans:clone(PAYSEED); }
+      else if(!snap.exists()||!d.replies){ REPLIES=clone(SEED); PAYPLANS=clone(PAYSEED); persist(); }
+      saveCache(); render();
+    }, function(err){ console.error(err); });
+  } else { if(unsub){unsub();unsub=null;} docRef=null; $("#authGate").classList.add("on"); }
+});
+
+// ---------- init (instant from cache) ----------
+document.documentElement.lang=lang;
+[].forEach.call($("#langSeg").children,function(c){c.classList.toggle("on",c.getAttribute("data-lang")===lang);});
+loadCache(); render();
+
+// ---------- PWA ----------
+if("serviceWorker" in navigator){ window.addEventListener("load",function(){ navigator.serviceWorker.register("/replies-sw.js",{scope:"/replies"}).catch(function(){}); }); }
+})();
+</script>
+</body>
+</html>

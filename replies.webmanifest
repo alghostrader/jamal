@@ -1,0 +1,15 @@
+{
+  "name": "Support Replies",
+  "short_name": "Replies",
+  "description": "IPTV client replies — find the right one and copy it in one tap.",
+  "start_url": "/replies",
+  "scope": "/replies",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#161310",
+  "theme_color": "#161310",
+  "icons": [
+    { "src": "/replies-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/replies-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
