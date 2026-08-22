@@ -260,29 +260,23 @@
   <div id="sec-finance" style="display:none">
   <div class="card pad" id="payoutCard">
     <div class="phead">
-      <h2 style="margin:0">Payouts &amp; balance</h2>
-      <span class="tiny muted" style="margin-left:auto">This cycle = sales since your last payout. Everything resets to €0 after each payout.</span>
+      <h2 style="margin:0">Payout</h2>
+      <span class="tiny muted" style="margin-left:auto">Since your last payout · resets to €0 each payout</span>
     </div>
     <div class="splitrow">
       <div class="netcard red" id="panelsCard">
-        <div><div class="l">For panels · this cycle</div><div class="v" id="bForPanels">€0</div></div>
-        <div class="brk">what you owe providers (panel credits + IBO licenses)</div>
+        <div><div class="l">For panels</div><div class="v" id="bForPanels">€0</div></div>
+        <div class="brk">set aside to pay your providers</div>
       </div>
       <div class="netcard" id="yoursCard">
-        <div><div class="l">Yours · this cycle</div><div class="v" id="bYours">€0</div></div>
-        <div class="brk">your profit = revenue − 7.5% fee − for panels</div>
+        <div><div class="l">Yours</div><div class="v" id="bYours">€0</div></div>
+        <div class="brk">your profit to keep</div>
       </div>
     </div>
-    <div class="balrow">
-      <div class="baltile"><div class="l">Revenue</div><div class="v" id="bRev">€0</div></div>
-      <div class="baltile cost"><div class="l">Fee 7.5%</div><div class="v" id="bFee">€0</div></div>
-      <div class="baltile avail"><div class="l">Available (cash)</div><div class="v" id="bAvail">€0</div></div>
-      <div class="baltile"><div class="l">Paid out · lifetime</div><div class="v" id="bPaid">€0</div></div>
-    </div>
-    <div id="panelCostBreak" class="tiny muted" style="margin:-8px 0 14px"></div>
+    <div id="panelCostBreak" class="tiny muted" style="margin:-4px 0 14px"></div>
     <div class="payadd">
       <input type="date" id="pDate" title="Payout date">
-      <input type="number" step="0.01" id="pAmount" placeholder="Amount € (blank = available)">
+      <input type="number" step="0.01" id="pAmount" placeholder="Amount € (blank = everything)">
       <input id="pNote" class="pnote" placeholder="Note (who / method)">
       <button class="btn primary" id="pAddBtn" type="button">Add payout</button>
     </div>
@@ -635,22 +629,15 @@ const db = getFirestore(fbApp);
       ibo+=iboCost(s);
       n++;
     });
-    var fee=g*FEE_RATE, forPanels=pb+ibo, avail=g-fee, yours=avail-forPanels;
-    return {gross:g,fee:fee,forPanels:forPanels,panelBase:pb,ibo:ibo,avail:avail,yours:yours,count:n,panelBy:panelBy};
+    var forPanels=pb+ibo, yours=g-forPanels;
+    return {gross:g,forPanels:forPanels,panelBase:pb,ibo:ibo,yours:yours,count:n,panelBy:panelBy};
   }
   function renderBalance(st){
     var c=cycle();
     $("#bForPanels").textContent=euro(c.forPanels);
     $("#bYours").textContent=euro(c.yours);
-    $("#bRev").textContent=euro(c.gross);
-    $("#bFee").textContent=euro(c.fee);
-    $("#bAvail").textContent=euro(c.avail);
-    $("#bPaid").textContent=euro(paidTotal());
-    document.querySelector(".baltile.avail").classList.toggle("neg",c.avail<0);
     document.querySelector("#yoursCard").classList.toggle("neg",c.yours<0);
-    var parts=[]; Object.keys(c.panelBy).sort().forEach(function(k){ if(c.panelBy[k]>0)parts.push(plabel(k)+" "+euro(c.panelBy[k])); });
-    if(c.ibo>0)parts.push("IBO licenses "+euro(c.ibo));
-    $("#panelCostBreak").textContent = c.count ? (c.count+" sale"+(c.count===1?"":"s")+" this cycle · for panels = "+(parts.length?parts.join("  ·  "):"€0")) : "No sales since your last payout yet.";
+    $("#panelCostBreak").textContent = c.count ? (c.count+" sale"+(c.count===1?"":"s")+" this cycle · "+euro(c.gross)+" in = "+euro(c.forPanels)+" panels + "+euro(c.yours)+" yours") : "No sales since your last payout yet.";
     var list=payouts.slice().sort(function(a,b){return (a.date<b.date?1:a.date>b.date?-1:b.id-a.id);});
     var tbl=$("#payTable"),tb=$("#payRows"),emp=$("#payEmpty");
     if(!list.length){tbl.style.display="none";emp.style.display="block";tb.innerHTML="";return;}
@@ -669,7 +656,7 @@ const db = getFirestore(fbApp);
   }
   function addPayout(){
     var c=cycle();
-    var amt=Number($("#pAmount").value); if(!amt||amt<=0)amt=Math.round(c.avail*100)/100;
+    var amt=Number($("#pAmount").value); if(!amt||amt<=0)amt=Math.round(c.gross*100)/100;
     if(!amt||amt<=0){alert("No sales to pay out yet.");return;}
     var d=$("#pDate").value||todayStr(),note=$("#pNote").value.trim()||null;
     payouts.push({id:(payouts.reduce(function(m,x){return Math.max(m,x.id);},0)+1),date:d,amount:amt,note:note,
