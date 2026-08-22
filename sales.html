@@ -112,6 +112,10 @@
   .netcard .v{font-family:var(--serif);font-size:34px;font-weight:500;color:var(--up);font-variant-numeric:tabular-nums;margin-top:2px}
   .netcard .brk{margin-left:auto;font-size:11.5px;color:var(--ink3);text-align:right}
   .netcard.neg{background:transparent;border-color:var(--red)}.netcard.neg .v{color:var(--red)}
+  .netcard.red{background:rgba(187,77,62,.10);border-color:var(--red)}.netcard.red .v{color:var(--red)}
+  .splitrow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .splitrow .netcard{margin-bottom:16px}
+  @media (max-width:640px){.splitrow{grid-template-columns:1fr}}
   .payadd{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
   .payadd .pnote{flex:1;min-width:150px}
   .seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--rs);overflow:hidden;flex:none}
@@ -257,28 +261,34 @@
   <div class="card pad" id="payoutCard">
     <div class="phead">
       <h2 style="margin:0">Payouts &amp; balance</h2>
-      <span class="tiny muted" style="margin-left:auto">This cycle = sales since your last payout. Available = those sales − 7.5% fee; Net profit also subtracts panel cost. Resets after each payout.</span>
+      <span class="tiny muted" style="margin-left:auto">This cycle = sales since your last payout. Everything resets to €0 after each payout.</span>
     </div>
-    <div class="netcard" id="netCard">
-      <div><div class="l">Net profit · since last payout</div><div class="v" id="bNet">€0</div></div>
-      <div class="brk" id="netBreak">sales − 7.5% fee − panel cost · resets to €0 after each payout</div>
+    <div class="splitrow">
+      <div class="netcard red" id="panelsCard">
+        <div><div class="l">For panels · this cycle</div><div class="v" id="bForPanels">€0</div></div>
+        <div class="brk">what you owe providers (panel credits + IBO licenses)</div>
+      </div>
+      <div class="netcard" id="yoursCard">
+        <div><div class="l">Yours · this cycle</div><div class="v" id="bYours">€0</div></div>
+        <div class="brk">your profit = revenue − 7.5% fee − for panels</div>
+      </div>
     </div>
     <div class="balrow">
+      <div class="baltile"><div class="l">Revenue</div><div class="v" id="bRev">€0</div></div>
       <div class="baltile cost"><div class="l">Fee 7.5%</div><div class="v" id="bFee">€0</div></div>
-      <div class="baltile cost"><div class="l">Panel cost</div><div class="v" id="bPanel">€0</div></div>
-      <div class="baltile"><div class="l">Paid out</div><div class="v" id="bPaid">€0</div></div>
-      <div class="baltile avail"><div class="l">Available for payout</div><div class="v" id="bAvail">€0</div></div>
+      <div class="baltile avail"><div class="l">Available (cash)</div><div class="v" id="bAvail">€0</div></div>
+      <div class="baltile"><div class="l">Paid out · lifetime</div><div class="v" id="bPaid">€0</div></div>
     </div>
     <div id="panelCostBreak" class="tiny muted" style="margin:-8px 0 14px"></div>
     <div class="payadd">
       <input type="date" id="pDate" title="Payout date">
-      <input type="number" step="0.01" id="pAmount" placeholder="Amount €">
+      <input type="number" step="0.01" id="pAmount" placeholder="Amount € (blank = available)">
       <input id="pNote" class="pnote" placeholder="Note (who / method)">
       <button class="btn primary" id="pAddBtn" type="button">Add payout</button>
     </div>
     <div style="overflow-x:auto">
       <table id="payTable" style="display:none">
-        <thead><tr><th>Date</th><th>Note</th><th class="num">Amount</th><th></th></tr></thead>
+        <thead><tr><th>Date</th><th>Note</th><th class="num">For panels</th><th class="num">Yours</th><th class="num">Amount</th><th></th></tr></thead>
         <tbody id="payRows"></tbody>
       </table>
     </div>
@@ -286,12 +296,17 @@
   </div>
 
   <div class="card pad" id="stockCard">
-    <div class="phead"><h2 style="margin:0">Panel stock</h2><span class="tiny muted" style="margin-left:auto">1 credit = 12 months. Each sale uses credits automatically — top up before you run out.</span></div>
+    <div class="phead"><h2 style="margin:0">Panel stock</h2><span class="tiny muted" style="margin-left:auto">Each sale burns credits automatically (Dino 1/mo, Mega &amp; Max 1/yr). IBO = optional license.</span></div>
     <div class="stockrow" id="stockRow"></div>
     <div class="payadd" style="margin-top:14px">
-      <select id="stPanel"><option value="dino">Dino</option><option value="mega">Mega</option><option value="max">Max</option></select>
+      <select id="stPanel"><option value="dino">Dino</option><option value="mega">Mega</option><option value="max">Max</option><option value="ibo">IBO license</option></select>
       <input type="number" step="0.01" id="stCredits" placeholder="Credits bought">
       <button class="btn primary" id="stAddBtn" type="button">+ Add credits</button>
+    </div>
+    <div class="tiny muted" style="margin-top:12px">IBO license = <b id="iboRateTxt">€2</b> per year · <a href="#" id="setIboRate">change</a></div>
+    <div style="margin-top:16px;border-top:1px solid var(--line);padding-top:14px">
+      <button class="btn" id="resetBtn" type="button" style="border-color:var(--red);color:var(--red)">↺ Start fresh — reset all data</button>
+      <span class="tiny muted" style="margin-left:8px">Wipes sales &amp; payouts, sets Mega 10.25 · Dino 95 · Max 0 · IBO 0.</span>
     </div>
   </div>
   </div><!-- /sec-finance -->
@@ -358,8 +373,8 @@
         </select></div>
       </div>
       <div class="frow c3">
-        <div class="fld"><label>App used</label><select name="app_used" id="fApp">
-          <option value="ibo">IBO Player</option><option value="smarters">IPTV Smarters Pro</option><option value="tivimate">TiViMate</option><option value="other">Other app</option>
+        <div class="fld"><label>App requested</label><select name="app_used" id="fApp">
+          <option value="line">Line code only</option><option value="smarters">IPTV Smarters Pro</option><option value="ibo">IBO Player</option><option value="other">Other app</option>
         </select></div>
         <div class="fld"><label>Panel</label><select name="panel">
           <option value="dino">Dino</option><option value="mega">Mega</option><option value="max">Max</option>
@@ -369,7 +384,8 @@
         </select></div>
       </div>
       <div class="frow ibo" id="iboBox" style="display:none">
-        <div class="note">IBO Player — save these so you can renew it yourself later:</div>
+        <label class="iboLic" style="grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;color:var(--acc);font-weight:600"><input type="checkbox" name="ibo_license" id="fIboLic" style="width:auto;min-height:0"> Cover IBO Player license (1 credit / year — only if the client asks)</label>
+        <div class="note">Save these so you can renew it yourself later:</div>
         <div class="fld"><label>MAC address</label><input name="mac_address" id="fMac" maxlength="17" inputmode="text" autocapitalize="characters" placeholder="00:1A:79:xx:xx:xx"></div>
         <div class="fld"><label>Device key</label><input name="device_key" placeholder="Device key"></div>
       </div>
@@ -406,16 +422,29 @@ const db = getFirestore(fbApp);
     ["smartersprofrance","smartersprofrance.fr","🇫🇷"],["iptvfranceofficiel","iptvfranceofficiel.fr","🇫🇷"],
     ["abonnementiptvofficiel","abonnementiptvofficiel","🇫🇷"],["iptvshqiptar","iptvshqiptar.com","🇦🇱"],["other","Other","🌐"]
   ];
-  var PANELS={dino:"Dino",mega:"Mega",max:"Max"};
-  var STOCK_SEED={dino:0,mega:10,max:0};
-  var APPS={ibo:"IBO Player",smarters:"IPTV Smarters Pro",tivimate:"TiViMate",other:"Other app"};
+  // Panels are credit pools. mpc = months of service per 1 credit; year = € cost per 12 months of service.
+  var PANELS={
+    dino:{label:"Dino",mpc:1, year:10},   // 1 credit = 1 month
+    mega:{label:"Mega",mpc:12,year:10},   // 1 credit = 1 year
+    max: {label:"Max", mpc:12,year:10}
+  };
+  var POOLS={dino:"Dino",mega:"Mega",max:"Max",ibo:"IBO license"};      // stock tiles (panels + IBO pool)
+  var POOL_RATIO={dino:"1 cr = 1 mo",mega:"1 cr = 1 yr",max:"1 cr = 1 yr",ibo:"1 cr = 1 yr"};
+  var STOCK_SEED={dino:95,mega:10.25,max:0,ibo:0};
+  var APPS={line:"Line code only",smarters:"IPTV Smarters Pro",ibo:"IBO Player",other:"Other app"};
+  var config={iboRate:2};   // € cost of a 1-year IBO Player license
   var STATUSES={paid:"Paid",activated:"Activated",renewed:"Renewed",expired:"Expired"};
   var STATUS_COLOR={paid:"var(--blue)",activated:"var(--acc)",renewed:"var(--up)",expired:"var(--red)"};
   var PRICE={iptvesp:{3:25,6:39,12:59,24:99}};
   function suggestPrice(s,m){return (PRICE[s]||{3:19,6:39,12:49,24:89})[m]||0;}
-  var PANEL_RATE=10; // € the provider charges per 12 months (per line)
-  var FEE_RATE=0.075; // 7.5% debited from each sale before it becomes available for payout
-  function panelCost(s){return (Number(s.plan_months)||0)/12*PANEL_RATE;}
+  var PANEL_RATE=10; // fallback € per 12 months of service (per line)
+  var FEE_RATE=0.075; // 7.5% card fee, taken before your share
+  function plabel(k){return (PANELS[k]&&PANELS[k].label)||POOLS[k]||k;}
+  function years(s){return (Number(s.plan_months)||0)/12;}
+  function panelYearCost(k){return (PANELS[k]&&PANELS[k].year)||PANEL_RATE;}
+  function panelBaseCost(s){return years(s)*panelYearCost(s.panel);}        // provider cost of the line
+  function iboCost(s){return s.ibo_license?years(s)*(Number(config.iboRate)||0):0;} // IBO license if covered
+  function panelCost(s){return panelBaseCost(s)+iboCost(s);}                // total "for panels"
   function siteLabel(id){var s=SITES.find(function(x){return x[0]===id;});return s?s[1]:id;}
   function siteFlag(id){var s=SITES.find(function(x){return x[0]===id;});return s?s[2]:"🌐";}
 
@@ -432,22 +461,31 @@ const db = getFirestore(fbApp);
   function localPayouts(){try{var a=JSON.parse(localStorage.getItem(PKEY));return Array.isArray(a)?a:[];}catch(e){return [];}}
   var sales=[], payouts=[], credits={};
   var docRef=null, unsub=null;
-  function persist(){ if(docRef){ setDoc(docRef,{sales:sales,payouts:payouts,credits:credits,updated_at:Date.now()}).catch(function(e){console.error("cloud save failed",e);}); } }
+  function persist(){ if(docRef){ setDoc(docRef,{sales:sales,payouts:payouts,credits:credits,config:config,updated_at:Date.now()}).catch(function(e){console.error("cloud save failed",e);}); } }
   function fmtCred(n){var r=Math.round(n*100)/100; return (r%1===0)?String(r):String(r).replace(/(\.\d)0$/,"$1");}
-  function creditsUsed(){var u={}; sales.forEach(function(s){ if(s.panel){u[s.panel]=(u[s.panel]||0)+(Number(s.plan_months)||0)/12;} }); return u;}
+  function creditsUsed(){
+    var u={};
+    sales.forEach(function(s){
+      var m=Number(s.plan_months)||0;
+      if(s.panel){ var mpc=(PANELS[s.panel]&&PANELS[s.panel].mpc)||12; u[s.panel]=(u[s.panel]||0)+m/mpc; }
+      if(s.ibo_license){ u.ibo=(u.ibo||0)+m/12; }   // IBO: 1 credit = 1 year
+    });
+    return u;
+  }
   function renderStock(){
     var used=creditsUsed(), el=$("#stockRow");
-    el.innerHTML=Object.keys(PANELS).map(function(k){
-      var bought=Number(credits[k])||0, us=used[k]||0, rem=bought-us;
-      if(bought===0&&us===0) return '<div class="stile" data-panel="'+k+'" title="Tap to set owned credits"><div class="l">'+PANELS[k]+'</div><div class="v" style="color:var(--ink3)">—</div><div class="sub">tap to set stock</div></div>';
+    el.innerHTML=Object.keys(POOLS).map(function(k){
+      var bought=Number(credits[k])||0, us=used[k]||0, rem=bought-us, ratio=POOL_RATIO[k]||"";
+      if(bought===0&&us===0) return '<div class="stile" data-panel="'+k+'" title="'+ratio+' · tap to set credits left"><div class="l">'+POOLS[k]+'</div><div class="v" style="color:var(--ink3)">—</div><div class="sub">'+ratio+' · tap to set</div></div>';
       var cls=rem<2?"low":rem<5?"mid":"ok";
-      return '<div class="stile '+cls+'" data-panel="'+k+'" title="Tap to set owned credits"><div class="l">'+PANELS[k]+'</div><div class="v">'+fmtCred(rem)+'</div>'+
+      return '<div class="stile '+cls+'" data-panel="'+k+'" title="'+ratio+' · tap to set credits left"><div class="l">'+POOLS[k]+'</div><div class="v">'+fmtCred(rem)+'</div>'+
         '<div class="sub">'+fmtCred(us)+' used · '+fmtCred(bought)+' owned'+(rem<2?' · ⚠ top up':'')+'</div></div>';
     }).join("");
+    var irt=$("#iboRateTxt"); if(irt)irt.textContent=euro(Number(config.iboRate)||0);
   }
   function setStock(p){
     var us=(creditsUsed()[p])||0, curRem=(Number(credits[p])||0)-us;
-    var v=prompt("Current "+PANELS[p]+" credits you have left right now:", fmtCred(curRem));
+    var v=prompt("Current "+(POOLS[p]||p)+" credits you have left right now:", fmtCred(curRem));
     if(v===null)return;
     v=Number(v);
     if(isNaN(v)||v<0){alert("Enter a number of 0 or more.");return;}
@@ -465,7 +503,7 @@ const db = getFirestore(fbApp);
   function fillSites(sel,all){SITES.forEach(function(s){if(s[0]==="other"&&all==="filter")return;var o=document.createElement("option");o.value=s[0];o.textContent=s[2]+" "+s[1];sel.appendChild(o);});}
   fillSites($("#fSaleSite"));
   SITES.forEach(function(s){var o=document.createElement("option");o.value=s[0];o.textContent=s[2]+" "+s[1];$("#fSite").appendChild(o);});
-  Object.keys(PANELS).forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=PANELS[k];$("#fPanel").appendChild(o);});
+  Object.keys(PANELS).forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=plabel(k);$("#fPanel").appendChild(o);});
   Object.keys(STATUSES).forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=STATUSES[k];$("#fStatus").appendChild(o);});
 
   function stats(){
@@ -576,7 +614,7 @@ const db = getFirestore(fbApp);
     $("#kRevMonth").textContent=euro(st.month);$("#kCountMonth").textContent=st.mCount+" sales";
     $("#kRevWeek").textContent=euro(st.week);
     bars($("#bySite"),st.site,function(k){return siteFlag(k)+" "+siteLabel(k);});
-    bars($("#byPanel"),st.panel,function(k){return PANELS[k]||k;});
+    bars($("#byPanel"),st.panel,function(k){return plabel(k);});
     expiring();
     var exp=sales.filter(function(s){return s.status!=="expired"&&s.status!=="renewed"&&s.end_date&&daysLeft(s.end_date)>=0&&daysLeft(s.end_date)<=7;}).length;
     $("#kExp").textContent=exp;$("#kExpF").textContent=exp?"needs attention":"all good";
@@ -585,50 +623,59 @@ const db = getFirestore(fbApp);
     if(curView==="clients")renderClients(); else renderRows();
   }
   function paidTotal(){return payouts.reduce(function(s,p){return s+(Number(p.amount)||0);},0);}
-  // Net profit accrued since the most recent payout (any payout resets it to 0).
-  // Sales made after the last payout are counted by their created_at timestamp.
-  function netProfit(){
+  // Current cycle = sales made after the most recent payout (by created_at). Any payout resets it.
+  function cycle(){
     var since=payouts.reduce(function(m,p){var t=p.created_at||"";return t>m?t:m;},"");
-    var g=0,pc=0,n=0,panelBy={};
+    var g=0,pb=0,ibo=0,n=0,panelBy={};
     sales.forEach(function(s){
       var ct=s.created_at||"";
-      if(since!==""&&!(ct>since))return;   // skip sales made on/before the last payout
+      if(since!==""&&!(ct>since))return;
       g+=Number(s.price_eur)||0;
-      var c=panelCost(s); pc+=c; if(s.panel)panelBy[s.panel]=(panelBy[s.panel]||0)+c;
+      var c=panelBaseCost(s); pb+=c; if(s.panel)panelBy[s.panel]=(panelBy[s.panel]||0)+c;
+      ibo+=iboCost(s);
       n++;
     });
-    var fee=g*FEE_RATE;
-    return {net:g-fee-pc,gross:g,fee:fee,panel:pc,count:n,panelBy:panelBy,avail:g-fee};
+    var fee=g*FEE_RATE, forPanels=pb+ibo, avail=g-fee, yours=avail-forPanels;
+    return {gross:g,fee:fee,forPanels:forPanels,panelBase:pb,ibo:ibo,avail:avail,yours:yours,count:n,panelBy:panelBy};
   }
   function renderBalance(st){
-    // Everything on this card is for the current cycle = sales since the last payout.
-    var np=netProfit();
-    $("#bFee").textContent=euro(np.fee);$("#bPanel").textContent=euro(np.panel);
-    $("#bPaid").textContent=euro(paidTotal());$("#bAvail").textContent=euro(np.avail);
-    $("#bNet").textContent=euro(np.net);
-    document.querySelector(".baltile.avail").classList.toggle("neg",np.avail<0);
-    document.querySelector("#netCard").classList.toggle("neg",np.net<0);
-    $("#netBreak").textContent=np.count+" sale"+(np.count===1?"":"s")+" since last payout · "+euro(np.gross)+" − "+euro(np.fee)+" fee − "+euro(np.panel)+" panel";
-    var pk=Object.keys(np.panelBy);
-    $("#panelCostBreak").textContent=pk.length?("To pay providers — "+pk.sort().map(function(k){return (PANELS[k]||k)+" "+euro(np.panelBy[k]);}).join("  ·  ")):"";
+    var c=cycle();
+    $("#bForPanels").textContent=euro(c.forPanels);
+    $("#bYours").textContent=euro(c.yours);
+    $("#bRev").textContent=euro(c.gross);
+    $("#bFee").textContent=euro(c.fee);
+    $("#bAvail").textContent=euro(c.avail);
+    $("#bPaid").textContent=euro(paidTotal());
+    document.querySelector(".baltile.avail").classList.toggle("neg",c.avail<0);
+    document.querySelector("#yoursCard").classList.toggle("neg",c.yours<0);
+    var parts=[]; Object.keys(c.panelBy).sort().forEach(function(k){ if(c.panelBy[k]>0)parts.push(plabel(k)+" "+euro(c.panelBy[k])); });
+    if(c.ibo>0)parts.push("IBO licenses "+euro(c.ibo));
+    $("#panelCostBreak").textContent = c.count ? (c.count+" sale"+(c.count===1?"":"s")+" this cycle · for panels = "+(parts.length?parts.join("  ·  "):"€0")) : "No sales since your last payout yet.";
     var list=payouts.slice().sort(function(a,b){return (a.date<b.date?1:a.date>b.date?-1:b.id-a.id);});
     var tbl=$("#payTable"),tb=$("#payRows"),emp=$("#payEmpty");
     if(!list.length){tbl.style.display="none";emp.style.display="block";tb.innerHTML="";return;}
     tbl.style.display="";emp.style.display="none";
     tb.innerHTML=list.map(function(p){
+      var fp=(p.for_panels!=null)?euro(Number(p.for_panels)):'<span class="muted">—</span>';
+      var yr=(p.yours!=null)?euro(Number(p.yours)):'<span class="muted">—</span>';
       return '<tr><td style="white-space:nowrap" class="muted">'+(p.date?new Date(p.date+"T00:00:00Z").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric",timeZone:"UTC"}):"—")+'</td>'+
         '<td>'+(p.note?esc(p.note):'<span class="muted">—</span>')+'</td>'+
+        '<td class="num" style="color:var(--red)">'+fp+'</td>'+
+        '<td class="num" style="color:var(--up)">'+yr+'</td>'+
         '<td class="num">'+euro(Number(p.amount)||0)+'</td>'+
         '<td style="text-align:right"><button class="del" data-id="'+p.id+'" title="Delete">✕</button></td></tr>';
     }).join("");
     Array.prototype.forEach.call(tb.querySelectorAll(".del"),function(b){b.onclick=function(){delPayout(Number(b.dataset.id));};});
   }
   function addPayout(){
-    var amt=Number($("#pAmount").value);
-    if(!amt||amt<=0){$("#pAmount").focus();return;}
+    var c=cycle();
+    var amt=Number($("#pAmount").value); if(!amt||amt<=0)amt=Math.round(c.avail*100)/100;
+    if(!amt||amt<=0){alert("No sales to pay out yet.");return;}
     var d=$("#pDate").value||todayStr(),note=$("#pNote").value.trim()||null;
-    payouts.push({id:(payouts.reduce(function(m,x){return Math.max(m,x.id);},0)+1),date:d,amount:amt,note:note,created_at:new Date().toISOString()});
-    saveP(payouts);$("#pAmount").value="";$("#pNote").value="";render();
+    payouts.push({id:(payouts.reduce(function(m,x){return Math.max(m,x.id);},0)+1),date:d,amount:amt,note:note,
+      for_panels:Math.round(c.forPanels*100)/100,yours:Math.round(c.yours*100)/100,revenue:Math.round(c.gross*100)/100,
+      created_at:new Date().toISOString()});
+    saveP();$("#pAmount").value="";$("#pNote").value="";render();
   }
   function delPayout(id){if(confirm("Delete this payout?")){payouts=payouts.filter(function(x){return x.id!==id;});saveP(payouts);render();}}
   function renderRows(){
@@ -650,9 +697,10 @@ const db = getFirestore(fbApp);
         '<td style="white-space:nowrap">'+siteFlag(s.site)+' <span class="muted">'+esc(siteLabel(s.site))+'</span></td>'+
         '<td style="white-space:nowrap" class="muted">'+esc(s.plan_months)+' mo · '+esc(s.screens||1)+'s</td>'+
         '<td class="num">'+euro(Number(s.price_eur)||0)+'</td>'+
-        '<td style="white-space:nowrap"><span class="muted">'+esc(APPS[s.app_used]||s.app_used)+'</span> '+
-          (ibo?'<span class="tag self" title="'+(s.mac_address?"MAC: "+esc(s.mac_address)+(s.device_key?" · Key: "+esc(s.device_key):""):"IBO — you can renew it yourself")+'">self-manage</span>':'<span class="tag cli">client-side</span>')+'</td>'+
-        '<td class="muted">'+(s.panel?esc(PANELS[s.panel]||s.panel):"—")+'</td>'+
+        '<td style="white-space:nowrap"><span class="muted">'+esc(APPS[s.app_used]||s.app_used)+'</span>'+
+          (ibo?' <span class="tag self" title="'+(s.mac_address?"MAC: "+esc(s.mac_address)+(s.device_key?" · Key: "+esc(s.device_key):""):"IBO — you can renew it yourself")+'">IBO</span>':'')+
+          (s.ibo_license?' <span class="tag self" title="You cover the IBO license (1 credit/yr)">license</span>':'')+'</td>'+
+        '<td class="muted">'+(s.panel?esc(plabel(s.panel)):"—")+'</td>'+
         '<td style="white-space:nowrap"><div class="muted">'+(s.end_date?new Date(s.end_date+"T00:00:00Z").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric",timeZone:"UTC"}):"—")+'</div>'+dlc+'</td>'+
         '<td><select class="stsel" data-id="'+s.id+'" style="color:'+(STATUS_COLOR[s.status]||"var(--ink2)")+'">'+opts+'</select></td>'+
         '<td style="text-align:right;white-space:nowrap"><button class="edit" data-id="'+s.id+'" title="Edit">✎</button><button class="del" data-id="'+s.id+'" title="Delete">✕</button></td>'+
@@ -668,13 +716,14 @@ const db = getFirestore(fbApp);
 
   // modal
   var ov=$("#overlay"),form=$("#saleForm"),editId=null;
-  function openModal(){editId=null;$("#modalTitle").textContent="New sale";form.reset();$("#fDate").value=todayStr();$("#fPlan").value="12";$("#fSaleSite").value="iptvesp";$("#fApp").value="ibo";syncIbo();syncPrice();$("#formErr").textContent="";ov.classList.add("on");}
+  function openModal(){editId=null;$("#modalTitle").textContent="New sale";form.reset();$("#fDate").value=todayStr();$("#fPlan").value="12";$("#fSaleSite").value="iptvesp";$("#fApp").value="smarters";syncIbo();syncPrice();$("#formErr").textContent="";ov.classList.add("on");}
   function openEdit(id){var s=sales.find(function(x){return x.id===id;});if(!s)return;editId=id;$("#modalTitle").textContent="Edit sale";form.reset();
     var set=function(n,v){var el=form.elements[n];if(el)el.value=(v==null?"":v);};
     set("sale_date",s.sale_date);set("client_name",s.client_name);set("whatsapp",s.whatsapp);set("language",s.language||"es");
     set("site",s.site);set("plan_months",s.plan_months);set("screens",s.screens||1);set("price_eur",s.price_eur);
     set("payment_method",s.payment_method||"aovancy");set("app_used",s.app_used||"other");set("panel",s.panel||"dino");
     set("status",s.status||"paid");set("mac_address",s.mac_address);set("device_key",s.device_key);set("notes",s.notes);
+    form.elements.ibo_license.checked=!!s.ibo_license;
     syncIbo();$("#formErr").textContent="";ov.classList.add("on");}
   function closeModal(){ov.classList.remove("on");}
   function syncIbo(){$("#iboBox").style.display=$("#fApp").value==="ibo"?"grid":"none";}
@@ -690,7 +739,8 @@ const db = getFirestore(fbApp);
     var data={sale_date:sale_date,client_name:form.elements.client_name.value.trim(),whatsapp:form.elements.whatsapp.value.trim()||null,
       site:form.elements.site.value,language:form.elements.language.value,plan_months:months,screens:Number(form.elements.screens.value)||1,
       price_eur:Number(form.elements.price_eur.value)||0,payment_method:form.elements.payment_method.value,app_used:form.elements.app_used.value,
-      panel:form.elements.panel.value,mac_address:ibo?(form.elements.mac_address.value.trim()||null):null,device_key:ibo?(form.elements.device_key.value.trim()||null):null,
+      panel:form.elements.panel.value,ibo_license:ibo&&form.elements.ibo_license.checked,
+      mac_address:ibo?(form.elements.mac_address.value.trim()||null):null,device_key:ibo?(form.elements.device_key.value.trim()||null):null,
       status:form.elements.status.value,end_date:addMonths(sale_date,months),notes:form.elements.notes.value.trim()||null};
     if(editId!=null){var r=sales.find(function(x){return x.id===editId;});if(r){for(var k in data)r[k]=data[k];}}
     else{data.id=sales.reduce(function(m,x){return Math.max(m,x.id);},0)+1;data.created_at=new Date().toISOString();sales.push(data);}
@@ -705,6 +755,17 @@ const db = getFirestore(fbApp);
   $("#pAddBtn").onclick=addPayout;$("#pDate").value=todayStr();
   $("#stAddBtn").onclick=addCredits;
   $("#stockRow").onclick=function(e){var t=e.target.closest(".stile");if(t&&t.getAttribute("data-panel"))setStock(t.getAttribute("data-panel"));};
+  $("#setIboRate").onclick=function(e){e.preventDefault();
+    var v=prompt("IBO Player license cost per year (€):",fmtCred(Number(config.iboRate)||0));
+    if(v===null)return; v=Number(v); if(isNaN(v)||v<0){alert("Enter a number of 0 or more.");return;}
+    config.iboRate=v; persist(); render();
+  };
+  $("#resetBtn").onclick=function(){
+    if(!confirm("Start fresh? This permanently deletes ALL your sales and payouts, and sets credits to Mega 10.25 · Dino 95 · Max 0 · IBO 0. This cannot be undone."))return;
+    if(!confirm("Are you sure? Everything you've recorded will be wiped."))return;
+    sales=[]; payouts=[]; credits=Object.assign({},STOCK_SEED); persist(); render();
+    alert("Done — fresh start. Credits set to Mega 10.25, Dino 95, Max 0, IBO 0.");
+  };
   // sidebar section switching
   var SEC_TITLES={overview:"Overview",finance:"Finance",sales:"Sales"};
   function setSection(s){
@@ -716,7 +777,7 @@ const db = getFirestore(fbApp);
 
   // export / import
   $("#exportBtn").onclick=function(){
-    var blob=new Blob([JSON.stringify({sales:sales,payouts:payouts,credits:credits},null,2)],{type:"application/json"});
+    var blob=new Blob([JSON.stringify({sales:sales,payouts:payouts,credits:credits,config:config},null,2)],{type:"application/json"});
     var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="iptv-sales-backup.json";a.click();URL.revokeObjectURL(a.href);
   };
   $("#importBtn").onclick=function(){$("#importFile").click();};
@@ -728,7 +789,8 @@ const db = getFirestore(fbApp);
       var np=(data&&Array.isArray(data.payouts))?data.payouts:[];
       if(ns===null)throw 0;
       if((sales.length||payouts.length)&&!confirm("Replace this browser's data with the imported backup ("+ns.length+" sales, "+np.length+" payouts)?"))return;
-      sales=ns;payouts=np;credits=(data&&data.credits&&typeof data.credits==="object")?data.credits:{};save(sales);saveP(payouts);persist();render();
+      sales=ns;payouts=np;credits=(data&&data.credits&&typeof data.credits==="object")?data.credits:{};
+      config=(data&&data.config&&typeof data.config==="object")?Object.assign({iboRate:2},data.config):config;save(sales);saveP(payouts);persist();render();
     }catch(err){alert("That file isn't a valid sales backup.");}};
     r.readAsText(file);e.target.value="";
   };
@@ -758,6 +820,7 @@ const db = getFirestore(fbApp);
         sales=(d&&Array.isArray(d.sales))?d.sales:[];
         payouts=(d&&Array.isArray(d.payouts))?d.payouts:[];
         credits=(d&&d.credits&&typeof d.credits==="object")?d.credits:{};
+        config=(d&&d.config&&typeof d.config==="object")?Object.assign({iboRate:2},d.config):{iboRate:2};
         var seeded=false;
         if(d&&Object.keys(credits).length===0){ credits=Object.assign({},STOCK_SEED); seeded=true; }
         if(autoExpire()||seeded)persist();
