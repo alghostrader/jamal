@@ -2,119 +2,124 @@
  "iptvesp.com": {
   "articles": [
    {
-    "path": "/blog/telegram-listas-iptv-espana",
+    "path": "/blog/listas-telegram-iptv-espana",
     "title": "Listas IPTV España por Telegram gratis: guía y riesgos 2026",
-    "words": 4263
+    "words": 4433
    },
    {
     "path": "/blog/iptv-espana-fire-tv-stick-4k-max-2026",
     "title": "IPTV en Fire TV Stick 4K Max: instalación 2026",
-    "words": 4012
+    "words": 4005
    },
    {
     "path": "/blog/iptv-deportes-motor-espana",
     "title": "IPTV deportes de motor en España 2026: automovilismo en 4K",
-    "words": 3823
+    "words": 3824
    },
    {
-    "path": "/blog/guia-elegir-iptv-espana",
+    "path": "/blog/como-elegir-iptv-espana",
     "title": "Mejor IPTV España 2026: proveedores, M3U y Xtream Codes",
-    "words": 3581
+    "words": 3718
    },
    {
     "path": "/blog/iptv-roku-espana",
     "title": "IPTV en Roku España 2026: instalación y alternativas",
-    "words": 3148
+    "words": 3146
    },
    {
     "path": "/blog/iptv-en-pc-windows-espana",
     "title": "IPTV en PC y Windows 2026: cómo ver IPTV en el ordenador",
-    "words": 2882
+    "words": 2881
    },
    {
     "path": "/blog/iptv-sony-bravia-espana",
     "title": "IPTV en Sony Bravia España 2026: instalar y configurar",
-    "words": 2782
+    "words": 2781
    },
    {
     "path": "/blog",
     "title": "Blog IPTV en España — guías y comparativas 2026 · IPTVESP",
-    "words": 2629
+    "words": 2681
    },
    {
-    "path": "/blog/guia-iptv-espana",
+    "path": "/blog/guia-completa-iptv-espana",
     "title": "IPTV España: guía completa 2026 para elegir plan",
-    "words": 2625
+    "words": 2630
    },
    {
     "path": "/blog/iptv-motociclismo-espana",
     "title": "IPTV motociclismo en España 2026: carreras de motos en 4K",
-    "words": 2613
+    "words": 2614
    },
    {
     "path": "/blog/iptv-iphone-ipad-espana",
     "title": "IPTV en iPhone y iPad: instalar y ver en iOS 2026",
-    "words": 2564
+    "words": 2565
    },
    {
     "path": "/blog/iptv-samsung-smart-tv-espana",
     "title": "IPTV en Samsung sin Smarters: apps y soluciones",
-    "words": 2367
+    "words": 2369
    },
    {
     "path": "/blog/iptv-telegram-gratis-2026",
     "title": "IPTV Telegram gratis 2026: qué esperar antes de bajarla",
-    "words": 2284
+    "words": 2278
    },
    {
     "path": "/blog/iptv-multipantalla-espana",
     "title": "IPTV multipantalla en España: ver en varias pantallas",
-    "words": 2179
+    "words": 2189
    },
    {
     "path": "/blog/riesgos-grupos-telegram-iptv",
     "title": "Grupos de Telegram con IPTV gratis: los riesgos reales",
-    "words": 2144
+    "words": 2147
    },
    {
     "path": "/blog/iptv-no-funciona",
     "title": "IPTV no funciona: causas y cómo solucionarlo",
-    "words": 2041
+    "words": 2040
    },
    {
-    "path": "/blog/listas-m3u-iptv-espana",
+    "path": "/blog/m3u-listas-iptv-espana",
     "title": "Listas IPTV España 2026: M3U, gratis y por qué fallan",
-    "words": 2016
+    "words": 2021
+   },
+   {
+    "path": "/blog/iptv-m3u-espana",
+    "title": "Listas IPTV España 2026: M3U, gratis y por qué fallan",
+    "words": 2021
    },
    {
     "path": "/blog/alternativas-a-telegram-iptv",
     "title": "Alternativas a Telegram para IPTV en España",
-    "words": 1993
-   },
-   {
-    "path": "/blog/iptv-4k-espana",
-    "title": "IPTV 4K España: requisitos, equipos y proveedores",
-    "words": 1956
+    "words": 1986
    },
    {
     "path": "/blog/iptv-gratis-es-fiable",
     "title": "IPTV gratis en España: ¿es fiable y seguro en 2026?",
-    "words": 1953
+    "words": 1960
+   },
+   {
+    "path": "/blog/iptv-4k-espana",
+    "title": "IPTV 4K España: requisitos, equipos y proveedores",
+    "words": 1955
    },
    {
     "path": "/blog/iptv-lg-smart-tv-espana",
     "title": "IPTV en LG Smart TV: webOS, apps y mejor configuración",
-    "words": 1928
+    "words": 1931
    },
    {
     "path": "/blog/iptv-kodi-espana",
     "title": "IPTV en Kodi: cómo instalar y configurar paso a paso",
-    "words": 1889
+    "words": 1893
    },
    {
-    "path": "/blog/aplicacion-iptv",
+    "path": "/blog/aplicaciones-iptv-espana",
     "title": "Aplicación IPTV: las mejores apps para España 2026",
-    "words": 1865
+    "words": 1873
    },
    {
     "path": "/blog/iptv-smarters-pro",
@@ -124,97 +129,102 @@
    {
     "path": "/blog/iptv-vs-plataformas-premium-espana",
     "title": "IPTV vs plataformas premium en España: comparativa 2026",
-    "words": 1844
+    "words": 1851
+   },
+   {
+    "path": "/blog/legalidad-iptv-espana",
+    "title": "IPTV legal en España 2026: lo que dice la ley y el CNMC",
+    "words": 1829
    },
    {
     "path": "/blog/epg-iptv-espana",
     "title": "Cómo configurar la guía de programación (EPG) en IPTV",
-    "words": 1750
+    "words": 1749
    },
    {
     "path": "/blog/iptv-vlc",
     "title": "IPTV con VLC: cómo reproducir tu lista M3U paso a paso",
-    "words": 1750
+    "words": 1741
    },
    {
     "path": "/blog/iptv-android-tv-espana",
     "title": "IPTV Smarters Pro en Android: TV box, móvil y Mi Box",
-    "words": 1731
-   },
-   {
-    "path": "/blog/iptv-legalidad-espana",
-    "title": "IPTV legal en España 2026: lo que dice la ley y el CNMC",
-    "words": 1730
+    "words": 1732
    },
    {
     "path": "/blog/iptv-box-espana",
     "title": "Cajas IPTV en España: MAG, Formuler y Android TV 2026",
-    "words": 1667
+    "words": 1671
    },
    {
     "path": "/blog/vpn-para-iptv-espana",
     "title": "¿Necesitas una VPN para IPTV en España?",
-    "words": 1664
+    "words": 1660
    },
    {
     "path": "/blog/iptv-xiaomi-mi-tv-stick-espana",
     "title": "Instalar IPTV en Xiaomi Mi TV Stick (2026)",
-    "words": 1651
+    "words": 1650
    },
    {
     "path": "/blog/cuanto-cuesta-iptv-espana",
     "title": "Precios IPTV en España 2026: cuánto cuesta (comparativa)",
-    "words": 1626
-   },
-   {
-    "path": "/blog/iptv-apple-tv-espana",
-    "title": "IPTV en Apple TV España: guía instalación tvOS 2026",
-    "words": 1610
+    "words": 1627
    },
    {
     "path": "/blog/iptv-pixelado-espana",
     "title": "IPTV pixelado en España: por qué pasa y cómo arreglarlo",
-    "words": 1607
+    "words": 1613
+   },
+   {
+    "path": "/blog/iptv-apple-tv-espana",
+    "title": "IPTV en Apple TV España: guía instalación tvOS 2026",
+    "words": 1609
    },
    {
     "path": "/blog/iptv-smart-tv-samsung-espana",
     "title": "IPTV en Samsung Smart TV: instalación y mejores apps",
-    "words": 1577
+    "words": 1578
    },
    {
     "path": "/blog/ss-iptv-smart-tv",
     "title": "SS IPTV Smart TV: instalar y configurar la app gratis",
-    "words": 1559
+    "words": 1558
    },
    {
     "path": "/blog/iptv-vodafone-orange-espana",
     "title": "Vodafone TV y Orange TV vs IPTV: ¿cuál compensa?",
-    "words": 1554
+    "words": 1555
    },
    {
     "path": "/blog/iptv-futbol-europeo-espana",
     "title": "Fútbol europeo en IPTV España 2026: verlo en 4K",
-    "words": 1533
+    "words": 1536
    },
    {
     "path": "/blog/iptv-en-chromecast-espana",
     "title": "IPTV en Chromecast España: guía con Google TV 2026",
-    "words": 1523
+    "words": 1522
+   },
+   {
+    "path": "/blog/tivimate-espana",
+    "title": "TiviMate en España: guía completa 2026",
+    "words": 1507
    },
    {
     "path": "/blog/mejor-reproductor-iptv",
     "title": "Mejor reproductor IPTV 2026: comparativa de aplicaciones",
-    "words": 1413
+    "words": 1418
    },
    {
     "path": "/blog/prueba-iptv-gratis",
     "title": "Prueba IPTV gratis en España: test sin riesgos",
-    "words": 1178
+    "words": 1181
    },
    {
     "path": "/blog/descargar-iptv-smarters-pro",
     "title": "Descargar IPTV Smarters Pro: guía de instalación",
-    "words": 1122
+    "words": 1120
    },
    {
     "path": "/generador-m3u",
@@ -339,7 +349,7 @@
     "covered": true
    }
   ],
-  "n_articles": 47,
+  "n_articles": 49,
   "n_thin": 2
  },
  "primeiptv-france.com": {
@@ -347,7 +357,7 @@
    {
     "path": "/guides/iptv-smarters-pro-android",
     "title": "IPTV Smarters Pro Android 2026 : Installation",
-    "words": 3647
+    "words": 3663
    },
    {
     "path": "/guides/iptv-cyclisme",
@@ -710,6 +720,11 @@
     "words": 984
    },
    {
+    "path": "/abonnement-12-mois",
+    "title": "Abonnement IPTV 12 Mois Pas Cher 2026",
+    "words": 953
+   },
+   {
     "path": "/iptv/cote-divoire",
     "title": "IPTV Côte d'Ivoire 2026 : Abonnement HD/4K",
     "words": 952
@@ -753,11 +768,6 @@
     "path": "/iptv/luxembourg",
     "title": "IPTV Luxembourg 2026 : Abonnement Premium",
     "words": 896
-   },
-   {
-    "path": "/abonnement-12-mois",
-    "title": "Abonnement IPTV 12 Mois Pas Cher 2026",
-    "words": 887
    },
    {
     "path": "/application",
@@ -951,7 +961,7 @@
    {
     "path": "/blog/iptv-op-iphone-ipad-nederland",
     "title": "IPTV op iPhone en iPad: iOS-installatiegids 2026",
-    "words": 2797
+    "words": 2799
    },
    {
     "path": "/blog/iptv-nederland",
@@ -961,7 +971,7 @@
    {
     "path": "/blog/iptv-opgerold-nederland",
     "title": "IPTV opgerold in Nederland: BREIN-acties",
-    "words": 2465
+    "words": 2473
    },
    {
     "path": "/blog/iptv-smarters-nederland",
@@ -971,12 +981,12 @@
    {
     "path": "/blog/iptv-op-lg-smart-tv-nederland",
     "title": "IPTV op LG Smart TV: webOS-installatiegids 2026",
-    "words": 2395
+    "words": 2399
    },
    {
     "path": "/blog/iptv-firestick-nederland",
     "title": "IPTV op Fire TV Stick (Firestick) installeren 2026",
-    "words": 2374
+    "words": 2380
    },
    {
     "path": "/abonnementen",
@@ -986,7 +996,7 @@
    {
     "path": "/blog/iptv-op-apple-tv-nederland",
     "title": "IPTV op Apple TV Nederland: installatiegids 2026",
-    "words": 2335
+    "words": 2337
    },
    {
     "path": "/iptv-legaal-nederland",
@@ -996,7 +1006,7 @@
    {
     "path": "/blog/iptv-op-samsung-smart-tv",
     "title": "IPTV op Samsung Smart TV: installatiegids",
-    "words": 2240
+    "words": 2244
    },
    {
     "path": "/blog/iptv-providers-nederland",
@@ -1004,14 +1014,14 @@
     "words": 2212
    },
    {
-    "path": "/blog/iptv-meerdere-apparaten-tegelijk-nederland",
-    "title": "IPTV op meerdere apparaten tegelijk: hoeveel schermen?",
-    "words": 2171
-   },
-   {
     "path": "/blog/iptv-streaming-alternatief-nederland",
     "title": "IPTV als streaming-alternatief in Nederland",
-    "words": 2171
+    "words": 2177
+   },
+   {
+    "path": "/blog/iptv-meerdere-apparaten-tegelijk-nederland",
+    "title": "IPTV op meerdere apparaten tegelijk: hoeveel schermen?",
+    "words": 2173
    },
    {
     "path": "/blog/iptv-proefaccount-nederland",
@@ -1021,7 +1031,7 @@
    {
     "path": "/blog/iptv-illegaal-gevolgen-nederland",
     "title": "IPTV illegaal: wat zijn de gevolgen in Nederland? (2026)",
-    "words": 2087
+    "words": 2089
    },
    {
     "path": "/blog/iptv-zonder-buffering-nederland",
@@ -1031,7 +1041,7 @@
    {
     "path": "/blog/iptv-playlist-uitleg",
     "title": "IPTV playlist uitgelegd: M3U & gratis lijsten",
-    "words": 1914
+    "words": 1916
    },
    {
     "path": "/blog/iptv-op-pc-windows-mac",
@@ -1081,7 +1091,7 @@
    {
     "path": "/beste-iptv-abonnement",
     "title": "Beste IPTV Abonnement Nederland 2026 — ranking · IPTVNED",
-    "words": 1021
+    "words": 1073
    },
    {
     "path": "/iptv-box",
@@ -1234,7 +1244,7 @@
    {
     "path": "/blog/pourquoi-mon-iptv-ne-marche-pas",
     "title": "Pourquoi mon IPTV ne marche pas ? 8 causes",
-    "words": 3545
+    "words": 3547
    },
    {
     "path": "/abonnements",
@@ -1259,7 +1269,7 @@
    {
     "path": "/blog/iptv-chromecast-google-tv-france-2026",
     "title": "IPTV Chromecast Google TV France 2026",
-    "words": 3026
+    "words": 3030
    },
    {
     "path": "/blog/abonnements-iptv-france",
@@ -1269,12 +1279,12 @@
    {
     "path": "/blog/iptv-4k-france-qualite-debit",
     "title": "IPTV 4K France : débit, matériel, qualité",
-    "words": 2615
+    "words": 2617
    },
    {
     "path": "/blog/meilleure-application-iptv-2026",
     "title": "Meilleure application IPTV 2026 — top 7",
-    "words": 2604
+    "words": 2608
    },
    {
     "path": "/blog/iptv-france-compatible-smart-tv-samsung",
@@ -1284,22 +1294,22 @@
    {
     "path": "/blog/iptv-france-2026-guide-complet",
     "title": "IPTV France 2026 : guide complet",
-    "words": 2491
+    "words": 2493
    },
    {
     "path": "/blog/iptv-smarters-pro-vs-tivimate",
     "title": "IPTV Smarters Pro vs TiviMate 2026",
-    "words": 2487
+    "words": 2489
    },
    {
     "path": "/blog/meilleure-box-android-iptv-2026",
     "title": "Meilleure box Android IPTV 2026",
-    "words": 2406
+    "words": 2408
    },
    {
     "path": "/blog/iptv-lg-smart-tv-webos-2026",
     "title": "IPTV sur LG Smart TV (webOS) 2026",
-    "words": 2281
+    "words": 2283
    },
    {
     "path": "/meilleur-abonnement-iptv",
@@ -1314,17 +1324,17 @@
    {
     "path": "/blog/iptv-smarters-pro-installation",
     "title": "Installer IPTVPIX : guide par appareil",
-    "words": 2226
+    "words": 2228
+   },
+   {
+    "path": "/blog/iptv-nvidia-shield-tv-2026",
+    "title": "IPTV sur Nvidia Shield TV en 2026",
+    "words": 2213
    },
    {
     "path": "/blog/comment-installer-iptv-sur-android-tv",
     "title": "Installer IPTV sur Android TV — guide 2026",
     "words": 2212
-   },
-   {
-    "path": "/blog/iptv-nvidia-shield-tv-2026",
-    "title": "IPTV sur Nvidia Shield TV en 2026",
-    "words": 2211
    },
    {
     "path": "/blog/iptv-smartphone-tablette-android-iphone",
@@ -1339,7 +1349,7 @@
    {
     "path": "/blog/iptv-ps4-ps5-xbox-france",
     "title": "IPTV sur PS4, PS5 et Xbox en France en 2026",
-    "words": 2128
+    "words": 2130
    },
    {
     "path": "/blog/smart-tv-ou-fire-stick",
@@ -1359,7 +1369,7 @@
    {
     "path": "/blog/lien-m3u-iptv-explication",
     "title": "IPTV M3U : qu'est-ce qu'un lien M3U",
-    "words": 2030
+    "words": 2032
    },
    {
     "path": "/blog/iptv-sur-pc-windows-mac",
@@ -1394,12 +1404,12 @@
    {
     "path": "/blog/iptv-firestick-france",
     "title": "IPTV Firestick France — Smarters Pro 2026",
-    "words": 1792
+    "words": 1794
    },
    {
     "path": "/blog/faut-il-un-vpn-pour-iptv",
     "title": "Faut-il un VPN pour regarder l'IPTV en France ? Ce qui est",
-    "words": 1637
+    "words": 1639
    },
    {
     "path": "/pandora-iptv",
@@ -1419,7 +1429,7 @@
    {
     "path": "/blog/iptv-belgique",
     "title": "IPTV Belgique 2026 : guide, prix & légalité",
-    "words": 1289
+    "words": 1293
    },
    {
     "path": "/iptv-acheter",
@@ -1429,7 +1439,7 @@
    {
     "path": "/blog/iptv-suisse",
     "title": "IPTV Suisse 2026 : guide, prix & légalité",
-    "words": 1256
+    "words": 1260
    },
    {
     "path": "/blog/xtream-codes-iptv",
@@ -1444,27 +1454,27 @@
    {
     "path": "/blog/abonnement-iptv-belgique",
     "title": "Abonnement IPTV Belgique 2026 : prix & choix",
-    "words": 1104
+    "words": 1108
    },
    {
     "path": "/blog/abonnement-iptv-suisse",
     "title": "Abonnement IPTV Suisse 2026 : prix & meilleur choix",
-    "words": 1046
+    "words": 1050
    },
    {
     "path": "/blog/iptv-gratuit-belgique-suisse",
     "title": "IPTV gratuit Belgique & Suisse 2026 : listes M3U",
-    "words": 1011
+    "words": 1013
    },
    {
     "path": "/blog/iptv-bruxelles",
     "title": "IPTV Bruxelles & Wallonie 2026 : guide & prix",
-    "words": 959
+    "words": 961
    },
    {
     "path": "/presse-media",
     "title": "Presse & Médias — Kit presse IPTVPIX · IPTVPIX",
-    "words": 783
+    "words": 785
    }
   ],
   "recommend": [
@@ -1661,14 +1671,14 @@
     "words": 4240
    },
    {
+    "path": "/blog/installer-iptv-smarters-pro",
+    "title": "IPTV Smarters Pro 2026 : installation & guide complet",
+    "words": 4222
+   },
+   {
     "path": "/blog/iptv-vs-bouquet-premium-2026",
     "title": "IPTV vs Abonnements TV Classiques 2026",
     "words": 4203
-   },
-   {
-    "path": "/blog/installer-iptv-smarters-pro",
-    "title": "IPTV Smarters Pro 2026 : installation & guide complet",
-    "words": 4160
    },
    {
     "path": "/blog/iptv-4k-france-2026",
@@ -2331,212 +2341,212 @@
    {
     "path": "/articles/iptv-pc-windows-mac",
     "title": "IPTV PC Windows Mac 2026 : VLC, Smarters Desktop, Kodi PVR",
-    "words": 4693
+    "words": 4701
    },
    {
     "path": "/articles/iptv-samsung-smart-tv",
     "title": "IPTV sur Samsung Smart TV : installation Tizen 2026",
-    "words": 4341
+    "words": 4345
    },
    {
     "path": "/articles/iptv-sans-buffering-france",
     "title": "IPTV sans buffering France 2026 : streaming fluide",
-    "words": 4189
+    "words": 4193
    },
    {
     "path": "/articles/iptv-fire-tv-stick-4k-max",
     "title": "IPTV Fire TV Stick 4K Max 2026 : MT8696, Wi-Fi 6E et HDR10+",
-    "words": 4134
+    "words": 4142
    },
    {
     "path": "/articles/iptv-apple-tv-4k",
     "title": "IPTV Apple TV 4K 2026 : tvOS 18 et home-cinéma",
-    "words": 4098
+    "words": 4106
    },
    {
     "path": "/articles/meilleur-abonnement-iptv-2026",
     "title": "Meilleur abonnement IPTV 2026 : le comparatif France",
-    "words": 3736
+    "words": 3740
    },
    {
     "path": "/articles/iptv-smarters-pro",
     "title": "IPTV Smarters Pro 2026 : installation & Xtream Codes",
-    "words": 3709
+    "words": 3719
    },
    {
     "path": "/articles/iptv-epg-xmltv-guide",
     "title": "EPG IPTV XMLTV 2026 : guide DVB-SI, parser et tvg-id mapping",
-    "words": 3662
+    "words": 3672
    },
    {
     "path": "/iptv-france",
     "title": "IPTV France 2026 — abonnement pas cher dès 3,29 €/mois",
-    "words": 3661
+    "words": 3663
    },
    {
     "path": "/boitier-iptv",
     "title": "Boîtier IPTV 2026 — Guide d'achat & comparatif",
-    "words": 3593
-   },
-   {
-    "path": "/articles/iptv-formuler-z11-pro",
-    "title": "IPTV Formuler Z11 Pro 2026 : Amlogic S922X-J et MyTVOnline 3",
-    "words": 3499
-   },
-   {
-    "path": "/articles/iptv-lg-smart-tv",
-    "title": "IPTV LG Smart TV 2026 : webOS, .wgt et tuning OLED",
-    "words": 3433
-   },
-   {
-    "path": "/articles/iptv-firestick-france",
-    "title": "IPTV Firestick France 2026 : specs et Smarters Pro",
-    "words": 3433
+    "words": 3595
    },
    {
     "path": "/application-iptv",
     "title": "Applications IPTV Premium : Smarters, IBO, TiviMate (2026)",
-    "words": 3405
+    "words": 3511
+   },
+   {
+    "path": "/articles/iptv-formuler-z11-pro",
+    "title": "IPTV Formuler Z11 Pro 2026 : Amlogic S922X-J et MyTVOnline 3",
+    "words": 3507
+   },
+   {
+    "path": "/articles/iptv-lg-smart-tv",
+    "title": "IPTV LG Smart TV 2026 : webOS, .wgt et tuning OLED",
+    "words": 3439
+   },
+   {
+    "path": "/articles/iptv-firestick-france",
+    "title": "IPTV Firestick France 2026 : specs et Smarters Pro",
+    "words": 3439
    },
    {
     "path": "/articles/iptv-4k-france",
     "title": "IPTV 4K France 2026 : vrai UHD ou marketing ?",
-    "words": 3278
+    "words": 3282
    },
    {
     "path": "/articles/iptv-smarters-pro-vs-tivimate",
     "title": "IPTV Smarters Pro vs TiviMate 2026 : comparatif",
-    "words": 3254
+    "words": 3260
    },
    {
     "path": "/articles/iptv-box-android-tv",
     "title": "Box Android TV IPTV 2026 : Shield, Fire Cube, Xiaomi",
-    "words": 3196
+    "words": 3202
    },
    {
     "path": "/articles/iptv-legal-en-france",
     "title": "IPTV légal en France 2026 : cadre juridique & Arcom",
-    "words": 3079
+    "words": 3083
    },
    {
     "path": "/test-iptv",
     "title": "Test IPTV France — Essai 22 000+ chaînes HD & 4K",
-    "words": 3074
+    "words": 3076
    },
    {
     "path": "/articles/iptv-sport-premium",
     "title": "IPTV sport premium 2026 : foot, rugby et sport auto en 4K",
-    "words": 3003
+    "words": 3011
    },
    {
     "path": "/articles/iptv-ibo-player-pro",
     "title": "IPTV IBO Player Pro 2026 : Tizen, webOS et MAC",
-    "words": 3003
+    "words": 3011
    },
    {
     "path": "/articles/iptv-android-smartphone",
     "title": "IPTV Android Smartphone 2026 : Smarters Pro & 5G",
-    "words": 2997
+    "words": 3003
    },
    {
     "path": "/articles/abonnement-iptv-pas-cher",
     "title": "Abonnement IPTV pas cher 2026 : le vrai coût décrypté",
-    "words": 2976
+    "words": 2980
    },
    {
     "path": "/articles/iptv-ne-fonctionne-pas",
     "title": "IPTV ne fonctionne pas : diagnostic technique 2026",
-    "words": 2925
-   },
-   {
-    "path": "/iptv-premium",
-    "title": "IPTV Premium 4K — 22 000+ chaînes & Smarters Pro",
-    "words": 2923
+    "words": 2933
    },
    {
     "path": "/articles/iptv-chromecast-google-tv",
     "title": "IPTV Chromecast Google TV 2026 : guide technique",
-    "words": 2923
+    "words": 2929
+   },
+   {
+    "path": "/iptv-premium",
+    "title": "IPTV Premium 4K — 22 000+ chaînes & Smarters Pro",
+    "words": 2927
    },
    {
     "path": "/articles/iptv-vpn-france-2026",
     "title": "IPTV VPN France 2026 : sécurité, débit et Arcom",
-    "words": 2737
+    "words": 2741
    },
    {
     "path": "/articles/comment-choisir-un-abonnement-iptv-france",
     "title": "Comment choisir un abonnement IPTV en France (2026)",
-    "words": 2712
+    "words": 2716
    },
    {
     "path": "/articles/iptv-freebox",
     "title": "IPTV sur Freebox 2026 : Pop, Ultra, Delta (guide)",
-    "words": 2692
+    "words": 2700
    },
    {
     "path": "/articles/iptv-nvidia-shield-tv",
     "title": "IPTV Nvidia Shield TV 2026 : installation + réglages 4K",
-    "words": 2680
+    "words": 2688
    },
    {
     "path": "/articles/iptv-football-francais-streaming",
     "title": "IPTV football français streaming 2026 : tous les matchs",
-    "words": 2593
+    "words": 2601
    },
    {
     "path": "/articles/iptv-orange-livebox",
     "title": "IPTV Orange Livebox 2026 : décodeur TV et boîtier HDMI",
-    "words": 2575
+    "words": 2581
    },
    {
     "path": "/articles/iptv-bbox-bouygues",
     "title": "IPTV sur Bbox Bouygues 2026 : Bbox 4K Android TV (guide)",
-    "words": 2565
+    "words": 2573
    },
    {
     "path": "/articles/iptv-pas-cher-vs-offres-tv",
     "title": "IPTV pas cher vs offres TV : comparatif prix 2026",
-    "words": 2463
+    "words": 2465
    },
    {
     "path": "/articles/lien-m3u-iptv-comment-lire",
     "title": "Lien M3U IPTV : comment le lire (guide 2026)",
-    "words": 2430
+    "words": 2436
    },
    {
     "path": "/articles/iptv-multi-ecrans",
     "title": "IPTV multi-écrans 2026 : plusieurs écrans simultanés",
-    "words": 2313
+    "words": 2319
    },
    {
     "path": "/articles",
     "title": "Articles IPTV France — guides & actualités 2026",
-    "words": 1707
+    "words": 1709
    },
    {
     "path": "/articles/iptv-replay",
     "title": "IPTV Replay : revoir vos programmes en catch-up (2026)",
-    "words": 1479
+    "words": 1481
    },
    {
     "path": "/conditions-generales",
     "title": "Conditions générales de vente — IPTV France Officiel",
-    "words": 1426
+    "words": 1430
    },
    {
     "path": "/politique-de-confidentialite",
     "title": "Politique de confidentialité · IPTV France Officiel",
-    "words": 1197
+    "words": 1201
    },
    {
     "path": "/politique-de-remboursement",
     "title": "Politique de remboursement · IPTV France Officiel",
-    "words": 974
+    "words": 978
    },
    {
     "path": "/mentions-legales",
     "title": "Mentions légales · IPTV France Officiel",
-    "words": 696
+    "words": 700
    }
   ],
   "recommend": [
@@ -2576,212 +2586,212 @@
    {
     "path": "/blog/iptv-essai-gratuit-france",
     "title": "IPTV essai gratuit France 2026 : tester sans risque",
-    "words": 4515
+    "words": 4519
    },
    {
     "path": "/blog/iptv-mi-box-s",
     "title": "IPTV Mi Box S 2026 : guide Xiaomi Android TV, Smarters et 4K",
-    "words": 4245
+    "words": 4249
    },
    {
     "path": "/blog/iptv-installation-rapide-guide",
     "title": "Installation IPTV rapide 2026 : le guide express",
-    "words": 3980
+    "words": 3990
    },
    {
     "path": "/blog/iptv-apple-tv-4k",
     "title": "IPTV Apple TV 4K 2026 : guide A15 & Dolby Vision",
-    "words": 3884
+    "words": 3888
    },
    {
     "path": "/blog/iptv-tivimate-vs-smarters-pro",
     "title": "TiviMate vs IPTV Smarters Pro 2026 : comparatif Android TV",
-    "words": 3712
+    "words": 3716
    },
    {
     "path": "/blog/meilleur-abonnement-iptv-2026",
     "title": "Comparatif : meilleur abonnement IPTV 2026 (guide d'achat)",
-    "words": 3647
+    "words": 3653
    },
    {
     "path": "/blog/iptv-4k-france",
     "title": "IPTV UHD & 4K France 2026 : le guide d'un vrai Ultra HD HDR",
-    "words": 3575
+    "words": 3579
    },
    {
     "path": "/blog/iptv-firestick-france",
     "title": "IPTV Firestick France 2026 : installation & 4K",
-    "words": 3423
+    "words": 3427
    },
    {
     "path": "/blog/iptv-samsung-smart-tv",
     "title": "IPTV Samsung Smart TV 2026 : guide Tizen & install",
-    "words": 3408
+    "words": 3412
    },
    {
     "path": "/blog/iptv-legal-en-france",
     "title": "IPTV légal en France 2026 : cadre juridique & Arcom",
-    "words": 3404
+    "words": 3406
    },
    {
     "path": "/blog/abonnement-iptv-pas-cher",
     "title": "Abonnement IPTV pas cher 2026 : le bon prix sans piège",
-    "words": 3347
+    "words": 3351
    },
    {
     "path": "/blog/iptv-vlc-media-player",
     "title": "IPTV VLC Media Player 2026 : guide expert flux M3U et 4K",
-    "words": 3318
+    "words": 3322
    },
    {
     "path": "/blog/iptv-sport-premium",
     "title": "IPTV Sport Premium 2026 : tout le sport en 4K",
-    "words": 3283
+    "words": 3287
    },
    {
     "path": "/blog/iptv-smarters-pro",
     "title": "IPTV Smarters Pro 2026 : guide d'installation complet",
-    "words": 3256
+    "words": 3258
    },
    {
     "path": "/blog/iptv-debit-internet-recommande",
     "title": "Débit IPTV : la bande passante vraiment nécessaire en 2026",
-    "words": 3193
+    "words": 3197
    },
    {
     "path": "/blog/abonnement-iptv-12-mois-pas-cher",
     "title": "Abonnement IPTV 12 mois pas cher : le vrai prix annuel",
-    "words": 3179
+    "words": 3185
    },
    {
     "path": "/blog/abonnement-iptv-multi-ecrans",
     "title": "Abonnement IPTV multi-écrans : la formule foyer 2026",
-    "words": 3171
+    "words": 3177
    },
    {
     "path": "/blog/comment-choisir-un-abonnement-iptv-france",
     "title": "Comment choisir un abonnement IPTV en France (2026)",
-    "words": 3113
-   },
-   {
-    "path": "/test-iptv",
-    "title": "Test IPTV France 2026 — Garantie 7 jours sans risque",
-    "words": 3094
+    "words": 3123
    },
    {
     "path": "/blog/iptv-ne-fonctionne-pas",
     "title": "IPTV ne fonctionne pas : 8 causes et solutions 2026",
-    "words": 3092
+    "words": 3098
+   },
+   {
+    "path": "/test-iptv",
+    "title": "Test IPTV France 2026 — Garantie 7 jours sans risque",
+    "words": 3096
    },
    {
     "path": "/blog/iptv-football-francais",
     "title": "IPTV football français streaming 2026 : tout le foot",
-    "words": 3086
+    "words": 3092
    },
    {
     "path": "/blog/iptv-chromecast-google-tv",
     "title": "IPTV Chromecast Google TV : installation 4K 2026",
-    "words": 3070
+    "words": 3072
    },
    {
     "path": "/guide-installation",
     "title": "Guide d'installation IPTV 2026 — Smart TV, Fire TV, mobile",
-    "words": 3067
+    "words": 3069
    },
    {
     "path": "/iptv-france",
     "title": "Abonnement IPTV France 2026 — Légal, HD & 4K",
-    "words": 2976
+    "words": 2978
    },
    {
     "path": "/blog/iptv-nvidia-shield-pro",
     "title": "IPTV Nvidia Shield Pro 2026 : guide 4K HDR premium",
-    "words": 2925
-   },
-   {
-    "path": "/blog/iptv-4k-box",
-    "title": "IPTV 4K box : quel boîtier pour un vrai UHD (2026)",
-    "words": 2810
+    "words": 2929
    },
    {
     "path": "/boitier-iptv",
     "title": "Meilleur boîtier IPTV 2026 : le comparatif complet",
-    "words": 2766
+    "words": 2845
+   },
+   {
+    "path": "/blog/iptv-4k-box",
+    "title": "IPTV 4K box : quel boîtier pour un vrai UHD (2026)",
+    "words": 2814
    },
    {
     "path": "/blog/iptv-sport-automobile",
     "title": "IPTV sport automobile 2026 : les courses en direct",
-    "words": 2673
+    "words": 2677
    },
    {
     "path": "/blog/playlist-m3u-iptv-guide",
     "title": "Playlist M3U IPTV : charger et sécuriser sa liste (2026)",
-    "words": 2544
+    "words": 2548
    },
    {
     "path": "/iptv-premium",
     "title": "IPTV Premium 2026 — Abonnement HD, 4K & Multi-Écrans",
-    "words": 2480
+    "words": 2484
    },
    {
     "path": "/blog/iptv-pc-windows",
     "title": "IPTV sur PC Windows 2026 : guide complet",
-    "words": 2454
+    "words": 2458
    },
    {
     "path": "/blog/iptv-arcom-amende",
     "title": "IPTV, Arcom et amendes : que risque-t-on en France ?",
-    "words": 2414
+    "words": 2418
    },
    {
     "path": "/blog/abonnement-iptv-sans-engagement",
     "title": "Abonnement IPTV sans engagement 2026 : le guide",
-    "words": 2295
+    "words": 2299
    },
    {
     "path": "/blog/iptv-smartphone-android",
     "title": "IPTV sur smartphone Android 2026 : le guide complet",
-    "words": 2292
+    "words": 2296
    },
    {
     "path": "/blog/iptv-football-europeen",
     "title": "IPTV football européen 2026 : grandes soirées",
-    "words": 2070
+    "words": 2074
    },
    {
     "path": "/blog/iptv-lg-smart-tv",
     "title": "IPTV LG Smart TV 2026 : webOS, apps & installation",
-    "words": 1749
+    "words": 1751
    },
    {
     "path": "/blog",
     "title": "Blog IPTV France — guides & actualités 2026 · IPTV Officiel",
-    "words": 1660
+    "words": 1662
    },
    {
     "path": "/blog/iptv-enregistrement",
     "title": "IPTV enregistrement : enregistrer un programme (2026)",
-    "words": 1503
+    "words": 1505
    },
    {
     "path": "/conditions-generales",
     "title": "Conditions générales (CGV/CGU) · IPTV Officiel",
-    "words": 1402
+    "words": 1406
    },
    {
     "path": "/politique-de-confidentialite",
     "title": "Politique de confidentialité · IPTV Officiel",
-    "words": 1177
+    "words": 1181
    },
    {
     "path": "/politique-de-remboursement",
     "title": "Politique de remboursement · IPTV Officiel",
-    "words": 956
+    "words": 960
    },
    {
     "path": "/mentions-legales",
     "title": "Mentions légales · IPTV Officiel",
-    "words": 680
+    "words": 684
    }
   ],
   "recommend": [

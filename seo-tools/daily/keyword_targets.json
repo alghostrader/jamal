@@ -13,7 +13,7 @@
   {
    "kw": "mejor iptv españa",
    "vol": 720,
-   "pos": 35,
+   "pos": 32,
    "url": "/"
   },
   {
@@ -30,7 +30,7 @@
   {
    "kw": "proveedor iptv",
    "vol": 480,
-   "pos": 37,
+   "pos": 32,
    "url": "/"
   }
  ],
@@ -58,7 +58,7 @@
   {
    "kw": "abonnement iptv 12 mois",
    "vol": 4400,
-   "pos": 29,
+   "pos": 24,
    "url": "/"
   },
   {
@@ -145,8 +145,7 @@
   {
    "kw": "application iptv",
    "vol": 6600,
-   "pos": 76,
-   "url": "/"
+   "pos": null
   },
   {
    "kw": "iptv erreur de lecture",
@@ -158,7 +157,7 @@
   {
    "kw": "iptv shqiptare",
    "vol": 1600,
-   "pos": 16,
+   "pos": 14,
    "url": "/"
   },
   {
@@ -174,7 +173,7 @@
   {
    "kw": "iptv shqiptar",
    "vol": 320,
-   "pos": 15,
+   "pos": 17,
    "url": "/"
   },
   {
@@ -203,22 +202,26 @@
   {
    "kw": "configuration iptv smarters",
    "vol": 10,
-   "pos": null
+   "pos": 39,
+   "url": "/"
   },
   {
    "kw": "smarters player lite",
    "vol": 12100,
-   "pos": null
+   "pos": 51,
+   "url": "/"
   },
   {
    "kw": "iptv smarters pro firestick",
    "vol": 70,
-   "pos": null
+   "pos": 43,
+   "url": "/"
   },
   {
    "kw": "smarters player lite apk",
    "vol": 880,
-   "pos": null
+   "pos": 56,
+   "url": "/"
   }
  ],
  "iptvfranceofficiel.fr": [
@@ -264,14 +267,14 @@
   {
    "kw": "essai iptv 7 jours",
    "vol": 90,
-   "pos": 52,
+   "pos": 4,
    "page": "/test-iptv",
    "url": "/"
   },
   {
    "kw": "meilleur boitier iptv",
    "vol": 720,
-   "pos": 76,
+   "pos": 62,
    "page": "/boitier-iptv",
    "url": "/"
   },

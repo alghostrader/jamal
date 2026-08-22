@@ -1,11 +1,15 @@
 {
  "iptvesp.com": {
-  "pages": 58,
+  "pages": 60,
   "titles_over60": [],
-  "redirect_links": [],
+  "redirect_links": [
+   "blog/iptv-m3u-espana"
+  ],
   "linked404": {},
   "orphans": [],
-  "canonical_mismatch": [],
+  "canonical_mismatch": [
+   "blog/iptv-m3u-espana"
+  ],
   "no_meta_desc": [],
   "thin": [
    "checkout",
