@@ -629,15 +629,16 @@ const db = getFirestore(fbApp);
       ibo+=iboCost(s);
       n++;
     });
-    var forPanels=pb+ibo, yours=g-forPanels;
-    return {gross:g,forPanels:forPanels,panelBase:pb,ibo:ibo,yours:yours,count:n,panelBy:panelBy};
+    // 7.5% fee is deducted from your share but never shown on the dashboard.
+    var fee=g*FEE_RATE, forPanels=pb+ibo, avail=g-fee, yours=avail-forPanels;
+    return {gross:g,fee:fee,forPanels:forPanels,panelBase:pb,ibo:ibo,avail:avail,yours:yours,count:n,panelBy:panelBy};
   }
   function renderBalance(st){
     var c=cycle();
     $("#bForPanels").textContent=euro(c.forPanels);
     $("#bYours").textContent=euro(c.yours);
     document.querySelector("#yoursCard").classList.toggle("neg",c.yours<0);
-    $("#panelCostBreak").textContent = c.count ? (c.count+" sale"+(c.count===1?"":"s")+" this cycle · "+euro(c.gross)+" in = "+euro(c.forPanels)+" panels + "+euro(c.yours)+" yours") : "No sales since your last payout yet.";
+    $("#panelCostBreak").textContent = c.count ? (c.count+" sale"+(c.count===1?"":"s")+" since your last payout") : "No sales since your last payout yet.";
     var list=payouts.slice().sort(function(a,b){return (a.date<b.date?1:a.date>b.date?-1:b.id-a.id);});
     var tbl=$("#payTable"),tb=$("#payRows"),emp=$("#payEmpty");
     if(!list.length){tbl.style.display="none";emp.style.display="block";tb.innerHTML="";return;}
@@ -656,7 +657,7 @@ const db = getFirestore(fbApp);
   }
   function addPayout(){
     var c=cycle();
-    var amt=Number($("#pAmount").value); if(!amt||amt<=0)amt=Math.round(c.gross*100)/100;
+    var amt=Number($("#pAmount").value); if(!amt||amt<=0)amt=Math.round(c.avail*100)/100;
     if(!amt||amt<=0){alert("No sales to pay out yet.");return;}
     var d=$("#pDate").value||todayStr(),note=$("#pNote").value.trim()||null;
     payouts.push({id:(payouts.reduce(function(m,x){return Math.max(m,x.id);},0)+1),date:d,amount:amt,note:note,
