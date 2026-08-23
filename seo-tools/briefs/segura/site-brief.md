@@ -1,4 +1,4 @@
-# Site Brief — IPTVEsp
+# Site Brief — IPTV Segura
 
 > Read by: keyword-fanout-map · seo-content-writer · onpage-optimizer ·
 > internal-link-architect · ai-visibility-checker
@@ -12,10 +12,10 @@
 
 ## Part 1 — Business
 
-- **Business name:** IPTVEsp
-- **Domain:** iptvesp.com
+- **Business name:** IPTV Segura
+- **Domain:** iptvsegura.com
 - **Industry / niche:** IPTV subscription service (Spain market)
-- **What they actually sell (one sentence):** IPTV subscription plans for Spanish viewers (Spanish + international channels, VOD).
+- **What they actually sell (one sentence):** IPTV subscriptions sold through a safety-first angle: how to choose a safe provider, avoid scams, stay legal.
 - **Price positioning:** budget-to-mid ⚠️ verify
 
 ### Services or products
@@ -25,7 +25,7 @@
 3. Free content: setup guides, tutorials, tools
 
 **Money pages** (internal links get prioritised towards these):
-- /suscripciones
+- /planes
 
 ### Service area
 
@@ -35,16 +35,16 @@
 
 ### Portfolio lane (HARD anti-cannibalization contract)
 
-- **This site owns:** ES market head terms + Telegram/lists content angle (transactional). Shares the ES market with iptvsegura.com, which owns the safety/trust angle.
-- **This site NEVER touches:** The safety/scam/legality angle ('iptv segura', 'estafas iptv', 'iptv legal españa') — iptvsegura.com owns it. Never free-list piracy bait beyond the existing Telegram-angle articles.
+- **This site owns:** ES safety/trust lane: 'iptv segura', 'estafas iptv', 'iptv legal españa', riesgos angles. The SECOND ES site — trust intent only.
+- **This site NEVER touches:** ES head terms ('iptv españa', 'listas iptv') and the telegram LISTS cluster — iptvesp owns those. Only the riesgos/safety angle may mention telegram.
 - Portfolio rule: one keyword → one page → one site per market. Check the
   dashboard's reserved-keyword queue before targeting anything new.
 
 ### Competitors
 
 1. iptvspain.es ⚠️ verify (seen in live SERPs, not owner-confirmed)
-2. suscripcion-iptv.com ⚠️ verify (seen in live SERPs, not owner-confirmed)
-3. tdtchannels.com (free alternative) ⚠️ verify (seen in live SERPs, not owner-confirmed)
+2. lecturas.com (listicles) ⚠️ verify (seen in live SERPs, not owner-confirmed)
+3. guru99.com (listicles) ⚠️ verify (seen in live SERPs, not owner-confirmed)
 
 ### Goals
 
@@ -67,7 +67,7 @@
 ### The call to action
 
 - **Primary CTA:** order (or start the trial of) the subscription on the money page ⚠️ verify wording
-- **Where it points:** /suscripciones
+- **Where it points:** /planes
 - **Phone / address:** none — digital only (contact via site form/WhatsApp/Telegram ⚠️ verify)
 
 ---
@@ -76,11 +76,11 @@
 
 ### Tone in three words
 
-direct, práctico, benefit-first
+prudente, honesto, protector
 
 ### The reader
 
-- **Who is reading:** Spanish cord-cutter comparing IPTV providers; price-sensitive, afraid of scams and cut-offs
+- **Who is reading:** Spanish buyer who is worried about scams, cut-offs and legality before purchasing IPTV
 - **Reading level:** simple, non-technical (Spanish); short sentences
 - **What they are afraid of:** scams, service cut-offs mid-subscription, buffering,
   payment safety
