@@ -24,20 +24,20 @@ SATELLITES = ["smartersprofrance.fr", "iptvfranceofficiel.fr", "abonnementiptvof
 SLUG = {s: s.replace(".com", "").replace(".", "-") for s in ALL}
 ABBR = {"iptvesp.com": "esp", "primeiptv-france.com": "prime", "iptvned.com": "ned", "iptvpix.com": "pix",
         "smarters-live.com": "slive", "iptvshqiptar.com": "shqip", "smartersprofrance.fr": "spf",
-        "iptvfranceofficiel.fr": "ifo", "abonnementiptvofficiel.com": "aio"}
+        "iptvfranceofficiel.fr": "ifo", "abonnementiptvofficiel.com": "aio", "iptvsegura.com": "segura"}
 LANG = {"iptvesp.com": ("Spanish", "es"), "primeiptv-france.com": ("French", "fr"), "iptvned.com": ("Dutch", "nl"),
         "iptvpix.com": ("French", "fr"), "smarters-live.com": ("French", "fr"), "iptvshqiptar.com": ("Albanian", "sq"),
         "smartersprofrance.fr": ("French", "fr"), "iptvfranceofficiel.fr": ("French", "fr"),
-        "abonnementiptvofficiel.com": ("French", "fr")}
+        "abonnementiptvofficiel.com": ("French", "fr"), "iptvsegura.com": ("Spanish", "es")}
 MONEY = {"iptvesp.com": "/suscripciones", "primeiptv-france.com": "/abonnement", "iptvned.com": "/abonnementen",
          "iptvpix.com": "/abonnements", "smarters-live.com": "https://primeiptv-france.com/abonnement (funnel to the flagship)",
          "iptvshqiptar.com": "the subscription page", "smartersprofrance.fr": "/abonnement-iptv",
-         "iptvfranceofficiel.fr": "/iptv-premium", "abonnementiptvofficiel.com": "/test-iptv"}
+         "iptvfranceofficiel.fr": "/iptv-premium", "abonnementiptvofficiel.com": "/test-iptv", "iptvsegura.com": "/planes"}
 CTRY = {"iptvesp.com": ("\U0001F1EA\U0001F1F8", "Spain"), "primeiptv-france.com": ("\U0001F1EB\U0001F1F7", "France"),
         "iptvpix.com": ("\U0001F1EB\U0001F1F7", "France"), "smarters-live.com": ("\U0001F1EB\U0001F1F7", "France"),
         "iptvned.com": ("\U0001F1F3\U0001F1F1", "Netherlands"), "iptvshqiptar.com": ("\U0001F1E6\U0001F1F1", "Albania"),
         "smartersprofrance.fr": ("\U0001F1EB\U0001F1F7", "France"), "iptvfranceofficiel.fr": ("\U0001F1EB\U0001F1F7", "France"),
-        "abonnementiptvofficiel.com": ("\U0001F1EB\U0001F1F7", "France")}
+        "abonnementiptvofficiel.com": ("\U0001F1EB\U0001F1F7", "France"), "iptvsegura.com": ("\U0001F1EA\U0001F1F8", "Spain")}
 gen = D["generated"]
 GSC_OFF = bool(D.get("gsc_unavailable"))
 STAMP_TXT = STAMP or gen
@@ -125,12 +125,12 @@ def kt_item(site, n):
     def rk(r):
         p = r.get("pos")
         return f"currently #{p}" if p else "not in top 100"
-    lines = "\n".join(f"     - \"{r['kw']}\" — {r['vol']:,}/mo — {rk(r)}"
+    lines = "\n".join(f"     - \"{r['kw']}\" — {(str(format(r['vol'], ',')) + '/mo') if r.get('vol') else 'niche volume'} — {rk(r)}"
                       + (f" — OWNED BY {r['page']}: strengthen that page, never a parallel article" if r.get("page") else "")
                       for r in rows)
     lead = rows[0]
     return (f"""{n}. KEYWORD TARGETS (strategic — the money terms this site should own).
-   Strengthen one page per term, biggest volume first. Primary: \"{lead['kw']}\" ({lead['vol']:,}/mo).
+   Strengthen one page per term, biggest volume first. Primary: \"{lead['kw']}\" ({(format(lead['vol'], ',') + '/mo') if lead.get('vol') else 'niche volume'}).
 {lines}
    Rules: one strong page per term (title + H1 keyword-first, 700+ words, schema, 2+ internal links in); never spin up a second page for a term that already has one; re-check positions after the next audit.""")
 
@@ -170,6 +170,7 @@ LANE = {
  "smartersprofrance.fr": "Satellite: iptv smarters install & configuration long-tail ONLY. Never generic app or abonnement terms.",
  "iptvfranceofficiel.fr": "Satellite: iptv premium / HDR quality angle. Head terms stay with the flagship.",
  "abonnementiptvofficiel.com": "Satellite: trial & deal intent (test, essai, pas cher) + boitier hardware.",
+ "iptvsegura.com": "ES safety/trust lane: es-seguro, estafas, legalidad, riesgos angles + guides, funnel to /planes. NEVER the ES head terms or the telegram LISTS cluster (iptvesp owns those) — the riesgos angle only.",
 }
 
 def site_prompt(site):
@@ -197,7 +198,7 @@ prompts = {s: site_prompt(s) for s in ALL}
 # ---------------- article prompts (with market reservation) ----------------
 MK = lambda s: LANG[s][1]
 CONTENT_PRIO = ["smarters-live.com", "primeiptv-france.com", "iptvesp.com", "iptvned.com", "iptvpix.com",
-                "abonnementiptvofficiel.com", "iptvfranceofficiel.fr", "smartersprofrance.fr", "iptvshqiptar.com"]
+                "abonnementiptvofficiel.com", "iptvfranceofficiel.fr", "smartersprofrance.fr", "iptvshqiptar.com", "iptvsegura.com"]
 RESERVED = {}
 for _s in SATELLITES + [x for x in ALL if x not in SATELLITES]:
     for _r in KT.get(_s, []):
@@ -312,6 +313,13 @@ def alerts():
         if f.get("orphans"): A.append(("warn", f"{s}: {len(f['orphans'])} orphan page(s) — add internal links"))
         if str(f.get("www_redirect", "")).startswith("307") or str(f.get("apex", "")).startswith("307"):
             A.append(("warn", f"{s}: host redirect is 307 — set it to 308 (permanent)"))
+        if str(f.get("www_redirect", "")) == "200":
+            A.append(("warn", f"{s}: www serves 200 instead of redirecting to the canonical host — set a 308 "
+                              f"www→apex redirect (duplicate-host risk)"))
+        if not GSC_OFF and not D["sites"].get(s, {}).get("in_gsc"):
+            A.append(("crit", f"{s} is NOT in Search Console (verified via sites.list) — add the sc-domain property, "
+                              f"submit sitemap.xml, and add the monitoring service account as a user. "
+                              f"Until then the dashboard cannot track its traffic."))
         if f.get("favicon") not in (200, None): A.append(("warn", f"{s}: /favicon.ico returns {f.get('favicon')}"))
         if rd is not None and rd <= 5:
             A.append(("warn", f"{s}: only {rd} referring domains — authority is the ceiling; run the Backlinks steps"))
@@ -421,7 +429,7 @@ def daily_plan():
     if GSC_OFF:
         owner.append("RESTORE SEARCH CONSOLE ACCESS — the monitoring service-account key was lost when the workspace "
                      "recycled. Re-share the gsc/sa.json key (or create a new service account and grant it read access "
-                     "to all 9 properties). Until then the dashboard has no clicks/impressions data.")
+                     "to all portfolio properties). Until then the dashboard has no clicks/impressions data.")
     owner.append("iptvpix.com — GSC → Pages: how many 'Crawled – currently not indexed' remain? (weekly recovery check)")
     owner.append("Request indexing for any article published since the last audit")
     owner.append("NEW: review the 9 site-briefs at seo-tools/briefs/ — confirm the ⚠️ fields (competitors, price "
@@ -572,7 +580,7 @@ def traffic_chart_card():
     wk = sum(vals[-7:]); prev = sum(vals[-14:-7])
     d = wk - prev
     dtxt = f'<span class="tmDelta {"up" if d>=0 else "down"}">{"+" if d>=0 else ""}{d} vs prior week</span>'
-    return (f'<div class="card"><h2>{icon("trend")} Traffic — all 9 sites · 90 days</h2>'
+    return (f'<div class="card"><h2>{icon("trend")} Traffic — all sites · 90 days</h2>'
             f'<p class="sub">GSC clicks/day summed across the portfolio. Last 7 days: <b>{wk}</b> {dtxt}</p>'
             f'{area_chart(vals, dates, cid="acport", label="Portfolio clicks")}</div>')
 
@@ -736,7 +744,7 @@ def ai_search_card():
             f'<p class="sub"><b>{total} pages cited</b> in AI answers (Semrush owner snapshot 2 Aug) — nearly all by ChatGPT; '
             f'Gemini &amp; AI Mode cite nobody in the niche yet. Structured guides + tools are what gets cited.</p>{tbl}{also}'
             '<p class="sub" style="margin:8px 0 0">Cross-check 14 Aug: the DataForSEO LLM-mentions corpus (sampled popular prompts) records '
-            '<b>0 mentions</b> for all 9 domains — the niche is cited via long-tail questions, not popular prompts. '
+            '<b>0 mentions</b> for all portfolio domains — the niche is cited via long-tail questions, not popular prompts. '
             'Run <code>/ai-visibility-checker</code> for a live per-query gap list.</p></div>')
 
 def authority_table():
@@ -896,7 +904,7 @@ def trends_body():
         def metric(name, val, series):
             return (f'<div class="tmetric"><div class="tmL"><span class="tmName">{name}</span>'
                     f'<span class="tmVal">{val}</span></div><div class="spkwrap">{spark(series, color=col)}</div></div>')
-        kt_rows = "".join(f'<tr><td>{H.escape(r["kw"])}</td><td>{r["vol"]:,}</td>'
+        kt_rows = "".join(f'<tr><td>{H.escape(r["kw"])}</td><td>{(format(r["vol"], ",") if r.get("vol") else "—")}</td>'
                           f'<td>{"#"+str(r["pos"]) if r.get("pos") else "—"}</td></tr>' for r in KT.get(s, []))
         clk = [x["clicks"] for x in daily_of(s)[-90:]]
         impr = [x["impressions"] for x in daily_of(s)[-90:]]
@@ -1031,7 +1039,7 @@ def links_body():
           f'<p class="sub" style="margin:0"><b>Unlinked-mention search:</b> {ml}</p></div>')
     b += pc("Step 3 prompt — journalist pitch", SOS_PITCH)
     b += pc("Step 3 prompt — outreach templates", OUTREACH_TPL)
-    MILES = [("m1", "Step 1 profile matrix complete for all 9 sites"),
+    MILES = [("m1", "Step 1 profile matrix complete for all sites"),
              ("m2", "primeiptv-france reaches 12 referring domains"),
              ("m3", "Tool #1 launched on Product Hunt"),
              ("m4", "All 4 tools listed on AlternativeTo + SaaSHub"),
@@ -1058,7 +1066,8 @@ PHASE = {"iptvesp.com": ("GROW 📈", "Protect the Spanish money queries; conver
          "iptvshqiptar.com": ("BASELINE 🧱", "Core Albanian content + light link tier"),
          "smartersprofrance.fr": ("SATELLITE ↺", "Install/config long-tail only"),
          "iptvfranceofficiel.fr": ("SATELLITE ↺", "Premium/HDR lane; retitle /application-iptv off the head term"),
-         "abonnementiptvofficiel.com": ("WATCH ◎", "Money pages frozen; support with internal links only")}
+         "abonnementiptvofficiel.com": ("WATCH ◎", "Money pages frozen; support with internal links only"),
+         "iptvsegura.com": ("ONBOARD ◔", "NEW: ES safety/trust lane — GSC property + first links + fix titles/www")}
 for s in ALL:
     ph, job = PHASE[s]; dfs = dfs_of(s)
     prow += (f'<tr><td>{s}</td><td>{ph}</td><td>{job}</td>'

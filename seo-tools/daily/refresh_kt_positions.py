@@ -8,7 +8,7 @@ LOC = {"iptvesp.com": ("Spain", "es"), "primeiptv-france.com": ("France", "fr"),
        "iptvned.com": ("Netherlands", "nl"), "iptvpix.com": ("France", "fr"),
        "smarters-live.com": ("France", "fr"), "iptvshqiptar.com": ("Albania", "sq"),
        "smartersprofrance.fr": ("France", "fr"), "iptvfranceofficiel.fr": ("France", "fr"),
-       "abonnementiptvofficiel.com": ("France", "fr")}
+       "abonnementiptvofficiel.com": ("France", "fr"), "iptvsegura.com": ("Spain", "es")}
 
 def serp_pos(kw, loc, lang, domain):
     last = "no response"

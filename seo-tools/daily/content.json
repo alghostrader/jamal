@@ -2837,5 +2837,89 @@
   ],
   "n_articles": 42,
   "n_thin": 0
+ },
+ "iptvsegura.com": {
+  "articles": [
+   {
+    "path": "/guias/estafas-iptv-como-evitarlas",
+    "title": "Estafas de IPTV en España: cómo detectarlas y evitarlas",
+    "words": 1551
+   },
+   {
+    "path": "/guias/que-es-lista-m3u",
+    "title": "Qué es una lista M3U y cómo funciona en IPTV",
+    "words": 955
+   },
+   {
+    "path": "/guias/iptv-legal-espana",
+    "title": "¿Es legal la IPTV en España? Guía clara y actual",
+    "words": 933
+   },
+   {
+    "path": "/guias/iptv-fire-tv-stick",
+    "title": "Cómo instalar IPTV en Fire TV Stick paso a paso",
+    "words": 897
+   },
+   {
+    "path": "/guias/tivimate-espana",
+    "title": "TiviMate en España: guía completa y configuración",
+    "words": 881
+   },
+   {
+    "path": "/guias/xtream-codes-que-es",
+    "title": "Qué es Xtream Codes y en qué se diferencia del M3U",
+    "words": 869
+   },
+   {
+    "path": "/guias/iptv-telegram-riesgos",
+    "title": "IPTV por Telegram: riesgos y alternativa segura",
+    "words": 853
+   },
+   {
+    "path": "/guias/como-elegir-iptv-seguro",
+    "title": "IPTV segura: cómo elegir un servicio fiable en 2026",
+    "words": 795
+   }
+  ],
+  "recommend": [
+   {
+    "kw": "iptv fire tv stick",
+    "vol": 260,
+    "covered": true,
+    "page": "/guias/iptv-fire-tv-stick"
+   },
+   {
+    "kw": "iptv legal españa",
+    "vol": 140,
+    "covered": true,
+    "page": "/guias/iptv-legal-espana"
+   },
+   {
+    "kw": "que es una lista m3u",
+    "vol": 50,
+    "covered": true,
+    "page": "/guias/que-es-lista-m3u"
+   },
+   {
+    "kw": "iptv segura",
+    "vol": 20,
+    "covered": true,
+    "page": "/"
+   },
+   {
+    "kw": "estafas iptv",
+    "vol": 0,
+    "covered": true,
+    "page": "/guias/estafas-iptv-como-evitarlas"
+   },
+   {
+    "kw": "es seguro el iptv",
+    "vol": 0,
+    "covered": true,
+    "page": "/guias/como-elegir-iptv-seguro"
+   }
+  ],
+  "n_articles": 8,
+  "n_thin": 0
  }
 }

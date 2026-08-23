@@ -12,9 +12,10 @@ CONFIG = {
     "smartersprofrance.fr": {"country": "France",      "desc": "satellite — Smarters install library",   "status": "SATELLITE",    "tone": "neutral", "badge": "↺"},
     "iptvfranceofficiel.fr":{"country": "France",      "desc": "satellite — premium/HDR lane",           "status": "SATELLITE",    "tone": "neutral", "badge": "↺"},
     "abonnementiptvofficiel.com": {"country": "France","desc": "satellite — trial/deals lane",           "status": "WATCH",        "tone": "warn",    "badge": "◎"},
+    "iptvsegura.com":       {"country": "Spain",       "desc": "NEW — ES safety/trust lane",             "status": "ONBOARDING",   "tone": "neutral", "badge": "◔"},
 }
 ORDER = ["iptvesp.com", "primeiptv-france.com", "iptvned.com", "iptvpix.com", "smarters-live.com",
-         "iptvshqiptar.com", "smartersprofrance.fr", "iptvfranceofficiel.fr", "abonnementiptvofficiel.com"]
+         "iptvshqiptar.com", "smartersprofrance.fr", "iptvfranceofficiel.fr", "abonnementiptvofficiel.com", "iptvsegura.com"]
 
 def _health(s, F):
     f = F.get(s, {})

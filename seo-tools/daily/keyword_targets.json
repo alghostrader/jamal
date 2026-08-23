@@ -293,5 +293,43 @@
    "vol": 50,
    "pos": null
   }
+ ],
+ "iptvsegura.com": [
+  {
+   "kw": "iptv segura",
+   "vol": 20,
+   "pos": null,
+   "page": "/"
+  },
+  {
+   "kw": "estafas iptv",
+   "vol": null,
+   "pos": null,
+   "page": "/guias/estafas-iptv-como-evitarlas"
+  },
+  {
+   "kw": "iptv legal españa",
+   "vol": 140,
+   "pos": null,
+   "page": "/guias/iptv-legal-espana"
+  },
+  {
+   "kw": "es seguro el iptv",
+   "vol": null,
+   "pos": null,
+   "page": "/guias/como-elegir-iptv-seguro"
+  },
+  {
+   "kw": "que es una lista m3u",
+   "vol": 50,
+   "pos": null,
+   "page": "/guias/que-es-lista-m3u"
+  },
+  {
+   "kw": "iptv fire tv stick",
+   "vol": 260,
+   "pos": null,
+   "page": "/guias/iptv-fire-tv-stick"
+  }
  ]
 }

@@ -9,6 +9,7 @@ SITES = [
  ("spf","smartersprofrance.fr","www.smartersprofrance.fr"),
  ("ifo","iptvfranceofficiel.fr","iptvfranceofficiel.fr"),
  ("aio","abonnementiptvofficiel.com","abonnementiptvofficiel.com"),
+ ("segura","iptvsegura.com","iptvsegura.com"),
 ]
 ALL = [d for _,d,_ in SITES]
 SLUG2DOM = {s:d for s,d,_ in SITES}

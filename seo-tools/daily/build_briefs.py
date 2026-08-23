@@ -17,8 +17,8 @@ TODAY = "2026-08-14"
 S = [
  dict(slug="esp", dom="iptvesp.com", brand="IPTVEsp", country="Spain", lang="Spanish", lc="es",
       money=["/suscripciones"], sells="IPTV subscription plans for Spanish viewers (Spanish + international channels, VOD).",
-      lane="ES market head terms + Telegram/lists content angle. The only ES site — owns the whole Spanish lane.",
-      never="Nothing portfolio-internal — sole ES site. Never free-list piracy bait beyond the existing Telegram-angle articles.",
+      lane="ES market head terms + Telegram/lists content angle (transactional). Shares the ES market with iptvsegura.com, which owns the safety/trust angle.",
+      never="The safety/scam/legality angle ('iptv segura', 'estafas iptv', 'iptv legal españa') — iptvsegura.com owns it. Never free-list piracy bait beyond the existing Telegram-angle articles.",
       comp=["iptvspain.es", "suscripcion-iptv.com", "tdtchannels.com (free alternative)"],
       tone="direct, práctico, benefit-first", reader="Spanish cord-cutter comparing IPTV providers; price-sensitive, afraid of scams and cut-offs"),
  dict(slug="prime", dom="primeiptv-france.com", brand="Prime IPTV France", country="France", lang="French", lc="fr",
@@ -72,6 +72,12 @@ S = [
       never="FR head terms (prime). NOTE: /test-iptv and /boitier-iptv are FROZEN (Google re-evaluation) — support via internal links only, zero on-page edits until probes clear them.",
       comp=["test-iptv.fr", "abonnement-iptvfrance.fr"],
       tone="direct, orienté essai, sans risque", reader="French user who wants to try before buying; deal-hunter; also boitier/hardware buyers"),
+ dict(slug="segura", dom="iptvsegura.com", brand="IPTV Segura", country="Spain", lang="Spanish", lc="es",
+      money=["/planes"], sells="IPTV subscriptions sold through a safety-first angle: how to choose a safe provider, avoid scams, stay legal.",
+      lane="ES safety/trust lane: 'iptv segura', 'estafas iptv', 'iptv legal españa', riesgos angles. The SECOND ES site — trust intent only.",
+      never="ES head terms ('iptv españa', 'listas iptv') and the telegram LISTS cluster — iptvesp owns those. Only the riesgos/safety angle may mention telegram.",
+      comp=["iptvspain.es", "lecturas.com (listicles)", "guru99.com (listicles)"],
+      tone="prudente, honesto, protector", reader="Spanish buyer who is worried about scams, cut-offs and legality before purchasing IPTV"),
 ]
 
 TPL = """# Site Brief — {brand}
