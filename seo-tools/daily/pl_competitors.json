@@ -1,0 +1,37 @@
+{
+ "iptv-polska.com.pl": {
+  "rd": 5,
+  "bl": 13,
+  "rank": 355
+ },
+ "iptv-poland.pl": {
+  "rd": 209,
+  "bl": 406,
+  "rank": 124
+ },
+ "pliptv.pl": {
+  "rd": 57,
+  "bl": 81,
+  "rank": 96
+ },
+ "iptvtelewizja.pl": {
+  "rd": 30,
+  "bl": 30,
+  "rank": 0
+ },
+ "polskatv-iptv.com": {
+  "rd": 6,
+  "bl": 6,
+  "rank": 0
+ },
+ "polskie.tv": {
+  "rd": 84,
+  "bl": 125,
+  "rank": 136
+ },
+ "polbox.tv": {
+  "rd": 908,
+  "bl": 1491,
+  "rank": 248
+ }
+}
