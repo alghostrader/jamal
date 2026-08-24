@@ -27,7 +27,9 @@
   "pages": 93,
   "titles_over60": [],
   "redirect_links": [],
-  "linked404": {},
+  "linked404": {
+   "guides/iptv-smarters-pro": 1
+  },
   "orphans": [],
   "canonical_mismatch": [],
   "no_meta_desc": [],
@@ -56,7 +58,7 @@
    "terugbetalingsbeleid"
   ],
   "favicon": 200,
-  "www_redirect": "err HTTPSConnectionPool(host='www.iptvned.co"
+  "www_redirect": "308 -> https://iptvned.com/"
  },
  "iptvpix.com": {
   "pages": 58,
@@ -152,16 +154,7 @@
  },
  "iptvsegura.com": {
   "pages": 14,
-  "titles_over60": [
-   [
-    63,
-    "planes"
-   ],
-   [
-    62,
-    "guias"
-   ]
-  ],
+  "titles_over60": [],
   "redirect_links": [],
   "linked404": {},
   "orphans": [],
@@ -169,8 +162,6 @@
   "no_meta_desc": [],
   "thin": [
    "aviso-legal",
-   "contacto",
-   "planes",
    "privacidad"
   ],
   "favicon": 200,

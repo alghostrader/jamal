@@ -13,7 +13,7 @@
   {
    "kw": "mejor iptv españa",
    "vol": 720,
-   "pos": 32,
+   "pos": 38,
    "url": "/"
   },
   {
@@ -24,13 +24,13 @@
   {
    "kw": "listas iptv españa telegram",
    "vol": 390,
-   "pos": 1,
+   "pos": 3,
    "url": "/"
   },
   {
    "kw": "proveedor iptv",
    "vol": 480,
-   "pos": 32,
+   "pos": 38,
    "url": "/"
   }
  ],
@@ -58,8 +58,7 @@
   {
    "kw": "abonnement iptv 12 mois",
    "vol": 4400,
-   "pos": 24,
-   "url": "/"
+   "pos": null
   },
   {
    "kw": "meilleur abonnement iptv",
@@ -173,7 +172,7 @@
   {
    "kw": "iptv shqiptar",
    "vol": 320,
-   "pos": 17,
+   "pos": 13,
    "url": "/"
   },
   {
@@ -208,20 +207,19 @@
   {
    "kw": "smarters player lite",
    "vol": 12100,
-   "pos": 51,
+   "pos": 55,
    "url": "/"
   },
   {
    "kw": "iptv smarters pro firestick",
    "vol": 70,
-   "pos": 43,
+   "pos": 42,
    "url": "/"
   },
   {
    "kw": "smarters player lite apk",
    "vol": 880,
-   "pos": 56,
-   "url": "/"
+   "pos": null
   }
  ],
  "iptvfranceofficiel.fr": [
@@ -274,7 +272,7 @@
   {
    "kw": "meilleur boitier iptv",
    "vol": 720,
-   "pos": 62,
+   "pos": 13,
    "page": "/boitier-iptv",
    "url": "/"
   },
@@ -298,14 +296,16 @@
   {
    "kw": "iptv segura",
    "vol": 20,
-   "pos": null,
-   "page": "/"
+   "pos": 21,
+   "page": "/",
+   "url": "/"
   },
   {
    "kw": "estafas iptv",
    "vol": null,
-   "pos": null,
-   "page": "/guias/estafas-iptv-como-evitarlas"
+   "pos": 8,
+   "page": "/guias/estafas-iptv-como-evitarlas",
+   "url": "/"
   },
   {
    "kw": "iptv legal españa",
@@ -316,8 +316,9 @@
   {
    "kw": "es seguro el iptv",
    "vol": null,
-   "pos": null,
-   "page": "/guias/como-elegir-iptv-seguro"
+   "pos": 17,
+   "page": "/guias/como-elegir-iptv-seguro",
+   "url": "/"
   },
   {
    "kw": "que es una lista m3u",
@@ -328,8 +329,9 @@
   {
    "kw": "iptv fire tv stick",
    "vol": 260,
-   "pos": null,
-   "page": "/guias/iptv-fire-tv-stick"
+   "pos": 48,
+   "page": "/guias/iptv-fire-tv-stick",
+   "url": "/"
   }
  ]
 }
