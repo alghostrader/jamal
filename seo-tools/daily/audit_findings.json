@@ -1,6 +1,6 @@
 {
  "iptvesp.com": {
-  "pages": 60,
+  "pages": 67,
   "titles_over60": [],
   "redirect_links": [
    "blog/iptv-m3u-espana"
@@ -24,7 +24,7 @@
   "www_redirect": "308 -> https://iptvesp.com/"
  },
  "primeiptv-france.com": {
-  "pages": 93,
+  "pages": 102,
   "titles_over60": [],
   "redirect_links": [],
   "linked404": {
@@ -37,16 +37,22 @@
    "mentions-legales",
    "politique-confidentialite"
   ],
-  "favicon": 200,
+  "favicon": null,
   "www_redirect": "308 -> https://primeiptv-france.com/"
  },
  "iptvned.com": {
-  "pages": 54,
+  "pages": 61,
   "titles_over60": [],
-  "redirect_links": [],
+  "redirect_links": [
+   "blog/iptv-m3u-lijsten-nederland",
+   "blog/smart-iptv-nederland"
+  ],
   "linked404": {},
   "orphans": [],
-  "canonical_mismatch": [],
+  "canonical_mismatch": [
+   "blog/iptv-m3u-lijsten-nederland",
+   "blog/smart-iptv-nederland"
+  ],
   "no_meta_desc": [],
   "thin": [
    "afrekenen",
@@ -153,7 +159,7 @@
   "www_redirect": "308 -> https://abonnementiptvofficiel.com/"
  },
  "iptvsegura.com": {
-  "pages": 14,
+  "pages": 33,
   "titles_over60": [],
   "redirect_links": [],
   "linked404": {},
