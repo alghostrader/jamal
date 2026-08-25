@@ -1,19 +1,19 @@
 {
- "_stamp": "2026-08-25 16:38 UTC",
+ "_stamp": "2026-08-26 08:11 UTC",
  "sites": {
   "iptvesp.com": {
    "clicks7d": 706,
    "sem_rd": 117,
-   "dfs_rd": 37,
+   "dfs_rd": 38,
    "top100": 34,
    "pages": 60,
    "positions": {
     "iptv espa\u00f1a": null,
     "listas iptv": null,
-    "mejor iptv espa\u00f1a": 38,
+    "mejor iptv espa\u00f1a": 40,
     "iptv smarters pro": null,
     "listas iptv espa\u00f1a telegram": 4,
-    "proveedor iptv": 40
+    "proveedor iptv": 44
    }
   },
   "primeiptv-france.com": {
@@ -35,7 +35,7 @@
   "iptvned.com": {
    "clicks7d": 20,
    "sem_rd": 40,
-   "dfs_rd": 16,
+   "dfs_rd": 17,
    "top100": 29,
    "pages": 54,
    "positions": {
@@ -50,7 +50,7 @@
   "iptvpix.com": {
    "clicks7d": 0,
    "sem_rd": 113,
-   "dfs_rd": 36,
+   "dfs_rd": 37,
    "top100": null,
    "pages": 58,
    "positions": {
@@ -81,7 +81,7 @@
    "top100": null,
    "pages": 21,
    "positions": {
-    "iptv shqiptare": 14,
+    "iptv shqiptare": 13,
     "iptv smarters pro": null,
     "iptv shqip": null,
     "iptv shqiptar": 13,
@@ -98,8 +98,8 @@
    "pages": 39,
    "positions": {
     "iptv smarters": null,
-    "configuration iptv smarters": 39,
-    "smarters player lite": 51,
+    "configuration iptv smarters": 40,
+    "smarters player lite": 52,
     "iptv smarters pro firestick": 42,
     "smarters player lite apk": null
    }
@@ -128,7 +128,7 @@
     "test iptv gratuit": null,
     "iptv pas cher": null,
     "essai iptv 7 jours": 4,
-    "meilleur boitier iptv": 14,
+    "meilleur boitier iptv": 11,
     "iptv moins cher": null,
     "code promo iptv": null,
     "iptv promo": null
@@ -141,12 +141,12 @@
    "top100": null,
    "pages": 14,
    "positions": {
-    "iptv segura": 21,
+    "iptv segura": 26,
     "estafas iptv": 8,
     "iptv legal espa\u00f1a": null,
-    "es seguro el iptv": 16,
-    "que es una lista m3u": 31,
-    "iptv fire tv stick": 48
+    "es seguro el iptv": 15,
+    "que es una lista m3u": 29,
+    "iptv fire tv stick": 46
    }
   }
  }
