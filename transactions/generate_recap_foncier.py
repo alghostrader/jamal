@@ -1,151 +1,224 @@
+"""Genere les deux recapitulatifs de transaction fonciere (leasehold et freehold).
+
+Meme structure dans les deux cas : prix vendeur / prix client avec commission,
+frais de notaire (taxes gouvernementales + honoraires avec forfait plancher),
+frais de geometre, total de l'operation et acompte pour l'appel de fonds.
+La seule difference est la duree du bail, qui n'existe pas en freehold.
+"""
+
 from openpyxl import Workbook
 from openpyxl.styles import Font
 from openpyxl.comments import Comment
-
-wb = Workbook()
-ws = wb.active
-ws.title = "Recapitulatif"
 
 ARIAL = "Arial"
 IDR = '#,##0'
 EUR = '#,##0.00'
 PCT = '0.0%'
+ARES = '#,##0.00'
 
-def put(cell, value, fmt=None, bold=False):
-    c = ws[cell]
-    c.value = value
-    c.font = Font(name=ARIAL, size=11, bold=bold)
-    if fmt:
-        c.number_format = fmt
-    return c
+TAUX_CHANGE = 20788.62      # reference BCE du 20/08/2026
+CHANGE_SRC = ("Taux de reference BCE du 20/08/2026 : 1 EUR = 20 788,62 IDR "
+              "(source : api.frankfurter.dev).\n"
+              "A actualiser au taux du jour / au taux retenu avec le client.")
 
-# --- En-tete ---
-put("A1", "RECAPITULATIF TRANSACTION FONCIERE - APPEL DE FONDS", bold=True)
-put("A2", "Client :")
-put("A3", "Terrain / localisation :")
-put("A4", "Date :")
 
-# --- Parametres (cellules a modifier) ---
-put("A6", "PARAMETRES (cellules a modifier)", bold=True)
-rows = [
-    ("A7",  "Surface du terrain (ares)",                        "B7",  6,        '#,##0.00'),
-    ("A8",  "Surface du terrain (m2)",                          "B8",  "=B7*100", '#,##0'),
-    ("A9",  "Duree du leasehold (annees)",                      "B9",  30,       '#,##0'),
-    ("A10", "Prix vendeur (IDR / are / an)",                    "B10", 4000000,  IDR),
-    ("A11", "Prix client avec commission (IDR / are / an)",     "B11", 5000000,  IDR),
-    ("A12", "Taux de change (IDR pour 1 EUR)",                  "B12", 20788.62, '#,##0.00'),
-    ("A13", "Taxes gouvernementales (% du prix client)",        "B13", 0.05,     PCT),
-    ("A14", "Honoraires du notaire (% du prix client)",         "B14", 0.01,     PCT),
-    ("A15", "Honoraires du notaire - forfait minimum (IDR)",    "B15", 10000000, IDR),
-    ("A16", "Frais de geometre (EUR)",                          "B16", 1000,     EUR),
-    ("A17", "Taux d'acompte (appel de fonds)",                  "B17", 0.10,     PCT),
-]
-for lab_cell, lab, val_cell, val, fmt in rows:
-    put(lab_cell, lab)
-    put(val_cell, val, fmt)
+def build(freehold, out):
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Recapitulatif"
 
-ws["B12"].comment = Comment(
-    "Taux de reference BCE du 20/08/2026 : 1 EUR = 20 788,62 IDR (source : api.frankfurter.dev).\n"
-    "A actualiser au taux du jour / au taux retenu avec le client.", "Agence")
-ws["B13"].comment = Comment(
-    "Taxes gouvernementales : 5% du prix client (prix avec commission). "
-    "Hypothese indiquee par l'agent.", "Agence")
-ws["B14"].comment = Comment(
-    "Honoraires du notaire : 1% du prix client (prix avec commission). "
-    "Hypothese indiquee par l'agent.", "Agence")
-ws["B15"].comment = Comment(
-    "Forfait plancher : si 1% du prix client donne moins de 10 000 000 IDR, "
-    "ce forfait s'applique a la place du pourcentage.", "Agence")
+    def put(cell, value, fmt=None, bold=False):
+        c = ws[cell]
+        c.value = value
+        c.font = Font(name=ARIAL, size=11, bold=bold)
+        if fmt:
+            c.number_format = fmt
+        return c
 
-# --- Detail du calcul ---
-put("A19", "DETAIL DU CALCUL", bold=True)
-hdr = [("A20", "Poste"), ("B20", "Surface (ares)"), ("C20", "Duree (ans)"),
-       ("D20", "Prix unitaire (IDR/are/an)"), ("E20", "Montant IDR"), ("F20", "Montant EUR")]
-for cell, lab in hdr:
-    put(cell, lab, bold=True)
+    regime = "FREEHOLD (pleine propriete)" if freehold else "LEASEHOLD (bail 30 ans)"
+    unite = "IDR / are" if freehold else "IDR / are / an"
 
-# Ligne 21 : prix vendeur
-put("A21", "Prix du terrain - PRIX VENDEUR")
-put("B21", "=B7", '#,##0.00')
-put("C21", "=B9", '#,##0')
-put("D21", "=B10", IDR)
-put("E21", "=B21*C21*D21", IDR)
-put("F21", "=E21/$B$12", EUR)
+    # --- En-tete ---
+    put("A1", "RECAPITULATIF TRANSACTION FONCIERE - APPEL DE FONDS", bold=True)
+    put("A2", "Regime : " + regime, bold=True)
+    put("A3", "Client :")
+    put("A4", "Terrain / localisation :")
+    put("A5", "Date :")
 
-# Ligne 22 : prix client
-put("A22", "Prix du terrain - PRIX CLIENT (avec commission)")
-put("B22", "=B7", '#,##0.00')
-put("C22", "=B9", '#,##0')
-put("D22", "=B11", IDR)
-put("E22", "=B22*C22*D22", IDR)
-put("F22", "=E22/$B$12", EUR)
+    # --- Parametres ---
+    put("A7", "PARAMETRES (cellules a modifier)", bold=True)
+    params = [("surface", "Surface du terrain (ares)", 6, ARES),
+              ("m2", "Surface du terrain (m2)", "=B8*100", IDR)]
+    if not freehold:
+        params.append(("duree", "Duree du leasehold (annees)", 30, IDR))
+    params += [
+        ("pv", "Prix vendeur (%s)%s" % (unite, " - A SAISIR" if freehold else ""),
+         None if freehold else 4000000, IDR),
+        ("pc", "Prix client avec commission (%s)%s" % (unite, " - A SAISIR" if freehold else ""),
+         None if freehold else 5000000, IDR),
+        ("fx", "Taux de change (IDR pour 1 EUR)", TAUX_CHANGE, '#,##0.00'),
+        ("taxes", "Taxes gouvernementales (% du prix client)", 0.05, PCT),
+        ("hono", "Honoraires du notaire (% du prix client)", 0.01, PCT),
+        ("mini", "Honoraires du notaire - forfait minimum (IDR)", 10000000, IDR),
+        ("geo", "Frais de geometre (EUR)", 1000, EUR),
+        ("acompte", "Taux d'acompte (appel de fonds)", 0.10, PCT),
+    ]
+    P = {}
+    r = 8
+    for key, label, value, fmt in params:
+        put("A%d" % r, label)
+        put("B%d" % r, value, fmt)
+        P[key] = "$B$%d" % r
+        r += 1
+    p_first, p_last = 8, r - 1
 
-# Ligne 23 : commission agence
-put("A23", "dont commission agence (ecart vendeur / client)")
-put("E23", "=E22-E21", IDR)
-put("F23", "=E23/$B$12", EUR)
+    ws[P["fx"].replace("$", "")].comment = Comment(CHANGE_SRC, "Agence")
+    ws[P["taxes"].replace("$", "")].comment = Comment(
+        "Taxes gouvernementales : 5% du prix client (prix avec commission). "
+        "Hypothese indiquee par l'agent.", "Agence")
+    ws[P["hono"].replace("$", "")].comment = Comment(
+        "Honoraires du notaire : 1% du prix client (prix avec commission). "
+        "Hypothese indiquee par l'agent.", "Agence")
+    ws[P["mini"].replace("$", "")].comment = Comment(
+        "Forfait plancher : si le pourcentage donne moins de 10 000 000 IDR, "
+        "ce forfait s'applique a la place du pourcentage.", "Agence")
+    if freehold:
+        note = ("Prix d'achat en pleine propriete, exprime en IDR par are (pas de duree). "
+                "A renseigner avec le prix negocie du dossier.\n"
+                "Exemple : 6 ares a 900 000 000 IDR/are = 5 400 000 000 IDR.")
+        ws[P["pv"].replace("$", "")].comment = Comment(note, "Agence")
+        ws[P["pc"].replace("$", "")].comment = Comment(note, "Agence")
 
-# --- Frais annexes ---
-put("A25", "FRAIS ANNEXES", bold=True)
-put("A26", "Taxes gouvernementales (5% du prix client)")
-put("D26", "=B13", PCT)
-put("E26", "=E22*$B$13", IDR)
-put("F26", "=E26/$B$12", EUR)
+    # --- Detail du calcul ---
+    r = p_last + 2
+    put("A%d" % r, "DETAIL DU CALCUL", bold=True)
+    r += 1
+    cols = ["Poste", "Surface (ares)"]
+    if not freehold:
+        cols.append("Duree (ans)")
+    cols += ["Prix unitaire (%s)" % unite, "Montant IDR", "Montant EUR"]
+    for i, label in enumerate(cols):
+        put("%s%d" % (chr(ord("A") + i), r), label, bold=True)
+    C_IDR = chr(ord("A") + len(cols) - 2)   # E en leasehold, D en freehold
+    C_EUR = chr(ord("A") + len(cols) - 1)   # F en leasehold, E en freehold
+    C_PU = chr(ord("A") + len(cols) - 3)    # colonne prix unitaire / taux
 
-put("A27", "Honoraires du notaire (1% du prix client, minimum 10 000 000 IDR)")
-put("D27", "=IF(E22=0,0,E27/E22)", PCT)
-put("E27", "=MAX(E22*$B$14,$B$15)", IDR)
-put("F27", "=E27/$B$12", EUR)
-ws["E27"].comment = Comment(
-    "MAX entre 1% du prix client et le forfait minimum de la cellule B15 : "
-    "si le pourcentage donne moins de 10 000 000 IDR, c'est le forfait qui s'applique.\n"
-    "La colonne D affiche le taux reellement supporte.", "Agence")
+    def ligne(label, idr_formula, row, taux=None, bold=False):
+        put("A%d" % row, label, bold=bold)
+        if taux:
+            put("%s%d" % (C_PU, row), taux, PCT)
+        put("%s%d" % (C_IDR, row), idr_formula, IDR, bold=bold)
+        put("%s%d" % (C_EUR, row), "=%s%d/%s" % (C_IDR, row, P["fx"]), EUR, bold=bold)
 
-put("A28", "Sous-total frais de notaire (taxes + honoraires)")
-put("D28", "=IF(E22=0,0,E28/E22)", PCT)
-put("E28", "=E26+E27", IDR)
-put("F28", "=E28/$B$12", EUR)
+    # prix vendeur / prix client
+    r_pv = r + 1
+    r_pc = r + 2
+    for row, key, label in ((r_pv, "pv", "Prix du terrain - PRIX VENDEUR"),
+                            (r_pc, "pc", "Prix du terrain - PRIX CLIENT (avec commission)")):
+        put("A%d" % row, label)
+        put("B%d" % row, "=%s" % P["surface"], ARES)
+        facteurs = "B%d" % row
+        if not freehold:
+            put("C%d" % row, "=%s" % P["duree"], IDR)
+            facteurs += "*C%d" % row
+        put("%s%d" % (C_PU, row), "=%s" % P[key], IDR)
+        facteurs += "*%s%d" % (C_PU, row)
+        put("%s%d" % (C_IDR, row), "=" + facteurs, IDR)
+        put("%s%d" % (C_EUR, row), "=%s%d/%s" % (C_IDR, row, P["fx"]), EUR)
 
-put("A29", "Frais de geometre (forfait 1 000 EUR)")
-put("E29", "=$B$16*$B$12", IDR)
-put("F29", "=$B$16", EUR)
+    r_com = r_pc + 1
+    ligne("dont commission agence (ecart vendeur / client)",
+          "=%s%d-%s%d" % (C_IDR, r_pc, C_IDR, r_pv), r_com)
 
-# --- Total ---
-put("A31", "TOTAL DE L'OPERATION POUR L'ACHETEUR", bold=True)
-put("E31", "=E22+E28+E29", IDR, bold=True)
-put("F31", "=E31/$B$12", EUR, bold=True)
+    # --- Frais annexes ---
+    r = r_com + 2
+    put("A%d" % r, "FRAIS ANNEXES", bold=True)
+    r_taxes = r + 1
+    ligne("Taxes gouvernementales (5% du prix client)",
+          "=%s%d*%s" % (C_IDR, r_pc, P["taxes"]), r_taxes, taux="=%s" % P["taxes"])
 
-# --- Appel de fonds ---
-put("A33", "APPEL DE FONDS", bold=True)
-put("A34", "Acompte 10% du total de l'operation (reservation notaire)")
-put("D34", "=B17", PCT)
-put("E34", "=E31*$B$17", IDR, bold=True)
-put("F34", "=E34/$B$12", EUR, bold=True)
+    r_hono = r_taxes + 1
+    ligne("Honoraires du notaire (1% du prix client, minimum 10 000 000 IDR)",
+          "=MAX(%s%d*%s,%s)" % (C_IDR, r_pc, P["hono"], P["mini"]), r_hono,
+          taux="=IF(%s%d=0,0,%s%d/%s%d)" % (C_IDR, r_pc, C_IDR, r_hono, C_IDR, r_pc))
+    ws["%s%d" % (C_IDR, r_hono)].comment = Comment(
+        "MAX entre le pourcentage d'honoraires et le forfait minimum : si le pourcentage "
+        "donne moins de 10 000 000 IDR, c'est le forfait qui s'applique.\n"
+        "La colonne des taux affiche le taux reellement supporte.", "Agence")
 
-put("A35", "Solde a regler apres acompte")
-put("E35", "=E31-E34", IDR)
-put("F35", "=E35/$B$12", EUR)
+    r_not = r_hono + 1
+    ligne("Sous-total frais de notaire (taxes + honoraires)",
+          "=%s%d+%s%d" % (C_IDR, r_taxes, C_IDR, r_hono), r_not,
+          taux="=IF(%s%d=0,0,%s%d/%s%d)" % (C_IDR, r_pc, C_IDR, r_not, C_IDR, r_pc))
 
-put("A37", "Pour information : 10% du prix du terrain seul")
-put("E37", "=E22*$B$17", IDR)
-put("F37", "=E37/$B$12", EUR)
+    r_geo = r_not + 1
+    put("A%d" % r_geo, "Frais de geometre (forfait 1 000 EUR)")
+    put("%s%d" % (C_IDR, r_geo), "=%s*%s" % (P["geo"], P["fx"]), IDR)
+    put("%s%d" % (C_EUR, r_geo), "=%s" % P["geo"], EUR)
 
-# --- Notes ---
-put("A39", "NOTES / HYPOTHESES", bold=True)
-put("A40", "1 are = 100 m2 -> terrain de 600 m2. Prix leasehold exprime en IDR par are et par an, sur 30 ans.")
-put("A41", "Taux de change en B12 : reference BCE du 20/08/2026 (1 EUR = 20 788,62 IDR). A actualiser avant envoi au client.")
-put("A42", "Frais de notaire detailles : taxes gouvernementales 5% (B13) + honoraires du notaire 1% (B14).")
-put("A43", "Honoraires du notaire : le pourcentage s'applique sauf s'il donne moins que le forfait minimum de 10 000 000 IDR (B15), auquel cas le forfait est retenu (formule MAX en E27).")
-put("A44", "Ces taux sont appliques au prix client avec commission. Remplacer E22 par E21 dans les formules E26 et E27 si la base retenue est le prix vendeur.")
-put("A45", "Frais de geometre saisis en EUR (B16) et convertis en IDR au taux B12.")
-put("A46", "Seules les cellules de parametres (colonne B, lignes 7 a 17) sont a saisir : tout le reste du tableau est calcule par formules et se met a jour automatiquement.")
+    # --- Total ---
+    r_tot = r_geo + 2
+    ligne("TOTAL DE L'OPERATION POUR L'ACHETEUR",
+          "=%s%d+%s%d+%s%d" % (C_IDR, r_pc, C_IDR, r_not, C_IDR, r_geo), r_tot, bold=True)
 
-# largeurs de colonnes (lisibilite uniquement)
-for col, w in [("A", 62), ("B", 16), ("C", 13), ("D", 26), ("E", 18), ("F", 15)]:
-    ws.column_dimensions[col].width = w
+    # --- Appel de fonds ---
+    r = r_tot + 2
+    put("A%d" % r, "APPEL DE FONDS", bold=True)
+    r_ac = r + 1
+    ligne("Acompte 10% du total de l'operation (reservation notaire)",
+          "=%s%d*%s" % (C_IDR, r_tot, P["acompte"]), r_ac,
+          taux="=%s" % P["acompte"], bold=True)
+    r_solde = r_ac + 1
+    ligne("Solde a regler apres acompte",
+          "=%s%d-%s%d" % (C_IDR, r_tot, C_IDR, r_ac), r_solde)
+    r_info = r_solde + 2
+    ligne("Pour information : 10% du prix du terrain seul",
+          "=%s%d*%s" % (C_IDR, r_pc, P["acompte"]), r_info)
 
-wb.calculation.fullCalcOnLoad = True
+    # --- Notes ---
+    r = r_info + 2
+    put("A%d" % r, "NOTES / HYPOTHESES", bold=True)
+    notes = ["1 are = 100 m2 -> terrain de 600 m2."]
+    if freehold:
+        notes.append("Achat en FREEHOLD (pleine propriete) : prix exprime en IDR par are, "
+                     "sans duree. Les deux prix (lignes %d et %d des parametres) sont a saisir."
+                     % (p_first + 2, p_first + 3))
+        notes.append("Exemple de saisie : 6 ares a 900 000 000 IDR/are = 5 400 000 000 IDR "
+                     "de prix de terrain.")
+    else:
+        notes.append("Achat en LEASEHOLD : prix exprime en IDR par are et par an, "
+                     "multiplie par la duree du bail.")
+    notes += [
+        "Taux de change en %s : reference BCE du 20/08/2026 (1 EUR = 20 788,62 IDR). "
+        "A actualiser avant envoi au client." % P["fx"].replace("$", ""),
+        "Frais de notaire detailles : taxes gouvernementales 5%% (%s) + honoraires du notaire "
+        "1%% (%s)." % (P["taxes"].replace("$", ""), P["hono"].replace("$", "")),
+        "Honoraires du notaire : le pourcentage s'applique sauf s'il donne moins que le forfait "
+        "minimum de 10 000 000 IDR (%s), auquel cas le forfait est retenu (formule MAX en %s%d)."
+        % (P["mini"].replace("$", ""), C_IDR, r_hono),
+        "Ces taux sont appliques au prix client avec commission. Remplacer %s%d par %s%d dans les "
+        "formules de frais si la base retenue est le prix vendeur." % (C_IDR, r_pc, C_IDR, r_pv),
+        "Frais de geometre saisis en EUR (%s) et convertis en IDR au taux %s."
+        % (P["geo"].replace("$", ""), P["fx"].replace("$", "")),
+        "Seules les cellules de parametres (colonne B, lignes %d a %d) sont a saisir : tout le "
+        "reste du tableau est calcule par formules et se met a jour automatiquement."
+        % (p_first, p_last),
+    ]
+    for i, n in enumerate(notes):
+        put("A%d" % (r + 1 + i), n)
 
-out = "/home/user/jamal/transactions/Recap_transaction_fonciere_appel_de_fonds.xlsx"
-wb.save(out)
-print(out)
+    widths = {"A": 62, "B": 16, C_PU: 26, C_IDR: 18, C_EUR: 15}
+    if not freehold:
+        widths.setdefault("C", 13)
+    for col, w in widths.items():
+        ws.column_dimensions[col].width = w
+
+    wb.calculation.fullCalcOnLoad = True
+    wb.save(out)
+    print(out)
+
+
+if __name__ == "__main__":
+    base = "/home/user/jamal/transactions/"
+    build(False, base + "Recap_transaction_fonciere_appel_de_fonds.xlsx")
+    build(True, base + "Recap_transaction_fonciere_FREEHOLD_appel_de_fonds.xlsx")
