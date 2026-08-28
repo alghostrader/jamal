@@ -1131,7 +1131,7 @@
    {
     "path": "/blog/smarters-player-lite-nederland",
     "title": "Smarters Player Lite: de app installeren en instellen",
-    "words": 1872
+    "words": 1870
    },
    {
     "path": "/blog/iptv-op-pc-windows-mac",
@@ -1149,14 +1149,19 @@
     "words": 1762
    },
    {
+    "path": "/blog/net-iptv-nederland",
+    "title": "Net IPTV: wat het is en hoe je het activeert",
+    "words": 1750
+   },
+   {
     "path": "/blog/set-iptv-nederland",
     "title": "Set IPTV: wat het is en hoe je het activeert",
-    "words": 1743
+    "words": 1741
    },
    {
     "path": "/blog/flix-iptv-nederland",
     "title": "Flix IPTV: de app installeren en activeren op je tv",
-    "words": 1729
+    "words": 1727
    },
    {
     "path": "/blog/ibo-player-nederland",
@@ -1171,7 +1176,7 @@
    {
     "path": "/blog",
     "title": "Blog & Gidsen IPTV · IPTVNED",
-    "words": 1617
+    "words": 1662
    },
    {
     "path": "/blog/iptv-strafbaar-nederland",
@@ -1346,7 +1351,7 @@
     "covered": true
    }
   ],
-  "n_articles": 46,
+  "n_articles": 47,
   "n_thin": 4
  },
  "iptvpix.com": {

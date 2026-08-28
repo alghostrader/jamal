@@ -13,7 +13,7 @@
   {
    "kw": "mejor iptv españa",
    "vol": 720,
-   "pos": 39,
+   "pos": 43,
    "url": "/"
   },
   {
@@ -30,7 +30,7 @@
   {
    "kw": "proveedor iptv",
    "vol": 480,
-   "pos": 43,
+   "pos": 46,
    "url": "/"
   }
  ],
@@ -156,8 +156,7 @@
   {
    "kw": "iptv shqiptare",
    "vol": 1600,
-   "pos": 10,
-   "url": "/"
+   "pos": null
   },
   {
    "kw": "iptv smarters pro",
@@ -172,7 +171,7 @@
   {
    "kw": "iptv shqiptar",
    "vol": 320,
-   "pos": 13,
+   "pos": 9,
    "url": "/"
   },
   {
@@ -201,19 +200,18 @@
   {
    "kw": "configuration iptv smarters",
    "vol": 10,
-   "pos": 42,
-   "url": "/"
+   "pos": null
   },
   {
    "kw": "smarters player lite",
    "vol": 12100,
-   "pos": 53,
+   "pos": 55,
    "url": "/"
   },
   {
    "kw": "iptv smarters pro firestick",
    "vol": 70,
-   "pos": 42,
+   "pos": 47,
    "url": "/"
   },
   {
@@ -272,7 +270,7 @@
   {
    "kw": "meilleur boitier iptv",
    "vol": 720,
-   "pos": 13,
+   "pos": 11,
    "page": "/boitier-iptv",
    "url": "/"
   },
@@ -296,14 +294,14 @@
   {
    "kw": "iptv segura",
    "vol": 20,
-   "pos": 23,
+   "pos": 26,
    "page": "/",
    "url": "/"
   },
   {
    "kw": "estafas iptv",
    "vol": null,
-   "pos": 8,
+   "pos": 28,
    "page": "/guias/estafas-iptv-como-evitarlas",
    "url": "/"
   },
@@ -316,21 +314,21 @@
   {
    "kw": "es seguro el iptv",
    "vol": null,
-   "pos": 17,
+   "pos": 14,
    "page": "/guias/como-elegir-iptv-seguro",
    "url": "/"
   },
   {
    "kw": "que es una lista m3u",
    "vol": 50,
-   "pos": 29,
+   "pos": 28,
    "page": "/guias/que-es-lista-m3u",
    "url": "/"
   },
   {
    "kw": "iptv fire tv stick",
    "vol": 260,
-   "pos": 45,
+   "pos": 48,
    "page": "/guias/iptv-fire-tv-stick",
    "url": "/"
   }

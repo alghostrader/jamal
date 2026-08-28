@@ -5,11 +5,11 @@
   "date": "2026-08-28",
   "as_label": "Low authority",
   "authority_score": 7,
-  "organic_traffic": 283,
-  "organic_keywords": 106,
-  "ok_delta": "+15 · 11 in top-3",
-  "ref_domains": 118,
-  "backlinks": 201,
+  "organic_traffic": 290,
+  "organic_keywords": 113,
+  "ok_delta": "+7 · 11 in top-3",
+  "ref_domains": 125,
+  "backlinks": 208,
   "ai_visibility": 0,
   "ai_cited_pages": 4,
   "ai_note": "ChatGPT 4"
@@ -21,8 +21,8 @@
   "organic_traffic": 3,
   "organic_keywords": 52,
   "ok_delta": "",
-  "ref_domains": 25,
-  "backlinks": 51,
+  "ref_domains": 26,
+  "backlinks": 53,
   "ai_visibility": 0,
   "ai_cited_pages": 3,
   "ai_note": "ChatGPT 3"
@@ -34,8 +34,8 @@
   "organic_traffic": 8,
   "organic_keywords": 74,
   "ok_delta": "",
-  "ref_domains": 42,
-  "backlinks": 55,
+  "ref_domains": 47,
+  "backlinks": 60,
   "ai_visibility": 14,
   "ai_cited_pages": 9,
   "ai_note": "ChatGPT 8 + AI Overview 1"
@@ -47,8 +47,8 @@
   "organic_traffic": null,
   "organic_keywords": null,
   "ok_delta": "",
-  "ref_domains": 116,
-  "backlinks": 192
+  "ref_domains": 123,
+  "backlinks": 200
  },
  "smarters-live.com": {
   "date": "2026-08-28",
@@ -103,8 +103,8 @@
   "organic_traffic": 8,
   "organic_keywords": 12,
   "ok_delta": "+1",
-  "ref_domains": 64,
-  "backlinks": 90,
+  "ref_domains": 66,
+  "backlinks": 94,
   "ai_visibility": 0,
   "ai_cited_pages": 1,
   "ai_note": "ChatGPT 1"
@@ -112,9 +112,9 @@
  "iptvsegura.com": {
   "date": "2026-08-28",
   "authority_score": 0,
-  "ref_domains": null,
-  "backlinks": null,
-  "as_label": "too new for Semrush",
+  "ref_domains": 3,
+  "backlinks": 3,
+  "as_label": "first links indexed",
   "organic_traffic": null,
   "organic_keywords": null,
   "ok_delta": ""

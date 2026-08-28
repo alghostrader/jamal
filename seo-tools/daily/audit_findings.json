@@ -37,11 +37,11 @@
    "mentions-legales",
    "politique-confidentialite"
   ],
-  "favicon": null,
+  "favicon": 200,
   "www_redirect": "308 -> https://primeiptv-france.com/"
  },
  "iptvned.com": {
-  "pages": 61,
+  "pages": 62,
   "titles_over60": [],
   "redirect_links": [
    "blog/iptv-m3u-lijsten-nederland",
