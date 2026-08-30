@@ -1,6 +1,6 @@
 """Projection de projet : cout foncier (freehold ou leasehold), investissement
-a consentir (terrain + construction + ameublement + PT PMA optionnelle) et
-revenus previsionnels de la villa. Tout tient sur une seule page."""
+a consentir (terrain + jusqu'a 5 constructions + jusqu'a 5 ameublements +
+PT PMA optionnelle) et revenus previsionnels de la villa. Tout sur une page."""
 
 from openpyxl import Workbook
 from openpyxl.styles import Font
@@ -14,6 +14,7 @@ PCT = '0.0%'
 NB = '#,##0.0'
 
 TAUX_CHANGE = 20788.62   # reference BCE du 20/08/2026
+N_LIGNES = 5             # nombre de lignes construction / ameublement
 
 wb = Workbook()
 ws = wb.active
@@ -34,6 +35,16 @@ def montant(row, label, formule_idr, bold=False):
     put("A%d" % row, label, bold=bold)
     put("C%d" % row, formule_idr, IDR, bold=bold)
     put("D%d" % row, "=C%d/$B$7" % row, EUR, bold=bold)
+
+
+def saisie_eur(row, label, commentaire=None):
+    """Une ligne saisie en EUR (colonne B) convertie en IDR."""
+    put("A%d" % row, label)
+    put("B%d" % row, None, EUR)
+    put("C%d" % row, "=B%d*$B$7" % row, IDR)
+    put("D%d" % row, "=B%d" % row, EUR)
+    if commentaire:
+        ws["B%d" % row].comment = Comment(commentaire, "Agence")
 
 
 # --- En-tete ---
@@ -116,64 +127,80 @@ put("A33", "Poste", bold=True)
 put("B33", "Saisie (EUR)", bold=True)
 put("C33", "Montant IDR", bold=True)
 put("D33", "Montant EUR", bold=True)
+put("E33", "Designation (libre)", bold=True)
 
 montant(34, "Cout foncier (report du tableau 1)", "=C28")
-put("A35", "Cout de construction")
-put("B35", None, EUR)
-put("C35", "=B35*$B$7", IDR)
-put("D35", "=B35", EUR)
-ws["B35"].comment = Comment(
-    "Saisir le budget de construction en EUR.\n"
-    "Pour un devis exprime en IDR, saisir la formule =montant_IDR/$B$7.", "Agence")
 
-put("A36", "Cout d'ameublement")
-put("B36", None, EUR)
-put("C36", "=B36*$B$7", IDR)
-put("D36", "=B36", EUR)
-ws["B36"].comment = Comment(
-    "Saisir le budget d'ameublement en EUR.\n"
-    "Pour un devis exprime en IDR, saisir la formule =montant_IDR/$B$7.", "Agence")
+aide = ("Saisir le montant en EUR. Laisser vide si la ligne n'est pas utilisee.\n"
+        "Pour un devis exprime en IDR, saisir la formule =montant_IDR/$B$7.\n"
+        "La colonne E permet de nommer la ligne (villa 1, piscine, pool house...).")
 
-put("A37", "Creation de la PT PMA (si OUI en B31)")
-put("B37", '=IF($B$31="OUI",$B$12,0)', EUR)
-put("C37", "=B37*$B$7", IDR)
-put("D37", "=B37", EUR)
+r_c1 = 36
+for i in range(N_LIGNES):
+    saisie_eur(r_c1 + i, "Construction %d" % (i + 1), aide)
+r_csum = r_c1 + N_LIGNES
+montant(r_csum, "SOUS-TOTAL CONSTRUCTION",
+        "=SUM(C%d:C%d)" % (r_c1, r_csum - 1), bold=True)
 
-montant(38, "INVESTISSEMENT TOTAL", "=C34+C35+C36+C37", bold=True)
+r_a1 = r_csum + 2
+for i in range(N_LIGNES):
+    saisie_eur(r_a1 + i, "Ameublement %d" % (i + 1), aide)
+r_asum = r_a1 + N_LIGNES
+montant(r_asum, "SOUS-TOTAL AMEUBLEMENT",
+        "=SUM(C%d:C%d)" % (r_a1, r_asum - 1), bold=True)
+
+r_pt = r_asum + 2
+put("A%d" % r_pt, "Creation de la PT PMA (si OUI en B31)")
+put("B%d" % r_pt, '=IF($B$31="OUI",$B$12,0)', EUR)
+put("C%d" % r_pt, "=B%d*$B$7" % r_pt, IDR)
+put("D%d" % r_pt, "=B%d" % r_pt, EUR)
+
+r_inv = r_pt + 1
+montant(r_inv, "INVESTISSEMENT TOTAL",
+        "=C34+C%d+C%d+C%d" % (r_csum, r_asum, r_pt), bold=True)
 
 # =====================  3. REVENUS PREVISIONNELS  =====================
-put("A40", "3. REVENUS PREVISIONNELS DE LA VILLA", bold=True)
-put("A41", "Taux d'occupation previsionnel");        put("B41", 0.65, PCT)
-put("A42", "Prix moyen de la nuitee (EUR)");         put("B42", 250, EUR)
-put("A43", "Nombre de nuits commercialisables / an"); put("B43", 365, '#,##0')
-put("A44", "Charges d'exploitation (% du revenu brut)"); put("B44", 0.30, PCT)
+r = r_inv + 2
+put("A%d" % r, "3. REVENUS PREVISIONNELS DE LA VILLA", bold=True)
+r_occ, r_nuitee, r_nuits, r_charges = r + 1, r + 2, r + 3, r + 4
+put("A%d" % r_occ, "Taux d'occupation previsionnel");            put("B%d" % r_occ, 0.65, PCT)
+put("A%d" % r_nuitee, "Prix moyen de la nuitee (EUR)");          put("B%d" % r_nuitee, 250, EUR)
+put("A%d" % r_nuits, "Nombre de nuits commercialisables / an");  put("B%d" % r_nuits, 365, '#,##0')
+put("A%d" % r_charges, "Charges d'exploitation (% du revenu brut)"); put("B%d" % r_charges, 0.30, PCT)
 
-put("A46", "Poste", bold=True)
-put("C46", "Montant IDR", bold=True)
-put("D46", "Montant EUR", bold=True)
+r_hdr = r_charges + 2
+put("A%d" % r_hdr, "Poste", bold=True)
+put("C%d" % r_hdr, "Montant IDR", bold=True)
+put("D%d" % r_hdr, "Montant EUR", bold=True)
 
-put("A47", "Nuits occupees par an")
-put("B47", "=B43*B41", NB)
+r_occup = r_hdr + 1
+put("A%d" % r_occup, "Nuits occupees par an")
+put("B%d" % r_occup, "=B%d*B%d" % (r_nuits, r_occ), NB)
 
-put("A48", "REVENUS BRUTS ANNUELS", bold=True)
-put("C48", "=D48*$B$7", IDR, bold=True)
-put("D48", "=B47*$B$42", EUR, bold=True)
+r_brut = r_occup + 1
+put("A%d" % r_brut, "REVENUS BRUTS ANNUELS", bold=True)
+put("C%d" % r_brut, "=D%d*$B$7" % r_brut, IDR, bold=True)
+put("D%d" % r_brut, "=B%d*$B$%d" % (r_occup, r_nuitee), EUR, bold=True)
 
-montant(49, "Charges d'exploitation (30% du revenu brut)", "=C48*$B$44")
-put("B49", "=$B$44", PCT)
+r_ch = r_brut + 1
+montant(r_ch, "Charges d'exploitation (% du revenu brut)", "=C%d*$B$%d" % (r_brut, r_charges))
+put("B%d" % r_ch, "=$B$%d" % r_charges, PCT)
 
-montant(50, "REVENUS NETS ANNUELS", "=C48-C49", bold=True)
+r_net = r_ch + 1
+montant(r_net, "REVENUS NETS ANNUELS", "=C%d-C%d" % (r_brut, r_ch), bold=True)
 
-put("A52", "INDICATEURS", bold=True)
-put("A53", "Rendement brut (revenus bruts / investissement total)")
-put("B53", "=IF(C38=0,0,C48/C38)", PCT)
-put("A54", "Rendement net (revenus nets / investissement total)")
-put("B54", "=IF(C38=0,0,C50/C38)", PCT)
-put("A55", "Retour sur investissement (annees)")
-put("B55", "=IF(C50=0,0,C38/C50)", NB)
+r_ind = r_net + 2
+put("A%d" % r_ind, "INDICATEURS", bold=True)
+put("A%d" % (r_ind + 1), "Rendement brut (revenus bruts / investissement total)")
+put("B%d" % (r_ind + 1), "=IF(C%d=0,0,C%d/C%d)" % (r_inv, r_brut, r_inv), PCT)
+put("A%d" % (r_ind + 2), "Rendement net (revenus nets / investissement total)")
+put("B%d" % (r_ind + 2), "=IF(C%d=0,0,C%d/C%d)" % (r_inv, r_net, r_inv), PCT)
+put("A%d" % (r_ind + 3), "Retour sur investissement (annees)")
+put("B%d" % (r_ind + 3), "=IF(C%d=0,0,C%d/C%d)" % (r_net, r_inv, r_net), NB)
 
 # --- Notes ---
-put("A57", "NOTES / HYPOTHESES", bold=True)
+r_notes = r_ind + 5
+put("A%d" % r_notes, "NOTES / HYPOTHESES", bold=True)
 notes = [
     "Tableau 1 : le choix FREEHOLD / LEASEHOLD en B15 pilote le calcul du prix du terrain. "
     "Le prix inutilise (B18 ou B19/B20) est simplement ignore.",
@@ -182,9 +209,14 @@ notes = [
     "Frais d'acquisition identiques dans les deux options : taxes gouvernementales 5% (B8) + "
     "honoraires du notaire 1% (B9) avec un forfait plancher de 10 000 000 IDR (B10), "
     "plus le geometre (B11).",
-    "Tableau 2 : le cout foncier est repris automatiquement du tableau 1. Construction et "
-    "ameublement se saisissent en EUR (colonne B) ; pour un devis en IDR, saisir "
-    "=montant_IDR/$B$7.",
+    "Tableau 2 : le cout foncier est repris automatiquement du tableau 1.",
+    "Cinq lignes de construction (%d a %d) et cinq lignes d'ameublement (%d a %d) sont "
+    "disponibles : n'en remplir que le nombre necessaire, les lignes vides comptent pour zero. "
+    "La colonne E sert a nommer chaque ligne (villa 1, piscine, pool house, lot mobilier...)."
+    % (r_c1, r_csum - 1, r_a1, r_asum - 1),
+    "Constructions et ameublements se saisissent en EUR (colonne B) ; pour un devis en IDR, "
+    "saisir =montant_IDR/$B$7. Les sous-totaux des lignes %d et %d alimentent "
+    "l'investissement total." % (r_csum, r_asum),
     "La creation de la PT PMA (2 000 EUR, cellule B12) s'ajoute a l'investissement uniquement "
     "si B31 = OUI.",
     "Tableau 3 : revenus bruts = nuits commercialisables x taux d'occupation x prix de la "
@@ -192,16 +224,17 @@ notes = [
     "Taux de change en B7 : reference BCE du 20/08/2026 (1 EUR = 20 788,62 IDR). "
     "A actualiser avant presentation au client.",
     "Cellules a saisir : B7 a B12 (parametres), B15 a B20 (terrain), B31 (PT PMA), "
-    "B35 et B36 (construction et ameublement), B41 a B44 (exploitation). "
-    "Tout le reste est calcule par formules.",
+    "B%d a B%d (constructions et ameublements), B%d a B%d (exploitation). "
+    "Tout le reste est calcule par formules."
+    % (r_c1, r_asum - 1, r_occ, r_charges),
     "Projection previsionnelle a but indicatif : elle n'integre ni la fiscalite indonesienne "
     "sur les revenus locatifs, ni l'amortissement, ni les frais de gestion au-dela du "
     "pourcentage de charges saisi.",
 ]
 for i, n in enumerate(notes):
-    put("A%d" % (58 + i), n)
+    put("A%d" % (r_notes + 1 + i), n)
 
-for col, w in [("A", 62), ("B", 18), ("C", 20), ("D", 16)]:
+for col, w in [("A", 62), ("B", 18), ("C", 20), ("D", 16), ("E", 26)]:
     ws.column_dimensions[col].width = w
 
 wb.calculation.fullCalcOnLoad = True
