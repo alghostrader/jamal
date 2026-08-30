@@ -59,7 +59,7 @@ def build(freehold, out):
         ("fx", "Taux de change (IDR pour 1 EUR)", TAUX_CHANGE, '#,##0.00'),
         ("taxes", "Taxes gouvernementales (% du prix client)", 0.05, PCT),
         ("hono", "Honoraires du notaire (% du prix client)", 0.01, PCT),
-        ("mini", "Honoraires du notaire - forfait minimum (IDR)", 10000000, IDR),
+        ("mini", "Honoraires du notaire - forfait minimum (IDR)", 20000000, IDR),
         ("geo", "Frais de geometre (EUR)", 1000, EUR),
         ("acompte", "Taux d'acompte (appel de fonds)", 0.10, PCT),
     ]
@@ -80,7 +80,7 @@ def build(freehold, out):
         "Honoraires du notaire : 1% du prix client (prix avec commission). "
         "Hypothese indiquee par l'agent.", "Agence")
     ws[P["mini"].replace("$", "")].comment = Comment(
-        "Forfait plancher : si le pourcentage donne moins de 10 000 000 IDR, "
+        "Forfait plancher : si le pourcentage donne moins de 20 000 000 IDR, "
         "ce forfait s'applique a la place du pourcentage.", "Agence")
     if freehold:
         note = ("Prix d'achat en pleine propriete, exprime en IDR par are (pas de duree). "
@@ -138,12 +138,12 @@ def build(freehold, out):
           "=%s%d*%s" % (C_IDR, r_pc, P["taxes"]), r_taxes, taux="=%s" % P["taxes"])
 
     r_hono = r_taxes + 1
-    ligne("Honoraires du notaire (1% du prix client, minimum 10 000 000 IDR)",
+    ligne("Honoraires du notaire (1% du prix client, minimum 20 000 000 IDR)",
           "=MAX(%s%d*%s,%s)" % (C_IDR, r_pc, P["hono"], P["mini"]), r_hono,
           taux="=IF(%s%d=0,0,%s%d/%s%d)" % (C_IDR, r_pc, C_IDR, r_hono, C_IDR, r_pc))
     ws["%s%d" % (C_IDR, r_hono)].comment = Comment(
         "MAX entre le pourcentage d'honoraires et le forfait minimum : si le pourcentage "
-        "donne moins de 10 000 000 IDR, c'est le forfait qui s'applique.\n"
+        "donne moins de 20 000 000 IDR, c'est le forfait qui s'applique.\n"
         "La colonne des taux affiche le taux reellement supporte.", "Agence")
 
     r_not = r_hono + 1
@@ -194,7 +194,7 @@ def build(freehold, out):
         "Frais de notaire detailles : taxes gouvernementales 5%% (%s) + honoraires du notaire "
         "1%% (%s)." % (P["taxes"].replace("$", ""), P["hono"].replace("$", "")),
         "Honoraires du notaire : le pourcentage s'applique sauf s'il donne moins que le forfait "
-        "minimum de 10 000 000 IDR (%s), auquel cas le forfait est retenu (formule MAX en %s%d)."
+        "minimum de 20 000 000 IDR (%s), auquel cas le forfait est retenu (formule MAX en %s%d)."
         % (P["mini"].replace("$", ""), C_IDR, r_hono),
         "Ces taux sont appliques au prix client avec commission. Remplacer %s%d par %s%d dans les "
         "formules de frais si la base retenue est le prix vendeur." % (C_IDR, r_pc, C_IDR, r_pv),
