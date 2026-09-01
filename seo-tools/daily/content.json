@@ -107,11 +107,6 @@
     "words": 2012
    },
    {
-    "path": "/blog/iptv-m3u-espana",
-    "title": "Listas IPTV España 2026: M3U, gratis y por qué fallan",
-    "words": 2012
-   },
-   {
     "path": "/blog/alternativas-a-telegram-iptv",
     "title": "Alternativas a Telegram para IPTV en España",
     "words": 1988
@@ -384,7 +379,7 @@
     "covered": true
    }
   ],
-  "n_articles": 56,
+  "n_articles": 55,
   "n_thin": 2
  },
  "primeiptv-france.com": {
@@ -450,14 +445,14 @@
     "words": 2657
    },
    {
+    "path": "/blog",
+    "title": "Blog & Guides IPTV France 2026",
+    "words": 2588
+   },
+   {
     "path": "/guides/installer-iptv-apple-tv",
     "title": "Installer l'IPTV sur Apple TV : guide 2026",
     "words": 2546
-   },
-   {
-    "path": "/blog",
-    "title": "Blog & Guides IPTV France 2026",
-    "words": 2489
    },
    {
     "path": "/guides/iptv-gratuit-est-ce-fiable",
@@ -472,7 +467,7 @@
    {
     "path": "/guides/iptv-fire-tv-stick",
     "title": "Installer l'IPTV sur Fire TV Stick : guide 2026",
-    "words": 2399
+    "words": 2393
    },
    {
     "path": "/guides/configurer-epg-iptv",
@@ -575,6 +570,11 @@
     "words": 1790
    },
    {
+    "path": "/guides/telegram-iptv-gratuit",
+    "title": "Telegram IPTV gratuit : ce que ça vaut vraiment",
+    "words": 1725
+   },
+   {
     "path": "/guides/iptv-vs-streaming",
     "title": "IPTV vs Streaming VOD 2026 : Comparatif",
     "words": 1722
@@ -625,6 +625,11 @@
     "words": 1505
    },
    {
+    "path": "/guides/groupe-telegram-iptv",
+    "title": "Groupes Telegram IPTV : les trouver, les éviter",
+    "words": 1497
+   },
+   {
     "path": "/guides/chaines-iptv-francaises-internationales",
     "title": "Chaînes IPTV Françaises & Internationales 2026",
     "words": 1491
@@ -640,14 +645,14 @@
     "words": 1406
    },
    {
-    "path": "/guides/iptv-smart-tv",
-    "title": "IPTV sur Smart TV : le guide complet 2026",
-    "words": 1390
-   },
-   {
     "path": "/installation/smart-tv-samsung",
     "title": "IPTV Smart TV Samsung 2026 : Installation 5 min",
     "words": 1386
+   },
+   {
+    "path": "/guides/iptv-smart-tv",
+    "title": "IPTV sur Smart TV : le guide complet 2026",
+    "words": 1385
    },
    {
     "path": "/guides",
@@ -685,6 +690,11 @@
     "words": 1340
    },
    {
+    "path": "/guides/iptv-telegram",
+    "title": "IPTV Telegram : groupes, risques et alternatives",
+    "words": 1338
+   },
+   {
     "path": "/installation/apple-tv",
     "title": "IPTV Apple TV 4K 2026 : Installation tvOS",
     "words": 1337
@@ -703,11 +713,6 @@
     "path": "/installation/android-mobile",
     "title": "IPTV Android Mobile Tablette 2026 : Installation",
     "words": 1322
-   },
-   {
-    "path": "/guides/iptv-telegram",
-    "title": "IPTV Telegram : groupes, risques et alternatives",
-    "words": 1319
    },
    {
     "path": "/guides/essai-iptv-gratuit",
@@ -1028,7 +1033,7 @@
     "covered": true
    }
   ],
-  "n_articles": 95,
+  "n_articles": 97,
   "n_thin": 0
  },
  "iptvned.com": {
@@ -1080,11 +1085,6 @@
    },
    {
     "path": "/iptv-legaal-nederland",
-    "title": "Is IPTV legaal of illegaal in Nederland? (2026) · IPTVNED",
-    "words": 2246
-   },
-   {
-    "path": "/blog/smart-iptv-nederland",
     "title": "Is IPTV legaal of illegaal in Nederland? (2026) · IPTVNED",
     "words": 2246
    },
@@ -1259,11 +1259,6 @@
     "words": 506
    },
    {
-    "path": "/blog/iptv-m3u-lijsten-nederland",
-    "title": "M3U IPTV Nederland 2026 — playlists & installatie · IPTVNED",
-    "words": 478
-   },
-   {
     "path": "/blog/iptv-vs-streaming-vergelijking",
     "title": "IPTV vs streaming: wat past bij u?",
     "words": 448
@@ -1351,8 +1346,8 @@
     "covered": true
    }
   ],
-  "n_articles": 47,
-  "n_thin": 4
+  "n_articles": 45,
+  "n_thin": 3
  },
  "iptvpix.com": {
   "articles": [

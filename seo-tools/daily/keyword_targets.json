@@ -13,8 +13,7 @@
   {
    "kw": "mejor iptv españa",
    "vol": 720,
-   "pos": 43,
-   "url": "/"
+   "pos": null
   },
   {
    "kw": "iptv smarters pro",
@@ -24,14 +23,13 @@
   {
    "kw": "listas iptv españa telegram",
    "vol": 390,
-   "pos": 3,
+   "pos": 1,
    "url": "/"
   },
   {
    "kw": "proveedor iptv",
    "vol": 480,
-   "pos": 46,
-   "url": "/"
+   "pos": null
   }
  ],
  "primeiptv-france.com": [
@@ -58,7 +56,8 @@
   {
    "kw": "abonnement iptv 12 mois",
    "vol": 4400,
-   "pos": null
+   "pos": 27,
+   "url": "/"
   },
   {
    "kw": "meilleur abonnement iptv",
@@ -205,13 +204,12 @@
   {
    "kw": "smarters player lite",
    "vol": 12100,
-   "pos": 55,
-   "url": "/"
+   "pos": null
   },
   {
    "kw": "iptv smarters pro firestick",
    "vol": 70,
-   "pos": 47,
+   "pos": 45,
    "url": "/"
   },
   {
@@ -263,14 +261,14 @@
   {
    "kw": "essai iptv 7 jours",
    "vol": 90,
-   "pos": 4,
+   "pos": 49,
    "page": "/test-iptv",
    "url": "/"
   },
   {
    "kw": "meilleur boitier iptv",
    "vol": 720,
-   "pos": 11,
+   "pos": 8,
    "page": "/boitier-iptv",
    "url": "/"
   },
@@ -321,7 +319,7 @@
   {
    "kw": "que es una lista m3u",
    "vol": 50,
-   "pos": 28,
+   "pos": 27,
    "page": "/guias/que-es-lista-m3u",
    "url": "/"
   },

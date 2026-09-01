@@ -1,15 +1,11 @@
 {
  "iptvesp.com": {
-  "pages": 67,
+  "pages": 66,
   "titles_over60": [],
-  "redirect_links": [
-   "blog/iptv-m3u-espana"
-  ],
+  "redirect_links": [],
   "linked404": {},
   "orphans": [],
-  "canonical_mismatch": [
-   "blog/iptv-m3u-espana"
-  ],
+  "canonical_mismatch": [],
   "no_meta_desc": [],
   "thin": [
    "checkout",
@@ -24,12 +20,10 @@
   "www_redirect": "308 -> https://iptvesp.com/"
  },
  "primeiptv-france.com": {
-  "pages": 102,
+  "pages": 104,
   "titles_over60": [],
   "redirect_links": [],
-  "linked404": {
-   "guides/iptv-smarters-pro": 1
-  },
+  "linked404": {},
   "orphans": [],
   "canonical_mismatch": [],
   "no_meta_desc": [],
@@ -41,18 +35,12 @@
   "www_redirect": "308 -> https://primeiptv-france.com/"
  },
  "iptvned.com": {
-  "pages": 62,
+  "pages": 60,
   "titles_over60": [],
-  "redirect_links": [
-   "blog/iptv-m3u-lijsten-nederland",
-   "blog/smart-iptv-nederland"
-  ],
+  "redirect_links": [],
   "linked404": {},
   "orphans": [],
-  "canonical_mismatch": [
-   "blog/iptv-m3u-lijsten-nederland",
-   "blog/smart-iptv-nederland"
-  ],
+  "canonical_mismatch": [],
   "no_meta_desc": [],
   "thin": [
    "afrekenen",
