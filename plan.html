@@ -2,30 +2,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%23cc785c%22 d=%22M12 2l8 10-8 10-8-10z%22/%3E%3C/svg%3E">
 <style>
   /* ============ TOKENS — Anthropic-inspired warm/flat ============ */
-  .viz-root{color-scheme:light;
-    --surface:#f5f4ee;--surface2:#ecebe3;--card:#ffffff;--line:#e4e2d8;--line2:#efeee7;
-    --ink:#191817;--ink2:#46443e;--ink3:#8b887d;
-    --acc:#cc785c;--acc2:#b8613f;--accsoft:#f7ece6;
-    --s1:#cc785c;--s2:#6a9b8f;--s3:#c99a3b;--s4:#8a7fb0;--s5:#b5654f;--s6:#5f7a86;--s7:#7d8f5a;--s8:#a06b8a;--s9:#4f7d9e;--s10:#8f6f4f;
-    --up:#4f7a52;--down:#bb4d3e;
-    --sh1:0 1px 2px rgba(25,24,23,.05);
-    --sh2:0 4px 16px rgba(25,24,23,.08);
+  .viz-root{color-scheme:dark;
+    --surface:#14152e;--surface2:#1d1f3d;--card:#1e2040;--line:#2c2f56;--line2:#262949;
+    --ink:#f2f3fa;--ink2:#c0c3dc;--ink3:#8489ad;
+    --acc:#35c3f5;--acc2:#7ee0ff;--accsoft:#1b2c4a;
+    --s1:#35c3f5;--s2:#8f7ff0;--s3:#f0c34e;--s4:#ff8fa8;--s5:#4fe0b0;--s6:#f09a4e;--s7:#9cb175;--s8:#c08aa9;--s9:#6f9dc0;--s10:#b8956d;
+    --up:#3ddc84;--down:#ff5a72;
+    --sh1:0 1px 2px rgba(0,0,0,.35);
+    --sh2:0 8px 26px rgba(0,0,0,.45);
     --r:14px;--rs:10px;--rp:999px;
-    --serif:ui-serif,Georgia,"Iowan Old Style","Times New Roman",serif}
-  @media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])) .viz-root{color-scheme:dark;
-    --surface:#1b1a17;--surface2:#242220;--card:#232120;--line:#38352f;--line2:#2b2926;
-    --ink:#f7f5ee;--ink2:#dbd7cb;--ink3:#aaa599;
-    --acc:#d98d6f;--acc2:#cc785c;--accsoft:#33261f;
-    --s1:#d98d6f;--s2:#7fb0a3;--s3:#d6ab55;--s4:#a99ed0;--s5:#cc785c;--s6:#7f9aa8;--s7:#9cb175;--s8:#c08aa9;--s9:#6f9dc0;--s10:#b8956d;
-    --up:#6ea86f;--down:#e0715c;
-    --sh1:0 1px 2px rgba(0,0,0,.3);--sh2:0 8px 26px rgba(0,0,0,.5)}}
-  :root[data-theme="dark"] .viz-root{color-scheme:dark;
-    --surface:#1b1a17;--surface2:#242220;--card:#232120;--line:#38352f;--line2:#2b2926;
-    --ink:#f7f5ee;--ink2:#dbd7cb;--ink3:#aaa599;
-    --acc:#d98d6f;--acc2:#cc785c;--accsoft:#33261f;
-    --s1:#d98d6f;--s2:#7fb0a3;--s3:#d6ab55;--s4:#a99ed0;--s5:#cc785c;--s6:#7f9aa8;--s7:#9cb175;--s8:#c08aa9;--s9:#6f9dc0;--s10:#b8956d;
-    --up:#6ea86f;--down:#e0715c;
-    --sh1:0 1px 2px rgba(0,0,0,.3);--sh2:0 8px 26px rgba(0,0,0,.5)}
+    --serif:"Segoe UI",ui-sans-serif,-apple-system,Roboto,Inter,sans-serif}
+  
+
 
 
   /* ============ MISSION CONTROL v4 ============ */
@@ -83,11 +71,17 @@
   @media (max-width:860px){.heroGrid{grid-template-columns:1fr;gap:18px}.heroNum{font-size:44px}
     .lgspark{display:none}.lgbest{min-width:0}}
 
+  .gpills{display:flex;flex-direction:column;gap:12px;min-width:260px}
+  .gpill{display:flex;flex-direction:column;gap:4px}
+  .gpillL{font:600 10.5px ui-monospace,Menlo,monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3)}
+  .gpill.done .gpillL{color:var(--up)}
+  .gpillV{font:600 13px ui-sans-serif,sans-serif;font-variant-numeric:tabular-nums}
+  @media (max-width:860px){.gpills{min-width:0}}
   /* ============ BASE + SHELL ============ */
   *{box-sizing:border-box}
-  html,body{margin:0;max-width:100%;overflow-x:hidden;overflow-x:clip;background:#f5f4ee}
-  @media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])) body,:root:where(:not([data-theme="light"])){background:#1b1a17}}
-  :root[data-theme="dark"],:root[data-theme="dark"] body{background:#1b1a17}
+  html,body{margin:0;max-width:100%;overflow-x:hidden;overflow-x:clip;background:#14152e}
+  
+  :root,body{background:#14152e}
   .viz-root{background:var(--surface);color:var(--ink);
     font:14.5px/1.6 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Inter,sans-serif;
     min-height:100vh;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
@@ -419,9 +413,41 @@
   @media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])) .viz-root .statusline.ok{background:#20301f;color:#7bb37c}
     :root:where(:not([data-theme="light"])) .viz-root .statusline.warn{background:#332b1a;color:#d6ab55}
     :root:where(:not([data-theme="light"])) .viz-root .statusline.crit{background:#3a231c;color:#e0846c}}
+
+  /* board look overrides (single navy theme) */
+  .b-good,.chg.good,.hchip.ok,.krank.good,.tkpi,.alert.good{background:#173a2a;color:#5fe6a1}
+  .b-bad,.chg.down,.hchip.bad,.tp0,.alert.crit{background:#3d1f2a;color:#ff8296}
+  .b-flag,.chg.info,.krank.ok,.topen{background:#20335c;color:#7fb3f0}
+  .krank.far{background:#2a2c50;color:#9aa0c8}.krank.miss{background:#2a2444;color:#a29ac2}
+  .b-warn,.alert.warn{background:#3a3220;color:#f0c34e}.b-neutral{background:#262949;color:#c0c3dc}
+  .statusline.ok{background:#173a2a;color:#5fe6a1}.statusline.warn{background:#3a3220;color:#f0c34e}
+  .statusline.crit{background:#3d1f2a;color:#ff8296}
+  .heroNum{color:#fff}
+  .copybtn{background:var(--acc);color:#0d1024}
+  /* board grid + tiles */
+  .board{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-bottom:18px}
+  .board .card{margin-bottom:0}
+  .t3{grid-column:span 3}.t4{grid-column:span 4}.t5{grid-column:span 5}.t6{grid-column:span 6}
+  .t7{grid-column:span 7}.t8{grid-column:span 8}.t12{grid-column:span 12}
+  .tile{display:flex;flex-direction:column;justify-content:flex-start;gap:2px}
+  .tileNum{font-size:46px;font-weight:700;line-height:1.05;color:#fff;letter-spacing:-.01em;font-variant-numeric:tabular-nums;margin-top:6px}
+  .tileNum small{font-size:20px;color:var(--ink3);font-weight:600}
+  .tileLbl{font-size:14px;color:var(--ink2);margin-top:2px}
+  .tileDelta{font:600 13px ui-sans-serif,sans-serif;margin-top:8px}
+  .tileDelta.up{color:var(--up)}.tileDelta.down{color:var(--down)}
+  .barlist{display:flex;flex-direction:column;gap:13px;margin-top:12px}
+  .bl{display:flex;flex-direction:column;gap:5px;text-decoration:none;color:var(--ink)}
+  .blTop{display:flex;align-items:baseline;gap:8px}
+  .blName{font-size:13.5px;color:var(--ink2)}
+  .blVal{margin-left:auto;font:700 14px ui-sans-serif,sans-serif;font-variant-numeric:tabular-nums;color:#fff}
+  .blSub{font-size:11px;color:var(--ink3)}
+  .blBar{height:5px;border-radius:3px;background:var(--surface2);overflow:hidden}
+  .blFill{height:100%;border-radius:3px}
+  @media (max-width:1000px){.t3,.t4,.t5{grid-column:span 6}.t6,.t7,.t8{grid-column:span 12}}
+  @media (max-width:640px){.t3,.t4,.t5{grid-column:span 12}.tileNum{font-size:38px}}
 </style>
 <div class="viz-root"><div class="app">
-<aside class="side"><a class="brand" href="./"><span class="brandmark"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l8 10-8 10-8-10z"/></svg></span><span>IPTV<b>SEO</b></span></a><nav class="nav"><a class="navitem" href="./"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg></span>Portfolio</a><a class="navitem" href="today"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>Today</a><a class="navitem" href="trends"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9 11l4 4 8-8"/><path d="M17 7h4v4"/></svg></span>Trends</a><a class="navitem" href="links"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15 15 9"/><path d="M11 6.5 12.5 5a4 4 0 0 1 5.7 5.7l-1.5 1.5"/><path d="M13 17.5 11.5 19a4 4 0 0 1-5.7-5.7l1.5-1.5"/></svg></span>Backlinks</a><a class="navitem on" href="plan"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg></span>Plan</a><a class="navitem" href="sales"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l3 6-9 12L3 9z"/><path d="M3 9h18"/></svg></span>Sales</a><div class="navsec">Sites</div><a class="navitem site" href="iptvesp"><span class="dot s1"></span>iptvesp</a><a class="navitem site" href="primeiptv-france"><span class="dot s2"></span>primeiptv-france</a><a class="navitem site" href="iptvned"><span class="dot s3"></span>iptvned</a><a class="navitem site" href="iptvpix"><span class="dot s4"></span>iptvpix</a><a class="navitem site" href="smarters-live"><span class="dot s5"></span>smarters-live</a><a class="navitem site" href="iptvshqiptar"><span class="dot s6"></span>iptvshqiptar</a><a class="navitem site" href="smartersprofrance-fr"><span class="dot s7"></span>smartersprofrance.fr</a><a class="navitem site" href="iptvfranceofficiel-fr"><span class="dot s8"></span>iptvfranceofficiel.fr</a><a class="navitem site" href="abonnementiptvofficiel"><span class="dot s9"></span>abonnementiptvofficiel</a><a class="navitem site" href="iptvsegura"><span class="dot s10"></span>iptvsegura</a></nav><div class="sidefoot">Updated<br>2026-09-01 07:23 UTC</div></aside>
+<aside class="side"><a class="brand" href="./"><span class="brandmark"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l8 10-8 10-8-10z"/></svg></span><span>IPTV<b>SEO</b></span></a><nav class="nav"><a class="navitem" href="./"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg></span>Portfolio</a><a class="navitem" href="today"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>Today</a><a class="navitem" href="trends"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9 11l4 4 8-8"/><path d="M17 7h4v4"/></svg></span>Trends</a><a class="navitem" href="links"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15 15 9"/><path d="M11 6.5 12.5 5a4 4 0 0 1 5.7 5.7l-1.5 1.5"/><path d="M13 17.5 11.5 19a4 4 0 0 1-5.7-5.7l1.5-1.5"/></svg></span>Backlinks</a><a class="navitem on" href="plan"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg></span>Plan</a><a class="navitem" href="sales"><span class="navicon"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l3 6-9 12L3 9z"/><path d="M3 9h18"/></svg></span>Sales</a><div class="navsec">Sites</div><a class="navitem site" href="iptvesp"><span class="dot s1"></span>iptvesp</a><a class="navitem site" href="primeiptv-france"><span class="dot s2"></span>primeiptv-france</a><a class="navitem site" href="iptvned"><span class="dot s3"></span>iptvned</a><a class="navitem site" href="iptvpix"><span class="dot s4"></span>iptvpix</a><a class="navitem site" href="smarters-live"><span class="dot s5"></span>smarters-live</a><a class="navitem site" href="iptvshqiptar"><span class="dot s6"></span>iptvshqiptar</a><a class="navitem site" href="smartersprofrance-fr"><span class="dot s7"></span>smartersprofrance.fr</a><a class="navitem site" href="iptvfranceofficiel-fr"><span class="dot s8"></span>iptvfranceofficiel.fr</a><a class="navitem site" href="abonnementiptvofficiel"><span class="dot s9"></span>abonnementiptvofficiel</a><a class="navitem site" href="iptvsegura"><span class="dot s10"></span>iptvsegura</a></nav><div class="sidefoot">Updated<br>2026-09-01 07:39 UTC</div></aside>
 <main class="main"><div class="wrap">
 <a class="backlink" href="./">← Portfolio home</a><h1>Plan — where we are going</h1><p class="meta">The standing strategy. Daily execution lives in <a class="slink" href="today">Today</a>; the link engine in <a class="slink" href="links">Backlinks</a>.</p><div class="card"><h2>Where each site stands — 2026-09-01</h2><div class="overflow"><table><thead><tr><th>site</th><th>phase</th><th>this cycle's job</th><th>status</th></tr></thead><tbody><tr><td>iptvesp.com</td><td>GROW <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9 11l4 4 8-8"/><path d="M17 7h4v4"/></svg></td><td>Protect the Spanish money queries; conversion module in the Telegram cluster</td><td>34 kw · 42 ref.dom</td></tr><tr><td>primeiptv-france.com</td><td>FLAGSHIP 🏁</td><td>All new FR content + every outreach link points here</td><td>26 kw · 12 ref.dom</td></tr><tr><td>iptvned.com</td><td>REBUILD 🔧</td><td>Legal-B2B cluster + NL links</td><td>30 kw · 21 ref.dom</td></tr><tr><td>iptvpix.com</td><td>RECOVERING 📶</td><td>Keep strengthening internal links; no restructuring</td><td>— kw · 40 ref.dom</td></tr><tr><td>smarters-live.com</td><td>BUILD 🔧</td><td>Rank the Smarters-Pro hub and the shipped tools</td><td>1 kw · 11 ref.dom</td></tr><tr><td>iptvshqiptar.com</td><td>BASELINE 🧱</td><td>Core Albanian content + light link tier</td><td>— kw · 7 ref.dom</td></tr><tr><td>smartersprofrance.fr</td><td>SATELLITE ↺</td><td>Install/config long-tail only</td><td>12 kw · — ref.dom</td></tr><tr><td>iptvfranceofficiel.fr</td><td>SATELLITE ↺</td><td>Premium/HDR lane; retitle /application-iptv off the head term</td><td>— kw · — ref.dom</td></tr><tr><td>abonnementiptvofficiel.com</td><td>WATCH ◎</td><td>Money pages frozen; support with internal links only</td><td>15 kw · 13 ref.dom</td></tr><tr><td>iptvsegura.com</td><td>ONBOARD ◔</td><td>NEW: ES safety/trust lane — GSC property + first links + fix titles/www</td><td>— kw · — ref.dom</td></tr></tbody></table></div></div><div class="card"><h2>Standing strategy</h2><ul class="lcl"><li><b>FR flagship = primeiptv.</b> All French links and content investment go here until further notice.</li><li><b>iptvesp = protect &amp; monetise.</b> The Telegram cluster carries the traffic; the money page must stay fast and linked.</li><li><b>iptvpix = recovering.</b> No penalty; the cause was authority/crawl-demand. Domain Rank is now measurable and Semrush lists it again. No restructuring.</li><li><b>Satellites stay in their lanes</b> — spf install/config, ifo premium/HDR, aio trial/deals. One keyword, one page, one site.</li><li><b>Authority is the portfolio ceiling.</b> Referring domains per site are still in the single digits on the flagship — the Backlinks steps are the highest-leverage work available.</li><li><b>AI search is a live channel.</b> ChatGPT already cites the portfolio; write every article so it can be cited (numbered steps, direct answers, tables).</li></ul></div><div class="card" style="border-left:4px solid var(--s2)"><h2><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg> Content OS — the 5-skill pipeline</h2><p class="sub">Every article now ships through the installed skill system instead of one-shot prompts. Each site page carries its ready-to-copy workflow with its reserved keyword.</p><div class="overflow"><table><thead><tr><th>step</th><th>skill</th><th>what it produces</th></tr></thead><tbody><tr><td>0</td><td><code>site-brief-builder</code></td><td>done — 9 briefs drafted at <code>seo-tools/briefs/&lt;site&gt;/site-brief.md</code> (⚠️-verify fields await the owner)</td></tr><tr><td>1</td><td><code>keyword-fanout-map</code></td><td>intent-clustered keyword map with live volumes (01-keyword-map.csv)</td></tr><tr><td>2</td><td><code>seo-content-writer</code></td><td>the article — citation-ready structure, voice from the brief</td></tr><tr><td>3</td><td><code>onpage-optimizer</code></td><td>title/meta/headings/schema pass on the draft</td></tr><tr><td>4</td><td><code>internal-link-architect</code></td><td>exact links in/out with anchors (money page prioritised)</td></tr><tr><td>5</td><td><code>ai-visibility-checker</code></td><td>AI-citation gap list — feeds the next cycle</td></tr></tbody></table></div><p class="sub" style="margin-top:8px">Guard rails stay in force: the reserved-keyword queue and the lane contract in each brief mean the pipeline cannot cannibalize a sibling site. The dashboard audit remains the verifier of record.</p></div><div class="card"><h2><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l3 6-9 12L3 9z"/><path d="M3 9h18"/></svg> Sales — the missing metric</h2><p class="sub" style="margin:0">The dashboard tracks visibility; the business runs on subscriptions. Give Claude a weekly number per site (even approximate — "esp 6 sales, prime 2") and a revenue column joins the Weekly scorecard, closing the loop from clicks to money.</p></div>
 </div></main>
