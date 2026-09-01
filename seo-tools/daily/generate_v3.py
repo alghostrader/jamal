@@ -619,14 +619,7 @@ def changes_card():
             if b.get(key) is not None and a.get(key) is not None and b[key] != a[key]:
                 d = b[key] - a[key]
                 ch.append(("good" if d > 0 else "down", f"{short}: {lbl} {a[key]} -> {b[key]} ({'+' if d>0 else ''}{d})"))
-        pa, pb = a.get("positions", {}), b.get("positions", {})
-        for kw, np in pb.items():
-            if kw not in pa: continue
-            op = pa.get(kw)
-            if np and not op: ch.append(("good", f'{short}: "{kw}" ENTERED the top 100 at #{np}'))
-            elif op and not np: ch.append(("down", f'{short}: "{kw}" dropped out of the top 100 (was #{op})'))
-            elif np and op and np != op:
-                ch.append(("good" if np < op else "down", f'{short}: "{kw}" #{op} -> #{np}'))
+        # per-keyword moves live on the Rankings board (movement arrows) — not repeated here
         if b.get("pages") and a.get("pages") and b["pages"] != a["pages"]:
             d = b["pages"] - a["pages"]
             ch.append(("info", f"{short}: {a['pages']} -> {b['pages']} pages ({'+' if d>0 else ''}{d})"))
@@ -839,6 +832,88 @@ def country_card():
 
 
 # ---------------- mission control (v4 home) ----------------
+
+def tile(cls, label, num, sub="", delta=None):
+    d = ""
+    if delta is not None:
+        up = delta >= 0
+        d = f'<span class="tileDelta {"up" if up else "down"}">{"▲" if up else "▼"} {abs(delta):,} vs last week</span>'
+    return (f'<div class="card tile {cls}"><span class="kpiL">{label}</span>'
+            f'<span class="tileNum">{num}</span>'
+            + (f'<span class="tileLbl">{sub}</span>' if sub else "") + d + '</div>')
+
+def board_row1():
+    dates, vals = _port_series()
+    wk = sum(vals[-7:]) if vals else 0
+    pw = sum(vals[-14:-7]) if len(vals) >= 14 else 0
+    n_rank = sum(nrank(s) for s in ALL)
+    top10 = goal_current("top10")
+    chart = area_chart(vals[-30:], dates[-30:], w=520, h=150, color="var(--acc)", cid="acbrd", label="Clicks 30d") if len(vals) >= 8 else ""
+    tgt = next((x["target"] for x in GOALS.get("goals", []) if x["id"] == "clicks"), 0)
+    pct = max(3, min(100, round(100 * wk / tgt))) if tgt else 0
+    clicks_tile = (f'<div class="card tile t3"><span class="kpiL">CLICKS · PAST 7 DAYS</span>'
+                   f'<span class="tileNum">{wk:,}</span>'
+                   f'<span class="tileDelta {"up" if wk-pw>=0 else "down"}">{"▲" if wk-pw>=0 else "▼"} {abs(wk-pw):,} vs last week</span>'
+                   f'<div class="ctryTrack" style="margin-top:10px"><div class="ctryFill" style="width:{pct}%"></div></div>'
+                   f'<span class="tileLbl">{pct}% of the {tgt:,}/week goal</span></div>')
+    return ('<div class="board">'
+            + clicks_tile
+            + f'<div class="card t5"><span class="kpiL">CLICKS · 30 DAYS</span><div style="margin-top:8px">{chart}</div></div>'
+            + tile("t4", "TARGETS IN TOP 100", f'{n_rank}<small> / 58</small>', f"{top10} on page 1")
+            + '</div>')
+
+def board_goals():
+    t = ""
+    for gl in GOALS.get("goals", []):
+        if gl["id"] == "clicks": continue
+        cur, tgt = goal_current(gl["id"]), gl["target"]
+        pct = max(3, min(100, round(100 * cur / tgt))) if tgt else 0
+        done = cur >= tgt
+        foot = "done, goal complete" if done else f"{pct}% - due {gl.get('due', '')}"
+        barcol = "var(--up)" if done else "var(--acc)"
+        t += (f'<div class="card tile t4"><span class="kpiL">{H.escape(gl["label"]).upper()}</span>'
+              f'<span class="tileNum">{cur:,}<small> / {tgt:,}</small></span>'
+              f'<div class="ctryTrack" style="margin-top:10px"><div class="ctryFill" style="width:{pct}%;background:{barcol}"></div></div>'
+              f'<span class="tileLbl">{H.escape(foot)}{" ✓" if done else ""}</span></div>')
+    return f'<div class="board">{t}</div>'
+
+def league_barlist():
+    rows = []
+    mx = 1
+    for s in ALL:
+        d = daily_of(s)
+        wk = sum(x["clicks"] for x in d[-7:]) if d else 0
+        pw = sum(x["clicks"] for x in d[-14:-7]) if len(d) >= 14 else 0
+        best = None
+        for r in KT.get(s, []):
+            if r.get("pos") and (best is None or r["pos"] < best[0]): best = (r["pos"], r["kw"])
+        rows.append((wk, wk - pw, best, s)); mx = max(mx, wk)
+    rows.sort(key=lambda x: -x[0])
+    out = ""
+    for wk, d, best, s in rows:
+        col = f"var(--s{ALL.index(s)+1})"
+        dtxt = f'<span class="tileDelta {"up" if d>=0 else "down"}" style="margin:0">{"▲" if d>=0 else "▼"}{abs(d)}</span>' if (wk or d) else ""
+        btxt = f'#{best[0]} {H.escape(best[1][:24])}' if best else "no rankings yet"
+        rd = (SEM.get(s) or {}).get("ref_domains")
+        out += (f'<a class="bl" href="{SLUG[s]}"><div class="blTop"><span class="dot" style="background:{col}"></span>'
+                f'<span class="blName">{s.replace(".com","").replace(".fr","")}</span>'
+                f'<span class="blSub">{btxt} · {rd if rd is not None else "—"} rd</span>'
+                f'{dtxt}<span class="blVal">{wk:,}</span></div>'
+                f'<div class="blBar"><div class="blFill" style="width:{max(2, round(100*wk/mx))}%;background:{col}"></div></div></a>')
+    return (f'<div class="card t6"><h2>{icon("award")} Traffic by site — 7 days</h2>'
+            f'<div class="barlist">{out}</div></div>')
+
+def board_row2():
+    return ('<div class="board">' + league_barlist()
+            + f'<div class="t6">{tier_board()}</div>' + '</div>')
+
+def board_row3():
+    return ('<div class="board">'
+            f'<div class="t4">{moves_card()}</div>'
+            f'<div class="t4">{changes_card()}</div>'
+            f'<div class="t4">{milestones_card()}</div>'
+            '</div>')
+
 def _dyn_top100():
     return f"{sum(dfs_of(s).get('ranked_top100') or 0 for s in ALL):,}"
 def _dyn_rd():
@@ -852,24 +927,41 @@ def statusline():
     return (f'<div class="statusline {cls}"><span class="stdot"></span><b>{txt}</b>'
             f'<span class="stmeta">{NSITES} sites · 58 keywords probed · {H.escape(STAMP_TXT)}</span></div>')
 
+def goal_current(gid):
+    if gid == "clicks": return sum(wk7(s) for s in ALL)
+    if gid == "top10": return sum(1 for s in ALL for r in KT.get(s, []) if r.get("pos") and r["pos"] <= 10)
+    if gid == "prime_rd": return (SEM.get("primeiptv-france.com") or {}).get("ref_domains") or 0
+    if gid == "earning": return sum(1 for s in ALL if wk7(s) > 0)
+    return 0
+
 def hero_v4():
     dates, vals = _port_series()
     wk = sum(vals[-7:]) if vals else 0
     prev = sum(vals[-14:-7]) if len(vals) >= 14 else 0
     d = wk - prev
-    dcls = "up" if d >= 0 else "down"
+    pills = ""
+    for gl in GOALS.get("goals", []):
+        cur, tgt = goal_current(gl["id"]), gl["target"]
+        pct = max(3, min(100, round(100 * cur / tgt))) if tgt else 0
+        done = cur >= tgt
+        pills += (f'<div class="gpill{" done" if done else ""}"><span class="gpillL">{H.escape(gl["label"])}'
+                  + (' ✓' if done else '') + '</span>'
+                  f'<span class="gpillV">{cur:,} / {tgt:,}</span>'
+                  f'<div class="ctryTrack"><div class="ctryFill" style="width:{pct}%"></div></div></div>')
     spark_html = spark(vals[-30:], color="var(--acc)") if len(vals) >= 8 else ""
     return (f'<div class="hero"><div class="heroGrid"><div class="heroMain">'
             f'<h1>IPTV Portfolio</h1>'
             f'<div class="heroNum">{wk:,}<span class="heroUnit">clicks / week</span></div>'
-            f'<span class="kdelta {dcls}">{"▲" if d>=0 else "▼"} {abs(d)} vs prior week</span>'
+            f'<span class="kdelta {"up" if d>=0 else "down"}">{"▲" if d>=0 else "▼"} {abs(d)} vs prior week</span>'
             f'<div class="heroSpark">{spark_html}</div></div>'
-            f'<div class="kpibar herokpis">'
-            + _kpi(icon("trend"), "Keywords · top 100", _dyn_top100(), "DataForSEO live")
-            + _kpi(icon("target"), "Targets ranking", f"{sum(nrank(s) for s in ALL)}", "of 58 tracked")
-            + _kpi(icon("link"), "Referring domains", _dyn_rd(), "Semrush live")
-            + _kpi(icon("gem"), "Sites earning", f"{sum(1 for s in ALL if wk7(s) > 0)}/{NSITES}", "clicks this week")
-            + '</div></div></div>')
+            f'<div class="gpills">{pills}</div></div></div>'
+            )
+
+def attention_card():
+    items = [(lv, t) for lv, t in alerts() if lv in ("crit", "warn")]
+    if not items: return ""
+    rows = "".join(f'<div class="alert {lv}"><b>{"URGENT" if lv == "crit" else "FIX"}</b> · {t}</div>' for lv, t in items)
+    return (f'<div class="card" id="attention"><h2>{icon("warn")} Needs attention — {len(items)} item(s)</h2>{rows}</div>')
 
 def moves_card():
     moves = []
@@ -1012,8 +1104,8 @@ sitelist = (f'<div class="card"><h2>Websites</h2><p class="sub">Status · keywor
 
 control = (f'<div class="grid2"><div>{traffic_chart_card()}{ai_search_card()}</div>'
            f'<div class="rail">{country_card()}{gauges_card()}{opportunity_card()}</div></div>')
-home_body = (statusline() + hero_v4() + alerts_card() + goals_card() + moves_card() + changes_card()
-             + league_table() + tier_board() + control + milestones_card())
+home_body = ('<h1 style="margin-bottom:14px">IPTV Portfolio</h1>' + statusline() + board_row1()
+             + board_goals() + attention_card() + board_row2() + board_row3())
 open(os.path.join(OUT, "index.html"), "w").write(shell("IPTV Portfolio — SEO Dashboard", home_body, cur=None))
 
 today_body = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Today — the daily queue</h1>'
@@ -1026,7 +1118,7 @@ def trends_body():
     b = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Trends — are we winning?</h1>'
          f'<p class="meta">Authority and ranking history builds from {H.escape(HIST[0]["date"]) if HIST else "today"} onward. '
          + ("Search Console traffic is paused until the service-account key is restored." if GSC_OFF else "") + '</p>')
-    b += traffic_chart_card() + weekly_scorecard()
+    b += traffic_chart_card() + weekly_scorecard() + ai_search_card()
     cards = ""
     order = sorted(ALL, key=lambda s: -(dfs_of(s).get("ranked_top100") or 0))
     for s in order:
