@@ -1111,40 +1111,58 @@ open(os.path.join(OUT, "index.html"), "w").write(shell("IPTV Portfolio — SEO D
 today_body = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Today — the daily queue</h1>'
               f'<p class="meta">Rebuilt {H.escape(STAMP_TXT)} · run the steps top to bottom, one prompt at a time · '
               f'when done say "update the dashboard"</p>') + TODAY_HTML
+_n_steps = len(_steps)
+_owner_n = 3
+_today_tiles = ('<div class="board">'
+    + tile("t4", "STEPS IN THE QUEUE", f"{_n_steps}", "auto-clear when the next audit verifies them")
+    + tile("t4", "TARGETS RANKING", f"{sum(nrank(s) for s in ALL)}", "across all sites, probed live")
+    + tile("t4", "DEFECTS OPEN", f"{sum(1 for lv, _ in alerts() if lv == chr(99)+chr(114)+chr(105)+chr(116))}", "crawl-verified this audit"))
+_today_tiles += '</div>'
+today_body = today_body.replace('<h1>', '<h1 data-tiles>', 1)
+today_body = today_body.replace('</p>', '</p>' + _today_tiles, 1)
 open(os.path.join(OUT, "today.html"), "w").write(shell("Today — Daily SEO Plan", today_body, cur="today", extra_js=COPY_JS))
 
 # trends
 def trends_body():
-    b = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Trends — are we winning?</h1>'
-         f'<p class="meta">Authority and ranking history builds from {H.escape(HIST[0]["date"]) if HIST else "today"} onward. '
-         + ("Search Console traffic is paused until the service-account key is restored." if GSC_OFF else "") + '</p>')
-    b += traffic_chart_card() + weekly_scorecard() + ai_search_card()
-    cards = ""
-    order = sorted(ALL, key=lambda s: -(dfs_of(s).get("ranked_top100") or 0))
+    b = (f'<h1>Trends — are we winning?</h1>'
+         f'<p class="meta">History builds from {H.escape(HIST[0]["date"]) if HIST else "today"} onward.'
+         + (" Search Console traffic is paused." if GSC_OFF else "") + '</p>')
+    dates, vals = _port_series()
+    imap = {}
+    for s in ALL:
+        for x in daily_of(s): imap[x["date"]] = imap.get(x["date"], 0) + x["impressions"]
+    ivals = [imap.get(d, 0) for d in dates]
+    tot_c, tot_i = sum(vals), sum(ivals)
+    wk = sum(vals[-7:]); pw = sum(vals[-14:-7]) if len(vals) >= 14 else 0
+    b += ('<div class="board">'
+          + tile("t3", "CLICKS · 90 DAYS", f"{tot_c:,}", "all sites", wk - pw)
+          + f'<div class="card t9"><span class="kpiL">CLICKS PER DAY · 90 DAYS</span><div style="margin-top:8px">'
+          + (area_chart(vals, dates, w=760, h=170, color="var(--acc)", cid="tr1", label="Clicks") if len(vals) > 2 else "") + '</div></div>'
+          + '</div><div class="board">'
+          + tile("t3", "IMPRESSIONS · 90 DAYS", f"{tot_i:,}", "all sites")
+          + f'<div class="card t9"><span class="kpiL">IMPRESSIONS PER DAY · 90 DAYS</span><div style="margin-top:8px">'
+          + (area_chart(ivals, dates, w=760, h=170, color="var(--s2)", cid="tr2", label="Impressions") if len(ivals) > 2 else "") + '</div></div>'
+          + '</div>')
+    b += f'<div class="board"><div class="t6">{weekly_scorecard()}</div><div class="t6">{ai_search_card()}</div></div>'
+    tiles = ""
+    order = sorted(ALL, key=lambda s: -sum(x["clicks"] for x in daily_of(s)[-90:]) if daily_of(s) else 0)
     for s in order:
-        i = ALL.index(s); col = f"var(--s{i+1})"; dfs = dfs_of(s)
-        rd_hist = [h["sites"].get(s, {}).get("ref_domains") for h in HIST if s in h.get("sites", {})]
-        rd_hist = [x for x in rd_hist if x is not None]
-        kw_hist = [h["sites"].get(s, {}).get("ranked_top100") for h in HIST if s in h.get("sites", {})]
-        kw_hist = [x for x in kw_hist if x is not None]
-        def metric(name, val, series):
-            return (f'<div class="tmetric"><div class="tmL"><span class="tmName">{name}</span>'
-                    f'<span class="tmVal">{val}</span></div><div class="spkwrap">{spark(series, color=col)}</div></div>')
-        kt_rows = "".join(f'<tr><td>{H.escape(r["kw"])}</td><td>{(format(r["vol"], ",") if r.get("vol") else "—")}</td>'
-                          f'<td>{"#"+str(r["pos"]) if r.get("pos") else "—"}</td></tr>' for r in KT.get(s, []))
+        i = ALL.index(s); col = f"var(--s{i+1})"; dfs = dfs_of(s); sm = SEM.get(s) or {}
         clk = [x["clicks"] for x in daily_of(s)[-90:]]
-        impr = [x["impressions"] for x in daily_of(s)[-90:]]
-        cards += (f'<div class="card"><div class="schead" style="margin-bottom:6px">'
-                  f'<div class="sname"><a class="slink" href="{SLUG[s]}">{s}</a>{ext(s)}</div>'
-                  f'<span class="badge b-{_sc.CONFIG[s]["tone"]}">{_sc.CONFIG[s]["badge"]} {_sc.CONFIG[s]["status"]}</span></div>'
-                  + (metric("Clicks · 90d", f"{sum(clk):,}", clk) if clk else "")
-                  + (metric("Impressions · 90d", f"{sum(impr):,}", impr) if impr else "")
-                  + metric("Keywords in top 100", dfs.get("ranked_top100") if dfs.get("ranked_top100") is not None else "—", kw_hist or [0])
-                  + metric("Referring domains", dfs.get("ref_domains") if dfs.get("ref_domains") is not None else "—", rd_hist or [0])
-                  + (f'<div class="rectitle" style="border:none;padding-top:14px">KEYWORD TARGETS</div>'
-                     f'<div class="overflow"><table><thead><tr><th>keyword</th><th>vol</th><th>live pos</th></tr></thead>'
-                     f'<tbody>{kt_rows}</tbody></table></div>' if kt_rows else "") + "</div>")
-    return b + f'<div class="tgrid">{cards}</div>'
+        c90 = sum(clk) if clk else 0
+        w7 = sum(clk[-7:]) if clk else 0
+        p7 = sum(clk[-14:-7]) if len(clk) >= 14 else 0
+        d = w7 - p7
+        dl = f'<span class="tileDelta {"up" if d>=0 else "down"}">{"▲" if d>=0 else "▼"} {abs(d)} this week</span>' if clk else ""
+        tiles += (f'<a class="card tile t4" style="text-decoration:none" href="{SLUG[s]}">'
+                  f'<span class="kpiL"><span class="dot" style="background:{col}"></span> {s.replace(".com","").replace(".fr","").upper()}</span>'
+                  f'<span class="tileNum">{c90:,}<small> clicks·90d</small></span>{dl}'
+                  f'<div style="margin-top:8px">{spark(clk, color=col) if clk else chr(39)}</div>'
+                  f'<span class="tileLbl">{dfs.get("ranked_top100") if dfs.get("ranked_top100") is not None else "—"} kw top-100 · '
+                  f'{sm.get("ref_domains") if sm.get("ref_domains") is not None else "—"} ref.dom · '
+                  f'{_sc.CONFIG[s]["status"]}</span></a>')
+    b += f'<h2 style="margin:8px 0 12px;font-size:17px">Per site — 90-day trajectory</h2><div class="board">{tiles}</div>'
+    return b
 open(os.path.join(OUT, "trends.html"), "w").write(shell("Trends — IPTV Portfolio", trends_body(), cur="trends"))
 
 # links
@@ -1280,7 +1298,20 @@ def links_body():
           '<p class="sub">Verifiable outcomes, not busywork. Each one moves the scoreboard at the top.</p>'
           f'<div class="overflow"><table><tbody>{mr}</tbody></table></div></div>')
     return b
-open(os.path.join(OUT, "links.html"), "w").write(shell("Backlinks — IPTV Portfolio", links_body(), cur="links", extra_js=COPY_JS + LINKS_JS))
+_lb = links_body()
+_total_boxes = _lb.count('type="checkbox"')
+_checked_boxes = _lb.count(' checked')
+_rd_tot = sum((SEM.get(s) or {}).get("ref_domains") or 0 for s in ALL)
+_sp_max = max(((dfs_of(s).get("spam_score") or 0), s) for s in ALL)
+_pct = round(100 * _checked_boxes / _total_boxes) if _total_boxes else 0
+_links_tiles = ('<div class="board">'
+    + tile("t4", "REFERRING DOMAINS", f"{_rd_tot}", "Semrush, all sites — the number this page grows")
+    + tile("t4", "CHECKLIST PROGRESS", f"{_pct}%", f"{_checked_boxes} of {_total_boxes} boxes done")
+    + tile("t4", "SPAM WATCH", f"{_sp_max[0]}", f"highest: {_sp_max[1].replace('.com','')} — +4pts = pause that site")
+    + '</div>')
+_lb = _lb.replace('</p>', '</p>' + _links_tiles, 1)
+open(os.path.join(OUT, "links.html"), "w").write(shell("Backlinks — IPTV Portfolio", _lb, cur="links", extra_js=COPY_JS + LINKS_JS))
+
 
 # plan
 prow = ""
@@ -1330,6 +1361,15 @@ plan_body = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Plan — 
              '<p class="sub" style="margin:0">The dashboard tracks visibility; the business runs on subscriptions. '
              'Give Claude a weekly number per site (even approximate — "esp 6 sales, prime 2") and a revenue column '
              'joins the Weekly scorecard, closing the loop from clicks to money.</p></div>')
+_pages_tot = sum(F.get(s, {}).get("pages") or 0 for s in ALL)
+_arts_tot = sum(len(CT.get(s, {}).get("articles", [])) for s in ALL)
+_plan_tiles = ('<div class="board">'
+    + tile("t3", "ACTIVE SITES", f"{NSITES}", "4 markets + Poland planned")
+    + tile("t3", "PAGES LIVE", f"{_pages_tot}", "crawled this audit")
+    + tile("t3", "ARTICLES PUBLISHED", f"{_arts_tot}", "across the portfolio")
+    + tile("t3", "PAGE-1 RANKINGS", f"{goal_current('top10')}", "targets in the top 10")
+    + '</div>')
+plan_body = plan_body.replace('</p>', '</p>' + _plan_tiles, 1)
 open(os.path.join(OUT, "plan.html"), "w").write(shell("Plan — IPTV Portfolio", plan_body, cur="plan"))
 
 # per-site pages
@@ -1456,12 +1496,40 @@ def skill_pipeline_card(s):
             f'The skills read <code>{brief}</code> — voice, lane rules and money page come from there, not from memory.</p>'
             f'<pre class="ptext">{H.escape(seq)}</pre></div>')
 
+
+def site_board(s):
+    d = daily_of(s)
+    wk = sum(x["clicks"] for x in d[-7:]) if d else 0
+    pw = sum(x["clicks"] for x in d[-14:-7]) if len(d) >= 14 else 0
+    dfs = dfs_of(s); sm = SEM.get(s) or {}
+    best = None
+    for r in KT.get(s, []):
+        if r.get("pos") and (best is None or r["pos"] < best[0]): best = (r["pos"], r["kw"])
+    i = ALL.index(s); col = f"var(--s{i+1})"
+    clk = [x["clicks"] for x in d[-30:]] if d else []
+    t1 = (f'<div class="card tile t3"><span class="kpiL">CLICKS · PAST 7 DAYS</span>'
+          f'<span class="tileNum">{wk:,}</span>'
+          + (f'<span class="tileDelta {"up" if wk-pw>=0 else "down"}">{"▲" if wk-pw>=0 else "▼"} {abs(wk-pw)} vs last week</span>' if d else '<span class="tileLbl">no GSC data yet</span>')
+          + (f'<div style="margin-top:8px">{spark(clk, color=col)}</div>' if clk else "") + '</div>')
+    t2 = (f'<div class="card tile t3"><span class="kpiL">BEST LIVE RANKING</span>'
+          + (f'<span class="tileNum">#{best[0]}</span><span class="tileLbl">{H.escape(best[1])}</span>' if best
+             else '<span class="tileNum">—</span><span class="tileLbl">no targets in the top 100 yet</span>') + '</div>')
+    kw100 = dfs.get("ranked_top100")
+    t3_ = (f'<div class="card tile t3"><span class="kpiL">KEYWORDS · TOP 100</span>'
+           f'<span class="tileNum">{kw100 if kw100 is not None else "—"}</span>'
+           f'<span class="tileLbl">{sm.get("organic_keywords") if sm.get("organic_keywords") is not None else "—"} in Semrush · {nrank(s)}/{len(KT.get(s, []))} targets</span></div>')
+    sp_ = dfs.get("spam_score")
+    t4_ = (f'<div class="card tile t3"><span class="kpiL">AUTHORITY</span>'
+           f'<span class="tileNum">{sm.get("ref_domains") if sm.get("ref_domains") is not None else "—"}<small> ref.dom</small></span>'
+           f'<span class="tileLbl">AS {sm.get("authority_score", "—")} · {sm.get("backlinks") if sm.get("backlinks") is not None else "—"} links · spam {sp_ if sp_ is not None else "—"}</span></div>')
+    return f'<div class="board">{t1}{t2}{t3_}{t4_}</div>'
+
 for s in ALL:
     cfg = _sc.CONFIG[s]
     body = (f'<a class="backlink" href="./">← All websites</a><h1>{s} {ext(s)}</h1>'
             f'<p class="meta">{cfg["country"]} — {cfg["desc"]} · updated {H.escape(STAMP_TXT)} · '
             f'<a class="slink" href="https://{s}/" target="_blank" rel="noopener">visit {s} ↗</a></p>')
-    body += domain_overview(s)
+    body += site_board(s)
     body += _sc.card(s, D, F, KT, CT, SEM, RECS)
     body += site_opportunity(s)
     body += (f'<div class="card pcard"><div class="phead"><h2>{icon("clipboard")} Fix Prompt — {s}</h2>'
