@@ -837,6 +837,140 @@ def country_card():
     title = "Ranking targets by country" if GSC_OFF else "Clicks by country · 90d"
     return f'<div class="card"><h2>{icon("globe")} {title}</h2><div class="ctry">{body}</div></div>'
 
+
+# ---------------- mission control (v4 home) ----------------
+def _dyn_top100():
+    return f"{sum(dfs_of(s).get('ranked_top100') or 0 for s in ALL):,}"
+def _dyn_rd():
+    return f"{sum((SEM.get(s) or {}).get('ref_domains') or 0 for s in ALL)}"
+def statusline():
+    n_crit = sum(1 for lv, _ in alerts() if lv == "crit")
+    n_warn = sum(1 for lv, _ in alerts() if lv == "warn")
+    if n_crit: cls, txt = "crit", f"{n_crit} urgent + {n_warn} minor to fix — details below"
+    elif n_warn: cls, txt = "warn", f"all clear except {n_warn} minor item(s) — details below"
+    else: cls, txt = "ok", "ALL CLEAR — zero technical defects across the portfolio"
+    return (f'<div class="statusline {cls}"><span class="stdot"></span><b>{txt}</b>'
+            f'<span class="stmeta">{NSITES} sites · 58 keywords probed · {H.escape(STAMP_TXT)}</span></div>')
+
+def hero_v4():
+    dates, vals = _port_series()
+    wk = sum(vals[-7:]) if vals else 0
+    prev = sum(vals[-14:-7]) if len(vals) >= 14 else 0
+    d = wk - prev
+    dcls = "up" if d >= 0 else "down"
+    spark_html = spark(vals[-30:], color="var(--acc)") if len(vals) >= 8 else ""
+    return (f'<div class="hero"><div class="heroGrid"><div class="heroMain">'
+            f'<h1>IPTV Portfolio</h1>'
+            f'<div class="heroNum">{wk:,}<span class="heroUnit">clicks / week</span></div>'
+            f'<span class="kdelta {dcls}">{"▲" if d>=0 else "▼"} {abs(d)} vs prior week</span>'
+            f'<div class="heroSpark">{spark_html}</div></div>'
+            f'<div class="kpibar herokpis">'
+            + _kpi(icon("trend"), "Keywords · top 100", _dyn_top100(), "DataForSEO live")
+            + _kpi(icon("target"), "Targets ranking", f"{sum(nrank(s) for s in ALL)}", "of 58 tracked")
+            + _kpi(icon("link"), "Referring domains", _dyn_rd(), "Semrush live")
+            + _kpi(icon("gem"), "Sites earning", f"{sum(1 for s in ALL if wk7(s) > 0)}/{NSITES}", "clicks this week")
+            + '</div></div></div>')
+
+def moves_card():
+    moves = []
+    for lv, t in alerts():
+        if lv == "crit":
+            moves.append(("fix", "Fix the urgent item", t[:120], "today")); break
+    moves.append(("links", "One platform row on Backlinks", "The single highest-leverage 30 minutes — every row moved rankings within days.", "links"))
+    cands = []
+    for s in CONTENT_PRIO:
+        rec = CT.get(s, {}).get("recommend", [])
+        gp = next((r for r in rec if not r["covered"] and reserved_for(s, r["kw"])), None)
+        if gp: cands.append((gp["vol"] or 0, s, gp))
+    if cands:
+        cands.sort(reverse=True, key=lambda x: x[0])
+        _, s, gp = cands[0]
+        vol = f"{gp['vol']:,}/mo" if gp['vol'] else "niche"
+        moves.append(("write", f"One article: \u201c{gp['kw']}\u201d", f"{vol} · reserved for {s} · 5-skill pipeline on its page.", SLUG[s]))
+    moves.append(("index", "Request indexing for yesterday\u2019s pages", "GSC \u2192 URL inspection \u2192 Request indexing. Cuts discovery from weeks to days on low-authority sites.", "today"))
+    body = "".join(f'<a class="move" href="{href}"><span class="moveN">{i+1}</span><div class="moveT"><b>{H.escape(t)}</b>'
+                   f'<span>{H.escape(d)}</span></div><span class="srarrow">{icon("arrow")}</span></a>'
+                   for i, (k, t, d, href) in enumerate(moves[:3]))
+    return (f'<div class="card movecard"><h2>{icon("zap")} Today\u2019s three moves</h2>'
+            f'<p class="sub">Do these in order — everything else is optional. The full queue lives in <a class="slink" href="today">Today</a>.</p>'
+            f'<div class="movegrid">{body}</div></div>')
+
+def league_table():
+    rows = []
+    for s in ALL:
+        d = daily_of(s)
+        wk = sum(x["clicks"] for x in d[-7:]) if d else 0
+        pw = sum(x["clicks"] for x in d[-14:-7]) if len(d) >= 14 else 0
+        best = None
+        for r in KT.get(s, []):
+            if r.get("pos") and (best is None or r["pos"] < best[0]): best = (r["pos"], r["kw"])
+        rows.append((wk, wk - pw, best, s))
+    rows.sort(key=lambda x: -x[0])
+    out = ""
+    for i, (wk, d, best, s) in enumerate(rows):
+        cfg = _sc.CONFIG[s]
+        dot = f'<span class="dot s{ALL.index(s)+1}"></span>'
+        spk = spark([x["clicks"] for x in daily_of(s)[-14:]], color=f"var(--s{ALL.index(s)+1})") if daily_of(s) else '<span class="stmeta">no GSC yet</span>'
+        dtxt = f'<span class="kdelta {"up" if d>=0 else "down"}">{"▲" if d>=0 else "▼"}{abs(d)}</span>' if wk or d else ""
+        btxt = f'<span class="krank {"good" if best[0]<=10 else "ok" if best[0]<=30 else "far"}">#{best[0]}</span> <span class="lgkw">{H.escape(best[1][:26])}</span>' if best else '<span class="stmeta">no rankings yet</span>'
+        rd = (SEM.get(s) or {}).get("ref_domains")
+        out += (f'<a class="lgrow" href="{SLUG[s]}"><span class="lgpos">{i+1}</span>{dot}'
+                f'<span class="lgname">{s.replace(".com","").replace(".fr","")}</span>'
+                f'<span class="lgspark">{spk}</span>'
+                f'<span class="lgclicks">{wk:,}<small>/7d</small> {dtxt}</span>'
+                f'<span class="lgbest">{btxt}</span>'
+                f'<span class="lgrd">{rd if rd is not None else "—"}<small> rd</small></span>'
+                f'<span class="badge b-{cfg["tone"]}">{cfg["badge"]} {cfg["status"]}</span></a>')
+    return (f'<div class="card"><h2>{icon("award")} The league — ranked by traffic</h2>'
+            f'<p class="sub">14-day trend · clicks/week with change · best live ranking · referring domains (Semrush) · status. Tap a row for the full site page.</p>'
+            f'<div class="league">{out}</div></div>')
+
+def tier_board():
+    prev_pos = {}
+    if PREV:
+        for s in ALL:
+            for kw, p in PREV.get("sites", {}).get(s, {}).get("positions", {}).items():
+                prev_pos[(s, kw)] = p
+    tiers = [("Page 1", 1, 10, "good"), ("Page 2\u20133", 11, 30, "ok"), ("Climbing", 31, 60, "far"), ("Deep", 61, 100, "far")]
+    ranked, absent = [], 0
+    for s in ALL:
+        for r in KT.get(s, []):
+            if r.get("pos"): ranked.append((r["pos"], r["kw"], s))
+            else: absent += 1
+    ranked.sort()
+    cols = ""
+    for name, lo, hi, cls in tiers:
+        chips = ""
+        for p, kw, s in ranked:
+            if lo <= p <= hi:
+                op = prev_pos.get((s, kw))
+                mv = ""
+                if op and op != p: mv = f'<i class="{"tup" if p < op else "tdn"}">{"▲" if p < op else "▼"}{abs(op-p)}</i>'
+                elif op is None and PREV: mv = '<i class="tup">NEW</i>'
+                chips += (f'<span class="tchip"><span class="dot s{ALL.index(s)+1}"></span>'
+                          f'{H.escape(kw[:30])} <b class="krank {cls}">#{p}</b>{mv}</span>')
+        n = sum(1 for p, _, _ in ranked if lo <= p <= hi)
+        if not chips: chips = '<span class="stmeta">none</span>'
+        cols += (f'<div class="tiercol"><div class="tierhead">{name} <b>{n}</b></div>'
+                 f'<div class="tierchips">{chips}</div></div>')
+    return (f'<div class="card"><h2>{icon("trend")} Rankings board — {len(ranked)}/{len(ranked)+absent} targets in the top 100</h2>'
+            f'<p class="sub">Colored dot = which site. Arrows = movement since the last audit. {absent} target(s) still outside the top 100.</p>'
+            f'<div class="tiers">{cols}</div></div>')
+
+MILESTONES = [
+ ("1 Sep", "primeiptv referring-domains goal COMPLETE: 31/30, a month early"),
+ ("1 Sep", "\u201cmeilleur boitier iptv\u201d reaches PAGE 1 (#8) \u2014 from #62 in two weeks"),
+ ("1 Sep", "\u201clistas iptv espa\u00f1a telegram\u201d back at #1 after the DMCA wobble"),
+ ("28 Aug", "iptvshqiptar enters the top 10 (#9)"),
+ ("25 Aug", "iptvsegura ranks on page 1 (\u201cestafas iptv\u201d #8) at 3 days old"),
+ ("22 Aug", "\u201cessai iptv 7 jours\u201d completes its freeze recovery: #69 \u2192 #4"),
+ ("22 Aug", "iptvsegura.com joins as the 10th site \u2014 ES safety lane"),
+ ("17 Aug", "smartersprofrance earns its first clicks ever"),
+]
+def milestones_card():
+    rows = "".join(f'<div class="mile"><span class="miledate">{d}</span><span>{t}</span></div>' for d, t in MILESTONES)
+    return (f'<div class="card"><h2>{icon("gem")} Milestones — the journey so far</h2><div class="miles">{rows}</div></div>')
+
 def _kpi(ic, label, value, foot="", urg=False):
     return (f'<div class="kpi{" urg" if urg else ""}"><div class="kpiHd"><span class="kpiIcon">{ic}</span>'
             f'<span class="kpiL">{label}</span></div><span class="kpiV">{value}</span>'
@@ -878,8 +1012,8 @@ sitelist = (f'<div class="card"><h2>Websites</h2><p class="sub">Status · keywor
 
 control = (f'<div class="grid2"><div>{traffic_chart_card()}{ai_search_card()}</div>'
            f'<div class="rail">{country_card()}{gauges_card()}{opportunity_card()}</div></div>')
-home_body = (head + alerts_card() + goals_card() + action_strip() + changes_card()
-             + control + rankings_board() + sitelist)
+home_body = (statusline() + hero_v4() + alerts_card() + goals_card() + moves_card() + changes_card()
+             + league_table() + tier_board() + control + milestones_card())
 open(os.path.join(OUT, "index.html"), "w").write(shell("IPTV Portfolio — SEO Dashboard", home_body, cur=None))
 
 today_body = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Today — the daily queue</h1>'
