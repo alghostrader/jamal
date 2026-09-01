@@ -415,6 +415,69 @@ C) BROKEN LINK →
 Subject: Dead link in [article]
 Hi [name] — the link to [dead URL] in [article] returns 404. We keep a live equivalent here: [our URL]. — [name]"""
 
+
+def role_header(emoji, role, who, count, cls=""):
+    return (f'<div class="rolehead {cls}"><span class="roleemoji">{emoji}</span>'
+            f'<div><h2 style="margin:0">{role}</h2><span class="rolesub">{who}</span></div>'
+            f'<span class="rolecount">{count} task(s)</span></div>')
+
+def prompt_card(title, text, note=""):
+    return (f'<div class="card pcard"><div class="phead"><h2>{icon("clipboard")} {title}</h2>'
+            f'<button class="copybtn" data-copy>Copy prompt</button></div>'
+            + (f'<p class="sub">{note}</p>' if note else "")
+            + f'<pre class="ptext">{H.escape(text)}</pre></div>')
+
+def build_work():
+    b = ""
+    # --- DEVELOPER ---
+    dev = [(s, prompts[s]) for s in ALL if tech_items(s)]
+    b += role_header("🔧", "Developer", "technical fixes — crawl-verified, auto-clear when the next audit confirms them", len(dev))
+    if dev:
+        for s, p in dev:
+            b += prompt_card(f"Fix — {s}", p, note=f'Open items on <a class="slink" href="{SLUG[s]}">{s}</a>. Copy, run, done.')
+    else:
+        b += '<div class="card"><p class="sub" style="margin:0">Nothing. Zero technical defects portfolio-wide. ✓</p></div>'
+    # --- SEO / CONTENT ---
+    cands = []
+    for s in CONTENT_PRIO:
+        rec = CT.get(s, {}).get("recommend", [])
+        gp = next((r for r in rec if not r["covered"] and reserved_for(s, r["kw"])), None)
+        if gp: cands.append((gp["vol"] or 0, s, gp))
+    cands.sort(reverse=True, key=lambda x: x[0])
+    b += role_header("✍️", "SEO · Content", "one article per day through the 5-skill pipeline — today\u2019s target first; the queue below is tomorrow", 1)
+    if cands:
+        _, s, gp = cands[0]
+        vol = f"{gp['vol']:,}/mo" if gp["vol"] else "niche volume"
+        seq = (f'Write today\u2019s article with the 5-skill pipeline. Site: {s}. Brief: seo-tools/briefs/{DOM2SLUG[s]}/site-brief.md\n\n'
+               f'1. /keyword-fanout-map  "{gp["kw"]}"  \u2014 {CTRY[s][1]}, {LANG[s][0]}\n'
+               f'2. /seo-content-writer  \u2014 blog post; check no same-market article already targets it. STOP if one does.\n'
+               f'3. /onpage-optimizer  \u2014 on the draft\n'
+               f'4. /internal-link-architect  \u2014 link plan; money page {MONEY[s]} first\n'
+               f'5. Publish + sitemap + request indexing in GSC.')
+        b += prompt_card(f'TODAY: \u201c{gp["kw"]}\u201d ({vol}) on {s}', seq,
+                         note="The biggest genuinely-uncovered keyword in the portfolio. One article today \u2014 this one.")
+        if cands[1:]:
+            q = "".join(f'<tr><td>{H.escape(gp2["kw"])}</td><td>{(format(gp2["vol"], ",") + "/mo") if gp2["vol"] else "-"}</td>'
+                        f'<td><a class="slink" href="{SLUG[s2]}">{s2.replace(".com","")}</a></td></tr>'
+                        for _, s2, gp2 in cands[1:])
+            b += (f'<div class="card"><h2>{icon("file")} Up next in the queue</h2>'
+                  f'<p class="sub">Reserved, one per site \u2014 tomorrow\u2019s candidates. Anti-cannibalization enforced.</p>'
+                  f'<div class="overflow"><table><thead><tr><th>keyword</th><th>vol</th><th>site</th></tr></thead><tbody>{q}</tbody></table></div></div>')
+    # --- LINK BUILDER ---
+    b += role_header("🔗", "Link builder", "one platform row per day \u2014 tick boxes on Backlinks, paste the progress code when done", 1)
+    b += prompt_card(f"Platform batch \u2014 all {NSITES} sites", PLATFORM_BATCH,
+                     note=f'Take the topmost incomplete row of the <a class="slink" href="links">Backlinks matrix</a>. 30 minutes. This is the #1 growth lever.')
+    # --- OWNER ---
+    owner = []
+    if not D["sites"].get("iptvsegura.com", {}).get("in_gsc"):
+        owner.append("iptvsegura.com: add the monitoring service account in Search Console (Settings \u2192 Users \u2192 Add: seo-monitor@seo-dashboard-505310.iam.gserviceaccount.com, Restricted)")
+    owner.append("Weekly: send Claude the sales numbers per site \u2014 revenue joins the scorecard")
+    owner.append("Review briefs\u2019 \u26a0\ufe0f fields at seo-tools/briefs/ when you have 10 minutes")
+    b += role_header("👤", "Owner", "account access and business inputs \u2014 only you can do these", len(owner))
+    b += ('<div class="card"><ul class="lcl" style="margin:6px 0 0">'
+          + "".join(f"<li>{t}</li>" for t in owner) + "</ul></div>")
+    return b
+
 def daily_plan():
     cards = []; n = 0
     def pcard(num, title, text, note=""):
@@ -478,7 +541,7 @@ _steps = RE.findall(r"Step (\d+) · ([^<]+)", TODAY_HTML)
 
 # ---------------- shell ----------------
 def sidebar(cur):
-    top = [("./", "home", "Portfolio", None), ("today", "zap", "Today", "today"),
+    top = [("./", "home", "Portfolio", None), ("today", "zap", "Work", "today"),
            ("trends", "trend", "Trends", "trends"), ("links", "link", "Backlinks", "links"),
            ("plan", "file", "Plan", "plan"), ("sales", "gem", "Sales", "sales")]
     nav = "".join(f'<a class="navitem{" on" if cur==k else ""}" href="{h}"><span class="navicon">{icon(i)}</span>{l}</a>'
@@ -909,9 +972,8 @@ def board_row2():
 
 def board_row3():
     return ('<div class="board">'
-            f'<div class="t4">{moves_card()}</div>'
-            f'<div class="t4">{changes_card()}</div>'
-            f'<div class="t4">{milestones_card()}</div>'
+            f'<div class="t6">{changes_card()}</div>'
+            f'<div class="t6">{milestones_card()}</div>'
             '</div>')
 
 def _dyn_top100():
@@ -962,6 +1024,17 @@ def attention_card():
     if not items: return ""
     rows = "".join(f'<div class="alert {lv}"><b>{"URGENT" if lv == "crit" else "FIX"}</b> · {t}</div>' for lv, t in items)
     return (f'<div class="card" id="attention"><h2>{icon("warn")} Needs attention — {len(items)} item(s)</h2>{rows}</div>')
+
+
+def work_strip():
+    n_dev = sum(1 for s in ALL if tech_items(s))
+    n_owner = 2 + (0 if D["sites"].get("iptvsegura.com", {}).get("in_gsc") else 1)
+    parts = [("🔧 Developer", n_dev), ("✍️ Content", 1), ("🔗 Links", 1), ("👤 Owner", n_owner)]
+    chips = "".join(f'<span class="wchip">{lbl} <b>{n}</b></span>' for lbl, n in parts if n)
+    total = sum(n for _, n in parts)
+    return (f'<a class="card workstrip" href="today"><div><h2 style="margin:0">{icon("zap")} {total} tasks on the Work page</h2>'
+            f'<p class="sub" style="margin:4px 0 0">Organized by role — everyone finds their list in one place.</p></div>'
+            f'<div class="wchips">{chips}</div><span class="srarrow">{icon("arrow")}</span></a>')
 
 def moves_card():
     moves = []
@@ -1104,13 +1177,13 @@ sitelist = (f'<div class="card"><h2>Websites</h2><p class="sub">Status · keywor
 
 control = (f'<div class="grid2"><div>{traffic_chart_card()}{ai_search_card()}</div>'
            f'<div class="rail">{country_card()}{gauges_card()}{opportunity_card()}</div></div>')
-home_body = ('<h1 style="margin-bottom:14px">IPTV Portfolio</h1>' + statusline() + board_row1()
+home_body = ('<h1 style="margin-bottom:14px">IPTV Portfolio</h1>' + statusline() + work_strip() + board_row1()
              + board_goals() + attention_card() + board_row2() + board_row3())
 open(os.path.join(OUT, "index.html"), "w").write(shell("IPTV Portfolio — SEO Dashboard", home_body, cur=None))
 
-today_body = (f'<a class="backlink" href="./">← Portfolio home</a><h1>Today — the daily queue</h1>'
-              f'<p class="meta">Rebuilt {H.escape(STAMP_TXT)} · run the steps top to bottom, one prompt at a time · '
-              f'when done say "update the dashboard"</p>') + TODAY_HTML
+today_body = (f'<h1>Work — who does what</h1>'
+              f'<p class="meta">Everything actionable, in one place, by role. Prompts are copy-paste complete. '
+              f'Done something? Say "update the dashboard" and verified items clear automatically.</p>') + build_work()
 _n_steps = len(_steps)
 _owner_n = 3
 _today_tiles = ('<div class="board">'
@@ -1473,7 +1546,7 @@ def content_section(s):
     nap_html = (f'<div class="card pcard"><div class="phead"><h2>{icon("pen")} No skills installed? Classic one-shot prompt</h2>'
                 f'<button class="copybtn" data-copy>Copy prompt</button></div>'
                 f'<pre class="ptext">{H.escape(nap)}</pre></div>') if nap else ""
-    return arts_html + rec_html + skill_pipeline_card(s) + nap_html
+    return arts_html + rec_html
 
 def skill_pipeline_card(s):
     c = CT.get(s, {}); rec = c.get("recommend", [])
@@ -1532,9 +1605,10 @@ for s in ALL:
     body += site_board(s)
     body += _sc.card(s, D, F, KT, CT, SEM, RECS)
     body += site_opportunity(s)
-    body += (f'<div class="card pcard"><div class="phead"><h2>{icon("clipboard")} Fix Prompt — {s}</h2>'
-             f'<button class="copybtn" data-copy>Copy prompt</button></div>'
-             f'<pre class="ptext">{H.escape(prompts[s])}</pre></div>')
+    if tech_items(s):
+        body += (f'<a class="card workstrip" href="today"><div><h2 style="margin:0">{icon("warn")} This site has open fixes</h2>'
+                 f'<p class="sub" style="margin:4px 0 0">The prompt lives on the Work page — Developer section.</p></div>'
+                 f'<span class="srarrow">{icon("arrow")}</span></a>')
     body += kt_card(s)
     body += content_section(s)
     open(os.path.join(OUT, f"{SLUG[s]}.html"), "w").write(shell(f"{s} — SEO", body, cur=s, extra_js=COPY_JS))
