@@ -127,8 +127,8 @@ def build(client, out):
     param(r, "Surface du terrain (m²)", "=B%d*100" % k_surf, ENT); r += 1
     suffixe = "" if client else " - prix vendeur"
     param(r, "Prix FREEHOLD%s (IDR / are)" % suffixe, None, fmt_idr); k_pfh = r; r += 1
-    param(r, "Prix LEASEHOLD%s (IDR / are / an)" % suffixe,
-          5000000 if client else 4000000, fmt_idr); k_plh = r; r += 1
+    param(r, "Prix LEASEHOLD%s (IDR / are / an)" % suffixe, 4000000, fmt_idr)
+    k_plh = r; r += 1
     param(r, "Durée du leasehold (années)", 30, ENT,
       "Utilisee uniquement en LEASEHOLD. En FREEHOLD la cellule est grisee et n'entre dans aucun calcul."); k_duree = r; r += 1
     if not client:
@@ -143,6 +143,11 @@ def build(client, out):
     param(r, "Cérémonie traditionnelle (IDR)", 0, fmt_idr,
           "Cérémonie traditionnelle balinaise. Montant forfaitaire a renseigner "
           "selon le dossier."); k_cer = r; r += 1
+    k_ag = None
+    if client:
+        param(r, "Frais d'agence (IDR)", 0, fmt_idr,
+              "Montant à renseigner manuellement selon le dossier.")
+        k_ag = r; r += 1
 
     def etat(row, actif_si, cellule):
         """Mention d'etat en colonne C : sans objet, ou a renseigner si vide."""
@@ -177,7 +182,10 @@ def build(client, out):
     prix_terrain = ('=IF($B$%d="FREEHOLD",$B$%d*$B$%d,$B$%d*$B$%d*$B$%d)'
                     % (k_opt, k_surf, k_pfh, k_surf, k_plh, k_duree))
     if client:
-        montant(r, "Prix du terrain", prix_terrain); k_base = r; r += 1
+        montant(r, "Prix du terrain", prix_terrain); k_pt_l = r; r += 1
+        montant(r, "Frais d'agence", "=$B$%d" % k_ag); k_ag_l = r; r += 1
+        montant(r, "SOUS-TOTAL TERRAIN ET FRAIS D'AGENCE",
+                "=C%d+C%d" % (k_pt_l, k_ag_l), total=True); k_base = r; r += 1
     else:
         montant(r, "Prix du terrain - PRIX VENDEUR", prix_terrain); k_pv = r; r += 1
         montant(r, "Commission agence (si OUI en B%d)" % k_com_oui,
@@ -343,9 +351,13 @@ def build(client, out):
             "(tableau 3). Les villas non utilisees restent vides et comptent pour zero.",
             "Tableau 1 : le choix FREEHOLD / LEASEHOLD en B%d pilote le calcul du prix du "
             "terrain ; le prix inutilise est simplement ignore. 1 are = 100 m2." % k_opt,
-            "Les prix du terrain sont des PRIX VENDEUR : la commission agence est ajoutee "
-            "separement en ligne %d, uniquement si B%d = OUI, au taux de la cellule B%d."
+            "Les prix du terrain sont des PRIX VENDEUR : la commission agence est ajoutée "
+            "séparément en ligne %d, uniquement si B%d = OUI, au taux de la cellule B%d."
             % (k_com, k_com_oui, k_com_tx),
+            "REPORT VERS LE TABLEAU CLIENT : ajuster le taux de commission jusqu'au montant "
+            "voulu, puis reporter le montant de la ligne %d dans la ligne 'Frais d'agence' du "
+            "tableau client. Ce dernier attend le PRIX VENDEUR dans ses cellules de prix : "
+            "la commission n'y est comptée qu'une fois, en frais d'agence." % k_com,
             "Les frais de notaire portent sur le prix du terrain commission comprise "
             "(ligne %d) : taxes gouvernementales (B8) + honoraires (B9) avec un forfait "
             "plancher de 20 000 000 IDR (B10)." % k_base,
