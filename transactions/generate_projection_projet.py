@@ -264,7 +264,11 @@ def build(client, out):
     param(r, "Charges d'exploitation (% du revenu brut)", 0.30, PCT,
           "Pourcentage appliqué au revenu brut cumulé de toutes les villas "
           "(gestion, ménage, entretien, énergie...).")
-    k_charges = r; r += 2
+    k_charges = r; r += 1
+    param(r, "Impôt sur les sociétés (% du chiffre d'affaires)", 0.005, PCT,
+          "Impôt assis sur le chiffre d'affaires brut, et non sur le résultat : "
+          "il est dû même si l'exploitation ne dégage pas de bénéfice.")
+    k_is = r; r += 2
 
     entetes(r, ["", "Désignation de la villa", "Taux d'occupation", "Prix nuitée (EUR)",
                 "Nuits occupées / an", "Revenus bruts (EUR)", "Revenus bruts (IDR)"]); r += 1
@@ -302,7 +306,13 @@ def build(client, out):
     montant(r, "Charges d'exploitation", "=C%d*$B$%d" % (k_brut, k_charges),
             taux="=$B$%d" % k_charges)
     k_ch = r; r += 1
-    montant(r, "REVENUS NETS ANNUELS", "=C%d-C%d" % (k_brut, k_ch), total=True)
+    montant(r, "Impôt sur les sociétés (sur le chiffre d'affaires)",
+            "=C%d*$B$%d" % (k_brut, k_is), taux="=$B$%d" % k_is)
+    k_is_l = r; r += 1
+    montant(r, "TOTAL DES CHARGES", "=C%d+C%d" % (k_ch, k_is_l),
+            taux="=IF(C%d=0,0,C%d/C%d)" % (k_brut, r, k_brut))
+    k_tch = r; r += 1
+    montant(r, "REVENUS NETS ANNUELS", "=C%d-C%d" % (k_brut, k_tch), total=True)
     k_net = r; r += 2
 
     bandeau(r, "INDICATEURS"); r += 1
@@ -347,14 +357,18 @@ def build(client, out):
             "La creation de la PT PMA (2 000 EUR, cellule B12) s'ajoute a l'investissement "
             "uniquement si B%d = OUI, quel que soit le nombre de villas." % k_pt,
             "Tableau 3 : chaque villa a son propre taux d'occupation et son propre prix de "
-            "nuitee. Revenus bruts = nuits commercialisables (B13) x taux d'occupation x "
-            "prix de la nuitee. Les charges s'appliquent au revenu brut cumule.",
-            "Taux de change en B7 : reference BCE du 20/08/2026 (1 EUR = 20 788,62 IDR). "
-            "A actualiser avant presentation au client.",
-            "Projection previsionnelle a but indicatif : elle n'integre ni la fiscalite "
-            "indonesienne sur les revenus locatifs, ni l'amortissement, ni les frais de "
-            "gestion au-dela du pourcentage de charges saisi. En leasehold, le rendement "
-            "doit s'apprecier au regard de la duree residuelle du bail.",
+            "nuitée. Revenus bruts = nuits commercialisables (B13) x taux d'occupation x "
+            "prix de la nuitée.",
+            "Les charges regroupent les charges d'exploitation (B%d) et l'impôt sur les "
+            "sociétés (B%d), ce dernier assis sur le chiffre d'affaires brut et non sur le "
+            "résultat : il reste dû même sans bénéfice." % (k_charges, k_is),
+            "Taux de change en B7 : référence BCE du 20/08/2026 (1 EUR = 20 788,62 IDR). "
+            "À actualiser avant présentation au client.",
+            "Projection prévisionnelle à but indicatif : hors impôt sur les sociétés assis "
+            "sur le chiffre d'affaires, elle n'intègre aucune autre fiscalité, ni "
+            "l'amortissement, ni les frais de gestion au-delà du pourcentage de charges "
+            "saisi. En leasehold, le rendement doit s'apprécier au regard de la durée "
+            "résiduelle du bail.",
             "VERSION INTERNE - contient la commission agence. Ne pas transmettre au client : "
             "utiliser la version 'presentation client'.",
         ]
