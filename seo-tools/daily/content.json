@@ -435,6 +435,11 @@
     "words": 2731
    },
    {
+    "path": "/blog",
+    "title": "Blog & Guides IPTV France 2026",
+    "words": 2692
+   },
+   {
     "path": "/tarifs",
     "title": "IPTV pas cher France 2026 — Tarifs dès 4,08€",
     "words": 2682
@@ -443,11 +448,6 @@
     "path": "/guides/iptv-connexions-simultanees",
     "title": "Combien d'appareils IPTV en simultané ? Guide 2026",
     "words": 2657
-   },
-   {
-    "path": "/blog",
-    "title": "Blog & Guides IPTV France 2026",
-    "words": 2588
    },
    {
     "path": "/guides/installer-iptv-apple-tv",
@@ -570,14 +570,14 @@
     "words": 1790
    },
    {
-    "path": "/guides/telegram-iptv-gratuit",
-    "title": "Telegram IPTV gratuit : ce que ça vaut vraiment",
-    "words": 1725
-   },
-   {
     "path": "/guides/iptv-vs-streaming",
     "title": "IPTV vs Streaming VOD 2026 : Comparatif",
     "words": 1722
+   },
+   {
+    "path": "/guides/telegram-iptv-gratuit",
+    "title": "Telegram IPTV gratuit : ce que ça vaut vraiment",
+    "words": 1721
    },
    {
     "path": "/guides/iptv-vs-apps-streaming-gratuit",
@@ -593,6 +593,11 @@
     "path": "/guides/meilleur-lecteur-iptv",
     "title": "Meilleur lecteur IPTV 2026 : le comparatif",
     "words": 1639
+   },
+   {
+    "path": "/guides/iptv-sans-coupure",
+    "title": "IPTV sans coupure : les vraies causes et solutions",
+    "words": 1606
    },
    {
     "path": "/guides/iptv-famille-controle-parental",
@@ -625,19 +630,24 @@
     "words": 1505
    },
    {
-    "path": "/guides/groupe-telegram-iptv",
-    "title": "Groupes Telegram IPTV : les trouver, les éviter",
-    "words": 1497
-   },
-   {
     "path": "/guides/chaines-iptv-francaises-internationales",
     "title": "Chaînes IPTV Françaises & Internationales 2026",
     "words": 1491
    },
    {
+    "path": "/guides/groupe-telegram-iptv",
+    "title": "Groupes Telegram IPTV : les trouver, les éviter",
+    "words": 1488
+   },
+   {
     "path": "/guides/iptv-vs-box-orange-free-sfr-bouygues",
     "title": "IPTV vs Box Opérateur : Orange Free SFR 2026",
     "words": 1477
+   },
+   {
+    "path": "/guides/liste-m3u-gratuite",
+    "title": "Liste M3U gratuite : pourquoi elles déçoivent",
+    "words": 1453
    },
    {
     "path": "/guides/iptv-samsung-smart-tv",
@@ -690,14 +700,14 @@
     "words": 1340
    },
    {
-    "path": "/guides/iptv-telegram",
-    "title": "IPTV Telegram : groupes, risques et alternatives",
-    "words": 1338
-   },
-   {
     "path": "/installation/apple-tv",
     "title": "IPTV Apple TV 4K 2026 : Installation tvOS",
     "words": 1337
+   },
+   {
+    "path": "/guides/iptv-telegram",
+    "title": "IPTV Telegram : groupes, risques et alternatives",
+    "words": 1334
    },
    {
     "path": "/installation/windows-pc",
@@ -1033,7 +1043,7 @@
     "covered": true
    }
   ],
-  "n_articles": 97,
+  "n_articles": 99,
   "n_thin": 0
  },
  "iptvned.com": {

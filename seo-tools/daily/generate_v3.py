@@ -3,6 +3,7 @@
 Rebuilt 12 Aug 2026 after container recycle. Degrades gracefully when GSC is unavailable."""
 import json, os, re as RE, math, html as H
 from _sites import SITES, DOM2SLUG
+CANON = {d: c for _, d, c in SITES}
 
 STAMP = os.environ.get("DASH_STAMP", "")
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -313,9 +314,16 @@ def alerts():
         if f.get("orphans"): A.append(("warn", f"{s}: {len(f['orphans'])} orphan page(s) — add internal links"))
         if str(f.get("www_redirect", "")).startswith("307") or str(f.get("apex", "")).startswith("307"):
             A.append(("warn", f"{s}: host redirect is 307 — set it to 308 (permanent)"))
-        if str(f.get("www_redirect", "")) == "200":
-            A.append(("warn", f"{s}: www serves 200 instead of redirecting to the canonical host — set a 308 "
-                              f"www→apex redirect (duplicate-host risk)"))
+        canon_www = CANON.get(s, s).startswith("www.")
+        www_status = str(f.get("www_redirect", ""))
+        apex_status = str(f.get("apex", ""))
+        if canon_www:
+            # correct setup: apex 308 -> www, www serves 200
+            if apex_status == "200":
+                A.append(("warn", f"{s}: apex serves 200 but the canonical host is www — set a 308 apex→www redirect (duplicate-host risk)"))
+        else:
+            if www_status == "200":
+                A.append(("warn", f"{s}: www serves 200 but the canonical host is the apex — set a 308 www→apex redirect (duplicate-host risk)"))
         if not GSC_OFF and not D["sites"].get(s, {}).get("in_gsc"):
             A.append(("crit", f"{s} is NOT in Search Console (verified via sites.list) — add the sc-domain property, "
                               f"submit sitemap.xml, and add the monitoring service account as a user. "
@@ -323,8 +331,12 @@ def alerts():
         if f.get("favicon") not in (200, None): A.append(("warn", f"{s}: /favicon.ico returns {f.get('favicon')}"))
         if rd is not None and rd <= 5:
             A.append(("warn", f"{s}: only {rd} referring domains — authority is the ceiling; run the Backlinks steps"))
-        if sp and sp >= 60:
-            A.append(("warn", f"{s}: backlink spam score {sp}/100 — audit the link profile before adding more"))
+        sp_hist = [h["sites"].get(s, {}).get("spam_score") for h in HIST if s in h.get("sites", {})]
+        sp_hist = [x for x in sp_hist if x is not None]
+        if sp is not None and sp_hist and sp - sp_hist[0] >= 4:
+            A.append(("warn", f"{s}: spam score jumped {sp_hist[0]}→{sp} (+{sp - sp_hist[0]}) — pause this site's tier-2 link work and review the newest links"))
+        # note: a high-but-stable score is third-party bot spam (identical domains portfolio-wide);
+        # Google discounts it, sc-domain properties can't disavow, and it is NOT from our outreach — no alert.
         if prev:
             p = prev.get("sites", {}).get(s, {})
             if p.get("ref_domains") is not None and rd is not None and rd > p["ref_domains"]:
