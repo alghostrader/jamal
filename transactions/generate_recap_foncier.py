@@ -134,13 +134,13 @@ def build(freehold, out):
     r = r_com + 2
     put("A%d" % r, "FRAIS ANNEXES", bold=True)
     r_taxes = r + 1
-    ligne("Taxes gouvernementales (5% du prix client)",
-          "=%s%d*%s" % (C_IDR, r_pc, P["taxes"]), r_taxes, taux="=%s" % P["taxes"])
+    ligne("Taxes gouvernementales (5% du prix officiel)",
+          "=%s%d*%s" % (C_IDR, r_pv, P["taxes"]), r_taxes, taux="=%s" % P["taxes"])
 
     r_hono = r_taxes + 1
-    ligne("Honoraires du notaire (1% du prix client, minimum 20 000 000 IDR)",
-          "=MAX(%s%d*%s,%s)" % (C_IDR, r_pc, P["hono"], P["mini"]), r_hono,
-          taux="=IF(%s%d=0,0,%s%d/%s%d)" % (C_IDR, r_pc, C_IDR, r_hono, C_IDR, r_pc))
+    ligne("Honoraires du notaire (1% du prix officiel, minimum 20 000 000 IDR)",
+          "=MAX(%s%d*%s,%s)" % (C_IDR, r_pv, P["hono"], P["mini"]), r_hono,
+          taux="=IF(%s%d=0,0,%s%d/%s%d)" % (C_IDR, r_pv, C_IDR, r_hono, C_IDR, r_pv))
     ws["%s%d" % (C_IDR, r_hono)].comment = Comment(
         "MAX entre le pourcentage d'honoraires et le forfait minimum : si le pourcentage "
         "donne moins de 20 000 000 IDR, c'est le forfait qui s'applique.\n"
@@ -149,7 +149,7 @@ def build(freehold, out):
     r_not = r_hono + 1
     ligne("Sous-total frais de notaire (taxes + honoraires)",
           "=%s%d+%s%d" % (C_IDR, r_taxes, C_IDR, r_hono), r_not,
-          taux="=IF(%s%d=0,0,%s%d/%s%d)" % (C_IDR, r_pc, C_IDR, r_not, C_IDR, r_pc))
+          taux="=IF(%s%d=0,0,%s%d/%s%d)" % (C_IDR, r_pv, C_IDR, r_not, C_IDR, r_pv))
 
     r_geo = r_not + 1
     put("A%d" % r_geo, "Frais de geometre (forfait 1 000 EUR)")
@@ -196,8 +196,9 @@ def build(freehold, out):
         "Honoraires du notaire : le pourcentage s'applique sauf s'il donne moins que le forfait "
         "minimum de 20 000 000 IDR (%s), auquel cas le forfait est retenu (formule MAX en %s%d)."
         % (P["mini"].replace("$", ""), C_IDR, r_hono),
-        "Ces taux sont appliques au prix client avec commission. Remplacer %s%d par %s%d dans les "
-        "formules de frais si la base retenue est le prix vendeur." % (C_IDR, r_pc, C_IDR, r_pv),
+        "Les frais de notaire portent sur le PRIX OFFICIEL, c'est-a-dire le prix vendeur "
+        "declare a l'acte (ligne %d), et non sur le prix client commission comprise."
+        % r_pv,
         "Frais de geometre saisis en EUR (%s) et convertis en IDR au taux %s."
         % (P["geo"].replace("$", ""), P["fx"].replace("$", "")),
         "Seules les cellules de parametres (colonne B, lignes %d a %d) sont a saisir : tout le "

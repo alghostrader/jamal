@@ -186,6 +186,7 @@ def build(client, out):
         montant(r, "Frais d'agence", "=$B$%d" % k_ag); k_ag_l = r; r += 1
         montant(r, "SOUS-TOTAL TERRAIN ET FRAIS D'AGENCE",
                 "=C%d+C%d" % (k_pt_l, k_ag_l), total=True); k_base = r; r += 1
+        k_fisc = k_pt_l
     else:
         montant(r, "Prix du terrain - PRIX VENDEUR", prix_terrain); k_pv = r; r += 1
         montant(r, "Commission agence (si OUI en B%d)" % k_com_oui,
@@ -193,21 +194,23 @@ def build(client, out):
                 taux='=IF($B$%d="OUI",$B$%d,0)' % (k_com_oui, k_com_tx)); k_com = r; r += 1
         montant(r, "PRIX DU TERRAIN AVEC COMMISSION", "=C%d+C%d" % (k_pv, k_com),
                 total=True); k_base = r; r += 1
+        k_fisc = k_pv
     ws["C%d" % k_base].comment = Comment(
         "FREEHOLD : surface x prix à l'are.\n"
         "LEASEHOLD : surface x prix à l'are et par an x durée.", "Agence")
 
-    montant(r, "Taxes gouvernementales", "=C%d*$B$8" % k_base, taux="=$B$8")
+    montant(r, "Taxes gouvernementales (sur le prix officiel du terrain)",
+            "=C%d*$B$8" % k_fisc, taux="=$B$8")
     k_tax = r; r += 1
-    montant(r, "Honoraires du notaire (forfait plancher en B10)",
-            "=MAX(C%d*$B$9,$B$10)" % k_base, taux="=IF(C%d=0,0,C%d/C%d)" % (k_base, r, k_base))
+    montant(r, "Honoraires du notaire (sur le prix officiel, forfait plancher en B10)",
+            "=MAX(C%d*$B$9,$B$10)" % k_fisc, taux="=IF(C%d=0,0,C%d/C%d)" % (k_fisc, r, k_fisc))
     ws["C%d" % r].comment = Comment(
         "MAX entre le pourcentage d'honoraires (B9) et le forfait minimum (B10) : "
         "si le pourcentage donne moins que le forfait, c'est le forfait qui s'applique.",
         "Agence")
     k_hono = r; r += 1
     montant(r, "Sous-total frais de notaire (taxes + honoraires)",
-            "=C%d+C%d" % (k_tax, k_hono), taux="=IF(C%d=0,0,C%d/C%d)" % (k_base, r, k_base))
+            "=C%d+C%d" % (k_tax, k_hono), taux="=IF(C%d=0,0,C%d/C%d)" % (k_fisc, r, k_fisc))
     k_not = r; r += 1
     put("A%d" % r, "Frais de géomètre (forfait)", border=True)
     put("B%d" % r, None, border=True)
@@ -358,9 +361,9 @@ def build(client, out):
             "voulu, puis reporter le montant de la ligne %d dans la ligne 'Frais d'agence' du "
             "tableau client. Ce dernier attend le PRIX VENDEUR dans ses cellules de prix : "
             "la commission n'y est comptée qu'une fois, en frais d'agence." % k_com,
-            "Les frais de notaire portent sur le prix du terrain commission comprise "
-            "(ligne %d) : taxes gouvernementales (B8) + honoraires (B9) avec un forfait "
-            "plancher de 20 000 000 IDR (B10)." % k_base,
+            "Les frais de notaire portent sur le PRIX OFFICIEL du terrain (ligne %d), "
+            "commission exclue : taxes gouvernementales (B8) + honoraires (B9) avec un "
+            "forfait plancher de 20 000 000 IDR (B10)." % k_fisc,
             "S'ajoutent au cout foncier le geometre (B11), les frais d'emmenagement (B%d) "
             "et la ceremonie traditionnelle (B%d), saisis en IDR." % (k_emm, k_cer),
             "Tableau 2 : une ligne par villa, construction et ameublement saisis en EUR ; "
