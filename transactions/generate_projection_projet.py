@@ -12,6 +12,8 @@ Structure commune : 1. cout foncier, 2. investissement (une ligne par villa),
 
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
+from openpyxl.styles.differential import DifferentialStyle
+from openpyxl.formatting.rule import Rule
 from openpyxl.comments import Comment
 from openpyxl.worksheet.datavalidation import DataValidation
 
@@ -127,7 +129,8 @@ def build(client, out):
     param(r, "Prix FREEHOLD%s (IDR / are)" % suffixe, None, fmt_idr); k_pfh = r; r += 1
     param(r, "Prix LEASEHOLD%s (IDR / are / an)" % suffixe,
           5000000 if client else 4000000, fmt_idr); k_plh = r; r += 1
-    param(r, "Durée du leasehold (années)", 30, ENT); k_duree = r; r += 1
+    param(r, "Durée du leasehold (années)", 30, ENT,
+      "Utilisee uniquement en LEASEHOLD. En FREEHOLD la cellule est grisee et n'entre dans aucun calcul."); k_duree = r; r += 1
     if not client:
         param(r, "Commission agence - à appliquer ? (OUI / NON)", "OUI", None)
         k_com_oui = r; r += 1
@@ -140,6 +143,24 @@ def build(client, out):
     param(r, "Cérémonie traditionnelle (IDR)", 0, fmt_idr,
           "Cérémonie traditionnelle balinaise. Montant forfaitaire a renseigner "
           "selon le dossier."); k_cer = r; r += 1
+
+    def etat(row, actif_si, cellule):
+        """Mention d'etat en colonne C : sans objet, ou a renseigner si vide."""
+        inactif = "FREEHOLD" if actif_si == "LEASEHOLD" else "LEASEHOLD"
+        put("C%d" % row,
+            '=IF($B$%d="%s",IF($B$%d>0,"","A RENSEIGNER"),"sans objet en %s")'
+            % (k_opt, actif_si, cellule, inactif))
+        ws["C%d" % row].font = Font(name=ARIAL, size=10, italic=True, color="808080")
+        gris = DifferentialStyle(font=Font(color="A6A6A6", italic=True),
+                                 fill=PatternFill(bgColor="F2F2F2"))
+        ws.conditional_formatting.add(
+            "A%d:C%d" % (row, row),
+            Rule(type="expression", dxf=gris,
+                 formula=['$B$%d<>"%s"' % (k_opt, actif_si)]))
+
+    etat(k_pfh, "FREEHOLD", k_pfh)
+    etat(k_plh, "LEASEHOLD", k_plh)
+    etat(k_duree, "LEASEHOLD", k_duree)
 
     liste("B%d" % k_opt, ["FREEHOLD", "LEASEHOLD"],
           "Choisir FREEHOLD ou LEASEHOLD dans la liste deroulante.\n"
