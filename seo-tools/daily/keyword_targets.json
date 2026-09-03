@@ -56,7 +56,7 @@
   {
    "kw": "abonnement iptv 12 mois",
    "vol": 4400,
-   "pos": 26,
+   "pos": 28,
    "url": "/"
   },
   {
@@ -170,7 +170,7 @@
   {
    "kw": "iptv shqiptar",
    "vol": 320,
-   "pos": 9,
+   "pos": 6,
    "url": "/"
   },
   {
@@ -209,7 +209,7 @@
   {
    "kw": "iptv smarters pro firestick",
    "vol": 70,
-   "pos": 43,
+   "pos": 44,
    "url": "/"
   },
   {
@@ -261,7 +261,7 @@
   {
    "kw": "essai iptv 7 jours",
    "vol": 90,
-   "pos": 35,
+   "pos": 44,
    "page": "/test-iptv",
    "url": "/"
   },
@@ -292,14 +292,14 @@
   {
    "kw": "iptv segura",
    "vol": 20,
-   "pos": 28,
+   "pos": 29,
    "page": "/",
    "url": "/"
   },
   {
    "kw": "estafas iptv",
    "vol": null,
-   "pos": 14,
+   "pos": 35,
    "page": "/guias/estafas-iptv-como-evitarlas",
    "url": "/"
   },
@@ -312,21 +312,21 @@
   {
    "kw": "es seguro el iptv",
    "vol": null,
-   "pos": 14,
+   "pos": 16,
    "page": "/guias/como-elegir-iptv-seguro",
    "url": "/"
   },
   {
    "kw": "que es una lista m3u",
    "vol": 50,
-   "pos": 29,
+   "pos": 31,
    "page": "/guias/que-es-lista-m3u",
    "url": "/"
   },
   {
    "kw": "iptv fire tv stick",
    "vol": 260,
-   "pos": 50,
+   "pos": 54,
    "page": "/guias/iptv-fire-tv-stick",
    "url": "/"
   }

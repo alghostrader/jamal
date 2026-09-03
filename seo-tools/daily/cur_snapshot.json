@@ -1,9 +1,9 @@
 {
- "_stamp": "2026-09-02 12:07 UTC",
+ "_stamp": "2026-09-03 12:30 UTC",
  "sites": {
   "iptvesp.com": {
-   "clicks7d": 512,
-   "sem_rd": 129,
+   "clicks7d": 509,
+   "sem_rd": 132,
    "dfs_rd": 42,
    "top100": 34,
    "pages": 66,
@@ -17,8 +17,8 @@
    }
   },
   "primeiptv-france.com": {
-   "clicks7d": 70,
-   "sem_rd": 33,
+   "clicks7d": 78,
+   "sem_rd": 36,
    "dfs_rd": 12,
    "top100": 26,
    "pages": 106,
@@ -27,14 +27,14 @@
     "boitier iptv": null,
     "iptv france": null,
     "application iptv": null,
-    "abonnement iptv 12 mois": 26,
+    "abonnement iptv 12 mois": 28,
     "meilleur abonnement iptv": null,
     "serveur iptv": null
    }
   },
   "iptvned.com": {
-   "clicks7d": 15,
-   "sem_rd": 62,
+   "clicks7d": 16,
+   "sem_rd": 63,
    "dfs_rd": 21,
    "top100": 30,
    "pages": 60,
@@ -49,7 +49,7 @@
   },
   "iptvpix.com": {
    "clicks7d": 0,
-   "sem_rd": 132,
+   "sem_rd": 133,
    "dfs_rd": 40,
    "top100": null,
    "pages": 58,
@@ -64,7 +64,7 @@
   "smarters-live.com": {
    "clicks7d": 0,
    "sem_rd": 29,
-   "dfs_rd": 12,
+   "dfs_rd": 13,
    "top100": 1,
    "pages": 52,
    "positions": {
@@ -84,14 +84,14 @@
     "iptv shqiptare": null,
     "iptv smarters pro": null,
     "iptv shqip": null,
-    "iptv shqiptar": 9,
+    "iptv shqiptar": 6,
     "tv shqip live": null,
     "iptv per smart tv": null,
     "aplikacion per iptv": null
    }
   },
   "smartersprofrance.fr": {
-   "clicks7d": 47,
+   "clicks7d": 52,
    "sem_rd": 4,
    "dfs_rd": null,
    "top100": 12,
@@ -100,7 +100,7 @@
     "iptv smarters": null,
     "configuration iptv smarters": null,
     "smarters player lite": null,
-    "iptv smarters pro firestick": 43,
+    "iptv smarters pro firestick": 44,
     "smarters player lite apk": null
    }
   },
@@ -119,15 +119,15 @@
    }
   },
   "abonnementiptvofficiel.com": {
-   "clicks7d": 88,
-   "sem_rd": 71,
-   "dfs_rd": 13,
+   "clicks7d": 70,
+   "sem_rd": 74,
+   "dfs_rd": 14,
    "top100": 15,
    "pages": 44,
    "positions": {
     "test iptv gratuit": null,
     "iptv pas cher": null,
-    "essai iptv 7 jours": 35,
+    "essai iptv 7 jours": 44,
     "meilleur boitier iptv": 8,
     "iptv moins cher": null,
     "code promo iptv": null,
@@ -135,18 +135,18 @@
    }
   },
   "iptvsegura.com": {
-   "clicks7d": 9,
+   "clicks7d": 12,
    "sem_rd": 10,
    "dfs_rd": null,
    "top100": null,
    "pages": 33,
    "positions": {
-    "iptv segura": 28,
-    "estafas iptv": 14,
+    "iptv segura": 29,
+    "estafas iptv": 35,
     "iptv legal espa\u00f1a": null,
-    "es seguro el iptv": 14,
-    "que es una lista m3u": 29,
-    "iptv fire tv stick": 50
+    "es seguro el iptv": 16,
+    "que es una lista m3u": 31,
+    "iptv fire tv stick": 54
    }
   }
  }
