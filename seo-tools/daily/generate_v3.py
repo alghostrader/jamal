@@ -1824,18 +1824,22 @@ def site_board(s):
 
 for s in ALL:
     cfg = _sc.CONFIG[s]
-    body = (f'<a class="backlink" href="./">← All websites</a><h1>{s} {ext(s)}</h1>'
-            f'<p class="meta">{cfg["country"]} — {cfg["desc"]} · updated {H.escape(STAMP_TXT)} · '
-            f'<a class="slink" href="https://{s}/" target="_blank" rel="noopener">visit {s} ↗</a></p>')
-    body += site_board(s)
-    body += _sc.card(s, D, F, KT, CT, SEM, RECS)
-    body += site_opportunity(s)
+    i_s = ALL.index(s) + 1
+    body = (f'<a class="backlink" href="./">← All websites</a>'
+            f'<div class="hdr sitehdr"><div>'
+            f'<h1><span class="dot s{i_s}" style="width:12px;height:12px;margin-right:6px"></span>{s} {ext(s)}</h1>'
+            f'<p class="sub">{cfg["country"]} — {cfg["desc"]} · updated {H.escape(STAMP_TXT)}</p></div>'
+            f'<span class="badge b-{cfg["tone"]} bigbadge">{cfg["badge"]} {cfg["status"]}</span></div>')
+    inner = site_board(s)
+    inner += _sc.card(s, D, F, KT, CT, SEM, RECS)
+    inner += site_opportunity(s)
     if tech_items(s):
-        body += (f'<a class="card workstrip" href="today"><div><h2 style="margin:0">{icon("warn")} This site has open fixes</h2>'
-                 f'<p class="sub" style="margin:4px 0 0">The prompt lives on the Work page — Developer section.</p></div>'
-                 f'<span class="srarrow">{icon("arrow")}</span></a>')
-    body += kt_card(s)
-    body += content_section(s)
+        inner += (f'<a class="card workstrip" href="today"><div><h2 style="margin:0">{icon("warn")} This site has open fixes</h2>'
+                  f'<p class="sub" style="margin:4px 0 0">The prompt lives on the Work page — Developer section.</p></div>'
+                  f'<span class="srarrow">{icon("arrow")}</span></a>')
+    inner += kt_card(s)
+    inner += content_section(s)
+    body += f'<div class="stack">{inner}</div>'
     open(os.path.join(OUT, f"{SLUG[s]}.html"), "w").write(shell(f"{s} — SEO", body, cur=s, extra_js=COPY_JS))
 
 print("multi-page dashboard written to out/:", sorted(os.listdir(OUT)))

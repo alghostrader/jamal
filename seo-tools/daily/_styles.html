@@ -200,4 +200,33 @@
   .tchip i{font:700 10px var(--body);font-style:normal}
   .tup{color:var(--g700)}.tdn{color:var(--t700)}
   .stmeta{font-size:11px;color:var(--n500)}
+
+  /* ─── per-site page: header, status card, spacing ─── */
+  .backlink{display:inline-block;font:600 12px var(--body);letter-spacing:.04em;text-transform:uppercase;
+    color:var(--n600);text-decoration:none;margin-bottom:12px}
+  .backlink:hover{color:var(--t700)}
+  .sitehdr{margin-bottom:24px;align-items:center}
+  .sitehdr h1{margin:0 0 6px;display:flex;align-items:center;font-size:34px}
+  .sitehdr .extlink .ic{width:16px;height:16px}
+  .bigbadge{font-size:12px;padding:6px 16px}
+  .stack>.board,.stack>.pcard{margin:0}
+  .stack{gap:24px}
+  .sitecard .schead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .narr{font-size:14px;line-height:1.65;color:var(--n800);margin:10px 0 0;max-width:76ch}
+  .statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;
+    background:var(--surface);border-radius:12px;padding:14px 18px;margin-top:14px}
+  .st{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .stl{font:700 10px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--n600)}
+  .stv{font:400 21px/1.2 var(--head);color:var(--ink);font-variant-numeric:tabular-nums}
+  .secrow{margin-top:18px}
+  .secrow .rectitle{padding-top:0}
+  .hchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+  .hchip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 12px;font:600 12px var(--body)}
+  .hchip.ok{background:var(--g200);color:var(--g800)}
+  .hchip.bad{background:var(--t200);color:var(--t700)}
+  .recs{list-style:none;margin:9px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .recs li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;line-height:1.5}
+  .recs .tag{flex:none}
+  .srarrow{margin-left:auto;color:var(--t700);flex:none}
+  .srarrow .ic{width:18px;height:18px}
 </style>

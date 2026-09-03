@@ -34,6 +34,9 @@ def _health(s, F):
     return checks
 
 def card(s, D, F, KT, CT, SEM, RECS, link=None):
+    """Organic-design site status card. The page header above it already shows the
+    site name/lane and the 4 stat tiles show week clicks + authority — this card
+    carries the 90-day view, the story, and the verified checklists. No duplication."""
     cfg = CONFIG[s]
     v = D["sites"].get(s, {})
     dfs = v.get("dfs", {}) or {}
@@ -42,46 +45,46 @@ def card(s, D, F, KT, CT, SEM, RECS, link=None):
     kt = KT.get(s, [])
     nrank = sum(1 for r in kt if r.get("pos"))
     best = min([r["pos"] for r in kt if r.get("pos")], default=None)
+    rd = dfs.get("ref_domains")
 
     if daily:
         c90 = sum(x["clicks"] for x in daily); i90 = sum(x["impressions"] for x in daily)
         ctr = f"{(100*c90/i90):.1f}%" if i90 else "—"
-        stat3 = (f'<div class="st"><span class="stl">CLICKS 90D</span><span class="stv">{c90}</span></div>'
-                 f'<div class="st"><span class="stl">IMPR. 90D</span><span class="stv">{i90:,}</span></div>'
-                 f'<div class="st"><span class="stl">CTR</span><span class="stv">{ctr}</span></div>')
+        stats = [("Clicks · 90 days", f"{c90:,}"), ("Impressions · 90 days", f"{i90:,}"),
+                 ("CTR", ctr), ("DFS ref. domains", rd if rd is not None else "—")]
     else:
-        stat3 = (f'<div class="st"><span class="stl">TOP-100 KW</span><span class="stv">{dfs.get("ranked_top100") if dfs.get("ranked_top100") is not None else "—"}</span></div>'
-                 f'<div class="st"><span class="stl">TARGETS RANKING</span><span class="stv">{nrank}/{len(kt)}</span></div>'
-                 f'<div class="st"><span class="stl">BEST POSITION</span><span class="stv">{"#"+str(best) if best else "—"}</span></div>')
-    sec = (f'<div class="sec"><span class="stl">AUTHORITY</span><span class="stv">'
-           f'DFS {dfs.get("ref_domains") if dfs.get("ref_domains") is not None else "—"} ref.dom · '
-           f'Semrush AS {sm.get("authority_score", "—")} / {sm.get("ref_domains", "—")} ref.dom</span></div>')
+        t100 = dfs.get("ranked_top100")
+        stats = [("Top-100 keywords", t100 if t100 is not None else "—"),
+                 ("Targets ranking", f"{nrank}/{len(kt)}"),
+                 ("Best position", f"#{best}" if best else "—"),
+                 ("DFS ref. domains", rd if rd is not None else "—")]
+    statrow = ('<div class="statrow">'
+               + "".join(f'<div class="st"><span class="stl">{H.escape(l)}</span>'
+                         f'<span class="stv">{val}</span></div>' for l, val in stats)
+               + '</div>')
 
     hc = _health(s, F)
     n_ok = sum(1 for _, ok in hc if ok)
     chips = "".join(f'<span class="hchip {"ok" if ok else "bad"}">{"✓" if ok else "✗"} {H.escape(l)}</span>' for l, ok in hc)
-    health = f'<div class="rectitle">VERIFIED CLEAN TODAY · {n_ok}/{len(hc)}</div><div class="hchips">{chips}</div>'
+    health = (f'<div class="secrow"><div class="rectitle">Verified clean today · {n_ok}/{len(hc)}</div>'
+              f'<div class="hchips">{chips}</div></div>')
 
-    # ranked keyword strip
     ranked = sorted([r for r in kt if r.get("pos")], key=lambda r: r["pos"])[:4]
     rk = ""
     if ranked:
-        rk = ('<div class="rectitle">LIVE RANKINGS</div><div class="hchips">'
+        rk = ('<div class="secrow"><div class="rectitle">Live rankings</div><div class="hchips">'
               + "".join(f'<span class="hchip ok">#{r["pos"]} {H.escape(r["kw"])}</span>' for r in ranked)
-              + '</div>')
+              + '</div></div>')
 
     narr = _narrative(s, dfs, sm, F, kt, CT)
-    recs = "".join(f'<li><span class="tag t{t.lower().replace(" ","")}">{t}</span><span>{H.escape(x)}</span></li>'
-                   for t, x in RECS.get(s, []))
-    recs_html = (f'<div class="rectitle">ONGOING PRIORITIES</div><ul class="recs">{recs}</ul>') if recs else ""
-    name = f'<a class="sname slink" href="{link}">{s}</a>' if link else f'<div class="sname">{s}</div>'
-    visit = (f'<a class="extlink" href="https://{s}/" target="_blank" rel="noopener" '
-             f'title="Open {s}" style="font-size:13px">↗</a>')
-    return f'''<div class="scard">
-      <div class="schead"><div>{name}{visit}<div class="sdesc">{cfg["country"]} — {cfg["desc"]}</div></div>
-        <span class="badge b-{cfg["tone"]}">{cfg["badge"]} {cfg["status"]}</span></div>
-      <div class="stats">{stat3}</div>{sec}
-      <p class="narr">{H.escape(narr)}</p>{rk}{health}{recs_html}</div>'''
+    recs = "".join(f'<li><span class="tag {"pos" if t.upper()=="DO" else "neu"}">{H.escape(t)}</span>'
+                   f'<span>{H.escape(x)}</span></li>' for t, x in RECS.get(s, []))
+    recs_html = (f'<div class="secrow"><div class="rectitle">Ongoing priorities</div>'
+                 f'<ul class="recs">{recs}</ul></div>') if recs else ""
+    return f'''<div class="card sitecard">
+      <div class="schead"><h2>Where this site stands</h2></div>
+      <p class="narr">{H.escape(narr)}</p>
+      {statrow}{rk}{health}{recs_html}</div>'''
 
 def build(D, F, KT, CT, SEM, RECS, links=None):
     links = links or {}
