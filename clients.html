@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Clients &amp; renewals — IPTV Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%23c67139%22 d=%22M12 2l8 10-8 10-8-10z%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  .viz-root{color-scheme:light;
+    --bg:#f5ead8;--surface:#ebddc5;--card:#f9f4ed;--ink:#201e1d;
+    --n200:#eee7db;--n400:#c0b6a5;--n500:#a19786;--n600:#82796a;--n700:#645c50;--n800:#474238;
+    --t200:#ffe1d0;--t400:#f6a06b;--t:#c67139;--t600:#b2622d;--t700:#8c491a;--t900:#402310;
+    --g200:#e1eecc;--g300:#ccdbb2;--g:#7a8a5e;--g700:#56633f;--g800:#3d472b;
+    --divider:rgba(32,30,29,.16);--rule:rgba(32,30,29,.08);--shadow:0 1px 2px rgba(46,43,37,.14);
+    --head:'Caprasimo',serif;--body:'Figtree',ui-sans-serif,system-ui,sans-serif;
+    --s1:#c67139;--s2:#7a8a5e;--s3:#f6a06b;--s4:#8c491a;--s5:#aebf92;--s6:#645c50;--s7:#56633f;--s8:#c0b6a5;--s9:#402310;--s10:#ffc6a5}
+  *{box-sizing:border-box}
+  html,body{margin:0;max-width:100%;overflow-x:clip;background:#f5ead8}
+  .viz-root{background:var(--bg);color:var(--ink);font:14px/1.5 var(--body);min-height:100vh;-webkit-font-smoothing:antialiased}
+  a{color:var(--t700)}:focus-visible{outline:2px solid var(--t);outline-offset:2px}
+  .num{font-variant-numeric:tabular-nums}
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(245,234,216,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(32,30,29,.1)}
+  .tb1{display:flex;align-items:center;gap:20px;padding:12px 32px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex:none}
+  .brandmark{width:34px;height:34px;border-radius:50%;background:var(--t);color:#f5ead8;display:grid;place-items:center;font:400 18px var(--head)}
+  .wordmark{font:400 19px var(--head)}.wordmark b{color:var(--t);font-weight:400}
+  .navpills{display:flex;background:var(--surface);border-radius:999px;padding:4px;overflow-x:auto;scrollbar-width:none}
+  .navpills::-webkit-scrollbar{display:none}
+  .navpills a{font:600 13px var(--body);padding:7px 14px;border-radius:999px;text-decoration:none;color:var(--n700);white-space:nowrap}
+  .navpills a.on{background:var(--t);color:#f5ead8}
+  .tbspacer{flex:1}
+  .auditstat{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--n600);white-space:nowrap}
+  .auditstat::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--g)}
+  .runbtn{font:400 14px var(--head);background:var(--t);color:#f5ead8;padding:9px 18px;border-radius:999px;text-decoration:none;white-space:nowrap}
+  .tb2{display:flex;align-items:center;gap:6px;padding:0 32px 10px;overflow-x:auto;scrollbar-width:none}
+  .tb2::-webkit-scrollbar{display:none}
+  .tb2 .lbl{font:600 11px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--n600);margin-right:4px;flex:none}
+  .schip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:3px 10px;border:1px solid rgba(32,30,29,.14);border-radius:999px;text-decoration:none;color:var(--ink);white-space:nowrap}
+  .schip .dot{width:7px;height:7px}
+  .wrap{max-width:1400px;margin:0 auto;padding:28px 32px 60px}
+  h1{font:400 40px/1.05 var(--head);margin:0 0 8px}
+  .sub{font:400 15px var(--body);color:var(--n600);margin:0}
+  .card{background:var(--card);border-radius:16px;padding:16px 20px;box-shadow:var(--shadow)}
+  .card.table{padding:0;overflow:hidden}
+  .card.warn{background:var(--t200);color:var(--t900)}
+  .kick{font:700 10px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--t)}
+  .kick.n{color:var(--n600)}.kick.w{color:var(--t700)}
+  .big{font:400 34px/1.1 var(--head)}
+  .tag{display:inline-block;border-radius:999px;padding:2px 9px;font:700 10px var(--body);letter-spacing:.06em;text-transform:uppercase}
+  .tag.pos{background:var(--g200);color:var(--g800)}.tag.warn{background:var(--t200);color:var(--t700)}.tag.neu{background:var(--n200);color:var(--n700)}
+  .btn{font:600 13px var(--body);border:1px solid var(--divider);background:transparent;color:var(--ink);padding:7px 16px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn:hover{background:rgba(32,30,29,.07)}
+  .btn.primary{font:400 14px var(--head);background:var(--t);color:#f5ead8;border:none}
+  .btn.sage{background:var(--g200);color:var(--g800);border:none}
+  .btn.sm{padding:5px 12px;font-size:12px}
+  .seg{display:inline-flex;background:var(--surface);border-radius:999px;padding:3px;flex-wrap:wrap}
+  .seg button{font:600 12px var(--body);padding:5px 13px;border-radius:999px;border:none;background:none;color:var(--n700);cursor:pointer}
+  .seg button.on{background:var(--t);color:#f5ead8}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th{font:600 11px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--n600);text-align:left;padding:8px 12px;border-bottom:1px solid var(--divider);white-space:nowrap}
+  td{padding:10px 12px;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums;vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:rgba(32,30,29,.04)}
+  .overflow{overflow-x:auto;max-width:100%}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:none;vertical-align:middle}
+  .s1{background:var(--s1)}.s2{background:var(--s2)}.s3{background:var(--s3)}.s4{background:var(--s4)}.s5{background:var(--s5)}.s6{background:var(--s6)}.s7{background:var(--s7)}.s8{background:var(--s8)}.s9{background:var(--s9)}.s10{background:var(--s10)}
+  .grid{display:grid;gap:14px;margin:20px 0}.g4{grid-template-columns:repeat(4,1fr)}
+  .hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+  .cardhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px 12px}
+  .kpi .kick{margin-bottom:8px}.kpi .big{margin:0}.kpi .foot{font-size:12px;color:var(--n600);margin-top:6px}
+  .cname{font-weight:600}.cwa{font-size:11px;color:var(--n600)}
+  .empty{padding:44px;text-align:center;color:var(--n500)}
+  .authgate{position:fixed;inset:0;background:var(--bg);display:none;align-items:center;justify-content:center;padding:24px;z-index:100}
+  .authgate.on{display:flex}
+  .authcard{width:100%;max-width:340px;display:flex;flex-direction:column;gap:11px;text-align:center}
+  .authcard h1{font-size:26px}.authcard p{color:var(--n600);font-size:14px;margin:0 0 4px}
+  .authcard input{background:var(--card);border:1px solid var(--divider);border-radius:999px;padding:12px 16px;font:14px var(--body);min-height:46px}
+  .err{color:var(--t700);font-size:13px;min-height:16px}
+  @media (max-width:1080px){.g4{grid-template-columns:1fr 1fr}}
+  @media (max-width:640px){.g4{grid-template-columns:1fr 1fr}h1{font-size:31px}.tb1{padding:10px 16px;gap:10px}.tb2{padding:0 16px 10px}.wrap{padding:20px 16px 60px}.auditstat,.runbtn{display:none}}
+</style>
+</head>
+<body>
+<div class="viz-root">
+<div id="authGate" class="authgate on">
+  <form class="authcard" id="authForm">
+    <h1>Clients</h1>
+    <p>Sign in with your dashboard account.</p>
+    <input id="authEmail" type="email" placeholder="Email" autocomplete="username">
+    <input id="authPass" type="password" placeholder="Password" autocomplete="current-password">
+    <div class="err" id="authErr"></div>
+    <button class="btn primary" id="signInBtn" type="submit" style="min-height:46px">Sign in</button>
+  </form>
+</div>
+
+<header class="topbar"><div class="tb1"><a class="brand" href="./"><span class="brandmark">i</span><span class="wordmark">IPTV <b>Portfolio</b></span></a><nav class="navpills"><a href="./">Overview</a><a href="today">Work</a><a href="trends">Trends</a><a href="links">Backlinks</a><a href="plan">Plan</a><a href="sales">Sales</a><a href="clients" class="on">Clients</a><a href="replies">Replies</a><a href="settings">Settings</a></nav><span class="tbspacer"></span><span class="auditstat">Audit 2026-09-02 08:42 UTC</span><a class="runbtn" href="./">Run audit</a></div><div class="tb2"><span class="lbl">Sites</span><a class="schip" href="iptvesp"><span class="dot s1"></span>esp</a><a class="schip" href="primeiptv-france"><span class="dot s2"></span>prime</a><a class="schip" href="iptvned"><span class="dot s3"></span>ned</a><a class="schip" href="iptvpix"><span class="dot s4"></span>pix</a><a class="schip" href="smarters-live"><span class="dot s5"></span>slive</a><a class="schip" href="iptvshqiptar"><span class="dot s6"></span>shqip</a><a class="schip" href="smartersprofrance-fr"><span class="dot s7"></span>spf</a><a class="schip" href="iptvfranceofficiel-fr"><span class="dot s8"></span>ifo</a><a class="schip" href="abonnementiptvofficiel"><span class="dot s9"></span>aio</a><a class="schip" href="iptvsegura"><span class="dot s10"></span>segura</a></div></header>
+
+<div class="wrap">
+  <div class="hdr">
+    <div><h1>Clients &amp; renewals</h1><p class="sub" id="sub">Your subscribers, their renewals and lifetime value.</p></div>
+    <div class="seg" id="viewSeg">
+      <button data-v="due" class="on">Due ≤ 14d</button><button data-v="active">Active</button><button data-v="lapsed">Lapsed</button><button data-v="all">All</button>
+    </div>
+  </div>
+
+  <div class="grid g4" style="margin-top:0">
+    <div class="card warn kpi"><div class="kick w">Expiring ≤ 7 days</div><div class="big" id="k7">0</div><div class="foot" id="k7f">renew now</div></div>
+    <div class="card kpi"><div class="kick n">Expiring 8–14 days</div><div class="big" id="k14">0</div><div class="foot">line them up</div></div>
+    <div class="card kpi"><div class="kick n">Lapsed · 30 days</div><div class="big" id="kl">0</div><div class="foot">win them back</div></div>
+    <div class="card kpi"><div class="kick n">Active clients</div><div class="big" id="ka">0</div><div class="foot" id="kaf">renewal rate —</div></div>
+  </div>
+
+  <div class="card table">
+    <div class="cardhead"><h2 style="font:400 21px var(--head);margin:0" id="tblTitle">Clients</h2><span style="font-size:12px;color:var(--n600)" id="tblCount">0</span></div>
+    <div class="overflow">
+      <table>
+        <thead><tr><th>Client</th><th>Language</th><th>Site</th><th>Plan · screens</th><th>Panel</th><th>Ends</th><th style="text-align:right">Lifetime €</th><th>Status</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyAI1eXkzlFca79XYLUS41WFTPPG2mL4BJI",authDomain:"iptv-sales.firebaseapp.com",projectId:"iptv-sales",messagingSenderId:"547649027254",appId:"1:547649027254:web:87d70cbfd54ff34164ba17"};
+const fbApp=initializeApp(firebaseConfig);const auth=getAuth(fbApp);const db=getFirestore(fbApp);
+
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+var sales=[], docRef=null, unsub=null, view="due";
+var SITE={iptvesp:{s:"esp",d:"s1"},primeiptv:{s:"prime",d:"s2"},iptvned:{s:"ned",d:"s3"},iptvpix:{s:"pix",d:"s4"},"smarters-live":{s:"slive",d:"s5"},iptvshqiptar:{s:"shqip",d:"s6"},smartersprofrance:{s:"spf",d:"s7"},iptvfranceofficiel:{s:"ifo",d:"s8"},abonnementiptvofficiel:{s:"aio",d:"s9"},iptvsegura:{s:"segura",d:"s10"},other:{s:"other",d:""}};
+var LANG={es:"Spanish",fr:"French",nl:"Dutch",en:"English",sq:"Albanian"};
+var PANEL={dino:"Dino",mega:"Mega",max:"Max"};
+function esc(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+function euro(n){return "€"+(Math.round((Number(n)||0)*100)/100).toLocaleString("en-IE",{minimumFractionDigits:0,maximumFractionDigits:2});}
+function daysLeft(end){if(!end)return null;var n=new Date();var t=Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),n.getUTCDate());var p=end.split("-").map(Number);return Math.round((Date.UTC(p[0],p[1]-1,p[2])-t)/864e5);}
+function fmtDate(d){return d?new Date(d+"T00:00:00Z").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric",timeZone:"UTC"}):"—";}
+function todayStr(){return new Date().toISOString().slice(0,10);}
+function addMonths(d,m){var p=d.split("-").map(Number);var x=new Date(Date.UTC(p[0],p[1]-1,p[2]));x.setUTCMonth(x.getUTCMonth()+Number(m));return x.toISOString().slice(0,10);}
+function waDigits(s){return (s.whatsapp||"").replace(/\D/g,"");}
+function mask(wa){if(!wa)return "";var d=wa.replace(/[^\d+]/g,"");if(d.length<6)return d;return d.slice(0,Math.min(4,d.length-2))+"•••••"+d.slice(-2);}
+
+function agg(){
+  var m={};
+  sales.forEach(function(s){
+    var w=waDigits(s), k=w?("w:"+w):("n:"+(s.client_name||"").trim().toLowerCase());
+    if(!m[k])m[k]={key:k,name:s.client_name,whatsapp:s.whatsapp,language:s.language,site:s.site,panel:s.panel,plan:s.plan_months,screens:s.screens||1,end:"",ltv:0,orders:0,last:"",lastSale:null};
+    var c=m[k];c.orders++;c.ltv+=Number(s.price_eur)||0;
+    if((s.sale_date||"")>=c.last){c.last=s.sale_date||"";c.name=s.client_name;if(s.whatsapp)c.whatsapp=s.whatsapp;c.language=s.language;c.site=s.site;c.panel=s.panel;c.plan=s.plan_months;c.screens=s.screens||1;c.lastSale=s;}
+    if((s.end_date||"")>c.end)c.end=s.end_date||"";
+  });
+  return Object.keys(m).map(function(k){var c=m[k];c.dl=daysLeft(c.end);return c;});
+}
+function statusOf(c){
+  if(c.dl===null)return {t:"Paid",cls:"neu"};
+  if(c.dl<0)return {t:"Lapsed",cls:"warn"};
+  if(c.dl<=7)return {t:"Expiring",cls:"warn"};
+  if(c.dl<=14)return {t:"Expiring",cls:"neu"};
+  return {t:"Active",cls:"pos"};
+}
+function render(){
+  var list=agg();
+  var k7=0,k14=0,kl=0,ka=0,ended=0,renewed=0;
+  list.forEach(function(c){
+    if(c.dl!==null){ if(c.dl>=0&&c.dl<=7)k7++; else if(c.dl>=8&&c.dl<=14)k14++; else if(c.dl<0&&c.dl>=-30)kl++; if(c.dl>=0)ka++; if(c.dl<0)ended++; if(c.orders>1)renewed++; }
+  });
+  $("#k7").textContent=k7;$("#k7f").textContent=k7?"renew now":"all good";
+  $("#k14").textContent=k14;$("#kl").textContent=kl;$("#ka").textContent=ka;
+  var rate=(renewed+ended)>0?Math.round(renewed/(renewed+ended)*100):null;
+  $("#kaf").textContent="renewal rate "+(rate===null?"—":rate+"%");
+
+  var filtered=list.filter(function(c){
+    if(view==="all")return true;
+    if(view==="active")return c.dl!==null&&c.dl>=0;
+    if(view==="lapsed")return c.dl!==null&&c.dl<0;
+    return c.dl!==null&&c.dl>=0&&c.dl<=14; // due
+  }).sort(function(a,b){var da=a.dl===null?99999:a.dl,dbb=b.dl===null?99999:b.dl;return da-dbb;});
+
+  $("#tblTitle").textContent={due:"Due in the next 14 days",active:"Active clients",lapsed:"Lapsed clients",all:"All clients"}[view];
+  $("#tblCount").textContent=filtered.length+(filtered.length===1?" client":" clients");
+  var tb=$("#rows");
+  if(!filtered.length){tb.innerHTML='<tr><td colspan="9" class="empty">No clients yet. Record sales in Sales and they show up here.</td></tr>';return;}
+  tb.innerHTML=filtered.map(function(c){
+    var st=statusOf(c), si=SITE[c.site]||{s:c.site,d:""};
+    var endColor=c.dl<0?"color:var(--n500)":(c.dl!==null&&c.dl<=7?"color:var(--t700);font-weight:600":"color:var(--n700)");
+    var dig=waDigits(c);
+    var msg=dig?('<a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/'+dig+'">Message</a>'):'<span style="color:var(--n400);font-size:12px">no WhatsApp</span>';
+    return '<tr>'+
+      '<td><div class="cname">'+esc(c.name||"—")+'</div>'+(c.whatsapp?'<div class="cwa">'+esc(mask(c.whatsapp))+'</div>':'')+'</td>'+
+      '<td>'+esc(LANG[c.language]||c.language||"—")+'</td>'+
+      '<td style="white-space:nowrap">'+(si.d?'<span class="dot '+si.d+'"></span> ':'')+esc(si.s)+'</td>'+
+      '<td class="num" style="white-space:nowrap">'+esc(c.plan)+' mo · '+esc(c.screens)+'s</td>'+
+      '<td>'+esc(PANEL[c.panel]||c.panel||"—")+'</td>'+
+      '<td style="white-space:nowrap;'+endColor+'">'+fmtDate(c.end)+(c.dl!==null?' <span style="font-size:11px;color:var(--n500)">('+(c.dl<0?Math.abs(c.dl)+"d ago":c.dl+"d")+')</span>':'')+'</td>'+
+      '<td class="num" style="text-align:right;font-weight:600">'+euro(c.ltv)+'</td>'+
+      '<td><span class="tag '+st.cls+'">'+st.t+'</span></td>'+
+      '<td style="white-space:nowrap;text-align:right">'+msg+' <button class="btn sage sm" data-renew="'+esc(c.key)+'">↻ Renew</button></td>'+
+      '</tr>';
+  }).join("");
+  Array.prototype.forEach.call(tb.querySelectorAll("[data-renew]"),function(b){b.onclick=function(){renew(b.getAttribute("data-renew"));};});
+}
+function renew(key){
+  var list=agg(), c=list.filter(function(x){return x.key===key;})[0];
+  if(!c||!c.lastSale)return;
+  var s=c.lastSale, months=Number(s.plan_months)||12;
+  if(!confirm("Renew "+(s.client_name||"this client")+" for "+months+" month(s) (€"+(Number(s.price_eur)||0)+")? This logs a new paid sale."))return;
+  var base=(daysLeft(s.end_date)||-1)>0?s.end_date:todayStr();
+  var rec=Object.assign({},s,{id:sales.reduce(function(m,x){return Math.max(m,x.id||0);},0)+1,created_at:new Date().toISOString(),sale_date:todayStr(),end_date:addMonths(base,months),status:"paid"});
+  s.status="renewed"; sales.push(rec);
+  if(docRef)setDoc(docRef,{sales:sales},{merge:true}).catch(function(e){console.error(e);});
+  render();
+}
+$("#viewSeg").addEventListener("click",function(e){var b=e.target.closest("[data-v]");if(!b)return;view=b.getAttribute("data-v");[].forEach.call(this.children,function(c){c.classList.toggle("on",c===b);});render();});
+
+// auth
+$("#authForm").onsubmit=function(e){e.preventDefault();$("#authErr").textContent="";signInWithEmailAndPassword(auth,$("#authEmail").value.trim(),$("#authPass").value).catch(function(err){$("#authErr").textContent="Sign-in failed: "+((err&&err.code||"").replace("auth/","").replace(/-/g," "));});};
+onAuthStateChanged(auth,function(user){
+  if(user){$("#authGate").classList.remove("on");docRef=doc(db,"trackers",user.uid);
+    if(unsub)unsub();
+    unsub=onSnapshot(docRef,function(snap){var d=snap.exists()?snap.data():null;sales=(d&&Array.isArray(d.sales))?d.sales:[];render();},function(err){console.error(err);});
+  }else{if(unsub){unsub();unsub=null;}docRef=null;sales=[];$("#authGate").classList.add("on");}
+});
+render();
+})();
+</script>
+</body>
+</html>
