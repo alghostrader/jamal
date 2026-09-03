@@ -88,11 +88,11 @@ def _spam_cls(v):
     v = v or 0
     return "good" if v < 40 else "ok" if v < 60 else "far"
 
-def spark(vals, w=150, h=38, color="var(--acc)"):
+def spark(vals, w=150, h=38, color="var(--t)"):
     vals = [v or 0 for v in vals]
     if len(vals) < 2 or max(vals) == 0:
         return (f'<svg class="spk" width="{w}" height="{h}" viewBox="0 0 {w} {h}">'
-                f'<line x1="3" y1="{h//2}" x2="{w-3}" y2="{h//2}" stroke="var(--line)" stroke-width="2" stroke-linecap="round"/></svg>')
+                f'<line x1="3" y1="{h//2}" x2="{w-3}" y2="{h//2}" stroke="var(--divider)" stroke-width="2" stroke-linecap="round"/></svg>')
     n = len(vals); mx = max(vals); pad = 4
     X = lambda i: pad + (w - 2*pad) * (i/(n-1))
     Y = lambda v: pad + (h - 2*pad) * (1 - v/mx)
@@ -102,11 +102,11 @@ def spark(vals, w=150, h=38, color="var(--acc)"):
             f'<polyline points="{pts}" fill="none" stroke="{color}" stroke-width="1.8" stroke-linejoin="round"/>'
             f'<circle cx="{X(n-1):.1f}" cy="{Y(vals[-1]):.1f}" r="2.6" fill="{color}"/></svg>')
 
-def donut(val, mx, center, label, color="var(--acc)", r=30, sw=7):
+def donut(val, mx, center, label, color="var(--t)", r=30, sw=7):
     C = 2*math.pi*r; pct = 0 if not mx else max(0, min(1, val/mx)); off = C*(1-pct)
     size = (r+sw)*2+2; cx = size/2
     return (f'<div class="gauge"><svg width="{size}" height="{size}" viewBox="0 0 {size} {size}">'
-            f'<circle cx="{cx}" cy="{cx}" r="{r}" fill="none" stroke="var(--surface2)" stroke-width="{sw}"/>'
+            f'<circle cx="{cx}" cy="{cx}" r="{r}" fill="none" stroke="var(--surface)" stroke-width="{sw}"/>'
             f'<circle class="gaugeArc" cx="{cx}" cy="{cx}" r="{r}" fill="none" stroke="{color}" stroke-width="{sw}" '
             f'stroke-linecap="round" stroke-dasharray="{C:.1f}" stroke-dashoffset="{off:.1f}"/>'
             f'<text class="gaugeC" x="{cx}" y="{cx+5}" text-anchor="middle">{center}</text></svg>'
@@ -360,7 +360,7 @@ def alerts_card():
     nfix = sum(1 for lv, _ in A if lv in ("crit", "warn"))
     cls = "card alertcard" if any(lv == "crit" for lv, _ in A) else "card"
     return (f'<div class="{cls}"><h2>{icon("bell")} Urgent — fix now '
-            f'<span style="font-weight:400;color:var(--ink3)">· {nfix} to fix</span></h2>{items}</div>')
+            f'<span style="font-weight:400;color:var(--n600)">· {nfix} to fix</span></h2>{items}</div>')
 
 # ---------------- daily queue ----------------
 PLATFORM_BATCH = f""">>> LINK PLATFORM BATCH — [PLATFORM NAME] × all {NSITES} websites <<<
@@ -440,55 +440,60 @@ def prompt_card(title, text, note=""):
             + f'<pre class="ptext">{H.escape(text)}</pre></div>')
 
 def build_work():
-    b = ""
-    # --- DEVELOPER ---
+    cols = []
     dev = [(s, prompts[s]) for s in ALL if tech_items(s)]
-    b += role_header("🔧", "Developer", "technical fixes — crawl-verified, auto-clear when the next audit confirms them", len(dev))
-    if dev:
-        for s, p in dev:
-            b += prompt_card(f"Fix — {s}", p, note=f'Open items on <a class="slink" href="{SLUG[s]}">{s}</a>. Copy, run, done.')
-    else:
-        b += '<div class="card"><p class="sub" style="margin:0">Nothing. Zero technical defects portfolio-wide. ✓</p></div>'
-    # --- SEO / CONTENT ---
+    dev_cards = "".join(
+        f'<div class="task"><div class="meta"><span class="tag warn">FIX</span> {s}</div>'
+        f'<div style="font-size:14px;line-height:1.4">{H.escape(tech_items(s)[0].split(chr(10))[0][:110])}</div>'
+        f'<div class="pcard" style="margin:0"><details><summary class="linkbtn" style="cursor:pointer">Show prompt</summary>'
+        f'<pre class="ptext">{H.escape(p)}</pre></details>'
+        f'<div style="margin-top:8px"><button class="btn sm" data-copy>Copy prompt</button></div></div></div>'
+        for s, p in dev) or '<div class="task"><div style="font-size:14px;color:var(--n600)">Nothing — zero defects. ✓</div></div>'
+    cols.append(("Developer", len(dev), dev_cards))
     cands = []
     for s in CONTENT_PRIO:
         rec = CT.get(s, {}).get("recommend", [])
         gp = next((r for r in rec if not r["covered"] and reserved_for(s, r["kw"])), None)
         if gp: cands.append((gp["vol"] or 0, s, gp))
     cands.sort(reverse=True, key=lambda x: x[0])
-    b += role_header("✍️", "SEO · Content", "one article per day through the 5-skill pipeline — today\u2019s target first; the queue below is tomorrow", 1)
+    cont_cards = ""
     if cands:
         _, s, gp = cands[0]
-        vol = f"{gp['vol']:,}/mo" if gp["vol"] else "niche volume"
+        vol = f"{gp['vol']:,}/mo" if gp["vol"] else "niche"
         seq = (f'Write today\u2019s article with the 5-skill pipeline. Site: {s}. Brief: seo-tools/briefs/{DOM2SLUG[s]}/site-brief.md\n\n'
                f'1. /keyword-fanout-map  "{gp["kw"]}"  \u2014 {CTRY[s][1]}, {LANG[s][0]}\n'
-               f'2. /seo-content-writer  \u2014 blog post; check no same-market article already targets it. STOP if one does.\n'
-               f'3. /onpage-optimizer  \u2014 on the draft\n'
-               f'4. /internal-link-architect  \u2014 link plan; money page {MONEY[s]} first\n'
-               f'5. Publish + sitemap + request indexing in GSC.')
-        b += prompt_card(f'TODAY: \u201c{gp["kw"]}\u201d ({vol}) on {s}', seq,
-                         note="The biggest genuinely-uncovered keyword in the portfolio. One article today \u2014 this one.")
-        if cands[1:]:
-            q = "".join(f'<tr><td>{H.escape(gp2["kw"])}</td><td>{(format(gp2["vol"], ",") + "/mo") if gp2["vol"] else "-"}</td>'
-                        f'<td><a class="slink" href="{SLUG[s2]}">{s2.replace(".com","")}</a></td></tr>'
-                        for _, s2, gp2 in cands[1:])
-            b += (f'<div class="card"><h2>{icon("file")} Up next in the queue</h2>'
-                  f'<p class="sub">Reserved, one per site \u2014 tomorrow\u2019s candidates. Anti-cannibalization enforced.</p>'
-                  f'<div class="overflow"><table><thead><tr><th>keyword</th><th>vol</th><th>site</th></tr></thead><tbody>{q}</tbody></table></div></div>')
-    # --- LINK BUILDER ---
-    b += role_header("🔗", "Link builder", "one platform row per day \u2014 tick boxes on Backlinks, paste the progress code when done", 1)
-    b += prompt_card(f"Platform batch \u2014 all {NSITES} sites", PLATFORM_BATCH,
-                     note=f'Take the topmost incomplete row of the <a class="slink" href="links">Backlinks matrix</a>. 30 minutes. This is the #1 growth lever.')
-    # --- OWNER ---
+               f'2. /seo-content-writer \u2014 check no same-market duplicate first; STOP if one exists\n'
+               f'3. /onpage-optimizer \u2014 on the draft\n4. /internal-link-architect \u2014 money page {MONEY[s]} first\n'
+               f'5. Publish + sitemap + request indexing.')
+        cont_cards = (f'<div class="task"><div class="meta"><span class="tag pos">WRITE</span> {s}</div>'
+                      f'<div style="font-size:14px">\u201c{H.escape(gp["kw"])}\u201d \u2014 {vol}. Today\u2019s one article.</div>'
+                      f'<div class="pcard" style="margin:0"><details><summary class="linkbtn" style="cursor:pointer">Show workflow</summary>'
+                      f'<pre class="ptext">{H.escape(seq)}</pre></details>'
+                      f'<div style="margin-top:8px"><button class="btn sm" data-copy>Copy prompt</button></div></div></div>')
+        for _, s2, gp2 in cands[1:4]:
+            v2 = f"{gp2['vol']:,}/mo" if gp2["vol"] else "niche"
+            cont_cards += (f'<div class="task" style="opacity:.75"><div class="meta"><span class="tag neu">QUEUED</span> {s2}</div>'
+                           f'<div style="font-size:13px">\u201c{H.escape(gp2["kw"])}\u201d \u2014 {v2}</div></div>')
+    cols.append(("Content", 1, cont_cards))
+    link_cards = (f'<div class="task"><div class="meta"><span class="tag neu">LINKS</span> all {NSITES} sites</div>'
+                  f'<div style="font-size:14px">One platform row on the <a class="slink" href="links">Backlinks matrix</a>. 30 minutes \u2014 the #1 lever.</div>'
+                  f'<div class="pcard" style="margin:0"><details><summary class="linkbtn" style="cursor:pointer">Show batch prompt</summary>'
+                  f'<pre class="ptext">{H.escape(PLATFORM_BATCH)}</pre></details>'
+                  f'<div style="margin-top:8px"><button class="btn sm" data-copy>Copy prompt</button></div></div></div>')
+    cols.append(("Links", 1, link_cards))
     owner = []
     if not D["sites"].get("iptvsegura.com", {}).get("in_gsc"):
-        owner.append("iptvsegura.com: add the monitoring service account in Search Console (Settings \u2192 Users \u2192 Add: seo-monitor@seo-dashboard-505310.iam.gserviceaccount.com, Restricted)")
-    owner.append("Weekly: send Claude the sales numbers per site \u2014 revenue joins the scorecard")
-    owner.append("Review briefs\u2019 \u26a0\ufe0f fields at seo-tools/briefs/ when you have 10 minutes")
-    b += role_header("👤", "Owner", "account access and business inputs \u2014 only you can do these", len(owner))
-    b += ('<div class="card"><ul class="lcl" style="margin:6px 0 0">'
-          + "".join(f"<li>{t}</li>" for t in owner) + "</ul></div>")
-    return b
+        owner.append("iptvsegura: add the monitoring service account in Search Console (Restricted)")
+    owner.append("Weekly: send Claude the sales numbers per site")
+    owner.append("Review the \u26a0\ufe0f fields in seo-tools/briefs/")
+    own_cards = "".join(f'<div class="task"><div class="meta"><span class="tag neu">OWNER</span></div>'
+                        f'<div style="font-size:14px">{t}</div></div>' for t in owner)
+    cols.append(("Owner", len(owner), own_cards))
+    total = sum(n for _, n, _ in cols)
+    hdr = (f'<div class="hdr"><div><h1>Work \u2014 {total} tasks</h1>'
+           f'<p class="sub">Organised by role. Tasks auto-clear when the next audit verifies them done.</p></div></div>')
+    kan = "".join(f'<div><h3>{r} <span class="cnt">{n}</span></h3>{cardshtml}</div>' for r, n, cardshtml in cols)
+    return hdr + f'<div class="kanban">{kan}</div>'
 
 def daily_plan():
     cards = []; n = 0
@@ -570,17 +575,40 @@ HEAD_META = ('<meta name="viewport" content="width=device-width, initial-scale=1
              '<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 '
              'viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%23cc785c%22 d=%22M12 2l8 10-8 10-8-10z%22/%3E%3C/svg%3E">')
 
+def topbar(cur):
+    NAV = [("./", "Overview", None), ("today", "Work", "today"), ("trends", "Trends", "trends"),
+           ("links", "Backlinks", "links"), ("plan", "Plan", "plan"), ("sales", "Sales", "sales"),
+           ("replies", "Replies", "replies"), ("settings", "Settings", "settings")]
+    pills = "".join(f'<a href="{h}" class="{"on" if cur == k else ""}">{l}</a>' for h, l, k in NAV)
+    chips = "".join(f'<a class="schip{" on" if cur == s else ""}" href="{SLUG[s]}">'
+                    f'<span class="dot s{i+1}"></span>{ABBR[s]}</a>' for i, s in enumerate(ALL))
+    return (f'<header class="topbar"><div class="tb1">'
+            f'<a class="brand" href="./"><span class="brandmark">i</span>'
+            f'<span class="wordmark">IPTV <b>Portfolio</b></span></a>'
+            f'<nav class="navpills">{pills}</nav><span class="tbspacer"></span>'
+            f'<span class="auditstat">Audit {H.escape(STAMP_TXT)}</span>'
+            f'<button class="runbtn" id="runaudit" title="Copies the audit request — paste it to Claude">Run audit</button>'
+            f'</div><div class="tb2"><span class="lbl">Sites</span>{chips}</div></header>')
+
+RUN_JS = """<script>
+const rb = document.getElementById("runaudit");
+if (rb) rb.addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText("Full audit and update the dashboard please"); } catch(e){}
+  rb.textContent = "Copied — paste to Claude"; setTimeout(() => rb.textContent = "Run audit", 2600);
+});
+</script>"""
+
 def shell(title, body, cur=None, extra_js=""):
     return f'''<title>{title}</title>
 {HEAD_META}
 {STYLE}
-<div class="viz-root"><div class="app">
-{sidebar(cur)}
-<main class="main"><div class="wrap">
+<div class="viz-root">
+{topbar(cur)}
+<main><div class="wrap">
 {flat(body)}
 </div></main>
-</div></div>
-{extra_js}'''
+</div>
+{RUN_JS}{extra_js}'''
 
 COPY_JS = """<script>
 document.querySelectorAll("[data-copy]").forEach(btn=>btn.addEventListener("click",async ()=>{
@@ -624,10 +652,10 @@ def area_chart(vals, dates, w=560, h=210, color="var(--s1)", cid="ac", label="Tr
     grid = ""
     for t in range(4):
         val = round(mx * (3-t) / 3); yy = padT + (h-padT-padB) * (t/3)
-        grid += (f'<line x1="{padL}" x2="{w-padR}" y1="{yy:.0f}" y2="{yy:.0f}" stroke="var(--line2)" stroke-width="1"/>'
-                 f'<text x="{padL}" y="{yy-3:.0f}" fill="var(--ink3)" font-size="9.5" font-family="ui-monospace,monospace">{val:,}</text>')
+        grid += (f'<line x1="{padL}" x2="{w-padR}" y1="{yy:.0f}" y2="{yy:.0f}" stroke="var(--rule)" stroke-width="1"/>'
+                 f'<text x="{padL}" y="{yy-3:.0f}" fill="var(--n600)" font-size="9.5" font-family="ui-monospace,monospace">{val:,}</text>')
     st = max(1, n // 6)
-    xlab = "".join(f'<text x="{X(i):.0f}" y="{h-6}" fill="var(--ink3)" font-size="9.5" text-anchor="middle" font-family="ui-monospace,monospace">{dates[i][5:]}</text>'
+    xlab = "".join(f'<text x="{X(i):.0f}" y="{h-6}" fill="var(--n600)" font-size="9.5" text-anchor="middle" font-family="ui-monospace,monospace">{dates[i][5:]}</text>'
                    for i in range(0, n, st))
     line = " ".join(f"{X(i):.1f},{Y(v):.1f}" for i, v in enumerate(vals))
     area = f'{padL},{Y(0):.1f} ' + line + f' {X(n-1):.1f},{Y(0):.1f}'
@@ -729,7 +757,7 @@ def goals_card():
                   f'<div class="ctryTrack"><div class="ctryFill" style="width:{pct}%"></div></div>'
                   f'<span class="ovsub">{pct}% · due {H.escape(g["due"])}</span></div>')
     return (f'<div class="card" style="border-left:4px solid var(--s3)"><h2>{icon("target")} North Star — the goals'
-            f'<span style="font-weight:400;color:var(--ink3);font-size:12px"> · set {H.escape(GOALS.get("set_on",""))}, change them anytime</span></h2>'
+            f'<span style="font-weight:400;color:var(--n600);font-size:12px"> · set {H.escape(GOALS.get("set_on",""))}, change them anytime</span></h2>'
             f'<div class="goalgrid">{tiles}</div></div>')
 
 def weekly_scorecard():
@@ -752,7 +780,7 @@ def weekly_scorecard():
     for wkey, w in rows:
         d = (w["c"] - prevc) if prevc is not None else None
         dtxt = "—" if d is None else f'<span class="tmDelta {"up" if d>=0 else "down"}">{"+" if d>0 else ""}{d}</span>'
-        partial = " <span style=\'color:var(--ink3)\'>(partial)</span>" if w["days"] < 7 else ""
+        partial = " <span style=\'color:var(--n600)\'>(partial)</span>" if w["days"] < 7 else ""
         out_rows.append(f'<tr><td>wk of {wkey[5:]}{partial}</td><td>{w["c"]:,}</td><td>{dtxt}</td><td>{w["i"]:,}</td></tr>')
         if w["days"] == 7: prevc = w["c"]
     body = "".join(reversed(out_rows))
@@ -782,7 +810,7 @@ def rankings_board():
     if rows:
         body = "".join(f'<tr><td>{pb(p)}</td><td>{H.escape(k)}</td><td>{v:,}</td>'
                        f'<td><a class="slink" href="{SLUG[s]}">{s.replace(".com","")}</a></td>'
-                       f'<td style="color:var(--ink3)">{H.escape(u)}</td></tr>' for p, k, v, s, u in rows)
+                       f'<td style="color:var(--n600)">{H.escape(u)}</td></tr>' for p, k, v, s, u in rows)
         tbl = (f'<div class="overflow"><table><thead><tr><th>pos</th><th>keyword</th><th>vol/mo</th>'
                f'<th>site</th><th>page</th></tr></thead><tbody>{body}</tbody></table></div>')
     else:
@@ -801,7 +829,7 @@ def ai_search_card():
     if not vis and not cited_only: return ""
     vis.sort(reverse=True)
     rows = "".join(f'<tr><td><a class="slink" href="{SLUG[s]}">{s.replace(".com","")}</a></td><td>{v}</td>'
-                   f'<td>{c} <span style="color:var(--ink3)">({H.escape(n)})</span></td></tr>' for v, c, s, n in vis)
+                   f'<td>{c} <span style="color:var(--n600)">({H.escape(n)})</span></td></tr>' for v, c, s, n in vis)
     tbl = (f'<div class="overflow"><table><thead><tr><th>site</th><th>visibility</th><th>cited pages</th></tr></thead>'
            f'<tbody>{rows}</tbody></table></div>') if rows else ""
     cited_only.sort(reverse=True)
@@ -884,7 +912,7 @@ def opportunity_card():
                f'but not yet in the top 100. Content is done; <b>authority is the unlock</b> — every referring domain from the '
                f'<a class="slink" href="links">Backlinks</a> matrix moves it. Next: {run}.')
     return (f'<div class="card oppcard"><h2>{icon("gem")} Biggest opportunity</h2>'
-            f'<div class="oppNum">{num}<span style="font-size:14px;color:var(--ink3);font-weight:600"> /mo</span></div>'
+            f'<div class="oppNum">{num}<span style="font-size:14px;color:var(--n600);font-weight:600"> /mo</span></div>'
             f'<p class="sub" style="margin:0">{txt}</p></div>')
 
 def country_card():
@@ -923,7 +951,7 @@ def board_row1():
     pw = sum(vals[-14:-7]) if len(vals) >= 14 else 0
     n_rank = sum(nrank(s) for s in ALL)
     top10 = goal_current("top10")
-    chart = area_chart(vals[-30:], dates[-30:], w=520, h=150, color="var(--acc)", cid="acbrd", label="Clicks 30d") if len(vals) >= 8 else ""
+    chart = area_chart(vals[-30:], dates[-30:], w=520, h=150, color="var(--t)", cid="acbrd", label="Clicks 30d") if len(vals) >= 8 else ""
     tgt = next((x["target"] for x in GOALS.get("goals", []) if x["id"] == "clicks"), 0)
     pct = max(3, min(100, round(100 * wk / tgt))) if tgt else 0
     clicks_tile = (f'<div class="card tile t3"><span class="kpiL">CLICKS · PAST 7 DAYS</span>'
@@ -945,7 +973,7 @@ def board_goals():
         pct = max(3, min(100, round(100 * cur / tgt))) if tgt else 0
         done = cur >= tgt
         foot = "done, goal complete" if done else f"{pct}% - due {gl.get('due', '')}"
-        barcol = "var(--up)" if done else "var(--acc)"
+        barcol = "var(--up)" if done else "var(--t)"
         t += (f'<div class="card tile t4"><span class="kpiL">{H.escape(gl["label"]).upper()}</span>'
               f'<span class="tileNum">{cur:,}<small> / {tgt:,}</small></span>'
               f'<div class="ctryTrack" style="margin-top:10px"><div class="ctryFill" style="width:{pct}%;background:{barcol}"></div></div>'
@@ -1022,7 +1050,7 @@ def hero_v4():
                   + (' ✓' if done else '') + '</span>'
                   f'<span class="gpillV">{cur:,} / {tgt:,}</span>'
                   f'<div class="ctryTrack"><div class="ctryFill" style="width:{pct}%"></div></div></div>')
-    spark_html = spark(vals[-30:], color="var(--acc)") if len(vals) >= 8 else ""
+    spark_html = spark(vals[-30:], color="var(--t)") if len(vals) >= 8 else ""
     return (f'<div class="hero"><div class="heroGrid"><div class="heroMain">'
             f'<h1>IPTV Portfolio</h1>'
             f'<div class="heroNum">{wk:,}<span class="heroUnit">clicks / week</span></div>'
@@ -1189,22 +1217,202 @@ sitelist = (f'<div class="card"><h2>Websites</h2><p class="sub">Status · keywor
 
 control = (f'<div class="grid2"><div>{traffic_chart_card()}{ai_search_card()}</div>'
            f'<div class="rail">{country_card()}{gauges_card()}{opportunity_card()}</div></div>')
-home_body = ('<h1 style="margin-bottom:14px">IPTV Portfolio</h1>' + statusline() + work_strip() + board_row1()
-             + board_goals() + attention_card() + board_row2() + board_row3())
-open(os.path.join(OUT, "index.html"), "w").write(shell("IPTV Portfolio — SEO Dashboard", home_body, cur=None))
 
-today_body = (f'<h1>Work — who does what</h1>'
-              f'<p class="meta">Everything actionable, in one place, by role. Prompts are copy-paste complete. '
-              f'Done something? Say "update the dashboard" and verified items clear automatically.</p>') + build_work()
-_n_steps = len(_steps)
-_owner_n = 3
-_today_tiles = ('<div class="board">'
-    + tile("t4", "STEPS IN THE QUEUE", f"{_n_steps}", "auto-clear when the next audit verifies them")
-    + tile("t4", "TARGETS RANKING", f"{sum(nrank(s) for s in ALL)}", "across all sites, probed live")
-    + tile("t4", "DEFECTS OPEN", f"{sum(1 for lv, _ in alerts() if lv == chr(99)+chr(114)+chr(105)+chr(116))}", "crawl-verified this audit"))
-_today_tiles += '</div>'
-today_body = today_body.replace('<h1>', '<h1 data-tiles>', 1)
-today_body = today_body.replace('</p>', '</p>' + _today_tiles, 1)
+# ═══════════ ORGANIC SCREENS ═══════════
+def sdot(s): return f'<span class="dot s{ALL.index(s)+1}"></span>'
+
+def spark_svg(vals, color="#c67139", w=72, hgt=22, sw=1.75):
+    vals = [v or 0 for v in (vals or [])][-12:]
+    if len(vals) < 2: return ""
+    mx = max(vals) or 1
+    pts = " ".join(f"{i*(w/(len(vals)-1)):.1f},{hgt-2-(v/mx)*(hgt-4):.1f}" for i, v in enumerate(vals))
+    return f'<svg width="{w}" height="{hgt}"><polyline points="{pts}" fill="none" stroke="{color}" stroke-width="{sw}"/></svg>'
+
+def phase_tag(s):
+    st = _sc.CONFIG[s]["status"]
+    cls = "pos" if st in ("ACCELERATING", "FLAGSHIP", "GROW") else ("warn" if st in ("WATCH", "RECOVERING") else "neu")
+    return f'<span class="tag {cls}">{st}</span>'
+
+def ov_alert_banners():
+    out = ""
+    for lv, t in alerts():
+        if lv not in ("crit", "warn"): continue
+        site = next((s for s in ALL if s in t), None)
+        btn = f'<a class="btn" href="{SLUG[site]}">Open site</a>' if site else ""
+        out += (f'<div class="card warn alertbanner"><span class="alertbang">!</span>'
+                f'<div style="flex:1"><div class="kick w">Needs attention</div>'
+                f'<div style="font-size:15px;margin-top:2px">{t}</div></div>{btn}'
+                f'<a class="btn primary" href="today">Open Work</a></div>')
+    return out
+
+def ov_north_star():
+    cards = ""
+    ndone = 0
+    for gl in GOALS.get("goals", []):
+        cur, tgt = goal_current(gl["id"]), gl["target"]
+        pct = max(3, min(100, round(100 * cur / tgt))) if tgt else 0
+        done = cur >= tgt; ndone += done
+        cards += (f'<div class="card"><div class="kick n">{H.escape(gl["label"])}</div>'
+                  f'<div style="margin:6px 0 10px"><span class="big num">{cur:,}</span>'
+                  f'<span style="color:var(--n600);font-size:14px"> / {tgt:,}</span></div>'
+                  f'<div class="bar"><i class="{"done" if done else ""}" style="width:{pct}%"></i></div>'
+                  f'<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--n600);margin-top:8px">'
+                  f'<span>{"goal complete" if done else str(pct) + "%"}</span><span>{"done ✓" if done else "due " + H.escape(gl.get("due", ""))}</span></div></div>')
+    head = (f'<div class="rowflex" style="justify-content:space-between;margin-bottom:12px"><h2>North star — {len(GOALS.get("goals", []))} goals</h2>'
+            f'<span style="font-size:12px;color:var(--n600)">set {H.escape(GOALS.get("set_on", ""))} · {ndone} complete</span></div>')
+    return head + f'<div class="grid g4" style="margin-top:0">{cards}</div>'
+
+def ov_sites_table():
+    rows = []
+    for s in ALL:
+        d = daily_of(s)
+        wk = sum(x["clicks"] for x in d[-7:]) if d else 0
+        pw = sum(x["clicks"] for x in d[-14:-7]) if len(d) >= 14 else 0
+        best = None
+        for r in KT.get(s, []):
+            if r.get("pos") and (best is None or r["pos"] < best[0]): best = (r["pos"], r["kw"])
+        rows.append((wk, wk - pw, best, s))
+    rows.sort(key=lambda x: -x[0])
+    body = ""
+    for wk, dl, best, s in rows:
+        sm = SEM.get(s) or {}; sp = dfs_of(s).get("spam_score")
+        dtxt = f'<span class="{"up" if dl > 0 else "down" if dl < 0 else "flat"}">{"▲ " + str(dl) if dl > 0 else "▼ " + str(abs(dl)) if dl < 0 else "—"}</span>'
+        sp_html = (f'<span class="tag warn">{sp}</span>' if (sp or 0) >= 58 else
+                   f'<span class="down">{sp}</span>' if (sp or 0) >= 50 else
+                   f'<span style="color:var(--n700)">{sp}</span>' if sp is not None else '<span class="flat">—</span>')
+        btxt = f'#{best[0]} {H.escape(best[1])}' if best else "—"
+        clk30 = [x["clicks"] for x in daily_of(s)[-30:]]
+        body += (f'<tr><td><a href="{SLUG[s]}" style="text-decoration:none;color:var(--ink)">{sdot(s)} {ABBR[s]}</a></td>'
+                 f'<td>{phase_tag(s)}</td><td style="text-align:right;font-weight:600">{wk:,}</td><td>{dtxt}</td>'
+                 f'<td>{spark_svg(clk30)}</td>'
+                 f'<td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{btxt}</td>'
+                 f'<td>{sm.get("ref_domains") if sm.get("ref_domains") is not None else "—"}</td><td>{sp_html}</td></tr>')
+    return (f'<div class="card table"><div class="cardhead"><h2>Sites — 7 days</h2></div>'
+            f'<div class="overflow"><table><thead><tr><th>Site</th><th>Phase</th><th style="text-align:right">Clicks</th>'
+            f'<th>Δ wk</th><th>30d</th><th>Best rank</th><th>Ref.dom</th><th>Spam</th></tr></thead><tbody>{body}</tbody></table></div></div>')
+
+def ov_rankings_card():
+    ranked = []
+    prev_pos = {}
+    if PREV:
+        for s in ALL:
+            for kw, p in PREV.get("sites", {}).get(s, {}).get("positions", {}).items(): prev_pos[(s, kw)] = p
+    total = 0
+    for s in ALL:
+        for r in KT.get(s, []):
+            total += 1
+            if r.get("pos"): ranked.append((r["pos"], r["kw"], s))
+    ranked.sort()
+    n1 = sum(1 for p, _, _ in ranked if p <= 10); n2 = sum(1 for p, _, _ in ranked if 10 < p <= 30)
+    n3 = sum(1 for p, _, _ in ranked if 30 < p <= 100); n0 = total - len(ranked)
+    dist = (f'<div class="distbar"><i style="flex:{max(n1,1)};background:var(--g)"></i>'
+            f'<i style="flex:{max(n2,1)};background:var(--g400)"></i>'
+            f'<i style="flex:{max(n3,1)};background:var(--t400)"></i>'
+            f'<i style="flex:{max(n0,1)};background:var(--surface)"></i></div>'
+            f'<div style="display:flex;gap:12px;font-size:11px;color:var(--n600)">'
+            f'<span>● page 1 · {n1}</span><span>● 11–30 · {n2}</span><span>● 31–100 · {n3}</span><span>● out · {n0}</span></div>')
+    rows = ""
+    for p, kw, s in ranked[:7]:
+        op = prev_pos.get((s, kw))
+        mv = (f'<span class="up">▲ {op-p}</span>' if op and p < op else
+              f'<span class="down">▼ {p-op}</span>' if op and p > op else '<span class="flat">—</span>')
+        rows += f'<div class="moverow">{sdot(s)}<span>{H.escape(kw)}</span>{mv}<span class="pos num">#{p}</span></div>'
+    return (f'<div class="card"><div class="rowflex" style="justify-content:space-between"><h2>Rankings movement</h2>'
+            f'<span style="font-size:13px;color:var(--n600)">{len(ranked)} / {total} in top 100</span></div>{dist}'
+            f'<div style="margin-top:10px">{rows}</div></div>')
+
+def ov_backlink_card():
+    rd_tot = sum((SEM.get(s) or {}).get("ref_domains") or 0 for s in ALL)
+    lb = _LINKS_CACHE["body"]
+    tot, chk = _LINKS_CACHE["total"], _LINKS_CACHE["checked"]
+    pct = round(100 * chk / tot) if tot else 0
+    sp_max = max(((dfs_of(s).get("spam_score") or 0), ABBR[s]) for s in ALL)
+    return (f'<div class="card"><h2>Backlink engine</h2>'
+            f'<div class="grid g3" style="gap:10px;margin:12px 0">'
+            f'<div><div class="kick n">Ref. domains</div><div class="big sm num">{rd_tot}</div></div>'
+            f'<div><div class="kick n">Checklist</div><div class="big sm num">{pct}%</div></div>'
+            f'<div><div class="kick w">Spam max</div><div class="big sm num" style="color:var(--t700)">{sp_max[0]}</div></div></div>'
+            f'<div class="bar"><i class="done" style="width:{pct}%"></i></div>'
+            f'<div style="font-size:12px;color:var(--n600);margin-top:8px">{chk} of {tot} placements done</div>'
+            f'<a class="linkbtn" href="links" style="display:inline-block;margin-top:8px">Open →</a></div>')
+
+def ov_work_card():
+    n_dev = sum(1 for s in ALL if tech_items(s))
+    n_owner = 2 + (0 if D["sites"].get("iptvsegura.com", {}).get("in_gsc") else 1)
+    tiles = "".join(f'<div class="inset"><div style="font-size:11px;color:var(--n700)">{r}</div>'
+                    f'<div class="big sm num">{n}</div></div>'
+                    for r, n in [("Developer", n_dev), ("Content", 1), ("Links", 1), ("Owner", n_owner)])
+    total = n_dev + 2 + n_owner
+    return (f'<div class="card"><h2>Work — by role</h2>'
+            f'<div class="grid g4" style="gap:10px;margin:12px 0 10px">{tiles}</div>'
+            f'<a class="linkbtn" href="today">All {total} tasks →</a></div>')
+
+def ov_changes_card():
+    if not PREV:
+        return '<div class="card"><h2>What changed</h2><p class="sub" style="margin-top:8px">Baseline saved — diffs appear from the next audit.</p></div>'
+    inner = changes_card()
+    return inner
+
+def build_home():
+    n_alerts = sum(1 for lv, _ in alerts() if lv in ("crit", "warn"))
+    n_dev = sum(1 for s in ALL if tech_items(s))
+    n_tasks = n_dev + 2 + 2 + (0 if D["sites"].get("iptvsegura.com", {}).get("in_gsc") else 1)
+    dates, vals = _port_series()
+    wk = sum(vals[-7:]) if vals else 0
+    title = ("All clear this morning." if n_alerts == 0 else
+             "Good morning. One thing needs you." if n_alerts == 1 else
+             f"Good morning. {n_alerts} things need you.")
+    hdr = (f'<div class="hdr"><div><h1>{title}</h1>'
+           f'<p class="sub">{NSITES} sites · 58 keywords probed · {wk:,} clicks this week</p></div>'
+           f'<div class="rowflex">'
+           + (f'<span class="tag warn" style="padding:6px 14px">{n_alerts} fix</span>' if n_alerts else '')
+           + f'<span class="tag pos" style="padding:6px 14px">{n_tasks} tasks open</span></div></div>')
+    return (hdr + ov_alert_banners() + ov_north_star()
+            + f'<div class="grid g169">{ov_sites_table()}<div class="stack">{ov_rankings_card()}{ov_backlink_card()}</div></div>'
+            + f'<div class="grid g2">{ov_work_card()}{ov_changes_card()}</div>')
+
+
+def build_settings():
+    integ = [("Google Search Console", "service account · 10 properties · clicks & impressions daily", "pos", "Connected"),
+             ("DataForSEO", "backlinks, domain rank, spam, live SERP probes", "pos", "Connected"),
+             ("Semrush", "AS, ref. domains — pulled live via MCP connector when linked", "neu", "Via Claude"),
+             ("Vercel", "deploys ride on git push to the dashboard branch", "pos", "Connected"),
+             ("Sales app", "browser-local; lives at /sales, /replies, /support", "neu", "Local")]
+    ints = "".join(f'<div class="rowflex" style="padding:9px 0;border-bottom:1px solid var(--rule)">'
+                   f'<span class="dot" style="background:{"var(--g)" if k == "pos" else "var(--n400)"}"></span>'
+                   f'<div style="flex:1"><div style="font-weight:600;font-size:13px">{n}</div>'
+                   f'<div style="font-size:11px;color:var(--n600)">{d}</div></div>'
+                   f'<span class="tag {"pos" if k == "pos" else "neu"}">{st}</span></div>'
+                   for n, d, k, st in integ)
+    goals_rows = "".join(f'<div class="rowflex" style="padding:8px 0"><span style="flex:1;font-size:13px">{H.escape(gl["label"])}</span>'
+                         f'<span class="inset" style="padding:5px 14px;font-size:13px">{gl["target"]:,}</span>'
+                         f'<span class="inset" style="padding:5px 14px;font-size:13px">{H.escape(gl.get("due", ""))}</span></div>'
+                         for gl in GOALS.get("goals", []))
+    sites_rows = ""
+    for s in ALL:
+        gsc = '<span class="up">verified</span>' if D["sites"].get(s, {}).get("in_gsc") else '<span class="down">missing</span>'
+        lane_short = H.escape(LANE.get(s, "")[:70])
+        sites_rows += (f'<tr><td>{sdot(s)} {ABBR[s]}</td><td>{s}</td><td>{CTRY[s][1]}</td>'
+                       f'<td style="font-size:12px;color:var(--n700);max-width:300px">{lane_short}…</td>'
+                       f'<td>{phase_tag(s)}</td><td>{gsc}</td>'
+                       f'<td class="mono">{CANON.get(s, s)}</td></tr>')
+    rules = [("Daily audit", "crawls \u00d7 10 \u2192 GSC + DataForSEO \u2192 58 SERP probes \u2192 Semrush \u2192 regenerate \u2192 deploy \u2192 verify twice"),
+             ("Re-probe rule", "any watched ranking that changes is re-probed twice before it is recorded; GSC corroborates big moves"),
+             ("Spam pause rule", "+4 points on any site = pause that site\u2019s tier-2 links and review the newest ones")]
+    rules_html = "".join(f'<div class="inset" style="margin-top:10px"><div style="font-weight:600;font-size:13px">{t}</div>'
+                         f'<div style="font-size:12px;color:var(--n600);margin-top:3px">{d}</div></div>' for t, d in rules)
+    return (f'<div class="hdr"><div><h1>Settings & integrations</h1>'
+            f'<p class="sub">How the dashboard is wired. Change goals or sites by telling Claude.</p></div></div>'
+            f'<div class="grid g2"><div class="card"><h2>Integrations</h2><div style="margin-top:8px">{ints}</div></div>'
+            f'<div class="card"><h2>North-star goals</h2><div style="margin-top:8px">{goals_rows}</div>'
+            f'<div style="font-size:12px;color:var(--n600);margin-top:8px">To change a target: tell Claude \u201cset the clicks goal to \u2026\u201d</div></div></div>'
+            f'<div class="card table"><div class="cardhead"><h2>Sites</h2></div><div class="overflow"><table>'
+            f'<thead><tr><th>Slug</th><th>Domain</th><th>Market</th><th>Lane</th><th>Phase</th><th>GSC</th><th>Canonical host</th></tr></thead>'
+            f'<tbody>{sites_rows}</tbody></table></div></div>'
+            f'<div class="card" style="margin-top:20px"><h2>Audit schedule & rules</h2>{rules_html}</div>')
+
+
+today_body = build_work()
 open(os.path.join(OUT, "today.html"), "w").write(shell("Today — Daily SEO Plan", today_body, cur="today", extra_js=COPY_JS))
 
 # trends
@@ -1222,7 +1430,7 @@ def trends_body():
     b += ('<div class="board">'
           + tile("t3", "CLICKS · 90 DAYS", f"{tot_c:,}", "all sites", wk - pw)
           + f'<div class="card t9"><span class="kpiL">CLICKS PER DAY · 90 DAYS</span><div style="margin-top:8px">'
-          + (area_chart(vals, dates, w=760, h=170, color="var(--acc)", cid="tr1", label="Clicks") if len(vals) > 2 else "") + '</div></div>'
+          + (area_chart(vals, dates, w=760, h=170, color="var(--t)", cid="tr1", label="Clicks") if len(vals) > 2 else "") + '</div></div>'
           + '</div><div class="board">'
           + tile("t3", "IMPRESSIONS · 90 DAYS", f"{tot_i:,}", "all sites")
           + f'<div class="card t9"><span class="kpiL">IMPRESSIONS PER DAY · 90 DAYS</span><div style="margin-top:8px">'
@@ -1257,7 +1465,7 @@ def links_body():
     def pc(t, x):
         return (f'<div class="card pcard"><div class="phead"><h2>{icon("clipboard")} {t}</h2>'
                 f'<button class="copybtn" data-copy>Copy prompt</button></div><pre class="ptext">{H.escape(x)}</pre></div>')
-    b += (f'<div class="card" style="border-left:4px solid var(--acc)"><div class="phead">'
+    b += (f'<div class="card" style="border-left:4px solid var(--t)"><div class="phead">'
           f'<h2>{icon("check")} Sync your ticks</h2><button class="copybtn" id="copyprog">Copy progress</button></div>'
           '<p class="sub" style="margin:0">Checkboxes save in THIS browser instantly. To make them permanent everywhere: '
           'tick → <b>Copy progress</b> → paste the code to Claude. Stored server-side, pre-checked on every device next deploy.</p></div>')
@@ -1283,11 +1491,11 @@ def links_body():
                   f'<td colspan="{NSITES}" style="text-align:center"><input class="lpx" type="checkbox" id="lp-{pid}-one"'
                   f'{" checked" if f"lp-{pid}-one" in CHECKED else ""}></td>'
                   f'<td class="lpcount" style="font-weight:700">0/1</td></tr>')
-    b += ('<style>.lpx{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--ink3);'
+    b += ('<style>.lpx{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--n600);'
           'border-radius:6px;background:transparent;cursor:pointer;position:relative;vertical-align:middle;margin:0}'
-          '.lpx:hover{border-color:var(--acc)}.lpx:checked{background:var(--acc);border-color:var(--acc)}'
+          '.lpx:hover{border-color:var(--t)}.lpx:checked{background:var(--t);border-color:var(--t)}'
           '.lpx:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;'
-          'border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}.lpcount{color:var(--ink2)!important}</style>'
+          'border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}.lpcount{color:var(--n700)!important}</style>'
           f'<div class="card"><h2>{icon("check")} Step 1 — Profile foundation: one platform × all {NSITES} sites</h2>'
           '<p class="sub">Pick the <b>topmost row that is not complete and not ⏳ rate-limited</b>, run the batch prompt below, '
           'tick the boxes, move to the next row.</p>'
@@ -1313,13 +1521,13 @@ def links_body():
             ("Raindrop public collection", "https://raindrop.io/")])]
     mb_rows = ""; cells_n = 0
     for gt, scope, items in MB:
-        mb_rows += f'<tr><td colspan="{NSITES+2}" style="font-weight:700;color:var(--ink2);padding-top:14px">{gt}</td></tr>'
+        mb_rows += f'<tr><td colspan="{NSITES+2}" style="font-weight:700;color:var(--n700);padding-top:14px">{gt}</td></tr>'
         for name, url in items:
             pid = "".join(c for c in name.lower() if c.isalnum())[:20]
             cells = ""
             for s in ALL:
                 if scope == "fr" and s not in FRS:
-                    cells += '<td style="text-align:center;color:var(--ink3)">·</td>'
+                    cells += '<td style="text-align:center;color:var(--n600)">·</td>'
                 else:
                     cid = f"lp-mb2-{pid}-{ABBR[s]}"; cells_n += 1
                     cells += (f'<td style="text-align:center"><input class="lpx" type="checkbox" id="{cid}"'
@@ -1383,6 +1591,11 @@ def links_body():
           '<p class="sub">Verifiable outcomes, not busywork. Each one moves the scoreboard at the top.</p>'
           f'<div class="overflow"><table><tbody>{mr}</tbody></table></div></div>')
     return b
+open(os.path.join(OUT, "settings.html"), "w").write(shell("Settings — IPTV Portfolio", build_settings(), cur="settings"))
+_lb_raw = links_body()
+_LINKS_CACHE = {"body": _lb_raw, "total": _lb_raw.count('type="checkbox"'), "checked": _lb_raw.count(" checked")}
+open(os.path.join(OUT, "index.html"), "w").write(shell("IPTV Portfolio — SEO Dashboard", build_home(), cur=None))
+
 _lb = links_body()
 _total_boxes = _lb.count('type="checkbox"')
 _checked_boxes = _lb.count(' checked')
@@ -1514,7 +1727,7 @@ def site_opportunity(s):
         foot = ('<p class="sub" style="margin:8px 0 0">Already ranking: '
                 + " · ".join(f'“{H.escape(r["kw"])}” <b>#{r["pos"]}</b>' for r in ranked) + ' ✓ — protect these.</p>')
     return (f'<div class="card oppcard"><h2>{icon("gem")} Biggest opportunity — this site</h2>'
-            f'<div class="oppNum">{num}<span style="font-size:14px;color:var(--ink3);font-weight:600"> /mo</span></div>'
+            f'<div class="oppNum">{num}<span style="font-size:14px;color:var(--n600);font-weight:600"> /mo</span></div>'
             f'<p class="sub" style="margin:0">{txt}</p>{foot}</div>')
 
 def kt_card(s):
