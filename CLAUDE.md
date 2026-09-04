@@ -18,8 +18,9 @@ Console service account) must be re-supplied by the owner after a recycle.
 
 ### The full-audit checklist (all of it, every time)
 
-1. **Crawl all 10 sites** — fresh BFS crawl (refresh sitemaps first). Never reuse an old crawl.
-   (10th site iptvsegura.com added 22 Aug — ES safety/trust lane.)
+1. **Crawl all 11 sites** — fresh BFS crawl (refresh sitemaps first). Never reuse an old crawl.
+   (10th site iptvsegura.com added 22 Aug — ES safety/trust lane. 11th site rodaktv.com added
+   4 Sep — sole PL site: iptv-polska head terms + diaspora landers, money page /abonament.)
 2. **GSC** — verified property list (sites.list — fact, not inference) + 90d traffic per site.
 3. **DataForSEO** — backlinks/summary (rank, ref domains, spam) per site; volumes where needed.
 4. **Live SERP probes** — re-probe every keyword target's position (refresh_kt_positions.py);
@@ -44,7 +45,8 @@ Console service account) must be re-supplied by the owner after a recycle.
   prime = FR head terms · smarters-live = application/Smarters-Pro FR · pix = FR content ·
   spf = Smarters install/config · ifo = premium/HDR · aio = trial/deals + boitier ·
   esp = ES head terms + telegram lists · segura = ES safety/estafas/legal angle (never ES
-  head terms or the telegram lists cluster).
+  head terms or the telegram lists cluster) · rodak = whole PL market + Polish diaspora
+  (UK/DE/NL/… probed from those countries via per-keyword loc overrides in keyword_targets).
 - **Frozen pages stay frozen** until re-probes clear them (aio /test-iptv & /boitier-iptv,
   frozen 1 Aug, ~2-3 weeks) — support via internal links only.
 - Dashboard generator lives in the session scratchpad (`scratchpad/daily/generate_v3.py`);
