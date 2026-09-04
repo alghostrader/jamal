@@ -410,23 +410,6 @@
    }
   },
   {
-   "id": "ee2bf478f4",
-   "kind": "Striking distance",
-   "site": "iptvsegura.com",
-   "query": "iptv segura",
-   "page": "",
-   "what": "\u201ciptv segura\u201d sits at position 20 with 10 impressions/28d.",
-   "score": 51,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": 33,
-    "gsc_pos": 19.8,
-    "clicks28": 0
-   }
-  },
-  {
    "id": "9f828be461",
    "kind": "Striking distance",
    "site": "abonnementiptvofficiel.com",
@@ -1664,6 +1647,23 @@
    "baseline": {
     "probe_pos": null,
     "gsc_pos": 18.4,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "ee2bf478f4",
+   "kind": "Striking distance",
+   "site": "iptvsegura.com",
+   "query": "iptv segura",
+   "page": "",
+   "what": "\u201ciptv segura\u201d sits at position 20 with 10 impressions/28d.",
+   "score": 43,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": 30,
+    "gsc_pos": 19.8,
     "clicks28": 0
    }
   },

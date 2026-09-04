@@ -3047,7 +3047,7 @@
    {
     "path": "/blog/lista-m3u-polska",
     "title": "Lista M3U w Polsce — co to jest i czy jest bezpieczna",
-    "words": 1740
+    "words": 1742
    },
    {
     "path": "/blog/iptv-na-firestick",
@@ -3068,6 +3068,16 @@
     "path": "/blog/iptv-na-android-box",
     "title": "IPTV na Android Box — instalacja krok po kroku",
     "words": 1653
+   },
+   {
+    "path": "/blog/polskie-kanaly-telegram",
+    "title": "Polskie kanały na Telegramie — jak je znaleźć i oglądać",
+    "words": 1604
+   },
+   {
+    "path": "/blog/polska-telewizja-za-granica-za-darmo",
+    "title": "Polska telewizja za granicą za darmo — czy to bezpieczne?",
+    "words": 1524
    },
    {
     "path": "/blog/jak-skonfigurowac-iptv",
@@ -3112,7 +3122,7 @@
    {
     "path": "/polska-telewizja-za-granica",
     "title": "Polska telewizja za granicą — oglądaj online z każdego kraju",
-    "words": 901
+    "words": 928
    },
    {
     "path": "/opinie",
@@ -3122,7 +3132,7 @@
    {
     "path": "/blog",
     "title": "Poradniki IPTV — instalacja, jakość i bezpieczeństwo",
-    "words": 761
+    "words": 841
    },
    {
     "path": "/polska-telewizja-w-holandii",
@@ -3213,7 +3223,7 @@
     "page": "/abonament"
    }
   ],
-  "n_articles": 28,
+  "n_articles": 30,
   "n_thin": 0
  }
 }

@@ -56,7 +56,7 @@
   {
    "kw": "abonnement iptv 12 mois",
    "vol": 4400,
-   "pos": 26,
+   "pos": 25,
    "url": "/"
   },
   {
@@ -209,7 +209,7 @@
   {
    "kw": "iptv smarters pro firestick",
    "vol": 70,
-   "pos": 48,
+   "pos": 47,
    "url": "/"
   },
   {
@@ -292,14 +292,14 @@
   {
    "kw": "iptv segura",
    "vol": 20,
-   "pos": 33,
+   "pos": 30,
    "page": "/",
    "url": "/"
   },
   {
    "kw": "estafas iptv",
    "vol": null,
-   "pos": 25,
+   "pos": 20,
    "page": "/guias/estafas-iptv-como-evitarlas",
    "url": "/"
   },
@@ -312,7 +312,7 @@
   {
    "kw": "es seguro el iptv",
    "vol": null,
-   "pos": 16,
+   "pos": 17,
    "page": "/guias/como-elegir-iptv-seguro",
    "url": "/"
   },

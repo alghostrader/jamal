@@ -7,9 +7,9 @@
   "authority_score": 7,
   "organic_traffic": 450,
   "organic_keywords": 152,
-  "ok_delta": "+1 vs 3 Sep",
-  "ref_domains": 133,
-  "backlinks": 202,
+  "ok_delta": "+1",
+  "ref_domains": 134,
+  "backlinks": 203,
   "ai_visibility": 0,
   "ai_cited_pages": 4,
   "ai_note": "ChatGPT 4"
@@ -20,7 +20,7 @@
   "authority_score": 2,
   "organic_traffic": 3,
   "organic_keywords": 89,
-  "ok_delta": "+37 keywords in a day",
+  "ok_delta": "",
   "ref_domains": 37,
   "backlinks": 64,
   "ai_visibility": 0,
@@ -34,8 +34,8 @@
   "organic_traffic": 9,
   "organic_keywords": 76,
   "ok_delta": "+2",
-  "ref_domains": 63,
-  "backlinks": 77,
+  "ref_domains": 65,
+  "backlinks": 79,
   "ai_visibility": 14,
   "ai_cited_pages": 9,
   "ai_note": "ChatGPT 8 + AI Overview 1"
@@ -46,9 +46,9 @@
   "authority_score": 2,
   "organic_traffic": null,
   "organic_keywords": null,
-  "ok_delta": "",
-  "ref_domains": 134,
-  "backlinks": 199
+  "ok_delta": "+1",
+  "ref_domains": 135,
+  "backlinks": 200
  },
  "smarters-live.com": {
   "date": "2026-09-04",
@@ -56,7 +56,7 @@
   "authority_score": 2,
   "organic_traffic": 0,
   "organic_keywords": 9,
-  "ok_delta": "FIRST FR organic listing",
+  "ok_delta": "",
   "ref_domains": 53,
   "backlinks": 60,
   "ai_visibility": 0,
@@ -79,7 +79,7 @@
   "authority_score": 2,
   "organic_traffic": 9,
   "organic_keywords": 55,
-  "ok_delta": "+33",
+  "ok_delta": "",
   "ref_domains": 4,
   "backlinks": 7
  },
@@ -102,7 +102,7 @@
   "authority_score": 7,
   "organic_traffic": 20,
   "organic_keywords": 26,
-  "ok_delta": "+14",
+  "ok_delta": "",
   "ref_domains": 75,
   "backlinks": 107,
   "ai_visibility": 0,
@@ -117,7 +117,7 @@
   "as_label": "links building",
   "organic_traffic": 0,
   "organic_keywords": 7,
-  "ok_delta": "FIRST ES organic listing"
+  "ok_delta": ""
  },
  "rodaktv.com": {
   "date": "2026-09-04",

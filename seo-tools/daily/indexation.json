@@ -182,7 +182,7 @@
     "last_crawl": "2026-08-23T18:23:43Z"
    },
    "/planes": {
-    "state": "URL is unknown to Google",
+    "state": "Discovered - currently not indexed",
     "verdict": "NEUTRAL",
     "canonical_google": null,
     "canonical_user": null,
@@ -226,7 +226,7 @@
     "last_crawl": null
    },
    "/test-iptv": {
-    "state": "URL is unknown to Google",
+    "state": "Discovered - currently not indexed",
     "verdict": "NEUTRAL",
     "canonical_google": null,
     "canonical_user": null,
