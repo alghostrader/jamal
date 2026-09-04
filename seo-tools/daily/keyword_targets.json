@@ -56,7 +56,7 @@
   {
    "kw": "abonnement iptv 12 mois",
    "vol": 4400,
-   "pos": 28,
+   "pos": 26,
    "url": "/"
   },
   {
@@ -209,7 +209,7 @@
   {
    "kw": "iptv smarters pro firestick",
    "vol": 70,
-   "pos": 44,
+   "pos": 48,
    "url": "/"
   },
   {
@@ -261,7 +261,7 @@
   {
    "kw": "essai iptv 7 jours",
    "vol": 90,
-   "pos": 44,
+   "pos": 48,
    "page": "/test-iptv",
    "url": "/"
   },
@@ -292,14 +292,14 @@
   {
    "kw": "iptv segura",
    "vol": 20,
-   "pos": 29,
+   "pos": 33,
    "page": "/",
    "url": "/"
   },
   {
    "kw": "estafas iptv",
    "vol": null,
-   "pos": 35,
+   "pos": 25,
    "page": "/guias/estafas-iptv-como-evitarlas",
    "url": "/"
   },
@@ -326,7 +326,7 @@
   {
    "kw": "iptv fire tv stick",
    "vol": 260,
-   "pos": 54,
+   "pos": 52,
    "page": "/guias/iptv-fire-tv-stick",
    "url": "/"
   }

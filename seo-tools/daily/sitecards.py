@@ -51,13 +51,13 @@ def card(s, D, F, KT, CT, SEM, RECS, link=None):
         c90 = sum(x["clicks"] for x in daily); i90 = sum(x["impressions"] for x in daily)
         ctr = f"{(100*c90/i90):.1f}%" if i90 else "—"
         stats = [("Clicks · 90 days", f"{c90:,}"), ("Impressions · 90 days", f"{i90:,}"),
-                 ("CTR", ctr), ("DFS ref. domains", rd if rd is not None else "—")]
+                 ("CTR", ctr), ("Targets ranking", f"{nrank}/{len(kt)}")]
     else:
         t100 = dfs.get("ranked_top100")
         stats = [("Top-100 keywords", t100 if t100 is not None else "—"),
                  ("Targets ranking", f"{nrank}/{len(kt)}"),
                  ("Best position", f"#{best}" if best else "—"),
-                 ("DFS ref. domains", rd if rd is not None else "—")]
+                 ("Articles", CT.get(s, {}).get("n_articles", "—"))]
     statrow = ('<div class="statrow">'
                + "".join(f'<div class="st"><span class="stl">{H.escape(l)}</span>'
                          f'<span class="stv">{val}</span></div>' for l, val in stats)

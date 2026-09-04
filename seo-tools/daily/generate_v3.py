@@ -1809,6 +1809,36 @@ def skill_pipeline_card(s):
             f'<pre class="ptext">{H.escape(seq)}</pre></div>')
 
 
+def authority_card(s):
+    """Per-site authority box: the Semrush view (owner-verified index) and the
+    DataForSEO view (live each audit) side by side, one stat row each."""
+    sm = SEM.get(s) or {}; dfs = dfs_of(s)
+    def v(x, suffix=""):
+        return f"{x:,}{suffix}" if isinstance(x, (int, float)) else "—"
+    sm_stats = [("Authority Score", v(sm.get("authority_score"))),
+                ("Ref. domains", v(sm.get("ref_domains"))),
+                ("Backlinks", v(sm.get("backlinks"))),
+                ("Organic keywords", v(sm.get("organic_keywords"))),
+                ("Organic traffic /mo", v(sm.get("organic_traffic")))]
+    sp = dfs.get("spam_score")
+    d_stats = [("Domain Rank", v(dfs.get("domain_rank"))),
+               ("Ref. domains", v(dfs.get("ref_domains"))),
+               ("Backlinks", v(dfs.get("backlinks"))),
+               ("Spam score", v(sp))]
+    def row(label, stats):
+        cells = "".join(f'<div class="st"><span class="stl">{H.escape(l)}</span>'
+                        f'<span class="stv">{val}</span></div>' for l, val in stats)
+        return f'<div class="secrow"><div class="rectitle">{label}</div><div class="statrow" style="margin-top:9px">{cells}</div></div>'
+    note = sm.get("ok_delta") or ""
+    note_html = f' <span class="tag pos">{H.escape(note)}</span>' if note else ""
+    sub = (f'Semrush is the owner-verified index (updated {H.escape(sm.get("date", "—"))}){note_html} · '
+           f'DataForSEO is probed live each audit. The two count links differently — watch each one\'s trend, not the gap between them.')
+    return (f'<div class="card"><h2>{icon("award")} Authority &amp; links</h2>'
+            f'<p class="sub">{sub}</p>'
+            + row(f"Semrush · {H.escape(sm.get('date', ''))}", sm_stats)
+            + row("DataForSEO · this audit" + (" (no index rows for this domain today)" if dfs.get("ref_domains") is None else ""), d_stats)
+            + '</div>')
+
 def site_board(s):
     d = daily_of(s)
     wk = sum(x["clicks"] for x in d[-7:]) if d else 0
@@ -1846,6 +1876,7 @@ for s in ALL:
             f'<span class="badge b-{cfg["tone"]} bigbadge">{cfg["badge"]} {cfg["status"]}</span></div>')
     inner = site_board(s)
     inner += _sc.card(s, D, F, KT, CT, SEM, RECS)
+    inner += authority_card(s)
     inner += site_opportunity(s)
     if tech_items(s):
         inner += (f'<a class="card workstrip" href="today"><div><h2 style="margin:0">{icon("warn")} This site has open fixes</h2>'
