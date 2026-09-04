@@ -1,247 +1,443 @@
-<title>IPTV Portfolio — SEO Dashboard</title><!-- pipeline:rodak-onboard-0725 -->
+<title>IPTV Portfolio — SEO Command Center</title><!-- pipeline:v4-command-center-0826 -->
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%23cc785c%22 d=%22M12 2l8 10-8 10-8-10z%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* ═══════════ ORGANIC DESIGN SYSTEM — design handoff, high fidelity ═══════════ */
+  /* ═══════ v4 design system — premium neutral analytics ═══════ */
   .viz-root{color-scheme:light;
-    --bg:#f5ead8;--surface:#ebddc5;--card:#f9f4ed;--ink:#201e1d;
-    --n100:#f9f4ed;--n200:#eee7db;--n300:#dcd3c4;--n400:#c0b6a5;--n500:#a19786;--n600:#82796a;--n700:#645c50;--n800:#474238;--n900:#2e2b25;
-    --t200:#ffe1d0;--t300:#ffc6a5;--t400:#f6a06b;--t:#c67139;--t600:#b2622d;--t700:#8c491a;--t900:#402310;
-    --g200:#e1eecc;--g300:#ccdbb2;--g400:#aebf92;--g:#7a8a5e;--g700:#56633f;--g800:#3d472b;
-    --divider:rgba(32,30,29,.16);--rule:rgba(32,30,29,.08);
-    --shadow:0 1px 2px rgba(46,43,37,.14);
-    --head:'Caprasimo',serif;--body:'Figtree',ui-sans-serif,system-ui,sans-serif;
-    --s1:#c67139;--s2:#7a8a5e;--s3:#f6a06b;--s4:#8c491a;--s5:#aebf92;--s6:#645c50;--s7:#56633f;--s8:#c0b6a5;--s9:#402310;--s10:#ffc6a5;--s11:#82796a}
+    --bg:#fafafa;--card:#ffffff;--ink:#171717;--mut:#6b7280;--faint:#9ca3af;
+    --line:#e5e7eb;--line2:#f3f4f6;--soft:#f9fafb;
+    --acc:#4f46e5;--acc-bg:#eef2ff;--acc-dk:#3730a3;
+    --pos:#16a34a;--pos-bg:#f0fdf4;--neg:#dc2626;--neg-bg:#fef2f2;
+    --amb:#d97706;--amb-bg:#fffbeb;
+    --shadow:0 1px 2px rgba(0,0,0,.05);
+    --body:'Inter',ui-sans-serif,system-ui,sans-serif;
+    --s1:#4f46e5;--s2:#0891b2;--s3:#d97706;--s4:#dc2626;--s5:#16a34a;--s6:#7c3aed;
+    --s7:#be185d;--s8:#0d9488;--s9:#a16207;--s10:#475569;--s11:#c2410c}
   *{box-sizing:border-box}
-  html,body{margin:0;max-width:100%;overflow-x:clip;background:#f5ead8}
-  .viz-root{background:var(--bg);color:var(--ink);font:14px/1.5 var(--body);min-height:100vh;
+  html,body{margin:0;max-width:100%;overflow-x:clip;background:#fafafa}
+  .viz-root{background:var(--bg);color:var(--ink);font:13.5px/1.55 var(--body);min-height:100vh;
     -webkit-font-smoothing:antialiased;overflow-x:clip;max-width:100vw}
-  a{color:var(--t700)}
-  :focus-visible{outline:2px solid var(--t);outline-offset:2px}
+  a{color:var(--acc);text-decoration:none}
+  a:hover{text-decoration:underline}
+  :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
   .num{font-variant-numeric:tabular-nums}
 
-  /* ─── shell: top bar ─── */
-  .topbar{position:sticky;top:0;z-index:50;background:rgba(245,234,216,.92);backdrop-filter:blur(8px);
-    border-bottom:1px solid rgba(32,30,29,.1)}
-  .tb1{display:flex;align-items:center;gap:20px;padding:12px 32px}
-  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex:none}
-  .brandmark{width:34px;height:34px;border-radius:50%;background:var(--t);color:#f5ead8;display:grid;place-items:center;
-    font:400 18px var(--head)}
-  .wordmark{font:400 19px var(--head)}.wordmark b{color:var(--t);font-weight:400}
-  .navpills{display:flex;background:var(--surface);border-radius:999px;padding:4px;gap:0;overflow-x:auto;scrollbar-width:none}
-  .navpills::-webkit-scrollbar{display:none}
-  .navpills a{font:600 13px var(--body);padding:7px 14px;border-radius:999px;text-decoration:none;color:var(--n700);white-space:nowrap}
-  .navpills a.on{background:var(--t);color:#f5ead8}
-  .tbspacer{flex:1}
-  .auditstat{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--n600);white-space:nowrap}
-  .auditstat::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--g)}
-  .runbtn{font:400 14px var(--head);background:var(--t);color:#f5ead8;padding:9px 18px;border-radius:999px;border:none;
-    cursor:pointer;white-space:nowrap;text-decoration:none}
-  .runbtn:hover{background:var(--t600)}
-  .tb2{display:flex;align-items:center;gap:6px;padding:0 32px 10px;overflow-x:auto;scrollbar-width:none}
-  .tb2::-webkit-scrollbar{display:none}
-  .tb2 .lbl{font:600 11px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--n600);margin-right:4px;flex:none}
-  .schip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:3px 10px;border:1px solid rgba(32,30,29,.14);
-    border-radius:999px;text-decoration:none;color:var(--ink);white-space:nowrap}
-  .schip .dot{width:7px;height:7px}
-  .schip.on{border-color:var(--t);background:var(--t200);color:var(--t700);font-weight:700}
-  .wrap{max-width:1400px;margin:0 auto;padding:28px 32px 60px}
+  /* ─── application shell: sidebar + main ─── */
+  .app{display:grid;grid-template-columns:216px 1fr;min-height:100vh}
+  .side{background:#fff;border-right:1px solid var(--line);padding:16px 12px;position:sticky;top:0;
+    height:100vh;overflow-y:auto;display:flex;flex-direction:column;gap:4px}
+  .side .brand{display:flex;align-items:center;gap:9px;padding:4px 8px 14px;color:var(--ink)}
+  .side .brand:hover{text-decoration:none}
+  .bmark{width:26px;height:26px;border-radius:7px;background:var(--acc);color:#fff;display:grid;
+    place-items:center;font:700 13px var(--body);flex:none}
+  .bname{font:600 14px var(--body)}
+  .navgrp{font:600 10.5px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);
+    padding:14px 8px 4px}
+  .side nav a{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:7px;
+    font:500 13px var(--body);color:#374151;text-decoration:none}
+  .side nav a:hover{background:var(--soft);text-decoration:none}
+  .side nav a.on{background:var(--acc-bg);color:var(--acc-dk);font-weight:600}
+  .side nav a .ic{width:15px;height:15px;color:var(--faint)}
+  .side nav a.on .ic{color:var(--acc)}
+  .side .foot{margin-top:auto;padding:10px 8px 2px;font-size:11px;color:var(--faint);border-top:1px solid var(--line2)}
 
-  /* ─── shared ─── */
+  .main{min-width:0;display:flex;flex-direction:column}
+  .toph{background:rgba(250,250,250,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:12px;padding:10px 28px;flex-wrap:wrap}
+  .crumb{font:600 14px var(--body);color:var(--ink);margin-right:auto;display:flex;align-items:center;gap:8px}
+  .fresh{display:flex;gap:14px;font-size:11.5px;color:var(--mut);flex-wrap:wrap}
+  .fresh b{font-weight:600;color:#374151}
+  .fresh .fdot{width:6px;height:6px;border-radius:50%;background:var(--pos);display:inline-block;margin-right:4px;vertical-align:1px}
+  .fresh .fdot.warn{background:var(--amb)}.fresh .fdot.off{background:var(--faint)}
+  .runbtn{font:600 12.5px var(--body);background:var(--acc);color:#fff;padding:7px 14px;border-radius:7px;
+    border:none;cursor:pointer;white-space:nowrap}
+  .runbtn:hover{background:var(--acc-dk)}
+  .wrap{padding:24px 28px 64px;max-width:1480px;width:100%;margin:0 auto}
+
+  /* site selector */
+  .siteselect{position:relative}
+  .siteselect>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:7px;
+    font:600 12.5px var(--body);color:var(--ink);border:1px solid var(--line);background:#fff;
+    padding:6px 12px;border-radius:7px;white-space:nowrap}
+  .siteselect>summary::-webkit-details-marker{display:none}
+  .siteselect>summary:after{content:"▾";color:var(--faint);font-size:10px}
+  .sitemenu{position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--line);
+    border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.09);min-width:280px;padding:6px;z-index:60;
+    max-height:70vh;overflow:auto}
+  .sitemenu a{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:7px;color:var(--ink);
+    font-size:12.5px;text-decoration:none}
+  .sitemenu a:hover{background:var(--soft);text-decoration:none}
+  .sitemenu a .meta{margin-left:auto;color:var(--faint);font-size:11px;text-align:right}
+  .sitemenu .allrow{border-bottom:1px solid var(--line2);margin-bottom:4px;padding-bottom:8px;font-weight:600}
+
+  /* ─── primitives ─── */
+  h1{font:700 20px/1.3 var(--body);margin:0 0 4px;letter-spacing:-.01em}
+  h2{font:600 14.5px/1.35 var(--body);margin:0;letter-spacing:-.005em}
+  h3{font:600 13px var(--body);margin:0}
+  .sub{font:400 12.5px var(--body);color:var(--mut);margin:0}
+  .pagehead{margin-bottom:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow)}
+  .card.flush{padding:0;overflow:hidden}
+  .card .chead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .card.flush .chead{padding:14px 18px 0;margin-bottom:8px}
+  .grid{display:grid;gap:16px;margin:16px 0}
+  .g2{grid-template-columns:1fr 1fr}.g23{grid-template-columns:1.5fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+  .stack{display:flex;flex-direction:column;gap:16px}
+  .kick{font:600 10.5px var(--body);letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+  .up{color:var(--pos);font-weight:600}.down{color:var(--neg);font-weight:600}.flat{color:var(--faint);font-weight:500}
+  .tag{display:inline-flex;align-items:center;border-radius:5px;padding:1.5px 7px;font:600 10.5px var(--body);
+    letter-spacing:.02em;white-space:nowrap}
+  .tag.pos{background:var(--pos-bg);color:var(--pos)}
+  .tag.neg{background:var(--neg-bg);color:var(--neg)}
+  .tag.warn{background:var(--amb-bg);color:var(--amb)}
+  .tag.neu{background:var(--line2);color:#4b5563}
+  .tag.acc{background:var(--acc-bg);color:var(--acc-dk)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:none;vertical-align:middle}
+  .s1{background:var(--s1)}.s2{background:var(--s2)}.s3{background:var(--s3)}.s4{background:var(--s4)}
+  .s5{background:var(--s5)}.s6{background:var(--s6)}.s7{background:var(--s7)}.s8{background:var(--s8)}
+  .s9{background:var(--s9)}.s10{background:var(--s10)}.s11{background:var(--s11)}
+  .btn{font:600 12px var(--body);border:1px solid var(--line);background:#fff;color:var(--ink);
+    padding:6px 12px;border-radius:7px;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn:hover{background:var(--soft);text-decoration:none}
+  .btn.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
+  .btn.sm{padding:4px 9px;font-size:11.5px}
+  .copybtn{font:600 11.5px var(--body);border:1px solid var(--line);background:#fff;color:var(--ink);
+    padding:4px 11px;border-radius:6px;cursor:pointer}
+  .copybtn:hover{background:var(--soft)}
   .ic{width:1em;height:1em;flex:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;
     stroke-linejoin:round;fill:none;vertical-align:-0.12em;display:inline-block}
-  .brandmark .ic{width:17px;height:17px;fill:#f5ead8;stroke:none}
-  .extlink{display:inline-flex;color:var(--t700);margin-left:6px;font-size:13px}
-  .extlink .ic{width:13px;height:13px}
-  h2 .ic{width:17px;height:17px;color:var(--t);margin-right:2px}
-  svg:not([width]):not(.ic){max-width:100%;max-height:220px}
-  .gauge svg{max-width:100%}
+  svg:not([width]):not(.ic){max-width:100%;max-height:240px}
+  .mono{font-family:ui-monospace,Menlo,monospace;font-size:11.5px}
 
-  h1{font:400 40px/1.05 var(--head);margin:0 0 8px}
-  .sub{font:400 15px var(--body);color:var(--n600);margin:0}
-  h2{font:400 21px var(--head);margin:0}
-  .card{background:var(--card);border-radius:16px;padding:16px 20px;box-shadow:var(--shadow)}
-  .card.table{padding:0;overflow:hidden}
-  .card.warn{background:var(--t200);color:var(--t900)}
-  .card.pos{background:var(--g200);color:var(--g800)}
-  .inset{background:var(--surface);border-radius:12px;padding:12px 14px}
-  .kick{font:700 10px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--t)}
-  .kick.n{color:var(--n600)}.kick.w{color:var(--t700)}.kick.p{color:var(--g700)}
-  .big{font:400 34px/1.1 var(--head)}.big.sm{font-size:27px}
-  .bar{height:8px;border-radius:999px;background:var(--surface);overflow:hidden}
-  .bar i{display:block;height:100%;border-radius:999px;background:var(--t)}
-  .bar i.done{background:var(--g)}
-  .tag{display:inline-block;border-radius:999px;padding:2px 9px;font:700 10px var(--body);letter-spacing:.06em;text-transform:uppercase}
-  .tag.pos{background:var(--g200);color:var(--g800)}
-  .tag.warn{background:var(--t200);color:var(--t700)}
-  .tag.neu{background:var(--n200);color:var(--n700)}
-  .up{color:var(--g700);font-weight:600}.down{color:var(--t700);font-weight:600}.flat{color:var(--n500)}
-  .btn{font:600 13px var(--body);border:1px solid var(--divider);background:transparent;color:var(--ink);
-    padding:7px 16px;border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block}
-  .btn:hover{background:rgba(32,30,29,.07)}
-  .btn.primary{font:400 14px var(--head);background:var(--t);color:#f5ead8;border:none}
-  .btn.primary:hover{background:var(--t600)}
-  .btn.sage{background:var(--g200);color:var(--g800);border:none}
-  .btn.sage:hover{background:var(--g300)}
-  .btn.sm{padding:5px 12px;font-size:12px}
-  .linkbtn{font:600 12px var(--body);color:var(--t700);text-decoration:none}
-  .seg{display:inline-flex;background:var(--surface);border-radius:999px;padding:3px}
-  .seg button,.seg span{font:600 12px var(--body);padding:4px 12px;border-radius:999px;border:none;background:none;color:var(--n700);cursor:pointer}
-  .seg .on{background:var(--t);color:#f5ead8}
-  table{border-collapse:collapse;width:100%;font-size:13px}
-  th{font:600 11px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--n600);text-align:left;
-    padding:8px 12px;border-bottom:1px solid var(--divider)}
-  td{padding:10px 12px;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums;vertical-align:middle}
+  /* KPI tiles */
+  .kpirow{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin:0 0 16px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+    display:flex;flex-direction:column;gap:2px;position:relative;min-width:0}
+  .kpi .kl{font:600 10.5px var(--body);letter-spacing:.05em;text-transform:uppercase;color:var(--mut);
+    display:flex;align-items:center;gap:5px}
+  .kpi .kv{font:700 21px/1.25 var(--body);letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+  .kpi .kv small{font-size:12px;font-weight:500;color:var(--mut)}
+  .kpi .kd{font-size:11.5px;color:var(--mut)}
+  .kpi .kspark{margin-top:6px}
+  .kpi .src{position:absolute;top:10px;right:10px;color:var(--faint);cursor:help}
+  .kpi .src:hover .tip{display:block}
+  .tip{display:none;position:absolute;right:0;top:18px;z-index:50;background:#171717;color:#f5f5f5;
+    font:400 11px/1.5 var(--body);padding:8px 10px;border-radius:7px;width:230px;white-space:normal;text-align:left}
+  .spark{stroke:var(--acc);stroke-width:1.6;fill:none}
+  .spark.g{stroke:var(--pos)}
+
+  /* tables */
+  table{border-collapse:collapse;width:100%;font-size:12.5px}
+  th{font:600 10.5px var(--body);letter-spacing:.05em;text-transform:uppercase;color:var(--mut);
+    text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;
+    background:var(--soft);position:sticky;top:0}
+  th.sortable{cursor:pointer}
+  th.sortable:hover{color:var(--ink)}
+  td{padding:7px 10px;border-bottom:1px solid var(--line2);font-variant-numeric:tabular-nums;vertical-align:middle}
   tr:last-child td{border-bottom:none}
-  tbody tr:hover{background:rgba(32,30,29,.04)}
+  tbody tr:hover{background:var(--soft)}
   .overflow{overflow-x:auto;max-width:100%}
-  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:none;vertical-align:middle}
-  .s1{background:var(--s1)}.s2{background:var(--s2)}.s3{background:var(--s3)}.s4{background:var(--s4)}.s5{background:var(--s5)}
-  .s6{background:var(--s6)}.s7{background:var(--s7)}.s8{background:var(--s8)}.s9{background:var(--s9)}.s10{background:var(--s10)}.s11{background:var(--s11)}
-  .ck{width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(32,30,29,.2);display:inline-grid;place-items:center;
-    cursor:pointer;background:transparent;font:700 12px var(--body);color:transparent}
-  .ck.sm{width:20px;height:20px}
-  input:checked + .ck, .ck.done{background:var(--g);border-color:var(--g);color:#f5ead8}
-  .grid{display:grid;gap:20px;margin:20px 0}
-  .g2{grid-template-columns:1fr 1fr}.g169{grid-template-columns:1.6fr 1fr}.g149{grid-template-columns:1.4fr 1fr}
-  .g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr);gap:14px}.g5{grid-template-columns:repeat(5,1fr);gap:14px}
-  .stack{display:flex;flex-direction:column;gap:20px}
-  .rowflex{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  .mono{font-family:ui-monospace,Menlo,monospace;font-size:12px}
-  .spark{stroke:var(--t);stroke-width:1.75;fill:none}
-  .spark.g{stroke:var(--g);stroke-width:2}
-  .hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
-  .cardhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px 12px}
-  .card.table .cardhead{border-bottom:none}
-  .pcard pre{background:var(--surface);border-radius:12px;padding:12px 14px;font:12px/1.55 ui-monospace,Menlo,monospace;
-    white-space:pre-wrap;word-break:break-word;color:var(--n800);margin:10px 0 0;max-height:340px;overflow:auto}
-  .alertbanner{display:flex;align-items:center;gap:16px;padding:16px 20px;margin-bottom:20px}
-  .alertbang{width:40px;height:40px;border-radius:50%;background:var(--t);color:#f5ead8;display:grid;place-items:center;
-    font:400 18px var(--head);flex:none}
-  .distbar{display:flex;gap:6px;height:6px;margin:12px 0 8px}
-  .distbar i{border-radius:999px;height:6px}
-  .moverow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(32,30,29,.07);font-size:13px}
-  .moverow:last-child{border-bottom:none}
-  .moverow .pos{margin-left:auto;font:400 16px var(--head)}
-  .kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
-  .kanban h3{font:400 18px var(--head);margin:0;display:flex;align-items:center;gap:8px}
-  .kanban .cnt{background:var(--surface);border-radius:999px;padding:1px 10px;font:600 12px var(--body);color:var(--n700)}
-  .task{background:var(--card);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;margin-top:12px}
-  .task .meta{font-size:11px;color:var(--n600)}
-  .cyc{display:flex;gap:12px;align-items:flex-start;padding:8px 0;font-size:13px}
-  .cyc .n{width:26px;height:26px;border-radius:50%;background:var(--surface);display:grid;place-items:center;
-    font:400 13px var(--head);flex:none}
-  .milerow{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:13px}
-  .milerow.done span{color:var(--n600);text-decoration:line-through}
-  .healthchip{display:inline-flex;align-items:center;gap:7px;background:var(--card);border-radius:999px;
-    padding:5px 13px 5px 6px;font-size:12.5px;box-shadow:var(--shadow)}
-  .healthchip i{width:15px;height:15px;border-radius:50%;background:var(--g);color:#f5ead8;display:grid;place-items:center;
-    font:700 9px var(--body);font-style:normal}
-  .tile-hover:hover{background:#fff}
-  .copybtn{font:600 13px var(--body);border:1px solid var(--divider);background:transparent;color:var(--ink);
-    padding:5px 14px;border-radius:999px;cursor:pointer}
-  .copybtn:hover{background:rgba(32,30,29,.07)}
-  @media (max-width:1080px){.g2,.g169,.g149,.g3{grid-template-columns:1fr}.g4{grid-template-columns:1fr 1fr}
-    .g5{grid-template-columns:1fr 1fr}.kanban{grid-template-columns:1fr 1fr}}
-  @media (max-width:640px){.g4,.g5,.kanban{grid-template-columns:1fr}h1{font-size:31px}
-    .tb1{padding:10px 16px;gap:10px}.tb2{padding:0 16px 10px}.wrap{padding:20px 16px 60px}
-    .auditstat{display:none}}
+  .twrap{overflow:auto;max-height:560px}
 
-  /* compat: previous board classes → Organic */
-  .board{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin:0 0 20px}
-  .board .card{margin:0}
-  .t3{grid-column:span 3}.t4{grid-column:span 4}.t5{grid-column:span 5}.t6{grid-column:span 6}
-  .t9{grid-column:span 9}.t12{grid-column:span 12}
-  .tile{display:flex;flex-direction:column;gap:2px}
-  .kpiL{font:700 10px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--n600)}
-  .tileNum{font:400 33px/1.1 var(--head);color:var(--ink)}
-  .tileNum small{font-size:16px;color:var(--n600)}
-  .tileLbl{font-size:12px;color:var(--n600);margin-top:4px}
-  .tileDelta{font:600 13px var(--body);margin-top:6px}
-  .tileDelta.up{color:var(--g700)}.tileDelta.down{color:var(--t700)}
-  .ctryTrack{height:8px;border-radius:999px;background:var(--surface);overflow:hidden;margin-top:8px}
-  .ctryFill{height:100%;border-radius:999px;background:var(--t)}
-  .rolehead{display:flex;align-items:center;gap:14px;margin:26px 0 12px;padding:14px 18px;background:var(--card);
-    border-radius:16px;box-shadow:var(--shadow)}
-  .rolehead h2{font-size:19px}
-  .roleemoji{font-size:24px}.rolesub{font-size:12px;color:var(--n600)}
-  .rolecount{margin-left:auto;background:var(--surface);color:var(--n700);font:600 12px var(--body);padding:5px 13px;border-radius:999px}
-  .pcard .phead{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .pcard{margin-bottom:14px}
-  .ptext{background:var(--surface);border-radius:12px;padding:12px 14px;font:12px/1.55 ui-monospace,Menlo,monospace;
-    white-space:pre-wrap;word-break:break-word;color:var(--n800);margin:10px 0 0;max-height:340px;overflow:auto}
-  .krank{display:inline-block;border-radius:999px;padding:2px 9px;font:700 11px var(--body)}
-  .krank.good{background:var(--g200);color:var(--g800)}
-  .krank.ok{background:var(--n200);color:var(--n700)}
-  .krank.far{background:var(--t200);color:var(--t700)}
-  .krank.miss{color:var(--n500);background:none;font-weight:500;font-size:12px}
-  .badge{display:inline-block;border-radius:999px;padding:2px 9px;font:700 10px var(--body);letter-spacing:.06em;text-transform:uppercase}
-  .badge.b-good{background:var(--g200);color:var(--g800)}.badge.b-flag{background:var(--g200);color:var(--g800)}
-  .badge.b-warn{background:var(--t200);color:var(--t700)}.badge.b-neutral,.badge.b-bad{background:var(--n200);color:var(--n700)}
-  .alert{border-radius:12px;padding:11px 15px;margin:8px 0;font-size:13.5px}
-  .alert.crit{background:var(--t200);color:var(--t900)}
-  .alert.warn{background:#fff2eb;color:var(--t900)}
-  .alert.good{background:var(--g200);color:var(--g800)}
-  .chglist{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-  .chg{font-size:13px;padding:8px 13px;border-radius:9px}
-  .chg.good{background:var(--g200);color:var(--g800)}.chg.info{background:var(--n200);color:var(--n700)}
-  .chg.down{background:var(--t200);color:var(--t700)}
-  .miles .mile{display:flex;gap:12px;padding:7px 0;font-size:13px}
-  .miledate{font:600 11px var(--body);color:var(--n600);min-width:48px}
-  .lcl{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:13.5px}
-  .slink{color:var(--t700)}
-  .workstrip{display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink)}
-  .rectitle{font:700 10px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--n600);padding-top:10px}
-  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:12px}
-  .tiercol{background:var(--surface);border-radius:12px;padding:12px 13px}
-  .tierhead{font:600 11px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--n600);display:flex;justify-content:space-between;margin-bottom:10px}
-  .tierchips{display:flex;flex-direction:column;gap:7px}
-  .tchip{display:flex;align-items:center;gap:7px;font-size:12px;flex-wrap:wrap}
+  /* filter pills */
+  .fbar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:0 0 10px}
+  .fpill{font:600 11.5px var(--body);border:1px solid var(--line);background:#fff;color:#374151;
+    padding:4px 11px;border-radius:999px;cursor:pointer}
+  .fpill:hover{background:var(--soft)}
+  .fpill.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden;background:#fff}
+  .seg button{font:600 11.5px var(--body);padding:5px 12px;border:none;background:#fff;color:var(--mut);cursor:pointer}
+  .seg button.on{background:var(--ink);color:#fff}
+
+  /* alerts / severity */
+  .sev{display:inline-flex;border-radius:5px;padding:1.5px 7px;font:700 10px var(--body);letter-spacing:.05em}
+  .sev.critical{background:var(--neg);color:#fff}
+  .sev.high{background:var(--neg-bg);color:var(--neg)}
+  .sev.medium{background:var(--amb-bg);color:var(--amb)}
+  .sev.low{background:var(--line2);color:var(--mut)}
+  .alertrow{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line2);font-size:12.5px}
+  .alertrow:last-child{border-bottom:none}
+  .alertrow .sev{flex:none;margin-top:1px}
+
+  /* what-changed feed */
+  .chg{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line2);font-size:12.5px}
+  .chg:last-child{border-bottom:none}
+  .chg .cico{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;flex:none;font:700 11px var(--body)}
+  .chg.good .cico{background:var(--pos-bg);color:var(--pos)}
+  .chg.bad .cico{background:var(--neg-bg);color:var(--neg)}
+  .chg.info .cico{background:var(--line2);color:var(--mut)}
+  .chg .cbody{min-width:0}
+  .chg .cmeta{font-size:11px;color:var(--faint);margin-top:1px}
+  .hypo{font-size:11px;color:var(--mut);font-style:italic}
+
+  /* opportunity cards */
+  .opp{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:#fff;display:flex;
+    flex-direction:column;gap:6px}
+  .opp .ohead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .opp .score{font:700 13px var(--body);background:var(--acc-bg);color:var(--acc-dk);border-radius:6px;
+    padding:2px 8px;font-variant-numeric:tabular-nums}
+  .opp .orow{font-size:12px;color:#374151}
+  .opp .orow b{font-weight:600}
+  .opp .ofoot{font-size:11px;color:var(--faint);display:flex;gap:10px;flex-wrap:wrap}
+
+  /* charts */
+  .chart{position:relative}
+  .chart .hoverline{position:absolute;top:0;bottom:22px;width:1px;background:var(--faint);display:none;pointer-events:none}
+  .chart .htip{position:absolute;background:#171717;color:#f5f5f5;font:400 11px/1.5 var(--body);
+    padding:6px 9px;border-radius:6px;pointer-events:none;display:none;white-space:nowrap;z-index:30}
+  .legend{display:flex;gap:14px;font-size:11.5px;color:var(--mut);flex-wrap:wrap}
+  .legend i{width:10px;height:3px;border-radius:2px;display:inline-block;vertical-align:middle;margin-right:5px}
+  .axis{font:400 10px var(--body);fill:var(--faint)}
+  .gridline{stroke:var(--line2);stroke-width:1}
+
+  /* distribution / bars */
+  .bar{height:7px;border-radius:999px;background:var(--line2);overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:999px;background:var(--acc)}
+  .bar i.done{background:var(--pos)}
+  .distbar{display:flex;gap:4px;height:6px;margin:10px 0 6px}
+  .distbar i{border-radius:999px;height:6px}
+  .hbar{display:flex;align-items:center;gap:9px;font-size:12px;padding:3px 0}
+  .hbar .hlab{width:110px;color:#374151;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .hbar .htrack{flex:1;height:7px;background:var(--line2);border-radius:999px;overflow:hidden}
+  .hbar .htrack i{display:block;height:100%;background:var(--acc);border-radius:999px}
+  .hbar .hval{width:76px;text-align:right;color:var(--mut);font-variant-numeric:tabular-nums;flex:none;font-size:11.5px}
+
+  /* empty / setup states */
+  .empty{border:1px dashed var(--line);border-radius:10px;padding:18px;text-align:center;color:var(--mut);
+    font-size:12.5px;background:var(--soft)}
+  .empty b{color:#374151}
+
+  /* details / progressive disclosure */
+  details.panel{border:1px solid var(--line);border-radius:10px;background:#fff}
+  details.panel>summary{list-style:none;cursor:pointer;padding:11px 15px;font:600 13px var(--body);
+    display:flex;align-items:center;gap:8px}
+  details.panel>summary::-webkit-details-marker{display:none}
+  details.panel>summary:after{content:"▸";margin-left:auto;color:var(--faint);transition:transform .15s}
+  details.panel[open]>summary:after{transform:rotate(90deg)}
+  details.panel>.pbody{padding:0 15px 13px;font-size:12.5px}
+  .ptext,.pcard pre{background:var(--soft);border:1px solid var(--line2);border-radius:8px;padding:11px 13px;
+    font:11.5px/1.55 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-word;color:#374151;
+    margin:8px 0 0;max-height:320px;overflow:auto}
+
+  /* work board */
+  .kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}
+  .kanban h3{display:flex;align-items:center;gap:7px;font-size:12.5px}
+  .kanban .cnt{background:var(--line2);border-radius:999px;padding:0 8px;font:600 11px var(--body);color:var(--mut)}
+  .task{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:7px;margin-top:10px;font-size:12.5px}
+  .task .meta{font-size:11px;color:var(--faint)}
+  .task .chips{display:flex;gap:5px;flex-wrap:wrap}
+
+  /* checklist compat (links drawer) */
+  .ck{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);display:inline-grid;place-items:center;
+    cursor:pointer;background:#fff;font:700 11px var(--body);color:transparent}
+  input:checked + .ck, .ck.done{background:var(--pos);border-color:var(--pos);color:#fff}
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:10px}
+  .tiercol{background:var(--soft);border:1px solid var(--line2);border-radius:8px;padding:10px 12px}
+  .tierhead{font:600 10.5px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);
+    display:flex;justify-content:space-between;margin-bottom:8px}
+  .tierchips{display:flex;flex-direction:column;gap:6px}
+  .tchip{display:flex;align-items:center;gap:6px;font-size:11.5px;flex-wrap:wrap}
   .tchip .krank{margin-left:auto}
   .tchip i{font:700 10px var(--body);font-style:normal}
-  .tup{color:var(--g700)}.tdn{color:var(--t700)}
-  .stmeta{font-size:11px;color:var(--n500)}
+  .tup{color:var(--pos)}.tdn{color:var(--neg)}
 
-  /* ─── per-site page: header, status card, spacing ─── */
-  .backlink{display:inline-block;font:600 12px var(--body);letter-spacing:.04em;text-transform:uppercase;
-    color:var(--n600);text-decoration:none;margin-bottom:12px}
-  .backlink:hover{color:var(--t700)}
-  .sitehdr{margin-bottom:24px;align-items:center}
-  .sitehdr h1{margin:0 0 6px;display:flex;align-items:center;font-size:34px}
-  .sitehdr .extlink .ic{width:16px;height:16px}
-  .bigbadge{font-size:12px;padding:6px 16px}
-  .stack>.board,.stack>.pcard{margin:0}
-  .stack{gap:24px}
-  .sitecard .schead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .narr{font-size:14px;line-height:1.65;color:var(--n800);margin:10px 0 0;max-width:76ch}
-  .statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;
-    background:var(--surface);border-radius:12px;padding:14px 18px;margin-top:14px}
-  .st{display:flex;flex-direction:column;gap:3px;min-width:0}
-  .stl{font:700 10px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--n600)}
-  .stv{font:400 21px/1.2 var(--head);color:var(--ink);font-variant-numeric:tabular-nums}
-  .secrow{margin-top:18px}
-  .secrow .rectitle{padding-top:0}
-  .hchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
-  .hchip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 12px;font:600 12px var(--body)}
-  .hchip.ok{background:var(--g200);color:var(--g800)}
-  .hchip.bad{background:var(--t200);color:var(--t700)}
-  .recs{list-style:none;margin:9px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
-  .recs li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;line-height:1.5}
+  /* rank pills */
+  .krank{display:inline-block;border-radius:5px;padding:1.5px 7px;font:700 11px var(--body)}
+  .krank.good{background:var(--pos-bg);color:var(--pos)}
+  .krank.ok{background:var(--line2);color:#4b5563}
+  .krank.far{background:var(--amb-bg);color:var(--amb)}
+  .krank.miss{color:var(--faint);background:none;font-weight:500;font-size:11.5px}
+
+  /* legacy compat (site cards, prompts, milestones) mapped to v4 look */
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .hchip{display:inline-flex;align-items:center;gap:4px;border-radius:5px;padding:2.5px 9px;font:600 11px var(--body)}
+  .hchip.ok{background:var(--pos-bg);color:var(--pos)}
+  .hchip.bad{background:var(--neg-bg);color:var(--neg)}
+  .rectitle{font:600 10.5px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+  .secrow{margin-top:14px}
+  .statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;
+    background:var(--soft);border:1px solid var(--line2);border-radius:8px;padding:11px 14px;margin-top:10px}
+  .st{display:flex;flex-direction:column;gap:1px;min-width:0}
+  .stl{font:600 10px var(--body);letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+  .stv{font:600 16px/1.3 var(--body);color:var(--ink);font-variant-numeric:tabular-nums}
+  .narr{font-size:12.5px;line-height:1.6;color:#374151;margin:8px 0 0;max-width:78ch}
+  .recs{list-style:none;margin:7px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+  .recs li{display:flex;gap:8px;align-items:baseline;font-size:12.5px}
   .recs .tag{flex:none}
-  .srarrow{margin-left:auto;color:var(--t700);flex:none}
-  .srarrow .ic{width:18px;height:18px}
+  .badge{display:inline-block;border-radius:5px;padding:1.5px 8px;font:700 10px var(--body);letter-spacing:.04em;text-transform:uppercase}
+  .badge.b-good,.badge.b-flag{background:var(--pos-bg);color:var(--pos)}
+  .badge.b-warn{background:var(--amb-bg);color:var(--amb)}
+  .badge.b-neutral,.badge.b-bad{background:var(--line2);color:var(--mut)}
+  .alert{border-radius:8px;padding:9px 13px;margin:6px 0;font-size:12.5px;border:1px solid var(--line)}
+  .alert.crit{background:var(--neg-bg);border-color:#fecaca;color:#7f1d1d}
+  .alert.warn{background:var(--amb-bg);border-color:#fde68a;color:#78350f}
+  .alert.good{background:var(--pos-bg);border-color:#bbf7d0;color:#14532d}
+  .pcard .phead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .workstrip{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+  .workstrip:hover{text-decoration:none;background:var(--soft)}
+  .srarrow{margin-left:auto;color:var(--acc);flex:none}
+  .backlink{display:inline-block;font:600 11px var(--body);letter-spacing:.04em;text-transform:uppercase;
+    color:var(--mut);text-decoration:none;margin-bottom:10px}
+  .backlink:hover{color:var(--acc);text-decoration:none}
+  .extlink{display:inline-flex;color:var(--acc);margin-left:6px;font-size:12px}
+  .extlink .ic{width:12px;height:12px}
+  .lcl{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:12.5px}
+  .miles .mile{display:flex;gap:10px;padding:6px 0;font-size:12.5px}
+  .miledate{font:600 10.5px var(--body);color:var(--mut);min-width:48px}
+  .rolehead{display:flex;align-items:center;gap:12px;margin:22px 0 10px;padding:11px 15px;background:#fff;
+    border:1px solid var(--line);border-radius:10px}
+  .rolehead h2{font-size:13.5px}
+  .roleemoji{font-size:18px}.rolesub{font-size:11px;color:var(--mut)}
+  .rolecount{margin-left:auto;background:var(--line2);color:var(--mut);font:600 11px var(--body);padding:3px 10px;border-radius:999px}
+  .chglist{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+  .board{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin:0 0 16px}
+  .t3{grid-column:span 3}.t4{grid-column:span 4}.t6{grid-column:span 6}.t12{grid-column:span 12}
+  .tile{display:flex;flex-direction:column;gap:2px}
+  .kpiL{font:600 10px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+  .tileNum{font:700 22px/1.2 var(--body);letter-spacing:-.02em;color:var(--ink)}
+  .tileNum small{font-size:12px;color:var(--mut);font-weight:500}
+  .tileLbl{font-size:11.5px;color:var(--mut);margin-top:2px}
+  .tileDelta{font:600 11.5px var(--body);margin-top:4px}
+  .tileDelta.up{color:var(--pos)}.tileDelta.down{color:var(--neg)}
+  .stmeta{font-size:10.5px;color:var(--faint)}
+  .sitehdr{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .gauge svg{max-width:100%}
+
+  @media (max-width:1080px){
+    .g2,.g23,.g3{grid-template-columns:1fr}
+    .kanban{grid-template-columns:1fr 1fr}
+    .app{grid-template-columns:1fr}
+    .side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;
+      border-right:none;border-bottom:1px solid var(--line);padding:10px 14px}
+    .side nav{display:flex;flex-wrap:wrap;gap:2px}
+    .navgrp{display:none}.side .foot{display:none}
+    .side .brand{padding:0 8px 0 0}
+  }
+  @media (max-width:640px){
+    .kanban{grid-template-columns:1fr}
+    .wrap{padding:16px 14px 48px}
+    .toph{padding:8px 14px}
+    .fresh{display:none}
+    .kpirow{grid-template-columns:1fr 1fr}
+    h1{font-size:17px}
+    .hbar .hlab{width:80px}
+  }
 </style>
-<div class="viz-root">
-<header class="topbar"><div class="tb1"><a class="brand" href="./"><span class="brandmark">i</span><span class="wordmark">IPTV <b>Portfolio</b></span></a><nav class="navpills"><a href="./" class="on">Overview</a><a href="today" class="">Work</a><a href="trends" class="">Trends</a><a href="links" class="">Backlinks</a><a href="plan" class="">Plan</a><a href="sales" class="">Sales</a><a href="replies" class="">Replies</a><a href="settings" class="">Settings</a></nav><span class="tbspacer"></span><span class="auditstat">Audit 2026-09-04 07:24 UTC</span><button class="runbtn" id="runaudit" title="Copies the audit request — paste it to Claude">Run audit</button></div><div class="tb2"><span class="lbl">Sites</span><a class="schip" href="iptvesp"><span class="dot s1"></span>esp</a><a class="schip" href="primeiptv-france"><span class="dot s2"></span>prime</a><a class="schip" href="iptvned"><span class="dot s3"></span>ned</a><a class="schip" href="iptvpix"><span class="dot s4"></span>pix</a><a class="schip" href="smarters-live"><span class="dot s5"></span>slive</a><a class="schip" href="iptvshqiptar"><span class="dot s6"></span>shqip</a><a class="schip" href="smartersprofrance-fr"><span class="dot s7"></span>spf</a><a class="schip" href="iptvfranceofficiel-fr"><span class="dot s8"></span>ifo</a><a class="schip" href="abonnementiptvofficiel"><span class="dot s9"></span>aio</a><a class="schip" href="iptvsegura"><span class="dot s10"></span>segura</a><a class="schip" href="rodaktv"><span class="dot s11"></span>rodak</a></div></header>
+
+<div class="viz-root"><div class="app">
+<aside class="side"><a class="brand" href="./"><span class="bmark">iP</span><span class="bname">IPTV Portfolio</span></a><nav><div class="navgrp">Portfolio</div><a href="./" class="on"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>Overview</a><a href="performance" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M8 17v-5M13 17V8M18 17v-8"/></svg>Performance</a><a href="rankings" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>Rankings</a><a href="content" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>Content</a><a href="technical" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4z"/></svg>Technical</a><a href="authority" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m9 14-1.5 7L12 18l4.5 3L15 14"/></svg>Authority</a><a href="opportunities" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c1 1 1.5 2 1.5 3h5c0-1 .5-2 1.5-3a6 6 0 0 0-4-10z"/></svg>Opportunities</a><a href="today" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Work</a><div class="navgrp">Business</div><a href="sales" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5"/><path d="M14.4 5.5a5 5 0 1 1-5 8.9"/></svg>Sales</a><a href="clients" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.4a3.2 3.2 0 0 1 0 5.9M17 13.7a5.5 5.5 0 0 1 3.5 5.3"/></svg>Clients</a><a href="replies" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 0-3.1 6.3L21 20l-1.2-3.6A8 8 0 0 0 20 12z"/></svg>Replies</a><div class="navgrp">System</div><a href="plan" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 4 6v14l5-2 6 2 5-2V4l-5 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>Plan</a><a href="settings" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2-1.2L14.2 3H9.8l-.4 2.7a7 7 0 0 0-2 1.2l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2 1.2l.4 2.7h4.4l.4-2.7a7 7 0 0 0 2-1.2l2.3 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>Integrations</a></nav><div class="foot">Audit 2026-09-04 08:24 UTC</div></aside>
+<div class="main">
+<div class="toph"><span class="crumb">IPTV Portfolio</span><span class="fresh"><span><span class="fdot "></span><b>GSC</b> pulled 2026-09-04</span><span><span class="fdot "></span><b>DataForSEO</b> this audit</span><span><span class="fdot "></span><b>Semrush</b> 2026-09-04</span><span><span class="fdot "></span><b>Sales</b> browser-local · live</span></span><details class="siteselect"><summary><span class="dot s1" style="display:none"></span>All websites</summary><div class="sitemenu"><a href="./" class="allrow">All websites<span class="meta">11 sites</span></a><a href="iptvesp"><span class="dot s1"></span>iptvesp.com<span class="meta">Spain · Accelerating</span></a><a href="primeiptv-france"><span class="dot s2"></span>primeiptv-france.com<span class="meta">France · Flagship</span></a><a href="iptvned"><span class="dot s3"></span>iptvned.com<span class="meta">Netherlands · Rebuild</span></a><a href="iptvpix"><span class="dot s4"></span>iptvpix.com<span class="meta">France · Recovering</span></a><a href="smarters-live"><span class="dot s5"></span>smarters-live.com<span class="meta">France · Build</span></a><a href="iptvshqiptar"><span class="dot s6"></span>iptvshqiptar.com<span class="meta">Albania · Baseline</span></a><a href="smartersprofrance-fr"><span class="dot s7"></span>smartersprofrance.fr<span class="meta">France · Satellite</span></a><a href="iptvfranceofficiel-fr"><span class="dot s8"></span>iptvfranceofficiel.fr<span class="meta">France · Satellite</span></a><a href="abonnementiptvofficiel"><span class="dot s9"></span>abonnementiptvofficiel.com<span class="meta">France · Watch</span></a><a href="iptvsegura"><span class="dot s10"></span>iptvsegura.com<span class="meta">Spain · Onboarding</span></a><a href="rodaktv"><span class="dot s11"></span>rodaktv.com<span class="meta">Poland · Launch</span></a></div></details><button class="runbtn" id="runaudit" title="Copies the audit request — paste it to Claude">Run audit</button></div>
 <main><div class="wrap">
-<div class="hdr"><div><h1>Good morning. 4 things need you.</h1><p class="sub">11 sites · 58 keywords probed · 751 clicks this week</p></div><div class="rowflex"><span class="tag warn" style="padding:6px 14px">4 fix</span><span class="tag pos" style="padding:6px 14px">9 tasks open</span></div></div><div class="card warn alertbanner"><span class="alertbang">!</span><div style="flex:1"><div class="kick w">Needs attention</div><div style="font-size:15px;margin-top:2px">rodaktv.com is NOT in Search Console (verified via sites.list) — add the sc-domain property, submit sitemap.xml, and add the monitoring service account as a user. Until then the dashboard cannot track its traffic.</div></div><a class="btn" href="rodaktv">Open site</a><a class="btn primary" href="today">Open Work</a></div><div class="card warn alertbanner"><span class="alertbang">!</span><div style="flex:1"><div class="kick w">Needs attention</div><div style="font-size:15px;margin-top:2px">abonnementiptvofficiel.com: spam score jumped 48→58 (+10) — pause this site's tier-2 link work and review the newest links</div></div><a class="btn" href="abonnementiptvofficiel">Open site</a><a class="btn primary" href="today">Open Work</a></div><div class="card warn alertbanner"><span class="alertbang">!</span><div style="flex:1"><div class="kick w">Needs attention</div><div style="font-size:15px;margin-top:2px">iptvsegura.com: only 3 referring domains — authority is the ceiling; run the Backlinks steps</div></div><a class="btn" href="iptvsegura">Open site</a><a class="btn primary" href="today">Open Work</a></div><div class="card warn alertbanner"><span class="alertbang">!</span><div style="flex:1"><div class="kick w">Needs attention</div><div style="font-size:15px;margin-top:2px">rodaktv.com: host redirect is 307 — set it to 308 (permanent)</div></div><a class="btn" href="rodaktv">Open site</a><a class="btn primary" href="today">Open Work</a></div><div class="rowflex" style="justify-content:space-between;margin-bottom:12px"><h2>North star — 4 goals</h2><span style="font-size:12px;color:var(--n600)">set 2026-08-14 · 1 complete</span></div><div class="grid g4" style="margin-top:0"><div class="card"><div class="kick n">Portfolio clicks / week</div><div style="margin:6px 0 10px"><span class="big num">751</span><span style="color:var(--n600);font-size:14px"> / 1,000</span></div><div class="bar"><i class="" style="width:75%"></i></div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--n600);margin-top:8px"><span>75%</span><span>due 31 Oct</span></div></div><div class="card"><div class="kick n">Targets in the top 10</div><div style="margin:6px 0 10px"><span class="big num">3</span><span style="color:var(--n600);font-size:14px"> / 10</span></div><div class="bar"><i class="" style="width:30%"></i></div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--n600);margin-top:8px"><span>30%</span><span>due 31 Oct</span></div></div><div class="card"><div class="kick n">primeiptv ref. domains (Semrush)</div><div style="margin:6px 0 10px"><span class="big num">37</span><span style="color:var(--n600);font-size:14px"> / 30</span></div><div class="bar"><i class="done" style="width:100%"></i></div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--n600);margin-top:8px"><span>goal complete</span><span>done ✓</span></div></div><div class="card"><div class="kick n">Sites earning clicks / week</div><div style="margin:6px 0 10px"><span class="big num">7</span><span style="color:var(--n600);font-size:14px"> / 9</span></div><div class="bar"><i class="" style="width:78%"></i></div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--n600);margin-top:8px"><span>78%</span><span>due 30 Sep</span></div></div></div><div class="grid g169"><div class="card table"><div class="cardhead"><h2>Sites — 7 days</h2></div><div class="overflow"><table><thead><tr><th>Site</th><th>Phase</th><th style="text-align:right">Clicks</th><th>Δ wk</th><th>30d</th><th>Best rank</th><th>Ref.dom</th><th>Spam</th></tr></thead><tbody><tr><td><a href="iptvesp" style="text-decoration:none;color:var(--ink)"><span class="dot s1"></span> esp</a></td><td><span class="tag pos">ACCELERATING</span></td><td style="text-align:right;font-weight:600">509</td><td><span class="down">▼ 100</span></td><td><svg width="72" height="22"><polyline points="0.0,10.6 6.5,2.0 13.1,9.2 19.6,15.1 26.2,11.7 32.7,10.1 39.3,9.8 45.8,15.4 52.4,9.8 58.9,9.3 65.5,13.5 72.0,13.7" fill="none" stroke="#c67139" stroke-width="1.75"/></svg></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">#1 listas iptv españa telegram</td><td>133</td><td><span class="down">55</span></td></tr><tr><td><a href="primeiptv-france" style="text-decoration:none;color:var(--ink)"><span class="dot s2"></span> prime</a></td><td><span class="tag pos">FLAGSHIP</span></td><td style="text-align:right;font-weight:600">78</td><td><span class="up">▲ 20</span></td><td><svg width="72" height="22"><polyline points="0.0,9.9 6.5,6.5 13.1,14.4 19.6,8.8 26.2,13.2 32.7,9.9 39.3,7.6 45.8,2.0 52.4,9.9 58.9,9.9 65.5,6.5 72.0,6.5" fill="none" stroke="#c67139" stroke-width="1.75"/></svg></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">#26 abonnement iptv 12 mois</td><td>37</td><td><span class="tag warn">62</span></td></tr><tr><td><a href="abonnementiptvofficiel" style="text-decoration:none;color:var(--ink)"><span class="dot s9"></span> aio</a></td><td><span class="tag warn">WATCH</span></td><td style="text-align:right;font-weight:600">70</td><td><span class="up">▲ 13</span></td><td><svg width="72" height="22"><polyline points="0.0,19.1 6.5,16.6 13.1,5.4 19.6,2.0 26.2,8.9 32.7,11.4 39.3,9.7 45.8,15.7 52.4,10.6 58.9,6.3 65.5,10.6 72.0,15.7" fill="none" stroke="#c67139" stroke-width="1.75"/></svg></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">#8 meilleur boitier iptv</td><td>75</td><td><span class="tag warn">58</span></td></tr><tr><td><a href="smartersprofrance-fr" style="text-decoration:none;color:var(--ink)"><span class="dot s7"></span> spf</a></td><td><span class="tag neu">SATELLITE</span></td><td style="text-align:right;font-weight:600">52</td><td><span class="up">▲ 12</span></td><td><svg width="72" height="22"><polyline points="0.0,6.9 6.5,13.5 13.1,2.0 19.6,11.8 26.2,13.5 32.7,10.2 39.3,2.0 45.8,5.3 52.4,11.8 58.9,8.5 65.5,10.2 72.0,6.9" fill="none" stroke="#c67139" stroke-width="1.75"/></svg></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">#48 iptv smarters pro firestick</td><td>4</td><td><span class="flat">—</span></td></tr><tr><td><a href="iptvned" style="text-decoration:none;color:var(--ink)"><span class="dot s3"></span> ned</a></td><td><span class="tag neu">REBUILD</span></td><td style="text-align:right;font-weight:600">16</td><td><span class="down">▼ 3</span></td><td><svg width="72" height="22"><polyline points="0.0,5.6 6.5,5.6 13.1,12.8 19.6,20.0 26.2,12.8 32.7,12.8 39.3,12.8 45.8,2.0 52.4,12.8 58.9,12.8 65.5,9.2 72.0,20.0" fill="none" stroke="#c67139" stroke-width="1.75"/></svg></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</td><td>63</td><td><span class="down">55</span></td></tr><tr><td><a href="iptvshqiptar" style="text-decoration:none;color:var(--ink)"><span class="dot s6"></span> shqip</a></td><td><span class="tag neu">BASELINE</span></td><td style="text-align:right;font-weight:600">14</td><td><span class="up">▲ 2</span></td><td><svg width="72" height="22"><polyline points="0.0,12.8 6.5,16.4 13.1,12.8 19.6,2.0 26.2,20.0 32.7,9.2 39.3,12.8 45.8,12.8 52.4,20.0 58.9,12.8 65.5,12.8 72.0,9.2" fill="none" stroke="#c67139" stroke-width="1.75"/></svg></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">#6 iptv shqiptar</td><td>55</td><td><span class="down">50</span></td></tr><tr><td><a href="iptvsegura" style="text-decoration:none;color:var(--ink)"><span class="dot s10"></span> segura</a></td><td><span class="tag neu">ONBOARDING</span></td><td style="text-align:right;font-weight:600">12</td><td><span class="up">▲ 12</span></td><td><svg width="72" height="22"><polyline points="0.0,20.0 7.2,20.0 14.4,20.0 21.6,20.0 28.8,8.0 36.0,2.0 43.2,20.0 50.4,8.0 57.6,8.0 64.8,8.0 72.0,14.0" fill="none" stroke="#c67139" stroke-width="1.75"/></svg></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">#16 es seguro el iptv</td><td>10</td><td><span class="down">53</span></td></tr><tr><td><a href="iptvpix" style="text-decoration:none;color:var(--ink)"><span class="dot s4"></span> pix</a></td><td><span class="tag warn">RECOVERING</span></td><td style="text-align:right;font-weight:600">0</td><td><span class="flat">—</span></td><td><svg width="72" height="22"><polyline points="0.0,20.0 6.5,20.0 13.1,20.0 19.6,20.0 26.2,20.0 32.7,20.0 39.3,20.0 45.8,20.0 52.4,20.0 58.9,20.0 65.5,20.0 72.0,20.0" fill="none" stroke="#c67139" stroke-width="1.75"/></svg></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</td><td>134</td><td><span class="down">50</span></td></tr><tr><td><a href="smarters-live" style="text-decoration:none;color:var(--ink)"><span class="dot s5"></span> slive</a></td><td><span class="tag neu">BUILD</span></td><td style="text-align:right;font-weight:600">0</td><td><span class="flat">—</span></td><td><svg width="72" height="22"><polyline points="0.0,20.0 6.5,20.0 13.1,20.0 19.6,20.0 26.2,20.0 32.7,20.0 39.3,20.0 45.8,20.0 52.4,20.0 58.9,20.0 65.5,20.0 72.0,20.0" fill="none" stroke="#c67139" stroke-width="1.75"/></svg></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</td><td>53</td><td><span class="tag warn">62</span></td></tr><tr><td><a href="iptvfranceofficiel-fr" style="text-decoration:none;color:var(--ink)"><span class="dot s8"></span> ifo</a></td><td><span class="tag neu">SATELLITE</span></td><td style="text-align:right;font-weight:600">0</td><td><span class="flat">—</span></td><td><svg width="72" height="22"><polyline points="0.0,20.0 6.5,20.0 13.1,20.0 19.6,20.0 26.2,20.0 32.7,20.0 39.3,20.0 45.8,20.0 52.4,20.0 58.9,20.0 65.5,20.0 72.0,20.0" fill="none" stroke="#c67139" stroke-width="1.75"/></svg></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</td><td>3</td><td><span class="flat">—</span></td></tr><tr><td><a href="rodaktv" style="text-decoration:none;color:var(--ink)"><span class="dot s11"></span> rodak</a></td><td><span class="tag neu">LAUNCH</span></td><td style="text-align:right;font-weight:600">0</td><td><span class="flat">—</span></td><td></td><td style="font-size:12px;color:var(--n700);max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</td><td>—</td><td><span class="flat">—</span></td></tr></tbody></table></div></div><div class="stack"><div class="card"><div class="rowflex" style="justify-content:space-between"><h2>Rankings movement</h2><span style="font-size:13px;color:var(--n600)">11 / 64 in top 100</span></div><div class="distbar"><i style="flex:3;background:var(--g)"></i><i style="flex:3;background:var(--g400)"></i><i style="flex:5;background:var(--t400)"></i><i style="flex:53;background:var(--surface)"></i></div><div style="display:flex;gap:12px;font-size:11px;color:var(--n600)"><span>● page 1 · 3</span><span>● 11–30 · 3</span><span>● 31–100 · 5</span><span>● out · 53</span></div><div style="margin-top:10px"><div class="moverow"><span class="dot s1"></span><span>listas iptv españa telegram</span><span class="flat">—</span><span class="pos num">#1</span></div><div class="moverow"><span class="dot s6"></span><span>iptv shqiptar</span><span class="flat">—</span><span class="pos num">#6</span></div><div class="moverow"><span class="dot s9"></span><span>meilleur boitier iptv</span><span class="flat">—</span><span class="pos num">#8</span></div><div class="moverow"><span class="dot s10"></span><span>es seguro el iptv</span><span class="flat">—</span><span class="pos num">#16</span></div><div class="moverow"><span class="dot s10"></span><span>estafas iptv</span><span class="flat">—</span><span class="pos num">#25</span></div><div class="moverow"><span class="dot s2"></span><span>abonnement iptv 12 mois</span><span class="flat">—</span><span class="pos num">#26</span></div><div class="moverow"><span class="dot s10"></span><span>que es una lista m3u</span><span class="flat">—</span><span class="pos num">#31</span></div></div></div><div class="card"><h2>Backlink engine</h2><div class="grid g3" style="gap:10px;margin:12px 0"><div><div class="kick n">Ref. domains</div><div class="big sm num">567</div></div><div><div class="kick n">Checklist</div><div class="big sm num">11%</div></div><div><div class="kick w">Spam max</div><div class="big sm num" style="color:var(--t700)">62</div></div></div><div class="bar"><i class="done" style="width:11%"></i></div><div style="font-size:12px;color:var(--n600);margin-top:8px">45 of 400 placements done</div><a class="linkbtn" href="links" style="display:inline-block;margin-top:8px">Open →</a></div></div></div><div class="grid g2"><div class="card"><h2>Work — by role</h2><div class="grid g4" style="gap:10px;margin:12px 0 10px"><div class="inset"><div style="font-size:11px;color:var(--n700)">Developer</div><div class="big sm num">5</div></div><div class="inset"><div style="font-size:11px;color:var(--n700)">Content</div><div class="big sm num">1</div></div><div class="inset"><div style="font-size:11px;color:var(--n700)">Links</div><div class="big sm num">1</div></div><div class="inset"><div style="font-size:11px;color:var(--n700)">Owner</div><div class="big sm num">2</div></div></div><a class="linkbtn" href="today">All 9 tasks →</a></div><div class="card"><h2><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 4v5h-5"/></svg> What changed this update</h2><p class="sub" style="margin:0">No measurable change since 2026-09-04 06:36 UTC — normal on a same-day re-run.</p></div></div>
+<div class="pagehead"><h1>Overview</h1><p class="sub">Executive view · complete 28-day GSC windows (2026-08-05 → 2026-09-01 vs 2026-07-08 → 2026-08-04) · audit 2026-09-04 08:24 UTC</p></div><div class="kpirow"><div class="kpi" id="kpi-revenue"><span class="kl">Revenue · 28d</span><span class="kv">—</span><span class="kd"><span class="flat">open /sales on this device to load</span></span><span class="src">i<span class="tip">TOTAL sales revenue from the sales app (localStorage, this device). NOT organic-attributed — no analytics layer exists on the sites yet.</span></span></div><div class="kpi" id="kpi-sales"><span class="kl">Sales · 28d</span><span class="kv">—</span><span class="kd"><span class="flat">sales app data</span></span><span class="src">i<span class="tip">Count of sales recorded in the sales app in the last 28 days. All channels, not organic-only.</span></span></div><div class="kpi"><span class="kl">Organic clicks · 28d</span><span class="kv">2,616</span><span class="kd"><span class="up">▲ 285%</span> <span class="stmeta">vs prev 28d</span></span><div class="kspark"><svg class="spk" width="130" height="26" viewBox="0 0 130 26" preserveAspectRatio="none"><polygon points="4,22 4.0,19.0 6.8,20.4 9.5,19.4 12.3,20.3 15.1,19.9 17.9,20.4 20.6,19.8 23.4,20.0 26.2,19.7 29.0,20.3 31.7,19.8 34.5,19.8 37.3,19.0 40.0,17.3 42.8,17.0 45.6,16.9 48.4,17.5 51.1,16.8 53.9,15.5 56.7,17.1 59.5,15.9 62.2,14.3 65.0,15.5 67.8,16.9 70.5,16.2 73.3,15.3 76.1,15.6 78.9,11.5 81.6,4.8 84.4,12.4 87.2,14.7 90.0,12.0 92.7,12.7 95.5,11.5 98.3,4.0 101.0,9.0 103.8,13.7 106.6,12.4 109.4,10.3 112.1,9.1 114.9,14.4 117.7,10.3 120.5,9.0 123.2,12.8 126.0,13.7 126,22" fill="var(--acc)" opacity=".13"/><polyline points="4.0,19.0 6.8,20.4 9.5,19.4 12.3,20.3 15.1,19.9 17.9,20.4 20.6,19.8 23.4,20.0 26.2,19.7 29.0,20.3 31.7,19.8 34.5,19.8 37.3,19.0 40.0,17.3 42.8,17.0 45.6,16.9 48.4,17.5 51.1,16.8 53.9,15.5 56.7,17.1 59.5,15.9 62.2,14.3 65.0,15.5 67.8,16.9 70.5,16.2 73.3,15.3 76.1,15.6 78.9,11.5 81.6,4.8 84.4,12.4 87.2,14.7 90.0,12.0 92.7,12.7 95.5,11.5 98.3,4.0 101.0,9.0 103.8,13.7 106.6,12.4 109.4,10.3 112.1,9.1 114.9,14.4 117.7,10.3 120.5,9.0 123.2,12.8 126.0,13.7" fill="none" stroke="var(--acc)" stroke-width="1.8" stroke-linejoin="round"/><circle cx="126.0" cy="13.7" r="2.6" fill="var(--acc)"/></svg></div><span class="src">i<span class="tip">Google Search Console, all 11 properties, complete days 2026-08-05 → 2026-09-01 vs 2026-07-08 → 2026-08-04.</span></span></div><div class="kpi"><span class="kl">Impressions · 28d</span><span class="kv">29,304</span><span class="kd"><span class="up">▲ 245%</span> <span class="stmeta">vs prev 28d</span></span><span class="src">i<span class="tip">GSC impressions, same complete 28-day windows.</span></span></div><div class="kpi"><span class="kl">CTR · 28d</span><span class="kv">8.9%</span><span class="kd"><span class="up">▲ 1 pts</span> <span class="stmeta">vs prev</span></span><span class="src">i<span class="tip">Portfolio clicks ÷ impressions (GSC). Compare trend, not absolute level — query mix differs per site.</span></span></div><div class="kpi"><span class="kl">Avg position</span><span class="kv">15.7</span><span class="kd"><span class="up">▲ 1</span> <span class="stmeta">impr-weighted</span></span><span class="src">i<span class="tip">GSC average position weighted by impressions across all sites. Lower is better; the delta arrow already accounts for that.</span></span></div><div class="kpi"><span class="kl">Top-10 strategic</span><span class="kv">3</span><span class="kd"><span class="flat">· 0</span> <span class="stmeta">vs last audit</span></span><span class="src">i<span class="tip">Strategic tracked keywords (our 64-target list) at position ≤10 in live DataForSEO probes. Not the same as Semrush/DFS totals — see Rankings.</span></span></div><div class="kpi"><span class="kl">Indexation</span><span class="kv">23/30</span><span class="kd"><span class="down">7 failing</span></span><span class="src">i<span class="tip">Priority URLs (money + strategic target pages) checked via the GSC URL Inspection API this audit.</span></span></div></div><div class="grid g23"><div class="card"><div class="chead"><h2>Organic traffic — 90 days</h2><div class="seg" data-period><button data-n="7">7d</button><button data-n="28">28d</button><button class="on" data-n="90">90d</button></div></div><div class="chart" data-series='[{"d": "2026-06-04", "c": 0, "i": 82}, {"d": "2026-06-05", "c": 1, "i": 71}, {"d": "2026-06-06", "c": 0, "i": 90}, {"d": "2026-06-07", "c": 2, "i": 58}, {"d": "2026-06-08", "c": 1, "i": 51}, {"d": "2026-06-09", "c": 3, "i": 65}, {"d": "2026-06-10", "c": 2, "i": 134}, {"d": "2026-06-11", "c": 4, "i": 87}, {"d": "2026-06-12", "c": 6, "i": 251}, {"d": "2026-06-13", "c": 2, "i": 172}, {"d": "2026-06-14", "c": 6, "i": 130}, {"d": "2026-06-15", "c": 8, "i": 111}, {"d": "2026-06-16", "c": 2, "i": 106}, {"d": "2026-06-17", "c": 4, "i": 121}, {"d": "2026-06-18", "c": 5, "i": 100}, {"d": "2026-06-19", "c": 1, "i": 77}, {"d": "2026-06-20", "c": 3, "i": 86}, {"d": "2026-06-21", "c": 5, "i": 87}, {"d": "2026-06-22", "c": 10, "i": 110}, {"d": "2026-06-23", "c": 11, "i": 138}, {"d": "2026-06-24", "c": 12, "i": 146}, {"d": "2026-06-25", "c": 4, "i": 106}, {"d": "2026-06-26", "c": 14, "i": 156}, {"d": "2026-06-27", "c": 16, "i": 177}, {"d": "2026-06-28", "c": 14, "i": 180}, {"d": "2026-06-29", "c": 5, "i": 121}, {"d": "2026-06-30", "c": 16, "i": 157}, {"d": "2026-07-01", "c": 8, "i": 126}, {"d": "2026-07-02", "c": 15, "i": 128}, {"d": "2026-07-03", "c": 8, "i": 129}, {"d": "2026-07-04", "c": 17, "i": 158}, {"d": "2026-07-05", "c": 13, "i": 167}, {"d": "2026-07-06", "c": 8, "i": 156}, {"d": "2026-07-07", "c": 19, "i": 304}, {"d": "2026-07-08", "c": 12, "i": 317}, {"d": "2026-07-09", "c": 14, "i": 165}, {"d": "2026-07-10", "c": 9, "i": 161}, {"d": "2026-07-11", "c": 29, "i": 383}, {"d": "2026-07-12", "c": 22, "i": 200}, {"d": "2026-07-13", "c": 23, "i": 207}, {"d": "2026-07-14", "c": 20, "i": 233}, {"d": "2026-07-15", "c": 19, "i": 289}, {"d": "2026-07-16", "c": 12, "i": 262}, {"d": "2026-07-17", "c": 17, "i": 232}, {"d": "2026-07-18", "c": 24, "i": 289}, {"d": "2026-07-19", "c": 30, "i": 386}, {"d": "2026-07-20", "c": 16, "i": 233}, {"d": "2026-07-21", "c": 26, "i": 284}, {"d": "2026-07-22", "c": 17, "i": 232}, {"d": "2026-07-23", "c": 21, "i": 233}, {"d": "2026-07-24", "c": 16, "i": 256}, {"d": "2026-07-25", "c": 22, "i": 302}, {"d": "2026-07-26", "c": 20, "i": 311}, {"d": "2026-07-27", "c": 23, "i": 355}, {"d": "2026-07-28", "c": 17, "i": 333}, {"d": "2026-07-29", "c": 22, "i": 380}, {"d": "2026-07-30", "c": 22, "i": 322}, {"d": "2026-07-31", "c": 30, "i": 377}, {"d": "2026-08-01", "c": 48, "i": 397}, {"d": "2026-08-02", "c": 51, "i": 392}, {"d": "2026-08-03", "c": 52, "i": 451}, {"d": "2026-08-04", "c": 46, "i": 508}, {"d": "2026-08-05", "c": 53, "i": 552}, {"d": "2026-08-06", "c": 66, "i": 627}, {"d": "2026-08-07", "c": 50, "i": 490}, {"d": "2026-08-08", "c": 62, "i": 536}, {"d": "2026-08-09", "c": 78, "i": 555}, {"d": "2026-08-10", "c": 66, "i": 560}, {"d": "2026-08-11", "c": 52, "i": 551}, {"d": "2026-08-12", "c": 59, "i": 757}, {"d": "2026-08-13", "c": 68, "i": 729}, {"d": "2026-08-14", "c": 65, "i": 720}, {"d": "2026-08-15", "c": 106, "i": 914}, {"d": "2026-08-16", "c": 174, "i": 1070}, {"d": "2026-08-17", "c": 97, "i": 906}, {"d": "2026-08-18", "c": 74, "i": 910}, {"d": "2026-08-19", "c": 101, "i": 1022}, {"d": "2026-08-20", "c": 94, "i": 1081}, {"d": "2026-08-21", "c": 106, "i": 1223}, {"d": "2026-08-22", "c": 182, "i": 1536}, {"d": "2026-08-23", "c": 131, "i": 1581}, {"d": "2026-08-24", "c": 84, "i": 1392}, {"d": "2026-08-25", "c": 97, "i": 1402}, {"d": "2026-08-26", "c": 118, "i": 1687}, {"d": "2026-08-27", "c": 130, "i": 1556}, {"d": "2026-08-28", "c": 77, "i": 1361}, {"d": "2026-08-29", "c": 118, "i": 1448}, {"d": "2026-08-30", "c": 131, "i": 1515}, {"d": "2026-08-31", "c": 93, "i": 1426}, {"d": "2026-09-01", "c": 84, "i": 1197}]'><svg viewBox="0 0 1000 200" width="100%" height="200" preserveAspectRatio="none"><polyline points="6.0,184.9 17.1,186.1 28.2,184.0 39.3,187.5 50.4,188.3 61.5,186.8 72.6,179.1 83.7,184.3 94.8,166.0 105.9,174.8 117.0,179.5 128.1,181.6 139.2,182.2 150.3,180.5 161.4,182.9 172.5,185.4 183.6,184.4 194.7,184.3 205.8,181.7 216.9,178.6 228.0,177.7 239.1,182.2 250.2,176.6 261.3,174.3 272.4,173.9 283.5,180.5 294.6,176.5 305.7,180.0 316.8,179.7 327.9,179.6 339.0,176.4 350.1,175.4 361.2,176.6 372.3,160.1 383.4,158.7 394.5,175.6 405.6,176.1 416.7,151.3 427.8,171.7 438.9,170.9 450.0,168.0 461.1,161.8 472.2,164.8 483.3,168.1 494.4,161.8 505.6,151.0 516.7,168.0 527.8,162.4 538.9,168.1 550.0,168.0 561.1,165.5 572.2,160.3 583.3,159.3 594.4,154.4 605.5,156.9 616.6,151.7 627.7,158.1 638.8,152.0 649.9,149.8 661.0,150.3 672.1,143.7 683.2,137.4 694.3,132.5 705.4,124.1 716.5,139.4 727.6,134.3 738.7,132.2 749.8,131.6 760.9,132.6 772.0,109.6 783.1,112.8 794.2,113.8 805.3,92.1 816.4,74.8 827.5,93.0 838.6,92.6 849.7,80.1 860.8,73.5 871.9,57.7 883.0,22.8 894.1,17.8 905.2,38.9 916.3,37.8 927.4,6.0 938.5,20.6 949.6,42.3 960.7,32.6 971.8,25.2 982.9,35.1 994.0,60.6" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><polyline points="6.0,194.0 17.1,193.0 28.2,194.0 39.3,191.9 50.4,193.0 61.5,190.9 72.6,191.9 83.7,189.9 94.8,187.8 105.9,191.9 117.0,187.8 128.1,185.7 139.2,191.9 150.3,189.9 161.4,188.8 172.5,193.0 183.6,190.9 194.7,188.8 205.8,183.7 216.9,182.6 228.0,181.6 239.1,189.9 250.2,179.5 261.3,177.5 272.4,179.5 283.5,188.8 294.6,177.5 305.7,185.7 316.8,178.5 327.9,185.7 339.0,176.4 350.1,180.6 361.2,185.7 372.3,174.4 383.4,181.6 394.5,179.5 405.6,184.7 416.7,164.0 427.8,171.3 438.9,170.2 450.0,173.3 461.1,174.4 472.2,181.6 483.3,176.4 494.4,169.2 505.6,163.0 516.7,177.5 527.8,167.1 538.9,176.4 550.0,172.3 561.1,177.5 572.2,171.3 583.3,173.3 594.4,170.2 605.5,176.4 616.6,171.3 627.7,171.3 638.8,163.0 649.9,144.4 661.0,141.3 672.1,140.3 683.2,146.5 694.3,139.3 705.4,125.8 716.5,142.4 727.6,130.0 738.7,113.4 749.8,125.8 760.9,140.3 772.0,133.1 783.1,123.8 794.2,126.9 805.3,84.5 816.4,14.3 827.5,93.8 838.6,117.6 849.7,89.7 860.8,96.9 871.9,84.5 883.0,6.0 894.1,58.7 905.2,107.2 916.3,93.8 927.4,72.1 938.5,59.7 949.6,114.5 960.7,72.1 971.8,58.7 982.9,97.9 994.0,107.2" fill="none" stroke="#4f46e5" stroke-width="2"/></svg><div class="hoverline"></div><div class="htip"></div></div><div class="legend"><span><i style="background:#4f46e5"></i>Clicks (left-scaled)</span><span><i style="background:#c7d2fe"></i>Impressions (own scale)</span><span class="stmeta">Each series is scaled to its own max — read shape, not cross-height.</span></div></div><div class="card"><div class="chead"><h2>Alerts</h2><a class="btn sm" href="settings">rules</a></div><div class="alertrow"><span class="sev medium">MEDIUM</span><span>abonnementiptvofficiel.com: spam score jumped 48→58 (+10) — pause this site&#x27;s tier-2 link work and review the newest links</span></div><div class="alertrow"><span class="sev medium">MEDIUM</span><span>iptvsegura.com: only 3 referring domains — authority is the ceiling; run the Backlinks steps</span></div><div class="alertrow"><span class="sev medium">MEDIUM</span><span>rodaktv.com: host redirect is 307 — set it to 308 (permanent)</span></div></div></div><div class="grid g23"><div class="card"><div class="chead"><h2>What changed</h2><span class="stmeta">28d vs previous 28d · live probes · audit history</span></div><div class="chg good"><span class="cico">▲</span><div class="cbody">spf gained 90  organic clicks (2 → 92, 28d vs previous 28d).<div class="cmeta">largest contributor: /articles/iptv-smarters-pro-vpn-france (+14 clicks)</div></div></div><div class="chg good"><span class="cico">▲</span><div class="cbody">aio gained 468% organic clicks (28 → 159, 28d vs previous 28d).<div class="cmeta">largest contributor: /boitier-iptv (+68 clicks)</div></div></div><div class="chg good"><span class="cico">▲</span><div class="cbody">ned gained 293% organic clicks (14 → 55, 28d vs previous 28d).<div class="cmeta">largest contributor: /blog/iptv-firestick-nederland (+15 clicks)</div></div></div><div class="chg good"><span class="cico">▲</span><div class="cbody">esp gained 256% organic clicks (572 → 2037, 28d vs previous 28d).<div class="cmeta">largest contributor: /blog/telegram-listas-iptv-espana (+813 clicks)</div></div></div><div class="chg good"><span class="cico">▲</span><div class="cbody">prime gained 250% organic clicks (62 → 217, 28d vs previous 28d).<div class="cmeta">largest contributor: /iptv/algerie (+108 clicks)</div></div></div><div class="chg good"><span class="cico">▲</span><div class="cbody">esp: 29 queries entered positions 1–10 (“iptv fútbol telegram”, “listas iptv españa telegram gratis”, “iptv spain telegram”…).</div></div><div class="chg good"><span class="cico">▲</span><div class="cbody">aio: 23 queries entered positions 1–10 (“iptv essai 7 jours”, “flux tv vlc”, “quel boitier iptv choisir”…).</div></div><div class="chg bad"><span class="cico">▼</span><div class="cbody">segura: priority page /guias/iptv-legal-espana is not indexed (Duplicate without user-selected canonical).<div class="cmeta">GSC URL Inspection</div></div></div><div class="chg bad"><span class="cico">▼</span><div class="cbody">segura: priority page /planes is not indexed (URL is unknown to Google).<div class="cmeta">GSC URL Inspection</div></div></div><div class="chg bad"><span class="cico">▼</span><div class="cbody">rodak: priority page /abonament is not indexed (Discovered - currently not indexed).<div class="cmeta">GSC URL Inspection</div></div></div></div><div class="card"><div class="chead"><h2>Top opportunities</h2><a class="btn sm" href="opportunities">all 117</a></div><div class="stack" style="gap:10px"><div class="opp"><div class="ohead"><span class="score num">70</span><span class="tag acc">Indexation</span><a href="iptvsegura" style="font-weight:600">segura</a><span class="dot s10"></span></div><div class="orow"><b>What:</b> Priority page /guias/iptv-legal-espana is not indexed (Duplicate without user-selected canonical).</div><div class="orow"><b>Why it matters:</b> An unindexed money/target page earns exactly zero organic clicks.</div><div class="orow"><b>Expected upside:</b> Full recovery of the page&#x27;s potential.</div><div class="orow"><b>Action:</b> Request indexing in GSC, check canonical/robots, add 2–3 internal links from indexed pages.</div><div class="ofoot"><span>page: /guias/iptv-legal-espana</span><span>source: GSC URL Inspection API</span></div></div><div class="opp"><div class="ohead"><span class="score num">70</span><span class="tag acc">Indexation</span><a href="iptvsegura" style="font-weight:600">segura</a><span class="dot s10"></span></div><div class="orow"><b>What:</b> Priority page /planes is not indexed (URL is unknown to Google).</div><div class="orow"><b>Why it matters:</b> An unindexed money/target page earns exactly zero organic clicks.</div><div class="orow"><b>Expected upside:</b> Full recovery of the page&#x27;s potential.</div><div class="orow"><b>Action:</b> Request indexing in GSC, check canonical/robots, add 2–3 internal links from indexed pages.</div><div class="ofoot"><span>page: /planes</span><span>source: GSC URL Inspection API</span></div></div><div class="opp"><div class="ohead"><span class="score num">70</span><span class="tag acc">Indexation</span><a href="rodaktv" style="font-weight:600">rodak</a><span class="dot s11"></span></div><div class="orow"><b>What:</b> Priority page /abonament is not indexed (Discovered - currently not indexed).</div><div class="orow"><b>Why it matters:</b> An unindexed money/target page earns exactly zero organic clicks.</div><div class="orow"><b>Expected upside:</b> Full recovery of the page&#x27;s potential.</div><div class="orow"><b>Action:</b> Request indexing in GSC, check canonical/robots, add 2–3 internal links from indexed pages.</div><div class="ofoot"><span>page: /abonament</span><span>source: GSC URL Inspection API</span></div></div><div class="opp"><div class="ohead"><span class="score num">70</span><span class="tag acc">Indexation</span><a href="rodaktv" style="font-weight:600">rodak</a><span class="dot s11"></span></div><div class="orow"><b>What:</b> Priority page /opinie is not indexed (Discovered - currently not indexed).</div><div class="orow"><b>Why it matters:</b> An unindexed money/target page earns exactly zero organic clicks.</div><div class="orow"><b>Expected upside:</b> Full recovery of the page&#x27;s potential.</div><div class="orow"><b>Action:</b> Request indexing in GSC, check canonical/robots, add 2–3 internal links from indexed pages.</div><div class="ofoot"><span>page: /opinie</span><span>source: GSC URL Inspection API</span></div></div></div></div></div><div class="card flush"><div class="chead"><h2>Websites</h2><span class="stmeta">clicks = GSC 28d complete</span></div><div class="overflow"><table><thead><tr><th>site</th><th>market</th><th class="sortable">clicks 28d</th><th>Δ</th><th class="sortable">top-10 strategic</th><th class="sortable">ref.dom (Semrush)</th><th>phase</th></tr></thead><tbody><tr><td><a href="iptvesp"><span class="dot s1"></span> esp</a></td><td>Spain</td><td data-v="2037">2,037</td><td><span class="up">▲ 256%</span></td><td data-v="1">1</td><td data-v="133">133</td><td><span class="badge b-good">ACCELERATING</span></td></tr><tr><td><a href="primeiptv-france"><span class="dot s2"></span> prime</a></td><td>France</td><td data-v="217">217</td><td><span class="up">▲ 250%</span></td><td data-v="0">0</td><td data-v="37">37</td><td><span class="badge b-flag">FLAGSHIP</span></td></tr><tr><td><a href="iptvned"><span class="dot s3"></span> ned</a></td><td>Netherlands</td><td data-v="55">55</td><td><span class="up">▲ 293%</span></td><td data-v="0">0</td><td data-v="63">63</td><td><span class="badge b-warn">REBUILD</span></td></tr><tr><td><a href="iptvpix"><span class="dot s4"></span> pix</a></td><td>France</td><td data-v="0">0</td><td><span class="flat">new</span></td><td data-v="0">0</td><td data-v="134">134</td><td><span class="badge b-flag">RECOVERING</span></td></tr><tr><td><a href="smarters-live"><span class="dot s5"></span> slive</a></td><td>France</td><td data-v="0">0</td><td><span class="down">▼ 100%</span></td><td data-v="0">0</td><td data-v="53">53</td><td><span class="badge b-neutral">BUILD</span></td></tr><tr><td><a href="iptvshqiptar"><span class="dot s6"></span> shqip</a></td><td>Albania</td><td data-v="44">44</td><td><span class="flat">new</span></td><td data-v="1">1</td><td data-v="55">55</td><td><span class="badge b-neutral">BASELINE</span></td></tr><tr><td><a href="smartersprofrance-fr"><span class="dot s7"></span> spf</a></td><td>France</td><td data-v="92">92</td><td><span class="up">▲ 4500%</span></td><td data-v="0">0</td><td data-v="4">4</td><td><span class="badge b-neutral">SATELLITE</span></td></tr><tr><td><a href="iptvfranceofficiel-fr"><span class="dot s8"></span> ifo</a></td><td>France</td><td data-v="0">0</td><td><span class="down">▼ 100%</span></td><td data-v="0">0</td><td data-v="3">3</td><td><span class="badge b-neutral">SATELLITE</span></td></tr><tr><td><a href="abonnementiptvofficiel"><span class="dot s9"></span> aio</a></td><td>France</td><td data-v="159">159</td><td><span class="up">▲ 468%</span></td><td data-v="1">1</td><td data-v="75">75</td><td><span class="badge b-warn">WATCH</span></td></tr><tr><td><a href="iptvsegura"><span class="dot s10"></span> segura</a></td><td>Spain</td><td data-v="12">12</td><td><span class="flat">new</span></td><td data-v="0">0</td><td data-v="10">10</td><td><span class="badge b-neutral">ONBOARDING</span></td></tr><tr><td><a href="rodaktv"><span class="dot s11"></span> rodak</a></td><td>Poland</td><td data-v="0">0</td><td><span class="flat">new</span></td><td data-v="0">0</td><td data-v="0">—</td><td><span class="badge b-neutral">LAUNCH</span></td></tr></tbody></table></div></div>
 </div></main>
-</div>
+</div></div></div>
 <script>
 const rb = document.getElementById("runaudit");
 if (rb) rb.addEventListener("click", async () => {
   try { await navigator.clipboard.writeText("Full audit and update the dashboard please"); } catch(e){}
   rb.textContent = "Copied — paste to Claude"; setTimeout(() => rb.textContent = "Run audit", 2600);
 });
+</script><script>
+(function(){
+ document.querySelectorAll('.chart[data-series]').forEach(function(ch){
+  var data=JSON.parse(ch.dataset.series), svg=ch.querySelector('svg'), tip=ch.querySelector('.htip'),
+      line=ch.querySelector('.hoverline');
+  if(!svg) return;
+  ch.addEventListener('mousemove',function(ev){
+    var r=svg.getBoundingClientRect(), x=(ev.clientX-r.left)/r.width;
+    var i=Math.min(data.length-1,Math.max(0,Math.round(x*(data.length-1))));
+    var d=data[i]; if(!d) return;
+    line.style.display='block'; line.style.left=(x*100)+'%';
+    tip.style.display='block';
+    tip.style.left=Math.min(r.width-150,Math.max(0,ev.clientX-r.left+10))+'px'; tip.style.top='6px';
+    tip.innerHTML='<b>'+d.d+'</b><br>'+d.c.toLocaleString()+' clicks · '+d.i.toLocaleString()+' impressions';
+  });
+  ch.addEventListener('mouseleave',function(){tip.style.display='none';line.style.display='none';});
+ });
+})();
+</script><script>
+(function(){
+ // filter pills: buttons with data-filter toggle rows carrying data-f flags
+ document.querySelectorAll('[data-filterbar]').forEach(function(bar){
+  var table=document.getElementById(bar.dataset.filterbar); if(!table) return;
+  bar.querySelectorAll('.fpill').forEach(function(b){
+   b.addEventListener('click',function(){
+    bar.querySelectorAll('.fpill').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    var f=b.dataset.filter;
+    table.querySelectorAll('tbody tr').forEach(function(tr){
+      tr.style.display=(f==='all'||(tr.dataset.f||'').split(' ').indexOf(f)>=0)?'':'none';
+    });
+   });
+  });
+ });
+ // sortable headers
+ document.querySelectorAll('th.sortable').forEach(function(th){
+  th.addEventListener('click',function(){
+   var table=th.closest('table'), tb=table.querySelector('tbody');
+   var idx=Array.prototype.indexOf.call(th.parentNode.children,th);
+   var dir=th.dataset.dir==='asc'?'desc':'asc'; th.dataset.dir=dir;
+   var rows=Array.prototype.slice.call(tb.querySelectorAll('tr'));
+   rows.sort(function(a,b){
+    var av=a.children[idx].dataset.v!==undefined?parseFloat(a.children[idx].dataset.v):a.children[idx].textContent.trim();
+    var bv=b.children[idx].dataset.v!==undefined?parseFloat(b.children[idx].dataset.v):b.children[idx].textContent.trim();
+    if(typeof av==='number'&&!isNaN(av)&&typeof bv==='number'&&!isNaN(bv)) return dir==='asc'?av-bv:bv-av;
+    return dir==='asc'?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
+   });
+   rows.forEach(function(r){tb.appendChild(r);});
+  });
+ });
+})();
+</script><script>
+(function(){
+ var ch=document.querySelector('.chart[data-series]'); if(!ch) return;
+ var all=JSON.parse(ch.dataset.series);
+ document.querySelectorAll('.seg[data-period] button').forEach(function(b){
+  b.addEventListener('click',function(){
+   document.querySelectorAll('.seg[data-period] button').forEach(function(x){x.classList.remove('on');});
+   b.classList.add('on');
+   var n=parseInt(b.dataset.n,10), data=all.slice(-n);
+   ch.dataset.series=JSON.stringify(data);
+   redraw(ch,data);
+  });
+ });
+ function redraw(ch,data){
+  var svg=ch.querySelector('svg'); if(!svg||!data.length) return;
+  var W=1000,Hh=200,pad=6;
+  var mc=Math.max.apply(null,data.map(function(d){return d.c;}))||1;
+  var mi=Math.max.apply(null,data.map(function(d){return d.i;}))||1;
+  function pts(key,mx){ return data.map(function(d,i){
+    var x=pad+i*(W-2*pad)/Math.max(1,data.length-1), y=Hh-pad-(d[key]/mx)*(Hh-2*pad);
+    return x.toFixed(1)+','+y.toFixed(1); }).join(' ');
+  }
+  var pl=svg.querySelectorAll('polyline');
+  if(pl[0]) pl[0].setAttribute('points',pts('i',mi));
+  if(pl[1]) pl[1].setAttribute('points',pts('c',mc));
+ }
+})();
+</script><script>
+(function(){
+ var el=document.getElementById('kpi-revenue'), el2=document.getElementById('kpi-sales');
+ if(!el) return;
+ var raw=null; try{ raw=localStorage.getItem('iptv_sales_v1'); }catch(e){}
+ if(!raw){ return; } // server-rendered 'no data on this device' state stays
+ var sales=[]; try{ var j=JSON.parse(raw); sales=Array.isArray(j)?j:(j.sales||j.items||[]); }catch(e){ return; }
+ if(!sales.length) return;
+ var now=new Date(), cut=new Date(now-28*864e5), cut2=new Date(now-56*864e5);
+ function dt(s){ return new Date(s.date||s.start||s.created||s.paid_date||0); }
+ function eur(n){ return '\u20ac'+Math.round(n).toLocaleString(); }
+ var rev=0,revP=0,n28=0,nP=0;
+ sales.forEach(function(s){
+   var p=parseFloat(s.price)||0, d=dt(s);
+   if(d>=cut){ rev+=p; n28++; } else if(d>=cut2){ revP+=p; nP++; }
+ });
+ var total=sales.reduce(function(a,s){return a+(parseFloat(s.price)||0);},0);
+ el.querySelector('.kv').textContent=eur(rev);
+ el.querySelector('.kd').innerHTML=(revP?((rev>=revP?'<span class=up>\u25b2 ':'<span class=down>\u25bc ')+Math.abs(Math.round(100*(rev-revP)/revP))+'%</span> vs prior 28d · '):'')+eur(total)+' all-time';
+ if(el2){ el2.querySelector('.kv').textContent=n28;
+   el2.querySelector('.kd').innerHTML=nP?((n28>=nP?'<span class=up>\u25b2 ':'<span class=down>\u25bc ')+Math.abs(n28-nP)+'</span> vs prior 28d'):'all channels'; }
+})();
 </script>
