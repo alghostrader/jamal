@@ -1,11 +1,11 @@
 {
- "_stamp": "2026-09-03 12:30 UTC",
+ "_stamp": "2026-09-04 03:25 UTC",
  "sites": {
   "iptvesp.com": {
    "clicks7d": 509,
-   "sem_rd": 132,
-   "dfs_rd": 42,
-   "top100": 34,
+   "sem_rd": 133,
+   "dfs_rd": null,
+   "top100": null,
    "pages": 66,
    "positions": {
     "iptv espa\u00f1a": null,
@@ -18,9 +18,9 @@
   },
   "primeiptv-france.com": {
    "clicks7d": 78,
-   "sem_rd": 36,
-   "dfs_rd": 12,
-   "top100": 26,
+   "sem_rd": 37,
+   "dfs_rd": null,
+   "top100": null,
    "pages": 106,
    "positions": {
     "abonnement iptv": null,
@@ -35,8 +35,8 @@
   "iptvned.com": {
    "clicks7d": 16,
    "sem_rd": 63,
-   "dfs_rd": 21,
-   "top100": 30,
+   "dfs_rd": null,
+   "top100": null,
    "pages": 60,
    "positions": {
     "iptv nederland": null,
@@ -49,8 +49,8 @@
   },
   "iptvpix.com": {
    "clicks7d": 0,
-   "sem_rd": 133,
-   "dfs_rd": 40,
+   "sem_rd": 134,
+   "dfs_rd": null,
    "top100": null,
    "pages": 58,
    "positions": {
@@ -63,9 +63,9 @@
   },
   "smarters-live.com": {
    "clicks7d": 0,
-   "sem_rd": 29,
-   "dfs_rd": 13,
-   "top100": 1,
+   "sem_rd": 53,
+   "dfs_rd": null,
+   "top100": null,
    "pages": 52,
    "positions": {
     "iptv smarters pro": null,
@@ -76,8 +76,8 @@
   },
   "iptvshqiptar.com": {
    "clicks7d": 14,
-   "sem_rd": 49,
-   "dfs_rd": 7,
+   "sem_rd": 55,
+   "dfs_rd": null,
    "top100": null,
    "pages": 21,
    "positions": {
@@ -94,7 +94,7 @@
    "clicks7d": 52,
    "sem_rd": 4,
    "dfs_rd": null,
-   "top100": 12,
+   "top100": null,
    "pages": 39,
    "positions": {
     "iptv smarters": null,
@@ -120,9 +120,9 @@
   },
   "abonnementiptvofficiel.com": {
    "clicks7d": 70,
-   "sem_rd": 74,
-   "dfs_rd": 14,
-   "top100": 15,
+   "sem_rd": 75,
+   "dfs_rd": null,
+   "top100": null,
    "pages": 44,
    "positions": {
     "test iptv gratuit": null,
