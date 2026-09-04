@@ -84,8 +84,9 @@ def card(s, D, F, KT, CT, SEM, RECS, link=None):
                  f'<ul class="recs">{recs}</ul></div>') if recs else ""
     return f'''<div class="card sitecard">
       <div class="schead"><h2>Where this site stands</h2></div>
-      <p class="narr">{H.escape(narr)}</p>
-      {statrow}{rk}{health}{recs_html}</div>'''
+      {statrow}{rk}{health}{recs_html}
+      <details style="margin-top:12px"><summary class="linkbtn" style="cursor:pointer">Strategy</summary>
+      <p class="narr">{H.escape(narr)}</p></details></div>'''
 
 def build(D, F, KT, CT, SEM, RECS, links=None):
     links = links or {}

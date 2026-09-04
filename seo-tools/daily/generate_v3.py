@@ -608,10 +608,11 @@ SEM_UPD = SEM.get("_updated", "") if isinstance(SEM, dict) else ""
 
 def sidebar(cur):
     groups = [
-        ("Portfolio", [("./", "Overview", None, "home"), ("performance", "Performance", "performance", "chart"),
-                       ("rankings", "Rankings", "rankings", "target"), ("content", "Content", "content", "file"),
-                       ("technical", "Technical", "technical", "wrench"), ("authority", "Authority", "authority", "award"),
-                       ("opportunities", "Opportunities", "opportunities", "bulb"), ("today", "Work", "today", "check")]),
+        ("Execute", [("today", "Today", "today", "zap"), ("work", "Work", "work", "check")]),
+        ("Monitor", [("./", "Overview", None, "home"), ("rankings", "Rankings", "rankings", "target"),
+                     ("performance", "Performance", "performance", "chart"), ("content", "Content", "content", "file"),
+                     ("technical", "Technical", "technical", "wrench"), ("authority", "Authority", "authority", "award"),
+                     ("opportunities", "Opportunities", "opportunities", "bulb")]),
         ("Business", [("sales", "Sales", "sales", "coins"), ("clients", "Clients", "clients", "users"),
                       ("replies", "Replies", "replies", "chat")]),
         ("System", [("plan", "Plan", "plan", "map"), ("settings", "Integrations", "settings", "gear")]),
@@ -1478,7 +1479,7 @@ def build_settings():
 
 
 today_body = build_work()
-open(os.path.join(OUT, "today.html"), "w").write(shell("Today — Daily SEO Plan", today_body, cur="today", extra_js=COPY_JS))
+open(os.path.join(OUT, "work.html"), "w").write(shell("Work — All tasks", today_body, cur="work", extra_js=COPY_JS))
 
 # trends
 def trends_body():

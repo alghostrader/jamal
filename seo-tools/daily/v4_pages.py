@@ -413,6 +413,232 @@ def build_all(G):
 
     OPPS = opportunities()
 
+    # ═══════════ PRIORITY ENGINE — turns detections into an ordered plan ═══════════
+    # score 0–100 = impact(0–40) + strategic(0–20) + urgency(0–25) + probability(0–15),
+    # then multiplied by an effort factor (quick 1.0 / medium 0.92 / deep 0.78).
+    # Buckets: ≥72 TODAY (max 5) · 52–71 NEXT · 34–51 MONITOR · <34 BACKLOG.
+    # Documented in Integrations; per-task drivers shown in "Why this priority?".
+    import hashlib, datetime as _dt
+    TODAY_STR = _dt.date.today().isoformat()
+    EFFORT = {"Striking distance": ("Medium", 40), "CTR gap": ("Quick", 15), "Content gap": ("Deep work", 90),
+              "Content decay": ("Medium", 45), "Authority gap": ("Medium", 30), "Indexation": ("Quick", 15),
+              "Technical fix": ("Quick", 20), "Rank recovery": ("Medium", 50)}
+    EFACT = {"Quick": 1.0, "Medium": 0.92, "Deep work": 0.78}
+
+    def tid(kind, site, key):
+        return hashlib.md5(f"{kind}|{site}|{key}".encode()).hexdigest()[:10]
+
+    def kw_baseline(s, q):
+        g = GS.get(s, {}).get("queries", {}).get("cur", {}).get(q)
+        r = next((r for r in KT.get(s, []) if r["kw"] == q), None)
+        return {"probe_pos": r.get("pos") if r else None,
+                "gsc_pos": round(g["position"], 1) if g else None,
+                "clicks28": g["clicks"] if g else 0}
+
+    def build_tasks():
+        tasks = []
+        # 1. every opportunity becomes a candidate task with urgency/probability layered on
+        for o in OPPS:
+            s, q = o["site"], o["query"]
+            kind = o["kind"]
+            r = next((r for r in KT.get(s, []) if q and r["kw"] == q), None)
+            op = prev_pos.get((s, q)) if q else None
+            np_ = r.get("pos") if r else None
+            worsening = bool(op and np_ and np_ > op + 2) or kind == "Content decay"
+            improving = bool(op and np_ and np_ < op - 1)
+            impact = min(40, int(o["score"] * 0.45))
+            strategic = 20 if (r or (o["page"] and o["page"] in (MONEY.get(s), "/"))) else (12 if s in ("iptvesp.com", "primeiptv-france.com", "rodaktv.com") else 8)
+            urgency = 25 if kind == "Indexation" else (22 if worsening else (12 if kind in ("Striking distance", "CTR gap") else 8))
+            if improving: urgency = 4  # already moving without intervention — protect attention
+            prob = 14 if kind in ("Indexation", "CTR gap") else (12 if kind == "Striking distance" else (10 if kind == "Content decay" else 8))
+            elabel, emin = EFFORT.get(kind, ("Medium", 40))
+            raw = (impact + strategic + urgency + prob) * EFACT[elabel]
+            score = max(1, min(100, round(raw)))
+            drivers = []
+            if impact >= 25: drivers.append("high traffic/volume upside")
+            if strategic >= 20: drivers.append("strategic target or money page")
+            if worsening: drivers.append("currently worsening")
+            if improving: drivers.append("already improving on its own")
+            if kind == "Indexation": drivers.append("page earns zero clicks until indexed")
+            if elabel == "Quick": drivers.append("low effort")
+            if kind == "Content gap": drivers.append("uncontested demand in this lane")
+            tasks.append(dict(id=tid(kind, s, q or o["page"]), kind=kind, site=s, query=q, page=o["page"],
+                              what=o["what"], why=o["why"], upside=o["upside"], action=o["action"], src=o["src"],
+                              score=score, drivers=drivers, effort=elabel, effort_min=emin,
+                              improving=improving, worsening=worsening,
+                              baseline=kw_baseline(s, q) if q else {"probe_pos": None, "gsc_pos": None, "clicks28": 0}))
+        # 2. open technical fixes
+        for s in ALL:
+            for it in (G["tech_items"](s) or []):
+                txt = it if isinstance(it, str) else str(it)
+                p1 = "P1" in txt or "REDIRECT" in txt
+                score = 78 if p1 else 45
+                tasks.append(dict(id=tid("Technical fix", s, txt[:40]), kind="Technical fix", site=s, query="",
+                                  page="", what=txt[:180], why="Technical defects cap every other effort on the site.",
+                                  upside="Removes a crawl/indexation handicap.", action="Fix card with full prompt on the Work page.",
+                                  src="fresh BFS crawl", score=score,
+                                  drivers=(["P1 defect"] if p1 else ["P2 defect"]) + ["low effort", "verified automatically by the next audit"],
+                                  effort="Quick", effort_min=20, improving=False, worsening=False,
+                                  baseline={"probe_pos": None, "gsc_pos": None, "clicks28": 0}))
+        # 3. strategic rank losses (recovery tasks)
+        for s in ALL:
+            for r in KT.get(s, []):
+                op, np_ = prev_pos.get((s, r["kw"])), r.get("pos")
+                if op and op <= 20 and (np_ is None or np_ > op + 4):
+                    vol = r.get("vol") or 0
+                    score = min(100, 55 + min(25, vol // 200) + (10 if op <= 10 else 0))
+                    tasks.append(dict(id=tid("Rank recovery", s, r["kw"]), kind="Rank recovery", site=s,
+                                      query=r["kw"], page=r.get("page") or "",
+                                      what=f'"{r["kw"]}" fell #{op} → {"out of top 100" if np_ is None else f"#{np_}"} (live probe).',
+                                      why="A previously earned ranking is the cheapest one to win back.",
+                                      upside=f"Recovery restores a top-{op} position on {vol:,}/mo." if vol else "Restores the earned position.",
+                                      action="Check GSC for the exact query first (probe noise), then refresh the page section matching it and add 2 internal links.",
+                                      src="live probes vs last audit", score=score,
+                                      drivers=["previously ranked, now declining", "recovery beats new acquisition"],
+                                      effort="Medium", effort_min=50, improving=False, worsening=True,
+                                      baseline=kw_baseline(s, r["kw"])))
+        # dedupe by id, keep highest score
+        best = {}
+        for t in tasks:
+            if t["id"] not in best or t["score"] > best[t["id"]]["score"]:
+                best[t["id"]] = t
+        tasks = sorted(best.values(), key=lambda t: -t["score"])
+        # coalesce per-site indexation tasks: requesting indexing for N pages is ONE
+        # sitting in GSC, not N separate tasks
+        merged, seen_idx = [], {}
+        for t in tasks:
+            if t["kind"] == "Indexation":
+                if t["site"] in seen_idx:
+                    m = seen_idx[t["site"]]
+                    m["pages_all"] = m.get("pages_all", [m["page"]]) + [t["page"]]
+                    m["what"] = f'{len(m["pages_all"])} priority pages are not indexed: ' + ", ".join(m["pages_all"]) + "."
+                    m["effort_min"] = min(40, 15 + 5 * (len(m["pages_all"]) - 1))
+                    continue
+                seen_idx[t["site"]] = t
+            merged.append(t)
+        tasks = merged
+        # bucket assignment (TODAY hard-capped at 5, with diversity: max 2 per site, max 2 per kind)
+        today_, next_, monitor_, backlog_ = [], [], [], []
+        site_n, kind_n = {}, {}
+        for t in tasks:
+            if t["improving"]:
+                t["bucket"] = "monitor"; t["posture_note"] = "Already improving without intervention — no action recommended yet."
+                monitor_.append(t); continue
+            crowded = site_n.get(t["site"], 0) >= 2 or kind_n.get(t["kind"], 0) >= 2
+            if t["score"] >= 72 and len(today_) < 5 and not crowded:
+                t["bucket"] = "today"; today_.append(t)
+                site_n[t["site"]] = site_n.get(t["site"], 0) + 1
+                kind_n[t["kind"]] = kind_n.get(t["kind"], 0) + 1
+            elif t["score"] >= 72:
+                t["bucket"] = "next"; t["posture_note"] = "High priority, but today already has enough from this site/category — first in line tomorrow."
+                next_.append(t); continue
+            elif t["score"] >= 52:
+                t["bucket"] = "next"; t["posture_note"] = "Deferred: higher-impact tasks come first today."
+                next_.append(t)
+            elif t["score"] >= 34:
+                t["bucket"] = "monitor"; t["posture_note"] = "Watch item — not worth time yet relative to what is above."
+                monitor_.append(t)
+            else:
+                t["bucket"] = "backlog"; t["posture_note"] = "Low priority: too far from page 1 relative to the effort."
+                backlog_.append(t)
+        return tasks, today_, next_, monitor_, backlog_
+
+    TASKS, T_TODAY, T_NEXT, T_MONITOR, T_BACKLOG = build_tasks()
+
+    # keyword postures
+    def kw_posture(s, r):
+        p, op = r.get("pos"), prev_pos.get((s, r["kw"]))
+        vol = r.get("vol") or 0
+        if p and p <= 3: return ("MAINTAIN", "Strong position — protect, don't touch.")
+        if op and op <= 20 and (p is None or p > op + 4): return ("RECOVER", "Earned ranking is slipping — investigate before it settles lower.")
+        if p and 4 <= p <= 10: return ("PUSH", "Close to the top 3 — highest-leverage band.")
+        if p and 11 <= p <= 20 and vol >= 300: return ("PUSH", "Striking distance on real volume.")
+        if p and op and p < op: return ("MONITOR", "Improving on its own — let it run.")
+        if p and p <= 50: return ("MONITOR", "Ranked but far — content/links compound before targeted work pays.")
+        return ("IGNORE FOR NOW", "Too far from page 1 relative to effort — authority is the unlock, not page work.")
+
+    # site postures from 7d clicks + strategic movement + open issues
+    def site_postures():
+        out = {}
+        for s in ALL:
+            d = daily_of(s)
+            wk = sum(x["clicks"] for x in d[-7:]) if d else 0
+            pw = sum(x["clicks"] for x in d[-14:-7]) if len(d) >= 14 else 0
+            delta = pct(wk, pw)
+            movers_up = sum(1 for r in KT.get(s, []) if r.get("pos") and prev_pos.get((s, r["kw"])) and r["pos"] < prev_pos[(s, r["kw"])])
+            movers_dn = sum(1 for r in KT.get(s, []) if r.get("pos") and prev_pos.get((s, r["kw"])) and r["pos"] > prev_pos[(s, r["kw"])])
+            open_fix = bool(G["tech_items"](s))
+            n_today = sum(1 for t in T_TODAY if t["site"] == s)
+            if not GS.get(s, {}).get("in_gsc") or (wk == 0 and not d):
+                p = ("MONITOR", "New/low-data site — indexation and links compound; no daily attention needed.")
+            elif delta is not None and delta <= -15 and pw >= 15:
+                p = ("FOCUS", f"Clicks down {abs(delta):.0f}% week-over-week — investigate before anything else on this site.")
+            elif n_today >= 2:
+                p = ("FOCUS", "Multiple top-priority tasks live here today.")
+            elif delta is not None and delta >= 15 and movers_up >= movers_dn:
+                p = ("PUSH", f"Up {delta:.0f}% with rankings rising — feed the momentum (links/content).")
+            elif movers_dn > movers_up and movers_dn >= 2:
+                p = ("RECOVER", "Several strategic rankings slipped — check before they settle.")
+            elif open_fix:
+                p = ("MAINTAIN", "Healthy traffic; clear the small open fix when convenient.")
+            else:
+                p = ("MAINTAIN", "Stable — avoid unnecessary work.")
+            out[s] = {"posture": p[0], "note": p[1], "wk": wk, "pw": pw, "delta": delta,
+                      "up": movers_up, "dn": movers_dn}
+        return out
+
+    SPOST = site_postures()
+
+    # ranking movements, categorized; only significant ones
+    def movements():
+        opp, loss, brk = [], [], []
+        for s in ALL:
+            for r in KT.get(s, []):
+                op, np_ = prev_pos.get((s, r["kw"])), r.get("pos")
+                if op is None or np_ is None or op == np_: continue
+                if np_ < op and np_ <= 10 and op > 10: opp.append((s, r, op, np_))
+                elif np_ < op and (op - np_) >= 15 and np_ <= 30: brk.append((s, r, op, np_))
+                elif np_ > op and (np_ - op) >= 3 and op <= 20: loss.append((s, r, op, np_))
+                elif np_ < op and (op - np_) >= 3 and np_ <= 20: opp.append((s, r, op, np_))
+        return opp[:6], loss[:6], brk[:4]
+
+    MV_OPP, MV_LOSS, MV_BRK = movements()
+
+    # persist the plan + auto-verification of prior engine tasks
+    import os as _os
+    PLAN_PATH = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "plan.json")
+    HIST_PATH = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "task_history.json")
+    try:
+        PREV_PLAN = J.load(open(PLAN_PATH))
+    except Exception:
+        PREV_PLAN = {}
+    try:
+        THIST = J.load(open(HIST_PATH))
+    except Exception:
+        THIST = {"completed": []}
+    # auto-complete technical tasks that existed in the previous plan and are now gone
+    open_ids = {t["id"] for t in TASKS}
+    for pt in (PREV_PLAN.get("tasks") or []):
+        if pt["kind"] == "Technical fix" and pt["id"] not in open_ids                 and not any(c["id"] == pt["id"] for c in THIST["completed"]):
+            THIST["completed"].append({**{k: pt.get(k) for k in ("id", "kind", "site", "query", "page", "what", "baseline")},
+                                       "completed": TODAY_STR, "how": "auto-verified: the defect is gone from this audit's crawl",
+                                       "outcome": "VERIFIED"})
+    # verification checkpoints for completed tasks with a keyword baseline
+    for c in THIST["completed"]:
+        if c.get("outcome") == "VERIFIED" or not c.get("query"): continue
+        days = (_dt.date.today() - _dt.date.fromisoformat(c["completed"])).days if c.get("completed") else 0
+        cur_b = kw_baseline(c["site"], c["query"])
+        c["checkpoint_days"] = days
+        c["now"] = cur_b
+        b = c.get("baseline") or {}
+        if days >= 7 and b.get("probe_pos") and cur_b.get("probe_pos"):
+            c["outcome"] = ("POSITIVE" if cur_b["probe_pos"] < b["probe_pos"]
+                            else "NO IMPACT YET" if cur_b["probe_pos"] == b["probe_pos"] else "NEGATIVE SO FAR")
+    J.dump(THIST, open(HIST_PATH, "w"), indent=1)
+    J.dump({"date": TODAY_STR, "tasks": [{k: t.get(k) for k in
+            ("id", "kind", "site", "query", "page", "what", "score", "bucket", "effort", "effort_min", "baseline")}
+            for t in TASKS]}, open(PLAN_PATH, "w"), indent=1)
+
     def opp_card(o):
         i = ALL.index(o["site"]) + 1
         qh = f'<span>query: {e(o["query"])}</span>' if o["query"] else ""
@@ -429,73 +655,75 @@ def build_all(G):
                 f'<span>source: {e(o["src"])}</span></div></div>')
 
     # ---------- OVERVIEW ----------
+    def sev_chip(sc):
+        lab = "Do today" if sc >= 72 else "High" if sc >= 52 else "Next" if sc >= 34 else "Low"
+        return f'<span class="score num">{sc}</span> <span class="stmeta">{lab}</span>'
+
+    def post_pill(p):
+        cls = {"FOCUS": "neg", "RECOVER": "warn", "PUSH": "pos", "MAINTAIN": "neu", "MONITOR": "neu",
+               "IGNORE FOR NOW": "neu"}.get(p, "neu")
+        return f'<span class="tag {cls}">{p}</span>'
+
     def build_overview():
-        dc = pct(cur["clicks"], prev["clicks"])
-        di = pct(cur["impressions"], prev["impressions"])
-        dctr = (cur["ctr"] - prev["ctr"]) * 100 if prev["impressions"] else None
-        dpos = (prev["position"] - cur["position"]) if (cur["position"] and prev["position"]) else None
-        clk_spark = spark([d["c"] for d in series[-45:]], w=130, h=26, color="var(--acc)") if series else ""
+        wk = sum(v["wk"] for v in SPOST.values()); pw = sum(v["pw"] for v in SPOST.values())
+        dwk = pct(wk, pw)
+        growing = sum(1 for v in SPOST.values() if v["delta"] is not None and v["delta"] > 5)
+        declining = sum(1 for v in SPOST.values() if v["delta"] is not None and v["delta"] < -5 and v["pw"] >= 10)
+        est = sum(t["effort_min"] for t in T_TODAY)
         kpis = (
-            kpi("Revenue · 28d", "—",
-                '<span class="flat">open /sales on this device to load</span>',
-                "TOTAL sales revenue from the sales app (localStorage, this device). NOT organic-attributed — no analytics layer exists on the sites yet.", vid="kpi-revenue")
-            + kpi("Sales · 28d", "—", '<span class="flat">sales app data</span>',
-                  "Count of sales recorded in the sales app in the last 28 days. All channels, not organic-only.", vid="kpi-sales")
-            + kpi("Organic clicks · 28d", f'{cur["clicks"]:,}', dfmt(dc) + ' <span class="stmeta">vs prev 28d</span>',
-                  f"Google Search Console, all {NSITES} properties, complete days {range_note}.", clk_spark)
-            + kpi("Impressions · 28d", f'{cur["impressions"]:,}', dfmt(di) + ' <span class="stmeta">vs prev 28d</span>',
-                  "GSC impressions, same complete 28-day windows.")
-            + kpi("CTR · 28d", f'{100*cur["ctr"]:.1f}%',
-                  (dfmt(dctr, unit=" pts") if dctr is not None else '<span class="flat">—</span>') + ' <span class="stmeta">vs prev</span>',
-                  "Portfolio clicks ÷ impressions (GSC). Compare trend, not absolute level — query mix differs per site.")
-            + kpi("Avg position", f'{cur["position"]:.1f}' if cur["position"] else "—",
-                  (dfmt(dpos, unit="") if dpos is not None else '<span class="flat">—</span>') + ' <span class="stmeta">impr-weighted</span>',
-                  "GSC average position weighted by impressions across all sites. Lower is better; the delta arrow already accounts for that.")
+            kpi("Clicks · 7 days", f"{wk:,}", dfmt(dwk) + ' <span class="stmeta">vs prev 7d</span>',
+                "GSC clicks, all sites, last 7 recorded days vs the 7 before.")
+            + kpi("Revenue · 28d", "—", '<span class="flat">open /sales on this device</span>',
+                  "TOTAL sales from the sales app (this device). Not organic-attributed.", vid="kpi-revenue")
             + kpi("Top-10 strategic", str(top10_now), dfmt(top10_now - top10_prev, unit="") + ' <span class="stmeta">vs last audit</span>',
-                  f"Strategic tracked keywords (our {sum(len(v) for v in KT.values())}-target list) at position ≤10 in live DataForSEO probes. Not the same as Semrush/DFS totals — see Rankings.")
-            + kpi("Indexation", f'{len(insp_pass)}/{len(insp_all)}' if insp_all else "—",
-                  (f'<span class="{"up" if not insp_fail else "down"}">{len(insp_fail)} failing</span>' if insp_all else '<span class="flat">no inspection data</span>'),
-                  "Priority URLs (money + strategic target pages) checked via the GSC URL Inspection API this audit.")
+                  "Strategic tracked keywords at position ≤10 in live probes.")
+            + kpi("Sites growing", f'{growing}<small> / {NSITES}</small>',
+                  (f'<span class="down">{declining} declining</span>' if declining else '<span class="up">none declining</span>'),
+                  "Growing = 7d clicks up >5% · declining = down >5% on a ≥10-click base.")
         )
-        ch_parts = []
-        for c in changes:
-            ico = "▲" if c["kind"] == "good" else ("▼" if c["kind"] == "bad" else "·")
-            meta_h = f'<div class="cmeta">{e(c["meta"])}</div>' if c["meta"] else ""
-            hypo_h = f'<div class="hypo">{e(c["hypo"])}</div>' if c["hypo"] else ""
-            ch_parts.append(f'<div class="chg {c["kind"]}"><span class="cico">{ico}</span>'
-                            f'<div class="cbody">{e(c["text"])}{meta_h}{hypo_h}</div></div>')
-        ch = "".join(ch_parts) or '<div class="empty">No meaningful changes detected between the last two 28-day windows.</div>'
-        al = "".join(f'<div class="alertrow"><span class="sev {s_}">{s_.upper()}</span><span>{e(t)}</span></div>'
-                     for s_, t in SEVS) or '<div class="empty"><b>No open alerts.</b> All monitored rules are quiet.</div>'
-        opp_top = "".join(opp_card(o) for o in OPPS[:4])
         srows = ""
         for i, s in enumerate(ALL):
-            t, tp = tot(s), tot(s, "28", "prev")
-            d = pct(t.get("clicks", 0), tp.get("clicks", 0))
-            sm = SEM.get(s) or {}
+            v = SPOST[s]
             n10 = sum(1 for r in KT.get(s, []) if r.get("pos") and r["pos"] <= 10)
-            gsc_ok = GS.get(s, {}).get("in_gsc")
+            mv = (f'<span class="up">↑{v["up"]}</span>' if v["up"] else "") + " " + (f'<span class="down">↓{v["dn"]}</span>' if v["dn"] else "")
             srows += (f'<tr><td><a href="{SLUG[s]}"><span class="dot s{i+1}"></span> {ABBR[s]}</a></td>'
-                      f'<td>{e(CTRY[s][1])}</td>'
-                      + (f'<td data-v="{t.get("clicks",0)}">{t.get("clicks",0):,}</td><td>{dfmt(d)}</td>'
-                         if gsc_ok else '<td colspan="2"><span class="tag warn">awaiting GSC</span></td>')
-                      + f'<td data-v="{n10}">{n10}</td>'
-                      f'<td data-v="{sm.get("ref_domains") or 0}">{sm.get("ref_domains") if sm.get("ref_domains") is not None else "—"}</td>'
-                      f'<td><span class="badge b-{_sc.CONFIG[s]["tone"]}">{_sc.CONFIG[s]["status"]}</span></td></tr>')
-        return (f'<div class="pagehead"><h1>Overview</h1><p class="sub">Executive view · complete 28-day GSC windows ({range_note}) · audit {e(STAMP_TXT)}</p></div>'
+                      f'<td data-v="{v["wk"]}">{v["wk"]:,}</td>'
+                      f'<td data-v="{v["delta"] or 0}">{dfmt(v["delta"]) if v["delta"] is not None else "·"}</td>'
+                      f'<td>{mv.strip() or "·"}</td><td data-v="{n10}">{n10}</td>'
+                      f'<td title="{e(v["note"])}">{post_pill(v["posture"])}</td></tr>')
+        t3 = "".join(f'<div class="hbar"><span class="score num" style="font-size:12px">{t["score"]}</span>'
+                     f'<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'
+                     f'{e(t["kind"])}: <b>{e(t["query"] or t["page"] or t["site"])}</b> · {ABBR[t["site"]]}</span>'
+                     f'<span class="hval">{t["effort_min"]} min</span></div>' for t in T_TODAY[:3])
+        def mvlist(rows):
+            if not rows: return '<div class="stmeta" style="padding:6px 0">none this audit</div>'
+            return "".join(f'<div class="hbar"><span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'
+                           f'{e(r["kw"])} <span class="stmeta">{ABBR[s_]}</span></span>'
+                           f'<span class="hval num">#{op} → #{np_}</span></div>' for s_, r, op, np_ in rows[:4])
+        al = "".join(f'<div class="alertrow"><span class="sev {s_}">{s_.upper()}</span><span>{e(t)}</span></div>'
+                     for s_, t in SEVS) or '<div class="empty"><b>No open alerts.</b></div>'
+        n_att = len(SEVS) + len(T_TODAY) + len(T_NEXT)  # attention = alerts + actionable queue, not the watch list
+        return (f'<div class="pagehead"><h1>Overview</h1><p class="sub">Portfolio state in 30 seconds · audit {e(STAMP_TXT)} · '
+                f'GSC windows end {e(GSCD.get("window_end", ""))}</p></div>'
                 f'<div class="kpirow">{kpis}</div>'
-                f'<div class="grid g23"><div class="card"><div class="chead"><h2>Organic traffic — 90 days</h2>'
+                f'<div class="grid g23"><div class="card flush"><div class="chead"><h2>Sites — last 7 days</h2>'
+                f'<span class="stmeta">posture = where your attention should go (hover for reason)</span></div>'
+                f'<div class="overflow"><table><thead><tr><th>site</th><th class="sortable">clicks 7d</th><th>Δ</th>'
+                f'<th>strategic moves</th><th class="sortable">top-10</th><th>posture</th></tr></thead>'
+                f'<tbody>{srows}</tbody></table></div></div>'
+                f'<div class="card" style="border-color:#c7d2fe;background:#fbfbff"><div class="chead"><h2>Today</h2>'
+                f'<span class="stmeta">{len(T_TODAY)} tasks · ≈{est//60}h {est%60:02d}m</span></div>{t3 or "<div class=empty>Nothing urgent today.</div>"}'
+                f'<a class="btn primary" href="today" style="margin-top:12px">Open today&#39;s plan</a>'
+                f'<div class="stmeta" style="margin-top:10px">{n_att} things need attention · only {len(T_TODAY)} recommended today</div></div></div>'
+                f'<div class="grid g3"><div class="card"><h2>Opportunities</h2><p class="sub" style="margin-bottom:4px">moving into valuable positions</p>{mvlist(MV_OPP)}</div>'
+                f'<div class="card"><h2>Losses</h2><p class="sub" style="margin-bottom:4px">meaningful declines to investigate</p>{mvlist(MV_LOSS)}</div>'
+                f'<div class="card"><h2>Breakouts</h2><p class="sub" style="margin-bottom:4px">unusually strong progress</p>{mvlist(MV_BRK)}'
+                f'<a class="linkbtn" href="rankings" style="display:block;margin-top:8px">View all movements →</a></div></div>'
+                f'<div class="grid g23"><div class="card"><div class="chead"><h2>Traffic — 90 days</h2>'
                 f'<div class="seg" data-period><button data-n="7">7d</button><button data-n="28">28d</button>'
                 f'<button class="on" data-n="90">90d</button></div></div>{big_chart()}</div>'
-                f'<div class="card"><div class="chead"><h2>Alerts</h2><a class="btn sm" href="settings">rules</a></div>{al}</div></div>'
-                f'<div class="grid g23"><div class="card"><div class="chead"><h2>What changed</h2>'
-                f'<span class="stmeta">28d vs previous 28d · live probes · audit history</span></div>{ch}</div>'
-                f'<div class="card"><div class="chead"><h2>Top opportunities</h2>'
-                f'<a class="btn sm" href="opportunities">all {len(OPPS)}</a></div><div class="stack" style="gap:10px">{opp_top}</div></div></div>'
-                f'<div class="card flush"><div class="chead"><h2>Websites</h2><span class="stmeta">clicks = GSC 28d complete</span></div>'
-                f'<div class="overflow"><table><thead><tr><th>site</th><th>market</th><th class="sortable">clicks 28d</th>'
-                f'<th>Δ</th><th class="sortable">top-10 strategic</th><th class="sortable">ref.dom (Semrush)</th><th>phase</th></tr></thead>'
-                f'<tbody>{srows}</tbody></table></div></div>')
+                f'<div class="card"><div class="chead"><h2>Things need attention</h2>'
+                f'<span class="stmeta">{len(SEVS)} open</span></div>{al}</div></div>')
 
     # ---------- PERFORMANCE ----------
     def build_performance():
@@ -583,7 +811,17 @@ def build_all(G):
         chtml = "".join(f'<div class="hbar"><span class="hlab">{e(k.upper())}</span>'
                         f'<span class="htrack"><i style="width:{100*v/mxc:.0f}%"></i></span>'
                         f'<span class="hval">{v:,}</span></div>' for k, v in top_c)
+        ch_parts2 = []
+        for c in changes:
+            ico = "▲" if c["kind"] == "good" else ("▼" if c["kind"] == "bad" else "·")
+            meta_h = f'<div class="cmeta">{e(c["meta"])}</div>' if c["meta"] else ""
+            hypo_h = f'<div class="hypo">{e(c["hypo"])}</div>' if c["hypo"] else ""
+            ch_parts2.append(f'<div class="chg {c["kind"]}"><span class="cico">{ico}</span>'
+                             f'<div class="cbody">{e(c["text"])}{meta_h}{hypo_h}</div></div>')
+        chfeed = "".join(ch_parts2) or '<div class="empty">No meaningful changes between the last two windows.</div>'
         return (f'<div class="pagehead"><h1>Performance</h1><p class="sub">Search Console analytics · complete windows {range_note} · top 250 queries/pages per site</p></div>'
+                f'<div class="card" style="margin-bottom:16px"><div class="chead"><h2>What changed</h2>'
+                f'<span class="stmeta">28d vs previous 28d · hypotheses labeled as hypotheses</span></div>{chfeed}</div>'
                 f'<div class="card" style="margin-bottom:16px"><div class="chead"><h2>Traffic — 90 days, all sites</h2>'
                 f'<div class="seg" data-period><button data-n="7">7d</button><button data-n="28">28d</button>'
                 f'<button class="on" data-n="90">90d</button></div></div>{big_chart()}</div>'
@@ -604,23 +842,53 @@ def build_all(G):
 
     # ---------- RANKINGS ----------
     def build_rankings():
+        by_q = {}
+        for t in TASKS:
+            if t["query"]: by_q.setdefault((t["site"], t["query"]), t)
         rows = ""
         for s in ALL:
             qc = GS.get(s, {}).get("queries", {}).get("cur", {})
+            qp = GS.get(s, {}).get("queries", {}).get("prev", {})
             for r in sorted(KT.get(s, []), key=lambda r: (r.get("pos") or 999)):
                 op = prev_pos.get((s, r["kw"]))
-                g = qc.get(r["kw"])
+                g, gp = qc.get(r["kw"]), qp.get(r["kw"])
                 p = r.get("pos")
+                post, note = kw_posture(s, r)
+                t = by_q.get((s, r["kw"]))
+                d_audit = (op - p) if (op and p) else None
+                d28 = (gp["position"] - g["position"]) if (g and gp) else None
+                intent = "commercial" if any(w in r["kw"] for w in INTENT_WORDS) else "info"
                 pill = (f'<span class="krank {"good" if p<=10 else "ok" if p<=30 else "far"}">#{p}</span>'
                         if p else '<span class="krank miss">not in top 100</span>')
                 gpos = ("%.1f" % g["position"]) if g else "—"
                 voltxt = ("{:,}".format(r["vol"])) if r.get("vol") else "—"
-                rows += (f'<tr><td>{e(r["kw"])}</td><td><a href="{SLUG[s]}">{ABBR[s]}</a></td>'
-                         f'<td data-v="{r.get("vol") or 0}">{voltxt}</td>'
+                prio = f'<span class="score num">{t["score"]}</span>' if t else '<span class="stmeta">·</span>'
+                det_id = f'rk_{ALL.index(s)}_{abs(hash(r["kw"])) % 99999}'
+                rows += (f'<tr class="rkrow" data-det="{det_id}" style="cursor:pointer">'
+                         f'<td>{e(r["kw"])}</td><td><a href="{SLUG[s]}">{ABBR[s]}</a></td>'
                          f'<td data-v="{p or 999}">{pill}</td>'
-                         f'<td>{dfmt((op-p) if op and p else None, unit="") if (op and p and op!=p) else "·"}</td>'
+                         f'<td data-v="{d_audit or 0}">{dfmt(d_audit, unit="") if d_audit else "·"}</td>'
+                         f'<td data-v="{d28 or 0}">{dfmt(d28, unit="") if d28 is not None and abs(d28) >= 1 else "·"}</td>'
                          f'<td data-v="{g["position"] if g else 999}">{gpos}</td>'
-                         f'<td class="mono" style="font-size:11px">{e(r.get("page") or "—")}</td></tr>')
+                         f'<td data-v="{r.get("vol") or 0}">{voltxt}</td><td class="stmeta">{intent}</td>'
+                         f'<td>{post_pill(post)}</td><td data-v="{t["score"] if t else 0}">{prio}</td></tr>')
+                # detail drawer row
+                drivers = "".join(f"<li>{e(x)}</li>" for x in (t["drivers"] if t else [])) or "<li>no open task for this keyword</li>"
+                changed = (f'Probe {f"#{op}" if op else "—"} → {f"#{p}" if p else "not in top 100"} since the last audit. '
+                           + (f'Real-user GSC position {gpos} on {g["impressions"]:,} impressions/28d. ' if g else 'No GSC impressions in the last 28d. '))
+                act = e(t["action"]) if t else "No action recommended — see posture note."
+                bl = ""
+                if t:
+                    bl = (f'<div class="stmeta" style="margin-top:8px">priority {t["score"]}/100 · {t["effort"]} (≈{t["effort_min"]} min) · '
+                          f'bucket: {t["bucket"].upper()}</div>')
+                rows += (f'<tr id="{det_id}" class="rkdet" style="display:none;background:var(--soft)"><td colspan="10" style="padding:14px 18px">'
+                         f'<div class="grid g3" style="margin:0;gap:18px">'
+                         f'<div><div class="rectitle">Why this matters</div><p class="narr" style="margin-top:5px">{e(note)} '
+                         f'{f"Volume {voltxt}/mo · {intent} intent." if r.get("vol") else ""}</p></div>'
+                         f'<div><div class="rectitle">What changed</div><p class="narr" style="margin-top:5px">{changed}</p></div>'
+                         f'<div><div class="rectitle">Why this priority</div><ul class="lcl" style="margin-top:5px">{drivers}</ul></div></div>'
+                         f'<div class="rectitle" style="margin-top:10px">Recommended action</div>'
+                         f'<p class="narr" style="margin-top:4px">{act}</p>{bl}</td></tr>')
         dfs_rows = ""
         for i, s in enumerate(ALL):
             hh = [x["sites"].get(s, {}).get("ranked_top100") for x in HIST if s in x.get("sites", {})]
@@ -632,17 +900,28 @@ def build_all(G):
                          f'<td>{spark(hh, w=90, h=20, color="var(--acc)") if len(hh)>1 else "·"}</td>'
                          f'<td data-v="{sm.get("organic_keywords") or 0}">{sm.get("organic_keywords") if sm.get("organic_keywords") is not None else "—"}</td>'
                          f'<td>{e(sm.get("ok_delta") or "")}</td><td class="stmeta">{e(sm.get("date",""))}</td></tr>')
-        return (f'<div class="pagehead"><h1>Rankings</h1><p class="sub">Three independent datasets — never merged. '
-                f'When they disagree, each is shown with its own trend.</p></div>'
-                f'<div class="card flush" style="margin-bottom:16px"><div class="chead"><h2>Strategic tracked keywords — {sum(len(v) for v in KT.values())}</h2>'
-                f'<span class="stmeta">probe = DataForSEO live SERP ({e(POS_SRC)}) · GSC = real-user avg position, 28d</span></div>'
-                f'<div class="twrap"><table><thead><tr><th>keyword</th><th>site</th><th class="sortable">vol/mo</th>'
-                f'<th class="sortable">probe pos</th><th>Δ vs last audit</th><th class="sortable">GSC pos</th><th>target page</th></tr></thead>'
+        RK_JS = """<script>
+document.querySelectorAll('.rkrow').forEach(function(tr){
+  tr.addEventListener('click',function(ev){
+    if(ev.target.closest('a')) return;
+    var d=document.getElementById(tr.dataset.det);
+    if(d) d.style.display=d.style.display==='none'?'':'none';
+  });
+});
+</script>"""
+        return (f'<div class="pagehead"><h1>Rankings</h1><p class="sub">Every strategic keyword with a posture and a priority. '
+                f'Click a row for why-it-matters, what changed, and the recommended action. Probe = DataForSEO live SERP · GSC = real users, 28d.</p></div>'
+                f'<div class="card flush" style="margin-bottom:16px"><div class="chead"><h2>Strategic keywords — {sum(len(v) for v in KT.values())}</h2>'
+                f'<span class="stmeta">PUSH = close to top 3 · RECOVER = earned rank slipping · MAINTAIN = protect · MONITOR/IGNORE = do not spend time yet</span></div>'
+                f'<div class="twrap"><table><thead><tr><th>keyword</th><th>site</th><th class="sortable">probe</th>'
+                f'<th class="sortable">Δ audit</th><th class="sortable">Δ 28d GSC</th><th class="sortable">GSC pos</th>'
+                f'<th class="sortable">vol/mo</th><th>intent</th><th>posture</th><th class="sortable">priority</th></tr></thead>'
                 f'<tbody>{rows}</tbody></table></div></div>'
                 f'<div class="card flush"><div class="chead"><h2>Index footprints per site</h2>'
-                f'<span class="stmeta">DataForSEO top-100 (live each audit) vs Semrush organic keywords (owner-verified index) — different crawlers, different counts, both real</span></div>'
-                f'<div class="overflow"><table><thead><tr><th>site</th><th class="sortable">DFS top-100 kw</th><th>trend</th>'
-                f'<th class="sortable">Semrush organic kw</th><th>note</th><th>Semrush date</th></tr></thead><tbody>{dfs_rows}</tbody></table></div></div>')
+                f'<span class="stmeta">DataForSEO top-100 (live) vs Semrush organic (owner-verified) — different crawlers, never merged</span></div>'
+                f'<div class="overflow"><table><thead><tr><th>site</th><th class="sortable">DFS top-100</th><th>trend</th>'
+                f'<th class="sortable">Semrush organic</th><th>note</th><th>date</th></tr></thead><tbody>{dfs_rows}</tbody></table></div></div>'
+                + RK_JS)
 
     # ---------- CONTENT ----------
     def build_content():
@@ -817,6 +1096,14 @@ CRITICAL — revenue or indexation is threatened right now (money page deindexed
 HIGH — high-impact ranking/traffic problem (large click loss, priority page not indexed, link-risk trigger).<br>
 MEDIUM — meaningful improvement opportunity or watch item.<br>
 LOW — maintenance. The Overview shows at most 7 alerts; everything else lives on its section page.</div></details>
+<details class="panel"><summary>Priority engine — exact formula</summary><div class="pbody">
+Task priority (0-100) = impact (0-40, from the opportunity score) + strategic weight (0-20: strategic target or
+money page 20, growth-site 12, other 8) + urgency (indexation 25, worsening 22, striking-distance/CTR 12, other 8,
+already-improving 4) + probability of improvement (indexation/CTR 14, striking distance 12, decay 10, other 8),
+multiplied by an effort factor (Quick x1.0, Medium x0.92, Deep x0.78).<br>
+Buckets: &ge;72 DO TODAY (hard cap 5) · 52-71 NEXT · 34-51 MONITOR ONLY · &lt;34 BACKLOG.
+Keywords already improving on their own are always MONITOR - the engine protects attention.
+Effort labels: Quick &lt;15m · Medium 15-45m · Deep 45-120m; estimates are for capacity planning, not promises.</div></details>
 <details class="panel"><summary>Opportunity score — exact formula</summary><div class="pbody">
 score = impressions/volume band (0–30) + ranking proximity (25 − position, min 0) + commercial intent (20 if the query
 contains buy/subscribe/test/brand-app terms, else 8) + CTR upside (expected−actual CTR × impressions, capped 15)
@@ -840,9 +1127,179 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
                 f'<th>phase</th><th>GSC</th></tr></thead><tbody>{sr}</tbody></table></div></div>'
                 f'<div class="stack" style="gap:10px">{docs}</div>')
 
+    # ---------- TODAY (execution mode) ----------
+    STEPS = {
+        "Striking distance": ["Open the ranking page and its GSC queries", "Strengthen the section matching the query",
+                              "Add 2 internal links with the query as anchor", "Re-check position after 7 days"],
+        "CTR gap": ["Rewrite title (keyword first + differentiator)", "Rewrite meta description", "Publish", "Watch CTR for 7 days"],
+        "Content gap": ["Copy the article prompt from Work", "Run the 5-skill pipeline", "Publish + sitemap", "Next audit verifies"],
+        "Content decay": ["Read the page vs its top queries in GSC", "Refresh facts/year + missing section", "Re-run onpage-optimizer", "Watch 14 days"],
+        "Authority gap": ["Point today's link batch at this site", "Add internal links from 3 related articles to the money page"],
+        "Indexation": ["Request indexing in GSC", "Check canonical + robots", "Add 2-3 internal links from indexed pages"],
+        "Technical fix": ["Copy the fix prompt from Work", "Apply + deploy", "Next audit verifies automatically"],
+        "Rank recovery": ["Check the exact query in GSC first (probe noise?)", "Refresh the matching page section",
+                          "Add 2 internal links", "Re-check after 7 days"],
+    }
+    import datetime as _dt2
+    DAYNAME = _dt2.date.today().strftime("%A, %B %-d") if hasattr(_dt2.date.today(), "strftime") else TODAY_STR
+
+    def task_card(t, n):
+        i = ALL.index(t["site"]) + 1
+        steps = STEPS.get(t["kind"], ["Do the recommended action", "Re-check next audit"])
+        steps_json = e(J.dumps(steps))
+        drivers = "".join(f"<li>{e(x)}</li>" for x in t["drivers"])
+        b = t["baseline"]
+        pg_txt = " · " + e(t["page"]) if t["page"] else ""
+        bl_txt = " · ".join(x for x in [
+            f'probe #{b["probe_pos"]}' if b.get("probe_pos") else "",
+            f'GSC pos {b["gsc_pos"]}' if b.get("gsc_pos") else "",
+            f'{b["clicks28"]} clicks/28d' if b.get("clicks28") else ""] if x) or "no keyword baseline"
+        return (f'<div class="card taskcard" data-tid="{t["id"]}" data-min="{t["effort_min"]}" data-steps="{steps_json}" '
+                f'data-title="{e(t["kind"])}: {e(t["query"] or t["page"] or t["site"])}">'
+                f'<div class="chead" style="margin-bottom:6px"><div style="display:flex;align-items:center;gap:9px;min-width:0">'
+                f'<span class="tasknum">#{n}</span><h2 style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'
+                f'{e(t["kind"])}: {e(t["query"] or t["page"] or ABBR[t["site"]])}</h2></div>'
+                f'<span class="score num" title="priority score">{t["score"]}</span></div>'
+                f'<div class="stmeta" style="margin-bottom:8px"><span class="dot s{i}"></span> {ABBR[t["site"]]}'
+                f'{pg_txt} · <b>{t["effort"]}</b> ≈{t["effort_min"]} min · baseline: {bl_txt}</div>'
+                f'<p class="narr" style="margin:0 0 8px">{e(t["what"])}</p>'
+                f'<details><summary class="linkbtn" style="cursor:pointer">Why this priority?</summary>'
+                f'<ul class="lcl" style="margin-top:6px">{drivers}</ul>'
+                f'<div class="stmeta" style="margin-top:6px">{e(t["why"])} · source: {e(t["src"])}</div></details>'
+                f'<div class="rectitle" style="margin-top:9px">Recommended action</div>'
+                f'<p class="narr" style="margin:3px 0 10px">{e(t["action"])}</p>'
+                f'<div class="rowflex"><button class="btn primary sm t-start">Start task</button>'
+                f'<button class="btn sm t-done">Mark completed</button>'
+                f'<button class="btn sm t-defer">Defer</button><button class="btn sm t-dismiss">Dismiss</button></div></div>')
+
+    def slim_row(t, show_reason=True):
+        reason = t.get("posture_note", "")
+        reason_h = ("<div class=" + chr(34) + "stmeta" + chr(34) + "><i>" + e(reason) + "</i></div>") if show_reason and reason else ""
+        return (f'<div class="alertrow" data-tid="{t["id"]}"><span class="score num" style="font-size:12px">{t["score"]}</span>'
+                f'<div style="min-width:0;flex:1"><b>{e(t["kind"])}</b>: {e(t["query"] or t["page"] or ABBR[t["site"]])} '
+                f'<span class="stmeta">· {ABBR[t["site"]]} · {t["effort"]} ≈{t["effort_min"]}m</span>'
+                f'{reason_h}</div>'
+                f'<button class="btn sm t-promote" style="flex:none">Add to Today</button></div>')
+
+    def build_today():
+        est = sum(t["effort_min"] for t in T_TODAY)
+        cards = "".join(task_card(t, n + 1) for n, t in enumerate(T_TODAY))             or '<div class="empty"><b>Nothing urgent today.</b> The engine found no task scoring ≥72 — links and content cadence continue as standing work.</div>'
+        nxt = "".join(slim_row(t) for t in T_NEXT[:8]) or '<div class="empty">Queue is empty.</div>'
+        mon = "".join(slim_row(t) for t in T_MONITOR[:10]) or '<div class="empty">Nothing on watch.</div>'
+        done_rows = ""
+        for c in reversed(THIST.get("completed", [])[-12:]):
+            oc = c.get("outcome", "AWAITING VERIFICATION")
+            occls = "pos" if oc in ("VERIFIED", "POSITIVE") else ("neg" if "NEGATIVE" in oc else "neu")
+            after = ""
+            if c.get("now") and c.get("baseline") and c["baseline"].get("probe_pos") and c["now"].get("probe_pos"):
+                after = (f' · #{c["baseline"]["probe_pos"]} → #{c["now"]["probe_pos"]} after {c.get("checkpoint_days", "?")}d '
+                         f'(movement observed during the verification period — not proof of cause)')
+            done_rows += (f'<div class="alertrow"><span class="tag {occls}">{e(oc)}</span>'
+                          f'<div><b>{e(c.get("kind", ""))}</b>: {e(c.get("query") or c.get("page") or c.get("site", ""))} '
+                          f'<span class="stmeta">· {ABBR.get(c.get("site"), c.get("site", ""))} · completed {e(c.get("completed", ""))}'
+                          f'{e(after)}</div></div>')
+        return (f'<div class="pagehead"><h1>Today</h1><p class="sub">{e(DAYNAME)} · your SEO plan: '
+                f'<b>{len(T_TODAY)} recommended tasks</b> · estimated workload ≈{est//60}h {est%60:02d}m · '
+                f'{len(T_NEXT)} next · {len(T_MONITOR)} monitor-only · {len(T_BACKLOG)} backlog. '
+                f'Task states persist in this browser; "Copy status" hands them to the next audit for verification.</p></div>'
+                f'<div id="focusbar" style="display:none"></div>'
+                f'<div id="todaylist" class="stack" style="gap:14px;margin-bottom:20px">{cards}</div>'
+                f'<div id="donetoday"></div>'
+                f'<div class="grid g2"><div class="card"><div class="chead"><h2>Next</h2>'
+                f'<span class="stmeta">after today&#39;s plan — deferred, not forgotten</span></div>{nxt}</div>'
+                f'<div class="card"><div class="chead"><h2>Monitor only — do not work on these yet</h2>'
+                f'<span class="stmeta">the engine is protecting your attention</span></div>{mon}'
+                f'<div class="stmeta" style="margin-top:8px">+ {len(T_BACKLOG)} backlog items scoring &lt;34 — see '
+                f'<a href="opportunities">Opportunities</a> for the full list.</div></div></div>'
+                f'<div class="card" style="margin-top:16px"><div class="chead"><h2>Completed &amp; verification</h2>'
+                f'<button class="copybtn" id="copystatus">Copy status for next audit</button></div>'
+                f'{done_rows or "<div class=empty>No completed tasks recorded yet. Mark tasks done here (or let audits auto-verify technical fixes) and the 7/14/28-day before/after comparison appears in this list.</div>"}'
+                f'<div id="devicedone"></div></div>')
+
+    TODAY_JS = """<script>
+(function(){
+ var K='seo_tasks_v2';
+ function load(){ try{return JSON.parse(localStorage.getItem(K)||'{}');}catch(e){return{};} }
+ function save(st){ try{localStorage.setItem(K,JSON.stringify(st));}catch(e){} }
+ var st=load();
+ function baseline(card){ return {title:card.dataset.title||''}; }
+ function apply(){
+  var doneN=0, hidden=0;
+  document.querySelectorAll('.taskcard').forEach(function(c){
+    var s=st[c.dataset.tid];
+    if(!s) return;
+    if(s.state==='completed'){ c.style.display='none'; doneN++; }
+    if(s.state==='dismissed'||s.state==='deferred'){ c.style.display='none'; hidden++; }
+  });
+  var dd=document.getElementById('donetoday');
+  if(dd) dd.innerHTML=(doneN||hidden)?'<div class="empty" style="margin-bottom:16px"><b>'+doneN+' completed</b>'+(hidden?' · '+hidden+' deferred/dismissed':'')+' on this device today. Copy status below so the next audit records and verifies them.</div>':'';
+  renderFocus();
+ }
+ function renderFocus(){
+  var bar=document.getElementById('focusbar'); if(!bar) return;
+  var fid=null; Object.keys(st).forEach(function(k){ if(st[k].state==='active') fid=k; });
+  if(!fid){ bar.style.display='none'; return; }
+  var s=st[fid], steps=s.steps||[], done=(s.checked||[]).length;
+  var mins=Math.max(0, Math.round((s.min||30)*(1-done/Math.max(1,steps.length))));
+  var html='<div class="card" style="border-color:#4f46e5;background:#eef2ff;margin-bottom:16px">'
+    +'<div class="chead" style="margin-bottom:4px"><h2>Current focus: '+s.title+'</h2>'
+    +'<span class="stmeta">'+done+' / '+steps.length+' actions · ≈'+mins+' min remaining</span></div>';
+  steps.forEach(function(sp,i){
+    var ck=(s.checked||[]).indexOf(i)>=0;
+    html+='<label style="display:flex;gap:8px;align-items:center;padding:3px 0;font-size:12.5px;cursor:pointer">'
+      +'<input type="checkbox" data-i="'+i+'" '+(ck?'checked':'')+'> <span style="'+(ck?'color:#9ca3af;text-decoration:line-through':'')+'">'+sp+'</span></label>';
+  });
+  html+='<div class="rowflex" style="margin-top:10px"><button class="btn primary sm" id="focusdone">Mark completed</button>'
+    +'<button class="btn sm" id="focusstop">Pause focus</button></div></div>';
+  bar.innerHTML=html; bar.style.display='';
+  bar.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+    cb.addEventListener('change',function(){
+      var i=parseInt(cb.dataset.i,10); s.checked=s.checked||[];
+      var at=s.checked.indexOf(i);
+      if(cb.checked&&at<0)s.checked.push(i); if(!cb.checked&&at>=0)s.checked.splice(at,1);
+      st[fid]=s; save(st); renderFocus();
+    });
+  });
+  var fd=document.getElementById('focusdone');
+  if(fd) fd.addEventListener('click',function(){ s.state='completed'; s.completed=new Date().toISOString().slice(0,10); st[fid]=s; save(st); apply(); });
+  var fs=document.getElementById('focusstop');
+  if(fs) fs.addEventListener('click',function(){ s.state='queued'; st[fid]=s; save(st); renderFocus(); });
+ }
+ document.querySelectorAll('.taskcard').forEach(function(c){
+  var id=c.dataset.tid;
+  function set(state){ var cur=st[id]||{}; cur.state=state; cur.title=c.dataset.title; cur.min=parseInt(c.dataset.min,10)||30;
+    try{cur.steps=JSON.parse(c.dataset.steps);}catch(e){cur.steps=[];}
+    if(state==='completed') cur.completed=new Date().toISOString().slice(0,10);
+    st[id]=cur; save(st); apply(); }
+  var b;
+  if(b=c.querySelector('.t-start')) b.addEventListener('click',function(){
+    Object.keys(st).forEach(function(k){ if(st[k].state==='active') st[k].state='queued'; });
+    set('active'); window.scrollTo({top:0,behavior:'smooth'}); });
+  if(b=c.querySelector('.t-done')) b.addEventListener('click',function(){ set('completed'); });
+  if(b=c.querySelector('.t-defer')) b.addEventListener('click',function(){ set('deferred'); });
+  if(b=c.querySelector('.t-dismiss')) b.addEventListener('click',function(){ set('dismissed'); });
+ });
+ document.querySelectorAll('.t-promote').forEach(function(b){
+  b.addEventListener('click',function(){
+    var row=b.closest('[data-tid]'); if(!row) return;
+    st[row.dataset.tid]={state:'promoted',title:row.textContent.trim().slice(0,80)}; save(st);
+    b.textContent='On your list'; b.disabled=true;
+  });
+ });
+ var cs=document.getElementById('copystatus');
+ if(cs) cs.addEventListener('click',async function(){
+   var out={exported:new Date().toISOString().slice(0,10),tasks:st};
+   var txt='TASK STATUS v2 (paste this to Claude with the next audit): '+JSON.stringify(out);
+   try{ await navigator.clipboard.writeText(txt); }catch(e){}
+   cs.textContent='Copied — paste to Claude'; setTimeout(function(){cs.textContent='Copy status for next audit';},2500);
+ });
+ apply();
+})();
+</script>"""
     # ---------- write ----------
     JS = CHART_JS + TABLE_JS + PERIOD_JS
     pages = [
+        ("today.html", "Today — IPTV Portfolio", build_today(), "today", TODAY_JS),
         ("index.html", "IPTV Portfolio — SEO Command Center", build_overview(), None, JS + SALES_JS),
         ("performance.html", "Performance — IPTV Portfolio", build_performance(), "performance", JS),
         ("rankings.html", "Rankings — IPTV Portfolio", build_rankings(), "rankings", TABLE_JS),
