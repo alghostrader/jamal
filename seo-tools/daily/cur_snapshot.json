@@ -1,5 +1,5 @@
 {
- "_stamp": "2026-09-04 06:36 UTC",
+ "_stamp": "2026-09-04 07:24 UTC",
  "sites": {
   "iptvesp.com": {
    "clicks7d": 509,
@@ -147,6 +147,21 @@
     "es seguro el iptv": 16,
     "que es una lista m3u": 31,
     "iptv fire tv stick": 52
+   }
+  },
+  "rodaktv.com": {
+   "clicks7d": 0,
+   "sem_rd": null,
+   "dfs_rd": null,
+   "top100": null,
+   "pages": 31,
+   "positions": {
+    "iptv polska": null,
+    "polska telewizja w uk": null,
+    "polska telewizja w niemczech": null,
+    "iptv abonament": null,
+    "test iptv": null,
+    "iptv opinie": null
    }
   }
  }
