@@ -29,9 +29,15 @@ Console service account) must be re-supplied by the owner after a recycle.
    and every claim from the owner's fix reports verified or not (verify independently, live).
 6. **Content intel** — rebuild coverage/gaps with the cannibalization guards (sibling
    ownership, page hints, lane reservation). Recompute next-article prompts.
-7. **Regenerate EVERY page** — home, Today queue, Trends, Links, Plan, all 9 site pages:
-   prompts, opportunity cards, narratives, statuses, plan table, alerts, owner tasks.
+7. **Regenerate EVERY page** — Overview, Today (priority engine: plan.json buckets
+   today/next/monitor/backlog, capped at 5 diverse tasks), Work, Performance, Rankings
+   (postures), Content, Technical, Authority, Opportunities, Integrations, all site pages.
    Anything conditional must be recomputed (steps auto-clear when work is verified done).
+   **Task feedback loop**: if the owner pastes a "TASK STATUS v2" blob (from Today's
+   Copy-status button), merge its completed/dismissed states into
+   seo-tools/daily/task_history.json BEFORE generating — completed tasks keep their
+   plan.json baselines and get 7/14/28-day before/after verification automatically.
+   Technical fixes auto-verify when the defect disappears from the fresh crawl.
 8. **History** — append authority + keyword-position history points.
 9. **Deploy** — dashboard branch, pipeline marker, verify the marker live on
    iptv.alghostrader.com before reporting done.
