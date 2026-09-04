@@ -45,6 +45,10 @@ STAMP_TXT = STAMP or gen
 
 dfs_of = lambda s: (D["sites"].get(s, {}).get("dfs", {}) or {})
 def daily_of(s): return D["sites"].get(s, {}).get("daily", []) or []
+# When DataForSEO is unreachable (no credit) positions can't be re-probed — label them honestly.
+DFS_DOWN = all((D["sites"].get(s, {}).get("dfs") or {}).get("ref_domains") is None for s in D["sites"]) if D["sites"] else False
+POS_SRC = ("positions from last probe 3 Sep — DFS paused, GSC cross-checked today" if DFS_DOWN
+           else "live positions from this audit")
 def nrank(s): return sum(1 for r in KT.get(s, []) if r.get("pos"))
 
 # ---------------- icons ----------------
@@ -272,6 +276,14 @@ RECS = _recs()
 def alerts():
     A = []
     prev = HIST[-2] if len(HIST) >= 2 else None
+    # DataForSEO outage: when the account has no credit every DFS field comes back None.
+    # Surface one loud alert instead of letting "—" cells pass silently, and keep the
+    # open aio spam watch visible (it cannot be re-checked while DFS is down).
+    if all(dfs_of(s).get("ref_domains") is None for s in ALL):
+        A.append(("crit", "DataForSEO account is OUT OF CREDIT (balance −$0.07) — live SERP probes, DFS authority "
+                          "and search volumes are paused. Keyword positions shown are from the last successful probe "
+                          "(3 Sep), cross-checked against GSC today. Top up at app.dataforseo.com, then rerun the audit. "
+                          "The aio spam-score watch (48→58) stays open — it cannot be re-checked until then."))
     # Rank-loss annotations: when GSC (Google's own report) contradicts a probe-based
     # loss, the owner-side evidence wins and the alert is downgraded to a watch.
     # A None value = suppress silently, no alert at all (verdict settled, owner informed).
@@ -1187,6 +1199,7 @@ os.makedirs(OUT, exist_ok=True)
 for f_ in os.listdir(OUT):
     if f_.endswith(".html"): os.remove(os.path.join(OUT, f_))
 import sitecards as _sc
+_sc.POS_LABEL = 'Rankings · last probe 3 Sep (DFS paused)' if DFS_DOWN else 'Live rankings'
 
 tot_rd = sum(dfs_of(s).get("ref_domains") or 0 for s in ALL)
 tot_top100 = sum(dfs_of(s).get("ranked_top100") or 0 for s in ALL)
@@ -1374,7 +1387,8 @@ def build_home():
 
 def build_settings():
     integ = [("Google Search Console", "service account · 10 properties · clicks & impressions daily", "pos", "Connected"),
-             ("DataForSEO", "backlinks, domain rank, spam, live SERP probes", "pos", "Connected"),
+             ("DataForSEO", "backlinks, domain rank, spam, live SERP probes", "warn" if DFS_DOWN else "pos",
+              "OUT OF CREDIT — top up" if DFS_DOWN else "Connected"),
              ("Semrush", "AS, ref. domains — pulled live via MCP connector when linked", "neu", "Via Claude"),
              ("Vercel", "deploys ride on git push to the dashboard branch", "pos", "Connected"),
              ("Sales app", "browser-local; lives at /sales, /replies, /support", "neu", "Local")]
@@ -1741,7 +1755,7 @@ def kt_card(s):
         body += f'<tr><td>{H.escape(r["kw"])}</td><td>{(r.get("vol") or 0):,}</td><td>{rk}</td></tr>'
     return (f'<div class="card"><h2>{icon("target")} Keyword targets</h2>'
             f'<p class="sub">Primary: <b>{H.escape(lead["kw"])}</b> ({(lead.get("vol") or 0):,}/mo) · '
-            f'{svol:,}/mo addressable across {len(rows)} terms · live positions from this audit</p>'
+            f'{svol:,}/mo addressable across {len(rows)} terms · {POS_SRC}</p>'
             f'<div class="overflow"><table><thead><tr><th>target keyword</th><th>volume/mo</th><th>current rank</th></tr></thead>'
             f'<tbody>{body}</tbody></table></div></div>')
 
@@ -1809,7 +1823,7 @@ def site_board(s):
           f'<span class="tileNum">{wk:,}</span>'
           + (f'<span class="tileDelta {"up" if wk-pw>=0 else "down"}">{"▲" if wk-pw>=0 else "▼"} {abs(wk-pw)} vs last week</span>' if d else '<span class="tileLbl">no GSC data yet</span>')
           + (f'<div style="margin-top:8px">{spark(clk, color=col)}</div>' if clk else "") + '</div>')
-    t2 = (f'<div class="card tile t3"><span class="kpiL">BEST LIVE RANKING</span>'
+    t2 = (f'<div class="card tile t3"><span class="kpiL">{"BEST RANKING · 3 SEP PROBE" if DFS_DOWN else "BEST LIVE RANKING"}</span>'
           + (f'<span class="tileNum">#{best[0]}</span><span class="tileLbl">{H.escape(best[1])}</span>' if best
              else '<span class="tileNum">—</span><span class="tileLbl">no targets in the top 100 yet</span>') + '</div>')
     kw100 = dfs.get("ranked_top100")

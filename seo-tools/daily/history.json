@@ -1132,5 +1132,90 @@
     "targets_ranking": 5
    }
   }
+ },
+ {
+  "date": "2026-09-04",
+  "sites": {
+   "iptvesp.com": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 1
+   },
+   "primeiptv-france.com": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 1
+   },
+   "iptvned.com": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 0
+   },
+   "iptvpix.com": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 0
+   },
+   "smarters-live.com": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 0
+   },
+   "iptvshqiptar.com": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 1
+   },
+   "smartersprofrance.fr": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 1
+   },
+   "iptvfranceofficiel.fr": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 0
+   },
+   "abonnementiptvofficiel.com": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 2
+   },
+   "iptvsegura.com": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 5
+   }
+  }
  }
 ]

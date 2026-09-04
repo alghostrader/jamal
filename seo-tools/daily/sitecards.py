@@ -72,7 +72,7 @@ def card(s, D, F, KT, CT, SEM, RECS, link=None):
     ranked = sorted([r for r in kt if r.get("pos")], key=lambda r: r["pos"])[:4]
     rk = ""
     if ranked:
-        rk = ('<div class="secrow"><div class="rectitle">Live rankings</div><div class="hchips">'
+        rk = (f'<div class="secrow"><div class="rectitle">{globals().get("POS_LABEL", "Live rankings")}</div><div class="hchips">'
               + "".join(f'<span class="hchip ok">#{r["pos"]} {H.escape(r["kw"])}</span>' for r in ranked)
               + '</div></div>')
 

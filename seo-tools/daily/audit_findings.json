@@ -51,7 +51,7 @@
    "contact",
    "terugbetalingsbeleid"
   ],
-  "favicon": null,
+  "favicon": 200,
   "www_redirect": "308 -> https://iptvned.com/"
  },
  "iptvpix.com": {
@@ -118,7 +118,7 @@
   "no_meta_desc": [],
   "thin": [],
   "favicon": 200,
-  "apex": "308 -> https://www.smartersprofrance.fr/",
+  "apex": "err HTTPSConnectionPool(host='smartersprofra",
   "www": "200",
   "www_redirect": "200"
  },
