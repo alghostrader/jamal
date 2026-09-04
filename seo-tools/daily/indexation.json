@@ -1,0 +1,237 @@
+{
+ "generated": "2026-09-04",
+ "sites": {
+  "iptvesp.com": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvesp.com/",
+    "canonical_user": "https://iptvesp.com/",
+    "last_crawl": "2026-08-28T23:36:32Z"
+   },
+   "/suscripciones": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvesp.com/suscripciones",
+    "canonical_user": "https://iptvesp.com/suscripciones",
+    "last_crawl": "2026-07-15T01:46:07Z"
+   }
+  },
+  "primeiptv-france.com": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://primeiptv-france.com/",
+    "canonical_user": "https://primeiptv-france.com/",
+    "last_crawl": "2026-08-28T18:39:50Z"
+   },
+   "/tarifs": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://primeiptv-france.com/tarifs",
+    "canonical_user": "https://primeiptv-france.com/tarifs",
+    "last_crawl": "2026-07-18T00:28:20Z"
+   }
+  },
+  "iptvned.com": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvned.com/",
+    "canonical_user": "https://iptvned.com/",
+    "last_crawl": "2026-08-01T11:07:02Z"
+   },
+   "/abonnementen": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvned.com/abonnementen",
+    "canonical_user": "https://iptvned.com/abonnementen",
+    "last_crawl": "2026-07-07T14:26:10Z"
+   }
+  },
+  "iptvpix.com": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvpix.com/",
+    "canonical_user": "https://iptvpix.com/",
+    "last_crawl": "2026-08-29T01:07:52Z"
+   },
+   "/abonnements": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvpix.com/abonnements",
+    "canonical_user": "https://iptvpix.com/abonnements",
+    "last_crawl": "2026-07-08T06:09:38Z"
+   }
+  },
+  "smarters-live.com": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://www.smarters-live.com/",
+    "canonical_user": "https://www.smarters-live.com/",
+    "last_crawl": "2026-08-30T01:50:09Z"
+   }
+  },
+  "iptvshqiptar.com": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvshqiptar.com/",
+    "canonical_user": "https://iptvshqiptar.com/",
+    "last_crawl": "2026-08-19T17:06:27Z"
+   }
+  },
+  "smartersprofrance.fr": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://www.smartersprofrance.fr/",
+    "canonical_user": "https://www.smartersprofrance.fr/",
+    "last_crawl": "2026-08-26T00:46:43Z"
+   },
+   "/abonnement-iptv": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://www.smartersprofrance.fr/abonnement-iptv",
+    "canonical_user": "https://www.smartersprofrance.fr/abonnement-iptv",
+    "last_crawl": "2026-08-19T21:27:51Z"
+   }
+  },
+  "iptvfranceofficiel.fr": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvfranceofficiel.fr/",
+    "canonical_user": "https://iptvfranceofficiel.fr/",
+    "last_crawl": "2026-08-30T10:18:18Z"
+   },
+   "/iptv-premium": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvfranceofficiel.fr/iptv-premium",
+    "canonical_user": "https://iptvfranceofficiel.fr/iptv-premium",
+    "last_crawl": "2026-08-10T08:09:37Z"
+   }
+  },
+  "abonnementiptvofficiel.com": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://abonnementiptvofficiel.com/",
+    "canonical_user": "https://abonnementiptvofficiel.com/",
+    "last_crawl": "2026-09-01T09:36:28Z"
+   },
+   "/boitier-iptv": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://abonnementiptvofficiel.com/boitier-iptv",
+    "canonical_user": "https://abonnementiptvofficiel.com/boitier-iptv",
+    "last_crawl": "2026-08-14T15:33:42Z"
+   },
+   "/test-iptv": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://abonnementiptvofficiel.com/test-iptv",
+    "canonical_user": "https://abonnementiptvofficiel.com/test-iptv",
+    "last_crawl": "2026-08-29T14:11:52Z"
+   }
+  },
+  "iptvsegura.com": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvsegura.com/",
+    "canonical_user": "https://iptvsegura.com/",
+    "last_crawl": "2026-08-31T10:33:39Z"
+   },
+   "/guias/como-elegir-iptv-seguro": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvsegura.com/guias/como-elegir-iptv-seguro",
+    "canonical_user": "https://iptvsegura.com/guias/como-elegir-iptv-seguro",
+    "last_crawl": "2026-08-24T02:35:44Z"
+   },
+   "/guias/estafas-iptv-como-evitarlas": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvsegura.com/guias/estafas-iptv-como-evitarlas",
+    "canonical_user": "https://iptvsegura.com/guias/estafas-iptv-como-evitarlas",
+    "last_crawl": "2026-08-23T17:38:01Z"
+   },
+   "/guias/iptv-fire-tv-stick": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvsegura.com/guias/iptv-fire-tv-stick",
+    "canonical_user": "https://iptvsegura.com/guias/iptv-fire-tv-stick",
+    "last_crawl": "2026-08-23T18:49:55Z"
+   },
+   "/guias/iptv-legal-espana": {
+    "state": "Duplicate without user-selected canonical",
+    "verdict": "NEUTRAL",
+    "canonical_google": "https://www.747live.bet/",
+    "canonical_user": null,
+    "last_crawl": "2026-08-23T16:52:10Z"
+   },
+   "/guias/que-es-lista-m3u": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvsegura.com/guias/que-es-lista-m3u",
+    "canonical_user": "https://iptvsegura.com/guias/que-es-lista-m3u",
+    "last_crawl": "2026-08-23T18:23:43Z"
+   },
+   "/planes": {
+    "state": "URL is unknown to Google",
+    "verdict": "NEUTRAL",
+    "canonical_google": null,
+    "canonical_user": null,
+    "last_crawl": null
+   }
+  },
+  "rodaktv.com": {
+   "/": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://rodaktv.com/",
+    "canonical_user": "https://rodaktv.com/",
+    "last_crawl": "2026-09-04T07:07:21Z"
+   },
+   "/abonament": {
+    "state": "Discovered - currently not indexed",
+    "verdict": "NEUTRAL",
+    "canonical_google": null,
+    "canonical_user": null,
+    "last_crawl": null
+   },
+   "/opinie": {
+    "state": "Discovered - currently not indexed",
+    "verdict": "NEUTRAL",
+    "canonical_google": null,
+    "canonical_user": null,
+    "last_crawl": null
+   },
+   "/polska-telewizja-w-niemczech": {
+    "state": "URL is unknown to Google",
+    "verdict": "NEUTRAL",
+    "canonical_google": null,
+    "canonical_user": null,
+    "last_crawl": null
+   },
+   "/polska-telewizja-w-uk": {
+    "state": "Discovered - currently not indexed",
+    "verdict": "NEUTRAL",
+    "canonical_google": null,
+    "canonical_user": null,
+    "last_crawl": null
+   },
+   "/test-iptv": {
+    "state": "URL is unknown to Google",
+    "verdict": "NEUTRAL",
+    "canonical_google": null,
+    "canonical_user": null,
+    "last_crawl": null
+   }
+  }
+ }
+}

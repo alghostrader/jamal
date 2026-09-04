@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """IPTV portfolio SEO dashboard generator — multi-page static build.
 Rebuilt 12 Aug 2026 after container recycle. Degrades gracefully when GSC is unavailable."""
-import json, os, re as RE, math, html as H
+import json, os, re as RE, math, html as H, datetime
 from _sites import SITES, DOM2SLUG
 CANON = {d: c for _, d, c in SITES}
 
@@ -30,7 +30,7 @@ LANG = {"iptvesp.com": ("Spanish", "es"), "primeiptv-france.com": ("French", "fr
         "iptvpix.com": ("French", "fr"), "smarters-live.com": ("French", "fr"), "iptvshqiptar.com": ("Albanian", "sq"),
         "smartersprofrance.fr": ("French", "fr"), "iptvfranceofficiel.fr": ("French", "fr"),
         "abonnementiptvofficiel.com": ("French", "fr"), "iptvsegura.com": ("Spanish", "es"), "rodaktv.com": ("Polish", "pl")}
-MONEY = {"iptvesp.com": "/suscripciones", "primeiptv-france.com": "/abonnement", "iptvned.com": "/abonnementen",
+MONEY = {"iptvesp.com": "/suscripciones", "primeiptv-france.com": "/tarifs", "iptvned.com": "/abonnementen",
          "iptvpix.com": "/abonnements", "smarters-live.com": "https://primeiptv-france.com/abonnement (funnel to the flagship)",
          "iptvshqiptar.com": "the subscription page", "smartersprofrance.fr": "/abonnement-iptv",
          "iptvfranceofficiel.fr": "/iptv-premium", "abonnementiptvofficiel.com": "/test-iptv", "iptvsegura.com": "/planes", "rodaktv.com": "/abonament"}
@@ -49,6 +49,15 @@ def daily_of(s): return D["sites"].get(s, {}).get("daily", []) or []
 DFS_DOWN = all((D["sites"].get(s, {}).get("dfs") or {}).get("ref_domains") is None for s in D["sites"]) if D["sites"] else False
 POS_SRC = ("positions from last probe 3 Sep — DFS paused, GSC cross-checked today" if DFS_DOWN
            else "live positions from this audit")
+TODAY_ISO = datetime.date.today().isoformat()
+try:
+    GSCD = json.load(open(os.path.join(BASE, "gsc_details.json")))
+except Exception:
+    GSCD = {}
+try:
+    INDEX = json.load(open(os.path.join(BASE, "indexation.json")))
+except Exception:
+    INDEX = {}
 def nrank(s): return sum(1 for r in KT.get(s, []) if r.get("pos"))
 
 # ---------------- icons ----------------
@@ -73,6 +82,12 @@ ICONS = {
  "warn": '<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/>',
  "chart": '<path d="M3 3v18h18"/><path d="M8 17v-5M13 17V8M18 17v-8"/>',
  "ext": '<path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"/>',
+ "wrench": '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4z"/>',
+ "coins": '<circle cx="8" cy="8" r="5"/><path d="M14.4 5.5a5 5 0 1 1-5 8.9"/>',
+ "users": '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.4a3.2 3.2 0 0 1 0 5.9M17 13.7a5.5 5.5 0 0 1 3.5 5.3"/>',
+ "chat": '<path d="M20 12a8 8 0 1 0-3.1 6.3L21 20l-1.2-3.6A8 8 0 0 0 20 12z"/>',
+ "map": '<path d="M9 4 4 6v14l5-2 6 2 5-2V4l-5 2-6-2z"/><path d="M9 4v14M15 6v14"/>',
+ "gear": '<circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2-1.2L14.2 3H9.8l-.4 2.7a7 7 0 0 0-2 1.2l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2 1.2l.4 2.7h4.4l.4-2.7a7 7 0 0 0 2-1.2l2.3 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/>',
  "layers": '<path d="m12 2 9 5-9 5-9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
 }
 def icon(n): return (f'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
@@ -589,20 +604,52 @@ HEAD_META = ('<meta name="viewport" content="width=device-width, initial-scale=1
              '<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 '
              'viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%23cc785c%22 d=%22M12 2l8 10-8 10-8-10z%22/%3E%3C/svg%3E">')
 
-def topbar(cur):
-    NAV = [("./", "Overview", None), ("today", "Work", "today"), ("trends", "Trends", "trends"),
-           ("links", "Backlinks", "links"), ("plan", "Plan", "plan"), ("sales", "Sales", "sales"),
-           ("replies", "Replies", "replies"), ("settings", "Settings", "settings")]
-    pills = "".join(f'<a href="{h}" class="{"on" if cur == k else ""}">{l}</a>' for h, l, k in NAV)
-    chips = "".join(f'<a class="schip{" on" if cur == s else ""}" href="{SLUG[s]}">'
-                    f'<span class="dot s{i+1}"></span>{ABBR[s]}</a>' for i, s in enumerate(ALL))
-    return (f'<header class="topbar"><div class="tb1">'
-            f'<a class="brand" href="./"><span class="brandmark">i</span>'
-            f'<span class="wordmark">IPTV <b>Portfolio</b></span></a>'
-            f'<nav class="navpills">{pills}</nav><span class="tbspacer"></span>'
-            f'<span class="auditstat">Audit {H.escape(STAMP_TXT)}</span>'
-            f'<button class="runbtn" id="runaudit" title="Copies the audit request — paste it to Claude">Run audit</button>'
-            f'</div><div class="tb2"><span class="lbl">Sites</span>{chips}</div></header>')
+SEM_UPD = SEM.get("_updated", "") if isinstance(SEM, dict) else ""
+
+def sidebar(cur):
+    groups = [
+        ("Portfolio", [("./", "Overview", None, "home"), ("performance", "Performance", "performance", "chart"),
+                       ("rankings", "Rankings", "rankings", "target"), ("content", "Content", "content", "file"),
+                       ("technical", "Technical", "technical", "wrench"), ("authority", "Authority", "authority", "award"),
+                       ("opportunities", "Opportunities", "opportunities", "bulb"), ("today", "Work", "today", "check")]),
+        ("Business", [("sales", "Sales", "sales", "coins"), ("clients", "Clients", "clients", "users"),
+                      ("replies", "Replies", "replies", "chat")]),
+        ("System", [("plan", "Plan", "plan", "map"), ("settings", "Integrations", "settings", "gear")]),
+    ]
+    out = ""
+    for label, items in groups:
+        out += f'<div class="navgrp">{label}</div>'
+        for h, l, k, ic in items:
+            out += f'<a href="{h}" class="{"on" if cur == k else ""}">{icon(ic) if ic in ICONS else ""}{l}</a>'
+    return (f'<aside class="side"><a class="brand" href="./"><span class="bmark">iP</span>'
+            f'<span class="bname">IPTV Portfolio</span></a><nav>{out}</nav>'
+            f'<div class="foot">Audit {H.escape(STAMP_TXT)}</div></aside>')
+
+def site_selector(cur):
+    rows = ""
+    for i, s in enumerate(ALL):
+        st = _sc.CONFIG[s]
+        rows += (f'<a href="{SLUG[s]}"><span class="dot s{i+1}"></span>{s}'
+                 f'<span class="meta">{H.escape(CTRY[s][1])} · {H.escape(st["status"].title())}</span></a>')
+    label = cur if cur in ALL else "All websites"
+    return (f'<details class="siteselect"><summary><span class="dot s{ALL.index(cur)+1 if cur in ALL else 1}" '
+            f'style="{"" if cur in ALL else "display:none"}"></span>{H.escape(label)}</summary>'
+            f'<div class="sitemenu"><a href="./" class="allrow">All websites'
+            f'<span class="meta">{NSITES} sites</span></a>{rows}</div></details>')
+
+def freshness_bar():
+    gsc_when = GSCD.get("generated", "") if GSCD else ""
+    items = [("GSC", f"pulled {gsc_when}" if gsc_when else "this audit", "" if gsc_when else "warn"),
+             ("DataForSEO", "this audit" if not DFS_DOWN else "OUT OF CREDIT", "warn" if DFS_DOWN else ""),
+             ("Semrush", H.escape(SEM_UPD) or "cached", "" if SEM_UPD == TODAY_ISO else "warn"),
+             ("Sales", "browser-local · live", "")]
+    return '<span class="fresh">' + "".join(
+        f'<span><span class="fdot {c}"></span><b>{n}</b> {v}</span>' for n, v, c in items) + '</span>'
+
+def topheader(title, cur):
+    return (f'<div class="toph"><span class="crumb">{H.escape(title)}</span>'
+            f'{freshness_bar()}{site_selector(cur)}'
+            f'<button class="runbtn" id="runaudit" title="Copies the audit request — paste it to Claude">Run audit</button></div>')
 
 RUN_JS = """<script>
 const rb = document.getElementById("runaudit");
@@ -612,16 +659,18 @@ if (rb) rb.addEventListener("click", async () => {
 });
 </script>"""
 
-def shell(title, body, cur=None, extra_js=""):
+def shell(title, body, cur=None, extra_js="", crumb=None):
     return f'''<title>{title}</title>
 {HEAD_META}
 {STYLE}
-<div class="viz-root">
-{topbar(cur)}
+<div class="viz-root"><div class="app">
+{sidebar(cur)}
+<div class="main">
+{topheader(crumb or title.split(" — ")[0], cur)}
 <main><div class="wrap">
 {flat(body)}
 </div></main>
-</div>
+</div></div></div>
 {RUN_JS}{extra_js}'''
 
 COPY_JS = """<script>
@@ -1897,3 +1946,7 @@ print("multi-page dashboard written to out/:", sorted(os.listdir(OUT)))
 # (cp cur_snapshot.json prev_snapshot.json) only after the new version is verified live.
 json.dump(CUR_SNAP, open(os.path.join(BASE, "cur_snapshot.json"), "w"), indent=1)
 print("snapshot saved to cur_snapshot.json — promote to prev_snapshot.json after deploy")
+
+# ---------------- v4 command-center pages (override index/settings, add sections) ----------------
+import v4_pages
+v4_pages.build_all(globals())
