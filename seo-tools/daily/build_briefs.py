@@ -78,6 +78,12 @@ S = [
       never="ES head terms ('iptv españa', 'listas iptv') and the telegram LISTS cluster — iptvesp owns those. Only the riesgos/safety angle may mention telegram.",
       comp=["iptvspain.es", "lecturas.com (listicles)", "guru99.com (listicles)"],
       tone="prudente, honesto, protector", reader="Spanish buyer who is worried about scams, cut-offs and legality before purchasing IPTV"),
+ dict(slug="rodak", dom="rodaktv.com", brand="Rodak TV", country="Poland", lang="Polish", lc="pl",
+      money=["/abonament"], sells="IPTV subscriptions for Poland and the Polish diaspora: HD/4K channels, free 24h test, activation via WhatsApp.",
+      lane="Sole PL site — owns the entire Polish market: 'iptv polska' head terms, /abonament money page, diaspora landers (/polska-telewizja-w-uk, -w-niemczech, -w-holandii, -w-irlandii, -w-belgii, -w-norwegii, -w-szwecji, -w-austrii, -w-usa) written in Polish but targeting those countries' SERPs, plus the install/config blog long-tail.",
+      never="'telewizja internetowa' head term at launch (dominated by legal mainstream streaming — long-tail articles only). No French/Spanish/Dutch terms — other portfolio sites own those markets.",
+      comp=["iptv-polska.com.pl (#1, only 5 ref domains)", "iptv-poland.pl", "polbox.tv (diaspora)", "polskie.tv (diaspora)"],
+      tone="konkretny, pomocny, bez ryzyka (direct, helpful, risk-free)", reader="Polish viewer at home or abroad (UK/DE strongest) who wants stable Polish TV online with an easy test before paying"),
 ]
 
 TPL = """# Site Brief — {brand}

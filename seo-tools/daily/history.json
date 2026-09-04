@@ -1215,6 +1215,14 @@
     "spam_score": 53,
     "ranked_top100": null,
     "targets_ranking": 5
+   },
+   "rodaktv.com": {
+    "ref_domains": null,
+    "backlinks": null,
+    "domain_rank": null,
+    "spam_score": null,
+    "ranked_top100": null,
+    "targets_ranking": 0
    }
   }
  }

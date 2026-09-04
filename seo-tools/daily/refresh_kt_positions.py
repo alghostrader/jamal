@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Re-probe every keyword target's live Google position (DataForSEO SERP live)."""
-import json, os, time, requests
+import json, os, sys, time, requests
 AUTH = (os.environ["DFS_LOGIN"], os.environ["DFS_PASSWORD"])
 BASE = os.path.dirname(os.path.abspath(__file__))
 API = "https://api.dataforseo.com/v3/serp/google/organic/live/advanced"
@@ -8,7 +8,7 @@ LOC = {"iptvesp.com": ("Spain", "es"), "primeiptv-france.com": ("France", "fr"),
        "iptvned.com": ("Netherlands", "nl"), "iptvpix.com": ("France", "fr"),
        "smarters-live.com": ("France", "fr"), "iptvshqiptar.com": ("Albania", "sq"),
        "smartersprofrance.fr": ("France", "fr"), "iptvfranceofficiel.fr": ("France", "fr"),
-       "abonnementiptvofficiel.com": ("France", "fr"), "iptvsegura.com": ("Spain", "es")}
+       "abonnementiptvofficiel.com": ("France", "fr"), "iptvsegura.com": ("Spain", "es"), "rodaktv.com": ("Poland", "pl")}
 
 def serp_pos(kw, loc, lang, domain):
     last = "no response"
@@ -32,11 +32,15 @@ def serp_pos(kw, loc, lang, domain):
 
 KT = json.load(open(os.path.join(BASE, "keyword_targets.json")))
 moved = 0
+ONLY = sys.argv[1] if len(sys.argv) > 1 else None
 for site, rows in KT.items():
+    if ONLY and site != ONLY: continue
     loc, lang = LOC[site]
     for r in rows:
         old = r.get("pos")
-        pos, url, err = serp_pos(r["kw"], loc, lang, site)
+        # diaspora keywords carry their own probe location, e.g. {"loc": ["United Kingdom", "pl"]}
+        kloc, klang = (r.get("loc") or [loc, lang])
+        pos, url, err = serp_pos(r["kw"], kloc, klang, site)
         if err:
             print(f"  {site} · {r['kw']!r}: probe error ({err}) — keeping pos={old}"); continue
         r["pos"] = pos

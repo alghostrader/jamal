@@ -330,5 +330,51 @@
    "page": "/guias/iptv-fire-tv-stick",
    "url": "/"
   }
+ ],
+ "rodaktv.com": [
+  {
+   "kw": "iptv polska",
+   "vol": 1900,
+   "pos": null,
+   "page": "/"
+  },
+  {
+   "kw": "polska telewizja w uk",
+   "vol": 2000,
+   "pos": null,
+   "page": "/polska-telewizja-w-uk",
+   "loc": [
+    "United Kingdom",
+    "pl"
+   ]
+  },
+  {
+   "kw": "polska telewizja w niemczech",
+   "vol": 720,
+   "pos": null,
+   "page": "/polska-telewizja-w-niemczech",
+   "loc": [
+    "Germany",
+    "pl"
+   ]
+  },
+  {
+   "kw": "iptv abonament",
+   "vol": 20,
+   "pos": null,
+   "page": "/abonament"
+  },
+  {
+   "kw": "test iptv",
+   "vol": 40,
+   "pos": null,
+   "page": "/test-iptv"
+  },
+  {
+   "kw": "iptv opinie",
+   "vol": 90,
+   "pos": null,
+   "page": "/opinie"
+  }
  ]
 }

@@ -118,7 +118,7 @@
   "no_meta_desc": [],
   "thin": [],
   "favicon": 200,
-  "apex": "err HTTPSConnectionPool(host='smartersprofra",
+  "apex": "308 -> https://www.smartersprofrance.fr/",
   "www": "200",
   "www_redirect": "200"
  },
@@ -160,5 +160,17 @@
   ],
   "favicon": 200,
   "www_redirect": "308 -> https://iptvsegura.com/"
+ },
+ "rodaktv.com": {
+  "pages": 31,
+  "titles_over60": [],
+  "redirect_links": [],
+  "linked404": {},
+  "orphans": [],
+  "canonical_mismatch": [],
+  "no_meta_desc": [],
+  "thin": [],
+  "favicon": 200,
+  "www_redirect": "307 -> https://rodaktv.com/"
  }
 }

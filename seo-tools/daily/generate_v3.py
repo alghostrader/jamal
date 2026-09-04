@@ -25,20 +25,20 @@ SATELLITES = ["smartersprofrance.fr", "iptvfranceofficiel.fr", "abonnementiptvof
 SLUG = {s: s.replace(".com", "").replace(".", "-") for s in ALL}
 ABBR = {"iptvesp.com": "esp", "primeiptv-france.com": "prime", "iptvned.com": "ned", "iptvpix.com": "pix",
         "smarters-live.com": "slive", "iptvshqiptar.com": "shqip", "smartersprofrance.fr": "spf",
-        "iptvfranceofficiel.fr": "ifo", "abonnementiptvofficiel.com": "aio", "iptvsegura.com": "segura"}
+        "iptvfranceofficiel.fr": "ifo", "abonnementiptvofficiel.com": "aio", "iptvsegura.com": "segura", "rodaktv.com": "rodak"}
 LANG = {"iptvesp.com": ("Spanish", "es"), "primeiptv-france.com": ("French", "fr"), "iptvned.com": ("Dutch", "nl"),
         "iptvpix.com": ("French", "fr"), "smarters-live.com": ("French", "fr"), "iptvshqiptar.com": ("Albanian", "sq"),
         "smartersprofrance.fr": ("French", "fr"), "iptvfranceofficiel.fr": ("French", "fr"),
-        "abonnementiptvofficiel.com": ("French", "fr"), "iptvsegura.com": ("Spanish", "es")}
+        "abonnementiptvofficiel.com": ("French", "fr"), "iptvsegura.com": ("Spanish", "es"), "rodaktv.com": ("Polish", "pl")}
 MONEY = {"iptvesp.com": "/suscripciones", "primeiptv-france.com": "/abonnement", "iptvned.com": "/abonnementen",
          "iptvpix.com": "/abonnements", "smarters-live.com": "https://primeiptv-france.com/abonnement (funnel to the flagship)",
          "iptvshqiptar.com": "the subscription page", "smartersprofrance.fr": "/abonnement-iptv",
-         "iptvfranceofficiel.fr": "/iptv-premium", "abonnementiptvofficiel.com": "/test-iptv", "iptvsegura.com": "/planes"}
+         "iptvfranceofficiel.fr": "/iptv-premium", "abonnementiptvofficiel.com": "/test-iptv", "iptvsegura.com": "/planes", "rodaktv.com": "/abonament"}
 CTRY = {"iptvesp.com": ("\U0001F1EA\U0001F1F8", "Spain"), "primeiptv-france.com": ("\U0001F1EB\U0001F1F7", "France"),
         "iptvpix.com": ("\U0001F1EB\U0001F1F7", "France"), "smarters-live.com": ("\U0001F1EB\U0001F1F7", "France"),
         "iptvned.com": ("\U0001F1F3\U0001F1F1", "Netherlands"), "iptvshqiptar.com": ("\U0001F1E6\U0001F1F1", "Albania"),
         "smartersprofrance.fr": ("\U0001F1EB\U0001F1F7", "France"), "iptvfranceofficiel.fr": ("\U0001F1EB\U0001F1F7", "France"),
-        "abonnementiptvofficiel.com": ("\U0001F1EB\U0001F1F7", "France"), "iptvsegura.com": ("\U0001F1EA\U0001F1F8", "Spain")}
+        "abonnementiptvofficiel.com": ("\U0001F1EB\U0001F1F7", "France"), "iptvsegura.com": ("\U0001F1EA\U0001F1F8", "Spain"), "rodaktv.com": ("\U0001F1F5\U0001F1F1", "Poland")}
 gen = D["generated"]
 GSC_OFF = bool(D.get("gsc_unavailable"))
 STAMP_TXT = STAMP or gen
@@ -176,6 +176,7 @@ LANE = {
  "iptvfranceofficiel.fr": "Satellite: iptv premium / HDR quality angle. Head terms stay with the flagship.",
  "abonnementiptvofficiel.com": "Satellite: trial & deal intent (test, essai, pas cher) + boitier hardware.",
  "iptvsegura.com": "ES safety/trust lane: es-seguro, estafas, legalidad, riesgos angles + guides, funnel to /planes. NEVER the ES head terms or the telegram LISTS cluster (iptvesp owns those) — the riesgos angle only.",
+ "rodaktv.com": "Sole PL site — owns the whole Polish market: iptv polska head terms, /abonament money page, diaspora landers (UK/DE/NL/IE/BE/NO/SE/AT/USA) in Polish targeting those countries' SERPs, install/config long-tail.",
 }
 
 def site_prompt(site):
@@ -203,7 +204,7 @@ prompts = {s: site_prompt(s) for s in ALL}
 # ---------------- article prompts (with market reservation) ----------------
 MK = lambda s: LANG[s][1]
 CONTENT_PRIO = ["smarters-live.com", "primeiptv-france.com", "iptvesp.com", "iptvned.com", "iptvpix.com",
-                "abonnementiptvofficiel.com", "iptvfranceofficiel.fr", "smartersprofrance.fr", "iptvshqiptar.com", "iptvsegura.com"]
+                "abonnementiptvofficiel.com", "iptvfranceofficiel.fr", "smartersprofrance.fr", "iptvshqiptar.com", "iptvsegura.com", "rodaktv.com"]
 RESERVED = {}
 for _s in SATELLITES + [x for x in ALL if x not in SATELLITES]:
     for _r in KT.get(_s, []):
@@ -494,8 +495,9 @@ def build_work():
                   f'<div style="margin-top:8px"><button class="btn sm" data-copy>Copy prompt</button></div></div></div>')
     cols.append(("Links", 1, link_cards))
     owner = []
-    if not D["sites"].get("iptvsegura.com", {}).get("in_gsc"):
-        owner.append("iptvsegura: add the monitoring service account in Search Console (Restricted)")
+    for _od in ALL:
+        if not D["sites"].get(_od, {}).get("in_gsc"):
+            owner.append(f"{ABBR[_od]}: add the sc-domain property + monitoring service account in Search Console (Restricted)")
     owner.append("Weekly: send Claude the sales numbers per site")
     owner.append("Review the \u26a0\ufe0f fields in seo-tools/briefs/")
     own_cards = "".join(f'<div class="task"><div class="meta"><span class="tag neu">OWNER</span></div>'
@@ -1636,7 +1638,8 @@ PHASE = {"iptvesp.com": ("GROW 📈", "Protect the Spanish money queries; conver
          "smartersprofrance.fr": ("SATELLITE ↺", "Install/config long-tail only"),
          "iptvfranceofficiel.fr": ("SATELLITE ↺", "Premium/HDR lane; retitle /application-iptv off the head term"),
          "abonnementiptvofficiel.com": ("WATCH ◎", "Money pages frozen; support with internal links only"),
-         "iptvsegura.com": ("ONBOARD ◔", "NEW: ES safety/trust lane — GSC property + first links + fix titles/www")}
+         "iptvsegura.com": ("ONBOARD ◔", "NEW: ES safety/trust lane — GSC property + first links + fix titles/www"),
+         "rodaktv.com": ("LAUNCH ◔", "NEW: sole PL site — GSC property + www 308 + day-one links (page 1 ≈ 10–30 rd)")}
 for s in ALL:
     ph, job = PHASE[s]; dfs = dfs_of(s)
     prow += (f'<tr><td>{s}</td><td>{ph}</td><td>{job}</td>'

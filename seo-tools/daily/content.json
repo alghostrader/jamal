@@ -3031,5 +3031,189 @@
   ],
   "n_articles": 29,
   "n_thin": 1
+ },
+ "rodaktv.com": {
+  "articles": [
+   {
+    "path": "/blog/najlepsza-platna-telewizja-internetowa",
+    "title": "Najlepsza płatna telewizja internetowa — porównanie 2026",
+    "words": 1943
+   },
+   {
+    "path": "/blog/iptv-co-to-jest",
+    "title": "IPTV co to jest — jak działa telewizja online",
+    "words": 1754
+   },
+   {
+    "path": "/blog/lista-m3u-polska",
+    "title": "Lista M3U w Polsce — co to jest i czy jest bezpieczna",
+    "words": 1740
+   },
+   {
+    "path": "/blog/iptv-na-firestick",
+    "title": "IPTV na Fire TV Stick — instalacja krok po kroku",
+    "words": 1718
+   },
+   {
+    "path": "/blog/iptv-na-smart-tv-samsung",
+    "title": "IPTV na Smart TV Samsung — instalacja krok po kroku",
+    "words": 1708
+   },
+   {
+    "path": "/blog/iptv-4k",
+    "title": "IPTV 4K — jaka jakość i jakie łącze internetowe",
+    "words": 1667
+   },
+   {
+    "path": "/blog/iptv-na-android-box",
+    "title": "IPTV na Android Box — instalacja krok po kroku",
+    "words": 1653
+   },
+   {
+    "path": "/blog/jak-skonfigurowac-iptv",
+    "title": "Jak skonfigurować IPTV — instrukcja krok po kroku",
+    "words": 1458
+   },
+   {
+    "path": "/blog/iptv-na-lg-smart-tv",
+    "title": "IPTV na LG Smart TV — instalacja na webOS krok po kroku",
+    "words": 1356
+   },
+   {
+    "path": "/abonament",
+    "title": "Abonament IPTV — plany, ceny i aktywacja",
+    "words": 1185
+   },
+   {
+    "path": "/blog/iptv-sie-tnie",
+    "title": "IPTV się tnie i buforuje — jak to naprawić",
+    "words": 1178
+   },
+   {
+    "path": "/blog/iptv-na-telefonie",
+    "title": "IPTV na telefonie — jak oglądać na Androidzie i iPhonie",
+    "words": 1176
+   },
+   {
+    "path": "/blog/jak-wybrac-dostawce-iptv",
+    "title": "Jak wybrać dostawcę IPTV — 7 rzeczy do sprawdzenia",
+    "words": 1162
+   },
+   {
+    "path": "/blog/iptv-a-prawo-w-polsce",
+    "title": "Czy IPTV jest legalne w Polsce — co warto wiedzieć",
+    "words": 1099
+   },
+   {
+    "path": "/blog/iptv-na-komputerze",
+    "title": "IPTV na komputerze — jak oglądać na Windows i w VLC",
+    "words": 1078
+   },
+   {
+    "path": "/polska-telewizja-za-granica",
+    "title": "Polska telewizja za granicą — oglądaj online z każdego kraju",
+    "words": 901
+   },
+   {
+    "path": "/opinie",
+    "title": "IPTV opinie — jak wybrać najlepszego dostawcę",
+    "words": 888
+   },
+   {
+    "path": "/blog",
+    "title": "Poradniki IPTV — instalacja, jakość i bezpieczeństwo",
+    "words": 761
+   },
+   {
+    "path": "/polska-telewizja-w-holandii",
+    "title": "Polska telewizja w Holandii — oglądaj online bez anteny",
+    "words": 756
+   },
+   {
+    "path": "/polska-telewizja-w-usa",
+    "title": "Polska telewizja w USA — oglądaj online przez internet",
+    "words": 742
+   },
+   {
+    "path": "/polska-telewizja-w-norwegii",
+    "title": "Polska telewizja w Norwegii — oglądaj online bez anteny",
+    "words": 727
+   },
+   {
+    "path": "/polska-telewizja-w-irlandii",
+    "title": "Polska telewizja w Irlandii — oglądaj online przez internet",
+    "words": 722
+   },
+   {
+    "path": "/polska-telewizja-w-szwecji",
+    "title": "Polska telewizja w Szwecji — oglądaj online bez anteny",
+    "words": 695
+   },
+   {
+    "path": "/polska-telewizja-w-austrii",
+    "title": "Polska telewizja w Austrii — oglądaj online bez anteny",
+    "words": 695
+   },
+   {
+    "path": "/polska-telewizja-w-belgii",
+    "title": "Polska telewizja w Belgii — oglądaj online bez anteny",
+    "words": 689
+   },
+   {
+    "path": "/polska-telewizja-w-uk",
+    "title": "Polska telewizja w UK — oglądaj online przez internet",
+    "words": 682
+   },
+   {
+    "path": "/test-iptv",
+    "title": "Test IPTV — sprawdź usługę za darmo przez 24 h",
+    "words": 671
+   },
+   {
+    "path": "/polska-telewizja-w-niemczech",
+    "title": "Polska telewizja w Niemczech — oglądaj online",
+    "words": 646
+   }
+  ],
+  "recommend": [
+   {
+    "kw": "polska telewizja w uk",
+    "vol": 2000,
+    "covered": true,
+    "page": "/polska-telewizja-w-uk"
+   },
+   {
+    "kw": "iptv polska",
+    "vol": 1900,
+    "covered": true,
+    "page": "/"
+   },
+   {
+    "kw": "polska telewizja w niemczech",
+    "vol": 720,
+    "covered": true,
+    "page": "/polska-telewizja-w-niemczech"
+   },
+   {
+    "kw": "iptv opinie",
+    "vol": 90,
+    "covered": true,
+    "page": "/opinie"
+   },
+   {
+    "kw": "test iptv",
+    "vol": 40,
+    "covered": true,
+    "page": "/test-iptv"
+   },
+   {
+    "kw": "iptv abonament",
+    "vol": 20,
+    "covered": true,
+    "page": "/abonament"
+   }
+  ],
+  "n_articles": 28,
+  "n_thin": 0
  }
 }

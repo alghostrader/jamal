@@ -118,5 +118,15 @@
   "organic_traffic": 0,
   "organic_keywords": 7,
   "ok_delta": "FIRST ES organic listing"
+ },
+ "rodaktv.com": {
+  "date": "2026-09-04",
+  "authority_score": null,
+  "ref_domains": null,
+  "backlinks": null,
+  "organic_keywords": null,
+  "organic_traffic": null,
+  "ok_delta": "",
+  "as_label": "brand new \u2014 not yet in Semrush index"
  }
 }
