@@ -1,5 +1,5 @@
 {
- "date": "2026-09-04",
+ "date": "2026-09-05",
  "tasks": [
   {
    "id": "dbb3a9ea15",
@@ -104,6 +104,23 @@
    }
   },
   {
+   "id": "8fcbe4f4aa",
+   "kind": "Striking distance",
+   "site": "abonnementiptvofficiel.com",
+   "query": "boitier iptv",
+   "page": "",
+   "what": "\u201cboitier iptv\u201d sits at position 22 with 168 impressions/28d.",
+   "score": 61,
+   "bucket": "next",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 22.4,
+    "clicks28": 3
+   }
+  },
+  {
    "id": "70f507b6f5",
    "kind": "Striking distance",
    "site": "iptvesp.com",
@@ -169,6 +186,23 @@
     "probe_pos": null,
     "gsc_pos": 7,
     "clicks28": 2
+   }
+  },
+  {
+   "id": "a7f8ec3cc1",
+   "kind": "Striking distance",
+   "site": "smartersprofrance.fr",
+   "query": "smarters player lite",
+   "page": "",
+   "what": "\u201csmarters player lite\u201d sits at position 24 with 44 impressions/28d.",
+   "score": 55,
+   "bucket": "next",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 23.9,
+    "clicks28": 0
    }
   },
   {
@@ -407,6 +441,23 @@
     "probe_pos": null,
     "gsc_pos": 13.2,
     "clicks28": 1
+   }
+  },
+  {
+   "id": "ee2bf478f4",
+   "kind": "Striking distance",
+   "site": "iptvsegura.com",
+   "query": "iptv segura",
+   "page": "",
+   "what": "\u201ciptv segura\u201d sits at position 20 with 10 impressions/28d.",
+   "score": 51,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": 30,
+    "gsc_pos": 19.8,
+    "clicks28": 0
    }
   },
   {
@@ -831,6 +882,23 @@
    "baseline": {
     "probe_pos": null,
     "gsc_pos": 8.9,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "a520b2958d",
+   "kind": "Striking distance",
+   "site": "iptvsegura.com",
+   "query": "que es una lista m3u",
+   "page": "",
+   "what": "\u201cque es una lista m3u\u201d sits at position 24 with 12 impressions/28d.",
+   "score": 49,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": 31,
+    "gsc_pos": 23.6,
     "clicks28": 0
    }
   },
@@ -1647,23 +1715,6 @@
    "baseline": {
     "probe_pos": null,
     "gsc_pos": 18.4,
-    "clicks28": 0
-   }
-  },
-  {
-   "id": "ee2bf478f4",
-   "kind": "Striking distance",
-   "site": "iptvsegura.com",
-   "query": "iptv segura",
-   "page": "",
-   "what": "\u201ciptv segura\u201d sits at position 20 with 10 impressions/28d.",
-   "score": 43,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": 30,
-    "gsc_pos": 19.8,
     "clicks28": 0
    }
   },

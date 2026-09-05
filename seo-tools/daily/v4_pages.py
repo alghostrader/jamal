@@ -348,7 +348,8 @@ def build_all(G):
                 pos, imp, ctr = v["position"], v["impressions"], v["ctr"]
                 intent = any(w in q for w in INTENT_WORDS)
                 strat = any(r["kw"] == q for r in KT.get(s, []))
-                if 4 <= pos <= 20 and imp >= 10:
+                sd_cap = 25 if (strat or (vol_of(s, q) or 0) >= 5000) else 20
+                if 4 <= pos <= sd_cap and imp >= 10:
                     upside = max(0, (ectr(3) - ctr)) * imp
                     score = min(30, imp // 10) + max(0, 25 - int(pos)) + (20 if intent else 8) \
                         + min(15, int(upside / 5)) + phase_bonus + (5 if strat else 0)
@@ -549,6 +550,9 @@ def build_all(G):
     def kw_posture(s, r):
         p, op = r.get("pos"), prev_pos.get((s, r["kw"]))
         vol = r.get("vol") or 0
+        g = GS.get(s, {}).get("queries", {}).get("cur", {}).get(r["kw"])
+        if p is None and g and g["position"] <= 30 and vol >= 5000:
+            return ("PUSH", f"Probes miss it (retail-heavy SERP) but real users see it at GSC #{g['position']:.0f} on {vol:,}/mo — GSC is the truth here; the biggest prize in this market.")
         if p and p <= 3: return ("MAINTAIN", "Strong position — protect, don't touch.")
         if op and op <= 20 and (p is None or p > op + 4): return ("RECOVER", "Earned ranking is slipping — investigate before it settles lower.")
         if p and 4 <= p <= 10: return ("PUSH", "Close to the top 3 — highest-leverage band.")

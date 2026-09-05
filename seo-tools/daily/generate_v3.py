@@ -173,7 +173,7 @@ def tech_items(site):
     if str(f.get("www_redirect", "")).startswith("307") or str(f.get("apex", "")).startswith("307"):
         p.append(f"""{len(p)+1}. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> Domains set it to permanent (308). Verify with curl -sI.""")
     if f.get("favicon") not in (200, None):
-        p.append(f"""{len(p)+1}. FAVICON (P2). /favicon.ico returns {f.get('favicon')}. Ship a real favicon.ico in public/. Verify 200.""")
+        p.append(f"""{len(p)+1}. FAVICON (P3, cosmetic). /favicon.ico returns {f.get('favicon')}. Ship a favicon.ico in public/ when convenient — no ranking impact.""")
     thin = f.get("thin", [])
     if len(thin) > 2:
         p.append(f"""{len(p)+1}. THIN PAGES (P2). {len(thin)} page(s) under 300 words: {', '.join(thin[:6])}.
@@ -356,7 +356,7 @@ def alerts():
             A.append(("crit", f"{s} is NOT in Search Console (verified via sites.list) — add the sc-domain property, "
                               f"submit sitemap.xml, and add the monitoring service account as a user. "
                               f"Until then the dashboard cannot track its traffic."))
-        if f.get("favicon") not in (200, None): A.append(("warn", f"{s}: /favicon.ico returns {f.get('favicon')}"))
+        # favicon status is informational (shown in the site checklist), never an alert
         if rd is not None and rd <= 5:
             A.append(("warn", f"{s}: only {rd} referring domains — authority is the ceiling; run the Backlinks steps"))
         sp_hist = [h["sites"].get(s, {}).get("spam_score") for h in HIST if s in h.get("sites", {})]

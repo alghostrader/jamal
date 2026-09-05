@@ -39,11 +39,6 @@
    "pos": null
   },
   {
-   "kw": "boitier iptv",
-   "vol": 14800,
-   "pos": null
-  },
-  {
    "kw": "iptv france",
    "vol": 9900,
    "pos": null
@@ -248,6 +243,12 @@
  ],
  "abonnementiptvofficiel.com": [
   {
+   "kw": "boitier iptv",
+   "vol": 14800,
+   "pos": null,
+   "page": "/boitier-iptv"
+  },
+  {
    "kw": "test iptv gratuit",
    "vol": 1900,
    "pos": null,
@@ -261,7 +262,7 @@
   {
    "kw": "essai iptv 7 jours",
    "vol": 90,
-   "pos": 48,
+   "pos": 50,
    "page": "/test-iptv",
    "url": "/"
   },
@@ -373,8 +374,27 @@
   {
    "kw": "iptv opinie",
    "vol": 90,
+   "pos": 43,
+   "page": "/opinie",
+   "url": "/"
+  },
+  {
+   "kw": "polska telewizja za granica",
+   "vol": 90,
    "pos": null,
-   "page": "/opinie"
+   "page": "/polska-telewizja-za-granica"
+  },
+  {
+   "kw": "polskie kanaly telegram",
+   "vol": 90,
+   "pos": null,
+   "page": null
+  },
+  {
+   "kw": "smart iptv",
+   "vol": 2900,
+   "pos": null,
+   "page": null
   }
  ]
 }
