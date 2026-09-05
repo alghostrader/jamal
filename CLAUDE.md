@@ -57,4 +57,8 @@ Console service account) must be re-supplied by the owner after a recycle.
   frozen 1 Aug, ~2-3 weeks) — support via internal links only.
 - Dashboard generator lives in the session scratchpad (`scratchpad/daily/generate_v3.py`);
   deploys go to the `dashboard` branch as static HTML with a pipeline marker comment.
+- **Dashboard is password-protected** — `middleware.js` on the `dashboard` branch (Vercel Edge
+  Middleware, HTTP Basic Auth). NEVER delete or overwrite it during a deploy; every deploy must
+  keep it. Credentials: env vars DASH_USER / DASH_PASS in Vercel (fallbacks live in the file).
+  Verify after each deploy: unauthenticated request → 401, authenticated → 200.
 - Model ID never appears in commits/PRs. Git author is the owner's identity.
