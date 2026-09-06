@@ -33,11 +33,13 @@ Console service account) must be re-supplied by the owner after a recycle.
    today/next/monitor/backlog, capped at 5 diverse tasks), Work, Performance, Rankings
    (postures), Content, Technical, Authority, Opportunities, Integrations, all site pages.
    Anything conditional must be recomputed (steps auto-clear when work is verified done).
-   **Task feedback loop**: if the owner pastes a "TASK STATUS v2" blob (from Today's
-   Copy-status button), merge its completed/dismissed states into
-   seo-tools/daily/task_history.json BEFORE generating — completed tasks keep their
-   plan.json baselines and get 7/14/28-day before/after verification automatically.
-   Technical fixes auto-verify when the defect disappears from the fresh crawl.
+   **Task feedback loop (automatic)**: run `python3 fetch_task_state.py` BEFORE generating —
+   it reads the owner's synced ticks (Today/Work/Backlinks) from the sales project's
+   Firestore (`seo_state/{uid}`, service account has Cloud Datastore Viewer on iptv-sales)
+   into cloud_state.json; the generator turns completed ticks into task_history.json
+   records with their plan.json baselines and runs 7/14/28-day verification. A pasted
+   "TASK STATUS v2" blob is only a fallback if the reader fails. Technical fixes
+   auto-verify when the defect disappears from the fresh crawl.
 8. **History** — append authority + keyword-position history points.
 9. **Deploy** — dashboard branch, pipeline marker, verify the marker live on
    iptv.alghostrader.com before reporting done.

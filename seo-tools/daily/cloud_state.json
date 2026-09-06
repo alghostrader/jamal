@@ -1,0 +1,37 @@
+{
+ "fetched": "2026-09-06T11:58Z",
+ "ok": true,
+ "tasks": {
+  "bd9ac0bccf": {
+   "completed": "2026-09-06",
+   "state": "completed",
+   "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: afrekenen, afrekenen, afrekenen, "
+  },
+  "e91c45e957": {
+   "completed": "2026-09-06",
+   "state": "completed",
+   "title": "FIX: 1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, che"
+  },
+  "dda33ce6cb": {
+   "completed": "2026-09-06",
+   "state": "completed",
+   "title": "WRITE: \u201ciptv provider\u201d \u2014 880/mo. Today\u2019s one article."
+  },
+  "82fbbe1c24": {
+   "completed": "2026-09-06",
+   "state": "completed",
+   "title": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, che"
+  },
+  "8162a0a994": {
+   "completed": "2026-09-06",
+   "state": "completed",
+   "title": "FIX: 1. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> D"
+  },
+  "0b8f632913": {
+   "completed": "2026-09-06",
+   "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: checkout, checkout, checkout, che",
+   "state": "completed"
+  }
+ },
+ "links": {}
+}

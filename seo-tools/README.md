@@ -40,6 +40,9 @@ python3 -c "from _sites import SITES; [print(s,c) for s,_,c in SITES]" | \
 set -a && . ../dash/.env && set +a
 python3 ../dash/fetch_dash_data.py     # GSC (if key present) + DataForSEO
 python3 refresh_kt_positions.py        # live SERP position for every target
+python3 fetch_gsc_details.py           # query/page/device/country, 28d vs prev
+python3 inspect_urls.py                # URL Inspection for priority pages
+python3 fetch_task_state.py            # owner's synced ticks from Firestore → cloud_state.json
 python3 build_findings.py
 python3 build_content_kw.py && python3 build_content.py
 python3 history.py

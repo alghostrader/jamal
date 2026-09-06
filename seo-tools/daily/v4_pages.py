@@ -620,6 +620,25 @@ def build_all(G):
         THIST = J.load(open(HIST_PATH))
     except Exception:
         THIST = {"completed": []}
+    # owner ticks synced from Firestore (fetch_task_state.py) → completed records with plan baselines
+    try:
+        CLOUD = J.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "cloud_state.json")))
+    except Exception:
+        CLOUD = {}
+    plan_by_id = {t["id"]: t for t in (PREV_PLAN.get("tasks") or [])}
+    plan_by_id.update({t["id"]: t for t in TASKS})
+    known = {c["id"] for c in THIST["completed"]}
+    for cid, cs in (CLOUD.get("tasks") or {}).items():
+        if not isinstance(cs, dict) or cs.get("state") != "completed" or cid in known: continue
+        pt = plan_by_id.get(cid) or {}
+        title = str(cs.get("title") or pt.get("what") or "")
+        kind = pt.get("kind") or ("Technical fix" if title.startswith("FIX") else "Content gap" if title.startswith(("WRITE", "QUEUED")) else "Owner task")
+        THIST["completed"].append({"id": cid, "kind": kind, "site": pt.get("site", ""), "query": pt.get("query", ""),
+                                   "page": pt.get("page", ""), "what": pt.get("what") or title[:160],
+                                   "baseline": pt.get("baseline") or {"probe_pos": None, "gsc_pos": None, "clicks28": 0},
+                                   "completed": cs.get("completed") or TODAY_STR,
+                                   "how": "marked done by the owner (synced from the dashboard)",
+                                   "outcome": "AWAITING VERIFICATION"})
     # auto-complete technical tasks that existed in the previous plan and are now gone
     open_ids = {t["id"] for t in TASKS}
     for pt in (PREV_PLAN.get("tasks") or []):
@@ -627,6 +646,9 @@ def build_all(G):
             THIST["completed"].append({**{k: pt.get(k) for k in ("id", "kind", "site", "query", "page", "what", "baseline")},
                                        "completed": TODAY_STR, "how": ("auto-verified: the defect is gone from this audit's crawl" if pt["kind"] == "Technical fix" else "auto-verified: page(s) now PASS in GSC URL Inspection"),
                                        "outcome": "VERIFIED"})
+    for c in THIST["completed"]:
+        if c.get("kind") == "Technical fix" and c.get("outcome") == "AWAITING VERIFICATION" and c["id"] not in open_ids:
+            c["outcome"] = "VERIFIED"; c["how"] += " · defect gone from this audit's crawl"
     # verification checkpoints for completed tasks with a keyword baseline
     for c in THIST["completed"]:
         if c.get("outcome") == "VERIFIED" or not c.get("query"): continue
