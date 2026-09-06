@@ -1328,16 +1328,16 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
 })();
 </script>"""
     SYNC_JS = """<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-const app = initializeApp({ apiKey: "AIzaSyAI1eXkzlFca79XYLUS41WFTPPG2mL4BJI", authDomain: "iptv-sales.firebaseapp.com",
+const app = getApps().length ? getApps()[0] : initializeApp({ apiKey: "AIzaSyAI1eXkzlFca79XYLUS41WFTPPG2mL4BJI", authDomain: "iptv-sales.firebaseapp.com",
   projectId: "iptv-sales", messagingSenderId: "547649027254", appId: "1:547649027254:web:87d70cbfd54ff34164ba17" });
 const auth = getAuth(app), db = getFirestore(app), K = 'seo_tasks_v2';
 const el = document.getElementById('syncstate');
 function status(t, ok){ if(el){ el.textContent = t; el.style.color = ok ? '#16a34a' : ''; } }
 onAuthStateChanged(auth, function(user){
-  if(!user){ status('Task states: local to this browser — sign in on the Sales page once for cross-device sync', false); window.seoCloudSave = null; return; }
+  if(!user){ status('Task states: local to this browser until you sign in', false); window.seoCloudSave = null; return; }
   const ref = doc(db, 'seo_state', user.uid);
   let pushedLocal = false;
   window.seoCloudSave = function(st){ setDoc(ref, { tasks: st, updated_at: Date.now() }, { merge: true })
