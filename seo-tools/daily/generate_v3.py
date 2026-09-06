@@ -829,11 +829,11 @@ document.querySelectorAll("[data-copy]").forEach(btn=>btn.addEventListener("clic
 
 LINKS_JS = """<script>
 (function(){
-  function applyAll(){ document.querySelectorAll('input.lpx').forEach(function(cb){ cb.checked=localStorage.getItem('lp:'+cb.id)==='1'; }); document.querySelectorAll('tr').forEach(count); }
+  function applyAll(){ document.querySelectorAll('input.lpx').forEach(function(cb){ cb.checked=cb.dataset.placed==='1'||localStorage.getItem('lp:'+cb.id)==='1'; }); document.querySelectorAll('tr').forEach(count); }
   function pushCloud(){ if(!window.seoCloudSaveLinks) return; var map={}; document.querySelectorAll('input.lpx').forEach(function(cb){ if(cb.checked) map[cb.id]=1; }); window.seoCloudSaveLinks(map); }
   document.querySelectorAll('input.lpx').forEach(function(cb){
     if(localStorage.getItem('lp:'+cb.id)==='1') cb.checked=true;
-    cb.addEventListener('change',function(){localStorage.setItem('lp:'+cb.id,cb.checked?'1':'0');count(cb.closest('tr'));pushCloud();});
+    cb.addEventListener('change',function(){ if(cb.dataset.placed==='1'&&!cb.checked){ cb.checked=true; return; } localStorage.setItem('lp:'+cb.id,cb.checked?'1':'0');count(cb.closest('tr'));pushCloud();});
   });
   window.addEventListener('seo-links-sync', applyAll);
   function count(row){if(!row)return;var t=row.querySelectorAll('input.lpx').length,d=row.querySelectorAll('input.lpx:checked').length;
@@ -1671,6 +1671,73 @@ def trends_body():
 open(os.path.join(OUT, "trends.html"), "w").write(shell("Trends — IPTV Portfolio", trends_body(), cur="trends"))
 
 # links
+# ---------------- Backlinks checklist from the verified ledger ----------------
+import csv as _csv
+LEDGER_PATH = os.path.join(BASE, "backlink_ledger.csv")
+PAUSED_LINKS = {"aio": "spam 58", "slive": "spam 62"}          # +4-pt jump rule: no new links until reviewed
+NEXT_P1 = [("blogger", "Blogger blog + 1 post", {"esp"}), ("wordpress", "WordPress.com blog + 1 post", {"pix", "prime"}),
+           ("medium", "Medium article (max 2/day)", {"prime", "ned"}), ("tumblr", "Tumblr blog + 1 post", {"aio"}),
+           ("substack", "Substack post", {"spf"})]
+NEXT_P2 = [("hotfrog", "Hotfrog"), ("cylex", "Cylex"), ("tupalo", "Tupalo"), ("europages", "Europages"), ("infobel", "Infobel")]
+NEXT_P3 = [("linktree", "Linktree / Beacons hub"), ("gravatar", "Gravatar profile"), ("pinterest", "Pinterest profile"),
+           ("aboutme", "About.me profile"), ("crunchbase", "Crunchbase profile")]
+NEXT_P4 = [("sourceofsources", "Source of Sources (expert account)"), ("featured", "Featured.com account"),
+           ("qwoted", "Qwoted account"), ("talkwalker", "Talkwalker Alerts account")]
+
+def ledger_checklist():
+    """Real placements (pre-ticked, verified live) + prioritised next targets, grouped by website."""
+    rows = list(_csv.DictReader(open(LEDGER_PATH, encoding="utf-8"))) if os.path.exists(LEDGER_PATH) else []
+    live = {}; lost = {}
+    for r in rows:
+        (live if r["status"] == "live" else lost).setdefault(r["site"], []).append(r)
+    KEY2DOM = {v: k for k, v in ABBR.items()}
+    order = ["rodak"] + [ABBR[s] for s in ALL if ABBR[s] != "rodak"]
+    def box(pid, key, text, checked, extra=""):
+        cid = f"lp-{pid}-{key}"
+        ck = ' checked data-placed="1"' if checked else ""
+        return f'<label class="lprow"><input class="lpx" type="checkbox" id="{cid}"{ck}> <span>{text}</span>{extra}</label>'
+    n_placed = n_next = 0; html = ""
+    verified = rows[0]["verified"] if rows else "—"
+    for key in order:
+        dom = KEY2DOM[key]; sm = SEM.get(dom) or {}; sp = dfs_of(dom).get("spam_score")
+        placed = live.get(key, []); have = {r["slug"] for r in placed}
+        pl_html = ""
+        for r in placed:
+            n_placed += 1
+            fcls = "pos" if r["follow"] == "dofollow" else "neu"
+            ftxt = "df" if r["follow"] == "dofollow" else "nf"
+            pl_html += box(r["slug"], key, f'{H.escape(r["platform"])} — {H.escape(r["detail"])}', True, f' <span class="tag {fcls}">{ftxt}</span>')
+        lost_html = "".join(f'<div class="stmeta" style="color:var(--neg);padding:2px 0">✗ lost: {H.escape(r["platform"])} — {H.escape(r["detail"])}</div>'
+                            for r in lost.get(key, []))
+        nx_html = ""
+        if key in PAUSED_LINKS:
+            nx_html = f'<div class="stmeta" style="color:var(--amb)">⚠ {PAUSED_LINKS[key]} — PAUSED: no new links until the newest ones are reviewed.</div>'
+        else:
+            for pid, label, excl in NEXT_P1:
+                if key in excl or pid in have: continue
+                n_next += 1; nx_html += box(pid, key, label, False, ' <span class="tag acc">P1</span>')
+            for pid, label in NEXT_P2:
+                if pid in have: continue
+                n_next += 1; nx_html += box(pid, key, f'{label} listing (brownbook method)', False, ' <span class="tag neu">P2 · owner</span>')
+            for pid, label in NEXT_P3:
+                if pid in have: continue
+                n_next += 1; nx_html += box(pid, key, label, False, ' <span class="tag neu">P3</span>')
+        badge = f' <span class="tag warn">spam {sp}</span>' if sp is not None and sp >= 58 else ""
+        rd = sm.get("ref_domains") if sm.get("ref_domains") is not None else "—"
+        opn = "open" if (key == "rodak" or placed) else ""
+        pl_block = pl_html or '<div class="stmeta">none yet</div>'
+        nx_block = nx_html or '<div class="stmeta">nothing queued</div>'
+        html += (f'<details class="panel" {opn}><summary><span class="dot s{ALL.index(dom)+1}"></span> {dom}{badge}'
+                 f'<span class="stmeta" style="margin-left:auto">{len(placed)} placed · {rd} ref.dom (Semrush)</span></summary>'
+                 f'<div class="pbody"><div class="rectitle" style="margin-top:4px">✓ Placed (live, verified {H.escape(verified)})</div>'
+                 f'<div class="lplist">{pl_block}</div>{lost_html}'
+                 f'<div class="rectitle" style="margin-top:10px">▢ Next</div><div class="lplist">{nx_block}</div></div></details>')
+    p4 = "".join(box(pid, "one", label, False, ' <span class="tag neu">P4 · owner</span>') for pid, label in NEXT_P4)
+    n_next += len(NEXT_P4)
+    html += (f'<details class="panel"><summary>Expert / HARO accounts (one for the whole portfolio)</summary>'
+             f'<div class="pbody"><div class="lplist">{p4}</div></div></details>')
+    return html, n_placed, n_next
+
 def links_body():
     b = (f'<h1>Backlinks — step by step</h1><p class="meta">Scoreboard first, then the work: '
          f'<b>Step 1 → 2 → 3</b>. Tick as you go, sync when done.</p>')
@@ -1682,36 +1749,22 @@ def links_body():
           '<p class="sub" style="margin:0">Checkboxes save in THIS browser instantly. To make them permanent everywhere: '
           'tick → <b>Copy progress</b> → paste the code to Claude. Stored server-side, pre-checked on every device next deploy.</p></div>')
     b += authority_table()
-    PLATFORMS = ["Facebook Page", "X (Twitter) profile", "YouTube channel", "Pinterest profile",
-                 "Linktree / About.me hub", "Issuu (1 PDF guide)", "SlideShare (1 PDF)",
-                 "WordPress.com blog + 1 post", "Blogger blog + 1 post", "Tumblr blog + 1 post",
-                 "Medium article (1 per site)", "Google Alert set for brand"]
-    SINGLE = ["Source of Sources signup (ONE expert account)", "Featured.com account (free plan)",
-              "Qwoted account", "Talkwalker Alerts account"]
-    LIMITED = {"facebookpage": "drip 1-2/day (FB limit)", "mediumarticle1persit": "max 2/day (Medium limit)"}
     heads = "".join(f'<th style="text-align:center">{ABBR[s]}</th>' for s in ALL)
-    mrows = ""
-    for p in PLATFORMS:
-        pid = "".join(c for c in p.lower() if c.isalnum())[:20]
-        cells = "".join(f'<td style="text-align:center"><input class="lpx" type="checkbox" id="lp-{pid}-{ABBR[s]}"'
-                        f'{" checked" if f"lp-{pid}-{ABBR[s]}" in CHECKED else ""}></td>' for s in ALL)
-        lim = f' <span class="krank far" style="font-size:9.5px">⏳ {LIMITED[pid]}</span>' if pid in LIMITED else ""
-        mrows += f'<tr><td style="font-family:inherit">{H.escape(p)}{lim}</td>{cells}<td class="lpcount" style="font-weight:700">0/{NSITES}</td></tr>'
-    for p in SINGLE:
-        pid = "".join(c for c in p.lower() if c.isalnum())[:20]
-        mrows += (f'<tr><td style="font-family:inherit">{H.escape(p)}</td>'
-                  f'<td colspan="{NSITES}" style="text-align:center"><input class="lpx" type="checkbox" id="lp-{pid}-one"'
-                  f'{" checked" if f"lp-{pid}-one" in CHECKED else ""}></td>'
-                  f'<td class="lpcount" style="font-weight:700">0/1</td></tr>')
-    b += ('<style>.lpx{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--n600);'
-          'border-radius:6px;background:transparent;cursor:pointer;position:relative;vertical-align:middle;margin:0}'
-          '.lpx:hover{border-color:var(--t)}.lpx:checked{background:var(--t);border-color:var(--t)}'
-          '.lpx:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;'
-          'border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}.lpcount{color:var(--n700)!important}</style>'
-          f'<div class="card"><h2>{icon("check")} Step 1 — Profile foundation: one platform × all {NSITES} sites</h2>'
-          '<p class="sub">Pick the <b>topmost row that is not complete and not ⏳ rate-limited</b>, run the batch prompt below, '
-          'tick the boxes, move to the next row.</p>'
-          f'<div class="overflow"><table><thead><tr><th>platform</th>{heads}<th>done</th></tr></thead><tbody>{mrows}</tbody></table></div></div>')
+    _ck_html, _n_pl, _n_nx = ledger_checklist()
+    links_body.placed, links_body.next = _n_pl, _n_nx
+    b += ('<style>.lpx{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:1.5px solid var(--faint);'
+          'border-radius:5px;background:#fff;cursor:pointer;position:relative;vertical-align:middle;margin:0;flex:none}'
+          '.lpx:hover{border-color:var(--acc)}.lpx:checked{background:var(--pos);border-color:var(--pos)}'
+          '.lpx:checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;'
+          'border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}'
+          '.lplist{display:flex;flex-direction:column;gap:5px}.lprow{display:flex;align-items:center;gap:8px;font-size:12.5px;cursor:pointer}'
+          '.lprow input:checked+span{color:var(--mut)}.lpcount{color:var(--mut)!important}</style>'
+          f'<div class="card"><h2>{icon("check")} Step 1 — Placements: what is live, what is next</h2>'
+          f'<p class="sub" style="margin-bottom:10px">Built from the verified ledger (seo-tools/links/BACKLINK-LEDGER.csv). '
+          f'Pre-ticked = verified live. Unticked = next target: P1 first (accounts we already own, 1–2/day), then P2 directories '
+          f'(owner: signup + CAPTCHA), P3 profile hubs, P4 expert accounts. Anchor = brand or naked URL only. '
+          f'New placement → log it in the ledger and re-verify before ticking.</p>'
+          f'<div class="stack" style="gap:8px">{_ck_html}</div></div>')
     b += pc(f"Step 1 batch prompt — one platform × all {NSITES} sites", PLATFORM_BATCH)
     FRS = {"primeiptv-france.com", "iptvpix.com", "smarters-live.com", "smartersprofrance.fr",
            "iptvfranceofficiel.fr", "abonnementiptvofficiel.com"}
@@ -1813,10 +1866,11 @@ _total_boxes = _lb.count('type="checkbox"')
 _checked_boxes = _lb.count(' checked')
 _rd_tot = sum((SEM.get(s) or {}).get("ref_domains") or 0 for s in ALL)
 _sp_max = max(((dfs_of(s).get("spam_score") or 0), s) for s in ALL)
-_pct = round(100 * _checked_boxes / _total_boxes) if _total_boxes else 0
+_pl, _nx = getattr(links_body, "placed", 0), getattr(links_body, "next", 0)
+_pct = round(100 * _pl / (_pl + _nx)) if (_pl + _nx) else 0
 _links_tiles = ('<div class="board">'
     + tile("t4", "REFERRING DOMAINS", f"{_rd_tot}", "Semrush, all sites — the number this page grows")
-    + tile("t4", "CHECKLIST PROGRESS", f"{_pct}%", f"{_checked_boxes} of {_total_boxes} boxes done")
+    + tile("t4", "CHECKLIST PROGRESS", f"{_pct}%", f"{_pl} placed · {_nx} next (verified ledger)")
     + tile("t4", "SPAM WATCH", f"{_sp_max[0]}", f"highest: {_sp_max[1].replace('.com','')} — +4pts = pause that site")
     + '</div>')
 _lb = _lb.replace('</p>', '</p>' + _links_tiles, 1)
