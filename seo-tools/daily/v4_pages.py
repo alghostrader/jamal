@@ -1209,7 +1209,7 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
         return (f'<div class="pagehead"><h1>Today</h1><p class="sub">{e(DAYNAME)} · your SEO plan: '
                 f'<b><span id="plan-n">{len(T_TODAY)}</span> tasks</b> · estimated workload ≈<span id="plan-est">{est//60}h {est%60:02d}m</span> · '
                 f'{len(T_NEXT)} next · {len(T_MONITOR)} monitor-only · {len(T_BACKLOG)} backlog. '
-                f'Task states persist in this browser; "Copy status" hands them to the next audit for verification.</p></div>'
+                f'<span id="syncstate" class="stmeta">Task states: local to this browser</span>. "Copy status" hands them to the next audit for verification.</p></div>'
                 f'<div id="focusbar" style="display:none"></div>'
                 f'<div id="todaylist" class="stack" style="gap:14px;margin-bottom:20px">{cards}</div>'
                 f'<div id="donetoday"></div>'
@@ -1228,8 +1228,9 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
 (function(){
  var K='seo_tasks_v2';
  function load(){ try{return JSON.parse(localStorage.getItem(K)||'{}');}catch(e){return{};} }
- function save(st){ try{localStorage.setItem(K,JSON.stringify(st));}catch(e){} }
+ function save(st){ try{localStorage.setItem(K,JSON.stringify(st));}catch(e){} if(window.seoCloudSave) window.seoCloudSave(st); }
  var st=load();
+ window.addEventListener('seo-state-sync',function(){ st=load(); apply(); });
  function baseline(card){ return {title:card.dataset.title||''}; }
  function apply(){
   var doneN=0, hidden=0, visible=0, mins=0;
@@ -1326,10 +1327,40 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
  apply();
 })();
 </script>"""
+    SYNC_JS = """<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+const app = initializeApp({ apiKey: "AIzaSyAI1eXkzlFca79XYLUS41WFTPPG2mL4BJI", authDomain: "iptv-sales.firebaseapp.com",
+  projectId: "iptv-sales", messagingSenderId: "547649027254", appId: "1:547649027254:web:87d70cbfd54ff34164ba17" });
+const auth = getAuth(app), db = getFirestore(app), K = 'seo_tasks_v2';
+const el = document.getElementById('syncstate');
+function status(t, ok){ if(el){ el.textContent = t; el.style.color = ok ? '#16a34a' : ''; } }
+onAuthStateChanged(auth, function(user){
+  if(!user){ status('Task states: local to this browser — sign in on the Sales page once for cross-device sync', false); window.seoCloudSave = null; return; }
+  const ref = doc(db, 'seo_state', user.uid);
+  let pushedLocal = false;
+  window.seoCloudSave = function(st){ setDoc(ref, { tasks: st, updated_at: Date.now() }, { merge: true })
+    .then(function(){ status('Task states: synced across your devices (' + (user.email||'') + ')', true); })
+    .catch(function(e){ status('Cloud sync blocked (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid} for signed-in users', false); }); };
+  onSnapshot(ref, function(snap){
+    if(snap.exists() && snap.data().tasks){
+      try{ localStorage.setItem(K, JSON.stringify(snap.data().tasks)); }catch(e){}
+      window.dispatchEvent(new Event('seo-state-sync'));
+      status('Task states: synced across your devices (' + (user.email||'') + ')', true);
+    } else if(!pushedLocal){
+      pushedLocal = true;
+      let local = {}; try{ local = JSON.parse(localStorage.getItem(K)||'{}'); }catch(e){}
+      window.seoCloudSave(local);
+    }
+  }, function(e){ status('Cloud sync blocked (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid} for signed-in users', false); });
+});
+</script>"""
+
     # ---------- write ----------
     JS = CHART_JS + TABLE_JS + PERIOD_JS
     pages = [
-        ("today.html", "Today — IPTV Portfolio", build_today(), "today", TODAY_JS),
+        ("today.html", "Today — IPTV Portfolio", build_today(), "today", TODAY_JS + SYNC_JS),
         ("index.html", "IPTV Portfolio — SEO Command Center", build_overview(), None, JS + SALES_JS),
         ("performance.html", "Performance — IPTV Portfolio", build_performance(), "performance", JS),
         ("rankings.html", "Rankings — IPTV Portfolio", build_rankings(), "rankings", TABLE_JS),
