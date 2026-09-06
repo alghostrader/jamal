@@ -1,5 +1,5 @@
 {
- "_stamp": "2026-09-06 07:57 UTC",
+ "_stamp": "2026-09-06 12:56 UTC",
  "sites": {
   "iptvesp.com": {
    "clicks7d": 452,
@@ -10,7 +10,7 @@
    "positions": {
     "iptv espa\u00f1a": null,
     "listas iptv": null,
-    "mejor iptv espa\u00f1a": 40,
+    "mejor iptv espa\u00f1a": 41,
     "iptv smarters pro": null,
     "listas iptv espa\u00f1a telegram": 1,
     "proveedor iptv": 38
@@ -97,9 +97,9 @@
    "pages": 39,
    "positions": {
     "iptv smarters": null,
-    "configuration iptv smarters": null,
+    "configuration iptv smarters": 40,
     "smarters player lite": null,
-    "iptv smarters pro firestick": 49,
+    "iptv smarters pro firestick": 43,
     "smarters player lite apk": null
    }
   },
@@ -119,7 +119,7 @@
   },
   "abonnementiptvofficiel.com": {
    "clicks7d": 68,
-   "sem_rd": 84,
+   "sem_rd": 85,
    "dfs_rd": 14,
    "top100": 18,
    "pages": 44,
@@ -127,7 +127,7 @@
     "boitier iptv": null,
     "test iptv gratuit": null,
     "iptv pas cher": null,
-    "essai iptv 7 jours": 46,
+    "essai iptv 7 jours": 53,
     "meilleur boitier iptv": 8,
     "iptv moins cher": null,
     "code promo iptv": null,
@@ -141,12 +141,12 @@
    "top100": null,
    "pages": 33,
    "positions": {
-    "iptv segura": 29,
-    "estafas iptv": 19,
-    "iptv legal espa\u00f1a": 49,
-    "es seguro el iptv": 17,
+    "iptv segura": 32,
+    "estafas iptv": 18,
+    "iptv legal espa\u00f1a": 48,
+    "es seguro el iptv": 16,
     "que es una lista m3u": 32,
-    "iptv fire tv stick": 53
+    "iptv fire tv stick": 55
    }
   },
   "rodaktv.com": {
@@ -154,16 +154,16 @@
    "sem_rd": null,
    "dfs_rd": null,
    "top100": null,
-   "pages": 38,
+   "pages": 42,
    "positions": {
     "iptv polska": null,
     "polska telewizja w uk": null,
     "polska telewizja w niemczech": 48,
-    "iptv abonament": 24,
+    "iptv abonament": 31,
     "test iptv": null,
     "iptv opinie": 43,
     "polska telewizja za granica": null,
-    "polskie kanaly telegram": 25,
+    "polskie kanaly telegram": 26,
     "smart iptv": null
    }
   }
