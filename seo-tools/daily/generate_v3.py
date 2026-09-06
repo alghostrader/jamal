@@ -608,7 +608,8 @@ SEM_UPD = SEM.get("_updated", "") if isinstance(SEM, dict) else ""
 
 def sidebar(cur):
     groups = [
-        ("Execute", [("today", "Today", "today", "zap"), ("work", "Work", "work", "check")]),
+        ("Execute", [("today", "Today", "today", "zap"), ("work", "Work", "work", "check"),
+                     ("links", "Backlinks", "links", "link")]),
         ("Monitor", [("./", "Overview", None, "home"), ("rankings", "Rankings", "rankings", "target"),
                      ("performance", "Performance", "performance", "chart"), ("content", "Content", "content", "file"),
                      ("technical", "Technical", "technical", "wrench"), ("authority", "Authority", "authority", "award"),
