@@ -836,6 +836,7 @@ LINKS_JS = """<script>
     cb.addEventListener('change',function(){ if(cb.dataset.placed==='1'&&!cb.checked){ cb.checked=true; return; } localStorage.setItem('lp:'+cb.id,cb.checked?'1':'0');count(cb.closest('tr'));pushCloud();});
   });
   window.addEventListener('seo-links-sync', applyAll);
+  document.querySelectorAll('.lkrow').forEach(function(tr){ tr.addEventListener('click',function(ev){ if(ev.target.closest('a,input,label')) return; var d=document.getElementById(tr.dataset.det); if(d) d.style.display=d.style.display==='none'?'':'none'; }); });
   function count(row){if(!row)return;var t=row.querySelectorAll('input.lpx').length,d=row.querySelectorAll('input.lpx:checked').length;
     var c=row.querySelector('.lpcount');if(c){c.textContent=d+'/'+t;c.style.setProperty('color',(d===t&&t>0)?'var(--up)':'','important');}}
   document.querySelectorAll('tr').forEach(count);
@@ -1685,70 +1686,95 @@ NEXT_P4 = [("sourceofsources", "Source of Sources (expert account)"), ("featured
            ("qwoted", "Qwoted account"), ("talkwalker", "Talkwalker Alerts account")]
 
 def ledger_checklist():
-    """Real placements (pre-ticked, verified live) + prioritised next targets, grouped by website."""
+    """Compact backlink tracker: a short DO-NEXT list + one row per site (expandable)."""
     rows = list(_csv.DictReader(open(LEDGER_PATH, encoding="utf-8"))) if os.path.exists(LEDGER_PATH) else []
     live = {}; lost = {}
     for r in rows:
         (live if r["status"] == "live" else lost).setdefault(r["site"], []).append(r)
     KEY2DOM = {v: k for k, v in ABBR.items()}
     order = ["rodak"] + [ABBR[s] for s in ALL if ABBR[s] != "rodak"]
-    def box(pid, key, text, checked, extra=""):
-        cid = f"lp-{pid}-{key}"
-        ck = ' checked data-placed="1"' if checked else ""
-        return f'<label class="lprow"><input class="lpx" type="checkbox" id="{cid}"{ck}> <span>{text}</span>{extra}</label>'
-    n_placed = n_next = 0; html = ""
     verified = rows[0]["verified"] if rows else "—"
+    def box(pid, key, text, checked, extra=""):
+        ck = ' checked data-placed="1"' if checked else ""
+        return f'<label class="lprow"><input class="lpx" type="checkbox" id="lp-{pid}-{key}"{ck}> <span>{text}</span>{extra}</label>'
+    # next targets per site, by priority
+    nxt = {}
     for key in order:
-        dom = KEY2DOM[key]; sm = SEM.get(dom) or {}; sp = dfs_of(dom).get("spam_score")
-        placed = live.get(key, []); have = {r["slug"] for r in placed}
-        pl_html = ""
-        for r in placed:
-            n_placed += 1
-            fcls = "pos" if r["follow"] == "dofollow" else "neu"
-            ftxt = "df" if r["follow"] == "dofollow" else "nf"
-            pl_html += box(r["slug"], key, f'{H.escape(r["platform"])} — {H.escape(r["detail"])}', True, f' <span class="tag {fcls}">{ftxt}</span>')
-        lost_html = "".join(f'<div class="stmeta" style="color:var(--neg);padding:2px 0">✗ lost: {H.escape(r["platform"])} — {H.escape(r["detail"])}</div>'
+        if key in PAUSED_LINKS: nxt[key] = []; continue
+        have = {r["slug"] for r in live.get(key, [])}
+        items = []
+        for pid, label, excl in NEXT_P1:
+            if key not in excl and pid not in have: items.append((pid, label, "P1", False))
+        for pid, label in NEXT_P2:
+            if pid not in have: items.append((pid, f"{label} listing", "P2", True))
+        for pid, label in NEXT_P3:
+            if pid not in have: items.append((pid, label, "P3", False))
+        nxt[key] = items
+    # DO NEXT: rodak first, then one P1 per other site, capped at 6
+    donext = []
+    for pid, label, pr, own in nxt.get("rodak", [])[:2]: donext.append(("rodak", pid, label, pr, own))
+    for key in order[1:]:
+        for pid, label, pr, own in nxt.get(key, []):
+            if pr == "P1": donext.append((key, pid, label, pr, own)); break
+        if len(donext) >= 6: break
+    donext = donext[:6]
+    dn_ids = {(k, pid) for k, pid, *_ in donext}
+    dn_html = "".join(box(pid, key, f'{label} <span class="stmeta">· {KEY2DOM[key]}</span>', False,
+                          f' <span class="tag acc">{pr}</span>') for key, pid, label, pr, own in donext) \
+        or '<div class="stmeta">Nothing queued.</div>'
+    # site table with expanders
+    trs = ""; n_placed = n_next = 0
+    for key in order:
+        dom = KEY2DOM[key]; sm = SEM.get(dom) or {}
+        placed = live.get(key, []); items = nxt.get(key, [])
+        n_placed += len(placed); n_next += len(items)
+        p1 = sum(1 for i in items if i[2] == "P1"); p23 = len(items) - p1
+        tot = len(placed) + len(items); pct = round(100 * len(placed) / tot) if tot else 0
+        status = (f'<span class="tag warn">paused · {PAUSED_LINKS[key]}</span>' if key in PAUSED_LINKS
+                  else ('<span class="tag pos">on track</span>' if placed else '<span class="tag neg">no links yet</span>'))
+        det = f"lk_{key}"
+        pl_html = "".join(box(r["slug"], key, f'{H.escape(r["platform"])} — {H.escape(r["detail"])}', True,
+                              f' <span class="tag {"pos" if r["follow"]=="dofollow" else "neu"}">{"df" if r["follow"]=="dofollow" else "nf"}</span>')
+                          for r in placed) or '<div class="stmeta">none yet</div>'
+        lost_html = "".join(f'<div class="stmeta" style="color:var(--neg)">✗ lost: {H.escape(r["platform"])} — {H.escape(r["detail"])}</div>'
                             for r in lost.get(key, []))
-        nx_html = ""
-        if key in PAUSED_LINKS:
-            nx_html = f'<div class="stmeta" style="color:var(--amb)">⚠ {PAUSED_LINKS[key]} — PAUSED: no new links until the newest ones are reviewed.</div>'
-        else:
-            for pid, label, excl in NEXT_P1:
-                if key in excl or pid in have: continue
-                n_next += 1; nx_html += box(pid, key, label, False, ' <span class="tag acc">P1</span>')
-            for pid, label in NEXT_P2:
-                if pid in have: continue
-                n_next += 1; nx_html += box(pid, key, f'{label} listing (brownbook method)', False, ' <span class="tag neu">P2 · owner</span>')
-            for pid, label in NEXT_P3:
-                if pid in have: continue
-                n_next += 1; nx_html += box(pid, key, label, False, ' <span class="tag neu">P3</span>')
-        badge = f' <span class="tag warn">⚠ {PAUSED_LINKS[key]} · paused</span>' if key in PAUSED_LINKS else ""
-        rd = sm.get("ref_domains") if sm.get("ref_domains") is not None else "—"
-        opn = "open" if (key == "rodak" or placed) else ""
-        pl_block = pl_html or '<div class="stmeta">none yet</div>'
-        nx_block = nx_html or '<div class="stmeta">nothing queued</div>'
-        html += (f'<details class="panel" {opn}><summary><span class="dot s{ALL.index(dom)+1}"></span> {dom}{badge}'
-                 f'<span class="stmeta" style="margin-left:auto">{len(placed)} placed · {rd} ref.dom (Semrush)</span></summary>'
-                 f'<div class="pbody"><div class="rectitle" style="margin-top:4px">✓ Placed (live, verified {H.escape(verified)})</div>'
-                 f'<div class="lplist">{pl_block}</div>{lost_html}'
-                 f'<div class="rectitle" style="margin-top:10px">▢ Next</div><div class="lplist">{nx_block}</div></div></details>')
+        p1_html = "".join(box(pid, key, label, False, ' <span class="tag acc">P1</span>')
+                          for pid, label, pr, own in items if pr == "P1" and (key, pid) not in dn_ids)
+        p23_html = "".join(box(pid, key, label, False, f' <span class="tag neu">{pr}{" · owner" if own else ""}</span>')
+                           for pid, label, pr, own in items if pr != "P1")
+        nx_html = (('<div class="lplist">' + p1_html + '</div>') if p1_html else "") + \
+                  (f'<details style="margin-top:6px"><summary class="linkbtn" style="cursor:pointer">{p23} more targets (P2 directories · P3 profiles)</summary>'
+                   f'<div class="lplist" style="margin-top:6px">{p23_html}</div></details>' if p23_html else "")
+        if key in PAUSED_LINKS: nx_html = f'<div class="stmeta" style="color:var(--amb)">Paused — no new links until the newest ones are reviewed.</div>'
+        trs += (f'<tr class="lkrow" data-det="{det}" style="cursor:pointer"><td><span class="dot s{ALL.index(dom)+1}"></span> {dom}</td>'
+                f'<td data-v="{len(placed)}"><b>{len(placed)}</b></td><td data-v="{len(items)}">{p1} <span class="stmeta">P1</span> · {p23} <span class="stmeta">P2/P3</span></td>'
+                f'<td data-v="{sm.get("ref_domains") or 0}">{sm.get("ref_domains") if sm.get("ref_domains") is not None else "—"}</td>'
+                f'<td>{status}</td><td style="min-width:110px"><div class="bar"><i class="done" style="width:{pct}%"></i></div></td></tr>'
+                f'<tr id="{det}" class="lkdet" style="display:none;background:var(--soft)"><td colspan="6" style="padding:12px 18px">'
+                f'<div class="grid g2" style="margin:0"><div><div class="rectitle">✓ Placed · verified {H.escape(verified)}</div>'
+                f'<div class="lplist" style="margin-top:6px">{pl_html}</div>{lost_html}</div>'
+                f'<div><div class="rectitle">▢ Next</div><div style="margin-top:6px">{nx_html or "<div class=stmeta>nothing queued</div>"}</div></div></div></td></tr>')
     p4 = "".join(box(pid, "one", label, False, ' <span class="tag neu">P4 · owner</span>') for pid, label in NEXT_P4)
     n_next += len(NEXT_P4)
-    html += (f'<details class="panel"><summary>Expert / HARO accounts (one for the whole portfolio)</summary>'
-             f'<div class="pbody"><div class="lplist">{p4}</div></div></details>')
+    html = (f'<div class="grid g23" style="margin:0 0 16px"><div class="card" style="border-color:#c7d2fe;background:#fbfbff">'
+            f'<div class="chead"><h2>Do next</h2><span class="stmeta">{len(donext)} placements · rodak first, then one P1 per site</span></div>'
+            f'<div class="lplist">{dn_html}</div></div>'
+            f'<div class="card"><div class="chead"><h2>Rules</h2></div><ul class="lcl" style="font-size:12px">'
+            f'<li>Anchor = brand or naked URL only — never money keywords.</li><li>Signup + CAPTCHA + publish = owner only (P2/P4).</li>'
+            f'<li>New placement → add it to the ledger, re-verify, then tick.</li><li>aio &amp; slive paused until their newest links are reviewed.</li></ul></div></div>'
+            f'<div class="card flush"><div class="chead"><h2>Sites</h2><span class="stmeta">click a row to see what is placed and what comes next</span></div>'
+            f'<div class="overflow"><table><thead><tr><th>site</th><th class="sortable">placed</th><th>next</th><th class="sortable">ref.dom</th><th>status</th><th>progress</th></tr></thead>'
+            f'<tbody>{trs}</tbody></table></div></div>'
+            f'<details class="panel" style="margin-top:16px"><summary>Expert / HARO accounts — one for the whole portfolio (P4, owner)</summary>'
+            f'<div class="pbody"><div class="lplist">{p4}</div></div></details>')
     return html, n_placed, n_next
 
 def links_body():
-    b = (f'<h1>Backlinks — step by step</h1><p class="meta">Scoreboard first, then the work: '
-         f'<b>Step 1 → 2 → 3</b>. Tick as you go, sync when done.</p>')
+    b = (f'<div class="hdr" style="margin-bottom:6px"><div><h1>Backlinks</h1><p class="sub">What is placed, what to do next — from the verified ledger. '
+         f'Ticks sync across your devices.</p></div><button class="copybtn" id="copyprog">Copy progress</button></div>')
     def pc(t, x):
         return (f'<div class="card pcard"><div class="phead"><h2>{icon("clipboard")} {t}</h2>'
                 f'<button class="copybtn" data-copy>Copy prompt</button></div><pre class="ptext">{H.escape(x)}</pre></div>')
-    b += (f'<div class="card" style="border-left:4px solid var(--t)"><div class="phead">'
-          f'<h2>{icon("check")} Sync your ticks</h2><button class="copybtn" id="copyprog">Copy progress</button></div>'
-          '<p class="sub" style="margin:0">Checkboxes save in THIS browser instantly. To make them permanent everywhere: '
-          'tick → <b>Copy progress</b> → paste the code to Claude. Stored server-side, pre-checked on every device next deploy.</p></div>')
-    b += authority_table()
     heads = "".join(f'<th style="text-align:center">{ABBR[s]}</th>' for s in ALL)
     _ck_html, _n_pl, _n_nx = ledger_checklist()
     links_body.placed, links_body.next = _n_pl, _n_nx
@@ -1759,12 +1785,8 @@ def links_body():
           'border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}'
           '.lplist{display:flex;flex-direction:column;gap:5px}.lprow{display:flex;align-items:center;gap:8px;font-size:12.5px;cursor:pointer}'
           '.lprow input:checked+span{color:var(--mut)}.lpcount{color:var(--mut)!important}</style>'
-          f'<div class="card"><h2>{icon("check")} Step 1 — Placements: what is live, what is next</h2>'
-          f'<p class="sub" style="margin-bottom:10px">Built from the verified ledger (seo-tools/links/BACKLINK-LEDGER.csv). '
-          f'Pre-ticked = verified live. Unticked = next target: P1 first (accounts we already own, 1–2/day), then P2 directories '
-          f'(owner: signup + CAPTCHA), P3 profile hubs, P4 expert accounts. Anchor = brand or naked URL only. '
-          f'New placement → log it in the ledger and re-verify before ticking.</p>'
-          f'<div class="stack" style="gap:8px">{_ck_html}</div></div>')
+          + _ck_html)
+    b += '<details class="panel" style="margin-top:16px"><summary>Advanced — batch prompts, extra matrices, weekly cycle, milestones</summary><div class="pbody">'
     b += pc(f"Step 1 batch prompt — one platform × all {NSITES} sites", PLATFORM_BATCH)
     FRS = {"primeiptv-france.com", "iptvpix.com", "smarters-live.com", "smartersprofrance.fr",
            "iptvfranceofficiel.fr", "abonnementiptvofficiel.com"}
@@ -1855,6 +1877,7 @@ def links_body():
     b += (f'<div class="card"><h2>{icon("target")} Milestones — tick when true</h2>'
           '<p class="sub">Verifiable outcomes, not busywork. Each one moves the scoreboard at the top.</p>'
           f'<div class="overflow"><table><tbody>{mr}</tbody></table></div></div>')
+    b += '</div></details>'
     return b
 open(os.path.join(OUT, "settings.html"), "w").write(shell("Settings — IPTV Portfolio", build_settings(), cur="settings"))
 _lb_raw = links_body()
