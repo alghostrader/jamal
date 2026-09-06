@@ -664,7 +664,7 @@ if (rb) rb.addEventListener("click", async () => {
 # ==== Dashboard auth gate (Firebase email/password, same login as the Sales app) ====
 # Client-side gate for a single unified sign-in; real access control stays in middleware.js (Basic Auth).
 GATE_HTML = """<div id="dashgate" style="position:fixed;inset:0;z-index:99999;background:#fafafa;display:flex;align-items:center;justify-content:center;font-family:'Inter',system-ui,sans-serif">
-  <form id="dashgateForm" style="width:320px;max-width:90vw;background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,.05);padding:28px 24px">
+  <form id="dashgateForm" hidden style="width:320px;max-width:90vw;background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,.05);padding:28px 24px">
     <div style="font-size:18px;font-weight:700;color:#171717;margin-bottom:4px">IPTV Portfolio</div>
     <div style="font-size:13px;color:#6b7280;margin-bottom:18px">Sign in to access the dashboard.</div>
     <input id="dashEmail" type="email" placeholder="Email" autocomplete="username" required style="width:100%;box-sizing:border-box;padding:10px 12px;margin-bottom:10px;border:1px solid #e5e7eb;border-radius:8px;font-size:13.5px">
@@ -682,9 +682,20 @@ GATE_HTML = """<div id="dashgate" style="position:fixed;inset:0;z-index:99999;ba
   const app = getApps().length ? getApps()[0] : initializeApp(cfg);
   const auth = getAuth(app);
   await setPersistence(auth, browserLocalPersistence);
-  const gate = document.getElementById("dashgate");
+  const gate = document.getElementById("dashgate"), form = document.getElementById("dashgateForm");
   document.documentElement.style.overflow = "hidden";
-  onAuthStateChanged(auth, u => { if (u && gate.isConnected) { gate.remove(); document.documentElement.style.overflow = ""; } });
+  // One sign-in per browser: after a successful login we remember a hint, so later pages keep the
+  // card hidden while Firebase restores the session (a few hundred ms) instead of flashing a login form.
+  let hint = false; try { hint = localStorage.getItem("dash_auth_hint") === "1"; } catch (_) {}
+  if (!hint) form.hidden = false;
+  const showForm = () => { form.hidden = false; };
+  const fallback = setTimeout(showForm, 4000);
+  onAuthStateChanged(auth, u => {
+    clearTimeout(fallback);
+    if (u) { try { localStorage.setItem("dash_auth_hint", "1"); } catch (_) {}
+             if (gate.isConnected) { gate.remove(); document.documentElement.style.overflow = ""; } }
+    else { try { localStorage.removeItem("dash_auth_hint"); } catch (_) {} showForm(); }
+  });
   document.getElementById("dashgateForm").addEventListener("submit", async e => {
     e.preventDefault();
     const err = document.getElementById("dashErr"); err.textContent = "";
