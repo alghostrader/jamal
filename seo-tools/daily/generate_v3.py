@@ -719,20 +719,32 @@ onAuthStateChanged(auth, function(user){
   if(!user){ status('Task states: local to this browser until you sign in', false); window.seoCloudSave = null; return; }
   const ref = doc(db, 'seo_state', user.uid);
   let pushedLocal = false;
-  window.seoCloudSave = function(st){ setDoc(ref, { tasks: st, updated_at: Date.now() }, { merge: true })
-    .then(function(){ status('Task states: synced across your devices (' + (user.email||'') + ')', true); })
-    .catch(function(e){ status('Cloud sync blocked (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid} for signed-in users', false); }); };
+  const fail = function(e){ status('Cloud sync blocked (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid} for signed-in users', false); };
+  const ok = function(){ status('Synced across your devices (' + (user.email||'') + ')', true); };
+  window.seoCloudSave = function(st){ setDoc(ref, { tasks: st, updated_at: Date.now() }, { merge: true }).then(ok).catch(fail); };
+  window.seoCloudSaveLinks = function(map){ setDoc(ref, { links: map, updated_at: Date.now() }, { merge: true }).then(ok).catch(fail); };
   onSnapshot(ref, function(snap){
-    if(snap.exists() && snap.data().tasks){
-      try{ localStorage.setItem(K, JSON.stringify(snap.data().tasks)); }catch(e){}
-      window.dispatchEvent(new Event('seo-state-sync'));
-      status('Task states: synced across your devices (' + (user.email||'') + ')', true);
+    const d = snap.exists() ? snap.data() : null;
+    if(d && d.tasks){
+      try{ localStorage.setItem(K, JSON.stringify(d.tasks)); }catch(e){}
+      window.dispatchEvent(new Event('seo-state-sync')); ok();
     } else if(!pushedLocal){
       pushedLocal = true;
       let local = {}; try{ local = JSON.parse(localStorage.getItem(K)||'{}'); }catch(e){}
       window.seoCloudSave(local);
     }
-  }, function(e){ status('Cloud sync blocked (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid} for signed-in users', false); });
+    if(d && d.links){
+      // cloud is the truth for the links matrix: set every known checkbox from it
+      document.querySelectorAll('input.lpx').forEach(function(cb){
+        try{ localStorage.setItem('lp:'+cb.id, d.links[cb.id] ? '1' : '0'); }catch(e){}
+      });
+      window.dispatchEvent(new Event('seo-links-sync'));
+    } else if(d && document.querySelector('input.lpx')){
+      // first device with the matrix: push local checks up once
+      var map = {}; document.querySelectorAll('input.lpx').forEach(function(cb){ if(localStorage.getItem('lp:'+cb.id)==='1') map[cb.id]=1; });
+      if(Object.keys(map).length) window.seoCloudSaveLinks(map);
+    }
+  }, fail);
 });
 </script>"""
 
@@ -817,10 +829,13 @@ document.querySelectorAll("[data-copy]").forEach(btn=>btn.addEventListener("clic
 
 LINKS_JS = """<script>
 (function(){
+  function applyAll(){ document.querySelectorAll('input.lpx').forEach(function(cb){ cb.checked=localStorage.getItem('lp:'+cb.id)==='1'; }); document.querySelectorAll('tr').forEach(count); }
+  function pushCloud(){ if(!window.seoCloudSaveLinks) return; var map={}; document.querySelectorAll('input.lpx').forEach(function(cb){ if(cb.checked) map[cb.id]=1; }); window.seoCloudSaveLinks(map); }
   document.querySelectorAll('input.lpx').forEach(function(cb){
     if(localStorage.getItem('lp:'+cb.id)==='1') cb.checked=true;
-    cb.addEventListener('change',function(){localStorage.setItem('lp:'+cb.id,cb.checked?'1':'0');count(cb.closest('tr'));});
+    cb.addEventListener('change',function(){localStorage.setItem('lp:'+cb.id,cb.checked?'1':'0');count(cb.closest('tr'));pushCloud();});
   });
+  window.addEventListener('seo-links-sync', applyAll);
   function count(row){if(!row)return;var t=row.querySelectorAll('input.lpx').length,d=row.querySelectorAll('input.lpx:checked').length;
     var c=row.querySelector('.lpcount');if(c){c.textContent=d+'/'+t;c.style.setProperty('color',(d===t&&t>0)?'var(--up)':'','important');}}
   document.querySelectorAll('tr').forEach(count);
@@ -1805,7 +1820,7 @@ _links_tiles = ('<div class="board">'
     + tile("t4", "SPAM WATCH", f"{_sp_max[0]}", f"highest: {_sp_max[1].replace('.com','')} — +4pts = pause that site")
     + '</div>')
 _lb = _lb.replace('</p>', '</p>' + _links_tiles, 1)
-open(os.path.join(OUT, "links.html"), "w").write(shell("Backlinks — IPTV Portfolio", _lb, cur="links", extra_js=COPY_JS + LINKS_JS))
+open(os.path.join(OUT, "links.html"), "w").write(shell("Backlinks — IPTV Portfolio", _lb, cur="links", extra_js=COPY_JS + LINKS_JS + SYNC_JS))
 
 
 # plan
