@@ -57,8 +57,9 @@ Console service account) must be re-supplied by the owner after a recycle.
   frozen 1 Aug, ~2-3 weeks) — support via internal links only.
 - Dashboard generator lives in the session scratchpad (`scratchpad/daily/generate_v3.py`);
   deploys go to the `dashboard` branch as static HTML with a pipeline marker comment.
-- **Dashboard is password-protected** — `middleware.js` on the `dashboard` branch (Vercel Edge
-  Middleware, HTTP Basic Auth). NEVER delete or overwrite it during a deploy; every deploy must
-  keep it. Credentials: env vars DASH_USER / DASH_PASS in Vercel (fallbacks live in the file).
-  Verify after each deploy: unauthenticated request → 401, authenticated → 200.
+- **Dashboard login = the Firebase sign-in gate** (`GATE_HTML` in generate_v3.py, same
+  iptv-sales project + email/password as the Sales app). Owner removed Basic Auth on 6 Sep —
+  do not re-add middleware.js. Every generated page must carry the gate; verify after deploy
+  that the live HTML contains `id="dashgate"`. Today's task sync uses the same login
+  (Firestore `seo_state/{uid}`) — its script must reuse the gate's Firebase app (getApps()).
 - Model ID never appears in commits/PRs. Git author is the owner's identity.
