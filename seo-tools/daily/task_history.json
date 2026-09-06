@@ -1,3 +1,36 @@
 {
- "completed": []
+ "completed": [
+  {
+   "id": "dbb3a9ea15",
+   "kind": "Indexation",
+   "site": "iptvsegura.com",
+   "query": "",
+   "page": "/planes",
+   "what": "2 priority pages are not indexed: /planes, /guias/iptv-legal-espana.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-06",
+   "how": "auto-verified: page(s) now PASS in GSC URL Inspection",
+   "outcome": "VERIFIED"
+  },
+  {
+   "id": "29449e289f",
+   "kind": "Indexation",
+   "site": "rodaktv.com",
+   "query": "",
+   "page": "/abonament",
+   "what": "5 priority pages are not indexed: /abonament, /opinie, /polska-telewizja-w-niemczech, /polska-telewizja-w-uk, /test-iptv.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-06",
+   "how": "auto-verified: page(s) now PASS in GSC URL Inspection",
+   "outcome": "VERIFIED"
+  }
+ ]
 }

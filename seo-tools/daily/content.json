@@ -4,7 +4,7 @@
    {
     "path": "/blog/listas-telegram-iptv-espana",
     "title": "Listas IPTV España por Telegram gratis: guía y riesgos 2026",
-    "words": 4433
+    "words": 4455
    },
    {
     "path": "/blog/iptv-espana-fire-tv-stick-4k-max-2026",
@@ -2811,6 +2811,12 @@
     "covered": false
    },
    {
+    "kw": "boitier iptv",
+    "vol": 14800,
+    "covered": true,
+    "page": "/boitier-iptv"
+   },
+   {
     "kw": "test iptv gratuit",
     "vol": 1900,
     "covered": true,
@@ -3042,7 +3048,7 @@
    {
     "path": "/blog/iptv-co-to-jest",
     "title": "IPTV co to jest — jak działa telewizja online",
-    "words": 1754
+    "words": 1759
    },
    {
     "path": "/blog/lista-m3u-polska",
@@ -3057,7 +3063,7 @@
    {
     "path": "/blog/iptv-na-smart-tv-samsung",
     "title": "IPTV na Smart TV Samsung — instalacja krok po kroku",
-    "words": 1708
+    "words": 1707
    },
    {
     "path": "/blog/iptv-4k",
@@ -3075,6 +3081,11 @@
     "words": 1604
    },
    {
+    "path": "/blog/instalacja-iptv-smarters-pro",
+    "title": "IPTV Smarters Pro — instalacja i konfiguracja krok po kroku",
+    "words": 1578
+   },
+   {
     "path": "/blog/polska-telewizja-za-granica-za-darmo",
     "title": "Polska telewizja za granicą za darmo — czy to bezpieczne?",
     "words": 1524
@@ -3082,12 +3093,32 @@
    {
     "path": "/blog/jak-skonfigurowac-iptv",
     "title": "Jak skonfigurować IPTV — instrukcja krok po kroku",
-    "words": 1458
+    "words": 1455
+   },
+   {
+    "path": "/blog/smart-iptv-aktywacja",
+    "title": "Smart IPTV — aktywacja i wgranie listy krok po kroku",
+    "words": 1416
+   },
+   {
+    "path": "/blog/tivimate-jak-skonfigurowac",
+    "title": "TiviMate — jak zainstalować i skonfigurować odtwarzacz",
+    "words": 1405
+   },
+   {
+    "path": "/blog/najlepsze-aplikacje-iptv",
+    "title": "Najlepsze aplikacje IPTV — jaki odtwarzacz wybrać",
+    "words": 1395
+   },
+   {
+    "path": "/blog/kod-iptv",
+    "title": "Kod IPTV — co to jest i jak aktywować dostęp",
+    "words": 1382
    },
    {
     "path": "/blog/iptv-na-lg-smart-tv",
     "title": "IPTV na LG Smart TV — instalacja na webOS krok po kroku",
-    "words": 1356
+    "words": 1357
    },
    {
     "path": "/abonament",
@@ -3107,7 +3138,7 @@
    {
     "path": "/blog/jak-wybrac-dostawce-iptv",
     "title": "Jak wybrać dostawcę IPTV — 7 rzeczy do sprawdzenia",
-    "words": 1162
+    "words": 1164
    },
    {
     "path": "/blog/iptv-a-prawo-w-polsce",
@@ -3120,6 +3151,11 @@
     "words": 1078
    },
    {
+    "path": "/blog",
+    "title": "Poradniki IPTV — instalacja, jakość i bezpieczeństwo",
+    "words": 1039
+   },
+   {
     "path": "/polska-telewizja-za-granica",
     "title": "Polska telewizja za granicą — oglądaj online z każdego kraju",
     "words": 928
@@ -3128,11 +3164,6 @@
     "path": "/opinie",
     "title": "IPTV opinie — jak wybrać najlepszego dostawcę",
     "words": 888
-   },
-   {
-    "path": "/blog",
-    "title": "Poradniki IPTV — instalacja, jakość i bezpieczeństwo",
-    "words": 841
    },
    {
     "path": "/polska-telewizja-w-holandii",
@@ -3187,6 +3218,11 @@
   ],
   "recommend": [
    {
+    "kw": "smart iptv",
+    "vol": 2900,
+    "covered": true
+   },
+   {
     "kw": "polska telewizja w uk",
     "vol": 2000,
     "covered": true,
@@ -3211,6 +3247,17 @@
     "page": "/opinie"
    },
    {
+    "kw": "polska telewizja za granica",
+    "vol": 90,
+    "covered": true,
+    "page": "/polska-telewizja-za-granica"
+   },
+   {
+    "kw": "polskie kanaly telegram",
+    "vol": 90,
+    "covered": true
+   },
+   {
     "kw": "test iptv",
     "vol": 40,
     "covered": true,
@@ -3223,7 +3270,7 @@
     "page": "/abonament"
    }
   ],
-  "n_articles": 30,
+  "n_articles": 35,
   "n_thin": 0
  }
 }

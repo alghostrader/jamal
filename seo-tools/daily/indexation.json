@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-04",
+ "generated": "2026-09-06",
  "sites": {
   "iptvesp.com": {
    "/": {
@@ -39,7 +39,7 @@
     "verdict": "PASS",
     "canonical_google": "https://iptvned.com/",
     "canonical_user": "https://iptvned.com/",
-    "last_crawl": "2026-08-01T11:07:02Z"
+    "last_crawl": "2026-09-06T06:27:43Z"
    },
    "/abonnementen": {
     "state": "Submitted and indexed",
@@ -71,7 +71,7 @@
     "verdict": "PASS",
     "canonical_google": "https://www.smarters-live.com/",
     "canonical_user": "https://www.smarters-live.com/",
-    "last_crawl": "2026-08-30T01:50:09Z"
+    "last_crawl": "2026-09-04T16:03:19Z"
    }
   },
   "iptvshqiptar.com": {
@@ -168,11 +168,11 @@
     "last_crawl": "2026-08-23T18:49:55Z"
    },
    "/guias/iptv-legal-espana": {
-    "state": "Duplicate without user-selected canonical",
-    "verdict": "NEUTRAL",
-    "canonical_google": "https://www.747live.bet/",
-    "canonical_user": null,
-    "last_crawl": "2026-08-23T16:52:10Z"
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvsegura.com/guias/iptv-legal-espana",
+    "canonical_user": "https://iptvsegura.com/guias/iptv-legal-espana",
+    "last_crawl": "2026-09-05T08:18:48Z"
    },
    "/guias/que-es-lista-m3u": {
     "state": "Submitted and indexed",
@@ -182,11 +182,11 @@
     "last_crawl": "2026-08-23T18:23:43Z"
    },
    "/planes": {
-    "state": "Discovered - currently not indexed",
-    "verdict": "NEUTRAL",
-    "canonical_google": null,
-    "canonical_user": null,
-    "last_crawl": null
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://iptvsegura.com/planes",
+    "canonical_user": "https://iptvsegura.com/planes",
+    "last_crawl": "2026-09-05T08:11:20Z"
    }
   },
   "rodaktv.com": {
@@ -198,39 +198,46 @@
     "last_crawl": "2026-09-04T07:07:21Z"
    },
    "/abonament": {
-    "state": "Discovered - currently not indexed",
-    "verdict": "NEUTRAL",
-    "canonical_google": null,
-    "canonical_user": null,
-    "last_crawl": null
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://rodaktv.com/abonament",
+    "canonical_user": "https://rodaktv.com/abonament",
+    "last_crawl": "2026-09-04T20:14:30Z"
    },
    "/opinie": {
-    "state": "Discovered - currently not indexed",
-    "verdict": "NEUTRAL",
-    "canonical_google": null,
-    "canonical_user": null,
-    "last_crawl": null
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://rodaktv.com/opinie",
+    "canonical_user": "https://rodaktv.com/opinie",
+    "last_crawl": "2026-09-04T16:34:07Z"
    },
    "/polska-telewizja-w-niemczech": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://rodaktv.com/polska-telewizja-w-niemczech",
+    "canonical_user": "https://rodaktv.com/polska-telewizja-w-niemczech",
+    "last_crawl": "2026-09-04T16:37:15Z"
+   },
+   "/polska-telewizja-w-uk": {
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://rodaktv.com/polska-telewizja-w-uk",
+    "canonical_user": "https://rodaktv.com/polska-telewizja-w-uk",
+    "last_crawl": "2026-09-05T08:02:37Z"
+   },
+   "/polska-telewizja-za-granica": {
     "state": "URL is unknown to Google",
     "verdict": "NEUTRAL",
     "canonical_google": null,
     "canonical_user": null,
     "last_crawl": null
    },
-   "/polska-telewizja-w-uk": {
-    "state": "Discovered - currently not indexed",
-    "verdict": "NEUTRAL",
-    "canonical_google": null,
-    "canonical_user": null,
-    "last_crawl": null
-   },
    "/test-iptv": {
-    "state": "Discovered - currently not indexed",
+    "state": "Crawled - currently not indexed",
     "verdict": "NEUTRAL",
     "canonical_google": null,
     "canonical_user": null,
-    "last_crawl": null
+    "last_crawl": "2026-09-05T07:51:36Z"
    }
   }
  }

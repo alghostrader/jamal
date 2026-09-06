@@ -623,9 +623,9 @@ def build_all(G):
     # auto-complete technical tasks that existed in the previous plan and are now gone
     open_ids = {t["id"] for t in TASKS}
     for pt in (PREV_PLAN.get("tasks") or []):
-        if pt["kind"] == "Technical fix" and pt["id"] not in open_ids                 and not any(c["id"] == pt["id"] for c in THIST["completed"]):
+        if pt["kind"] in ("Technical fix", "Indexation") and pt["id"] not in open_ids                 and not any(c["id"] == pt["id"] for c in THIST["completed"]):
             THIST["completed"].append({**{k: pt.get(k) for k in ("id", "kind", "site", "query", "page", "what", "baseline")},
-                                       "completed": TODAY_STR, "how": "auto-verified: the defect is gone from this audit's crawl",
+                                       "completed": TODAY_STR, "how": ("auto-verified: the defect is gone from this audit's crawl" if pt["kind"] == "Technical fix" else "auto-verified: page(s) now PASS in GSC URL Inspection"),
                                        "outcome": "VERIFIED"})
     # verification checkpoints for completed tasks with a keyword baseline
     for c in THIST["completed"]:
