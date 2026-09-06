@@ -1749,7 +1749,7 @@ def ledger_checklist():
         trs += (f'<tr class="lkrow" data-det="{det}" style="cursor:pointer"><td><span class="dot s{ALL.index(dom)+1}"></span> {dom}</td>'
                 f'<td data-v="{len(placed)}"><b>{len(placed)}</b></td><td data-v="{len(items)}">{p1} <span class="stmeta">P1</span> · {p23} <span class="stmeta">P2/P3</span></td>'
                 f'<td data-v="{sm.get("ref_domains") or 0}">{sm.get("ref_domains") if sm.get("ref_domains") is not None else "—"}</td>'
-                f'<td>{status}</td><td style="min-width:110px"><div class="bar"><i class="done" style="width:{pct}%"></i></div></td></tr>'
+                f'<td>{status}</td><td style="min-width:110px">{"<span class=stmeta>paused</span>" if key in PAUSED_LINKS else f"<div class=bar><i class=done style=width:{pct}%></i></div>"}</td></tr>'
                 f'<tr id="{det}" class="lkdet" style="display:none;background:var(--soft)"><td colspan="6" style="padding:12px 18px">'
                 f'<div class="grid g2" style="margin:0"><div><div class="rectitle">✓ Placed · verified {H.escape(verified)}</div>'
                 f'<div class="lplist" style="margin-top:6px">{pl_html}</div>{lost_html}</div>'
