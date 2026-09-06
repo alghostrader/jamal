@@ -326,4 +326,10 @@
     place-items:center;font:700 12.5px var(--body);flex:none}
   .taskcard{border-left:3px solid var(--acc)}
   .score{font:700 12.5px var(--body);background:var(--acc-bg);color:var(--acc-dk);border-radius:6px;padding:2px 8px}
+  .task{position:relative}
+  .wdone{position:absolute;top:10px;right:12px;display:flex;align-items:center;gap:5px;font:600 11px var(--body);color:var(--mut);cursor:pointer}
+  .wdone input{accent-color:var(--pos);width:14px;height:14px;margin:0;cursor:pointer}
+  .task.done{opacity:.55;background:var(--soft)}
+  .task.done>div:not(.meta):not(.pcard){text-decoration:line-through}
+  .task.done .wdone{color:var(--pos)}
 </style>

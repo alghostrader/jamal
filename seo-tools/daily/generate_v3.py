@@ -706,6 +706,90 @@ GATE_HTML = """<div id="dashgate" style="position:fixed;inset:0;z-index:99999;ba
 </script>
 """
 
+SYNC_JS = """<script type="module">
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+const app = getApps().length ? getApps()[0] : initializeApp({ apiKey: "AIzaSyAI1eXkzlFca79XYLUS41WFTPPG2mL4BJI", authDomain: "iptv-sales.firebaseapp.com",
+  projectId: "iptv-sales", messagingSenderId: "547649027254", appId: "1:547649027254:web:87d70cbfd54ff34164ba17" });
+const auth = getAuth(app), db = getFirestore(app), K = 'seo_tasks_v2';
+const el = document.getElementById('syncstate');
+function status(t, ok){ if(el){ el.textContent = t; el.style.color = ok ? '#16a34a' : ''; } }
+onAuthStateChanged(auth, function(user){
+  if(!user){ status('Task states: local to this browser until you sign in', false); window.seoCloudSave = null; return; }
+  const ref = doc(db, 'seo_state', user.uid);
+  let pushedLocal = false;
+  window.seoCloudSave = function(st){ setDoc(ref, { tasks: st, updated_at: Date.now() }, { merge: true })
+    .then(function(){ status('Task states: synced across your devices (' + (user.email||'') + ')', true); })
+    .catch(function(e){ status('Cloud sync blocked (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid} for signed-in users', false); }); };
+  onSnapshot(ref, function(snap){
+    if(snap.exists() && snap.data().tasks){
+      try{ localStorage.setItem(K, JSON.stringify(snap.data().tasks)); }catch(e){}
+      window.dispatchEvent(new Event('seo-state-sync'));
+      status('Task states: synced across your devices (' + (user.email||'') + ')', true);
+    } else if(!pushedLocal){
+      pushedLocal = true;
+      let local = {}; try{ local = JSON.parse(localStorage.getItem(K)||'{}'); }catch(e){}
+      window.seoCloudSave(local);
+    }
+  }, function(e){ status('Cloud sync blocked (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid} for signed-in users', false); });
+});
+</script>"""
+
+import hashlib as _hl
+def workify(html):
+    """Give every Work card a stable id + a Done checkbox. Ids match the Today engine's
+    task ids for technical fixes and content gaps, so a card done here = task done there."""
+    pat = RE.compile(r'<div class="task"( style="[^"]*")?><div class="meta"><span class="tag \w+">(\w+)</span>\s*([^<]*)</div>(<div[^>]*>)(.*?)</div>', RE.S)
+    def sub(m):
+        style, kind, site, tdiv, text = m.group(1) or "", m.group(2), m.group(3).strip(), m.group(4), m.group(5)
+        plain = RE.sub(r"<[^>]+>", "", text)
+        plain = H.unescape(plain).strip()
+        if kind == "FIX":
+            key = ("Technical fix", site, plain[:40])
+        elif kind in ("WRITE", "QUEUED"):
+            kw = RE.search(r"[“\"]([^”\"]+)[”\"]", plain)
+            key = ("Content gap", site, kw.group(1) if kw else plain[:40])
+        else:
+            key = (kind.title(), site, plain[:60])
+        wid = _hl.md5("|".join(key).encode()).hexdigest()[:10]
+        ctl = (f'<label class="wdone"><input type="checkbox" class="wck" data-wid="{wid}" '
+               f'data-title="{H.escape(kind)}: {H.escape(plain[:80])}"><span>Done</span></label>')
+        return f'<div class="task" data-wid="{wid}"{style}>{ctl}<div class="meta"><span class="tag" data-k="{kind}">{kind}</span> {site}</div>{tdiv}{text}</div>'
+    return pat.sub(sub, html)
+
+WORK_JS = """<script>
+(function(){
+ var K='seo_tasks_v2';
+ function load(){ try{return JSON.parse(localStorage.getItem(K)||'{}');}catch(e){return{};} }
+ function save(st){ try{localStorage.setItem(K,JSON.stringify(st));}catch(e){} if(window.seoCloudSave) window.seoCloudSave(st); }
+ var st=load();
+ function apply(){
+  document.querySelectorAll('.task[data-wid]').forEach(function(c){
+    var s=st[c.dataset.wid], done=!!(s&&s.state==='completed');
+    c.classList.toggle('done',done);
+    var cb=c.querySelector('.wck'); if(cb) cb.checked=done;
+    var lab=c.querySelector('.wdone span'); if(lab) lab.textContent=done?('Done '+(s.completed||'')):'Done';
+  });
+  document.querySelectorAll('.kanban > div').forEach(function(col){
+    var cnt=col.querySelector('.cnt'); if(!cnt) return;
+    var open=col.querySelectorAll('.task[data-wid]:not(.done)').length, all=col.querySelectorAll('.task[data-wid]').length;
+    cnt.textContent=all?(open+'/'+all):cnt.textContent;
+  });
+ }
+ document.querySelectorAll('.wck').forEach(function(cb){
+  cb.addEventListener('change',function(){
+    var id=cb.dataset.wid, cur=st[id]||{};
+    if(cb.checked){ cur.state='completed'; cur.completed=new Date().toISOString().slice(0,10); cur.title=cb.dataset.title; }
+    else { cur.state='queued'; delete cur.completed; }
+    st[id]=cur; save(st); apply();
+  });
+ });
+ window.addEventListener('seo-state-sync',function(){ st=load(); apply(); });
+ apply();
+})();
+</script>"""
+
 def shell(title, body, cur=None, extra_js="", crumb=None):
     return f'''<title>{title}</title>
 {HEAD_META}
@@ -1526,7 +1610,7 @@ def build_settings():
 
 
 today_body = build_work()
-open(os.path.join(OUT, "work.html"), "w").write(shell("Work — All tasks", today_body, cur="work", extra_js=COPY_JS))
+open(os.path.join(OUT, "work.html"), "w").write(shell("Work — All tasks", workify(today_body), cur="work", extra_js=COPY_JS + WORK_JS + SYNC_JS))
 
 # trends
 def trends_body():
