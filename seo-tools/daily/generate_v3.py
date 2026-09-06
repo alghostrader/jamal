@@ -722,8 +722,9 @@ onAuthStateChanged(auth, function(user){
   let pushedLocal = false;
   const fail = function(e){ status('BLOCKED (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid}', false); };
   const ok = function(){ status('on · ' + (user.email||''), true); };
-  window.seoCloudSave = function(st){ setDoc(ref, { tasks: st, updated_at: Date.now() }, { merge: true }).then(ok).catch(fail); };
-  window.seoCloudSaveLinks = function(map){ setDoc(ref, { links: map, updated_at: Date.now() }, { merge: true }).then(ok).catch(fail); };
+  window.seoCloudSave = function(st){ setDoc(ref, { tasks: st, updated_at: Date.now() }, { mergeFields: ["tasks", "updated_at"] }).then(ok).catch(fail); };
+  // mergeFields replaces the whole links map (a plain merge only adds keys, so unticking never reached the cloud)
+  window.seoCloudSaveLinks = function(map){ setDoc(ref, { links: map, updated_at: Date.now() }, { mergeFields: ["links", "updated_at"] }).then(ok).catch(fail); };
   onSnapshot(ref, function(snap){
     const d = snap.exists() ? snap.data() : null;
     if(d && d.tasks){
