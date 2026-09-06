@@ -1,5 +1,5 @@
 {
- "fetched": "2026-09-06T11:58Z",
+ "fetched": "2026-09-06T12:55Z",
  "ok": true,
  "tasks": {
   "bd9ac0bccf": {
@@ -31,7 +31,133 @@
    "completed": "2026-09-06",
    "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: checkout, checkout, checkout, che",
    "state": "completed"
+  },
+  "6f748626cd": {
+   "min": 20,
+   "completed": "2026-09-06",
+   "state": "completed",
+   "title": "Indexation: /polska-telewizja-za-granica",
+   "steps": [
+    "Request indexing in GSC",
+    "Check canonical + robots",
+    "Add 2-3 internal links from indexed pages"
+   ]
+  },
+  "737de905a9": {
+   "min": 40,
+   "title": "Striking distance: meilleur boitier iptv",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-06",
+   "state": "completed"
+  },
+  "f217a61cb1": {
+   "min": 40,
+   "title": "Striking distance: iptv algerie",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-06",
+   "state": "completed"
+  },
+  "715fb811aa": {
+   "min": 45,
+   "title": "Content decay: /blog/iptv-espana-telegram",
+   "steps": [
+    "Read the page vs its top queries in GSC",
+    "Refresh facts/year + missing section",
+    "Re-run onpage-optimizer",
+    "Watch 14 days"
+   ],
+   "completed": "2026-09-06",
+   "state": "completed"
+  },
+  "8fcbe4f4aa": {
+   "min": 40,
+   "title": "Striking distance: boitier iptv",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-06",
+   "state": "completed"
+  },
+  "70f507b6f5": {
+   "min": 40,
+   "title": "Striking distance: listas m3u telegram",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-06",
+   "state": "completed"
+  },
+  "dcbbd6a189": {
+   "min": 40,
+   "title": "Striking distance: abonnement iptv alg\u00e9rie",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-06",
+   "state": "completed"
+  },
+  "c5fe8d7689": {
+   "min": 40,
+   "title": "Striking distance: prix abonnement iptv alg\u00e9rie",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-06",
+   "state": "completed"
+  },
+  "ca8c1fdb3d": {
+   "min": 40,
+   "title": "Striking distance: telegram iptv",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-06",
+   "state": "completed"
   }
  },
- "links": {}
+ "links": {
+  "lp-mb2-telegraphtutorialnos-shqip": 1,
+  "lp-mb2-telegraphtutorialnos-prime": 1,
+  "lp-mb2-telegraphtutorialnos-pix": 1,
+  "lp-mb2-substacknewsletterme-esp": 1,
+  "lp-mb2-substacknewsletterme-pix": 1,
+  "lp-mb2-telegraphtutorialnos-esp": 1,
+  "lp-mb2-substacknewsletterme-prime": 1,
+  "lp-mb2-substacknewsletterme-spf": 1,
+  "lp-mb2-substacknewsletterme-aio": 1,
+  "lp-mb2-substacknewsletterme-ned": 1,
+  "lp-mb2-substacknewsletterme-slive": 1,
+  "lp-mb2-telegraphtutorialnos-ned": 1,
+  "lp-mb2-substacknewsletterme-ifo": 1,
+  "lp-mb2-telegraphtutorialnos-ifo": 1,
+  "lp-mb2-telegraphtutorialnos-slive": 1,
+  "lp-mb2-telegraphtutorialnos-aio": 1,
+  "lp-mb2-substacknewsletterme-shqip": 1,
+  "lp-mb2-telegraphtutorialnos-spf": 1
+ }
 }

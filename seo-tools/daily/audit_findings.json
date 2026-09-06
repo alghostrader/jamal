@@ -13,7 +13,6 @@
    "checkout",
    "checkout",
    "checkout",
-   "contacto",
    "politica-de-reembolso"
   ],
   "favicon": 200,
@@ -48,7 +47,6 @@
    "afrekenen",
    "afrekenen",
    "afrekenen",
-   "contact",
    "terugbetalingsbeleid"
   ],
   "favicon": 200,
@@ -102,8 +100,7 @@
    "checkout",
    "checkout",
    "checkout",
-   "checkout",
-   "kontakt"
+   "checkout"
   ],
   "favicon": 200,
   "www_redirect": "308 -> https://iptvshqiptar.com/"
@@ -144,7 +141,7 @@
   "no_meta_desc": [],
   "thin": [],
   "favicon": 200,
-  "www_redirect": "308 -> https://abonnementiptvofficiel.com/"
+  "www_redirect": "err HTTPSConnectionPool(host='www.abonnement"
  },
  "iptvsegura.com": {
   "pages": 33,
@@ -162,7 +159,7 @@
   "www_redirect": "308 -> https://iptvsegura.com/"
  },
  "rodaktv.com": {
-  "pages": 38,
+  "pages": 42,
   "titles_over60": [],
   "redirect_links": [],
   "linked404": {},
@@ -171,6 +168,6 @@
   "no_meta_desc": [],
   "thin": [],
   "favicon": 200,
-  "www_redirect": "307 -> https://rodaktv.com/"
+  "www_redirect": "308 -> https://rodaktv.com/"
  }
 }

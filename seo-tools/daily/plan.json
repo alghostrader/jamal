@@ -2,33 +2,16 @@
  "date": "2026-09-06",
  "tasks": [
   {
-   "id": "6f748626cd",
+   "id": "fd497a106a",
    "kind": "Indexation",
    "site": "rodaktv.com",
    "query": "",
-   "page": "/polska-telewizja-za-granica",
-   "what": "2 priority pages are not indexed: /polska-telewizja-za-granica, /test-iptv.",
+   "page": "/test-iptv",
+   "what": "Priority page /test-iptv is not indexed (Crawled - currently not indexed).",
    "score": 82,
    "bucket": "today",
    "effort": "Quick",
-   "effort_min": 20,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   }
-  },
-  {
-   "id": "8162a0a994",
-   "kind": "Technical fix",
-   "site": "rodaktv.com",
-   "query": "",
-   "page": "",
-   "what": "1. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> Domains set it to permanent (308). Verify with curl -sI.",
-   "score": 78,
-   "bucket": "today",
-   "effort": "Quick",
-   "effort_min": 20,
+   "effort_min": 15,
    "baseline": {
     "probe_pos": null,
     "gsc_pos": null,
@@ -118,6 +101,23 @@
     "probe_pos": null,
     "gsc_pos": 5.8,
     "clicks28": 38
+   }
+  },
+  {
+   "id": "ee2bf478f4",
+   "kind": "Striking distance",
+   "site": "iptvsegura.com",
+   "query": "iptv segura",
+   "page": "",
+   "what": "\u201ciptv segura\u201d sits at position 21 with 12 impressions/28d.",
+   "score": 59,
+   "bucket": "next",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": 32,
+    "gsc_pos": 21.2,
+    "clicks28": 0
    }
   },
   {
@@ -730,23 +730,6 @@
     "probe_pos": null,
     "gsc_pos": 5.4,
     "clicks28": 1
-   }
-  },
-  {
-   "id": "ee2bf478f4",
-   "kind": "Striking distance",
-   "site": "iptvsegura.com",
-   "query": "iptv segura",
-   "page": "",
-   "what": "\u201ciptv segura\u201d sits at position 21 with 12 impressions/28d.",
-   "score": 50,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": 29,
-    "gsc_pos": 21.2,
-    "clicks28": 0
    }
   },
   {
@@ -1430,12 +1413,12 @@
    }
   },
   {
-   "id": "0b8f632913",
+   "id": "627326bf4c",
    "kind": "Technical fix",
    "site": "iptvesp.com",
    "query": "",
    "page": "",
-   "what": "1. THIN PAGES (P2). 7 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout, contacto.\n   Expand each to answer its query properly, or consolidate/noindex if th",
+   "what": "1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout, politica-de-reembolso.\n   Expand each to answer its query properly, or consolidate/",
    "score": 45,
    "bucket": "monitor",
    "effort": "Quick",
@@ -1447,12 +1430,12 @@
    }
   },
   {
-   "id": "bd9ac0bccf",
+   "id": "b443b33f42",
    "kind": "Technical fix",
    "site": "iptvned.com",
    "query": "",
    "page": "",
-   "what": "1. THIN PAGES (P2). 7 page(s) under 300 words: afrekenen, afrekenen, afrekenen, afrekenen, afrekenen, contact.\n   Expand each to answer its query properly, or consolidate/noindex i",
+   "what": "1. THIN PAGES (P2). 6 page(s) under 300 words: afrekenen, afrekenen, afrekenen, afrekenen, afrekenen, terugbetalingsbeleid.\n   Expand each to answer its query properly, or consolid",
    "score": 45,
    "bucket": "monitor",
    "effort": "Quick",
@@ -1481,12 +1464,12 @@
    }
   },
   {
-   "id": "82fbbe1c24",
+   "id": "f6e1c07475",
    "kind": "Technical fix",
    "site": "iptvshqiptar.com",
    "query": "",
    "page": "",
-   "what": "1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout, kontakt.\n   Expand each to answer its query properly, or consolidate/noindex if the",
+   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
    "score": 45,
    "bucket": "monitor",
    "effort": "Quick",

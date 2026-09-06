@@ -226,11 +226,11 @@
     "last_crawl": "2026-09-05T08:02:37Z"
    },
    "/polska-telewizja-za-granica": {
-    "state": "URL is unknown to Google",
-    "verdict": "NEUTRAL",
-    "canonical_google": null,
-    "canonical_user": null,
-    "last_crawl": null
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://rodaktv.com/polska-telewizja-za-granica",
+    "canonical_user": "https://rodaktv.com/polska-telewizja-za-granica",
+    "last_crawl": "2026-09-06T09:18:16Z"
    },
    "/test-iptv": {
     "state": "Crawled - currently not indexed",

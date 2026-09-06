@@ -45,8 +45,8 @@
     "clicks28": 0
    },
    "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION"
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
+   "outcome": "VERIFIED"
   },
   {
    "id": "e91c45e957",
@@ -99,8 +99,8 @@
     "clicks28": 0
    },
    "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION"
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
+   "outcome": "VERIFIED"
   },
   {
    "id": "8162a0a994",
@@ -115,8 +115,8 @@
     "clicks28": 0
    },
    "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION"
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
+   "outcome": "VERIFIED"
   },
   {
    "id": "0b8f632913",
@@ -131,8 +131,194 @@
     "clicks28": 0
    },
    "completed": "2026-09-06",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
+   "outcome": "VERIFIED"
+  },
+  {
+   "id": "6f748626cd",
+   "kind": "Indexation",
+   "site": "rodaktv.com",
+   "query": "",
+   "page": "/polska-telewizja-za-granica",
+   "what": "2 priority pages are not indexed: /polska-telewizja-za-granica, /test-iptv.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "737de905a9",
+   "kind": "Striking distance",
+   "site": "abonnementiptvofficiel.com",
+   "query": "meilleur boitier iptv",
+   "page": "",
+   "what": "\u201cmeilleur boitier iptv\u201d sits at position 15 with 199 impressions/28d.",
+   "baseline": {
+    "probe_pos": 8,
+    "gsc_pos": 15.4,
+    "clicks28": 8
+   },
+   "completed": "2026-09-06",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": 8,
+    "gsc_pos": 15.4,
+    "clicks28": 8
+   }
+  },
+  {
+   "id": "f217a61cb1",
+   "kind": "Striking distance",
+   "site": "primeiptv-france.com",
+   "query": "iptv algerie",
+   "page": "",
+   "what": "\u201ciptv algerie\u201d sits at position 7 with 353 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 6.6,
+    "clicks28": 25
+   },
+   "completed": "2026-09-06",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 6.6,
+    "clicks28": 25
+   }
+  },
+  {
+   "id": "715fb811aa",
+   "kind": "Content decay",
+   "site": "iptvesp.com",
+   "query": "",
+   "page": "/blog/iptv-espana-telegram",
+   "what": "/blog/iptv-espana-telegram lost 175 clicks (175 \u2192 0, 28d vs previous).",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-06",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "8fcbe4f4aa",
+   "kind": "Striking distance",
+   "site": "abonnementiptvofficiel.com",
+   "query": "boitier iptv",
+   "page": "",
+   "what": "\u201cboitier iptv\u201d sits at position 23 with 179 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 23.0,
+    "clicks28": 3
+   },
+   "completed": "2026-09-06",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 23.0,
+    "clicks28": 3
+   }
+  },
+  {
+   "id": "70f507b6f5",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "listas m3u telegram",
+   "page": "",
+   "what": "\u201clistas m3u telegram\u201d sits at position 6 with 250 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 5.8,
+    "clicks28": 38
+   },
+   "completed": "2026-09-06",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 5.8,
+    "clicks28": 38
+   }
+  },
+  {
+   "id": "dcbbd6a189",
+   "kind": "Striking distance",
+   "site": "primeiptv-france.com",
+   "query": "abonnement iptv alg\u00e9rie",
+   "page": "",
+   "what": "\u201cabonnement iptv alg\u00e9rie\u201d sits at position 6 with 103 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 6.1,
+    "clicks28": 9
+   },
+   "completed": "2026-09-06",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 6.1,
+    "clicks28": 9
+   }
+  },
+  {
+   "id": "c5fe8d7689",
+   "kind": "Striking distance",
+   "site": "primeiptv-france.com",
+   "query": "prix abonnement iptv alg\u00e9rie",
+   "page": "",
+   "what": "\u201cprix abonnement iptv alg\u00e9rie\u201d sits at position 7 with 70 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 7.1,
+    "clicks28": 2
+   },
+   "completed": "2026-09-06",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 7.1,
+    "clicks28": 2
+   }
+  },
+  {
+   "id": "ca8c1fdb3d",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "telegram iptv",
+   "page": "",
+   "what": "\u201ctelegram iptv\u201d sits at position 5 with 155 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 4.7,
+    "clicks28": 30
+   },
+   "completed": "2026-09-06",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 4.7,
+    "clicks28": 30
+   }
   }
  ]
 }
