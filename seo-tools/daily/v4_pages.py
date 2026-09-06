@@ -1209,7 +1209,7 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
         return (f'<div class="pagehead"><h1>Today</h1><p class="sub">{e(DAYNAME)} · your SEO plan: '
                 f'<b><span id="plan-n">{len(T_TODAY)}</span> tasks</b> · estimated workload ≈<span id="plan-est">{est//60}h {est%60:02d}m</span> · '
                 f'{len(T_NEXT)} next · {len(T_MONITOR)} monitor-only · {len(T_BACKLOG)} backlog. '
-                f'<span id="syncstate" class="stmeta">Task states: local to this browser</span>. "Copy status" hands them to the next audit for verification.</p></div>'
+                f'Sync status is in the header. "Copy status" hands states to the next audit for verification.</p></div>'
                 f'<div id="focusbar" style="display:none"></div>'
                 f'<div id="todaylist" class="stack" style="gap:14px;margin-bottom:20px">{cards}</div>'
                 f'<div id="donetoday"></div>'
@@ -1332,7 +1332,7 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
     # ---------- write ----------
     JS = CHART_JS + TABLE_JS + PERIOD_JS
     pages = [
-        ("today.html", "Today — IPTV Portfolio", build_today(), "today", TODAY_JS + SYNC_JS),
+        ("today.html", "Today — IPTV Portfolio", build_today(), "today", TODAY_JS),
         ("index.html", "IPTV Portfolio — SEO Command Center", build_overview(), None, JS + SALES_JS),
         ("performance.html", "Performance — IPTV Portfolio", build_performance(), "performance", JS),
         ("rankings.html", "Rankings — IPTV Portfolio", build_rankings(), "rankings", TABLE_JS),

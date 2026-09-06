@@ -643,9 +643,10 @@ def freshness_bar():
     items = [("GSC", f"pulled {gsc_when}" if gsc_when else "this audit", "" if gsc_when else "warn"),
              ("DataForSEO", "this audit" if not DFS_DOWN else "OUT OF CREDIT", "warn" if DFS_DOWN else ""),
              ("Semrush", H.escape(SEM_UPD) or "cached", "" if SEM_UPD == TODAY_ISO else "warn"),
-             ("Sales", "browser-local · live", "")]
+            ]
     return '<span class="fresh">' + "".join(
-        f'<span><span class="fdot {c}"></span><b>{n}</b> {v}</span>' for n, v, c in items) + '</span>'
+        f'<span><span class="fdot {c}"></span><b>{n}</b> {v}</span>' for n, v, c in items) + \
+        '<span id="syncstate"><span class="fdot off"></span><b>Sync</b> checking…</span></span>'
 
 def topheader(title, cur):
     return (f'<div class="toph"><span class="crumb">{H.escape(title)}</span>'
@@ -714,13 +715,13 @@ const app = getApps().length ? getApps()[0] : initializeApp({ apiKey: "AIzaSyAI1
   projectId: "iptv-sales", messagingSenderId: "547649027254", appId: "1:547649027254:web:87d70cbfd54ff34164ba17" });
 const auth = getAuth(app), db = getFirestore(app), K = 'seo_tasks_v2';
 const el = document.getElementById('syncstate');
-function status(t, ok){ if(el){ el.textContent = t; el.style.color = ok ? '#16a34a' : ''; } }
+function status(t, ok){ console.log('[sync]', t); if(el){ el.innerHTML = '<span class="fdot ' + (ok ? '' : 'warn') + '"></span><b>Sync</b> ' + t.replace(/^Task states: /,''); } }
 onAuthStateChanged(auth, function(user){
-  if(!user){ status('Task states: local to this browser until you sign in', false); window.seoCloudSave = null; return; }
+  if(!user){ status('signed out — local only', false); window.seoCloudSave = null; return; }
   const ref = doc(db, 'seo_state', user.uid);
   let pushedLocal = false;
-  const fail = function(e){ status('Cloud sync blocked (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid} for signed-in users', false); };
-  const ok = function(){ status('Synced across your devices (' + (user.email||'') + ')', true); };
+  const fail = function(e){ status('BLOCKED (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid}', false); };
+  const ok = function(){ status('on · ' + (user.email||''), true); };
   window.seoCloudSave = function(st){ setDoc(ref, { tasks: st, updated_at: Date.now() }, { merge: true }).then(ok).catch(fail); };
   window.seoCloudSaveLinks = function(map){ setDoc(ref, { links: map, updated_at: Date.now() }, { merge: true }).then(ok).catch(fail); };
   onSnapshot(ref, function(snap){
@@ -807,6 +808,7 @@ def shell(title, body, cur=None, extra_js="", crumb=None):
 {HEAD_META}
 {STYLE}
 {GATE_HTML}
+{SYNC_JS}
 <div class="viz-root"><div class="app">
 {sidebar(cur)}
 <div class="main">
@@ -1626,7 +1628,7 @@ def build_settings():
 
 
 today_body = build_work()
-open(os.path.join(OUT, "work.html"), "w").write(shell("Work — All tasks", workify(today_body), cur="work", extra_js=COPY_JS + WORK_JS + SYNC_JS))
+open(os.path.join(OUT, "work.html"), "w").write(shell("Work — All tasks", workify(today_body), cur="work", extra_js=COPY_JS + WORK_JS))
 
 # trends
 def trends_body():
@@ -1897,7 +1899,7 @@ _links_tiles = ('<div class="board">'
     + tile("t4", "SPAM WATCH", f"{_sp_max[0]}", f"highest: {_sp_max[1].replace('.com','')} — +4pts = pause that site")
     + '</div>')
 _lb = _lb.replace('</p>', '</p>' + _links_tiles, 1)
-open(os.path.join(OUT, "links.html"), "w").write(shell("Backlinks — IPTV Portfolio", _lb, cur="links", extra_js=COPY_JS + LINKS_JS + SYNC_JS))
+open(os.path.join(OUT, "links.html"), "w").write(shell("Backlinks — IPTV Portfolio", _lb, cur="links", extra_js=COPY_JS + LINKS_JS))
 
 
 # plan
