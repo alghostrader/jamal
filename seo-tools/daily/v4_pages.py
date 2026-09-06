@@ -1147,7 +1147,7 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
     import datetime as _dt2
     DAYNAME = _dt2.date.today().strftime("%A, %B %-d") if hasattr(_dt2.date.today(), "strftime") else TODAY_STR
 
-    def task_card(t, n):
+    def task_card(t, n, promo=False):
         i = ALL.index(t["site"]) + 1
         steps = STEPS.get(t["kind"], ["Do the recommended action", "Re-check next audit"])
         steps_json = e(J.dumps(steps))
@@ -1158,10 +1158,12 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
             f'probe #{b["probe_pos"]}' if b.get("probe_pos") else "",
             f'GSC pos {b["gsc_pos"]}' if b.get("gsc_pos") else "",
             f'{b["clicks28"]} clicks/28d' if b.get("clicks28") else ""] if x) or "no keyword baseline"
+        promo_attr = ' data-promo="1" style="display:none"' if promo else ""
+        num_html = f'<span class="tasknum">#{n}</span>' if not promo else '<span class="tasknum" style="background:var(--pos)">+</span>'
         return (f'<div class="card taskcard" data-tid="{t["id"]}" data-min="{t["effort_min"]}" data-steps="{steps_json}" '
-                f'data-title="{e(t["kind"])}: {e(t["query"] or t["page"] or t["site"])}">'
+                f'data-title="{e(t["kind"])}: {e(t["query"] or t["page"] or t["site"])}"{promo_attr}>'
                 f'<div class="chead" style="margin-bottom:6px"><div style="display:flex;align-items:center;gap:9px;min-width:0">'
-                f'<span class="tasknum">#{n}</span><h2 style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'
+                f'{num_html}<h2 style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'
                 f'{e(t["kind"])}: {e(t["query"] or t["page"] or ABBR[t["site"]])}</h2></div>'
                 f'<span class="score num" title="priority score">{t["score"]}</span></div>'
                 f'<div class="stmeta" style="margin-bottom:8px"><span class="dot s{i}"></span> {ABBR[t["site"]]}'
@@ -1187,7 +1189,9 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
 
     def build_today():
         est = sum(t["effort_min"] for t in T_TODAY)
-        cards = "".join(task_card(t, n + 1) for n, t in enumerate(T_TODAY))             or '<div class="empty"><b>Nothing urgent today.</b> The engine found no task scoring ≥72 — links and content cadence continue as standing work.</div>'
+        cards = ("".join(task_card(t, n + 1) for n, t in enumerate(T_TODAY))
+                 or '<div class="empty" id="todayempty"><b>Nothing urgent today.</b> The engine found no task scoring ≥72 — links and content cadence continue as standing work.</div>')
+        cards += "".join(task_card(t, 0, promo=True) for t in (T_NEXT[:8] + T_MONITOR[:10]))
         nxt = "".join(slim_row(t) for t in T_NEXT[:8]) or '<div class="empty">Queue is empty.</div>'
         mon = "".join(slim_row(t) for t in T_MONITOR[:10]) or '<div class="empty">Nothing on watch.</div>'
         done_rows = ""
@@ -1203,7 +1207,7 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
                           f'<span class="stmeta">· {ABBR.get(c.get("site"), c.get("site", ""))} · completed {e(c.get("completed", ""))}'
                           f'{e(after)}</div></div>')
         return (f'<div class="pagehead"><h1>Today</h1><p class="sub">{e(DAYNAME)} · your SEO plan: '
-                f'<b>{len(T_TODAY)} recommended tasks</b> · estimated workload ≈{est//60}h {est%60:02d}m · '
+                f'<b><span id="plan-n">{len(T_TODAY)}</span> tasks</b> · estimated workload ≈<span id="plan-est">{est//60}h {est%60:02d}m</span> · '
                 f'{len(T_NEXT)} next · {len(T_MONITOR)} monitor-only · {len(T_BACKLOG)} backlog. '
                 f'Task states persist in this browser; "Copy status" hands them to the next audit for verification.</p></div>'
                 f'<div id="focusbar" style="display:none"></div>'
@@ -1228,13 +1232,32 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
  var st=load();
  function baseline(card){ return {title:card.dataset.title||''}; }
  function apply(){
-  var doneN=0, hidden=0;
+  var doneN=0, hidden=0, visible=0, mins=0;
   document.querySelectorAll('.taskcard').forEach(function(c){
-    var s=st[c.dataset.tid];
-    if(!s) return;
-    if(s.state==='completed'){ c.style.display='none'; doneN++; }
-    if(s.state==='dismissed'||s.state==='deferred'){ c.style.display='none'; hidden++; }
+    var s=st[c.dataset.tid], promo=c.dataset.promo==='1';
+    if(promo){
+      var show=s&&(s.state==='promoted'||s.state==='active');
+      c.style.display=show?'':'none';
+      if(show){ visible++; mins+=parseInt(c.dataset.min,10)||0; }
+      if(s&&s.state==='completed') doneN++;
+      return;
+    }
+    if(!s){ visible++; mins+=parseInt(c.dataset.min,10)||0; return; }
+    if(s.state==='completed'){ c.style.display='none'; doneN++; return; }
+    if(s.state==='dismissed'||s.state==='deferred'){ c.style.display='none'; hidden++; return; }
+    visible++; mins+=parseInt(c.dataset.min,10)||0;
   });
+  document.querySelectorAll('.alertrow[data-tid]').forEach(function(row){
+    var s=st[row.dataset.tid], b=row.querySelector('.t-promote'); if(!b) return;
+    if(s&&(s.state==='promoted'||s.state==='active')){ b.textContent='On your list'; b.disabled=true; }
+    else if(s&&s.state==='completed'){ b.textContent='Completed'; b.disabled=true; }
+    else if(s&&s.state==='dismissed'){ b.textContent='Dismissed'; b.disabled=true; }
+    else { b.textContent='Add to Today'; b.disabled=false; }
+  });
+  var pn=document.getElementById('plan-n'), pe=document.getElementById('plan-est'), te=document.getElementById('todayempty');
+  if(pn) pn.textContent=visible;
+  if(pe) pe.textContent=Math.floor(mins/60)+'h '+('0'+(mins%60)).slice(-2)+'m';
+  if(te) te.style.display=visible?'none':'';
   var dd=document.getElementById('donetoday');
   if(dd) dd.innerHTML=(doneN||hidden)?'<div class="empty" style="margin-bottom:16px"><b>'+doneN+' completed</b>'+(hidden?' · '+hidden+' deferred/dismissed':'')+' on this device today. Copy status below so the next audit records and verifies them.</div>':'';
   renderFocus();
@@ -1280,14 +1303,17 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
     Object.keys(st).forEach(function(k){ if(st[k].state==='active') st[k].state='queued'; });
     set('active'); window.scrollTo({top:0,behavior:'smooth'}); });
   if(b=c.querySelector('.t-done')) b.addEventListener('click',function(){ set('completed'); });
-  if(b=c.querySelector('.t-defer')) b.addEventListener('click',function(){ set('deferred'); });
+  if(b=c.querySelector('.t-defer')) b.addEventListener('click',function(){ set(c.dataset.promo==='1'?'queued':'deferred'); });
   if(b=c.querySelector('.t-dismiss')) b.addEventListener('click',function(){ set('dismissed'); });
  });
  document.querySelectorAll('.t-promote').forEach(function(b){
   b.addEventListener('click',function(){
     var row=b.closest('[data-tid]'); if(!row) return;
-    st[row.dataset.tid]={state:'promoted',title:row.textContent.trim().slice(0,80)}; save(st);
-    b.textContent='On your list'; b.disabled=true;
+    var card=document.querySelector('.taskcard[data-tid="'+row.dataset.tid+'"]');
+    var cur=st[row.dataset.tid]||{}; cur.state='promoted';
+    if(card){ cur.title=card.dataset.title; cur.min=parseInt(card.dataset.min,10)||30; try{cur.steps=JSON.parse(card.dataset.steps);}catch(e){cur.steps=[];} }
+    st[row.dataset.tid]=cur; save(st); apply();
+    if(card){ card.scrollIntoView({behavior:'smooth',block:'center'}); }
   });
  });
  var cs=document.getElementById('copystatus');
