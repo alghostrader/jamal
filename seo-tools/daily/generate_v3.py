@@ -1722,7 +1722,7 @@ def ledger_checklist():
             for pid, label in NEXT_P3:
                 if pid in have: continue
                 n_next += 1; nx_html += box(pid, key, label, False, ' <span class="tag neu">P3</span>')
-        badge = f' <span class="tag warn">spam {sp}</span>' if sp is not None and sp >= 58 else ""
+        badge = f' <span class="tag warn">⚠ {PAUSED_LINKS[key]} · paused</span>' if key in PAUSED_LINKS else ""
         rd = sm.get("ref_domains") if sm.get("ref_domains") is not None else "—"
         opn = "open" if (key == "rodak" or placed) else ""
         pl_block = pl_html or '<div class="stmeta">none yet</div>'
