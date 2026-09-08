@@ -16,7 +16,7 @@
 - **Domain:** smartersprofrance.fr
 - **Industry / niche:** IPTV subscription service (France market)
 - **What they actually sell (one sentence):** IPTV subscriptions sold through Smarters-Pro install/config expertise.
-- **Price positioning:** budget-to-mid — the plan cards + WhatsApp checkout on /abonnement-iptv quote 3 mois 22 €, 6 mois 39 €, 12 mois 49 €, 24 mois 79 €. NOTE: the same page's prose/summary inconsistently shows 25 €/39 €/59 €/99 € — an on-page price mismatch the owner should reconcile. One-off payments, no monthly billing.
+- **Price positioning:** budget-to-mid — 1-screen plans: 3 mois 25 €, 6 mois 39 €, 12 mois 59 €, 24 mois 99 € (per-month 8,33 / 6,50 / 4,92 / 4,13). One-off payments, no monthly billing. (Owner-confirmed 2026-09-08; stale 22/39/49/79 on the cards/checkout was corrected to match.)
 
 ### Services or products
 
@@ -48,7 +48,7 @@
 ### Goals
 
 - **Primary goal:** subscription sales via the money page(s)
-- **What a customer is worth, roughly:** ≈ 49 € per customer/year on the 12-month plan (checkout/WhatsApp price); other plans: 3 mois 22 €, 6 mois 39 €, 24 mois 79 €. (The page's prose inconsistently shows a 59 €/12-month figure — reconcile before quoting.) One-off payment. Assumes a one-year plan.
+- **What a customer is worth, roughly:** ≈ 59 € per customer/year on the 12-month plan (the ~80% choice); other plans 3 mois 25 €, 6 mois 39 €, 24 mois 99 €. One-off payment; assumes a one-year plan.
 - **What this business will NOT do:** paid ads, fake reviews, money-anchor link building
 
 ### Proof and assets
