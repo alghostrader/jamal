@@ -39,6 +39,9 @@ Console service account) must be re-supplied by the owner after a recycle.
    dash/.env, else inferred) AND the change is confirmed on the live URL (content: keyword on the
    page + modified date on/after the tick · technical: defect gone on a live re-fetch · backlink:
    placement URL live + dofollow). Never mark a task done from a claim or a commit.
+   **Git-side task channel**: `seo-tools/DO-NEXT.md` (generated, copy from daily/ every audit) is
+   the queue for the iptv coding session; it reports done work by appending lines to
+   `seo-tools/daily/task_updates.jsonl`. Never delete that file's lines — the audit consumes them.
    **Task feedback loop (automatic)**: run `python3 fetch_task_state.py` BEFORE generating —
    it reads the owner's synced ticks (Do next/Backlinks + placement URLs) from the sales project's
    Firestore (`seo_state/{uid}`, service account has Cloud Datastore Viewer on iptv-sales)

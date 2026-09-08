@@ -311,6 +311,55 @@ def build_donext(G, C):
                "shipped": [{k: v for k, v in m.items()} for m in shipped], "needs": needs, "monitor": [m for m in (model(t) for t in T_MONITOR) if m],
                "excluded": excluded}, open(os.path.join(BASE, "donext.json"), "w"), indent=1, default=str)
 
+    est = sum(m["effort_min"] for m in do_models)
+    G["DONEXT_N"] = len(do_models)
+
+    # ═════════════ DO-NEXT.md — the same queue for Claude Code sessions without a browser ═════════════
+    def md_task(m, i=None, verify=None):
+        verify = verify or {}
+        title = m["keyword"] or m["page"] or (m["category"].title() if m["category"] else m["site"])
+        head = (f"### {'#' + str(i) if i else '…'} {m['type']} — {title} · {m['site']}")
+        lines = [head, f"- id: `{m['id']}` · score {m['priority_score']} · {m['effort']} ≈{m['effort_min']} min · {m['metric']}",
+                 f"- repo: `{m['repo_path']}`" + (f" ({m['repo_content']})" if m['repo_content'] else ""),
+                 f"- action: **{m['action']}** → {m['target_url'] or '(URL not resolved — set it in the update line)'}"]
+        if m["cannibalization_note"]: lines.append(f"- ⚠ {m['cannibalization_note']}")
+        lines.append(f"- what: {m['what']}" + (f" {m['why_action']}" if m.get("why_action") else ""))
+        lines.append(f"- deploy-as: {m['deploy_as']} · guards: " + " · ".join(m["guards"]))
+        lines.append("- done when: " + " / ".join(m["done_when"]))
+        if verify.get("detail"): lines.append(f"- live check ({verify.get('checked', '')}): {verify['detail']}")
+        return "\n".join(lines) + "\n"
+    md = [f"# DO NEXT — IPTV portfolio · generated {TODAY} by the dashboard audit",
+          "",
+          "This file IS the task board (same data as iptv.alghostrader.com/today, lane **Do now**). Work top-down: #1 is the next task.",
+          "A task is DONE only when it is live-verified by the next audit (deploy READY + change confirmed on the live URL).",
+          "",
+          "## How to mark a task done (no browser needed)",
+          "Append ONE line per task to `seo-tools/daily/task_updates.jsonl`, then commit + push this repo (branch `claude/iptvpix-seo-audit-l68bmx`):",
+          "```",
+          '{"id": "<id from the task>", "state": "completed", "url": "https://<exact live URL you changed or published>", "date": "YYYY-MM-DD", "by": "iptv-session", "note": "what was changed (1 line)"}',
+          "```",
+          "States: `completed` (built + deployed) · `deferred` · `dismissed` (with a note why) · `active` (started). Always give the live URL for content/enhance tasks:",
+          "the audit fetches it and checks keyword + modified date (add `dateModified` / `og:updated_time` to the page). For a backlink id (`lp-…`) the url is the placement URL.",
+          "The next audit merges these lines with the owner's browser ticks (Firestore) and moves the task to Shipped only after the live check passes.",
+          "",
+          f"## Do now — {len(do_models)} tasks, ≈{est//60}h {est%60:02d}m", ""]
+    md += [md_task(m, i + 1) for i, m in enumerate(do_models)]
+    md += ["", f"## Verifying — {len(verifying)} built, not live yet (what is still missing)", ""]
+    md += [md_task(m, None, m["verify"]) for m in verifying]
+    md += ["", f"## Shipped (live-verified) — {len(shipped)}", ""]
+    md += [f"- ✓ {m['type']} — {m['keyword'] or m['page'] or m['category']} · {m['site']} · verified {m['verify'].get('verified_at')} · {m['verify'].get('detail', '')}" for m in shipped]
+    md += ["", f"## Needs Jamal (owner-only / blocked) — {len(needs)}", ""]
+    md += [f"- {n['badge']}: {n['title']} — {n['meta']}" for n in needs]
+    md += ["", f"## Monitor — {len(T_MONITOR)} watch items (do not work on these)", ""]
+    md += [f"- {t['kind']}: {t.get('query') or t.get('page')} · {ABBR[t['site']]} · score {t['score']}" for t in T_MONITOR[:25]]
+    md += ["", f"## Excluded — {len(excluded)} out-of-scope ({SCOPE['out_label']}) — never work on these", ""]
+    md += [f"- {x['q']} · {ABBR.get(x['site'], x['site'])}" for x in excluded]
+    md += ["", "## Rules", "- One keyword, one page, one site per market — ENHANCE the ranking page, never create a competing URL.",
+           "- Commits authored by alghostrader (other authors land BLOCKED on Vercel).",
+           "- No rights-holder / channel / league / broadcaster names. Title ≤ 60 chars. Real hero image.",
+           "- Backlinks: brand or naked-URL anchors only; signup + CAPTCHA + publish = owner only.", ""]
+    open(os.path.join(BASE, "DO-NEXT.md"), "w", encoding="utf-8").write("\n".join(md))
+
     # ═════════════ HTML ═════════════
     def track(m, state="", verify=None):
         verify = verify or {}
@@ -382,8 +431,6 @@ def build_donext(G, C):
         return (f'<div class="rrow" data-tid="{e(m.get("id", ""))}"><span class="score">{m.get("priority_score", m.get("score", ""))}</span>'
                 f'<span class="rt"><b>{e(title)}</b><div class="m"><span class="site">{e(ABBR.get(m["site"], m["site"]))}</span> · {e(sub)}</div></span>{btn}</div>')
 
-    est = sum(m["effort_min"] for m in do_models)
-    G["DONEXT_N"] = len(do_models)
     do_html = "".join(card(m, i + 1) for i, m in enumerate(do_models)) or '<div class="empty">Nothing to do — the engine found no open task. Links and content cadence continue as standing work.</div>'
     promo_html = "".join(card(m, None, promo=True) for m in promo_models)
     ver_html = "".join(card(m, None, "completed", m["verify"]) for m in verifying)

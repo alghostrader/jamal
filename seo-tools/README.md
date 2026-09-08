@@ -62,6 +62,13 @@ owner marked built is fetched live; it only moves to "Shipped" when the change i
 the URL. Results are cached in `live_verify.json`; the board's data model is `donext.json`.
 `/today` = Do next, `/work` redirects there, `/links` = Backlinks (`/backlinks` redirects).
 
+**Sessions without a browser (the iptv coding session):** the generator also writes
+`daily/DO-NEXT.md` — copy it to `seo-tools/DO-NEXT.md` when committing. It is the same
+queue with ids and work orders. A session marks work done by appending one JSON line to
+`seo-tools/daily/task_updates.jsonl` and pushing; `fetch_task_state.py` merges those lines
+with the browser ticks (and mirrors them to Firestore when the service account has
+Cloud Datastore User), then the audit live-verifies them like any other tick.
+
 Then deploy `out/*.html` to the `dashboard` branch (Vercel serves it), adding a
 `<!-- pipeline:<marker> -->` comment to `index.html` and verifying the marker is live.
 

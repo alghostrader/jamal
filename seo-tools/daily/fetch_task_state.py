@@ -31,8 +31,50 @@ try:
     # a task card can also carry the placement URL (Do next → Mark complete on a backlink card)
     for k, t in tasks.items():
         if k.startswith("lp-") and isinstance(t, dict) and t.get("url") and k not in link_urls: link_urls[k] = t["url"]
+    # ---- git-side updates: other Claude Code sessions (no browser) append lines to task_updates.jsonl ----
+    UPD = os.path.join(BASE, "task_updates.jsonl")
+    git_n = 0
+    if os.path.exists(UPD):
+        for line in open(UPD, encoding="utf-8"):
+            line = line.strip()
+            if not line or line.startswith("#"): continue
+            try: u = json.loads(line)
+            except Exception: print("task_updates.jsonl: skipped bad line:", line[:80]); continue
+            tid, st = str(u.get("id", "")).strip(), str(u.get("state", "completed"))
+            if not tid: continue
+            when = str(u.get("date") or datetime.date.today().isoformat())
+            if tid.startswith("lp-"):
+                if st == "completed": links[tid] = 1
+                if u.get("url"): link_urls[tid] = u["url"]
+                git_n += 1; continue
+            cur = tasks.get(tid) if isinstance(tasks.get(tid), dict) else {}
+            # the most recent decision wins (git line vs browser tick), ties go to the git line
+            if cur.get("state") and (cur.get("completed") or cur.get("updated") or "") > when: continue
+            new = {**cur, "state": st, "updated": when, "by": u.get("by", "git"), "note": u.get("note", "")}
+            if st == "completed": new["completed"] = when
+            if u.get("url"): new["url"] = u["url"]
+            if u.get("title") and not new.get("title"): new["title"] = u["title"]
+            tasks[tid] = new; git_n += 1
     state = {"fetched": datetime.datetime.utcnow().isoformat(timespec="minutes") + "Z", "ok": True,
-             "tasks": tasks, "links": links, "link_urls": link_urls}
+             "tasks": tasks, "links": links, "link_urls": link_urls, "git_updates": git_n}
+    # push the merged state back so every browser/device sees git-side ticks too (needs write access:
+    # role Cloud Datastore User on iptv-sales; read-only Viewer just prints a note)
+    if git_n:
+        docs = r.json().get("documents", [])
+        if docs:
+            name = docs[0]["name"]
+            def enc(v):
+                if isinstance(v, bool): return {"booleanValue": v}
+                if isinstance(v, int): return {"integerValue": str(v)}
+                if isinstance(v, float): return {"doubleValue": v}
+                if isinstance(v, list): return {"arrayValue": {"values": [enc(x) for x in v]}}
+                if isinstance(v, dict): return {"mapValue": {"fields": {k: enc(x) for k, x in v.items()}}}
+                return {"stringValue": str(v)}
+            body = {"fields": {"tasks": enc(tasks), "links": enc(links), "link_urls": enc(link_urls),
+                               "updated_at": {"integerValue": str(int(datetime.datetime.utcnow().timestamp() * 1000))}}}
+            pr = requests.patch(f"https://firestore.googleapis.com/v1/{name}?updateMask.fieldPaths=tasks&updateMask.fieldPaths=links&updateMask.fieldPaths=link_urls&updateMask.fieldPaths=updated_at",
+                                headers={"Authorization": f"Bearer {creds.token}"}, json=body, timeout=30)
+            print(f"git updates → Firestore: HTTP {pr.status_code}" + ("" if pr.status_code == 200 else " (grant the service account 'Cloud Datastore User' on iptv-sales to mirror git ticks into the browser dashboard; the audit uses them regardless)"))
     # the checklist IS the ledger: a ticked placement that is not in the CSV yet becomes a pending row
     # (with its URL) — live_verify/donext then fetches it and promotes it to live / decayed.
     import csv
@@ -61,7 +103,7 @@ try:
                 w = csv.DictWriter(fh, fieldnames=fields); w.writeheader(); w.writerows(rows)
             print(f"ledger: {added} pending placement(s) added from dashboard ticks")
     done = sum(1 for t in tasks.values() if isinstance(t, dict) and t.get("state") == "completed")
-    print(f"cloud state: {len(tasks)} task states ({done} completed) · {len(links)} matrix ticks · {len(link_urls)} placement URLs")
+    print(f"cloud state: {len(tasks)} task states ({done} completed) · {len(links)} matrix ticks · {len(link_urls)} placement URLs · {git_n} git-side updates")
 except Exception as e:
     prev = json.load(open(OUT)) if os.path.exists(OUT) else {}
     state = {**prev, "ok": False, "error": str(e)[:200], "fetched": prev.get("fetched")}
