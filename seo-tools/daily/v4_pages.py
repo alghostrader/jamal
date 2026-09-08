@@ -501,7 +501,7 @@ def build_all(G):
                 if out_of_scope(r["kw"]): continue
                 op, np_ = prev_pos.get((s, r["kw"])), r.get("pos")
                 g_ = GS.get(s, {}).get("queries", {}).get("cur", {}).get(r["kw"])
-                if g_ and g_["position"] <= 15 and (np_ is None or np_ > op + 4 if op else False):
+                if g_ and op and g_["position"] <= max(15, op + 3) and (np_ is None or np_ > op + 4):
                     continue  # probes lost it but Google's own data shows real users still see it — artifact, not a loss
                 if op and op <= 20 and (np_ is None or np_ > op + 4):
                     vol = r.get("vol") or 0

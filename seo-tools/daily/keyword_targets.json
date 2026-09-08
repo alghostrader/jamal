@@ -30,7 +30,7 @@
   {
    "kw": "proveedor iptv",
    "vol": 480,
-   "pos": 42,
+   "pos": 40,
    "url": "/"
   }
  ],
@@ -205,7 +205,7 @@
   {
    "kw": "iptv smarters pro firestick",
    "vol": 70,
-   "pos": 44,
+   "pos": 43,
    "url": "/"
   },
   {
@@ -246,8 +246,9 @@
   {
    "kw": "boitier iptv",
    "vol": 14800,
-   "pos": null,
-   "page": "/boitier-iptv"
+   "pos": 29,
+   "page": "/boitier-iptv",
+   "url": "/"
   },
   {
    "kw": "test iptv gratuit",
@@ -263,14 +264,14 @@
   {
    "kw": "essai iptv 7 jours",
    "vol": 90,
-   "pos": 51,
+   "pos": 52,
    "page": "/test-iptv",
    "url": "/"
   },
   {
    "kw": "meilleur boitier iptv",
    "vol": 720,
-   "pos": 7,
+   "pos": 8,
    "page": "/boitier-iptv",
    "url": "/"
   },
@@ -294,21 +295,21 @@
   {
    "kw": "iptv segura",
    "vol": 20,
-   "pos": 32,
+   "pos": 33,
    "page": "/",
    "url": "/"
   },
   {
    "kw": "estafas iptv",
    "vol": null,
-   "pos": 17,
+   "pos": 32,
    "page": "/guias/estafas-iptv-como-evitarlas",
    "url": "/"
   },
   {
    "kw": "iptv legal españa",
    "vol": 140,
-   "pos": 48,
+   "pos": 47,
    "page": "/guias/iptv-legal-espana",
    "url": "/"
   },
@@ -322,14 +323,14 @@
   {
    "kw": "que es una lista m3u",
    "vol": 50,
-   "pos": 30,
+   "pos": 29,
    "page": "/guias/que-es-lista-m3u",
    "url": "/"
   },
   {
    "kw": "iptv fire tv stick",
    "vol": 260,
-   "pos": 52,
+   "pos": 51,
    "page": "/guias/iptv-fire-tv-stick",
    "url": "/"
   }
@@ -354,7 +355,7 @@
   {
    "kw": "polska telewizja w niemczech",
    "vol": 720,
-   "pos": 42,
+   "pos": 43,
    "page": "/polska-telewizja-w-niemczech",
    "loc": [
     "Germany",
@@ -379,7 +380,7 @@
   {
    "kw": "iptv opinie",
    "vol": 90,
-   "pos": 46,
+   "pos": 47,
    "page": "/opinie",
    "url": "/"
   },
@@ -393,7 +394,7 @@
   {
    "kw": "polskie kanaly telegram",
    "vol": 90,
-   "pos": 27,
+   "pos": 32,
    "page": null,
    "url": "/"
   },

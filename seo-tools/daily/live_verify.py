@@ -34,12 +34,20 @@ def _env():
 _env()
 
 
+BROWSER_UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15",
+              "Accept-Language": "en,fr;q=0.8,es;q=0.7"}
 def fetch(url, timeout=12):
-    try:
-        r = requests.get(url, headers=UA, timeout=timeout, allow_redirects=True)
-        return r.status_code, r.text if "html" in (r.headers.get("content-type") or "") else "", r.url
-    except Exception as e:
-        return 0, "", url
+    import time
+    for attempt, hdr in enumerate((UA, BROWSER_UA)):
+        try:
+            r = requests.get(url, headers=hdr, timeout=timeout, allow_redirects=True)
+            if r.status_code in (403, 429, 0) and attempt == 0:
+                time.sleep(2); continue
+            return r.status_code, r.text if "html" in (r.headers.get("content-type") or "") else "", r.url
+        except Exception:
+            if attempt == 0: time.sleep(2); continue
+            return 0, "", url
+    return 0, "", url
 
 
 def norm(s):
@@ -158,6 +166,8 @@ def check_backlink(t):
     if not url:
         return dict(deployed=False, live=False, detail="no placement URL logged — tick it on Backlinks and paste the URL")
     st, html, _ = fetch(url)
+    if st in (403, 429, 999):
+        return dict(deployed=True, live=False, http=st, logged=True, detail=f"placement URL logged; the platform blocks automated checks (HTTP {st}) — counted as placed, not machine-verified")
     if st != 200:
         return dict(deployed=False, live=False, http=st, detail=f"placement URL returned HTTP {st or 'unreachable'}" + (" — DECAYED" if st in (404, 410) else ""))
     site = t["site"]

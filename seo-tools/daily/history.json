@@ -1392,12 +1392,12 @@
     "domain_rank": 0,
     "spam_score": 58,
     "ranked_top100": 18,
-    "targets_ranking": 2
+    "targets_ranking": 3
    },
    "iptvsegura.com": {
     "ref_domains": 3,
     "backlinks": 3,
-    "domain_rank": 0,
+    "domain_rank": null,
     "spam_score": 53,
     "ranked_top100": null,
     "targets_ranking": 6

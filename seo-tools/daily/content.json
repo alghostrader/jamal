@@ -4,7 +4,7 @@
    {
     "path": "/blog/listas-telegram-iptv-espana",
     "title": "Listas IPTV España por Telegram gratis: guía y riesgos 2026",
-    "words": 4599
+    "words": 4787
    },
    {
     "path": "/blog/iptv-espana-fire-tv-stick-4k-max-2026",
@@ -67,6 +67,11 @@
     "words": 2363
    },
    {
+    "path": "/blog/m3u-listas-iptv-espana",
+    "title": "Listas IPTV España 2026: M3U, gratis y por qué fallan",
+    "words": 2361
+   },
+   {
     "path": "/blog/iptv-telegram-gratis-2026",
     "title": "IPTV Telegram gratis 2026: qué esperar antes de bajarla",
     "words": 2272
@@ -80,11 +85,6 @@
     "path": "/blog/iptv-multipantalla-espana",
     "title": "IPTV multipantalla en España: ver en varias pantallas",
     "words": 2181
-   },
-   {
-    "path": "/blog/m3u-listas-iptv-espana",
-    "title": "Listas IPTV España 2026: M3U, gratis y por qué fallan",
-    "words": 2165
    },
    {
     "path": "/blog/ott-navigator-espana",
@@ -2349,6 +2349,11 @@
     "words": 2271
    },
    {
+    "path": "/articles/smarters-player-lite",
+    "title": "Smarters Player Lite APK : télécharger et installer (2026)",
+    "words": 2189
+   },
+   {
     "path": "/iptv-premium",
     "title": "IPTV Premium France 2026 — Abonnement 4K HDR Smarters Pro",
     "words": 1947
@@ -2404,11 +2409,6 @@
     "words": 1633
    },
    {
-    "path": "/articles/smarters-player-lite",
-    "title": "Smarters Player Lite : c'est quoi et comment l'installer",
-    "words": 1620
-   },
-   {
     "path": "/articles/iptv-smarters-pro-vs-tivimate",
     "title": "IPTV Smarters Pro vs TiviMate : le comparatif (2026)",
     "words": 1603
@@ -2441,11 +2441,6 @@
   ],
   "recommend": [
    {
-    "kw": "smarters player lite apk",
-    "vol": 880,
-    "covered": false
-   },
-   {
     "kw": "smarters player lite",
     "vol": 12100,
     "covered": true
@@ -2455,6 +2450,11 @@
     "vol": 8100,
     "covered": true,
     "page": "/ (homepage + install hub)"
+   },
+   {
+    "kw": "smarters player lite apk",
+    "vol": 880,
+    "covered": true
    },
    {
     "kw": "iptv smarters pro firestick",
@@ -2984,7 +2984,7 @@
    {
     "path": "/guias/iptv-se-corta-buffering-solucion",
     "title": "IPTV se corta y buffering: causas y solución",
-    "words": 2050
+    "words": 2051
    },
    {
     "path": "/guias/configurar-iptv-apple-tv-iphone",
@@ -2994,12 +2994,12 @@
    {
     "path": "/guias/iptv-pantalla-negra-solucion",
     "title": "IPTV pantalla negra: causas y solución rápida",
-    "words": 2017
+    "words": 2018
    },
    {
     "path": "/guias/velocidad-internet-para-iptv",
     "title": "Velocidad de internet para IPTV: cuántos Mbps necesitas",
-    "words": 2008
+    "words": 2009
    },
    {
     "path": "/guias/configurar-iptv-smarters-paso-a-paso",
@@ -3062,19 +3062,19 @@
     "words": 1720
    },
    {
-    "path": "/guias/iptv-sin-virus-apps-seguras",
-    "title": "IPTV sin virus: cómo evitar apps y listas peligrosas",
-    "words": 1600
+    "path": "/guias/estafas-iptv-como-evitarlas",
+    "title": "Estafas de IPTV en España: cómo detectarlas y evitarlas",
+    "words": 1659
    },
    {
     "path": "/guias/senales-de-una-iptv-falsa",
     "title": "Señales de una IPTV falsa: cómo detectar el fraude",
-    "words": 1600
+    "words": 1602
    },
    {
-    "path": "/guias/estafas-iptv-como-evitarlas",
-    "title": "Estafas de IPTV en España: cómo detectarlas y evitarlas",
-    "words": 1550
+    "path": "/guias/iptv-sin-virus-apps-seguras",
+    "title": "IPTV sin virus: cómo evitar apps y listas peligrosas",
+    "words": 1600
    },
    {
     "path": "/guias/iptv-fiable-o-gratis",
@@ -3094,17 +3094,22 @@
    {
     "path": "/guias/iptv-legal-espana",
     "title": "IPTV legal en España: qué dice la ley (2026)",
-    "words": 929
+    "words": 928
    },
    {
     "path": "/guias/iptv-fire-tv-stick",
     "title": "IPTV en Fire TV Stick: instalación paso a paso",
-    "words": 893
+    "words": 892
    },
    {
     "path": "/guias/tivimate-espana",
     "title": "TiviMate en España: guía completa y configuración",
-    "words": 879
+    "words": 878
+   },
+   {
+    "path": "/guias/iptv-telegram-riesgos",
+    "title": "IPTV por Telegram: riesgos y alternativa segura",
+    "words": 870
    },
    {
     "path": "/guias/xtream-codes-que-es",
@@ -3112,14 +3117,9 @@
     "words": 867
    },
    {
-    "path": "/guias/iptv-telegram-riesgos",
-    "title": "IPTV por Telegram: riesgos y alternativa segura",
-    "words": 850
-   },
-   {
     "path": "/guias/como-elegir-iptv-seguro",
     "title": "¿Es seguro el IPTV? Cómo usarlo de forma segura",
-    "words": 800
+    "words": 802
    },
    {
     "path": "/planes",

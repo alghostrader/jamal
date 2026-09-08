@@ -55,10 +55,11 @@
    "verified_at": "2026-09-08"
   },
   "1ec40f062e": {
-   "deployed": false,
-   "live": false,
-   "detail": "no new live placement logged for this site since completion (tick it on Backlinks with its URL)",
-   "checked": "2026-09-08"
+   "deployed": true,
+   "live": true,
+   "detail": "2 new live placement(s) logged for this site since completion",
+   "checked": "2026-09-08",
+   "verified_at": "2026-09-08"
   },
   "8162a0a994": {
    "deployed": true,
@@ -149,7 +150,7 @@
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-06",
    "checked": "2026-09-08",
-   "verified_at": "2026-09-08"
+   "verified_at": "2026-09-06"
   },
   "dbb3a9ea15": {
    "deployed": true,
@@ -176,9 +177,95 @@
    "live": false,
    "detail": "5 page(s) still under 300 words live: /afrekenen?plan=3-maanden-1-scherm, /afrekenen?plan=6-maanden-1-scherm, /afrekenen?plan=12-maanden-1-scherm, /afrekenen?plan=24-maanden-1-scherm",
    "checked": "2026-09-08"
+  },
+  "7532ac80e4": {
+   "deployed": true,
+   "live": true,
+   "http": 200,
+   "detail": "keyword present + modified on/after 2026-09-08",
+   "checked": "2026-09-08",
+   "verified_at": "2026-09-08"
+  },
+  "5b7c04cc72": {
+   "deployed": true,
+   "live": true,
+   "http": 200,
+   "detail": "keyword present + modified on/after 2026-09-08",
+   "checked": "2026-09-08",
+   "verified_at": "2026-09-08"
+  },
+  "42611f0848": {
+   "deployed": true,
+   "live": true,
+   "http": 200,
+   "detail": "keyword present + modified on/after 2026-09-08",
+   "checked": "2026-09-08",
+   "verified_at": "2026-09-08"
+  },
+  "b0afa996c9": {
+   "deployed": true,
+   "live": true,
+   "http": 200,
+   "detail": "keyword present + modified on/after 2026-09-08",
+   "checked": "2026-09-08",
+   "verified_at": "2026-09-08"
+  },
+  "7a02bb1649": {
+   "deployed": true,
+   "live": true,
+   "http": 200,
+   "detail": "keyword present + modified on/after 2026-09-08",
+   "checked": "2026-09-08",
+   "verified_at": "2026-09-08"
   }
  },
- "links": {},
+ "links": {
+  "lp-tumblr-rodak": {
+   "deployed": true,
+   "live": false,
+   "http": 429,
+   "logged": true,
+   "detail": "placement URL logged; the platform blocks automated checks (HTTP 429) \u2014 counted as placed, not machine-verified",
+   "checked": "2026-09-08",
+   "url": "https://iptvsmartersguide.tumblr.com/post/827162230469623808"
+  },
+  "lp-wordpress-ned": {
+   "deployed": true,
+   "live": true,
+   "http": 200,
+   "dofollow": true,
+   "detail": "link to iptvned.com is live (dofollow)",
+   "checked": "2026-09-08",
+   "url": "https://iptvpixguide.wordpress.com/2026/09/08/iptv-in-nederland-waar-je-op-moet-letten-voordat-je-betaalt/"
+  },
+  "lp-medium-esp": {
+   "deployed": true,
+   "live": false,
+   "http": 403,
+   "logged": true,
+   "detail": "placement URL logged; the platform blocks automated checks (HTTP 403) \u2014 counted as placed, not machine-verified",
+   "checked": "2026-09-08",
+   "url": "https://medium.com/@j.oughia/c\u00f3mo-saber-si-una-lista-iptv-va-a-aguantar-o-caerse-en-el-peor-momento-4478123785d0"
+  },
+  "lp-tumblr-prime": {
+   "deployed": true,
+   "live": false,
+   "http": 429,
+   "logged": true,
+   "detail": "placement URL logged; the platform blocks automated checks (HTTP 429) \u2014 counted as placed, not machine-verified",
+   "checked": "2026-09-08",
+   "url": "https://iptvsmartersguide.tumblr.com/post/827184258051375104"
+  },
+  "lp-medium-rodak": {
+   "deployed": true,
+   "live": false,
+   "http": 403,
+   "logged": true,
+   "detail": "placement URL logged; the platform blocks automated checks (HTTP 403) \u2014 counted as placed, not machine-verified",
+   "checked": "2026-09-08",
+   "url": "https://medium.com/@j.oughia/iptv-na-smart-tv-jak-w-kilka-minut-uruchomi\u0107-polsk\u0105-telewizj\u0119-d90c80b93f9d"
+  }
+ },
  "vercel": {},
  "note": "",
  "vercel_note": "no VERCEL_TOKEN in dash/.env \u2014 deploy state inferred from the live fetch"

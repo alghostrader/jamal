@@ -310,6 +310,8 @@ def alerts():
         ("iptvesp.com", "iptv españa"): None,
         # 8 Sep: probes lost it 3x in a row but GSC shows real users at pos 5.5 (tiny volume) — artifact, watch only
         ("iptvshqiptar.com", "iptv shqiptare"): "GSC still shows real users at ~#5 (2 impressions/7d) — probe artifact on a tiny-volume term; watch, no edits.",
+        # 8 Sep pm: three probes in a row returned None / #15 / #32 — volatile SERP; GSC real users at 17.9 (12 impr/28d)
+        ("iptvsegura.com", "estafas iptv"): "Probes are volatile (unranked, #15, #32 in three runs); GSC shows real users at ~#18 — not a loss, keep the enhancement task.",
     }
     rank_alerted = set()
     if PREV:
@@ -1716,7 +1718,7 @@ def ledger_checklist():
     live = {}; lost = {}; pending = {}
     for r in rows:
         r.setdefault("url", ""); r.setdefault("checked", ""); r.setdefault("http", "")
-        ({"live": live, "pending": pending}.get(r["status"], lost)).setdefault(r["site"], []).append(r)
+        ({"live": live, "logged": live, "pending": pending}.get(r["status"], lost)).setdefault(r["site"], []).append(r)
     def urltag(r):
         u = r.get("url") or ""
         t = (f' <a class="lpurl" href="{H.escape(u)}" target="_blank" rel="noopener">↗ {H.escape(u.replace("https://", "").replace("http://", "")[:42])}</a>' if u else ' <span class="stmeta">no URL logged</span>')
@@ -1766,7 +1768,8 @@ def ledger_checklist():
                   else ('<span class="tag pos">on track</span>' if placed else '<span class="tag neg">no links yet</span>'))
         det = f"lk_{key}"
         pl_html = "".join(box(r["slug"], key, f'{H.escape(r["platform"])} — {H.escape(r["detail"])}', True,
-                              f' <span class="tag {"pos" if r["follow"]=="dofollow" else "neu"}">{"df" if r["follow"]=="dofollow" else "nf"}</span>' + urltag(r))
+                              (' <span class="tag neu" title="the platform blocks automated checks">logged</span>' if r["status"] == "logged" else
+                               f' <span class="tag {"pos" if r["follow"]=="dofollow" else "neu"}">{"df" if r["follow"]=="dofollow" else "nf"}</span>') + urltag(r))
                           for r in placed) or '<div class="stmeta">none yet</div>'
         pl_html += "".join(box(r["slug"], key, f'{H.escape(r["platform"])} — {H.escape(r["detail"])}', True,
                                ' <span class="tag warn">awaiting live check</span>' + urltag(r)) for r in pending.get(key, []))

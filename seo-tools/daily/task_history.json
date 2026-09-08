@@ -125,7 +125,7 @@
    "outcome": "AWAITING VERIFICATION",
    "checkpoint_days": 2,
    "now": {
-    "probe_pos": 7,
+    "probe_pos": 8,
     "gsc_pos": 14.4,
     "clicks28": 9
    },
@@ -187,7 +187,7 @@
    "outcome": "AWAITING VERIFICATION",
    "checkpoint_days": 2,
    "now": {
-    "probe_pos": null,
+    "probe_pos": 29,
     "gsc_pos": 22.3,
     "clicks28": 3
    },
@@ -399,14 +399,14 @@
    },
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "outcome": "VERIFIED",
    "checkpoint_days": 0,
    "now": {
     "probe_pos": null,
     "gsc_pos": null,
     "clicks28": 0
    },
-   "live_check": "no new live placement logged for this site since completion (tick it on Backlinks with its URL)"
+   "live_check": "2 new live placement(s) logged for this site since completion"
   },
   {
    "id": "53045dba08",
@@ -512,12 +512,83 @@
    "live_check": "5 page(s) still under 300 words live: /afrekenen?plan=3-maanden-1-scherm, /afrekenen?plan=6-maanden-1-scherm, /afrekenen?plan=12-maanden-1-scherm, /afrekenen?plan=24-maanden-1-scherm"
   },
   {
-   "id": "b443b33f42",
+   "id": "lp-wordpress-ned",
+   "kind": "Owner task",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "Backlink: WordPress.com blog + 1 post",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "lp-tumblr-prime",
+   "kind": "Owner task",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "Backlink: Tumblr blog + 1 post",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "7532ac80e4",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "lista m3u premium telegram",
+   "page": "",
+   "what": "\u201clista m3u premium telegram\u201d sits at position 12 with 12 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 11.9,
+    "clicks28": 3
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "VERIFIED",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 11.9,
+    "clicks28": 3
+   },
+   "live_check": "keyword present + modified on/after 2026-09-08"
+  },
+  {
+   "id": "owner_sales_w37",
+   "kind": "Owner task",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "Send this week's sales numbers per site",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "627326bf4c",
    "kind": "Technical fix",
    "site": "",
    "query": "",
    "page": "",
-   "what": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: afrekenen, afrekenen, afrekenen, ",
+   "what": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, che",
    "baseline": {
     "probe_pos": null,
     "gsc_pos": null,
@@ -526,6 +597,194 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
    "outcome": "VERIFIED"
+  },
+  {
+   "id": "owner_briefs_v1",
+   "kind": "Owner task",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "Fill the \u26a0 placeholder fields in seo-tools/briefs/ (95 fields, 11 sites)",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "lp-tumblr-rodak",
+   "kind": "Owner task",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "Backlink: Tumblr blog + 1 post",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "owner_links_review_aio",
+   "kind": "Owner task",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "Review the newest links on abonnementiptvofficiel.com (spam 58) and decide: resu",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "5b7c04cc72",
+   "kind": "Striking distance",
+   "site": "iptvsegura.com",
+   "query": "estafas iptv",
+   "page": "",
+   "what": "\u201cestafas iptv\u201d sits at position 18 with 12 impressions/28d.",
+   "baseline": {
+    "probe_pos": 32,
+    "gsc_pos": 17.9,
+    "clicks28": 1
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "VERIFIED",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": 32,
+    "gsc_pos": 17.9,
+    "clicks28": 1
+   },
+   "live_check": "keyword present + modified on/after 2026-09-08"
+  },
+  {
+   "id": "42611f0848",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "iptv smarters telegram",
+   "page": "",
+   "what": "\u201ciptv smarters telegram\u201d sits at position 8 with 10 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 8.2,
+    "clicks28": 1
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "VERIFIED",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 8.2,
+    "clicks28": 1
+   },
+   "live_check": "keyword present + modified on/after 2026-09-08"
+  },
+  {
+   "id": "b0afa996c9",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "iptv listas m3u telegram",
+   "page": "",
+   "what": "\u201ciptv listas m3u telegram\u201d sits at position 4 with 67 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 4.2,
+    "clicks28": 20
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "VERIFIED",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 4.2,
+    "clicks28": 20
+   },
+   "live_check": "keyword present + modified on/after 2026-09-08"
+  },
+  {
+   "id": "lp-medium-esp",
+   "kind": "Owner task",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "Backlink: Medium article (max 2/day)",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "lp-medium-rodak",
+   "kind": "Owner task",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "Backlink: Medium article (max 2/day)",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "7a02bb1649",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "grupos telegram iptv",
+   "page": "",
+   "what": "\u201cgrupos telegram iptv\u201d sits at position 4 with 92 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 4.0,
+    "clicks28": 10
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "VERIFIED",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 4.0,
+    "clicks28": 10
+   },
+   "live_check": "keyword present + modified on/after 2026-09-08"
+  },
+  {
+   "id": "owner_links_review_slive",
+   "kind": "Owner task",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "Review the newest links on smarters-live.com (spam 62) and decide: resume or dis",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION"
   }
  ]
 }

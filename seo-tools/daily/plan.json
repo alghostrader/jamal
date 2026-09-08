@@ -2,6 +2,23 @@
  "date": "2026-09-08",
  "tasks": [
   {
+   "id": "5b7c04cc72",
+   "kind": "Striking distance",
+   "site": "iptvsegura.com",
+   "query": "estafas iptv",
+   "page": "",
+   "what": "\u201cestafas iptv\u201d sits at position 18 with 12 impressions/28d.",
+   "score": 61,
+   "bucket": "today",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": 32,
+    "gsc_pos": 17.9,
+    "clicks28": 1
+   }
+  },
+  {
    "id": "312b5a662b",
    "kind": "Content decay",
    "site": "iptvesp.com",
@@ -43,7 +60,7 @@
    "page": "",
    "what": "\u201ciptv smarters telegram\u201d sits at position 8 with 10 impressions/28d.",
    "score": 52,
-   "bucket": "today",
+   "bucket": "next",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
@@ -84,23 +101,6 @@
     "probe_pos": null,
     "gsc_pos": 11.9,
     "clicks28": 3
-   }
-  },
-  {
-   "id": "5b7c04cc72",
-   "kind": "Striking distance",
-   "site": "iptvsegura.com",
-   "query": "estafas iptv",
-   "page": "",
-   "what": "\u201cestafas iptv\u201d sits at position 18 with 12 impressions/28d.",
-   "score": 52,
-   "bucket": "next",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": 17,
-    "gsc_pos": 17.9,
-    "clicks28": 1
    }
   },
   {
@@ -608,7 +608,7 @@
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
-    "probe_pos": 32,
+    "probe_pos": 33,
     "gsc_pos": 22.4,
     "clicks28": 0
    }
@@ -625,7 +625,7 @@
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
-    "probe_pos": 30,
+    "probe_pos": 29,
     "gsc_pos": 24.8,
     "clicks28": 0
    }
@@ -1430,23 +1430,6 @@
    }
   },
   {
-   "id": "c9d69a7ba7",
-   "kind": "Content gap",
-   "site": "iptvesp.com",
-   "query": "proveedor iptv",
-   "page": "",
-   "what": "\u201cproveedor iptv\u201d (480/mo) has no page anywhere in this market.",
-   "score": 41,
-   "bucket": "monitor",
-   "effort": "Deep work",
-   "effort_min": 90,
-   "baseline": {
-    "probe_pos": 42,
-    "gsc_pos": null,
-    "clicks28": 0
-   }
-  },
-  {
    "id": "d69a2801b0",
    "kind": "Content gap",
    "site": "primeiptv-france.com",
@@ -1596,6 +1579,23 @@
    "baseline": {
     "probe_pos": null,
     "gsc_pos": 17.3,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "c9d69a7ba7",
+   "kind": "Content gap",
+   "site": "iptvesp.com",
+   "query": "proveedor iptv",
+   "page": "",
+   "what": "\u201cproveedor iptv\u201d (480/mo) has no page anywhere in this market.",
+   "score": 38,
+   "bucket": "monitor",
+   "effort": "Deep work",
+   "effort_min": 90,
+   "baseline": {
+    "probe_pos": 40,
+    "gsc_pos": null,
     "clicks28": 0
    }
   },

@@ -59,6 +59,28 @@ def build_donext(G, C):
     hist_by_id = {c["id"]: c for c in THIST.get("completed", [])}
     try: G["_ledger_rows_pre"] = list(csv.DictReader(open(G["LEDGER_PATH"], encoding="utf-8")))
     except Exception: G["_ledger_rows_pre"] = []
+    # ─── backlink ledger: decay check on every logged URL + promote pending rows ───
+    LEDGER = G["LEDGER_PATH"]
+    rows = list(csv.DictReader(open(LEDGER, encoding="utf-8"))) if os.path.exists(LEDGER) else []
+    fields = ["site", "platform", "slug", "detail", "follow", "status", "verified", "url", "checked", "http"]
+    KEY2DOM = {v: k for k, v in ABBR.items()}
+    changed = False
+    for r in rows:
+        for f in fields: r.setdefault(f, "")
+        if r["url"] and r["status"] in ("live", "pending", "decayed", "logged"):
+            res = LV.check_backlink({"target_url": r["url"], "site": KEY2DOM.get(r["site"], r["site"])})
+            r["checked"] = TODAY; r["http"] = str(res.get("http") or 0)
+            new = ("live" if res.get("live") else "logged" if res.get("logged") else
+                   "decayed" if (res.get("http") in (404, 410) or (r["status"] == "live" and res.get("http") == 200)) else r["status"])
+            if new == "live":
+                r["follow"] = "dofollow" if res.get("dofollow") else "nofollow"; r["verified"] = TODAY
+            elif new == "logged" and not r.get("verified"):
+                r["verified"] = TODAY   # owner-logged date; the platform refuses automated checks
+            if new != r["status"]: r["status"] = new; changed = True
+            cache.setdefault("links", {})[f'lp-{r["slug"]}-{r["site"]}'] = {**res, "checked": TODAY, "url": r["url"]}
+    with open(LEDGER, "w", encoding="utf-8", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=fields); w.writeheader(); w.writerows(rows)
+    G["_ledger_rows"] = rows; G["_ledger_rows_pre"] = rows
     for c in THIST.get("completed", []):
         if out_of_scope(c.get("query") or "") and c.get("outcome") != "OUT OF SCOPE":
             c["outcome"] = "OUT OF SCOPE"; c["how"] = (c.get("how") or "").split(" · ")[0] + " · Arab/MENA market — filed under Excluded (owner rule 8 Sep)"
@@ -101,7 +123,7 @@ def build_donext(G, C):
         return None
     def paths_in(txt): return re.findall(r"(/[A-Za-z0-9_\-/\.]+)", txt or "")
     def new_links_since(s, since):
-        return sum(1 for r in G.get("_ledger_rows_pre", []) if r.get("site") == ABBR[s] and r.get("status") == "live" and (r.get("verified") or "") >= (since or "9999"))
+        return sum(1 for r in G.get("_ledger_rows_pre", []) if r.get("site") == ABBR[s] and r.get("status") in ("live", "logged") and (r.get("verified") or r.get("checked") or TODAY) >= (since or "9999"))
     def done_when(kind, url, kw):
         if kind == "Content gap":
             return [f"article live at {url}, ≥ 900 words, real hero image", "internal links from 2 related pages + money-page CTA", "deploy READY + live fetch finds the keyword on the page"]
@@ -179,6 +201,8 @@ def build_donext(G, C):
     results = LV.verify_tasks(to_check, crawl_by_site, CANON, vercel) if to_check else {}
     for tid, r in results.items():
         prev = (cache.get("tasks") or {}).get(tid) or {}
+        if prev.get("live") and r.get("http") == 0:
+            r = {**prev, "detail": prev.get("detail", "") + f" · re-fetch unreachable on {TODAY}, keeping the earlier verified result"}
         if r.get("live") and not prev.get("verified_at"):
             h = hist_by_id.get(tid)
             r["verified_at"] = (h.get("completed") if (h and h.get("outcome") == "VERIFIED") else TODAY)
@@ -194,26 +218,7 @@ def build_donext(G, C):
             else:
                 if h.get("outcome") == "VERIFIED" and h.get("kind") not in ("Indexation",): h["outcome"] = "AWAITING VERIFICATION"
                 h["live_check"] = r.get("detail")
-    # ─── backlink ledger: decay check on every logged URL + promote pending rows ───
-    LEDGER = G["LEDGER_PATH"]
-    rows = list(csv.DictReader(open(LEDGER, encoding="utf-8"))) if os.path.exists(LEDGER) else []
-    fields = ["site", "platform", "slug", "detail", "follow", "status", "verified", "url", "checked", "http"]
-    KEY2DOM = {v: k for k, v in ABBR.items()}
-    changed = False
-    for r in rows:
-        for f in fields: r.setdefault(f, "")
-        if r["url"] and r["status"] in ("live", "pending", "decayed"):
-            res = LV.check_backlink({"target_url": r["url"], "site": KEY2DOM.get(r["site"], r["site"])})
-            r["checked"] = TODAY; r["http"] = str(res.get("http") or 0)
-            new = "live" if res.get("live") else ("decayed" if (res.get("http") in (404, 410) or (r["status"] == "live" and res.get("http") == 200)) else r["status"])
-            if new == "live":
-                r["follow"] = "dofollow" if res.get("dofollow") else "nofollow"; r["verified"] = TODAY
-            if new != r["status"]: r["status"] = new; changed = True
-            cache.setdefault("links", {})[f'lp-{r["slug"]}-{r["site"]}'] = {**res, "checked": TODAY, "url": r["url"]}
-    with open(LEDGER, "w", encoding="utf-8", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=fields); w.writeheader(); w.writerows(rows)
     LV.save_cache(cache)
-    G["_ledger_rows"] = rows
 
     # ─── lanes ───
     def st_of(tid): return (cloud_tasks.get(tid) or {}) if isinstance(cloud_tasks.get(tid), dict) else {}
@@ -236,6 +241,15 @@ def build_donext(G, C):
                               what=f"{label} for {dom}.", why="Authority is the ceiling on this site — one quality link moves the whole domain.",
                               why_action="Publish the post, then paste the live URL when you tick it: that write IS the ledger.",
                               drivers=["authority gap"], category="", bucket="links", completed=None, defect_gone=False, indexed=False))
+    bl = [m for m in do_models if m["type"] == "Backlink"]
+    for m in bl[4:]: do_models.remove(m)   # the rest stay on the Backlinks page
+    if sum(1 for m in do_models if m["type"] != "Backlink") < 3:
+        seen = {m["id"] for m in do_models}
+        for t in sorted(T_MONITOR, key=lambda t: -t["score"]):
+            if sum(1 for m in do_models if m["type"] != "Backlink") >= 3: break
+            if t["id"] in seen or t.get("improving") or st_of(t["id"]).get("state") in ("completed", "dismissed", "deferred"): continue
+            m = model(t)
+            if m: m["why_action"] = (m.get("why_action") or "") + " (backfilled from Monitor: the queue was short)"; do_models.append(m); seen.add(t["id"])
     do_models.sort(key=lambda m: -m["priority_score"])
     # verifying = built by the owner, not live yet · shipped = live-verified
     verifying, shipped = [], []
