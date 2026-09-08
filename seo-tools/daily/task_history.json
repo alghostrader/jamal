@@ -88,8 +88,8 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "AWAITING VERIFICATION",
-   "live_check": "redirect check failed: HTTPSConnectionPool(host='www.rodaktv.com', port=443): Max r"
+   "outcome": "VERIFIED",
+   "live_check": "host redirect is 308"
   },
   {
    "id": "6f748626cd",
@@ -207,14 +207,14 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "outcome": "VERIFIED",
    "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
     "gsc_pos": 5.7,
     "clicks28": 40
    },
-   "live_check": "live URL returned HTTP unreachable"
+   "live_check": "keyword present + modified on/after 2026-09-06"
   },
   {
    "id": "dcbbd6a189",

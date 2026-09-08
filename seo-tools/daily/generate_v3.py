@@ -841,13 +841,23 @@ LINKS_JS = """<script>
 (function(){
   function applyAll(){ document.querySelectorAll('input.lpx').forEach(function(cb){ cb.checked=cb.dataset.placed==='1'||localStorage.getItem('lp:'+cb.id)==='1'; }); document.querySelectorAll('tr').forEach(count); }
   function pushCloud(){ if(!window.seoCloudSaveLinks) return; var map={}, urls={}; document.querySelectorAll('input.lpx').forEach(function(cb){ if(cb.checked){ map[cb.id]=1; var u=localStorage.getItem('lpu:'+cb.id); if(u) urls[cb.id]=u; } }); window.seoCloudSaveLinks(map, urls); }
-  function showUrl(cb){ var lab=cb.closest('label'); if(!lab) return; var u=localStorage.getItem('lpu:'+cb.id)||''; var el=lab.querySelector('.lpurl'); if(!el){ el=document.createElement('a'); el.className='lpurl'; el.target='_blank'; el.rel='noopener'; lab.appendChild(el); } el.textContent=u?('↗ '+u.replace(/^https?:\/\//,'').slice(0,42)):''; el.href=u||'#'; el.style.display=u?'':'none'; }
+  window.seoLinksPush = pushCloud;
+  function showUrl(cb){ var lab=cb.closest('label'); if(!lab) return; var u=''; try{ u=localStorage.getItem('lpu:'+cb.id)||''; }catch(e){}
+    var el=lab.querySelector('.lpurl'); if(!el){ el=document.createElement('a'); el.className='lpurl'; el.target='_blank'; el.rel='noopener'; lab.appendChild(el); }
+    el.textContent=u?('↗ '+u.replace(/^https?:\/\//,'').slice(0,42)):''; el.href=u||'#'; el.style.display=u?'':'none';
+    // ticked, not from the ledger, no URL yet -> inline box (never a blocking prompt)
+    var box=lab.querySelector('.lpin');
+    var need=cb.checked&&cb.dataset.placed!=='1'&&!u;
+    if(need&&!box){ box=document.createElement('input'); box.type='url'; box.className='lpin'; box.placeholder='paste the live URL of the placement'; lab.appendChild(box);
+      box.addEventListener('click',function(ev){ ev.preventDefault(); ev.stopPropagation(); });
+      box.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); box.blur(); } });
+      box.addEventListener('change',function(){ var v=box.value.trim(); if(!v) return; try{ localStorage.setItem('lpu:'+cb.id,v); }catch(e){} showUrl(cb); pushCloud(); }); }
+    if(box&&!need){ box.remove(); } }
   document.querySelectorAll('input.lpx').forEach(function(cb){
-    if(localStorage.getItem('lp:'+cb.id)==='1') cb.checked=true;
+    try{ if(localStorage.getItem('lp:'+cb.id)==='1') cb.checked=true; }catch(e){}
     showUrl(cb);
     cb.addEventListener('change',function(){ if(cb.dataset.placed==='1'&&!cb.checked){ cb.checked=true; return; }
-      if(cb.checked&&cb.dataset.placed!=='1'&&!localStorage.getItem('lpu:'+cb.id)){ var u=window.prompt('Live URL of this placement (written to the ledger, re-verified every audit):',''); if(u===null){ cb.checked=false; return; } if(u.trim()) localStorage.setItem('lpu:'+cb.id,u.trim()); }
-      localStorage.setItem('lp:'+cb.id,cb.checked?'1':'0'); showUrl(cb); count(cb.closest('tr')); pushCloud(); });
+      try{ localStorage.setItem('lp:'+cb.id,cb.checked?'1':'0'); }catch(e){} showUrl(cb); count(cb.closest('tr')); pushCloud(); });
   });
   window.addEventListener('seo-links-sync', function(){ document.querySelectorAll('input.lpx').forEach(showUrl); });
   window.addEventListener('seo-links-sync', applyAll);

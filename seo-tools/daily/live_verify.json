@@ -47,11 +47,12 @@
    "checked": "2026-09-08"
   },
   "70f507b6f5": {
-   "deployed": false,
-   "live": false,
-   "http": 0,
-   "detail": "live URL returned HTTP unreachable",
-   "checked": "2026-09-08"
+   "deployed": true,
+   "live": true,
+   "http": 200,
+   "detail": "keyword present + modified on/after 2026-09-06",
+   "checked": "2026-09-08",
+   "verified_at": "2026-09-08"
   },
   "1ec40f062e": {
    "deployed": false,
@@ -60,10 +61,12 @@
    "checked": "2026-09-08"
   },
   "8162a0a994": {
-   "deployed": false,
-   "live": false,
-   "detail": "redirect check failed: HTTPSConnectionPool(host='www.rodaktv.com', port=443): Max r",
-   "checked": "2026-09-08"
+   "deployed": true,
+   "live": true,
+   "http": 308,
+   "detail": "host redirect is 308",
+   "checked": "2026-09-08",
+   "verified_at": "2026-09-06"
   },
   "dcbbd6a189": {
    "deployed": true,

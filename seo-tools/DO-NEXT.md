@@ -114,7 +114,7 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - done when: post published with a brand or naked-URL anchor / live URL logged on the Backlinks page (that list is the ledger) / live fetch: link present + dofollow
 
 
-## Verifying — 12 built, not live yet (what is still missing)
+## Verifying — 10 built, not live yet (what is still missing)
 
 ### … Striking distance — iptv shqiptare · iptvshqiptar.com
 - id: `1f5c56622b` · score 0 · — ≈0 min · GSC pos 13.6 · 1 clicks · 23 impr / 28d
@@ -156,16 +156,6 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - done when: 3+ internal links point at the ranking page with varied anchors / on-query section refreshed + dateModified bumped / deploy READY + live fetch finds the keyword on the page
 - live check (2026-09-08): page is live but declares no modified date — add dateModified / og:updated_time so the change can be verified
 
-### … Striking distance — listas m3u telegram · iptvesp.com
-- id: `70f507b6f5` · score 0 · — ≈0 min · GSC pos 5.7 · 40 clicks · 257 impr / 28d
-- repo: `/Desktop/iptv-espana-pro` (MDX content/blog)
-- action: **ENHANCE** → https://iptvesp.com/blog/telegram-listas-iptv-espana
-- ⚠ page already ranks this term — enhance it, never a new URL
-- what: “listas m3u telegram” sits at position 6 with 250 impressions/28d.
-- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
-- done when: 3+ internal links point at the ranking page with varied anchors / on-query section refreshed + dateModified bumped / deploy READY + live fetch finds the keyword on the page
-- live check (2026-09-08): live URL returned HTTP unreachable
-
 ### … Backlink — iptv polska · rodaktv.com
 - id: `1ec40f062e` · score 0 · — ≈0 min · 1,900/mo
 - repo: `⚠ confirm: alghostrader/iptv-polska` (blog/)
@@ -175,15 +165,6 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
 - done when: post published with a brand or naked-URL anchor / live URL logged on the Backlinks page (that list is the ledger) / live fetch: link present + dofollow
 - live check (2026-09-08): no new live placement logged for this site since completion (tick it on Backlinks with its URL)
-
-### … Technical — Redirect · rodaktv.com
-- id: `8162a0a994` · score 0 · — ≈0 min · no volume data
-- repo: `⚠ confirm: alghostrader/iptv-polska` (blog/)
-- action: **FIX** → https://rodaktv.com/
-- what: 1. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> Domains set it to permanent (308). Verify with curl -sI.
-- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
-- done when: defect fixed in the repo (all flagged pages) / deploy READY / live re-check passes (thin pages ≥ 300 words / redirect 308 / zero broken links)
-- live check (2026-09-08): redirect check failed: HTTPSConnectionPool(host='www.rodaktv.com', port=443): Max r
 
 ### … Content — iptv provider · iptvned.com
 - id: `dda33ce6cb` · score 0 · — ≈0 min · 880/mo
@@ -236,14 +217,16 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - live check (2026-09-08): 5 page(s) still under 300 words live: /afrekenen?plan=3-maanden-1-scherm, /afrekenen?plan=6-maanden-1-scherm, /afrekenen?plan=12-maanden-1-scherm, /afrekenen?plan=24-maanden-1-scherm
 
 
-## Shipped (live-verified) — 9
+## Shipped (live-verified) — 11
 
+- ✓ Striking distance — listas m3u telegram · iptvesp.com · verified 2026-09-08 · keyword present + modified on/after 2026-09-06
 - ✓ Content — smarters player lite apk · smartersprofrance.fr · verified 2026-09-08 · keyword present + modified on/after 2026-09-08
 - ✓ Striking distance — telegram iptv · iptvesp.com · verified 2026-09-08 · keyword present + modified on/after 2026-09-06
 - ✓ Striking distance — listas iptv premium telegram · iptvesp.com · verified 2026-09-08 · keyword present + modified on/after 2026-09-08
 - ✓ Striking distance — iptv smarters pro telegram · iptvesp.com · verified 2026-09-08 · keyword present + modified on/after 2026-09-08
 - ✓ Content — /blog/iptv-espana-telegram · iptvesp.com · verified 2026-09-08 · keyword present + modified on/after 2026-09-06
 - ✓ Technical — /polska-telewizja-za-granica · rodaktv.com · verified 2026-09-06 · page(s) PASS in GSC URL Inspection
+- ✓ Technical — REDIRECT · rodaktv.com · verified 2026-09-06 · host redirect is 308
 - ✓ Technical — /test-iptv · rodaktv.com · verified 2026-09-06 · page(s) PASS in GSC URL Inspection
 - ✓ Technical — /planes · iptvsegura.com · verified 2026-09-06 · page(s) PASS in GSC URL Inspection
 - ✓ Technical — /abonament · rodaktv.com · verified 2026-09-06 · page(s) PASS in GSC URL Inspection

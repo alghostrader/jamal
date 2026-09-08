@@ -390,7 +390,9 @@ def build_donext(G, C):
         if verify.get("detail"): lines.append(("live check", e(verify["detail"]) + (f' · Vercel {e(verify["vercel"])}' if verify.get("vercel") else "") + f' · {e(verify.get("checked", ""))}'))
         ws = "".join(f'<div class="line"><span class="key">{k}</span><span class="val">{v}</span></div>' for k, v in lines)
         dw = "".join(f'<li class="{"ok" if (shipped_ or (verify.get("live"))) else "pending"}"><span class="mk">{"✓" if (shipped_ or verify.get("live")) else "○"}</span> {e(x)}</li>' for x in m["done_when"])
-        url_in = (f'<input class="lpx" type="checkbox" id="{e(m["id"])}" hidden>') if m["id"].startswith("lp-") else (f'<div class="urlrow"><label>Live URL</label><input type="url" class="t-url" placeholder="https://{e(CANON[m["site"]])}/… (paste the exact live URL — the next audit fetches it)" value="{e((st_of(m["id"]).get("url") or ""))}"><button class="act t-urlsave">Save</button></div>')
+        is_lp = m["id"].startswith("lp-")
+        url_in = ((f'<input class="lpx" type="checkbox" id="{e(m["id"])}" hidden>' if is_lp else "") +
+                  f'<div class="urlrow"><label>{"Placement URL" if is_lp else "Live URL"}</label><input type="url" class="t-url" placeholder="{"https://… the published post (the audit checks it is live + dofollow)" if is_lp else "https://" + e(CANON[m["site"]]) + "/… (paste the exact live URL — the next audit fetches it)"}" value="{e((st_of(m["id"]).get("url") or ""))}"><button class="act t-urlsave">Save</button></div>')
         steps_json = e(json.dumps(STEPS.get(m["kind"], ["Do the recommended action", "Re-check next audit"])))
         drivers = "".join(f"<li>{e(x)}</li>" for x in m.get("drivers", []))
         why = (f'<details class="why"><summary>Why this priority? (score {m["priority_score"]})</summary><ul>{drivers}</ul><div class="dim">{e(m.get("why", ""))}</div></details>' if drivers else "")
@@ -563,8 +565,10 @@ DONEXT_JS = r"""<script>
   cur.prev=cur.state||'queued'; cur.state=state;
   if(state==='completed') cur.completed=TODAY; else delete cur.completed;
   if(state==='active'){ Object.keys(st).forEach(function(k){ if(st[k].state==='active'&&k!==id) st[k].state='queued'; }); }
-  st[id]=cur; save(st); apply();
+  st[id]=cur; save(st);
+  // ledger-driven ids: the checkbox is the truth, flip it first so apply() sees the new state
   if(id.indexOf('lp-')===0){ var cb=document.getElementById(id); if(cb&&cb.checked!==(state==='completed')){ cb.checked=(state==='completed'); cb.dispatchEvent(new Event('change')); } }
+  apply();
  }
  document.addEventListener('click',function(ev){
   var b=ev.target.closest('button'); if(!b) return;
@@ -576,15 +580,20 @@ DONEXT_JS = r"""<script>
     document.querySelector('.lane-btn[data-panel="do"]').click(); if(pc){ pc.scrollIntoView({behavior:'smooth',block:'center'}); } return; }
   if(!id) return;
   if(b.classList.contains('t-start')){ set(id,'active'); window.scrollTo({top:0,behavior:'smooth'}); }
-  else if(b.classList.contains('t-done')){ if(id.indexOf('lp-')===0&&!(st[id]||{}).url){ var u=window.prompt('Paste the live URL of the placement (it is written to the ledger and re-verified every audit):',''); if(u===null) return; var cur=st[id]||{}; cur.url=u.trim(); st[id]=cur; try{localStorage.setItem('lpu:'+id,u.trim());}catch(e){} } set(id,'completed'); }
+  else if(b.classList.contains('t-done')){ var inp=card.querySelector('.t-url'); if(inp&&inp.value.trim()){ var cu=st[id]||{}; cu.url=inp.value.trim(); st[id]=cu; try{localStorage.setItem('lpu:'+id,cu.url);}catch(e){} } set(id,'completed'); }
   else if(b.classList.contains('t-defer')) set(id,'deferred');
   else if(b.classList.contains('t-dismiss')) set(id,'dismissed');
   else if(b.classList.contains('t-undo')){ var s=st[id]||{}; var promo=card.dataset.promo==='1'; var back=promo?((s.state==='promoted')?'queued':'promoted'):'queued'; set(id,back); }
-  else if(b.classList.contains('t-urlsave')){ var inp=card.querySelector('.t-url'); var cur=st[id]||{}; cur.url=(inp.value||'').trim(); cur.title=card.dataset.title; st[id]=cur; save(st); b.textContent='Saved ✓'; setTimeout(function(){b.textContent='Save';},1500); }
+  else if(b.classList.contains('t-urlsave')){ var inp=card.querySelector('.t-url'); var cur=st[id]||{}; cur.url=(inp.value||'').trim(); cur.title=card.dataset.title; st[id]=cur; save(st);
+    if(id.indexOf('lp-')===0){ try{localStorage.setItem('lpu:'+id,cur.url);}catch(e){} var cb=document.getElementById(id); if(cb&&cb.checked&&window.seoLinksPush) window.seoLinksPush(); }
+    b.textContent='Saved ✓'; setTimeout(function(){b.textContent='Save';},1500); }
  });
  var sf=document.getElementById('sitefilter'); if(sf) sf.addEventListener('change',apply);
- window.addEventListener('seo-state-sync',function(){ st=load(); apply(); });
- window.addEventListener('seo-links-sync',apply);
+ document.addEventListener('change',function(ev){ if(ev.target&&ev.target.classList&&ev.target.classList.contains('lpx')) apply(); });
+ function fillUrls(){ document.querySelectorAll('article.task .t-url').forEach(function(inp){ var id=inp.closest('article.task').dataset.tid; var u=(st[id]||{}).url||''; if(!u&&id.indexOf('lp-')===0){ try{u=localStorage.getItem('lpu:'+id)||'';}catch(e){} } if(u&&!inp.value) inp.value=u; }); }
+ window.addEventListener('seo-state-sync',function(){ st=load(); apply(); fillUrls(); });
+ window.addEventListener('seo-links-sync',function(){ apply(); fillUrls(); });
+ fillUrls();
  apply();
 })();
 </script>"""
