@@ -25,7 +25,7 @@
 3. Free content: setup guides, tutorials, tools
 
 **Money pages** (internal links get prioritised towards these):
-- /abonnement
+- /tarifs
 
 ### Service area
 
@@ -72,7 +72,7 @@
 ### The call to action
 
 - **Primary CTA:** "Commander" (hero/nav); plan cards use "Choisir 3/6/12/24 mois", with "Voir les abonnements".
-- **Where it points:** /abonnement
+- **Where it points:** /tarifs
 - **Phone / address:** none — digital only; contact via WhatsApp (+44 7737 314826) and the site form. No phone number or postal address is published.
 
 ---

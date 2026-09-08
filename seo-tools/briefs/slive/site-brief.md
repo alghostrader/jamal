@@ -25,7 +25,7 @@
 3. Free content: setup guides, tutorials, tools
 
 **Money pages** (internal links get prioritised towards these):
-- https://primeiptv-france.com/abonnement (funnel to the flagship)
+- https://primeiptv-france.com/tarifs (funnel to the flagship)
 
 ### Service area
 
@@ -71,7 +71,7 @@
 ### The call to action
 
 - **Primary CTA:** "Commander →" and "Commander 3/6/12/24 Mois sur WhatsApp"; hero also uses "Voir nos offres IPTV", "Essai gratuit 24h" and "Activer mon abonnement".
-- **Where it points:** https://primeiptv-france.com/abonnement (funnel to the flagship)
+- **Where it points:** https://primeiptv-france.com/tarifs (funnel to the flagship)
 - **Phone / address:** none — digital only; contact via WhatsApp (+44 7737 314826) and the site form. No phone number or postal address is published.
 
 ---
