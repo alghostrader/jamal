@@ -570,7 +570,7 @@ def build_all(G):
         while len(today_) < 3 and next_:
             pick = None
             for t in next_:
-                if site_n.get(t["site"], 0) < 2 and kind_n.get(t["kind"], 0) < 2:
+                if site_n.get(t["site"], 0) < 3 and kind_n.get(t["kind"], 0) < 3:
                     pick = t; break
             if not pick: break
             next_.remove(pick); pick["bucket"] = "today"; pick["posture_note"] = "Filled from Next — the best available use of today."
