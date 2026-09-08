@@ -1,9 +1,9 @@
-# Site Brief — IPTVEsp
+# Site Brief — IPTV Segura
 
 > Read by: keyword-fanout-map · seo-content-writer · onpage-optimizer ·
 > internal-link-architect · ai-visibility-checker
 >
-> Drafted automatically from the 2026-08-14 portfolio audit (crawl + GSC + SERP data).
+> Drafted 2026-09-08 from the live site (crawl of the /planes money page + homepage).
 > Anything marked ⚠️ verify was inferred and needs the owner to confirm it.
 >
 > Last updated: 2026-09-08
@@ -12,11 +12,11 @@
 
 ## Part 1 — Business
 
-- **Business name:** IPTVEsp
-- **Domain:** iptvesp.com
-- **Industry / niche:** IPTV subscription service (Spain market)
-- **What they actually sell (one sentence):** IPTV subscription plans for Spanish viewers (Spanish + international channels, VOD).
-- **Price positioning:** budget-to-mid — one-off payments, no monthly billing: 3 meses 25 €, 6 meses 39 €, 12 meses 59 €, 24 meses 99 € (1 código = 1 pantalla), per the live /suscripciones page.
+- **Business name:** IPTV Segura
+- **Domain:** iptvsegura.com
+- **Industry / niche:** IPTV subscription service (Spain market) — guide-first, "safe/reliable IPTV" positioning
+- **What they actually sell (one sentence):** IPTV subscription plans for Spanish viewers, sold through guides that frame the service as safe, stable and reliable ("IPTV segura").
+- **Price positioning:** budget-to-mid — the /planes page lists 3 meses 25 €, 6 meses 39 €, 12 meses 59 €, 24 meses 99 € (1 código = 1 pantalla). One-off payments, no monthly billing.
 
 ### Services or products
 
@@ -25,7 +25,7 @@
 3. Free content: setup guides, tutorials, tools
 
 **Money pages** (internal links get prioritised towards these):
-- /suscripciones
+- /planes
 
 ### Service area
 
@@ -35,45 +35,45 @@
 
 ### Portfolio lane (HARD anti-cannibalization contract)
 
-- **This site owns:** ES market head terms + Telegram/lists content angle. The only ES site — owns the whole Spanish lane.
-- **This site NEVER touches:** Nothing portfolio-internal — sole ES site. Never free-list piracy bait beyond the existing Telegram-angle articles.
+- **This site owns:** The "IPTV segura / fiable / estable" guide-first angle in the ES market (how to choose safely, avoid scams) — a second Spanish property positioned as a DMCA hedge alongside iptvesp.
+- **This site NEVER touches:** iptvesp's ES head terms and reserved keywords — iptvesp owns the Spanish head lane. Stay on the safe/reliable-choice informational angle.
 - Portfolio rule: one keyword → one page → one site per market. Check the
   dashboard's reserved-keyword queue before targeting anything new.
 
 ### Competitors
 
 1. iptvspain.es (confirmed live, 2026-09-08)
-2. suscripcion-iptv.com ⚠️ verify — domain did not resolve on 2026-09-08; could not confirm it is a live site
-3. tdtchannels.com — free/legal alternative (confirmed live, 2026-09-08)
+2. tdtchannels.com — free/legal alternative (confirmed live, 2026-09-08)
 
 ### Goals
 
 - **Primary goal:** subscription sales via the money page(s)
-- **What a customer is worth, roughly:** ≈ 59 € per customer/year; most pick the 12-month plan at 59 € (the page marks it "la elección del 80 % de clientes"). Other plans: 3 months 25 €, 6 months 39 €, 24 months 99 €. One-off payment, one code = one screen. Assumes a one-year plan.
+- **What a customer is worth, roughly:** ≈ 59 € per customer/year; most pick the 12-month plan at 59 €. Other plans: 3 meses 25 €, 6 meses 39 €, 24 meses 99 € (1 código = 1 pantalla). One-off payment. Assumes a one-year plan.
 - **What this business will NOT do:** paid ads, fake reviews, money-anchor link building
 
 ### Proof and assets
 
-- **Real numbers the business can claim:** only what the /suscripciones page states —
-  +20 000 canales en directo, calidad Full HD y 4K, películas y series en VOD, EPG (guía
-  TV) incluida, replay de 7 días, sin permanencia, garantía de 7 días (satisfecho o
-  reembolsado), prueba 24h gratis a petición por WhatsApp, soporte en español 24/7,
-  activación en menos de 5 minutos, pago 100 % seguro. Do NOT invent channel or customer
-  counts beyond these.
+- **Real numbers the business can claim:** only what the /planes page states —
+  compatible con Smart TV, Fire TV Stick, Android y móvil; funciona con IPTV Smarters Pro,
+  TiviMate y más; EPG (guía) y contenido a la carta (VOD); activación en minutos por
+  WhatsApp; 7 días de garantía; un código = una conexión a la vez (dos pantallas = dos
+  códigos); prueba a petición para comprobar la calidad; soporte real por WhatsApp. The
+  page prints NO channel count and no explicit HD/4K claim — do NOT add one. Do NOT invent
+  channel or customer counts beyond these.
 - **Case studies / results:** none published — never fabricate.
 - **Certifications / awards:** none — never fabricate.
 
 ### Author identity (E-E-A-T)
 
 - **Who is credited as author:** no named author on-site — JSON-LD credits only the
-  Organization "IPTVESP"; no personal byline is published.
+  Organization "IPTV Segura"; no personal byline is published.
 - Publish without a fake persona. Never invent credentials.
 
 ### The call to action
 
-- **Primary CTA:** "Contratar ahora" on the plan buttons; hero uses "Ver los planes" and the secondary "Prueba 24h gratis".
-- **Where it points:** /suscripciones
-- **Phone / address:** none — digital only; contact via WhatsApp (+44 7737 314826) and the site form. No phone number or postal address is published.
+- **Primary CTA:** "Contratar" on the plan buttons; secondary "WhatsApp" / "¿Dudas? Escríbenos por WhatsApp".
+- **Where it points:** /planes
+- **Phone / address:** none — digital only; contact via WhatsApp (+44 7737 314826) and the contact form (Formulario de contacto), both shown on the site. No phone number or postal address is published.
 
 ---
 
@@ -81,11 +81,12 @@
 
 ### Tone in three words
 
-direct, práctico, benefit-first
+claro, prudente, tranquilizador
 
 ### The reader
 
-- **Who is reading:** Spanish cord-cutter comparing IPTV providers; price-sensitive, afraid of scams and cut-offs
+- **Who is reading:** Spanish user comparing IPTV providers, worried about scams and
+  reliability; wants a safe, stable choice before paying
 - **Reading level:** simple, non-technical (Spanish); short sentences
 - **What they are afraid of:** scams, service cut-offs mid-subscription, buffering,
   payment safety
@@ -98,7 +99,7 @@ direct, práctico, benefit-first
 |--------|-------|
 | concrete setup steps with device names | "100% legal" or any legality claim |
 | honest about what needs a stable connection | broadcaster logos / channel-brand promises |
-| "test before you commit" (where trials exist) | invented user counts or reviews |
+| "test before you commit" (a prueba is offered) | invented user counts or reviews |
 | plain Spanish, short sentences | machine-translated phrasing |
 
 ### Sentence style

@@ -6,7 +6,7 @@
 > Drafted automatically from the 2026-08-14 portfolio audit (crawl + GSC + SERP data).
 > Anything marked ⚠️ verify was inferred and needs the owner to confirm it.
 >
-> Last updated: 2026-08-14
+> Last updated: 2026-09-08
 
 ---
 
@@ -16,7 +16,7 @@
 - **Domain:** smartersprofrance.fr
 - **Industry / niche:** IPTV subscription service (France market)
 - **What they actually sell (one sentence):** IPTV subscriptions sold through Smarters-Pro install/config expertise.
-- **Price positioning:** budget-to-mid ⚠️ verify
+- **Price positioning:** budget-to-mid — the plan cards + WhatsApp checkout on /abonnement-iptv quote 3 mois 22 €, 6 mois 39 €, 12 mois 49 €, 24 mois 79 €. NOTE: the same page's prose/summary inconsistently shows 25 €/39 €/59 €/99 € — an on-page price mismatch the owner should reconcile. One-off payments, no monthly billing.
 
 ### Services or products
 
@@ -42,32 +42,39 @@
 
 ### Competitors
 
-1. iptvsmarterspro.fr ⚠️ verify (seen in live SERPs, not owner-confirmed)
-2. smarters-iptv.fr ⚠️ verify (seen in live SERPs, not owner-confirmed)
+1. iptvsmarterspro.fr ⚠️ verify — domain did not resolve on 2026-09-08; could not confirm it is a live site
+2. smarters-iptv.fr (confirmed live, 2026-09-08)
 
 ### Goals
 
 - **Primary goal:** subscription sales via the money page(s)
-- **What a customer is worth, roughly:** ⚠️ NEEDS INPUT (monthly plan price × avg retention)
+- **What a customer is worth, roughly:** ≈ 49 € per customer/year on the 12-month plan (checkout/WhatsApp price); other plans: 3 mois 22 €, 6 mois 39 €, 24 mois 79 €. (The page's prose inconsistently shows a 59 €/12-month figure — reconcile before quoting.) One-off payment. Assumes a one-year plan.
 - **What this business will NOT do:** paid ads, fake reviews, money-anchor link building
 
 ### Proof and assets
 
-- **Real numbers the business can claim:** ⚠️ NEEDS INPUT — do NOT invent channel
-  counts or customer counts; use only what the money page already states.
+- **Real numbers the business can claim:** only what the /abonnement-iptv page states —
+  22 000+ chaînes HD & 4K, sport en direct, cinéma, séries et bouquets internationaux
+  (UK, US, MENA, Maghreb), EPG XMLTV sur 7 jours, catchup/replay TV, VOD films & séries,
+  1 seul écran simultané par abonnement, activation en 5 min, garantie 7 jours satisfait
+  ou remboursé, compatible Smart TV Samsung/LG, Fire Stick, Android TV, Apple TV, iOS et
+  IPTV Smarters Pro. Do NOT invent channel or customer counts beyond these.
 - **Case studies / results:** none published — never fabricate.
 - **Certifications / awards:** none — never fabricate.
 
 ### Author identity (E-E-A-T)
 
-- **Who is credited as author:** ⚠️ NEEDS INPUT (no named author published today)
-- Until provided: publish without a fake persona. Never invent credentials.
+- **Who is credited as author:** "Alae H." — already published on-site (/a-propos,
+  JSON-LD Person), jobTitle "Éditeur — Spécialiste IPTV France", presented as the site's
+  testeur principal publishing IPTV guides since 2019. Credit this existing author; keep
+  the byline exactly "Alae H." as the site uses it.
+- Never invent additional credentials beyond what /a-propos already states.
 
 ### The call to action
 
-- **Primary CTA:** order (or start the trial of) the subscription on the money page ⚠️ verify wording
+- **Primary CTA:** "Commander maintenant" (hero, with "Dès 25 €"); plan cards use "Choisir 3/6/12/24 mois".
 - **Where it points:** /abonnement-iptv
-- **Phone / address:** none — digital only (contact via site form/WhatsApp/Telegram ⚠️ verify)
+- **Phone / address:** none — digital only; contact via WhatsApp (+44 7737 314826) and email contact@smartersprofrance.fr (both shown on the page). No phone number or postal address is published.
 
 ---
 

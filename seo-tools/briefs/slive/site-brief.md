@@ -6,7 +6,7 @@
 > Drafted automatically from the 2026-08-14 portfolio audit (crawl + GSC + SERP data).
 > Anything marked ⚠️ verify was inferred and needs the owner to confirm it.
 >
-> Last updated: 2026-08-14
+> Last updated: 2026-09-08
 
 ---
 
@@ -16,7 +16,7 @@
 - **Domain:** smarters-live.com
 - **Industry / niche:** IPTV subscription service (France market)
 - **What they actually sell (one sentence):** Nothing directly — the application/device hub: IPTV Smarters Pro & player guides, device checker tool. Funnels buyers to the flagship.
-- **Price positioning:** budget-to-mid ⚠️ verify
+- **Price positioning:** budget-to-mid — the homepage's own WhatsApp order CTAs quote 3 mois 25 €, 6 mois 39 €, 12 mois 59 €, 24 mois 99 € (mirrors the flagship ladder). One-off payments, no monthly billing.
 
 ### Services or products
 
@@ -42,32 +42,37 @@
 
 ### Competitors
 
-1. iptvsmarters.app ⚠️ verify (seen in live SERPs, not owner-confirmed)
-2. smarterspro.fr ⚠️ verify (seen in live SERPs, not owner-confirmed)
+1. iptvsmarters.app ⚠️ verify — domain did not resolve on 2026-09-08; could not confirm it is a live site
+2. smarterspro.fr ⚠️ verify — domain did not resolve on 2026-09-08; could not confirm it is a live site
 
 ### Goals
 
 - **Primary goal:** subscription sales via the money page(s)
-- **What a customer is worth, roughly:** ⚠️ NEEDS INPUT (monthly plan price × avg retention)
+- **What a customer is worth, roughly:** ≈ 59 € per customer/year; the WhatsApp order CTAs use the flagship ladder (3 mois 25 €, 6 mois 39 €, 12 mois 59 €, 24 mois 99 €). One-off payment. Assumes a one-year plan. (Some orders are handed off to the flagship.)
 - **What this business will NOT do:** paid ads, fake reviews, money-anchor link building
 
 ### Proof and assets
 
-- **Real numbers the business can claim:** ⚠️ NEEDS INPUT — do NOT invent channel
-  counts or customer counts; use only what the money page already states.
+- **Real numbers the business can claim:** only what the homepage states —
+  +20 000 chaînes HD & 4K, 100 000 films & séries en VOD, VOD illimitée, guide TV (EPG),
+  4K Ultra HD, 99.9 % de stabilité (serveurs), activation en 5 min, essai gratuit 24h,
+  support WhatsApp en moins de 15 min 7j/7. (The site labels itself "Fournisseur
+  licencié" — keep that as the site's own wording; never add a legality claim.) Do NOT
+  invent channel or customer counts beyond these.
 - **Case studies / results:** none published — never fabricate.
 - **Certifications / awards:** none — never fabricate.
 
 ### Author identity (E-E-A-T)
 
-- **Who is credited as author:** ⚠️ NEEDS INPUT (no named author published today)
-- Until provided: publish without a fake persona. Never invent credentials.
+- **Who is credited as author:** no named author on-site — no personal byline and no
+  JSON-LD author is published.
+- Publish without a fake persona. Never invent credentials.
 
 ### The call to action
 
-- **Primary CTA:** order (or start the trial of) the subscription on the money page ⚠️ verify wording
+- **Primary CTA:** "Commander →" and "Commander 3/6/12/24 Mois sur WhatsApp"; hero also uses "Voir nos offres IPTV", "Essai gratuit 24h" and "Activer mon abonnement".
 - **Where it points:** https://primeiptv-france.com/abonnement (funnel to the flagship)
-- **Phone / address:** none — digital only (contact via site form/WhatsApp/Telegram ⚠️ verify)
+- **Phone / address:** none — digital only; contact via WhatsApp (+44 7737 314826) and the site form. No phone number or postal address is published.
 
 ---
 

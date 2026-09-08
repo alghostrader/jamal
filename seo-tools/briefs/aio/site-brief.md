@@ -6,7 +6,7 @@
 > Drafted automatically from the 2026-08-14 portfolio audit (crawl + GSC + SERP data).
 > Anything marked ⚠️ verify was inferred and needs the owner to confirm it.
 >
-> Last updated: 2026-08-14
+> Last updated: 2026-09-08
 
 ---
 
@@ -16,7 +16,7 @@
 - **Domain:** abonnementiptvofficiel.com
 - **Industry / niche:** IPTV subscription service (France market)
 - **What they actually sell (one sentence):** Trial-intent and deal-intent IPTV: free tests, cheap plans, plus the boitier (box) hardware angle.
-- **Price positioning:** budget-to-mid ⚠️ verify
+- **Price positioning:** budget-to-mid — the /iptv-premium grid lists 12 months · 1 appareil at 59 € (advertised "à partir de 49 €/an"), 12 months · 2 appareils 89 €, 12 months · 3 appareils 99 €. One-off yearly payments, no monthly billing.
 
 ### Services or products
 
@@ -43,32 +43,36 @@
 
 ### Competitors
 
-1. test-iptv.fr ⚠️ verify (seen in live SERPs, not owner-confirmed)
-2. abonnement-iptvfrance.fr ⚠️ verify (seen in live SERPs, not owner-confirmed)
+1. test-iptv.fr (confirmed live, 2026-09-08)
+2. abonnement-iptvfrance.fr (confirmed live, 2026-09-08)
 
 ### Goals
 
 - **Primary goal:** subscription sales via the money page(s)
-- **What a customer is worth, roughly:** ⚠️ NEEDS INPUT (monthly plan price × avg retention)
+- **What a customer is worth, roughly:** ≈ 59 € per customer/year; most pick the 12-month 1-device plan at 59 € (advertised from 49 €/an). Multi-device: 2 appareils 89 €/an, 3 appareils 99 €/an. One-off payment. Assumes a one-year plan.
 - **What this business will NOT do:** paid ads, fake reviews, money-anchor link building
 
 ### Proof and assets
 
-- **Real numbers the business can claim:** ⚠️ NEEDS INPUT — do NOT invent channel
-  counts or customer counts; use only what the money page already states.
+- **Real numbers the business can claim:** only what the /iptv-premium page states —
+  22 000+ chaînes HD & 4K, 80 000+ films et séries en VOD, activation en 5 minutes,
+  garantie 7 jours satisfait ou remboursé, test IPTV gratuit de 24h, support francophone
+  7j/7, infrastructure serveur FR/EU (uptime annoncé 99,9 % sur 12 mois, latence moyenne
+  < 80 ms en France). Do NOT invent channel or customer counts beyond these.
 - **Case studies / results:** none published — never fabricate.
 - **Certifications / awards:** none — never fabricate.
 
 ### Author identity (E-E-A-T)
 
-- **Who is credited as author:** ⚠️ NEEDS INPUT (no named author published today)
-- Until provided: publish without a fake persona. Never invent credentials.
+- **Who is credited as author:** no named author on-site — JSON-LD credits only the
+  Organization "Abonnement IPTV Officiel"; no personal byline is published.
+- Publish without a fake persona. Never invent credentials.
 
 ### The call to action
 
-- **Primary CTA:** order (or start the trial of) the subscription on the money page ⚠️ verify wording
+- **Primary CTA:** "Commander via WhatsApp" (hero); plan cards use "Choisir cette formule" and "Voir les tarifs".
 - **Where it points:** /test-iptv (frozen — no edits)
-- **Phone / address:** none — digital only (contact via site form/WhatsApp/Telegram ⚠️ verify)
+- **Phone / address:** none — digital only; contact via WhatsApp (+44 7737 314826) and the site form. No phone number or postal address is published.
 
 ---
 

@@ -6,7 +6,7 @@
 > Drafted automatically from the 2026-08-14 portfolio audit (crawl + GSC + SERP data).
 > Anything marked ⚠️ verify was inferred and needs the owner to confirm it.
 >
-> Last updated: 2026-08-14
+> Last updated: 2026-09-08
 
 ---
 
@@ -16,7 +16,7 @@
 - **Domain:** iptvshqiptar.com
 - **Industry / niche:** IPTV subscription service (Albania market)
 - **What they actually sell (one sentence):** IPTV subscriptions for Albanian-speaking viewers (Albania, Kosovo, diaspora).
-- **Price positioning:** budget-to-mid ⚠️ verify
+- **Price positioning:** budget-to-mid — the homepage pricing section lists (1 ekran) 3 muaj 25 €, 6 muaj 39 €, 12 muaj 59 €, 24 muaj 99 €; (2 ekrane) 39 €, 59 €, 89 €, 149 €. Pagesë e njëhershme, no monthly billing.
 
 ### Services or products
 
@@ -25,7 +25,9 @@
 3. Free content: setup guides, tutorials, tools
 
 **Money pages** (internal links get prioritised towards these):
-- the subscription/contact page ⚠️ verify exact URL
+- Homepage pricing section /#cmimet (the plan cards live here), which links to per-plan
+  checkout URLs /checkout?plan=1ekran-3m | 1ekran-6m | 1ekran-12m | 1ekran-24m (plus the
+  2-screen variants). Contact page: /kontakt. (No standalone /abonime page exists.)
 
 ### Service area
 
@@ -42,32 +44,36 @@
 
 ### Competitors
 
-1. iptvshqip.com ⚠️ verify (seen in live SERPs, not owner-confirmed)
-2. tvalb.com ⚠️ verify (seen in live SERPs, not owner-confirmed)
+1. iptvshqip.com (confirmed live over http, 2026-09-08)
+2. tvalb.com (confirmed live, 2026-09-08)
 
 ### Goals
 
 - **Primary goal:** subscription sales via the money page(s)
-- **What a customer is worth, roughly:** ⚠️ NEEDS INPUT (monthly plan price × avg retention)
+- **What a customer is worth, roughly:** ≈ 59 € per customer/year; the 12-month 1-screen plan at 59 € is marked "zgjedhja e 80 % të klientëve". Other 1-screen plans: 3 muaj 25 €, 6 muaj 39 €, 24 muaj 99 €; 2-screen 39/59/89/149 €. Pagesë e njëhershme. Assumes a one-year plan.
 - **What this business will NOT do:** paid ads, fake reviews, money-anchor link building
 
 ### Proof and assets
 
-- **Real numbers the business can claim:** ⚠️ NEEDS INPUT — do NOT invent channel
-  counts or customer counts; use only what the money page already states.
+- **Real numbers the business can claim:** only what the live homepage states —
+  20.000+ kanale shqip HD/4K, filma & seriale në VOD, guidë TV (EPG) e integruar, replay
+  7 ditë, cilësi Full HD & 4K, garanci 7 ditë, mbështetje 24/7, aktivizim në ~5 minuta,
+  pagesë me kartë / PayPal / transfertë, punon në Smart TV Samsung (Tizen) & LG (webOS),
+  Android dhe IBO Player. Do NOT invent channel or customer counts beyond these.
 - **Case studies / results:** none published — never fabricate.
 - **Certifications / awards:** none — never fabricate.
 
 ### Author identity (E-E-A-T)
 
-- **Who is credited as author:** ⚠️ NEEDS INPUT (no named author published today)
-- Until provided: publish without a fake persona. Never invent credentials.
+- **Who is credited as author:** no named author on-site — JSON-LD credits only the
+  Organization "IPTV Shqiptar"; no personal byline is published.
+- Publish without a fake persona. Never invent credentials.
 
 ### The call to action
 
-- **Primary CTA:** order (or start the trial of) the subscription on the money page ⚠️ verify wording
-- **Where it points:** the subscription/contact page ⚠️ verify exact URL
-- **Phone / address:** none — digital only (contact via site form/WhatsApp/Telegram ⚠️ verify)
+- **Primary CTA:** "Porosit tani" and "Zgjidh pakon tënde" on the plan cards; "Pyet në WhatsApp" / "Bisedo në WhatsApp" as the secondary contact CTA.
+- **Where it points:** the homepage pricing section /#cmimet → per-plan /checkout?plan=… URLs; /kontakt for contact.
+- **Phone / address:** none — digital only; contact via WhatsApp (+44 7737 314826) and the /kontakt form. No phone number or postal address is published.
 
 ---
 
