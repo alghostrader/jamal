@@ -93,7 +93,7 @@ try:
             if len(m) < 3 or lid[:3] != "lp-": continue
             slug, key = "-".join(m[1:-1]), m[-1]
             if (slug, key) in have or key == "one": continue
-            if slug not in KNOWN and not link_urls.get(lid): continue
+            if slug not in KNOWN and not slug.startswith("gp-") and not link_urls.get(lid): continue
             rows.append({"site": key, "platform": slug.title(), "slug": slug, "detail": "ticked on the dashboard", "follow": "",
                          "status": "pending", "verified": "", "url": link_urls.get(lid, ""), "checked": "", "http": ""}); added += 1
         if added:

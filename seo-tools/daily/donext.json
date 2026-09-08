@@ -148,6 +148,92 @@
    "indexed": false
   },
   {
+   "id": "lp-gp-adslzone-esp",
+   "type": "Backlink",
+   "kind": "Backlink",
+   "site": "iptvesp.com",
+   "repo_path": "\u2014",
+   "repo_content": "",
+   "keyword": "adslzone.net \u2014 expert quote",
+   "page": "",
+   "metric": "authority 56 \u00b7 expert quote",
+   "search_volume": null,
+   "gsc": null,
+   "target_url": "https://adslzone.net/",
+   "action": "PITCH",
+   "cannibalization_note": "one contextual link, brand or naked-URL anchor, to a guide page (not the pricing page)",
+   "deploy_as": "owner sends the pitch and handles the editor; Claude writes pitch + article + quote",
+   "guards": [
+    "no rights-holder / channel / league names",
+    "no '100% legal' claims",
+    "real screenshots we own",
+    "author alghostrader"
+   ],
+   "done_when": [
+    "pitch sent from the owner's mailbox (draft in seo-tools/links/PITCHES-*.md)",
+    "editor accepted \u00b7 article or quote delivered",
+    "live URL pasted here \u2192 the audit checks it is live + dofollow"
+   ],
+   "priority_score": 52,
+   "effort": "Deep work",
+   "effort_min": 90,
+   "what": "Expert quote on adslzone.net (authority 56) for iptvesp.com. Angle: Listas M3U y Telegram: c\u00f3mo saber si una lista aguantar\u00e1 (checklist t\u00e9cnico)",
+   "why": "One in-content dofollow link from an indexed, relevant domain is worth more than the whole directory set.",
+   "why_action": "biggest ES connectivity/streaming media; pitch expert comments on IPTV safety, M3U, Fire TV",
+   "drivers": [
+    "authority is the ceiling on this site",
+    "target authority 56"
+   ],
+   "category": "",
+   "bucket": "links",
+   "completed": null,
+   "defect_gone": false,
+   "indexed": false
+  },
+  {
+   "id": "lp-gp-antyweb-rodak",
+   "type": "Backlink",
+   "kind": "Backlink",
+   "site": "rodaktv.com",
+   "repo_path": "\u2014",
+   "repo_content": "",
+   "keyword": "antyweb.pl \u2014 expert quote",
+   "page": "",
+   "metric": "authority 51 \u00b7 expert quote",
+   "search_volume": null,
+   "gsc": null,
+   "target_url": "https://antyweb.pl/",
+   "action": "PITCH",
+   "cannibalization_note": "one contextual link, brand or naked-URL anchor, to a guide page (not the pricing page)",
+   "deploy_as": "owner sends the pitch and handles the editor; Claude writes pitch + article + quote",
+   "guards": [
+    "no rights-holder / channel / league names",
+    "no '100% legal' claims",
+    "real screenshots we own",
+    "author alghostrader"
+   ],
+   "done_when": [
+    "pitch sent from the owner's mailbox (draft in seo-tools/links/PITCHES-*.md)",
+    "editor accepted \u00b7 article or quote delivered",
+    "live URL pasted here \u2192 the audit checks it is live + dofollow"
+   ],
+   "priority_score": 52,
+   "effort": "Deep work",
+   "effort_min": 90,
+   "what": "Expert quote on antyweb.pl (authority 51) for rodaktv.com. Angle: Polska telewizja za granic\u0105: co sprawdzi\u0107 przed zakupem abonamentu (UK / DE / NL)",
+   "why": "One in-content dofollow link from an indexed, relevant domain is worth more than the whole directory set.",
+   "why_action": "major PL tech blog; pitch expert comments on smart TV / streaming abroad",
+   "drivers": [
+    "authority is the ceiling on this site",
+    "target authority 51"
+   ],
+   "category": "",
+   "bucket": "links",
+   "completed": null,
+   "defect_gone": false,
+   "indexed": false
+  },
+  {
    "id": "9f828be461",
    "type": "Striking distance",
    "kind": "Striking distance",
@@ -286,78 +372,41 @@
    "new_links": 0
   },
   {
-   "id": "lp-tumblr-esp",
+   "id": "lp-gp-letsgodigital-ned",
    "type": "Backlink",
    "kind": "Backlink",
-   "site": "iptvesp.com",
+   "site": "iptvned.com",
    "repo_path": "\u2014",
    "repo_content": "",
-   "keyword": "Tumblr blog + 1 post",
+   "keyword": "letsgodigital.org \u2014 expert quote",
    "page": "",
-   "metric": "P1 placement \u00b7 brand / naked anchor",
+   "metric": "authority 39 \u00b7 expert quote",
    "search_volume": null,
    "gsc": null,
-   "target_url": "https://iptvesp.com/",
-   "action": "PLACE",
-   "cannibalization_note": "anchor = brand or naked URL only \u2014 never money keywords",
-   "deploy_as": "owner publishes (signup + CAPTCHA + publish)",
+   "target_url": "https://letsgodigital.org/",
+   "action": "PITCH",
+   "cannibalization_note": "one contextual link, brand or naked-URL anchor, to a guide page (not the pricing page)",
+   "deploy_as": "owner sends the pitch and handles the editor; Claude writes pitch + article + quote",
    "guards": [
     "no rights-holder / channel / league names",
-    "no fake reviews / address"
+    "no '100% legal' claims",
+    "real screenshots we own",
+    "author alghostrader"
    ],
    "done_when": [
-    "post published with a brand or naked-URL anchor",
-    "live URL logged on the Backlinks page (that list is the ledger)",
-    "live fetch: link present + dofollow"
+    "pitch sent from the owner's mailbox (draft in seo-tools/links/PITCHES-*.md)",
+    "editor accepted \u00b7 article or quote delivered",
+    "live URL pasted here \u2192 the audit checks it is live + dofollow"
    ],
-   "priority_score": 45,
-   "effort": "Quick",
-   "effort_min": 25,
-   "what": "Tumblr blog + 1 post for iptvesp.com.",
-   "why": "Authority is the ceiling on this site \u2014 one quality link moves the whole domain.",
-   "why_action": "Publish the post, then paste the live URL when you tick it: that write IS the ledger.",
+   "priority_score": 50,
+   "effort": "Deep work",
+   "effort_min": 90,
+   "what": "Expert quote on letsgodigital.org (authority 39) for iptvned.com. Angle: IPTV op je smart TV zonder bufferen: netwerkinstellingen die werken",
+   "why": "One in-content dofollow link from an indexed, relevant domain is worth more than the whole directory set.",
+   "why_action": "consumer electronics; pitch smart-TV/streaming expert comments",
    "drivers": [
-    "authority gap"
-   ],
-   "category": "",
-   "bucket": "links",
-   "completed": null,
-   "defect_gone": false,
-   "indexed": false
-  },
-  {
-   "id": "lp-substack-prime",
-   "type": "Backlink",
-   "kind": "Backlink",
-   "site": "primeiptv-france.com",
-   "repo_path": "\u2014",
-   "repo_content": "",
-   "keyword": "Substack post",
-   "page": "",
-   "metric": "P1 placement \u00b7 brand / naked anchor",
-   "search_volume": null,
-   "gsc": null,
-   "target_url": "https://primeiptv-france.com/",
-   "action": "PLACE",
-   "cannibalization_note": "anchor = brand or naked URL only \u2014 never money keywords",
-   "deploy_as": "owner publishes (signup + CAPTCHA + publish)",
-   "guards": [
-    "no rights-holder / channel / league names",
-    "no fake reviews / address"
-   ],
-   "done_when": [
-    "post published with a brand or naked-URL anchor",
-    "live URL logged on the Backlinks page (that list is the ledger)",
-    "live fetch: link present + dofollow"
-   ],
-   "priority_score": 45,
-   "effort": "Quick",
-   "effort_min": 25,
-   "what": "Substack post for primeiptv-france.com.",
-   "why": "Authority is the ceiling on this site \u2014 one quality link moves the whole domain.",
-   "why_action": "Publish the post, then paste the live URL when you tick it: that write IS the ledger.",
-   "drivers": [
-    "authority gap"
+    "authority is the ceiling on this site",
+    "target authority 39"
    ],
    "category": "",
    "bucket": "links",
@@ -1216,18 +1265,17 @@
     "on-query section refreshed + dateModified bumped",
     "deploy READY + live fetch finds the keyword on the page"
    ],
-   "priority_score": 61,
+   "priority_score": 52,
    "effort": "Medium",
    "effort_min": 40,
    "what": "\u201cestafas iptv\u201d sits at position 18 with 12 impressions/28d.",
    "why": "Positions 4\u201320 are the cheapest wins: the page already ranks, Google already tests it.",
    "why_action": "Strengthen internal links to the ranking page and refresh the content section matching this query.",
    "drivers": [
-    "strategic target or money page",
-    "currently worsening"
+    "strategic target or money page"
    ],
    "category": "",
-   "bucket": "today",
+   "bucket": "next",
    "completed": "2026-09-08",
    "defect_gone": false,
    "indexed": false,
@@ -1281,7 +1329,7 @@
    "why_action": "Strengthen internal links to the ranking page and refresh the content section matching this query.",
    "drivers": [],
    "category": "",
-   "bucket": "next",
+   "bucket": "today",
    "completed": "2026-09-08",
    "defect_gone": false,
    "indexed": false,
@@ -1712,6 +1760,51 @@
     ]
    ],
    "cta": "Done \u2014 token added"
+  },
+  {
+   "id": "owner_quote_accounts_v1",
+   "badge": "Owner",
+   "title": "Create the expert-quote accounts (signup + CAPTCHA are owner-only)",
+   "meta": "Source of Sources \u00b7 Featured.com \u00b7 Qwoted \u00b7 MentionMatch \u00b7 PressPlugs \u00b7 ResponseSource Journalist Enquiry Service",
+   "lines": [
+    [
+     "Source of Sources",
+     "https://www.sourceofsources.com/ \u2014 free \u00b7 sign up with name + email; up to 3 query emails a day; reply only on-topic (off-topic = removed)"
+    ],
+    [
+     "Featured.com",
+     "https://featured.com/ \u2014 free tier \u00b7 answer editor prompts; best answers get quoted with a link"
+    ],
+    [
+     "Qwoted",
+     "https://www.qwoted.com/ \u2014 free tier \u00b7 Pro $99\u2013149/mo \u00b7 pitch against live journalist requests"
+    ],
+    [
+     "MentionMatch",
+     "https://mentionmatch.com/ \u2014 free \u00b7 register as source, pick topics (SEO, streaming tech, security); queries arrive by email"
+    ],
+    [
+     "PressPlugs",
+     "https://pressplugs.co.uk/ \u2014 \u00a329/mo \u00b7 sector-filtered journalist requests + #journorequest monitoring"
+    ],
+    [
+     "ResponseSource Journalist Enquiry Service",
+     "https://www.responsesource.com/pr/journalistenquiry/ \u2014 paid \u00b7 journalist enquiries by sector"
+    ],
+    [
+     "#journorequest / #prrequest on X",
+     "https://x.com/search?q=%23journorequest \u2014 free \u00b7 search daily, reply fast with a one-line credential"
+    ],
+    [
+     "Reportaro",
+     "https://reportaro.com/ \u2014 free (to confirm) \u00b7 Spanish journalists post source requests; register as an expert \u2014 the site blocked our automated check, verify by hand"
+    ],
+    [
+     "Babbler",
+     "https://www.babbler.fr/ \u2014 PR network (pricing on request) \u00b7 opt-in network of PRs and journalists; verify access by hand (blocked automated check)"
+    ]
+   ],
+   "cta": "Accounts created"
   },
   {
    "id": "owner_sales_w37",
@@ -5361,6 +5454,50 @@
    "new_links": 0
   },
   {
+   "id": "c9d69a7ba7",
+   "type": "Content",
+   "kind": "Content gap",
+   "site": "iptvesp.com",
+   "repo_path": "/Desktop/iptv-espana-pro",
+   "repo_content": "MDX content/blog",
+   "keyword": "proveedor iptv",
+   "page": "",
+   "metric": "480/mo",
+   "search_volume": 480,
+   "gsc": null,
+   "target_url": "https://iptvesp.com/blog/como-elegir-iptv-espana",
+   "action": "ENHANCE",
+   "cannibalization_note": "page already targets this term (/blog/como-elegir-iptv-espana) \u2014 no new URL, enhance it",
+   "deploy_as": "alghostrader \u00b7 git push origin main \u2192 Vercel auto",
+   "guards": [
+    "title \u2264 60 chars (build fails otherwise)",
+    "no rights-holder / channel / league / broadcaster names",
+    "real hero image (no icon fallback)",
+    "brand or naked-URL anchors only for links"
+   ],
+   "done_when": [
+    "article live at https://iptvesp.com/blog/como-elegir-iptv-espana, \u2265 900 words, real hero image",
+    "internal links from 2 related pages + money-page CTA",
+    "deploy READY + live fetch finds the keyword on the page"
+   ],
+   "priority_score": 41,
+   "effort": "Deep work",
+   "effort_min": 90,
+   "what": "\u201cproveedor iptv\u201d (480/mo) has no page anywhere in this market.",
+   "why": "Uncontested demand inside this site's lane.",
+   "why_action": "Write it via the 5-skill pipeline (prompt ready on the Work page).",
+   "drivers": [
+    "strategic target or money page",
+    "uncontested demand in this lane"
+   ],
+   "category": "",
+   "bucket": "monitor",
+   "completed": null,
+   "defect_gone": false,
+   "indexed": false,
+   "new_links": 0
+  },
+  {
    "id": "d69a2801b0",
    "type": "Content",
    "kind": "Content gap",
@@ -5765,51 +5902,6 @@
    "why": "Positions 4\u201320 are the cheapest wins: the page already ranks, Google already tests it.",
    "why_action": "Strengthen internal links to the ranking page and refresh the content section matching this query.",
    "drivers": [],
-   "category": "",
-   "bucket": "monitor",
-   "completed": null,
-   "defect_gone": false,
-   "indexed": false,
-   "new_links": 0
-  },
-  {
-   "id": "c9d69a7ba7",
-   "type": "Content",
-   "kind": "Content gap",
-   "site": "iptvesp.com",
-   "repo_path": "/Desktop/iptv-espana-pro",
-   "repo_content": "MDX content/blog",
-   "keyword": "proveedor iptv",
-   "page": "",
-   "metric": "480/mo",
-   "search_volume": 480,
-   "gsc": null,
-   "target_url": "https://iptvesp.com/blog/como-elegir-iptv-espana",
-   "action": "ENHANCE",
-   "cannibalization_note": "page already targets this term (/blog/como-elegir-iptv-espana) \u2014 no new URL, enhance it",
-   "deploy_as": "alghostrader \u00b7 git push origin main \u2192 Vercel auto",
-   "guards": [
-    "title \u2264 60 chars (build fails otherwise)",
-    "no rights-holder / channel / league / broadcaster names",
-    "real hero image (no icon fallback)",
-    "brand or naked-URL anchors only for links"
-   ],
-   "done_when": [
-    "article live at https://iptvesp.com/blog/como-elegir-iptv-espana, \u2265 900 words, real hero image",
-    "internal links from 2 related pages + money-page CTA",
-    "deploy READY + live fetch finds the keyword on the page"
-   ],
-   "priority_score": 38,
-   "effort": "Deep work",
-   "effort_min": 90,
-   "what": "\u201cproveedor iptv\u201d (480/mo) has no page anywhere in this market.",
-   "why": "Uncontested demand inside this site's lane.",
-   "why_action": "Write it via the 5-skill pipeline (prompt ready on the Work page).",
-   "drivers": [
-    "strategic target or money page",
-    "already improving on its own",
-    "uncontested demand in this lane"
-   ],
    "category": "",
    "bucket": "monitor",
    "completed": null,

@@ -1,0 +1,63 @@
+{
+ "_note": "Guest-post and expert-quote targets researched 8 Sep 2026 (Semrush authority score = as). Ticking a target on the dashboard = placement logged (ledger id lp-gp-<slug>-<site>). Owner sends every pitch and creates every account; Claude prepares pitches, drafts and quotes.",
+ "platforms": [
+  {"slug": "sourceofsources", "name": "Source of Sources (SoS)", "url": "https://www.sourceofsources.com/", "scope": "global, EN", "cost": "free", "how": "sign up with name + email; up to 3 query emails a day; reply only on-topic (off-topic = removed)", "verified": true},
+  {"slug": "featured", "name": "Featured.com (+ the revived HARO newsletter)", "url": "https://featured.com/", "scope": "global, EN", "cost": "free tier", "how": "answer editor prompts; best answers get quoted with a link", "verified": true},
+  {"slug": "qwoted", "name": "Qwoted", "url": "https://www.qwoted.com/", "scope": "global, EN", "cost": "free tier · Pro $99–149/mo", "how": "pitch against live journalist requests", "verified": true},
+  {"slug": "mentionmatch", "name": "MentionMatch (ex Help a B2B Writer)", "url": "https://mentionmatch.com/", "scope": "global, EN, B2B/tech", "cost": "free", "how": "register as source, pick topics (SEO, streaming tech, security); queries arrive by email", "verified": true},
+  {"slug": "pressplugs", "name": "PressPlugs", "url": "https://pressplugs.co.uk/", "scope": "UK (rodak diaspora, EN)", "cost": "£29/mo", "how": "sector-filtered journalist requests + #journorequest monitoring", "verified": true},
+  {"slug": "responsesource", "name": "ResponseSource Journalist Enquiry Service", "url": "https://www.responsesource.com/pr/journalistenquiry/", "scope": "UK, EN", "cost": "paid", "how": "journalist enquiries by sector", "verified": true},
+  {"slug": "journorequest", "name": "#journorequest / #prrequest on X", "url": "https://x.com/search?q=%23journorequest", "scope": "UK + FR/ES variants (#journalistecherche, #periodistabusca)", "cost": "free", "how": "search daily, reply fast with a one-line credential", "verified": true},
+  {"slug": "reportaro", "name": "Reportaro", "url": "https://reportaro.com/", "scope": "Spain, ES", "cost": "free (to confirm)", "how": "Spanish journalists post source requests; register as an expert — the site blocked our automated check, verify by hand", "verified": false},
+  {"slug": "babbler", "name": "Babbler", "url": "https://www.babbler.fr/", "scope": "France, FR", "cost": "PR network (pricing on request)", "how": "opt-in network of PRs and journalists; verify access by hand (blocked automated check)", "verified": false}
+ ],
+ "prospects": {
+  "fr": [
+   {"slug": "korben", "domain": "korben.info", "as": 49, "type": "guest post", "how": "publishes contributor 'Article invité' pieces (hardware, boxes, NAS); pitch a box/streaming test via the contact page", "sites": ["primeiptv-france.com", "abonnementiptvofficiel.com", "smartersprofrance.fr"]},
+   {"slug": "pressecitron", "domain": "presse-citron.net", "as": 62, "type": "expert quote / partner content", "how": "large FR tech media; pitch expert comments on streaming, VPN, smart TV; partner content via their ad page", "sites": ["primeiptv-france.com", "iptvpix.com"]},
+   {"slug": "begeek", "domain": "begeek.fr", "as": 39, "type": "expert quote / guest post", "how": "tech & culture; contact form; propose a practical streaming/box guide", "sites": ["abonnementiptvofficiel.com", "iptvpix.com"]},
+   {"slug": "moyens", "domain": "moyens.net", "as": 31, "type": "guest post", "how": "has an 'Article invité' category (Streaming, Kodi, Android TV); submit via contact", "sites": ["smartersprofrance.fr", "smarters-live.com", "iptvfranceofficiel.fr"]},
+   {"slug": "blablahightech", "domain": "blablahightech.fr", "as": 22, "type": "guest post", "how": "independent gadgets/audio-video blog; personal contact, offer a box or Fire TV setup guide", "sites": ["abonnementiptvofficiel.com", "iptvfranceofficiel.fr"]}
+  ],
+  "es": [
+   {"slug": "adslzone", "domain": "adslzone.net", "as": 56, "type": "expert quote", "how": "biggest ES connectivity/streaming media; pitch expert comments on IPTV safety, M3U, Fire TV", "sites": ["iptvesp.com", "iptvsegura.com"]},
+   {"slug": "hipertextual", "domain": "hipertextual.com", "as": 43, "type": "expert quote", "how": "tech & culture; comment on streaming and online-scam topics", "sites": ["iptvsegura.com", "iptvesp.com"]},
+   {"slug": "esgeeks", "domain": "esgeeks.com", "as": 31, "type": "guest post", "how": "security blog with contributor posts; pitch 'cómo reconocer una estafa IPTV' — perfect for the safety lane", "sites": ["iptvsegura.com"]},
+   {"slug": "salesystems", "domain": "salesystems.es", "as": 29, "type": "guest post", "how": "tech blog that publishes guest articles; propose a smart-TV / streaming setup guide", "sites": ["iptvesp.com"]}
+  ],
+  "nl": [
+   {"slug": "dutchcowboys", "domain": "dutchcowboys.nl", "as": 38, "type": "guest post / sponsored", "how": "NL tech news & trends; accepts contributed and partner articles via contact", "sites": ["iptvned.com"]},
+   {"slug": "letsgodigital", "domain": "letsgodigital.org", "as": 39, "type": "expert quote", "how": "consumer electronics; pitch smart-TV/streaming expert comments", "sites": ["iptvned.com"]},
+   {"slug": "dutchtech", "domain": "dutch-tech.nl", "as": 23, "type": "guest post", "how": "tech blog magazine (BeeContent label) — email info@dutch-tech.nl to propose a gastartikel", "sites": ["iptvned.com"]},
+   {"slug": "alleblogs", "domain": "alleblogs.nl", "as": 10, "type": "directory listing", "how": "NL blog directory — list the iptvned blog (quick win, low weight)", "sites": ["iptvned.com"]}
+  ],
+  "pl": [
+   {"slug": "antyweb", "domain": "antyweb.pl", "as": 51, "type": "expert quote", "how": "major PL tech blog; pitch expert comments on smart TV / streaming abroad", "sites": ["rodaktv.com"]},
+   {"slug": "polskiobserwator", "domain": "polskiobserwator.de", "as": 36, "type": "sponsored / guest article", "how": "daily portal for Poles in Germany; contact for an article on Polish TV abroad", "sites": ["rodaktv.com"]},
+   {"slug": "polishexpress", "domain": "polishexpress.eu", "as": 34, "type": "sponsored article", "how": "UK/NL/IE/DE Polish community portal — https://polishexpress.eu/ogloszenia-i-reklama/", "sites": ["rodaktv.com"]},
+   {"slug": "dicompl", "domain": "di.com.pl", "as": 33, "type": "expert quote / guest", "how": "Dziennik Internautów; contact the editors with a practical guide", "sites": ["rodaktv.com"]},
+   {"slug": "mypolacy", "domain": "mypolacy.de", "as": 33, "type": "community article", "how": "largest social portal for Poles in Germany; publish a guide in the community section", "sites": ["rodaktv.com"]},
+   {"slug": "dojczland", "domain": "dojczland.info", "as": 33, "type": "sponsored / guest article", "how": "Poles in Germany portal; contact for a guide article", "sites": ["rodaktv.com"]},
+   {"slug": "techoteka", "domain": "techoteka.pl", "as": 28, "type": "sponsored article", "how": "https://techoteka.pl/wspolpraca/ — form; publishes 'Artykuł partnera'", "sites": ["rodaktv.com"]},
+   {"slug": "mojawyspa", "domain": "mojawyspa.co.uk", "as": 22, "type": "community article", "how": "Poles in the UK portal; propose a 'polska telewizja w UK' guide", "sites": ["rodaktv.com"]}
+  ],
+  "sq": [
+   {"slug": "shqipcom", "domain": "shqip.com", "as": 22, "type": "guest article", "how": "news portal with a Teknologji section; contact the editors", "sites": ["iptvshqiptar.com"]},
+   {"slug": "techal", "domain": "tech-al.info", "as": 6, "type": "guest article", "how": "Albanian tech news blog; low authority, easy yes", "sites": ["iptvshqiptar.com"]},
+   {"slug": "lajmetech", "domain": "lajme.tech", "as": 2, "type": "guest article", "how": "Albanian tech news; low authority, easy yes", "sites": ["iptvshqiptar.com"]}
+  ]
+ },
+ "ideas": {
+  "iptvesp.com": "Listas M3U y Telegram: cómo saber si una lista aguantará (checklist técnico)",
+  "iptvsegura.com": "Cómo reconocer una estafa IPTV antes de pagar: 7 señales",
+  "primeiptv-france.com": "Choisir un serveur IPTV stable : les critères techniques qui comptent",
+  "abonnementiptvofficiel.com": "Boîtier IPTV ou Fire TV Stick : lequel choisir en 2026 (test réseau)",
+  "smartersprofrance.fr": "Configurer IPTV Smarters Pro sur Fire TV : les 5 erreurs qui coupent l'image",
+  "iptvpix.com": "Streaming en 4K sans coupure : débit réel, Wi-Fi et Ethernet",
+  "smarters-live.com": "Erreur de lecture IPTV Smarters : diagnostic en 10 minutes",
+  "iptvfranceofficiel.fr": "IPTV 4K / HDR : la bande passante réelle dont vous avez besoin",
+  "iptvned.com": "IPTV op je smart TV zonder bufferen: netwerkinstellingen die werken",
+  "iptvshqiptar.com": "IPTV në Smart TV për diasporën: udhëzues hap pas hapi",
+  "rodaktv.com": "Polska telewizja za granicą: co sprawdzić przed zakupem abonamentu (UK / DE / NL)"
+ }
+}

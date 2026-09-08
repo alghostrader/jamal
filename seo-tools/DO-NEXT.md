@@ -12,7 +12,7 @@ States: `completed` (built + deployed) · `deferred` · `dismissed` (with a note
 the audit fetches it and checks keyword + modified date (add `dateModified` / `og:updated_time` to the page). For a backlink id (`lp-…`) the url is the placement URL.
 The next audit merges these lines with the owner's browser ticks (Firestore) and moves the task to Shipped only after the live check passes.
 
-## Do now — 7 tasks, ≈3h 40m
+## Do now — 8 tasks, ≈7h 20m
 
 ### #1 Backlink — Substack post · rodaktv.com
 - id: `lp-substack-rodak` · score 55 · Quick ≈25 min · P1 placement · brand / naked anchor
@@ -32,7 +32,25 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - deploy-as: owner publishes (signup + CAPTCHA + publish) · guards: no rights-holder / channel / league names · no fake reviews / address
 - done when: post published with a brand or naked-URL anchor / live URL logged on the Backlinks page (that list is the ledger) / live fetch: link present + dofollow
 
-### #3 Striking distance — meilleur boîtier iptv 2026 · abonnementiptvofficiel.com
+### #3 Backlink — adslzone.net — expert quote · iptvesp.com
+- id: `lp-gp-adslzone-esp` · score 52 · Deep work ≈90 min · authority 56 · expert quote
+- repo: `—`
+- action: **PITCH** → https://adslzone.net/
+- ⚠ one contextual link, brand or naked-URL anchor, to a guide page (not the pricing page)
+- what: Expert quote on adslzone.net (authority 56) for iptvesp.com. Angle: Listas M3U y Telegram: cómo saber si una lista aguantará (checklist técnico) biggest ES connectivity/streaming media; pitch expert comments on IPTV safety, M3U, Fire TV
+- deploy-as: owner sends the pitch and handles the editor; Claude writes pitch + article + quote · guards: no rights-holder / channel / league names · no '100% legal' claims · real screenshots we own · author alghostrader
+- done when: pitch sent from the owner's mailbox (draft in seo-tools/links/PITCHES-*.md) / editor accepted · article or quote delivered / live URL pasted here → the audit checks it is live + dofollow
+
+### #4 Backlink — antyweb.pl — expert quote · rodaktv.com
+- id: `lp-gp-antyweb-rodak` · score 52 · Deep work ≈90 min · authority 51 · expert quote
+- repo: `—`
+- action: **PITCH** → https://antyweb.pl/
+- ⚠ one contextual link, brand or naked-URL anchor, to a guide page (not the pricing page)
+- what: Expert quote on antyweb.pl (authority 51) for rodaktv.com. Angle: Polska telewizja za granicą: co sprawdzić przed zakupem abonamentu (UK / DE / NL) major PL tech blog; pitch expert comments on smart TV / streaming abroad
+- deploy-as: owner sends the pitch and handles the editor; Claude writes pitch + article + quote · guards: no rights-holder / channel / league names · no '100% legal' claims · real screenshots we own · author alghostrader
+- done when: pitch sent from the owner's mailbox (draft in seo-tools/links/PITCHES-*.md) / editor accepted · article or quote delivered / live URL pasted here → the audit checks it is live + dofollow
+
+### #5 Striking distance — meilleur boîtier iptv 2026 · abonnementiptvofficiel.com
 - id: `9f828be461` · score 51 · Medium ≈40 min · GSC pos 7.1 · 19 clicks · 210 impr / 28d
 - repo: `/Desktop/abonnementiptvofficiel` (MDX content/blog)
 - action: **ENHANCE** → https://abonnementiptvofficiel.com/boitier-iptv
@@ -41,7 +59,7 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
 - done when: 3+ internal links point at the ranking page with varied anchors / on-query section refreshed + dateModified bumped / deploy READY + live fetch finds the keyword on the page
 
-### #4 Striking distance — lista iptv telegram · iptvesp.com
+### #6 Striking distance — lista iptv telegram · iptvesp.com
 - id: `cbf9605fc7` · score 51 · Medium ≈40 min · GSC pos 4.1 · 9 clicks · 53 impr / 28d
 - repo: `/Desktop/iptv-espana-pro` (MDX content/blog)
 - action: **ENHANCE** → https://iptvesp.com/blog/listas-telegram-iptv-espana
@@ -50,7 +68,7 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
 - done when: 3+ internal links point at the ranking page with varied anchors / on-query section refreshed + dateModified bumped / deploy READY + live fetch finds the keyword on the page
 
-### #5 Striking distance — grupos de telegram iptv gratis · iptvesp.com
+### #7 Striking distance — grupos de telegram iptv gratis · iptvesp.com
 - id: `01103825fc` · score 51 · Medium ≈40 min · GSC pos 5.0 · 8 clicks · 55 impr / 28d
 - repo: `/Desktop/iptv-espana-pro` (MDX content/blog)
 - action: **ENHANCE** → https://iptvesp.com/blog/telegram-listas-iptv-espana
@@ -59,23 +77,14 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
 - done when: 3+ internal links point at the ranking page with varied anchors / on-query section refreshed + dateModified bumped / deploy READY + live fetch finds the keyword on the page
 
-### #6 Backlink — Tumblr blog + 1 post · iptvesp.com
-- id: `lp-tumblr-esp` · score 45 · Quick ≈25 min · P1 placement · brand / naked anchor
+### #8 Backlink — letsgodigital.org — expert quote · iptvned.com
+- id: `lp-gp-letsgodigital-ned` · score 50 · Deep work ≈90 min · authority 39 · expert quote
 - repo: `—`
-- action: **PLACE** → https://iptvesp.com/
-- ⚠ anchor = brand or naked URL only — never money keywords
-- what: Tumblr blog + 1 post for iptvesp.com. Publish the post, then paste the live URL when you tick it: that write IS the ledger.
-- deploy-as: owner publishes (signup + CAPTCHA + publish) · guards: no rights-holder / channel / league names · no fake reviews / address
-- done when: post published with a brand or naked-URL anchor / live URL logged on the Backlinks page (that list is the ledger) / live fetch: link present + dofollow
-
-### #7 Backlink — Substack post · primeiptv-france.com
-- id: `lp-substack-prime` · score 45 · Quick ≈25 min · P1 placement · brand / naked anchor
-- repo: `—`
-- action: **PLACE** → https://primeiptv-france.com/
-- ⚠ anchor = brand or naked URL only — never money keywords
-- what: Substack post for primeiptv-france.com. Publish the post, then paste the live URL when you tick it: that write IS the ledger.
-- deploy-as: owner publishes (signup + CAPTCHA + publish) · guards: no rights-holder / channel / league names · no fake reviews / address
-- done when: post published with a brand or naked-URL anchor / live URL logged on the Backlinks page (that list is the ledger) / live fetch: link present + dofollow
+- action: **PITCH** → https://letsgodigital.org/
+- ⚠ one contextual link, brand or naked-URL anchor, to a guide page (not the pricing page)
+- what: Expert quote on letsgodigital.org (authority 39) for iptvned.com. Angle: IPTV op je smart TV zonder bufferen: netwerkinstellingen die werken consumer electronics; pitch smart-TV/streaming expert comments
+- deploy-as: owner sends the pitch and handles the editor; Claude writes pitch + article + quote · guards: no rights-holder / channel / league names · no '100% legal' claims · real screenshots we own · author alghostrader
+- done when: pitch sent from the owner's mailbox (draft in seo-tools/links/PITCHES-*.md) / editor accepted · article or quote delivered / live URL pasted here → the audit checks it is live + dofollow
 
 
 ## Verifying — 9 built, not live yet (what is still missing)
@@ -191,9 +200,10 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - ✓ Technical — /planes · iptvsegura.com · verified 2026-09-06 · page(s) PASS in GSC URL Inspection
 - ✓ Technical — /abonament · rodaktv.com · verified 2026-09-06 · page(s) PASS in GSC URL Inspection
 
-## Needs Jamal (owner-only / blocked) — 5
+## Needs Jamal (owner-only / blocked) — 6
 
 - Owner: Add VERCEL_TOKEN to dash/.env so BLOCKED deploys are detected automatically — no VERCEL_TOKEN in dash/.env — deploy state inferred from the live fetch
+- Owner: Create the expert-quote accounts (signup + CAPTCHA are owner-only) — Source of Sources · Featured.com · Qwoted · MentionMatch · PressPlugs · ResponseSource Journalist Enquiry Service
 - Owner: Send this week's sales numbers per site — feeds revenue-weighted prioritisation
 - Owner: Fill the ⚠ placeholder fields in seo-tools/briefs/ (95 fields, 11 sites) — aio 8 · esp 9 · ifo 8 · ned 8 · pix 8 · prime 9 · rodak 10 · segura 9 · shqip 10 · slive 8 · spf 8
 - Owner: Review the newest links on abonnementiptvofficiel.com (spam 58) and decide: resume or disavow — link building is paused on this site until you decide

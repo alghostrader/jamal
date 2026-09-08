@@ -241,8 +241,40 @@ def build_donext(G, C):
                               what=f"{label} for {dom}.", why="Authority is the ceiling on this site — one quality link moves the whole domain.",
                               why_action="Publish the post, then paste the live URL when you tick it: that write IS the ledger.",
                               drivers=["authority gap"], category="", bucket="links", completed=None, defect_gone=False, indexed=False))
+    # guest posts + expert quotes (outreach_targets.json): the links that actually move authority.
+    # One card per priority site (paused sites skipped); ticking it = placement logged in the ledger (lp-gp-… id).
+    try: OUT = json.load(open(os.path.join(BASE, "outreach_targets.json")))
+    except Exception: OUT = {"platforms": [], "prospects": {}, "ideas": {}}
+    LANG_OF = {"iptvesp.com": "es", "iptvsegura.com": "es", "iptvned.com": "nl", "rodaktv.com": "pl", "iptvshqiptar.com": "sq"}
+    for s_ in ALL:
+        if s_ not in LANG_OF: LANG_OF[s_] = "fr"
+    PRIO = ["iptvesp.com", "iptvned.com", "rodaktv.com", "iptvsegura.com", "smartersprofrance.fr", "primeiptv-france.com", "iptvshqiptar.com"]
+    cloud_links = CLOUD.get("links") or {}
+    outreach = []
+    for s_ in PRIO:
+        key = ABBR[s_]
+        if key in (G["PAUSED_LINKS"] or {}): continue
+        for pr_ in sorted(OUT["prospects"].get(LANG_OF[s_], []), key=lambda x: -x["as"]):
+            if s_ not in pr_["sites"]: continue
+            lid = f'lp-gp-{pr_["slug"]}-{key}'
+            if cloud_links.get(lid): continue
+            outreach.append(dict(id=lid, type="Backlink", kind="Backlink", site=s_, repo_path="—", repo_content="",
+                                 keyword=f'{pr_["domain"]} — {pr_["type"]}', page="", metric=f'authority {pr_["as"]} · {pr_["type"]}', search_volume=None, gsc=None,
+                                 target_url=f'https://{pr_["domain"]}/', action="PITCH",
+                                 cannibalization_note="one contextual link, brand or naked-URL anchor, to a guide page (not the pricing page)",
+                                 deploy_as="owner sends the pitch and handles the editor; Claude writes pitch + article + quote",
+                                 guards=["no rights-holder / channel / league names", "no '100% legal' claims", "real screenshots we own", "author alghostrader"],
+                                 done_when=["pitch sent from the owner's mailbox (draft in seo-tools/links/PITCHES-*.md)", "editor accepted · article or quote delivered",
+                                            "live URL pasted here → the audit checks it is live + dofollow"],
+                                 priority_score=50 + (pr_["as"] >= 40) * 2, effort="Deep work", effort_min=90,
+                                 what=f'{pr_["type"].capitalize()} on {pr_["domain"]} (authority {pr_["as"]}) for {s_}. Angle: {OUT["ideas"].get(s_, "")}',
+                                 why="One in-content dofollow link from an indexed, relevant domain is worth more than the whole directory set.",
+                                 why_action=pr_["how"], drivers=["authority is the ceiling on this site", f'target authority {pr_["as"]}'],
+                                 category="", bucket="links", completed=None, defect_gone=False, indexed=False))
+            break   # one outreach card per site in the queue; the rest are on the Backlinks page
     bl = [m for m in do_models if m["type"] == "Backlink"]
-    for m in bl[4:]: do_models.remove(m)   # the rest stay on the Backlinks page
+    for m in bl[2:]: do_models.remove(m)   # the rest stay on the Backlinks page
+    do_models += outreach[:3]
     if sum(1 for m in do_models if m["type"] != "Backlink") < 3:
         seen = {m["id"] for m in do_models}
         for t in sorted(T_MONITOR, key=lambda t: -t["score"]):
@@ -277,6 +309,13 @@ def build_donext(G, C):
                           lines=[("why", "without it the board infers “deployed” from the live fetch and cannot see a BLOCKED build"),
                                  ("how", "Vercel → Account → Tokens → create (read scope) → paste as VERCEL_TOKEN=… (+ VERCEL_TEAM_ID if the projects live in a team)")],
                           cta="Done — token added"))
+    try: _pl = json.load(open(os.path.join(BASE, "outreach_targets.json"))).get("platforms", [])
+    except Exception: _pl = []
+    if _pl and not (cloud_tasks.get("owner_quote_accounts_v1") or {}).get("state") == "completed":
+        needs.append(dict(id="owner_quote_accounts_v1", badge="Owner", title="Create the expert-quote accounts (signup + CAPTCHA are owner-only)",
+                          meta=" · ".join(p_["name"].split(" (")[0] for p_ in _pl[:6]),
+                          lines=[(p_["name"].split(" (")[0], f'{p_["url"]} — {p_["cost"]} · {p_["how"]}') for p_ in _pl],
+                          cta="Accounts created"))
     wk = _dt.date.today().isocalendar()[1]
     needs.append(dict(id=f"owner_sales_w{wk}", badge="Owner", title="Send this week's sales numbers per site", meta="feeds revenue-weighted prioritisation",
                       lines=[("why", "so the queue ranks by € earned, not only search volume"), ("format", "site · new subs · renewals · revenue — a WhatsApp line per site is enough")], cta="Mark sent"))

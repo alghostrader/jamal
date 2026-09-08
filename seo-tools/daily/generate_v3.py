@@ -1792,6 +1792,28 @@ def ledger_checklist():
                 f'<div class="lplist" style="margin-top:6px">{pl_html}</div>{lost_html}</div>'
                 f'<div><div class="rectitle">▢ Next</div><div style="margin-top:6px">{nx_html or "<div class=stmeta>nothing queued</div>"}</div></div></div></td></tr>')
     p4 = "".join(box(pid, "one", label, False, ' <span class="tag neu">P4 · owner</span>') for pid, label in NEXT_P4)
+    # guest posts + expert quotes — researched targets, one checkbox per (target, site); tick = placement logged
+    try: OUTR = json.load(open(os.path.join(BASE, "outreach_targets.json")))
+    except Exception: OUTR = {"platforms": [], "prospects": {}}
+    LNAME = {"fr": "French", "es": "Spanish", "nl": "Dutch", "pl": "Polish", "sq": "Albanian"}
+    gp = ""
+    for lang, items in OUTR.get("prospects", {}).items():
+        rows_ = ""
+        for it in sorted(items, key=lambda x: -x["as"]):
+            for dom in it["sites"]:
+                k = ABBR.get(dom)
+                if not k: continue
+                rows_ += box(f'gp-{it["slug"]}', k, f'{H.escape(it["domain"])} <span class="stmeta">· {H.escape(it["type"])} · for {H.escape(dom)}</span>', False,
+                             f' <span class="tag {"pos" if it["as"] >= 40 else "acc" if it["as"] >= 20 else "neu"}">AS {it["as"]}</span>'
+                             f'<div class="stmeta" style="flex-basis:100%;padding-left:26px">{H.escape(it["how"])}</div>')
+        gp += f'<div class="rectitle" style="margin-top:12px">{LNAME.get(lang, lang)}</div><div class="lplist" style="margin-top:6px">{rows_}</div>'
+    plat = "".join(f'<div class="alertrow" style="padding:5px 0"><span class="tag {"pos" if p_["verified"] else "warn"}">{"verified" if p_["verified"] else "verify"}</span>'
+                   f'<div><a href="{H.escape(p_["url"])}" target="_blank" rel="noopener"><b>{H.escape(p_["name"])}</b></a> <span class="stmeta">· {H.escape(p_["scope"])} · {H.escape(p_["cost"])}</span>'
+                   f'<div class="stmeta">{H.escape(p_["how"])}</div></div></div>' for p_ in OUTR.get("platforms", []))
+    gp_panel = (f'<div class="card" style="margin-top:16px"><div class="chead"><h2>Guest posts &amp; expert quotes — the links that move authority</h2>'
+                f'<span class="stmeta">researched 8 Sep · AS = Semrush authority score · tick when the link is live and paste its URL</span></div>'
+                f'<div class="grid g2" style="margin:0"><div><div class="rectitle">Expert-quote platforms (owner creates the accounts)</div>{plat}</div>'
+                f'<div>{gp}</div></div></div>')
     n_next += len(NEXT_P4)
     html = (f'<div class="grid g23" style="margin:0 0 16px"><div class="card" style="border-color:#c7d2fe;background:#fbfbff">'
             f'<div class="chead"><h2>Do next</h2><span class="stmeta">{len(donext)} placements · rodak first, then one P1 per site</span></div>'
@@ -1802,6 +1824,7 @@ def ledger_checklist():
             f'<div class="card flush"><div class="chead"><h2>Sites</h2><span class="stmeta">click a row to see what is placed and what comes next</span></div>'
             f'<div class="overflow"><table><thead><tr><th>site</th><th class="sortable">placed</th><th>next</th><th class="sortable">ref.dom</th><th>status</th><th>progress</th></tr></thead>'
             f'<tbody>{trs}</tbody></table></div></div>'
+            + gp_panel +
             f'<details class="panel" style="margin-top:16px"><summary>Expert / HARO accounts — one for the whole portfolio (P4, owner)</summary>'
             f'<div class="pbody"><div class="lplist">{p4}</div></div></details>')
     return html, n_placed, n_next
@@ -1820,7 +1843,7 @@ def links_body():
           '.lpx:hover{border-color:var(--acc)}.lpx:checked{background:var(--pos);border-color:var(--pos)}'
           '.lpx:checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;'
           'border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}'
-          '.lplist{display:flex;flex-direction:column;gap:5px}.lprow{display:flex;align-items:center;gap:8px;font-size:12.5px;cursor:pointer}'
+          '.lplist{display:flex;flex-direction:column;gap:5px}.lprow{display:flex;align-items:center;gap:8px;font-size:12.5px;cursor:pointer;flex-wrap:wrap}'
           '.lprow input:checked+span{color:var(--mut)}.lpcount{color:var(--mut)!important}</style>'
           + _ck_html)
     b += '<details class="panel" style="margin-top:16px"><summary>Advanced — batch prompts, extra matrices, weekly cycle, milestones</summary><div class="pbody">'
