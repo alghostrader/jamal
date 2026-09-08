@@ -55,6 +55,9 @@ Console service account) must be re-supplied by the owner after a recycle.
   esp = ES head terms + telegram lists · segura = ES safety/estafas/legal angle (never ES
   head terms or the telegram lists cluster) · rodak = whole PL market + Polish diaspora
   (UK/DE/NL/… probed from those countries via per-keyword loc overrides in keyword_targets).
+- **Target markets are European only** (owner rule, 8 Sep): Algeria, Tunisia, Morocco and the
+  rest of Africa are NOT targets. Queries containing algérie/tunisie/maroc/afrique/africa etc. are
+  never turned into tasks, opportunities, postures or content prompts (`OUT_OF_SCOPE` in v4_pages).
 - **Frozen pages stay frozen** until re-probes clear them (aio /test-iptv & /boitier-iptv,
   frozen 1 Aug, ~2-3 weeks) — support via internal links only.
 - Dashboard generator lives in the session scratchpad (`scratchpad/daily/generate_v3.py`);

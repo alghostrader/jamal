@@ -275,7 +275,8 @@ def build_all(G):
             qc = GS.get(s, {}).get("queries", {}).get("cur", {})
             qp = GS.get(s, {}).get("queries", {}).get("prev", {})
             entered = [q for q, v in qc.items() if v["position"] <= 10 and v["impressions"] >= 5
-                       and (q not in qp or qp[q]["position"] > 10)]
+                       and (q not in qp or qp[q]["position"] > 10) and not any(w in q.lower() for w in
+                       ("algérie", "algerie", "tunisie", "maroc", "afrique", "africa", "senegal", "sénégal"))]
             if len(entered) >= 2:
                 ex = ", ".join(f'“{q}”' for q in entered[:3])
                 items.append(dict(kind="good",
@@ -332,6 +333,13 @@ def build_all(G):
     # ---------- OPPORTUNITIES ----------
     INTENT_WORDS = ("abonnement", "abonament", "suscrip", "prix", "acheter", "comprar", "kopen",
                     "test", "essai", "premium", "iptv polska", "smarters", "boitier", "subscription")
+    # Owner rule (8 Sep): Algeria, Tunisia, Morocco and Africa are NOT target markets — such
+    # queries are never turned into opportunities, tasks, postures or "entered top 10" insights.
+    OUT_OF_SCOPE = ("alger", "algérie", "algerie", "algeria", "tunis", "tunisie", "tunisia", "maroc", "morocco", "afrique",
+                    "africa", "sénégal", "senegal", "côte d'ivoire", "cote d'ivoire", "cameroun", "dz ", " dz")
+    def out_of_scope(q):
+        ql = (q or "").lower()
+        return any(w in ql for w in OUT_OF_SCOPE)
     def vol_of(s, q):
         for r in KT.get(s, []):
             if r["kw"] == q: return r.get("vol")
@@ -345,6 +353,7 @@ def build_all(G):
             pg_prev = GS.get(s, {}).get("pages", {}).get("prev", {})
             phase_bonus = 10 if s in ("iptvesp.com", "primeiptv-france.com") else 5
             for q, v in qc.items():
+                if out_of_scope(q): continue
                 pos, imp, ctr = v["position"], v["impressions"], v["ctr"]
                 intent = any(w in q for w in INTENT_WORDS)
                 strat = any(r["kw"] == q for r in KT.get(s, []))
@@ -369,6 +378,7 @@ def build_all(G):
                         action="Rewrite title/meta for this query (keep the keyword first, add the differentiator: price, test 24h, 4K).",
                         src="GSC query data + public CTR-by-position heuristic"))
             for r in CT.get(s, {}).get("recommend", []):
+                if out_of_scope(r["kw"]): continue
                 if not r["covered"] and reserved_for(s, r["kw"]) and (r["vol"] or 0) >= 100:
                     score = min(30, (r["vol"] or 0) // 100) + 10 + 15 + phase_bonus
                     opps.append(dict(kind="Content gap", score=score, site=s, query=r["kw"], page="",
@@ -378,6 +388,7 @@ def build_all(G):
                         action="Write it via the 5-skill pipeline (prompt ready on the Work page).",
                         src="DataForSEO volumes + portfolio coverage engine"))
             for u in set(pg_prev):
+                if out_of_scope(u): continue
                 pc = pg_cur.get(u, {}).get("clicks", 0); pp = pg_prev[u].get("clicks", 0)
                 if pp >= 15 and pc <= pp * 0.6:
                     path = "/" + u.split("/", 3)[-1] if u.count("/") >= 3 else u
@@ -485,6 +496,7 @@ def build_all(G):
         # 3. strategic rank losses (recovery tasks)
         for s in ALL:
             for r in KT.get(s, []):
+                if out_of_scope(r["kw"]): continue
                 op, np_ = prev_pos.get((s, r["kw"])), r.get("pos")
                 g_ = GS.get(s, {}).get("queries", {}).get("cur", {}).get(r["kw"])
                 if g_ and g_["position"] <= 15 and (np_ is None or np_ > op + 4 if op else False):

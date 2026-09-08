@@ -82,6 +82,11 @@
     "words": 2181
    },
    {
+    "path": "/blog/m3u-listas-iptv-espana",
+    "title": "Listas IPTV España 2026: M3U, gratis y por qué fallan",
+    "words": 2165
+   },
+   {
     "path": "/blog/ott-navigator-espana",
     "title": "OTT Navigator: guía completa en España 2026",
     "words": 2148
@@ -100,11 +105,6 @@
     "path": "/blog/iptv-no-funciona",
     "title": "IPTV no funciona: causas y cómo solucionarlo",
     "words": 2040
-   },
-   {
-    "path": "/blog/m3u-listas-iptv-espana",
-    "title": "Listas IPTV España 2026: M3U, gratis y por qué fallan",
-    "words": 2012
    },
    {
     "path": "/blog/alternativas-a-telegram-iptv",
@@ -137,14 +137,14 @@
     "words": 1889
    },
    {
+    "path": "/blog/iptv-vs-plataformas-premium-espana",
+    "title": "IPTV vs plataformas premium en España: comparativa 2026",
+    "words": 1869
+   },
+   {
     "path": "/blog/iptv-smarters-pro",
     "title": "IPTV Smarters Pro 2026: qué es y cómo funciona",
     "words": 1866
-   },
-   {
-    "path": "/blog/iptv-vs-plataformas-premium-espana",
-    "title": "IPTV vs plataformas premium en España: comparativa 2026",
-    "words": 1839
    },
    {
     "path": "/blog/legalidad-iptv-espana",
@@ -254,7 +254,7 @@
    {
     "path": "/blog/descargar-iptv-smarters-pro",
     "title": "Descargar IPTV Smarters Pro: guía de instalación",
-    "words": 1121
+    "words": 1173
    },
    {
     "path": "/generador-m3u",
@@ -265,6 +265,11 @@
     "path": "/suscripciones",
     "title": "Suscripciones IPTV España — precios y planes 2026 · IPTVESP",
     "words": 742
+   },
+   {
+    "path": "/politica-de-reembolso",
+    "title": "Política de reembolso · IPTV Smarters España",
+    "words": 646
    },
    {
     "path": "/condiciones",
@@ -284,8 +289,33 @@
     "covered": false
    },
    {
-    "kw": "iptv españa",
-    "vol": 4400,
+    "kw": "mejor lista iptv",
+    "vol": 320,
+    "covered": false
+   },
+   {
+    "kw": "iptv de pago",
+    "vol": 260,
+    "covered": false
+   },
+   {
+    "kw": "iptv barato",
+    "vol": 140,
+    "covered": false
+   },
+   {
+    "kw": "mejor aplicacion iptv",
+    "vol": 110,
+    "covered": false
+   },
+   {
+    "kw": "iptv firestick",
+    "vol": 90,
+    "covered": false
+   },
+   {
+    "kw": "iptv smarters pro",
+    "vol": 14800,
     "covered": true
    },
    {
@@ -294,22 +324,67 @@
     "covered": true
    },
    {
+    "kw": "aplicacion iptv",
+    "vol": 1600,
+    "covered": true
+   },
+   {
     "kw": "mejor iptv españa",
     "vol": 720,
     "covered": true
    },
    {
-    "kw": "iptv smarters pro",
-    "vol": 720,
+    "kw": "iptv 4k",
+    "vol": 480,
     "covered": true
    },
    {
-    "kw": "listas iptv españa telegram",
+    "kw": "iptv en pc",
     "vol": 390,
+    "covered": true
+   },
+   {
+    "kw": "iptv vlc",
+    "vol": 320,
+    "covered": true
+   },
+   {
+    "kw": "iptv smart tv",
+    "vol": 320,
+    "covered": true
+   },
+   {
+    "kw": "iptv android",
+    "vol": 210,
+    "covered": true
+   },
+   {
+    "kw": "iptv no funciona",
+    "vol": 140,
+    "covered": true
+   },
+   {
+    "kw": "iptv legal españa",
+    "vol": 140,
+    "covered": true
+   },
+   {
+    "kw": "como instalar iptv",
+    "vol": 50,
+    "covered": true
+   },
+   {
+    "kw": "iptv chromecast",
+    "vol": 40,
+    "covered": true
+   },
+   {
+    "kw": "iptv samsung smart tv",
+    "vol": 10,
     "covered": true
    }
   ],
-  "n_articles": 55,
+  "n_articles": 56,
   "n_thin": 2
  },
  "primeiptv-france.com": {
@@ -525,6 +600,11 @@
     "words": 1639
    },
    {
+    "path": "/guides/regarder-football-national-iptv-streaming",
+    "title": "Regarder le Football National en IPTV Streaming 2026",
+    "words": 1631
+   },
+   {
     "path": "/guides/iptv-sans-coupure",
     "title": "IPTV sans coupure : les vraies causes et solutions",
     "words": 1606
@@ -533,11 +613,6 @@
     "path": "/guides/iptv-famille-controle-parental",
     "title": "IPTV en Famille 2026 : Contrôle Parental",
     "words": 1602
-   },
-   {
-    "path": "/guides/regarder-football-national-iptv-streaming",
-    "title": "Regarder le Football National en IPTV Streaming 2026",
-    "words": 1595
    },
    {
     "path": "/guides/iptv-vs-bouquet-satellite-premium",
@@ -555,6 +630,11 @@
     "words": 1517
    },
    {
+    "path": "/guides/iptv-vs-box-orange-free-sfr-bouygues",
+    "title": "IPTV vs Box Opérateur : Orange Free SFR 2026",
+    "words": 1516
+   },
+   {
     "path": "/guides/iptv-legal-en-france",
     "title": "IPTV Légal en France 2026 : Guide Complet",
     "words": 1515
@@ -568,11 +648,6 @@
     "path": "/guides/groupe-telegram-iptv",
     "title": "Groupes Telegram IPTV : les trouver, les éviter",
     "words": 1488
-   },
-   {
-    "path": "/guides/iptv-vs-box-orange-free-sfr-bouygues",
-    "title": "IPTV vs Box Opérateur : Orange Free SFR 2026",
-    "words": 1477
    },
    {
     "path": "/guides/liste-m3u-gratuite",
@@ -1154,6 +1229,11 @@
     "words": 746
    },
    {
+    "path": "/terugbetalingsbeleid",
+    "title": "Terugbetalingsbeleid · IPTVNED",
+    "words": 685
+   },
+   {
     "path": "/steden/amsterdam",
     "title": "IPTV Amsterdam — abonnement & installatie · IPTVNED",
     "words": 669
@@ -1211,32 +1291,82 @@
     "covered": false
    },
    {
-    "kw": "iptv nederland",
-    "vol": 12100,
+    "kw": "goedkope iptv",
+    "vol": 260,
+    "covered": false
+   },
+   {
+    "kw": "iptv chromecast",
+    "vol": 90,
+    "covered": false
+   },
+   {
+    "kw": "iptv werkt niet",
+    "vol": 40,
+    "covered": false
+   },
+   {
+    "kw": "iptv smarters pro",
+    "vol": 8100,
     "covered": true
    },
    {
     "kw": "iptv kopen",
-    "vol": 6600,
+    "vol": 8100,
     "covered": true
    },
    {
     "kw": "iptv aanbieders",
-    "vol": 3600,
+    "vol": 4400,
     "covered": true
    },
    {
-    "kw": "iptv abonnement",
+    "kw": "iptv app",
     "vol": 1900,
     "covered": true
    },
    {
-    "kw": "beste iptv",
-    "vol": 1300,
+    "kw": "iptv box",
+    "vol": 1600,
+    "covered": true
+   },
+   {
+    "kw": "beste iptv nederland",
+    "vol": 1000,
+    "covered": true
+   },
+   {
+    "kw": "iptv 4k",
+    "vol": 880,
+    "covered": true
+   },
+   {
+    "kw": "beste iptv app",
+    "vol": 590,
+    "covered": true
+   },
+   {
+    "kw": "iptv legaal",
+    "vol": 170,
+    "covered": true
+   },
+   {
+    "kw": "iptv samsung tv",
+    "vol": 110,
+    "covered": true
+   },
+   {
+    "kw": "iptv installeren",
+    "vol": 90,
+    "covered": true
+   },
+   {
+    "kw": "iptv firestick",
+    "vol": 40,
     "covered": true
    }
   ],
-  "n_articles": 45,
+  "n_articles": 46,
   "n_thin": 3
  },
  "iptvpix.com": {
@@ -2023,7 +2153,7 @@
    {
     "path": "/blog/iptv-falas-a-eshte-i-sigurt",
     "title": "IPTV falas dhe listat M3U: a janë të sigurta?",
-    "words": 1909
+    "words": 1931
    },
    {
     "path": "/blog/iptv-ngec-buffering-zgjidhje",
@@ -2048,17 +2178,17 @@
    {
     "path": "/blog/iptv-shqip",
     "title": "IPTV Shqip 2026: udhëzuesi për kanalet shqiptare kudo",
-    "words": 885
+    "words": 911
    },
    {
     "path": "/blog/iptv-falas-apo-me-pagese",
     "title": "IPTV falas apo me pagesë? Rreziqet dhe dallimet",
-    "words": 876
+    "words": 898
    },
    {
     "path": "/blog/iptv-smarters-pro-shqip",
     "title": "IPTV Smarters Pro Shqip 2026: instalim & udhëzues",
-    "words": 867
+    "words": 887
    },
    {
     "path": "/blog/kanale-shqip-iptv",
@@ -2066,14 +2196,14 @@
     "words": 840
    },
    {
+    "path": "/blog/tv-shqip-nga-jashte",
+    "title": "TV shqip nga jashtë: Gjermani, Zvicër, Itali",
+    "words": 839
+   },
+   {
     "path": "/blog/iptv-shqip-firestick",
     "title": "IPTV Shqip në Amazon Fire TV Stick: instalim hap pas hapi",
     "words": 836
-   },
-   {
-    "path": "/blog/tv-shqip-nga-jashte",
-    "title": "TV shqip nga jashtë: Gjermani, Zvicër, Itali",
-    "words": 819
    },
    {
     "path": "/blog",
@@ -3146,14 +3276,14 @@
     "words": 1205
    },
    {
+    "path": "/blog/iptv-sie-tnie",
+    "title": "IPTV się tnie i buforuje — jak to naprawić",
+    "words": 1200
+   },
+   {
     "path": "/abonament",
     "title": "Abonament IPTV — plany, ceny i aktywacja",
     "words": 1185
-   },
-   {
-    "path": "/blog/iptv-sie-tnie",
-    "title": "IPTV się tnie i buforuje — jak to naprawić",
-    "words": 1178
    },
    {
     "path": "/blog/iptv-na-telefonie",

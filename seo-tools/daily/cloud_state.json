@@ -1,10 +1,206 @@
 {
- "fetched": "2026-09-08T03:55Z",
+ "fetched": "2026-09-08T07:00Z",
  "ok": true,
  "tasks": {
-  "fd497a106a": {
+  "1f5c56622b": {
+   "completed": "2026-09-08",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "min": 40,
+   "state": "completed",
+   "title": "Striking distance: iptv shqiptare"
+  },
+  "c5fe8d7689": {
+   "min": 40,
+   "state": "completed",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
    "completed": "2026-09-06",
+   "title": "Striking distance: prix abonnement iptv alg\u00e9rie"
+  },
+  "82fbbe1c24": {
+   "state": "completed",
+   "title": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, che",
+   "completed": "2026-09-06"
+  },
+  "312b5a662b": {
+   "steps": [
+    "Read the page vs its top queries in GSC",
+    "Refresh facts/year + missing section",
+    "Re-run onpage-optimizer",
+    "Watch 14 days"
+   ],
+   "state": "dismissed",
+   "title": "Content decay: /blog/listas-iptv-espana",
+   "min": 45
+  },
+  "6f748626cd": {
+   "completed": "2026-09-06",
+   "title": "Indexation: /polska-telewizja-za-granica",
+   "min": 20,
+   "state": "completed",
+   "steps": [
+    "Request indexing in GSC",
+    "Check canonical + robots",
+    "Add 2-3 internal links from indexed pages"
+   ]
+  },
+  "98a4408a71": {
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "state": "completed",
+   "title": "Striking distance: iptv shqiptar",
+   "min": 40,
+   "completed": "2026-09-08"
+  },
+  "f6e1c07475": {
+   "state": "completed",
+   "completed": "2026-09-08",
+   "title": "FIX: 1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, che"
+  },
+  "f7aa1de240": {
+   "min": 40,
+   "title": "Striking distance: iptv prix alg\u00e9rie",
+   "state": "dismissed",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ]
+  },
+  "8fcbe4f4aa": {
+   "title": "Striking distance: boitier iptv",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-06",
+   "state": "completed",
+   "min": 40
+  },
+  "ee2bf478f4": {
+   "state": "promoted",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "min": 40,
+   "title": "Striking distance: iptv segura"
+  },
+  "b3caca4a55": {
+   "min": 40,
+   "title": "Striking distance: iptv alg\u00e9rie prix",
+   "state": "completed",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-08"
+  },
+  "70f507b6f5": {
+   "completed": "2026-09-06",
+   "min": 40,
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "state": "completed",
+   "title": "Striking distance: listas m3u telegram"
+  },
+  "bd9ac0bccf": {
+   "completed": "2026-09-06",
+   "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: afrekenen, afrekenen, afrekenen, ",
+   "state": "completed"
+  },
+  "0b8f632913": {
+   "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: checkout, checkout, checkout, che",
+   "completed": "2026-09-06",
+   "state": "completed"
+  },
+  "1ec40f062e": {
+   "title": "Authority gap: iptv polska",
+   "min": 30,
+   "state": "completed",
+   "completed": "2026-09-08",
+   "steps": [
+    "Point today's link batch at this site",
+    "Add internal links from 3 related articles to the money page"
+   ]
+  },
+  "8162a0a994": {
+   "state": "completed",
+   "completed": "2026-09-06",
+   "title": "FIX: 1. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> D"
+  },
+  "dcbbd6a189": {
+   "min": 40,
+   "title": "Striking distance: abonnement iptv alg\u00e9rie",
+   "state": "completed",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-06"
+  },
+  "d272c6bbe4": {
+   "title": "Striking distance: iptv abonnement alg\u00e9rie",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "min": 40,
+   "state": "dismissed"
+  },
+  "53045dba08": {
+   "state": "completed",
+   "completed": "2026-09-08",
+   "title": "QUEUED: \u201csmarters player lite apk\u201d \u2014 880/mo"
+  },
+  "627326bf4c": {
+   "title": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, che",
+   "state": "completed",
+   "completed": "2026-09-08"
+  },
+  "ca8c1fdb3d": {
+   "state": "completed",
+   "min": 40,
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "title": "Striking distance: telegram iptv",
+   "completed": "2026-09-06"
+  },
+  "fd497a106a": {
    "min": 15,
+   "completed": "2026-09-06",
    "title": "Indexation: /test-iptv",
    "state": "completed",
    "steps": [
@@ -13,153 +209,102 @@
     "Add 2-3 internal links from indexed pages"
    ]
   },
+  "f217a61cb1": {
+   "completed": "2026-09-06",
+   "title": "Striking distance: iptv algerie",
+   "min": 40,
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "state": "completed"
+  },
+  "f0e54022f6": {
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "state": "dismissed",
+   "title": "Striking distance: meilleur abonnement iptv tunisie 2026",
+   "min": 40
+  },
+  "ddd984ebb5": {
+   "title": "Striking distance: listas iptv premium telegram",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "state": "completed",
+   "completed": "2026-09-08",
+   "min": 40
+  },
+  "d0d038c38d": {
+   "title": "Striking distance: meilleur iptv alg\u00e9rie 2026",
+   "min": 40,
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "state": "dismissed"
+  },
+  "b443b33f42": {
+   "completed": "2026-09-08",
+   "state": "completed",
+   "title": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: afrekenen, afrekenen, afrekenen, "
+  },
+  "dda33ce6cb": {
+   "completed": "2026-09-06",
+   "title": "WRITE: \u201ciptv provider\u201d \u2014 880/mo. Today\u2019s one article.",
+   "state": "completed"
+  },
+  "0859acb6ae": {
+   "title": "Striking distance: iptv smarters pro telegram",
+   "completed": "2026-09-08",
+   "min": 40,
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "state": "completed"
+  },
+  "e91c45e957": {
+   "completed": "2026-09-06",
+   "title": "FIX: 1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, che",
+   "state": "completed"
+  },
+  "737de905a9": {
+   "min": 40,
+   "completed": "2026-09-06",
+   "state": "completed",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "title": "Striking distance: meilleur boitier iptv"
+  },
   "715fb811aa": {
+   "state": "completed",
+   "min": 45,
    "steps": [
     "Read the page vs its top queries in GSC",
     "Refresh facts/year + missing section",
     "Re-run onpage-optimizer",
     "Watch 14 days"
    ],
-   "min": 45,
-   "state": "completed",
-   "title": "Content decay: /blog/iptv-espana-telegram",
-   "completed": "2026-09-06"
-  },
-  "bd9ac0bccf": {
-   "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: afrekenen, afrekenen, afrekenen, ",
-   "state": "completed",
-   "completed": "2026-09-06"
-  },
-  "dcbbd6a189": {
    "completed": "2026-09-06",
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ],
-   "min": 40,
-   "title": "Striking distance: abonnement iptv alg\u00e9rie",
-   "state": "completed"
-  },
-  "737de905a9": {
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ],
-   "completed": "2026-09-06",
-   "state": "completed",
-   "title": "Striking distance: meilleur boitier iptv",
-   "min": 40
-  },
-  "ee2bf478f4": {
-   "min": 40,
-   "state": "promoted",
-   "title": "Striking distance: iptv segura",
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ]
-  },
-  "ca8c1fdb3d": {
-   "completed": "2026-09-06",
-   "state": "completed",
-   "title": "Striking distance: telegram iptv",
-   "min": 40,
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ]
-  },
-  "0b8f632913": {
-   "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: checkout, checkout, checkout, che",
-   "state": "completed",
-   "completed": "2026-09-06"
-  },
-  "e91c45e957": {
-   "state": "completed",
-   "title": "FIX: 1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, che",
-   "completed": "2026-09-06"
-  },
-  "8fcbe4f4aa": {
-   "title": "Striking distance: boitier iptv",
-   "state": "completed",
-   "min": 40,
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ],
-   "completed": "2026-09-06"
-  },
-  "8162a0a994": {
-   "state": "completed",
-   "title": "FIX: 1. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> D",
-   "completed": "2026-09-06"
-  },
-  "70f507b6f5": {
-   "title": "Striking distance: listas m3u telegram",
-   "state": "completed",
-   "completed": "2026-09-06",
-   "min": 40,
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ]
-  },
-  "dda33ce6cb": {
-   "completed": "2026-09-06",
-   "state": "completed",
-   "title": "WRITE: \u201ciptv provider\u201d \u2014 880/mo. Today\u2019s one article."
-  },
-  "6f748626cd": {
-   "state": "completed",
-   "title": "Indexation: /polska-telewizja-za-granica",
-   "completed": "2026-09-06",
-   "steps": [
-    "Request indexing in GSC",
-    "Check canonical + robots",
-    "Add 2-3 internal links from indexed pages"
-   ],
-   "min": 20
-  },
-  "f217a61cb1": {
-   "state": "completed",
-   "title": "Striking distance: iptv algerie",
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ],
-   "completed": "2026-09-06",
-   "min": 40
-  },
-  "82fbbe1c24": {
-   "state": "completed",
-   "title": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, che",
-   "completed": "2026-09-06"
-  },
-  "c5fe8d7689": {
-   "state": "completed",
-   "title": "Striking distance: prix abonnement iptv alg\u00e9rie",
-   "completed": "2026-09-06",
-   "min": 40,
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ]
+   "title": "Content decay: /blog/iptv-espana-telegram"
   }
  },
  "links": {

@@ -167,7 +167,7 @@
    "outcome": "AWAITING VERIFICATION",
    "checkpoint_days": 2,
    "now": {
-    "probe_pos": 8,
+    "probe_pos": 7,
     "gsc_pos": 14.4,
     "clicks28": 9
    }
@@ -335,6 +335,208 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 page(s) now PASS in URL Inspection",
    "outcome": "VERIFIED"
+  },
+  {
+   "id": "1f5c56622b",
+   "kind": "Striking distance",
+   "site": "iptvshqiptar.com",
+   "query": "iptv shqiptare",
+   "page": "",
+   "what": "\u201ciptv shqiptare\u201d sits at position 14 with 23 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 13.6,
+    "clicks28": 1
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 13.6,
+    "clicks28": 1
+   }
+  },
+  {
+   "id": "98a4408a71",
+   "kind": "Striking distance",
+   "site": "iptvshqiptar.com",
+   "query": "iptv shqiptar",
+   "page": "",
+   "what": "\u201ciptv shqiptar\u201d sits at position 10 with 25 impressions/28d.",
+   "baseline": {
+    "probe_pos": 7,
+    "gsc_pos": 10.2,
+    "clicks28": 1
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": 7,
+    "gsc_pos": 10.2,
+    "clicks28": 1
+   }
+  },
+  {
+   "id": "f6e1c07475",
+   "kind": "Technical fix",
+   "site": "iptvshqiptar.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
+   "outcome": "VERIFIED"
+  },
+  {
+   "id": "b3caca4a55",
+   "kind": "Striking distance",
+   "site": "primeiptv-france.com",
+   "query": "iptv alg\u00e9rie prix",
+   "page": "",
+   "what": "\u201ciptv alg\u00e9rie prix\u201d sits at position 7 with 35 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 7.5,
+    "clicks28": 1
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 7.5,
+    "clicks28": 1
+   }
+  },
+  {
+   "id": "1ec40f062e",
+   "kind": "Authority gap",
+   "site": "rodaktv.com",
+   "query": "iptv polska",
+   "page": "/",
+   "what": "Money target \u201ciptv polska\u201d (1,900/mo) is unranked and the site has only 0 referring domains (Semrush).",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "53045dba08",
+   "kind": "Content gap",
+   "site": "smartersprofrance.fr",
+   "query": "smarters player lite apk",
+   "page": "",
+   "what": "\u201csmarters player lite apk\u201d (880/mo) has no page anywhere in this market.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "627326bf4c",
+   "kind": "Technical fix",
+   "site": "iptvesp.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout, politica-de-reembolso.\n   Expand each to answer its query properly, or consolidate/",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
+   "outcome": "VERIFIED"
+  },
+  {
+   "id": "ddd984ebb5",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "listas iptv premium telegram",
+   "page": "",
+   "what": "\u201clistas iptv premium telegram\u201d sits at position 6 with 26 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 5.5,
+    "clicks28": 4
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 5.5,
+    "clicks28": 4
+   }
+  },
+  {
+   "id": "b443b33f42",
+   "kind": "Technical fix",
+   "site": "iptvned.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 6 page(s) under 300 words: afrekenen, afrekenen, afrekenen, afrekenen, afrekenen, terugbetalingsbeleid.\n   Expand each to answer its query properly, or consolid",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
+   "outcome": "VERIFIED"
+  },
+  {
+   "id": "0859acb6ae",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "iptv smarters pro telegram",
+   "page": "",
+   "what": "\u201ciptv smarters pro telegram\u201d sits at position 6 with 12 impressions/28d.",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 5.6,
+    "clicks28": 3
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard)",
+   "outcome": "AWAITING VERIFICATION",
+   "checkpoint_days": 0,
+   "now": {
+    "probe_pos": null,
+    "gsc_pos": 5.6,
+    "clicks28": 3
+   }
   }
  ]
 }
