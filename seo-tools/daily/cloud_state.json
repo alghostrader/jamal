@@ -1,51 +1,48 @@
 {
- "fetched": "2026-09-06T12:55Z",
+ "fetched": "2026-09-08T03:55Z",
  "ok": true,
  "tasks": {
-  "bd9ac0bccf": {
+  "fd497a106a": {
    "completed": "2026-09-06",
+   "min": 15,
+   "title": "Indexation: /test-iptv",
    "state": "completed",
-   "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: afrekenen, afrekenen, afrekenen, "
-  },
-  "e91c45e957": {
-   "completed": "2026-09-06",
-   "state": "completed",
-   "title": "FIX: 1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, che"
-  },
-  "dda33ce6cb": {
-   "completed": "2026-09-06",
-   "state": "completed",
-   "title": "WRITE: \u201ciptv provider\u201d \u2014 880/mo. Today\u2019s one article."
-  },
-  "82fbbe1c24": {
-   "completed": "2026-09-06",
-   "state": "completed",
-   "title": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, che"
-  },
-  "8162a0a994": {
-   "completed": "2026-09-06",
-   "state": "completed",
-   "title": "FIX: 1. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> D"
-  },
-  "0b8f632913": {
-   "completed": "2026-09-06",
-   "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: checkout, checkout, checkout, che",
-   "state": "completed"
-  },
-  "6f748626cd": {
-   "min": 20,
-   "completed": "2026-09-06",
-   "state": "completed",
-   "title": "Indexation: /polska-telewizja-za-granica",
    "steps": [
     "Request indexing in GSC",
     "Check canonical + robots",
     "Add 2-3 internal links from indexed pages"
    ]
   },
-  "737de905a9": {
+  "715fb811aa": {
+   "steps": [
+    "Read the page vs its top queries in GSC",
+    "Refresh facts/year + missing section",
+    "Re-run onpage-optimizer",
+    "Watch 14 days"
+   ],
+   "min": 45,
+   "state": "completed",
+   "title": "Content decay: /blog/iptv-espana-telegram",
+   "completed": "2026-09-06"
+  },
+  "bd9ac0bccf": {
+   "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: afrekenen, afrekenen, afrekenen, ",
+   "state": "completed",
+   "completed": "2026-09-06"
+  },
+  "dcbbd6a189": {
+   "completed": "2026-09-06",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
    "min": 40,
-   "title": "Striking distance: meilleur boitier iptv",
+   "title": "Striking distance: abonnement iptv alg\u00e9rie",
+   "state": "completed"
+  },
+  "737de905a9": {
    "steps": [
     "Open the ranking page and its GSC queries",
     "Strengthen the section matching the query",
@@ -53,10 +50,90 @@
     "Re-check position after 7 days"
    ],
    "completed": "2026-09-06",
-   "state": "completed"
+   "state": "completed",
+   "title": "Striking distance: meilleur boitier iptv",
+   "min": 40
+  },
+  "ee2bf478f4": {
+   "min": 40,
+   "state": "promoted",
+   "title": "Striking distance: iptv segura",
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ]
+  },
+  "ca8c1fdb3d": {
+   "completed": "2026-09-06",
+   "state": "completed",
+   "title": "Striking distance: telegram iptv",
+   "min": 40,
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ]
+  },
+  "0b8f632913": {
+   "title": "FIX: 1. THIN PAGES (P2). 7 page(s) under 300 words: checkout, checkout, checkout, che",
+   "state": "completed",
+   "completed": "2026-09-06"
+  },
+  "e91c45e957": {
+   "state": "completed",
+   "title": "FIX: 1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, che",
+   "completed": "2026-09-06"
+  },
+  "8fcbe4f4aa": {
+   "title": "Striking distance: boitier iptv",
+   "state": "completed",
+   "min": 40,
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ],
+   "completed": "2026-09-06"
+  },
+  "8162a0a994": {
+   "state": "completed",
+   "title": "FIX: 1. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> D",
+   "completed": "2026-09-06"
+  },
+  "70f507b6f5": {
+   "title": "Striking distance: listas m3u telegram",
+   "state": "completed",
+   "completed": "2026-09-06",
+   "min": 40,
+   "steps": [
+    "Open the ranking page and its GSC queries",
+    "Strengthen the section matching the query",
+    "Add 2 internal links with the query as anchor",
+    "Re-check position after 7 days"
+   ]
+  },
+  "dda33ce6cb": {
+   "completed": "2026-09-06",
+   "state": "completed",
+   "title": "WRITE: \u201ciptv provider\u201d \u2014 880/mo. Today\u2019s one article."
+  },
+  "6f748626cd": {
+   "state": "completed",
+   "title": "Indexation: /polska-telewizja-za-granica",
+   "completed": "2026-09-06",
+   "steps": [
+    "Request indexing in GSC",
+    "Check canonical + robots",
+    "Add 2-3 internal links from indexed pages"
+   ],
+   "min": 20
   },
   "f217a61cb1": {
-   "min": 40,
+   "state": "completed",
    "title": "Striking distance: iptv algerie",
    "steps": [
     "Open the ranking page and its GSC queries",
@@ -65,99 +142,96 @@
     "Re-check position after 7 days"
    ],
    "completed": "2026-09-06",
-   "state": "completed"
+   "min": 40
   },
-  "715fb811aa": {
-   "min": 45,
-   "title": "Content decay: /blog/iptv-espana-telegram",
-   "steps": [
-    "Read the page vs its top queries in GSC",
-    "Refresh facts/year + missing section",
-    "Re-run onpage-optimizer",
-    "Watch 14 days"
-   ],
-   "completed": "2026-09-06",
-   "state": "completed"
-  },
-  "8fcbe4f4aa": {
-   "min": 40,
-   "title": "Striking distance: boitier iptv",
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ],
-   "completed": "2026-09-06",
-   "state": "completed"
-  },
-  "70f507b6f5": {
-   "min": 40,
-   "title": "Striking distance: listas m3u telegram",
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ],
-   "completed": "2026-09-06",
-   "state": "completed"
-  },
-  "dcbbd6a189": {
-   "min": 40,
-   "title": "Striking distance: abonnement iptv alg\u00e9rie",
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ],
-   "completed": "2026-09-06",
-   "state": "completed"
+  "82fbbe1c24": {
+   "state": "completed",
+   "title": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, che",
+   "completed": "2026-09-06"
   },
   "c5fe8d7689": {
-   "min": 40,
+   "state": "completed",
    "title": "Striking distance: prix abonnement iptv alg\u00e9rie",
-   "steps": [
-    "Open the ranking page and its GSC queries",
-    "Strengthen the section matching the query",
-    "Add 2 internal links with the query as anchor",
-    "Re-check position after 7 days"
-   ],
    "completed": "2026-09-06",
-   "state": "completed"
-  },
-  "ca8c1fdb3d": {
    "min": 40,
-   "title": "Striking distance: telegram iptv",
    "steps": [
     "Open the ranking page and its GSC queries",
     "Strengthen the section matching the query",
     "Add 2 internal links with the query as anchor",
     "Re-check position after 7 days"
-   ],
-   "completed": "2026-09-06",
-   "state": "completed"
+   ]
   }
  },
  "links": {
-  "lp-mb2-telegraphtutorialnos-shqip": 1,
-  "lp-mb2-telegraphtutorialnos-prime": 1,
-  "lp-mb2-telegraphtutorialnos-pix": 1,
-  "lp-mb2-substacknewsletterme-esp": 1,
-  "lp-mb2-substacknewsletterme-pix": 1,
-  "lp-mb2-telegraphtutorialnos-esp": 1,
-  "lp-mb2-substacknewsletterme-prime": 1,
-  "lp-mb2-substacknewsletterme-spf": 1,
-  "lp-mb2-substacknewsletterme-aio": 1,
-  "lp-mb2-substacknewsletterme-ned": 1,
-  "lp-mb2-substacknewsletterme-slive": 1,
-  "lp-mb2-telegraphtutorialnos-ned": 1,
-  "lp-mb2-substacknewsletterme-ifo": 1,
-  "lp-mb2-telegraphtutorialnos-ifo": 1,
-  "lp-mb2-telegraphtutorialnos-slive": 1,
-  "lp-mb2-telegraphtutorialnos-aio": 1,
   "lp-mb2-substacknewsletterme-shqip": 1,
-  "lp-mb2-telegraphtutorialnos-spf": 1
+  "lp-aboutme-ned": 1,
+  "lp-wordpress-esp": 1,
+  "lp-rentry-aio": 1,
+  "lp-blogger-pix": 1,
+  "lp-blogger-ned": 1,
+  "lp-brownbook-spf": 1,
+  "lp-mb2-telegraphtutorialnos-ned": 1,
+  "lp-wordpress-pix": 1,
+  "lp-mb2-overblogblog1post-pix": 1,
+  "lp-crunchbase-pix": 1,
+  "lp-mb2-canalblogblog1post-spf": 1,
+  "lp-mb2-substacknewsletterme-ned": 1,
+  "lp-mb2-canalblogblog1post-prime": 1,
+  "lp-brownbook-prime": 1,
+  "lp-mb2-overblogblog1post-ifo": 1,
+  "lp-mb2-substacknewsletterme-prime": 1,
+  "lp-mb2-substacknewsletterme-ifo": 1,
+  "lp-mb2-substacknewsletterme-spf": 1,
+  "lp-aboutme-pix": 1,
+  "lp-brownbook-shqip": 1,
+  "lp-mb2-canalblogblog1post-aio": 1,
+  "lp-brownbook-ned": 1,
+  "lp-mb2-canalblogblog1post-slive": 1,
+  "lp-blogger-rodak": 1,
+  "lp-tumblr-aio": 1,
+  "lp-brownbook-aio": 1,
+  "lp-aboutme-esp": 1,
+  "lp-blogger-prime": 1,
+  "lp-blogger-esp": 1,
+  "lp-crunchbase-slive": 1,
+  "lp-brownbook-ifo": 1,
+  "lp-mb2-overblogblog1post-aio": 1,
+  "lp-wordpress-rodak": 1,
+  "lp-mb2-overblogblog1post-slive": 1,
+  "lp-mb2-telegraphtutorialnos-pix": 1,
+  "lp-wordpress-prime": 1,
+  "lp-mb2-substacknewsletterme-slive": 1,
+  "lp-mb2-telegraphtutorialnos-spf": 1,
+  "lp-mb2-telegraphtutorialnos-shqip": 1,
+  "lp-mb2-canalblogblog1post-ifo": 1,
+  "lp-mb2-telegraphtutorialnos-prime": 1,
+  "lp-mb2-telegraphtutorialnos-esp": 1,
+  "lp-mb2-overblogblog1post-prime": 1,
+  "lp-aboutme-prime": 1,
+  "lp-medium-ned": 1,
+  "lp-mb2-telegraphtutorialnos-aio": 1,
+  "lp-mb2-canalblogblog1post-pix": 1,
+  "lp-mb2-substacknewsletterme-aio": 1,
+  "lp-brownbook-segura": 1,
+  "lp-mb2-substacknewsletterme-pix": 1,
+  "lp-storeboard-pix": 1,
+  "lp-aboutme-shqip": 1,
+  "lp-telegraph-prime": 1,
+  "lp-crunchbase-prime": 1,
+  "lp-crunchbase-shqip": 1,
+  "lp-writeas-shqip": 1,
+  "lp-mb2-telegraphtutorialnos-ifo": 1,
+  "lp-medium-prime": 1,
+  "lp-telegraph-esp": 1,
+  "lp-crunchbase-esp": 1,
+  "lp-brownbook-esp": 1,
+  "lp-brownbook-slive": 1,
+  "lp-crunchbase-ned": 1,
+  "lp-mb2-telegraphtutorialnos-slive": 1,
+  "lp-aboutme-slive": 1,
+  "lp-mb2-substacknewsletterme-esp": 1,
+  "lp-mb2-overblogblog1post-spf": 1,
+  "lp-brownbook-pix": 1,
+  "lp-substack-spf": 1
  }
 }

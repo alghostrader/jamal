@@ -61,8 +61,8 @@
     "clicks28": 0
    },
    "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION"
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
+   "outcome": "VERIFIED"
   },
   {
    "id": "dda33ce6cb",
@@ -79,7 +79,7 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 0,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
     "gsc_pos": null,
@@ -147,8 +147,8 @@
     "clicks28": 0
    },
    "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION"
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 page(s) now PASS in URL Inspection",
+   "outcome": "VERIFIED"
   },
   {
    "id": "737de905a9",
@@ -165,11 +165,11 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 0,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": 8,
-    "gsc_pos": 15.4,
-    "clicks28": 8
+    "gsc_pos": 14.4,
+    "clicks28": 9
    }
   },
   {
@@ -187,11 +187,11 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 0,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 6.6,
-    "clicks28": 25
+    "gsc_pos": 6.2,
+    "clicks28": 29
    }
   },
   {
@@ -225,10 +225,10 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 0,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 23.0,
+    "gsc_pos": 22.3,
     "clicks28": 3
    }
   },
@@ -247,11 +247,11 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 0,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 5.8,
-    "clicks28": 38
+    "gsc_pos": 5.7,
+    "clicks28": 40
    }
   },
   {
@@ -269,10 +269,10 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 0,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 6.1,
+    "gsc_pos": 6.0,
     "clicks28": 9
    }
   },
@@ -291,10 +291,10 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 0,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 7.1,
+    "gsc_pos": 7.0,
     "clicks28": 2
    }
   },
@@ -313,12 +313,28 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 0,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 4.7,
+    "gsc_pos": 4.5,
     "clicks28": 30
    }
+  },
+  {
+   "id": "fd497a106a",
+   "kind": "Indexation",
+   "site": "rodaktv.com",
+   "query": "",
+   "page": "/test-iptv",
+   "what": "Priority page /test-iptv is not indexed (Crawled - currently not indexed).",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-06",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 page(s) now PASS in URL Inspection",
+   "outcome": "VERIFIED"
   }
  ]
 }

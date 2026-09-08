@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-06",
+ "generated": "2026-09-08",
  "sites": {
   "iptvesp.com": {
    "/": {
@@ -71,7 +71,7 @@
     "verdict": "PASS",
     "canonical_google": "https://www.smarters-live.com/",
     "canonical_user": "https://www.smarters-live.com/",
-    "last_crawl": "2026-09-04T16:03:19Z"
+    "last_crawl": "2026-09-06T16:22:46Z"
    }
   },
   "iptvshqiptar.com": {
@@ -195,7 +195,7 @@
     "verdict": "PASS",
     "canonical_google": "https://rodaktv.com/",
     "canonical_user": "https://rodaktv.com/",
-    "last_crawl": "2026-09-04T07:07:21Z"
+    "last_crawl": "2026-09-06T21:59:59Z"
    },
    "/abonament": {
     "state": "Submitted and indexed",
@@ -233,11 +233,11 @@
     "last_crawl": "2026-09-06T09:18:16Z"
    },
    "/test-iptv": {
-    "state": "Crawled - currently not indexed",
-    "verdict": "NEUTRAL",
-    "canonical_google": null,
-    "canonical_user": null,
-    "last_crawl": "2026-09-05T07:51:36Z"
+    "state": "Submitted and indexed",
+    "verdict": "PASS",
+    "canonical_google": "https://rodaktv.com/test-iptv",
+    "canonical_user": "https://rodaktv.com/test-iptv",
+    "last_crawl": "2026-09-06T14:57:32Z"
    }
   }
  }

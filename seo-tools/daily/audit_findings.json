@@ -141,7 +141,7 @@
   "no_meta_desc": [],
   "thin": [],
   "favicon": 200,
-  "www_redirect": "err HTTPSConnectionPool(host='www.abonnement"
+  "www_redirect": "308 -> https://abonnementiptvofficiel.com/"
  },
  "iptvsegura.com": {
   "pages": 33,
@@ -155,7 +155,7 @@
    "aviso-legal",
    "privacidad"
   ],
-  "favicon": 200,
+  "favicon": null,
   "www_redirect": "308 -> https://iptvsegura.com/"
  },
  "rodaktv.com": {

@@ -308,6 +308,8 @@ def alerts():
     # nothing user-facing was lost. Do not re-alert on this keyword's probe churn.
     RANK_NOTES = {
         ("iptvesp.com", "iptv españa"): None,
+        # 8 Sep: probes lost it 3x in a row but GSC shows real users at pos 5.5 (tiny volume) — artifact, watch only
+        ("iptvshqiptar.com", "iptv shqiptare"): "GSC still shows real users at ~#5 (2 impressions/7d) — probe artifact on a tiny-volume term; watch, no edits.",
     }
     rank_alerted = set()
     if PREV:

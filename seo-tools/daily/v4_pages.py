@@ -420,6 +420,7 @@ def build_all(G):
     # Buckets: ≥72 TODAY (max 5) · 52–71 NEXT · 34–51 MONITOR · <34 BACKLOG.
     # Documented in Integrations; per-task drivers shown in "Why this priority?".
     import hashlib, datetime as _dt
+    import os as _os
     TODAY_STR = _dt.date.today().isoformat()
     EFFORT = {"Striking distance": ("Medium", 40), "CTR gap": ("Quick", 15), "Content gap": ("Deep work", 90),
               "Content decay": ("Medium", 45), "Authority gap": ("Medium", 30), "Indexation": ("Quick", 15),
@@ -485,6 +486,9 @@ def build_all(G):
         for s in ALL:
             for r in KT.get(s, []):
                 op, np_ = prev_pos.get((s, r["kw"])), r.get("pos")
+                g_ = GS.get(s, {}).get("queries", {}).get("cur", {}).get(r["kw"])
+                if g_ and g_["position"] <= 15 and (np_ is None or np_ > op + 4 if op else False):
+                    continue  # probes lost it but Google's own data shows real users still see it — artifact, not a loss
                 if op and op <= 20 and (np_ is None or np_ > op + 4):
                     vol = r.get("vol") or 0
                     score = min(100, 55 + min(25, vol // 200) + (10 if op <= 10 else 0))
@@ -503,7 +507,15 @@ def build_all(G):
         for t in tasks:
             if t["id"] not in best or t["score"] > best[t["id"]]["score"]:
                 best[t["id"]] = t
-        tasks = sorted(best.values(), key=lambda t: -t["score"])
+        # never re-recommend a task the owner completed in the last 28 days — it is in verification
+        try:
+            _th = J.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "task_history.json")))
+            _done = {c["id"] for c in _th.get("completed", [])
+                     if (_dt.date.today() - _dt.date.fromisoformat(c.get("completed", "2000-01-01"))).days <= 28
+                     and c.get("outcome") not in ("NEGATIVE SO FAR",)}
+        except Exception:
+            _done = set()
+        tasks = sorted((t for t in best.values() if t["id"] not in _done), key=lambda t: -t["score"])
         # coalesce per-site indexation tasks: requesting indexing for N pages is ONE
         # sitting in GSC, not N separate tasks
         merged, seen_idx = [], {}
@@ -542,6 +554,15 @@ def build_all(G):
             else:
                 t["bucket"] = "backlog"; t["posture_note"] = "Low priority: too far from page 1 relative to the effort."
                 backlog_.append(t)
+        # quiet day: fill up to 3 from the top of Next (diversity caps still apply) so the plan is never empty
+        while len(today_) < 3 and next_:
+            pick = None
+            for t in next_:
+                if site_n.get(t["site"], 0) < 2 and kind_n.get(t["kind"], 0) < 2:
+                    pick = t; break
+            if not pick: break
+            next_.remove(pick); pick["bucket"] = "today"; pick["posture_note"] = "Filled from Next — the best available use of today."
+            today_.append(pick); site_n[pick["site"]] = site_n.get(pick["site"], 0) + 1; kind_n[pick["kind"]] = kind_n.get(pick["kind"], 0) + 1
         return tasks, today_, next_, monitor_, backlog_
 
     TASKS, T_TODAY, T_NEXT, T_MONITOR, T_BACKLOG = build_tasks()
@@ -554,7 +575,10 @@ def build_all(G):
         if p is None and g and g["position"] <= 30 and vol >= 5000:
             return ("PUSH", f"Probes miss it (retail-heavy SERP) but real users see it at GSC #{g['position']:.0f} on {vol:,}/mo — GSC is the truth here; the biggest prize in this market.")
         if p and p <= 3: return ("MAINTAIN", "Strong position — protect, don't touch.")
-        if op and op <= 20 and (p is None or p > op + 4): return ("RECOVER", "Earned ranking is slipping — investigate before it settles lower.")
+        if op and op <= 20 and (p is None or p > op + 4):
+            if g and g["position"] <= 15:
+                return ("MONITOR", f"Probes lost it but GSC shows real users at #{g['position']:.0f} — datacenter artifact, no action.")
+            return ("RECOVER", "Earned ranking is slipping — investigate before it settles lower.")
         if p and 4 <= p <= 10: return ("PUSH", "Close to the top 3 — highest-leverage band.")
         if p and 11 <= p <= 20 and vol >= 300: return ("PUSH", "Striking distance on real volume.")
         if p and op and p < op: return ("MONITOR", "Improving on its own — let it run.")
@@ -647,8 +671,8 @@ def build_all(G):
                                        "completed": TODAY_STR, "how": ("auto-verified: the defect is gone from this audit's crawl" if pt["kind"] == "Technical fix" else "auto-verified: page(s) now PASS in GSC URL Inspection"),
                                        "outcome": "VERIFIED"})
     for c in THIST["completed"]:
-        if c.get("kind") == "Technical fix" and c.get("outcome") == "AWAITING VERIFICATION" and c["id"] not in open_ids:
-            c["outcome"] = "VERIFIED"; c["how"] += " · defect gone from this audit's crawl"
+        if c.get("kind") in ("Technical fix", "Indexation") and c.get("outcome") == "AWAITING VERIFICATION" and c["id"] not in open_ids:
+            c["outcome"] = "VERIFIED"; c["how"] += (" · defect gone from this audit's crawl" if c["kind"] == "Technical fix" else " · page(s) now PASS in URL Inspection")
     # verification checkpoints for completed tasks with a keyword baseline
     for c in THIST["completed"]:
         if c.get("outcome") == "VERIFIED" or not c.get("query"): continue
