@@ -1,25 +1,25 @@
 date,target,site,type,status,live_url,dofollow,notes
-2026-09-08,presse-citron.net,primeiptv-france.com,quote+guest,prepared,,,AS62 — pitch+draft prepared; owner to send
-2026-09-08,korben.info,primeiptv-france.com,guest,prepared,,,AS49 — Article invité; box test angle
+2026-09-08,presse-citron.net,iptvpix.com,quote+guest,draft-ready,,,AS62 — draft GUEST-pix-presse-citron-streaming-4k-debit.md → iptvpix 4K/débit; owner to send
+2026-09-08,korben.info,primeiptv-france.com,guest,draft-ready,,,AS49 — draft GUEST-korben-serveur-iptv-stable-criteres-techniques.md; owner to send
 2026-09-08,begeek.fr,smartersprofrance.fr,guest,prepared,,,AS39 — contact form
 2026-09-08,moyens.net,smartersprofrance.fr,guest,prepared,,,AS31 — Article invité (Streaming/Android TV)
 2026-09-08,blablahightech.fr,iptvpix.com,guest,prepared,,,AS22 — gadget/AV blog
-2026-09-08,adslzone.net,iptvesp.com,quote+guest,prepared,,,AS56 — IPTV safety/M3U/Fire TV
-2026-09-08,hipertextual.com,iptvsegura.com,quote+guest,prepared,,,AS43 — streaming + scams
+2026-09-08,adslzone.net,iptvesp.com,quote+guest,draft-ready,,,AS56 — draft GUEST-adslzone-checklist-listas-m3u-telegram.md; owner to send
+2026-09-08,hipertextual.com,iptvsegura.com,quote+guest,draft-ready,,,AS43 — draft GUEST-hipertextual-7-senales-estafa-iptv.md; owner to send
 2026-09-08,esgeeks.com,iptvsegura.com,guest,prepared,,,AS31 — security contributor posts
 2026-09-08,salesystems.es,iptvesp.com,guest,prepared,,,AS29 — smart-TV setup guide
-2026-09-08,letsgodigital.org,iptvned.com,quote+guest,prepared,,,AS39 — smart-TV expert comments
-2026-09-08,dutchcowboys.nl,iptvned.com,guest,prepared,,,AS38 — contributed/partner via contact
+2026-09-08,letsgodigital.org,iptvned.com,quote+guest,draft-ready,,,AS39 — draft GUEST-ned-letsgodigital-smart-tv-instellingen.md; owner to send
+2026-09-08,dutchcowboys.nl,iptvned.com,guest,draft-ready,,,AS38 — draft GUEST-ned-dutchcowboys-thuisnetwerk-streaming.md; owner to send
 2026-09-08,dutch-tech.nl,iptvned.com,guest,prepared,,,AS23 — email info@dutch-tech.nl (gastartikel)
 2026-09-08,alleblogs.nl,iptvned.com,listing,prepared,,,AS10 — directory listing (low weight)
-2026-09-08,antyweb.pl,rodaktv.com,quote+guest,prepared,,,AS51 — smart TV / streaming abroad
-2026-09-08,polskiobserwator.de,rodaktv.com,guest,prepared,,,AS36 — Poles in Germany
+2026-09-08,antyweb.pl,rodaktv.com,quote+guest,draft-ready,,,AS51 — draft GUEST-rodak-antyweb-co-sprawdzic-przed-zakupem.md; owner to send
+2026-09-08,polskiobserwator.de,rodaktv.com,guest,draft-ready,,,AS36 — draft GUEST-rodak-polskiobserwator-telewizja-za-granica.md; owner to send
 2026-09-08,polishexpress.eu,rodaktv.com,guest,prepared,,,AS34 — UK/NL/IE/DE portal
 2026-09-08,di.com.pl,rodaktv.com,guest,prepared,,,AS33 — Dziennik Internautow
 2026-09-08,mypolacy.de,rodaktv.com,guest,prepared,,,AS33 — Poles in Germany portal
 2026-09-08,dojczland.info,rodaktv.com,guest,prepared,,,AS33 — Poles in Germany
 2026-09-08,techoteka.pl,rodaktv.com,guest,prepared,,,AS28 — /wspolpraca/ (Artykul partnera)
 2026-09-08,mojawyspa.co.uk,rodaktv.com,guest,prepared,,,AS22 — Poles in the UK
-2026-09-08,shqip.com,iptvshqiptar.com,guest,prepared,,,AS22 — Teknologji section
-2026-09-08,tech-al.info,iptvshqiptar.com,guest,prepared,,,AS6 — low weight
+2026-09-08,shqip.com,iptvshqiptar.com,guest,draft-ready,,,AS22 — draft GUEST-shqip-smart-tv-diaspora.md; owner to send
+2026-09-08,tech-al.info,iptvshqiptar.com,guest,draft-ready,,,AS6 — draft GUEST-shqip-tech-al-para-se-te-blesh.md; owner to send
 2026-09-08,lajme.tech,iptvshqiptar.com,guest,prepared,,,AS2 — low weight
