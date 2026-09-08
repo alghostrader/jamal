@@ -74,6 +74,13 @@ for _, dom, _c in SITES:
                                         "dimensions": ["page"], "rowLimit": 250})),
                   "prev": rowmap(q(dom, {"startDate": p28s, "endDate": p28e,
                                          "dimensions": ["page"], "rowLimit": 250}))}
+    # query -> best ranking page (by impressions) so a striking-distance task knows WHICH URL to enhance
+    qp = {}
+    for r in (q(dom, {"startDate": c28s, "endDate": c28e, "dimensions": ["query", "page"], "rowLimit": 500}) or []):
+        qq, pg = r["keys"][0], r["keys"][1]
+        if qq not in qp or r["impressions"] > qp[qq]["impressions"]:
+            qp[qq] = {"page": pg, "impressions": r["impressions"], "clicks": r["clicks"], "position": r["position"]}
+    d["qpage"] = {k: v["page"] for k, v in qp.items()}
     d["device"] = rowmap(q(dom, {"startDate": c28s, "endDate": c28e,
                                  "dimensions": ["device"], "rowLimit": 10}))
     d["country"] = rowmap(q(dom, {"startDate": c28s, "endDate": c28e,
@@ -81,7 +88,7 @@ for _, dom, _c in SITES:
     d["in_gsc"] = True
     OUT["sites"][dom] = d
     t28 = tot["28"]["cur"]
-    print(f"{dom}: 28d clicks={t28['clicks']} q={len(d['queries']['cur'])} pages={len(d['pages']['cur'])}")
+    print(f"{dom}: 28d clicks={t28['clicks']} q={len(d['queries']['cur'])} pages={len(d['pages']['cur'])} q→page={len(d['qpage'])}")
 OUT["ranges"] = {"cur28": [c28s, c28e], "prev28": [p28s, p28e]}
 json.dump(OUT, open(os.path.join(BASE, "gsc_details.json"), "w"))
 print("saved gsc_details.json")

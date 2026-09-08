@@ -14,7 +14,8 @@
    },
    "completed": "2026-09-06",
    "how": "auto-verified: page(s) now PASS in GSC URL Inspection",
-   "outcome": "VERIFIED"
+   "outcome": "VERIFIED",
+   "live_check": "page(s) PASS in GSC URL Inspection"
   },
   {
    "id": "29449e289f",
@@ -30,7 +31,8 @@
    },
    "completed": "2026-09-06",
    "how": "auto-verified: page(s) now PASS in GSC URL Inspection",
-   "outcome": "VERIFIED"
+   "outcome": "VERIFIED",
+   "live_check": "page(s) PASS in GSC URL Inspection"
   },
   {
    "id": "e91c45e957",
@@ -46,7 +48,8 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 defect still present in this audit's crawl",
-   "outcome": "AWAITING VERIFICATION"
+   "outcome": "AWAITING VERIFICATION",
+   "live_check": "5 page(s) still under 300 words live: /checkout?plan=3mois-1ecran, /checkout?plan=6mois-1ecran, /checkout?plan=12mois-1ecran, /checkout?plan=24mois-1ecran"
   },
   {
    "id": "dda33ce6cb",
@@ -68,7 +71,8 @@
     "probe_pos": null,
     "gsc_pos": null,
     "clicks28": 0
-   }
+   },
+   "live_check": "page is live but its modified date is before 2026-09-06"
   },
   {
    "id": "8162a0a994",
@@ -84,7 +88,8 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "VERIFIED"
+   "outcome": "VERIFIED",
+   "live_check": "host redirect is 308"
   },
   {
    "id": "6f748626cd",
@@ -100,7 +105,8 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 page(s) now PASS in URL Inspection",
-   "outcome": "VERIFIED"
+   "outcome": "VERIFIED",
+   "live_check": "page(s) PASS in GSC URL Inspection"
   },
   {
    "id": "737de905a9",
@@ -122,7 +128,8 @@
     "probe_pos": 7,
     "gsc_pos": 14.4,
     "clicks28": 9
-   }
+   },
+   "live_check": "page is live but declares no modified date \u2014 add dateModified / og:updated_time so the change can be verified"
   },
   {
    "id": "f217a61cb1",
@@ -137,8 +144,8 @@
     "clicks28": 25
    },
    "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 Arab/MENA market \u2014 filed under Excluded (owner rule 8 Sep)",
+   "outcome": "OUT OF SCOPE",
    "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
@@ -160,7 +167,8 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION"
+   "outcome": "VERIFIED",
+   "live_check": "keyword present + modified on/after 2026-09-06"
   },
   {
    "id": "8fcbe4f4aa",
@@ -182,7 +190,8 @@
     "probe_pos": null,
     "gsc_pos": 22.3,
     "clicks28": 3
-   }
+   },
+   "live_check": "page is live but declares no modified date \u2014 add dateModified / og:updated_time so the change can be verified"
   },
   {
    "id": "70f507b6f5",
@@ -198,13 +207,14 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "outcome": "VERIFIED",
    "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
     "gsc_pos": 5.7,
     "clicks28": 40
-   }
+   },
+   "live_check": "keyword present + modified on/after 2026-09-06"
   },
   {
    "id": "dcbbd6a189",
@@ -219,8 +229,8 @@
     "clicks28": 9
    },
    "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 Arab/MENA market \u2014 filed under Excluded (owner rule 8 Sep)",
+   "outcome": "OUT OF SCOPE",
    "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
@@ -241,8 +251,8 @@
     "clicks28": 2
    },
    "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 Arab/MENA market \u2014 filed under Excluded (owner rule 8 Sep)",
+   "outcome": "OUT OF SCOPE",
    "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
@@ -264,13 +274,14 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "outcome": "VERIFIED",
    "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
     "gsc_pos": 4.5,
     "clicks28": 30
-   }
+   },
+   "live_check": "keyword present + modified on/after 2026-09-06"
   },
   {
    "id": "fd497a106a",
@@ -286,7 +297,8 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 page(s) now PASS in URL Inspection",
-   "outcome": "VERIFIED"
+   "outcome": "VERIFIED",
+   "live_check": "page(s) PASS in GSC URL Inspection"
   },
   {
    "id": "1f5c56622b",
@@ -308,7 +320,8 @@
     "probe_pos": null,
     "gsc_pos": 13.6,
     "clicks28": 1
-   }
+   },
+   "live_check": "page is live but its modified date is before 2026-09-08"
   },
   {
    "id": "98a4408a71",
@@ -330,7 +343,8 @@
     "probe_pos": 7,
     "gsc_pos": 10.2,
     "clicks28": 1
-   }
+   },
+   "live_check": "page is live but its modified date is before 2026-09-08"
   },
   {
    "id": "f6e1c07475",
@@ -346,7 +360,8 @@
    },
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 defect still present in this audit's crawl",
-   "outcome": "AWAITING VERIFICATION"
+   "outcome": "AWAITING VERIFICATION",
+   "live_check": "5 page(s) still under 300 words live: /checkout?plan=1ekran-3m, /checkout?plan=1ekran-6m, /checkout?plan=1ekran-12m, /checkout?plan=1ekran-24m"
   },
   {
    "id": "b3caca4a55",
@@ -361,8 +376,8 @@
     "clicks28": 1
    },
    "completed": "2026-09-08",
-   "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 Arab/MENA market \u2014 filed under Excluded (owner rule 8 Sep)",
+   "outcome": "OUT OF SCOPE",
    "checkpoint_days": 0,
    "now": {
     "probe_pos": null,
@@ -390,7 +405,8 @@
     "probe_pos": null,
     "gsc_pos": null,
     "clicks28": 0
-   }
+   },
+   "live_check": "no new live placement logged for this site since completion (tick it on Backlinks with its URL)"
   },
   {
    "id": "53045dba08",
@@ -406,13 +422,14 @@
    },
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "outcome": "VERIFIED",
    "checkpoint_days": 0,
    "now": {
     "probe_pos": null,
     "gsc_pos": null,
     "clicks28": 0
-   }
+   },
+   "live_check": "keyword present + modified on/after 2026-09-08"
   },
   {
    "id": "ddd984ebb5",
@@ -434,7 +451,8 @@
     "probe_pos": null,
     "gsc_pos": 5.5,
     "clicks28": 4
-   }
+   },
+   "live_check": "page is live but its modified date is before 2026-09-08"
   },
   {
    "id": "0859acb6ae",
@@ -456,7 +474,8 @@
     "probe_pos": null,
     "gsc_pos": 5.6,
     "clicks28": 3
-   }
+   },
+   "live_check": "page is live but its modified date is before 2026-09-08"
   },
   {
    "id": "984cc3c4dc",
@@ -472,7 +491,8 @@
    },
    "completed": "2026-09-08",
    "how": "auto-verified: the defect is gone from this audit's crawl \u00b7 defect still present in this audit's crawl",
-   "outcome": "AWAITING VERIFICATION"
+   "outcome": "AWAITING VERIFICATION",
+   "live_check": "5 page(s) still under 300 words live: /checkout?plan=1pant-3m, /checkout?plan=1pant-6m, /checkout?plan=1pant-12m, /checkout?plan=1pant-24m"
   },
   {
    "id": "7ef248c3f6",
@@ -488,7 +508,24 @@
    },
    "completed": "2026-09-08",
    "how": "auto-verified: the defect is gone from this audit's crawl \u00b7 defect still present in this audit's crawl",
-   "outcome": "AWAITING VERIFICATION"
+   "outcome": "AWAITING VERIFICATION",
+   "live_check": "5 page(s) still under 300 words live: /afrekenen?plan=3-maanden-1-scherm, /afrekenen?plan=6-maanden-1-scherm, /afrekenen?plan=12-maanden-1-scherm, /afrekenen?plan=24-maanden-1-scherm"
+  },
+  {
+   "id": "b443b33f42",
+   "kind": "Technical fix",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: afrekenen, afrekenen, afrekenen, ",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
+   "outcome": "VERIFIED"
   }
  ]
 }

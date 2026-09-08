@@ -1,0 +1,16 @@
+{
+ "_note": "Owner's local repos per site (from the owner's 2026-09 content report). deploy_as is fixed: commits must be authored by alghostrader or Vercel lands BLOCKED. content_path = where a new article URL lives. Entries marked ⚠ were not confirmed by the owner.",
+ "iptvesp.com":               {"repo": "/Desktop/iptv-espana-pro", "content": "MDX content/blog", "content_path": "/blog/", "framework": "next"},
+ "primeiptv-france.com":      {"repo": "/Desktop/iptv-pro", "content": "guides-TS (lib/guides-data.ts)", "content_path": "/guides/", "framework": "next"},
+ "iptvned.com":               {"repo": "/Desktop/alghostrader.com/iptvflick.nl", "content": "lib/posts.ts", "content_path": "/blog/", "framework": "next"},
+ "iptvpix.com":               {"repo": "iptv-agent-system/output/sites/iptvpix.com", "content": "lib/posts.ts", "content_path": "/blog/", "framework": "next"},
+ "smarters-live.com":         {"repo": "/Desktop/iptv-france-pro", "content": "lib/articles.ts", "content_path": "/blog/", "framework": "next"},
+ "iptvshqiptar.com":          {"repo": "/Desktop/iptvshqip", "content": "lib/posts.ts", "content_path": "/blog/", "framework": "next"},
+ "smartersprofrance.fr":      {"repo": "/Desktop/smartersprofrance-fr", "content": "static HTML (articles/)", "content_path": "/articles/", "framework": "static"},
+ "iptvfranceofficiel.fr":     {"repo": "/Desktop/iptvfranceofficiel-fr", "content": "MDX content/articles", "content_path": "/articles/", "framework": "next"},
+ "abonnementiptvofficiel.com":{"repo": "/Desktop/abonnementiptvofficiel", "content": "MDX content/blog", "content_path": "/blog/", "framework": "next"},
+ "iptvsegura.com":            {"repo": "⚠ set repo path (not in the owner's report)", "content": "guias/", "content_path": "/guias/", "framework": "next"},
+ "rodaktv.com":               {"repo": "⚠ confirm: alghostrader/iptv-polska", "content": "blog/", "content_path": "/blog/", "framework": "next"},
+ "deploy_as": "alghostrader · git push origin main → Vercel auto",
+ "guards": ["title ≤ 60 chars (build fails otherwise)", "no rights-holder / channel / league / broadcaster names", "real hero image (no icon fallback)", "brand or naked-URL anchors only for links"]
+}

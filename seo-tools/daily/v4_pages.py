@@ -335,11 +335,9 @@ def build_all(G):
                     "test", "essai", "premium", "iptv polska", "smarters", "boitier", "subscription")
     # Owner rule (8 Sep): Algeria, Tunisia, Morocco and Africa are NOT target markets — such
     # queries are never turned into opportunities, tasks, postures or "entered top 10" insights.
-    OUT_OF_SCOPE = ("alger", "algérie", "algerie", "algeria", "tunis", "tunisie", "tunisia", "maroc", "morocco", "afrique",
-                    "africa", "sénégal", "senegal", "côte d'ivoire", "cote d'ivoire", "cameroun", "dz ", " dz")
-    def out_of_scope(q):
-        ql = (q or "").lower()
-        return any(w in ql for w in OUT_OF_SCOPE)
+    import donext as _dn
+    OUT_OF_SCOPE = _dn.SCOPE["out_words"]
+    out_of_scope = _dn.out_of_scope
     def vol_of(s, q):
         for r in KT.get(s, []):
             if r["kw"] == q: return r.get("vol")
@@ -1225,281 +1223,17 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
     import datetime as _dt2
     DAYNAME = _dt2.date.today().strftime("%A, %B %-d") if hasattr(_dt2.date.today(), "strftime") else TODAY_STR
 
-    def task_card(t, n, promo=False):
-        i = ALL.index(t["site"]) + 1
-        steps = STEPS.get(t["kind"], ["Do the recommended action", "Re-check next audit"])
-        steps_json = e(J.dumps(steps))
-        drivers = "".join(f"<li>{e(x)}</li>" for x in t["drivers"])
-        b = t["baseline"]
-        pg_txt = " · " + e(t["page"]) if t["page"] else ""
-        bl_txt = " · ".join(x for x in [
-            f'probe #{b["probe_pos"]}' if b.get("probe_pos") else "",
-            f'GSC pos {b["gsc_pos"]}' if b.get("gsc_pos") else "",
-            f'{b["clicks28"]} clicks/28d' if b.get("clicks28") else ""] if x) or "no keyword baseline"
-        promo_attr = ' data-promo="1" style="display:none"' if promo else ""
-        num_html = f'<span class="tasknum">#{n}</span>' if not promo else '<span class="tasknum" style="background:var(--pos)">+</span>'
-        return (f'<div class="card taskcard" data-tid="{t["id"]}" data-min="{t["effort_min"]}" data-steps="{steps_json}" '
-                f'data-title="{e(t["kind"])}: {e(t["query"] or t["page"] or t["site"])}"{promo_attr}>'
-                f'<div class="chead" style="margin-bottom:6px"><div style="display:flex;align-items:center;gap:9px;min-width:0">'
-                f'{num_html}<h2 style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'
-                f'{e(t["kind"])}: {e(t["query"] or t["page"] or ABBR[t["site"]])}</h2></div>'
-                f'<span class="score num" title="priority score">{t["score"]}</span></div>'
-                f'<div class="stmeta" style="margin-bottom:8px"><span class="dot s{i}"></span> {ABBR[t["site"]]}'
-                f'{pg_txt} · <b>{t["effort"]}</b> ≈{t["effort_min"]} min · baseline: {bl_txt}</div>'
-                f'<p class="narr" style="margin:0 0 8px">{e(t["what"])}</p>'
-                f'<details><summary class="linkbtn" style="cursor:pointer">Why this priority?</summary>'
-                f'<ul class="lcl" style="margin-top:6px">{drivers}</ul>'
-                f'<div class="stmeta" style="margin-top:6px">{e(t["why"])} · source: {e(t["src"])}</div></details>'
-                f'<div class="rectitle" style="margin-top:9px">Recommended action</div>'
-                f'<p class="narr" style="margin:3px 0 10px">{e(t["action"])}</p>'
-                f'<div class="rowflex"><button class="btn primary sm t-start">Start task</button>'
-                f'<button class="btn sm t-done">Mark completed</button>'
-                f'<button class="btn sm t-defer">Defer</button><button class="btn sm t-dismiss">Dismiss</button></div></div>')
-
-    def slim_row(t, show_reason=True):
-        reason = t.get("posture_note", "")
-        reason_h = ("<div class=" + chr(34) + "stmeta" + chr(34) + "><i>" + e(reason) + "</i></div>") if show_reason and reason else ""
-        return (f'<div class="alertrow" data-tid="{t["id"]}"><span class="score num" style="font-size:12px">{t["score"]}</span>'
-                f'<div style="min-width:0;flex:1"><b>{e(t["kind"])}</b>: {e(t["query"] or t["page"] or ABBR[t["site"]])} '
-                f'<span class="stmeta">· {ABBR[t["site"]]} · {t["effort"]} ≈{t["effort_min"]}m</span>'
-                f'{reason_h}</div>'
-                f'<button class="btn sm t-promote" style="flex:none">Add to Today</button></div>')
-
-    def build_today():
-        est = sum(t["effort_min"] for t in T_TODAY)
-        cards = ("".join(task_card(t, n + 1) for n, t in enumerate(T_TODAY))
-                 or '<div class="empty" id="todayempty"><b>Nothing urgent today.</b> The engine found no task scoring ≥72 — links and content cadence continue as standing work.</div>')
-        cards += "".join(task_card(t, 0, promo=True) for t in (T_NEXT[:8] + T_MONITOR[:10]))
-        nxt = "".join(slim_row(t) for t in T_NEXT[:8]) or '<div class="empty">Queue is empty.</div>'
-        mon = "".join(slim_row(t) for t in T_MONITOR[:10]) or '<div class="empty">Nothing on watch.</div>'
-        done_rows = ""
-        for c in reversed(THIST.get("completed", [])[-12:]):
-            oc = c.get("outcome", "AWAITING VERIFICATION")
-            occls = "pos" if oc in ("VERIFIED", "POSITIVE") else ("neg" if "NEGATIVE" in oc else "neu")
-            after = ""
-            if c.get("now") and c.get("baseline") and c["baseline"].get("probe_pos") and c["now"].get("probe_pos"):
-                after = (f' · #{c["baseline"]["probe_pos"]} → #{c["now"]["probe_pos"]} after {c.get("checkpoint_days", "?")}d '
-                         f'(movement observed during the verification period — not proof of cause)')
-            done_rows += (f'<div class="alertrow"><span class="tag {occls}">{e(oc)}</span>'
-                          f'<div><b>{e(c.get("kind", ""))}</b>: {e(c.get("query") or c.get("page") or c.get("site", ""))} '
-                          f'<span class="stmeta">· {ABBR.get(c.get("site"), c.get("site", ""))} · completed {e(c.get("completed", ""))}'
-                          f'{e(after)}</div></div>')
-        return (f'<div class="pagehead"><h1>Today</h1><p class="sub">{e(DAYNAME)} · your SEO plan: '
-                f'<b><span id="plan-n">{len(T_TODAY)}</span> tasks</b> · estimated workload ≈<span id="plan-est">{est//60}h {est%60:02d}m</span> · '
-                f'{len(T_NEXT)} next · {len(T_MONITOR)} monitor-only · {len(T_BACKLOG)} backlog. '
-                f'Sync status is in the header. "Copy status" hands states to the next audit for verification.</p></div>'
-                f'<div id="focusbar" style="display:none"></div>'
-                f'<div id="todaylist" class="stack" style="gap:14px;margin-bottom:20px">{cards}</div>'
-                f'<div id="donetoday"></div>'
-                f'<div class="grid g2"><div class="card"><div class="chead"><h2>Next</h2>'
-                f'<span class="stmeta">after today&#39;s plan — deferred, not forgotten</span></div>{nxt}</div>'
-                f'<div class="card"><div class="chead"><h2>Monitor only — do not work on these yet</h2>'
-                f'<span class="stmeta">the engine is protecting your attention</span></div>{mon}'
-                f'<div class="stmeta" style="margin-top:8px">+ {len(T_BACKLOG)} backlog items scoring &lt;34 — see '
-                f'<a href="opportunities">Opportunities</a> for the full list.</div></div></div>'
-                f'<div class="card" style="margin-top:16px"><div class="chead"><h2>Completed &amp; verification</h2>'
-                f'<button class="copybtn" id="copystatus">Copy status for next audit</button></div>'
-                f'{done_rows or "<div class=empty>No completed tasks recorded yet. Mark tasks done here (or let audits auto-verify technical fixes) and the 7/14/28-day before/after comparison appears in this list.</div>"}'
-                f'<div id="devicedone"></div></div>')
-
-    TODAY_JS = """<script>
-(function(){
- var K='seo_tasks_v2';
- function load(){ try{return JSON.parse(localStorage.getItem(K)||'{}');}catch(e){return{};} }
- function save(st){ try{localStorage.setItem(K,JSON.stringify(st));}catch(e){} if(window.seoCloudSave) window.seoCloudSave(st); }
- var st=load();
- window.addEventListener('seo-state-sync',function(){ st=load(); apply(); });
- function baseline(card){ return {title:card.dataset.title||''}; }
- function apply(){
-  var doneN=0, hidden=0, visible=0, mins=0;
-  document.querySelectorAll('.taskcard').forEach(function(c){
-    var s=st[c.dataset.tid], promo=c.dataset.promo==='1';
-    if(promo){
-      var show=s&&(s.state==='promoted'||s.state==='active');
-      c.style.display=show?'':'none';
-      if(show){ visible++; mins+=parseInt(c.dataset.min,10)||0; }
-      if(s&&s.state==='completed') doneN++;
-      return;
-    }
-    if(!s){ visible++; mins+=parseInt(c.dataset.min,10)||0; return; }
-    if(s.state==='completed'){ c.style.display='none'; doneN++; return; }
-    if(s.state==='dismissed'||s.state==='deferred'){ c.style.display='none'; hidden++; return; }
-    visible++; mins+=parseInt(c.dataset.min,10)||0;
-  });
-  document.querySelectorAll('.alertrow[data-tid]').forEach(function(row){
-    var s=st[row.dataset.tid], b=row.querySelector('.t-promote'); if(!b) return;
-    if(s&&(s.state==='promoted'||s.state==='active')){ b.textContent='On your list'; b.disabled=true; }
-    else if(s&&s.state==='completed'){ b.textContent='Completed'; b.disabled=true; }
-    else if(s&&s.state==='dismissed'){ b.textContent='Dismissed'; b.disabled=true; }
-    else { b.textContent='Add to Today'; b.disabled=false; }
-  });
-  var pn=document.getElementById('plan-n'), pe=document.getElementById('plan-est'), te=document.getElementById('todayempty');
-  if(pn) pn.textContent=visible;
-  if(pe) pe.textContent=Math.floor(mins/60)+'h '+('0'+(mins%60)).slice(-2)+'m';
-  if(te) te.style.display=visible?'none':'';
-  var dd=document.getElementById('donetoday');
-  if(dd) dd.innerHTML=(doneN||hidden)?'<div class="empty" style="margin-bottom:16px"><b>'+doneN+' completed</b>'+(hidden?' · '+hidden+' deferred/dismissed':'')+' on this device today. Copy status below so the next audit records and verifies them.</div>':'';
-  renderFocus();
- }
- function renderFocus(){
-  var bar=document.getElementById('focusbar'); if(!bar) return;
-  var fid=null; Object.keys(st).forEach(function(k){ if(st[k].state==='active') fid=k; });
-  if(!fid){ bar.style.display='none'; return; }
-  var s=st[fid], steps=s.steps||[], done=(s.checked||[]).length;
-  var mins=Math.max(0, Math.round((s.min||30)*(1-done/Math.max(1,steps.length))));
-  var html='<div class="card" style="border-color:#4f46e5;background:#eef2ff;margin-bottom:16px">'
-    +'<div class="chead" style="margin-bottom:4px"><h2>Current focus: '+s.title+'</h2>'
-    +'<span class="stmeta">'+done+' / '+steps.length+' actions · ≈'+mins+' min remaining</span></div>';
-  steps.forEach(function(sp,i){
-    var ck=(s.checked||[]).indexOf(i)>=0;
-    html+='<label style="display:flex;gap:8px;align-items:center;padding:3px 0;font-size:12.5px;cursor:pointer">'
-      +'<input type="checkbox" data-i="'+i+'" '+(ck?'checked':'')+'> <span style="'+(ck?'color:#9ca3af;text-decoration:line-through':'')+'">'+sp+'</span></label>';
-  });
-  html+='<div class="rowflex" style="margin-top:10px"><button class="btn primary sm" id="focusdone">Mark completed</button>'
-    +'<button class="btn sm" id="focusstop">Pause focus</button></div></div>';
-  bar.innerHTML=html; bar.style.display='';
-  bar.querySelectorAll('input[type=checkbox]').forEach(function(cb){
-    cb.addEventListener('change',function(){
-      var i=parseInt(cb.dataset.i,10); s.checked=s.checked||[];
-      var at=s.checked.indexOf(i);
-      if(cb.checked&&at<0)s.checked.push(i); if(!cb.checked&&at>=0)s.checked.splice(at,1);
-      st[fid]=s; save(st); renderFocus();
-    });
-  });
-  var fd=document.getElementById('focusdone');
-  if(fd) fd.addEventListener('click',function(){ s.state='completed'; s.completed=new Date().toISOString().slice(0,10); st[fid]=s; save(st); apply(); });
-  var fs=document.getElementById('focusstop');
-  if(fs) fs.addEventListener('click',function(){ s.state='queued'; st[fid]=s; save(st); renderFocus(); });
- }
- document.querySelectorAll('.taskcard').forEach(function(c){
-  var id=c.dataset.tid;
-  function set(state){ var cur=st[id]||{}; cur.state=state; cur.title=c.dataset.title; cur.min=parseInt(c.dataset.min,10)||30;
-    try{cur.steps=JSON.parse(c.dataset.steps);}catch(e){cur.steps=[];}
-    if(state==='completed') cur.completed=new Date().toISOString().slice(0,10);
-    st[id]=cur; save(st); apply(); }
-  var b;
-  if(b=c.querySelector('.t-start')) b.addEventListener('click',function(){
-    Object.keys(st).forEach(function(k){ if(st[k].state==='active') st[k].state='queued'; });
-    set('active'); window.scrollTo({top:0,behavior:'smooth'}); });
-  if(b=c.querySelector('.t-done')) b.addEventListener('click',function(){ set('completed'); });
-  if(b=c.querySelector('.t-defer')) b.addEventListener('click',function(){ set(c.dataset.promo==='1'?'queued':'deferred'); });
-  if(b=c.querySelector('.t-dismiss')) b.addEventListener('click',function(){ set('dismissed'); });
- });
- document.querySelectorAll('.t-promote').forEach(function(b){
-  b.addEventListener('click',function(){
-    var row=b.closest('[data-tid]'); if(!row) return;
-    var card=document.querySelector('.taskcard[data-tid="'+row.dataset.tid+'"]');
-    var cur=st[row.dataset.tid]||{}; cur.state='promoted';
-    if(card){ cur.title=card.dataset.title; cur.min=parseInt(card.dataset.min,10)||30; try{cur.steps=JSON.parse(card.dataset.steps);}catch(e){cur.steps=[];} }
-    st[row.dataset.tid]=cur; save(st); apply();
-    if(card){ card.scrollIntoView({behavior:'smooth',block:'center'}); }
-  });
- });
- var cs=document.getElementById('copystatus');
- if(cs) cs.addEventListener('click',async function(){
-   var out={exported:new Date().toISOString().slice(0,10),tasks:st};
-   var txt='TASK STATUS v2 (paste this to Claude with the next audit): '+JSON.stringify(out);
-   try{ await navigator.clipboard.writeText(txt); }catch(e){}
-   cs.textContent='Copied — paste to Claude'; setTimeout(function(){cs.textContent='Copy status for next audit';},2500);
- });
- apply();
-})();
-</script>"""
-    SYNC_JS = G["SYNC_JS"]
-
-    # ---------- WORK — by website: audit → missing → next move → full to-do (tasks + backlinks) ----------
-    def build_work_by_site():
-        import csv as _csv2
-        prompts, tech_items, skill_card = G["prompts"], G["tech_items"], G["skill_pipeline_card"]
-        LEDGER_PATH, PAUSED, P1, P2 = G["LEDGER_PATH"], G["PAUSED_LINKS"], G["NEXT_P1"], G["NEXT_P2"]
-        rows = list(_csv2.DictReader(open(LEDGER_PATH, encoding="utf-8"))) if _os.path.exists(LEDGER_PATH) else []
-        live = {}
-        for r in rows:
-            if r["status"] == "live": live.setdefault(r["site"], []).append(r)
-        order_rank = {"FOCUS": 0, "RECOVER": 1, "PUSH": 2, "MAINTAIN": 3, "MONITOR": 4}
-        sites = sorted(ALL, key=lambda s: (order_rank.get(SPOST[s]["posture"], 5), ALL.index(s)))
-        done_ids = {c["id"] for c in THIST.get("completed", [])}
-        def wcard(wid, kind_tag, tagcls, title, body_html, effort="", prompt=None, score=None):
-            sc = f'<span class="score num" style="font-size:12px">{score}</span> ' if score else ""
-            pr = (f'<div class="pcard" style="margin:0"><details><summary class="linkbtn" style="cursor:pointer">Show prompt</summary>'
-                  f'<pre class="ptext">{e(prompt)}</pre></details><div style="margin-top:6px"><button class="btn sm" data-copy>Copy prompt</button></div></div>') if prompt else ""
-            return (f'<div class="task" data-wid="{wid}"><label class="wdone"><input type="checkbox" class="wck" data-wid="{wid}" '
-                    f'data-title="{e(kind_tag)}: {e(title[:80])}"><span>Done</span></label>'
-                    f'<div class="meta"><span class="tag {tagcls}">{e(kind_tag)}</span> {sc}{e(effort)}</div>'
-                    f'<div style="font-size:13px;font-weight:600">{e(title)}</div>{body_html}{pr}</div>')
-        out = ""; total_todo = 0
-        for s in sites:
-            key = ABBR[s]; v_ = SPOST[s]; sm = SEM.get(s) or {}; f = F.get(s, {})
-            checks = _sc._health(s, F); ok = sum(1 for _, o in checks if o)
-            insp = [(p, vv) for (ss, p, vv) in insp_all if ss == s]; ipass = sum(1 for _, vv in insp if vv.get("verdict") == "PASS")
-            n10 = sum(1 for r in KT.get(s, []) if r.get("pos") and r["pos"] <= 10)
-            nrk = sum(1 for r in KT.get(s, []) if r.get("pos"))
-            # ---- audit: what's missing ----
-            missing = []
-            for it in (tech_items(s) or []):
-                missing.append(("neg", "Technical: " + (it if isinstance(it, str) else str(it)).split(chr(10))[0][:110]))
-            for p, vv in insp:
-                if vv.get("verdict") not in (None, "PASS"): missing.append(("neg", f"Not indexed: {p} ({vv.get('state') or vv.get('detail')})"))
-            if not GS.get(s, {}).get("in_gsc"): missing.append(("neg", "Not in Search Console — no traffic data"))
-            thin = CT.get(s, {}).get("n_thin", 0)
-            if thin: missing.append(("warn", f"{thin} thin article(s) under 600 words"))
-            if nrk == 0 and KT.get(s): missing.append(("warn", f"No strategic keyword in the top 100 yet (0/{len(KT[s])})"))
-            elif n10 == 0: missing.append(("warn", f"No strategic keyword in the top 10 yet ({nrk}/{len(KT.get(s, []))} ranking)"))
-            rd = sm.get("ref_domains")
-            if rd is not None and rd < 20: missing.append(("warn", f"Authority: only {rd} referring domains (Semrush) — links are the ceiling"))
-            if key in PAUSED: missing.append(("warn", f"Link building paused ({PAUSED[key]}) — review newest links first"))
-            gaps = [r for r in CT.get(s, {}).get("recommend", []) if not r["covered"] and reserved_for(s, r["kw"]) and not out_of_scope(r["kw"]) and (r["vol"] or 0) >= 100]
-            if gaps: missing.append(("neu", f"{len(gaps)} uncovered keyword(s) in this lane — top: “{gaps[0]['kw']}” {gaps[0]['vol']:,}/mo"))
-            pc = GS.get(s, {}).get("pages", {}).get("cur", {}); pp = GS.get(s, {}).get("pages", {}).get("prev", {})
-            decay = [u for u in pp if pp[u].get("clicks", 0) >= 15 and pc.get(u, {}).get("clicks", 0) <= pp[u]["clicks"] * 0.6 and not out_of_scope(u)]
-            if decay: missing.append(("warn", f"{len(decay)} page(s) losing clicks (content decay)"))
-            if not missing: missing.append(("pos", "Nothing missing — tech clean, indexed, ranking. Keep feeding links and content."))
-            miss_html = "".join(f'<div class="alertrow" style="padding:5px 0"><span class="tag {c}">{"issue" if c=="neg" else "watch" if c=="warn" else "ok" if c=="pos" else "gap"}</span><span>{e(t)}</span></div>' for c, t in missing)
-            # ---- to-do: engine tasks for this site (not completed) ----
-            st = [t for t in TASKS if t["site"] == s and t["id"] not in done_ids and t["bucket"] in ("today", "next")]
-            st.sort(key=lambda t: -t["score"])
-            cards = ""
-            for t in st[:6]:
-                body = f'<div style="font-size:12.5px;color:#374151">{e(t["action"])}</div>'
-                pr = prompts.get(s) if t["kind"] == "Technical fix" else None
-                cards += wcard(t["id"], t["kind"], "warn" if t["kind"] in ("Technical fix", "Indexation", "Rank recovery") else "acc",
-                               t["query"] or t["page"] or s, body, f'{t["effort"]} ≈{t["effort_min"]}m · {"TODAY" if t["bucket"]=="today" else "next"}', pr, t["score"])
-            total_todo += len(st[:6])
-            if gaps:
-                sk = skill_card(s)
-                if sk: cards += sk
-            # ---- to-do: backlinks for this site ----
-            have = {r["slug"] for r in live.get(key, [])}
-            lk = ""
-            if key in PAUSED:
-                lk = f'<div class="stmeta" style="color:var(--amb)">Links paused ({PAUSED[key]}) — review the newest links, then resume.</div>'
-            else:
-                items = [(pid, label) for pid, label, excl in P1 if key not in excl and pid not in have]
-                items += [(pid, f"{label} listing (owner: signup + CAPTCHA)") for pid, label in P2 if pid not in have][:2]
-                for pid, label in items[:5]:
-                    lk += f'<label class="lprow"><input class="lpx" type="checkbox" id="lp-{pid}-{key}"> <span>{e(label)}</span></label>'
-                    total_todo += 1
-            nxt = st[0] if st else None
-            next_move = (f'{e(nxt["kind"])}: <b>{e(nxt["query"] or nxt["page"] or s)}</b> — {e(nxt["action"][:120])}' if nxt
-                         else ("Links: " + e(items[0][1]) if (key not in PAUSED and items) else "Nothing queued — maintain."))
-            det = f"ws_{key}"
-            out += (f'<div class="card" style="margin-bottom:14px"><div class="chead" style="margin-bottom:8px">'
-                    f'<div style="display:flex;align-items:center;gap:9px"><span class="dot s{ALL.index(s)+1}"></span><h2>{s}</h2>{post_pill(v_["posture"])}</div>'
-                    f'<span class="stmeta">clicks 7d <b>{v_["wk"]:,}</b> {dfmt(v_["delta"]) if v_["delta"] is not None else ""} · top-10 <b>{n10}</b> · ref.dom <b>{rd if rd is not None else "—"}</b> · health <b>{ok}/{len(checks)}</b> · indexed <b>{ipass}/{len(insp)}</b> · {len(live.get(key, []))} links placed</span></div>'
-                    f'<div class="grid g2" style="margin:0 0 10px;gap:14px"><div><div class="rectitle">Audit — what is missing</div>{miss_html}</div>'
-                    f'<div><div class="rectitle">Next move</div><p class="narr" style="margin-top:5px">{next_move}</p>'
-                    f'<div class="rectitle" style="margin-top:10px">Backlinks to do</div><div class="lplist" style="margin-top:5px">{lk or "<div class=stmeta>nothing queued</div>"}</div></div></div>'
-                    f'<details {"open" if st else ""}><summary class="linkbtn" style="cursor:pointer">To-do — {len(st[:6])} task(s)</summary>'
-                    f'<div class="stack" style="gap:10px;margin-top:8px">{cards or "<div class=empty>No open tasks on this site.</div>"}</div></details></div>')
-        return (f'<div class="pagehead"><h1>Work — by website</h1><p class="sub">Every site audited: what is missing, the next move, and the full to-do '
-                f'(tasks + backlinks) in one place. Sites ordered by posture (FOCUS first). {total_todo} open items. '
-                f'Ticks sync across devices and feed verification.</p></div>' + out)
+    # Today + Work are merged into ONE page ("Do next", today.html) — see donext.py.
+    C = dict(TASKS=TASKS, T_TODAY=T_TODAY, T_NEXT=T_NEXT, T_MONITOR=T_MONITOR, T_BACKLOG=T_BACKLOG, THIST=THIST, CLOUD=CLOUD,
+             STEPS=STEPS, KT=KT, CT=CT, GS=GS, SEM=SEM, SPOST=SPOST, vol_of=vol_of, insp_all=insp_all, tech_cat=tech_cat,
+             GSCD=GSCD, SEM_UPD=G.get("SEM_UPD", ""))
+    DONEXT_BODY = _dn.build_donext(G, C)
+    J.dump(THIST, open(HIST_PATH, "w"), indent=1)   # donext updates outcomes with the live checks
 
     # ---------- write ----------
     JS = CHART_JS + TABLE_JS + PERIOD_JS
     pages = [
-        ("today.html", "Today — IPTV Portfolio", build_today(), "today", TODAY_JS),
-        ("work.html", "Work — by website", build_work_by_site(), "work", COPY_JS + G["WORK_JS"] + G["LINKS_JS"]),
+        ("today.html", "Do next — IPTV Portfolio", DONEXT_BODY, "today", G["LINKS_JS"] + _dn.DONEXT_JS),
         ("index.html", "IPTV Portfolio — SEO Command Center", build_overview(), None, JS + SALES_JS),
         ("performance.html", "Performance — IPTV Portfolio", build_performance(), "performance", JS),
         ("rankings.html", "Rankings — IPTV Portfolio", build_rankings(), "rankings", TABLE_JS),
@@ -1511,10 +1245,16 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
     ]
     for fn, title, body, cur_, js in pages:
         open(os.path.join(OUT, fn), "w").write(shell(title, body, cur=cur_, extra_js=js))
-    # legacy route: trends -> performance
+    # legacy routes: work -> today (merged into Do next) · backlinks -> links · trends -> performance
+    for fn, dest, label in (("work.html", "/today", "Work merged into Do next"), ("backlinks.html", "/links", "Backlinks")):
+        open(os.path.join(OUT, fn), "w").write(
+            f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>{label}</title>'
+            f'<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url={dest}">'
+            f'<script>location.replace("{dest}");</script></head>'
+            f'<body style="font:14px system-ui;padding:40px">{label}: <a href="{dest}">{dest}</a>.</body></html>')
     open(os.path.join(OUT, "trends.html"), "w").write(
         '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Trends → Performance</title>'
         '<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/performance">'
         '<script>location.replace("/performance");</script></head>'
         '<body style="font:14px system-ui;padding:40px">Trends moved to <a href="/performance">Performance</a>.</body></html>')
-    print(f"v4 pages written: {len(pages)} + trends redirect · opportunities={len(OPPS)} · changes={len(changes)}")
+    print(f"v4 pages written: {len(pages)} + 3 redirects (work→today, backlinks→links, trends→performance) · opportunities={len(OPPS)} · changes={len(changes)}")

@@ -29,12 +29,18 @@ Console service account) must be re-supplied by the owner after a recycle.
    and every claim from the owner's fix reports verified or not (verify independently, live).
 6. **Content intel** — rebuild coverage/gaps with the cannibalization guards (sibling
    ownership, page hints, lane reservation). Recompute next-article prompts.
-7. **Regenerate EVERY page** — Overview, Today (priority engine: plan.json buckets
-   today/next/monitor/backlog, capped at 5 diverse tasks), Work, Performance, Rankings
-   (postures), Content, Technical, Authority, Opportunities, Integrations, all site pages.
+7. **Regenerate EVERY page** — Overview, **Do next** (`/today` — Today + Work merged on 8 Sep:
+   ONE ranked queue, lanes Do now / Needs Jamal / Monitor / Excluded; `/work` redirects there),
+   Backlinks (`/links`, `/backlinks` redirects), Performance, Rankings (postures), Content,
+   Technical, Authority, Opportunities, Integrations, all site pages.
    Anything conditional must be recomputed (steps auto-clear when work is verified done).
+   **"Done" = LIVE-VERIFIED** (donext.py + live_verify.py, run inside generate_v3): a task the
+   owner marked built clears only when the deploy is READY (Vercel API if `VERCEL_TOKEN` is in
+   dash/.env, else inferred) AND the change is confirmed on the live URL (content: keyword on the
+   page + modified date on/after the tick · technical: defect gone on a live re-fetch · backlink:
+   placement URL live + dofollow). Never mark a task done from a claim or a commit.
    **Task feedback loop (automatic)**: run `python3 fetch_task_state.py` BEFORE generating —
-   it reads the owner's synced ticks (Today/Work/Backlinks) from the sales project's
+   it reads the owner's synced ticks (Do next/Backlinks + placement URLs) from the sales project's
    Firestore (`seo_state/{uid}`, service account has Cloud Datastore Viewer on iptv-sales)
    into cloud_state.json; the generator turns completed ticks into task_history.json
    records with their plan.json baselines and runs 7/14/28-day verification. A pasted
@@ -57,7 +63,8 @@ Console service account) must be re-supplied by the owner after a recycle.
   (UK/DE/NL/… probed from those countries via per-keyword loc overrides in keyword_targets).
 - **Target markets are European only** (owner rule, 8 Sep): Algeria, Tunisia, Morocco and the
   rest of Africa are NOT targets. Queries containing algérie/tunisie/maroc/afrique/africa etc. are
-  never turned into tasks, opportunities, postures or content prompts (`OUT_OF_SCOPE` in v4_pages).
+  never turned into tasks, opportunities, postures or content prompts (`SCOPE` in donext.py is the
+  single scope config; they are filed under the Excluded lane instead).
 - **Frozen pages stay frozen** until re-probes clear them (aio /test-iptv & /boitier-iptv,
   frozen 1 Aug, ~2-3 weeks) — support via internal links only.
 - Dashboard generator lives in the session scratchpad (`scratchpad/daily/generate_v3.py`);
@@ -65,6 +72,6 @@ Console service account) must be re-supplied by the owner after a recycle.
 - **Dashboard login = the Firebase sign-in gate** (`GATE_HTML` in generate_v3.py, same
   iptv-sales project + email/password as the Sales app). Owner removed Basic Auth on 6 Sep —
   do not re-add middleware.js. Every generated page must carry the gate; verify after deploy
-  that the live HTML contains `id="dashgate"`. Today's task sync uses the same login
+  that the live HTML contains `id="dashgate"`. Do next's task sync uses the same login
   (Firestore `seo_state/{uid}`) — its script must reuse the gate's Firebase app (getApps()).
 - Model ID never appears in commits/PRs. Git author is the owner's identity.

@@ -16,7 +16,13 @@ seo-tools/
     build_content.py        crawl + keywords → content.json (gaps, cannibalization guards)
     refresh_kt_positions.py live SERP positions → keyword_targets.json
     history.py              daily authority/ranking snapshot → history.json
-    generate_v3.py          builds every dashboard page → out/*.html
+    generate_v3.py          builds every dashboard page → out/*.html (calls v4_pages → donext)
+    v4_pages.py             priority engine, postures, Performance/Rankings/… pages
+    donext.py               "Do next" board (Today + Work merged): lanes, task model, live verification
+    live_verify.py          "done = LIVE": fetches target URLs / recounts thin pages / checks placements;
+                            optional Vercel API (VERCEL_TOKEN in dash/.env) for BLOCKED/READY deploy state
+    site_repos.json         owner repo path + content path per site (worksheet lines on every card)
+    fetch_task_state.py     owner's synced ticks (Do next + Backlinks + placement URLs) from Firestore
     sitecards.py            per-site status cards
     recover_state.py        rebuilds JSON state from deployed HTML (disaster recovery)
     _styles.html            the design system (inlined into every page)
@@ -27,7 +33,9 @@ seo-tools/
 
 ## Credentials (never committed)
 
-- `dash/.env` — `DFS_LOGIN` / `DFS_PASSWORD` for DataForSEO.
+- `dash/.env` — `DFS_LOGIN` / `DFS_PASSWORD` for DataForSEO. Optional: `VERCEL_TOKEN`
+  (+ `VERCEL_TEAM_ID`) so the Do-next board reads real deploy states (READY / BLOCKED / ERROR);
+  without it the deploy step is inferred from the live fetch and BLOCKED cannot be detected.
 - `gsc/sa.json` — Google service-account key with **read** access to all 9 Search Console
   properties. Without it the pipeline still runs; traffic metrics show as paused.
 
@@ -48,6 +56,11 @@ python3 build_content_kw.py && python3 build_content.py
 python3 history.py
 DASH_STAMP="$(date -u '+%Y-%m-%d %H:%M UTC')" python3 generate_v3.py
 ```
+
+`generate_v3.py` runs the live verification itself (donext.py → live_verify.py): every task the
+owner marked built is fetched live; it only moves to "Shipped" when the change is confirmed on
+the URL. Results are cached in `live_verify.json`; the board's data model is `donext.json`.
+`/today` = Do next, `/work` redirects there, `/links` = Backlinks (`/backlinks` redirects).
 
 Then deploy `out/*.html` to the `dashboard` branch (Vercel serves it), adding a
 `<!-- pipeline:<marker> -->` comment to `index.html` and verifying the marker is live.

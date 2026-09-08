@@ -610,8 +610,7 @@ SEM_UPD = SEM.get("_updated", "") if isinstance(SEM, dict) else ""
 
 def sidebar(cur):
     groups = [
-        ("Execute", [("today", "Today", "today", "zap"), ("work", "Work", "work", "check"),
-                     ("links", "Backlinks", "links", "link")]),
+        ("Execute", [("today", "Do next", "today", "zap"), ("links", "Backlinks", "links", "link")]),
         ("Monitor", [("./", "Overview", None, "home"), ("rankings", "Rankings", "rankings", "target"),
                      ("performance", "Performance", "performance", "chart"), ("content", "Content", "content", "file"),
                      ("technical", "Technical", "technical", "wrench"), ("authority", "Authority", "authority", "award"),
@@ -624,7 +623,8 @@ def sidebar(cur):
     for label, items in groups:
         out += f'<div class="navgrp">{label}</div>'
         for h, l, k, ic in items:
-            out += f'<a href="{h}" class="{"on" if cur == k else ""}">{icon(ic) if ic in ICONS else ""}{l}</a>'
+            tag = (f'<span class="navtag">{globals().get("DONEXT_N")}</span>' if k == "today" and globals().get("DONEXT_N") is not None else "")
+            out += f'<a href="{h}" class="{"on" if cur == k else ""}">{icon(ic) if ic in ICONS else ""}{l}{tag}</a>'
     return (f'<aside class="side"><a class="brand" href="./"><span class="bmark">iP</span>'
             f'<span class="bname">IPTV Portfolio</span></a><nav>{out}</nav>'
             f'<div class="foot">Audit {H.escape(STAMP_TXT)}</div></aside>')
@@ -725,11 +725,14 @@ onAuthStateChanged(auth, function(user){
   let pushedLocal = false;
   const fail = function(e){ status('BLOCKED (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid}', false); };
   const ok = function(){ status('on · ' + (user.email||''), true); };
+  status('connecting · ' + (user.email||''), true);
   window.seoCloudSave = function(st){ setDoc(ref, { tasks: st, updated_at: Date.now() }, { mergeFields: ["tasks", "updated_at"] }).then(ok).catch(fail); };
   // mergeFields replaces the whole links map (a plain merge only adds keys, so unticking never reached the cloud)
-  window.seoCloudSaveLinks = function(map){ setDoc(ref, { links: map, updated_at: Date.now() }, { mergeFields: ["links", "updated_at"] }).then(ok).catch(fail); };
+  window.seoCloudSaveLinks = function(map, urls){ setDoc(ref, { links: map, link_urls: urls || {}, updated_at: Date.now() }, { mergeFields: ["links", "link_urls", "updated_at"] }).then(ok).catch(fail); };
   onSnapshot(ref, function(snap){
     const d = snap.exists() ? snap.data() : null;
+    ok();
+    if(d && d.link_urls){ Object.keys(d.link_urls).forEach(function(k){ try{ localStorage.setItem('lpu:'+k, d.link_urls[k]); }catch(e){} }); }
     if(d && d.tasks){
       try{ localStorage.setItem(K, JSON.stringify(d.tasks)); }catch(e){}
       window.dispatchEvent(new Event('seo-state-sync')); ok();
@@ -837,11 +840,16 @@ document.querySelectorAll("[data-copy]").forEach(btn=>btn.addEventListener("clic
 LINKS_JS = """<script>
 (function(){
   function applyAll(){ document.querySelectorAll('input.lpx').forEach(function(cb){ cb.checked=cb.dataset.placed==='1'||localStorage.getItem('lp:'+cb.id)==='1'; }); document.querySelectorAll('tr').forEach(count); }
-  function pushCloud(){ if(!window.seoCloudSaveLinks) return; var map={}; document.querySelectorAll('input.lpx').forEach(function(cb){ if(cb.checked) map[cb.id]=1; }); window.seoCloudSaveLinks(map); }
+  function pushCloud(){ if(!window.seoCloudSaveLinks) return; var map={}, urls={}; document.querySelectorAll('input.lpx').forEach(function(cb){ if(cb.checked){ map[cb.id]=1; var u=localStorage.getItem('lpu:'+cb.id); if(u) urls[cb.id]=u; } }); window.seoCloudSaveLinks(map, urls); }
+  function showUrl(cb){ var lab=cb.closest('label'); if(!lab) return; var u=localStorage.getItem('lpu:'+cb.id)||''; var el=lab.querySelector('.lpurl'); if(!el){ el=document.createElement('a'); el.className='lpurl'; el.target='_blank'; el.rel='noopener'; lab.appendChild(el); } el.textContent=u?('↗ '+u.replace(/^https?:\/\//,'').slice(0,42)):''; el.href=u||'#'; el.style.display=u?'':'none'; }
   document.querySelectorAll('input.lpx').forEach(function(cb){
     if(localStorage.getItem('lp:'+cb.id)==='1') cb.checked=true;
-    cb.addEventListener('change',function(){ if(cb.dataset.placed==='1'&&!cb.checked){ cb.checked=true; return; } localStorage.setItem('lp:'+cb.id,cb.checked?'1':'0');count(cb.closest('tr'));pushCloud();});
+    showUrl(cb);
+    cb.addEventListener('change',function(){ if(cb.dataset.placed==='1'&&!cb.checked){ cb.checked=true; return; }
+      if(cb.checked&&cb.dataset.placed!=='1'&&!localStorage.getItem('lpu:'+cb.id)){ var u=window.prompt('Live URL of this placement (written to the ledger, re-verified every audit):',''); if(u===null){ cb.checked=false; return; } if(u.trim()) localStorage.setItem('lpu:'+cb.id,u.trim()); }
+      localStorage.setItem('lp:'+cb.id,cb.checked?'1':'0'); showUrl(cb); count(cb.closest('tr')); pushCloud(); });
   });
+  window.addEventListener('seo-links-sync', function(){ document.querySelectorAll('input.lpx').forEach(showUrl); });
   window.addEventListener('seo-links-sync', applyAll);
   document.querySelectorAll('.lkrow').forEach(function(tr){ tr.addEventListener('click',function(ev){ if(ev.target.closest('a,input,label')) return; var d=document.getElementById(tr.dataset.det); if(d) d.style.display=d.style.display==='none'?'':'none'; }); });
   function count(row){if(!row)return;var t=row.querySelectorAll('input.lpx').length,d=row.querySelectorAll('input.lpx:checked').length;
@@ -1695,9 +1703,15 @@ NEXT_P4 = [("sourceofsources", "Source of Sources (expert account)"), ("featured
 def ledger_checklist():
     """Compact backlink tracker: a short DO-NEXT list + one row per site (expandable)."""
     rows = list(_csv.DictReader(open(LEDGER_PATH, encoding="utf-8"))) if os.path.exists(LEDGER_PATH) else []
-    live = {}; lost = {}
+    live = {}; lost = {}; pending = {}
     for r in rows:
-        (live if r["status"] == "live" else lost).setdefault(r["site"], []).append(r)
+        r.setdefault("url", ""); r.setdefault("checked", ""); r.setdefault("http", "")
+        ({"live": live, "pending": pending}.get(r["status"], lost)).setdefault(r["site"], []).append(r)
+    def urltag(r):
+        u = r.get("url") or ""
+        t = (f' <a class="lpurl" href="{H.escape(u)}" target="_blank" rel="noopener">↗ {H.escape(u.replace("https://", "").replace("http://", "")[:42])}</a>' if u else ' <span class="stmeta">no URL logged</span>')
+        if r.get("checked"): t += f' <span class="stmeta">· checked {H.escape(r["checked"])}</span>'
+        return t
     KEY2DOM = {v: k for k, v in ABBR.items()}
     order = ["rodak"] + [ABBR[s] for s in ALL if ABBR[s] != "rodak"]
     verified = rows[0]["verified"] if rows else "—"
@@ -1725,6 +1739,7 @@ def ledger_checklist():
             if pr == "P1": donext.append((key, pid, label, pr, own)); break
         if len(donext) >= 6: break
     donext = donext[:6]
+    ledger_checklist.donext = donext; ledger_checklist.nxt = nxt
     dn_ids = {(k, pid) for k, pid, *_ in donext}
     dn_html = "".join(box(pid, key, f'{label} <span class="stmeta">· {KEY2DOM[key]}</span>', False,
                           f' <span class="tag acc">{pr}</span>') for key, pid, label, pr, own in donext) \
@@ -1741,9 +1756,11 @@ def ledger_checklist():
                   else ('<span class="tag pos">on track</span>' if placed else '<span class="tag neg">no links yet</span>'))
         det = f"lk_{key}"
         pl_html = "".join(box(r["slug"], key, f'{H.escape(r["platform"])} — {H.escape(r["detail"])}', True,
-                              f' <span class="tag {"pos" if r["follow"]=="dofollow" else "neu"}">{"df" if r["follow"]=="dofollow" else "nf"}</span>')
+                              f' <span class="tag {"pos" if r["follow"]=="dofollow" else "neu"}">{"df" if r["follow"]=="dofollow" else "nf"}</span>' + urltag(r))
                           for r in placed) or '<div class="stmeta">none yet</div>'
-        lost_html = "".join(f'<div class="stmeta" style="color:var(--neg)">✗ lost: {H.escape(r["platform"])} — {H.escape(r["detail"])}</div>'
+        pl_html += "".join(box(r["slug"], key, f'{H.escape(r["platform"])} — {H.escape(r["detail"])}', True,
+                               ' <span class="tag warn">awaiting live check</span>' + urltag(r)) for r in pending.get(key, []))
+        lost_html = "".join(f'<div class="stmeta" style="color:var(--neg)">✗ {"DECAYED" if r["status"]=="decayed" else "lost"}: {H.escape(r["platform"])} — {H.escape(r["detail"])}{urltag(r) if r.get("url") else ""}</div>'
                             for r in lost.get(key, []))
         p1_html = "".join(box(pid, key, label, False, ' <span class="tag acc">P1</span>')
                           for pid, label, pr, own in items if pr == "P1" and (key, pid) not in dn_ids)
@@ -1768,7 +1785,7 @@ def ledger_checklist():
             f'<div class="lplist">{dn_html}</div></div>'
             f'<div class="card"><div class="chead"><h2>Rules</h2></div><ul class="lcl" style="font-size:12px">'
             f'<li>Anchor = brand or naked URL only — never money keywords.</li><li>Signup + CAPTCHA + publish = owner only (P2/P4).</li>'
-            f'<li>New placement → add it to the ledger, re-verify, then tick.</li><li>aio &amp; slive paused until their newest links are reviewed.</li></ul></div></div>'
+            f'<li>Tick a placement → paste its live URL: that write IS the ledger. Every audit re-fetches it (live · dofollow · decayed).</li><li>aio &amp; slive paused until their newest links are reviewed.</li></ul></div></div>'
             f'<div class="card flush"><div class="chead"><h2>Sites</h2><span class="stmeta">click a row to see what is placed and what comes next</span></div>'
             f'<div class="overflow"><table><thead><tr><th>site</th><th class="sortable">placed</th><th>next</th><th class="sortable">ref.dom</th><th>status</th><th>progress</th></tr></thead>'
             f'<tbody>{trs}</tbody></table></div></div>'
@@ -1778,7 +1795,7 @@ def ledger_checklist():
 
 def links_body():
     b = (f'<div class="hdr" style="margin-bottom:6px"><div><h1>Backlinks</h1><p class="sub">What is placed, what to do next — from the verified ledger. '
-         f'Ticks sync across your devices.</p></div><button class="copybtn" id="copyprog">Copy progress</button></div>')
+         f'Ticks sync across your devices and the audit reads them — no hand-off needed.</p></div></div>')
     def pc(t, x):
         return (f'<div class="card pcard"><div class="phead"><h2>{icon("clipboard")} {t}</h2>'
                 f'<button class="copybtn" data-copy>Copy prompt</button></div><pre class="ptext">{H.escape(x)}</pre></div>')

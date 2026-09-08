@@ -1,44 +1,44 @@
-site,platform,slug,detail,follow,status,verified
-esp,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06
-esp,Blogger,blogger,IPTV-Europ x2,dofollow,live,2026-09-06
-esp,Telegra.ph,telegraph,listas article,nofollow,live,2026-09-06
-esp,About.me,aboutme,profile,nofollow,live,2026-09-06
-esp,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06
-prime,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06
-prime,Telegra.ph,telegraph,Telegram article,nofollow,live,2026-09-06
-prime,Medium,medium,@j.oughia,nofollow,live,2026-09-06
-prime,WordPress,wordpress,iptvpixguide,dofollow,live,2026-09-06
-prime,About.me,aboutme,profile,nofollow,live,2026-09-06
-prime,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06
-ned,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06
-ned,Medium,medium,@j.oughia,nofollow,live,2026-09-06
-ned,About.me,aboutme,profile,nofollow,live,2026-09-06
-ned,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06
-pix,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06
-pix,WordPress,wordpress,Belgique,dofollow,live,2026-09-06
-pix,Storeboard,storeboard,profile (weak),nofollow,live,2026-09-06
-pix,About.me,aboutme,profile,nofollow,live,2026-09-06
-pix,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06
-slive,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06
-slive,About.me,aboutme,profile,nofollow,live,2026-09-06
-slive,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06
-shqip,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06
-shqip,Write.as,writeas,post,dofollow,live,2026-09-06
-shqip,About.me,aboutme,profile,nofollow,live,2026-09-06
-shqip,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06
-segura,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06
-ifo,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06
-aio,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06
-aio,Tumblr,tumblr,post,dofollow,live,2026-09-06
-aio,Rentry,rentry,-> /boitier-iptv,nofollow,live,2026-09-06
-spf,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06
-spf,Substack,substack,post,dofollow,live,2026-09-06
-segura,Telegra.ph,telegraph,"Como-saber... -> 404",nofollow,lost,2026-09-06
-pix,Telegra.ph,telegraph,"IPTV-en-Suisse... -> 404",nofollow,lost,2026-09-06
-esp,Kliqqi,kliqqi,"6x bookmarks (getsocialpr/gorillasocialwork/socialrus) masked to #, 0 value",none,lost,2026-09-06
-rodak,Blogger,blogger,"iptvesp.blogspot.com, anchor RodakTV",dofollow,live,2026-09-06
-rodak,WordPress,wordpress,"iptvpixguide, anchor rodaktv.com",dofollow,live,2026-09-06
-esp,WordPress,wordpress,"iptvpixguide, anchor iptvesp.com",dofollow,live,2026-09-06
-prime,Blogger,blogger,"anchor PrimeIPTV France",dofollow,live,2026-09-06
-ned,Blogger,blogger,"anchor IPTVNED",dofollow,live,2026-09-06
-pix,Blogger,blogger,"anchor IPTVPIX",dofollow,live,2026-09-06
+site,platform,slug,detail,follow,status,verified,url,checked,http
+esp,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06,,,
+esp,Blogger,blogger,IPTV-Europ x2,dofollow,live,2026-09-06,,,
+esp,Telegra.ph,telegraph,listas article,nofollow,live,2026-09-06,,,
+esp,About.me,aboutme,profile,nofollow,live,2026-09-06,,,
+esp,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06,,,
+prime,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06,,,
+prime,Telegra.ph,telegraph,Telegram article,nofollow,live,2026-09-06,,,
+prime,Medium,medium,@j.oughia,nofollow,live,2026-09-06,,,
+prime,WordPress,wordpress,iptvpixguide,dofollow,live,2026-09-06,,,
+prime,About.me,aboutme,profile,nofollow,live,2026-09-06,,,
+prime,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06,,,
+ned,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06,,,
+ned,Medium,medium,@j.oughia,nofollow,live,2026-09-06,,,
+ned,About.me,aboutme,profile,nofollow,live,2026-09-06,,,
+ned,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06,,,
+pix,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06,,,
+pix,WordPress,wordpress,Belgique,dofollow,live,2026-09-06,,,
+pix,Storeboard,storeboard,profile (weak),nofollow,live,2026-09-06,,,
+pix,About.me,aboutme,profile,nofollow,live,2026-09-06,,,
+pix,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06,,,
+slive,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06,,,
+slive,About.me,aboutme,profile,nofollow,live,2026-09-06,,,
+slive,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06,,,
+shqip,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06,,,
+shqip,Write.as,writeas,post,dofollow,live,2026-09-06,,,
+shqip,About.me,aboutme,profile,nofollow,live,2026-09-06,,,
+shqip,Crunchbase,crunchbase,profile,nofollow,live,2026-09-06,,,
+segura,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06,,,
+ifo,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06,,,
+aio,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06,,,
+aio,Tumblr,tumblr,post,dofollow,live,2026-09-06,,,
+aio,Rentry,rentry,-> /boitier-iptv,nofollow,live,2026-09-06,,,
+spf,Brownbook,brownbook,2 listings,dofollow,live,2026-09-06,,,
+spf,Substack,substack,post,dofollow,live,2026-09-06,,,
+segura,Telegra.ph,telegraph,Como-saber... -> 404,nofollow,lost,2026-09-06,,,
+pix,Telegra.ph,telegraph,IPTV-en-Suisse... -> 404,nofollow,lost,2026-09-06,,,
+esp,Kliqqi,kliqqi,"6x bookmarks (getsocialpr/gorillasocialwork/socialrus) masked to #, 0 value",none,lost,2026-09-06,,,
+rodak,Blogger,blogger,"iptvesp.blogspot.com, anchor RodakTV",dofollow,live,2026-09-06,,,
+rodak,WordPress,wordpress,"iptvpixguide, anchor rodaktv.com",dofollow,live,2026-09-06,,,
+esp,WordPress,wordpress,"iptvpixguide, anchor iptvesp.com",dofollow,live,2026-09-06,,,
+prime,Blogger,blogger,anchor PrimeIPTV France,dofollow,live,2026-09-06,,,
+ned,Blogger,blogger,anchor IPTVNED,dofollow,live,2026-09-06,,,
+pix,Blogger,blogger,anchor IPTVPIX,dofollow,live,2026-09-06,,,
