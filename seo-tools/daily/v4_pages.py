@@ -1387,10 +1387,99 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
 </script>"""
     SYNC_JS = G["SYNC_JS"]
 
+    # ---------- WORK — by website: audit → missing → next move → full to-do (tasks + backlinks) ----------
+    def build_work_by_site():
+        import csv as _csv2
+        prompts, tech_items, skill_card = G["prompts"], G["tech_items"], G["skill_pipeline_card"]
+        LEDGER_PATH, PAUSED, P1, P2 = G["LEDGER_PATH"], G["PAUSED_LINKS"], G["NEXT_P1"], G["NEXT_P2"]
+        rows = list(_csv2.DictReader(open(LEDGER_PATH, encoding="utf-8"))) if _os.path.exists(LEDGER_PATH) else []
+        live = {}
+        for r in rows:
+            if r["status"] == "live": live.setdefault(r["site"], []).append(r)
+        order_rank = {"FOCUS": 0, "RECOVER": 1, "PUSH": 2, "MAINTAIN": 3, "MONITOR": 4}
+        sites = sorted(ALL, key=lambda s: (order_rank.get(SPOST[s]["posture"], 5), ALL.index(s)))
+        done_ids = {c["id"] for c in THIST.get("completed", [])}
+        def wcard(wid, kind_tag, tagcls, title, body_html, effort="", prompt=None, score=None):
+            sc = f'<span class="score num" style="font-size:12px">{score}</span> ' if score else ""
+            pr = (f'<div class="pcard" style="margin:0"><details><summary class="linkbtn" style="cursor:pointer">Show prompt</summary>'
+                  f'<pre class="ptext">{e(prompt)}</pre></details><div style="margin-top:6px"><button class="btn sm" data-copy>Copy prompt</button></div></div>') if prompt else ""
+            return (f'<div class="task" data-wid="{wid}"><label class="wdone"><input type="checkbox" class="wck" data-wid="{wid}" '
+                    f'data-title="{e(kind_tag)}: {e(title[:80])}"><span>Done</span></label>'
+                    f'<div class="meta"><span class="tag {tagcls}">{e(kind_tag)}</span> {sc}{e(effort)}</div>'
+                    f'<div style="font-size:13px;font-weight:600">{e(title)}</div>{body_html}{pr}</div>')
+        out = ""; total_todo = 0
+        for s in sites:
+            key = ABBR[s]; v_ = SPOST[s]; sm = SEM.get(s) or {}; f = F.get(s, {})
+            checks = _sc._health(s, F); ok = sum(1 for _, o in checks if o)
+            insp = [(p, vv) for (ss, p, vv) in insp_all if ss == s]; ipass = sum(1 for _, vv in insp if vv.get("verdict") == "PASS")
+            n10 = sum(1 for r in KT.get(s, []) if r.get("pos") and r["pos"] <= 10)
+            nrk = sum(1 for r in KT.get(s, []) if r.get("pos"))
+            # ---- audit: what's missing ----
+            missing = []
+            for it in (tech_items(s) or []):
+                missing.append(("neg", "Technical: " + (it if isinstance(it, str) else str(it)).split(chr(10))[0][:110]))
+            for p, vv in insp:
+                if vv.get("verdict") not in (None, "PASS"): missing.append(("neg", f"Not indexed: {p} ({vv.get('state') or vv.get('detail')})"))
+            if not GS.get(s, {}).get("in_gsc"): missing.append(("neg", "Not in Search Console — no traffic data"))
+            thin = CT.get(s, {}).get("n_thin", 0)
+            if thin: missing.append(("warn", f"{thin} thin article(s) under 600 words"))
+            if nrk == 0 and KT.get(s): missing.append(("warn", f"No strategic keyword in the top 100 yet (0/{len(KT[s])})"))
+            elif n10 == 0: missing.append(("warn", f"No strategic keyword in the top 10 yet ({nrk}/{len(KT.get(s, []))} ranking)"))
+            rd = sm.get("ref_domains")
+            if rd is not None and rd < 20: missing.append(("warn", f"Authority: only {rd} referring domains (Semrush) — links are the ceiling"))
+            if key in PAUSED: missing.append(("warn", f"Link building paused ({PAUSED[key]}) — review newest links first"))
+            gaps = [r for r in CT.get(s, {}).get("recommend", []) if not r["covered"] and reserved_for(s, r["kw"]) and not out_of_scope(r["kw"]) and (r["vol"] or 0) >= 100]
+            if gaps: missing.append(("neu", f"{len(gaps)} uncovered keyword(s) in this lane — top: “{gaps[0]['kw']}” {gaps[0]['vol']:,}/mo"))
+            pc = GS.get(s, {}).get("pages", {}).get("cur", {}); pp = GS.get(s, {}).get("pages", {}).get("prev", {})
+            decay = [u for u in pp if pp[u].get("clicks", 0) >= 15 and pc.get(u, {}).get("clicks", 0) <= pp[u]["clicks"] * 0.6 and not out_of_scope(u)]
+            if decay: missing.append(("warn", f"{len(decay)} page(s) losing clicks (content decay)"))
+            if not missing: missing.append(("pos", "Nothing missing — tech clean, indexed, ranking. Keep feeding links and content."))
+            miss_html = "".join(f'<div class="alertrow" style="padding:5px 0"><span class="tag {c}">{"issue" if c=="neg" else "watch" if c=="warn" else "ok" if c=="pos" else "gap"}</span><span>{e(t)}</span></div>' for c, t in missing)
+            # ---- to-do: engine tasks for this site (not completed) ----
+            st = [t for t in TASKS if t["site"] == s and t["id"] not in done_ids and t["bucket"] in ("today", "next")]
+            st.sort(key=lambda t: -t["score"])
+            cards = ""
+            for t in st[:6]:
+                body = f'<div style="font-size:12.5px;color:#374151">{e(t["action"])}</div>'
+                pr = prompts.get(s) if t["kind"] == "Technical fix" else None
+                cards += wcard(t["id"], t["kind"], "warn" if t["kind"] in ("Technical fix", "Indexation", "Rank recovery") else "acc",
+                               t["query"] or t["page"] or s, body, f'{t["effort"]} ≈{t["effort_min"]}m · {"TODAY" if t["bucket"]=="today" else "next"}', pr, t["score"])
+            total_todo += len(st[:6])
+            if gaps:
+                sk = skill_card(s)
+                if sk: cards += sk
+            # ---- to-do: backlinks for this site ----
+            have = {r["slug"] for r in live.get(key, [])}
+            lk = ""
+            if key in PAUSED:
+                lk = f'<div class="stmeta" style="color:var(--amb)">Links paused ({PAUSED[key]}) — review the newest links, then resume.</div>'
+            else:
+                items = [(pid, label) for pid, label, excl in P1 if key not in excl and pid not in have]
+                items += [(pid, f"{label} listing (owner: signup + CAPTCHA)") for pid, label in P2 if pid not in have][:2]
+                for pid, label in items[:5]:
+                    lk += f'<label class="lprow"><input class="lpx" type="checkbox" id="lp-{pid}-{key}"> <span>{e(label)}</span></label>'
+                    total_todo += 1
+            nxt = st[0] if st else None
+            next_move = (f'{e(nxt["kind"])}: <b>{e(nxt["query"] or nxt["page"] or s)}</b> — {e(nxt["action"][:120])}' if nxt
+                         else ("Links: " + e(items[0][1]) if (key not in PAUSED and items) else "Nothing queued — maintain."))
+            det = f"ws_{key}"
+            out += (f'<div class="card" style="margin-bottom:14px"><div class="chead" style="margin-bottom:8px">'
+                    f'<div style="display:flex;align-items:center;gap:9px"><span class="dot s{ALL.index(s)+1}"></span><h2>{s}</h2>{post_pill(v_["posture"])}</div>'
+                    f'<span class="stmeta">clicks 7d <b>{v_["wk"]:,}</b> {dfmt(v_["delta"]) if v_["delta"] is not None else ""} · top-10 <b>{n10}</b> · ref.dom <b>{rd if rd is not None else "—"}</b> · health <b>{ok}/{len(checks)}</b> · indexed <b>{ipass}/{len(insp)}</b> · {len(live.get(key, []))} links placed</span></div>'
+                    f'<div class="grid g2" style="margin:0 0 10px;gap:14px"><div><div class="rectitle">Audit — what is missing</div>{miss_html}</div>'
+                    f'<div><div class="rectitle">Next move</div><p class="narr" style="margin-top:5px">{next_move}</p>'
+                    f'<div class="rectitle" style="margin-top:10px">Backlinks to do</div><div class="lplist" style="margin-top:5px">{lk or "<div class=stmeta>nothing queued</div>"}</div></div></div>'
+                    f'<details {"open" if st else ""}><summary class="linkbtn" style="cursor:pointer">To-do — {len(st[:6])} task(s)</summary>'
+                    f'<div class="stack" style="gap:10px;margin-top:8px">{cards or "<div class=empty>No open tasks on this site.</div>"}</div></details></div>')
+        return (f'<div class="pagehead"><h1>Work — by website</h1><p class="sub">Every site audited: what is missing, the next move, and the full to-do '
+                f'(tasks + backlinks) in one place. Sites ordered by posture (FOCUS first). {total_todo} open items. '
+                f'Ticks sync across devices and feed verification.</p></div>' + out)
+
     # ---------- write ----------
     JS = CHART_JS + TABLE_JS + PERIOD_JS
     pages = [
         ("today.html", "Today — IPTV Portfolio", build_today(), "today", TODAY_JS),
+        ("work.html", "Work — by website", build_work_by_site(), "work", COPY_JS + G["WORK_JS"] + G["LINKS_JS"]),
         ("index.html", "IPTV Portfolio — SEO Command Center", build_overview(), None, JS + SALES_JS),
         ("performance.html", "Performance — IPTV Portfolio", build_performance(), "performance", JS),
         ("rankings.html", "Rankings — IPTV Portfolio", build_rankings(), "rankings", TABLE_JS),
