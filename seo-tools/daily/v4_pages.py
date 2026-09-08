@@ -440,6 +440,10 @@ def build_all(G):
 
     def tid(kind, site, key):
         return hashlib.md5(f"{kind}|{site}|{key}".encode()).hexdigest()[:10]
+    def tech_cat(txt):
+        # "1. THIN PAGES (P2). 7 page(s)…" -> "THIN PAGES"; "1. REDIRECT (P1). …" -> "REDIRECT"
+        t = txt.split(".", 1)[1] if txt[:2].strip().rstrip(".").isdigit() else txt
+        return t.split("(")[0].strip().upper()[:40]
 
     def kw_baseline(s, q):
         g = GS.get(s, {}).get("queries", {}).get("cur", {}).get(q)
@@ -486,7 +490,7 @@ def build_all(G):
                 txt = it if isinstance(it, str) else str(it)
                 p1 = "P1" in txt or "REDIRECT" in txt
                 score = 78 if p1 else 45
-                tasks.append(dict(id=tid("Technical fix", s, txt[:40]), kind="Technical fix", site=s, query="",
+                tasks.append(dict(id=tid("Technical fix", s, tech_cat(txt)), kind="Technical fix", site=s, query="",
                                   page="", what=txt[:180], why="Technical defects cap every other effort on the site.",
                                   upside="Removes a crawl/indexation handicap.", action="Fix card with full prompt on the Work page.",
                                   src="fresh BFS crawl", score=score,
@@ -682,9 +686,25 @@ def build_all(G):
             THIST["completed"].append({**{k: pt.get(k) for k in ("id", "kind", "site", "query", "page", "what", "baseline")},
                                        "completed": TODAY_STR, "how": ("auto-verified: the defect is gone from this audit's crawl" if pt["kind"] == "Technical fix" else "auto-verified: page(s) now PASS in GSC URL Inspection"),
                                        "outcome": "VERIFIED"})
+    # one record per (site, defect category): keep the most recent tick, drop the duplicates the changing counts created
+    _seen = {}
     for c in THIST["completed"]:
-        if c.get("kind") in ("Technical fix", "Indexation") and c.get("outcome") == "AWAITING VERIFICATION" and c["id"] not in open_ids:
-            c["outcome"] = "VERIFIED"; c["how"] += (" · defect gone from this audit's crawl" if c["kind"] == "Technical fix" else " · page(s) now PASS in URL Inspection")
+        k = (c.get("site"), tech_cat(str(c.get("what") or ""))) if c.get("kind") == "Technical fix" else ("id", c["id"])
+        if k not in _seen or (c.get("completed") or "") >= (_seen[k].get("completed") or ""):
+            _seen[k] = c
+    THIST["completed"] = [c for c in THIST["completed"] if _seen.get(
+        (c.get("site"), tech_cat(str(c.get("what") or ""))) if c.get("kind") == "Technical fix" else ("id", c["id"])) is c]
+    open_cats = {(s, tech_cat(it if isinstance(it, str) else str(it))) for s in ALL for it in (G["tech_items"](s) or [])}
+    for c in THIST["completed"]:
+        if c.get("kind") == "Technical fix":
+            cat = tech_cat(str(c.get("what") or ""))
+            still_open = (c.get("site"), cat) in open_cats
+            new = "AWAITING VERIFICATION" if still_open else "VERIFIED"
+            if c.get("outcome") != new:
+                c["outcome"] = new
+                c["how"] = (c.get("how") or "").split(" · ")[0] + (" · defect still present in this audit's crawl" if still_open else " · defect gone from this audit's crawl")
+        elif c.get("kind") == "Indexation" and c.get("outcome") == "AWAITING VERIFICATION" and c["id"] not in open_ids:
+            c["outcome"] = "VERIFIED"; c["how"] += " · page(s) now PASS in URL Inspection"
     # verification checkpoints for completed tasks with a keyword baseline
     for c in THIST["completed"]:
         if c.get("outcome") == "VERIFIED" or not c.get("query"): continue

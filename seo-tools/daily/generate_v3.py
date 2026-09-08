@@ -763,7 +763,8 @@ def workify(html):
         plain = RE.sub(r"<[^>]+>", "", text)
         plain = H.unescape(plain).strip()
         if kind == "FIX":
-            key = ("Technical fix", site, plain[:40])
+            t = plain.split(".", 1)[1] if plain[:2].strip().rstrip(".").isdigit() else plain
+            key = ("Technical fix", site, t.split("(")[0].strip().upper()[:40])
         elif kind in ("WRITE", "QUEUED"):
             kw = RE.search(r"[“\"]([^”\"]+)[”\"]", plain)
             key = ("Content gap", site, kw.group(1) if kw else plain[:40])

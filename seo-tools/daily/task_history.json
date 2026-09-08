@@ -33,22 +33,6 @@
    "outcome": "VERIFIED"
   },
   {
-   "id": "bd9ac0bccf",
-   "kind": "Technical fix",
-   "site": "iptvned.com",
-   "query": "",
-   "page": "",
-   "what": "1. THIN PAGES (P2). 7 page(s) under 300 words: afrekenen, afrekenen, afrekenen, afrekenen, afrekenen, contact.\n   Expand each to answer its query properly, or consolidate/noindex i",
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   },
-   "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "VERIFIED"
-  },
-  {
    "id": "e91c45e957",
    "kind": "Technical fix",
    "site": "iptvpix.com",
@@ -61,8 +45,8 @@
     "clicks28": 0
    },
    "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "VERIFIED"
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect still present in this audit's crawl",
+   "outcome": "AWAITING VERIFICATION"
   },
   {
    "id": "dda33ce6cb",
@@ -87,44 +71,12 @@
    }
   },
   {
-   "id": "82fbbe1c24",
-   "kind": "Technical fix",
-   "site": "iptvshqiptar.com",
-   "query": "",
-   "page": "",
-   "what": "1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout, kontakt.\n   Expand each to answer its query properly, or consolidate/noindex if the",
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   },
-   "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "VERIFIED"
-  },
-  {
    "id": "8162a0a994",
    "kind": "Technical fix",
    "site": "rodaktv.com",
    "query": "",
    "page": "",
    "what": "1. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> Domains set it to permanent (308). Verify with curl -sI.",
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   },
-   "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "VERIFIED"
-  },
-  {
-   "id": "0b8f632913",
-   "kind": "Technical fix",
-   "site": "iptvesp.com",
-   "query": "",
-   "page": "",
-   "what": "1. THIN PAGES (P2). 7 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout, contacto.\n   Expand each to answer its query properly, or consolidate/noindex if th",
    "baseline": {
     "probe_pos": null,
     "gsc_pos": null,
@@ -393,8 +345,8 @@
     "clicks28": 0
    },
    "completed": "2026-09-08",
-   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "VERIFIED"
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect still present in this audit's crawl",
+   "outcome": "AWAITING VERIFICATION"
   },
   {
    "id": "b3caca4a55",
@@ -463,22 +415,6 @@
    }
   },
   {
-   "id": "627326bf4c",
-   "kind": "Technical fix",
-   "site": "iptvesp.com",
-   "query": "",
-   "page": "",
-   "what": "1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout, politica-de-reembolso.\n   Expand each to answer its query properly, or consolidate/",
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   },
-   "completed": "2026-09-08",
-   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "VERIFIED"
-  },
-  {
    "id": "ddd984ebb5",
    "kind": "Striking distance",
    "site": "iptvesp.com",
@@ -501,22 +437,6 @@
    }
   },
   {
-   "id": "b443b33f42",
-   "kind": "Technical fix",
-   "site": "iptvned.com",
-   "query": "",
-   "page": "",
-   "what": "1. THIN PAGES (P2). 6 page(s) under 300 words: afrekenen, afrekenen, afrekenen, afrekenen, afrekenen, terugbetalingsbeleid.\n   Expand each to answer its query properly, or consolid",
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   },
-   "completed": "2026-09-08",
-   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "VERIFIED"
-  },
-  {
    "id": "0859acb6ae",
    "kind": "Striking distance",
    "site": "iptvesp.com",
@@ -537,6 +457,38 @@
     "gsc_pos": 5.6,
     "clicks28": 3
    }
+  },
+  {
+   "id": "984cc3c4dc",
+   "kind": "Technical fix",
+   "site": "iptvesp.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "auto-verified: the defect is gone from this audit's crawl \u00b7 defect still present in this audit's crawl",
+   "outcome": "AWAITING VERIFICATION"
+  },
+  {
+   "id": "7ef248c3f6",
+   "kind": "Technical fix",
+   "site": "iptvned.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: afrekenen, afrekenen, afrekenen, afrekenen, afrekenen.\n   Expand each to answer its query properly, or consolidate/noindex if they se",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "auto-verified: the defect is gone from this audit's crawl \u00b7 defect still present in this audit's crawl",
+   "outcome": "AWAITING VERIFICATION"
   }
  ]
 }

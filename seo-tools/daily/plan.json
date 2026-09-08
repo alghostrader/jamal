@@ -87,20 +87,20 @@
    }
   },
   {
-   "id": "c9d69a7ba7",
-   "kind": "Content gap",
-   "site": "iptvesp.com",
-   "query": "proveedor iptv",
+   "id": "5b7c04cc72",
+   "kind": "Striking distance",
+   "site": "iptvsegura.com",
+   "query": "estafas iptv",
    "page": "",
-   "what": "\u201cproveedor iptv\u201d (480/mo) has no page anywhere in this market.",
+   "what": "\u201cestafas iptv\u201d sits at position 18 with 12 impressions/28d.",
    "score": 52,
    "bucket": "next",
-   "effort": "Deep work",
-   "effort_min": 90,
+   "effort": "Medium",
+   "effort_min": 40,
    "baseline": {
-    "probe_pos": 42,
-    "gsc_pos": null,
-    "clicks28": 0
+    "probe_pos": 17,
+    "gsc_pos": 17.9,
+    "clicks28": 1
    }
   },
   {
@@ -1073,7 +1073,7 @@
    }
   },
   {
-   "id": "984cc3c4dc",
+   "id": "b91c10424f",
    "kind": "Technical fix",
    "site": "iptvesp.com",
    "query": "",
@@ -1090,12 +1090,46 @@
    }
   },
   {
-   "id": "7ef248c3f6",
+   "id": "5b7bf2303d",
    "kind": "Technical fix",
    "site": "iptvned.com",
    "query": "",
    "page": "",
    "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: afrekenen, afrekenen, afrekenen, afrekenen, afrekenen.\n   Expand each to answer its query properly, or consolidate/noindex if they se",
+   "score": 45,
+   "bucket": "monitor",
+   "effort": "Quick",
+   "effort_min": 20,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "db10ebae21",
+   "kind": "Technical fix",
+   "site": "iptvpix.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
+   "score": 45,
+   "bucket": "monitor",
+   "effort": "Quick",
+   "effort_min": 20,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "bead5883ac",
+   "kind": "Technical fix",
+   "site": "iptvshqiptar.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
    "score": 45,
    "bucket": "monitor",
    "effort": "Quick",
@@ -1260,23 +1294,6 @@
    }
   },
   {
-   "id": "5b7c04cc72",
-   "kind": "Striking distance",
-   "site": "iptvsegura.com",
-   "query": "estafas iptv",
-   "page": "",
-   "what": "\u201cestafas iptv\u201d sits at position 18 with 12 impressions/28d.",
-   "score": 44,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": 17,
-    "gsc_pos": 17.9,
-    "clicks28": 1
-   }
-  },
-  {
    "id": "1758801d35",
    "kind": "Striking distance",
    "site": "iptvshqiptar.com",
@@ -1409,6 +1426,23 @@
    "baseline": {
     "probe_pos": null,
     "gsc_pos": 8.6,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "c9d69a7ba7",
+   "kind": "Content gap",
+   "site": "iptvesp.com",
+   "query": "proveedor iptv",
+   "page": "",
+   "what": "\u201cproveedor iptv\u201d (480/mo) has no page anywhere in this market.",
+   "score": 41,
+   "bucket": "monitor",
+   "effort": "Deep work",
+   "effort_min": 90,
+   "baseline": {
+    "probe_pos": 42,
+    "gsc_pos": null,
     "clicks28": 0
    }
   },
