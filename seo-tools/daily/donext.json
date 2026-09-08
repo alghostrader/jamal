@@ -748,6 +748,59 @@
    }
   },
   {
+   "id": "70f507b6f5",
+   "type": "Striking distance",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "repo_path": "/Desktop/iptv-espana-pro",
+   "repo_content": "MDX content/blog",
+   "keyword": "listas m3u telegram",
+   "page": "",
+   "metric": "GSC pos 5.7 \u00b7 40 clicks \u00b7 257 impr / 28d",
+   "search_volume": null,
+   "gsc": {
+    "clicks": 40,
+    "impressions": 257,
+    "ctr": 0.1556420233463035,
+    "position": 5.743190661478599
+   },
+   "target_url": "https://iptvesp.com/blog/telegram-listas-iptv-espana",
+   "action": "ENHANCE",
+   "cannibalization_note": "page already ranks this term \u2014 enhance it, never a new URL",
+   "deploy_as": "alghostrader \u00b7 git push origin main \u2192 Vercel auto",
+   "guards": [
+    "title \u2264 60 chars (build fails otherwise)",
+    "no rights-holder / channel / league / broadcaster names",
+    "real hero image (no icon fallback)",
+    "brand or naked-URL anchors only for links"
+   ],
+   "done_when": [
+    "3+ internal links point at the ranking page with varied anchors",
+    "on-query section refreshed + dateModified bumped",
+    "deploy READY + live fetch finds the keyword on the page"
+   ],
+   "priority_score": 0,
+   "effort": "\u2014",
+   "effort_min": 0,
+   "what": "\u201clistas m3u telegram\u201d sits at position 6 with 250 impressions/28d.",
+   "why": "",
+   "why_action": "",
+   "drivers": [],
+   "category": "",
+   "bucket": "",
+   "completed": "2026-09-06",
+   "defect_gone": false,
+   "indexed": false,
+   "new_links": 0,
+   "verify": {
+    "deployed": false,
+    "live": false,
+    "http": 0,
+    "detail": "live URL returned HTTP unreachable",
+    "checked": "2026-09-08"
+   }
+  },
+  {
    "id": "1ec40f062e",
    "type": "Backlink",
    "kind": "Authority gap",
@@ -795,25 +848,20 @@
    }
   },
   {
-   "id": "ddd984ebb5",
-   "type": "Striking distance",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "repo_path": "/Desktop/iptv-espana-pro",
-   "repo_content": "MDX content/blog",
-   "keyword": "listas iptv premium telegram",
+   "id": "8162a0a994",
+   "type": "Technical",
+   "kind": "Technical fix",
+   "site": "rodaktv.com",
+   "repo_path": "\u26a0 confirm: alghostrader/iptv-polska",
+   "repo_content": "blog/",
+   "keyword": "",
    "page": "",
-   "metric": "GSC pos 5.5 \u00b7 4 clicks \u00b7 26 impr / 28d",
+   "metric": "no volume data",
    "search_volume": null,
-   "gsc": {
-    "clicks": 4,
-    "impressions": 26,
-    "ctr": 0.15384615384615385,
-    "position": 5.5
-   },
-   "target_url": "https://iptvesp.com/blog/listas-telegram-iptv-espana",
-   "action": "ENHANCE",
-   "cannibalization_note": "page already ranks this term \u2014 enhance it, never a new URL",
+   "gsc": null,
+   "target_url": "https://rodaktv.com/",
+   "action": "FIX",
+   "cannibalization_note": "",
    "deploy_as": "alghostrader \u00b7 git push origin main \u2192 Vercel auto",
    "guards": [
     "title \u2264 60 chars (build fails otherwise)",
@@ -822,28 +870,27 @@
     "brand or naked-URL anchors only for links"
    ],
    "done_when": [
-    "3+ internal links point at the ranking page with varied anchors",
-    "on-query section refreshed + dateModified bumped",
-    "deploy READY + live fetch finds the keyword on the page"
+    "defect fixed in the repo (all flagged pages)",
+    "deploy READY",
+    "live re-check passes (thin pages \u2265 300 words / redirect 308 / zero broken links)"
    ],
    "priority_score": 0,
    "effort": "\u2014",
    "effort_min": 0,
-   "what": "\u201clistas iptv premium telegram\u201d sits at position 6 with 26 impressions/28d.",
+   "what": "1. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> Domains set it to permanent (308). Verify with curl -sI.",
    "why": "",
    "why_action": "",
    "drivers": [],
-   "category": "",
+   "category": "REDIRECT",
    "bucket": "",
-   "completed": "2026-09-08",
-   "defect_gone": false,
+   "completed": "2026-09-06",
+   "defect_gone": true,
    "indexed": false,
    "new_links": 0,
    "verify": {
-    "deployed": true,
+    "deployed": false,
     "live": false,
-    "http": 200,
-    "detail": "page is live but its modified date is before 2026-09-08",
+    "detail": "redirect check failed: HTTPSConnectionPool(host='www.rodaktv.com', port=443): Max r",
     "checked": "2026-09-08"
    }
   },
@@ -892,59 +939,6 @@
     "live": false,
     "http": 200,
     "detail": "page is live but its modified date is before 2026-09-06",
-    "checked": "2026-09-08"
-   }
-  },
-  {
-   "id": "0859acb6ae",
-   "type": "Striking distance",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "repo_path": "/Desktop/iptv-espana-pro",
-   "repo_content": "MDX content/blog",
-   "keyword": "iptv smarters pro telegram",
-   "page": "",
-   "metric": "GSC pos 5.6 \u00b7 3 clicks \u00b7 12 impr / 28d",
-   "search_volume": null,
-   "gsc": {
-    "clicks": 3,
-    "impressions": 12,
-    "ctr": 0.25,
-    "position": 5.583333333333333
-   },
-   "target_url": "https://iptvesp.com/blog/listas-telegram-iptv-espana",
-   "action": "ENHANCE",
-   "cannibalization_note": "page already ranks this term \u2014 enhance it, never a new URL",
-   "deploy_as": "alghostrader \u00b7 git push origin main \u2192 Vercel auto",
-   "guards": [
-    "title \u2264 60 chars (build fails otherwise)",
-    "no rights-holder / channel / league / broadcaster names",
-    "real hero image (no icon fallback)",
-    "brand or naked-URL anchors only for links"
-   ],
-   "done_when": [
-    "3+ internal links point at the ranking page with varied anchors",
-    "on-query section refreshed + dateModified bumped",
-    "deploy READY + live fetch finds the keyword on the page"
-   ],
-   "priority_score": 0,
-   "effort": "\u2014",
-   "effort_min": 0,
-   "what": "\u201ciptv smarters pro telegram\u201d sits at position 6 with 12 impressions/28d.",
-   "why": "",
-   "why_action": "",
-   "drivers": [],
-   "category": "",
-   "bucket": "",
-   "completed": "2026-09-08",
-   "defect_gone": false,
-   "indexed": false,
-   "new_links": 0,
-   "verify": {
-    "deployed": true,
-    "live": false,
-    "http": 200,
-    "detail": "page is live but its modified date is before 2026-09-08",
     "checked": "2026-09-08"
    }
   },
@@ -1145,60 +1139,6 @@
  ],
  "shipped": [
   {
-   "id": "70f507b6f5",
-   "type": "Striking distance",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "repo_path": "/Desktop/iptv-espana-pro",
-   "repo_content": "MDX content/blog",
-   "keyword": "listas m3u telegram",
-   "page": "",
-   "metric": "GSC pos 5.7 \u00b7 40 clicks \u00b7 257 impr / 28d",
-   "search_volume": null,
-   "gsc": {
-    "clicks": 40,
-    "impressions": 257,
-    "ctr": 0.1556420233463035,
-    "position": 5.743190661478599
-   },
-   "target_url": "https://iptvesp.com/blog/telegram-listas-iptv-espana",
-   "action": "ENHANCE",
-   "cannibalization_note": "page already ranks this term \u2014 enhance it, never a new URL",
-   "deploy_as": "alghostrader \u00b7 git push origin main \u2192 Vercel auto",
-   "guards": [
-    "title \u2264 60 chars (build fails otherwise)",
-    "no rights-holder / channel / league / broadcaster names",
-    "real hero image (no icon fallback)",
-    "brand or naked-URL anchors only for links"
-   ],
-   "done_when": [
-    "3+ internal links point at the ranking page with varied anchors",
-    "on-query section refreshed + dateModified bumped",
-    "deploy READY + live fetch finds the keyword on the page"
-   ],
-   "priority_score": 0,
-   "effort": "\u2014",
-   "effort_min": 0,
-   "what": "\u201clistas m3u telegram\u201d sits at position 6 with 250 impressions/28d.",
-   "why": "",
-   "why_action": "",
-   "drivers": [],
-   "category": "",
-   "bucket": "",
-   "completed": "2026-09-06",
-   "defect_gone": false,
-   "indexed": false,
-   "new_links": 0,
-   "verify": {
-    "deployed": true,
-    "live": true,
-    "http": 200,
-    "detail": "keyword present + modified on/after 2026-09-06",
-    "checked": "2026-09-08",
-    "verified_at": "2026-09-08"
-   }
-  },
-  {
    "id": "53045dba08",
    "type": "Content",
    "kind": "Content gap",
@@ -1302,6 +1242,114 @@
    }
   },
   {
+   "id": "ddd984ebb5",
+   "type": "Striking distance",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "repo_path": "/Desktop/iptv-espana-pro",
+   "repo_content": "MDX content/blog",
+   "keyword": "listas iptv premium telegram",
+   "page": "",
+   "metric": "GSC pos 5.5 \u00b7 4 clicks \u00b7 26 impr / 28d",
+   "search_volume": null,
+   "gsc": {
+    "clicks": 4,
+    "impressions": 26,
+    "ctr": 0.15384615384615385,
+    "position": 5.5
+   },
+   "target_url": "https://iptvesp.com/blog/listas-telegram-iptv-espana",
+   "action": "ENHANCE",
+   "cannibalization_note": "page already ranks this term \u2014 enhance it, never a new URL",
+   "deploy_as": "alghostrader \u00b7 git push origin main \u2192 Vercel auto",
+   "guards": [
+    "title \u2264 60 chars (build fails otherwise)",
+    "no rights-holder / channel / league / broadcaster names",
+    "real hero image (no icon fallback)",
+    "brand or naked-URL anchors only for links"
+   ],
+   "done_when": [
+    "3+ internal links point at the ranking page with varied anchors",
+    "on-query section refreshed + dateModified bumped",
+    "deploy READY + live fetch finds the keyword on the page"
+   ],
+   "priority_score": 0,
+   "effort": "\u2014",
+   "effort_min": 0,
+   "what": "\u201clistas iptv premium telegram\u201d sits at position 6 with 26 impressions/28d.",
+   "why": "",
+   "why_action": "",
+   "drivers": [],
+   "category": "",
+   "bucket": "",
+   "completed": "2026-09-08",
+   "defect_gone": false,
+   "indexed": false,
+   "new_links": 0,
+   "verify": {
+    "deployed": true,
+    "live": true,
+    "http": 200,
+    "detail": "keyword present + modified on/after 2026-09-08",
+    "checked": "2026-09-08",
+    "verified_at": "2026-09-08"
+   }
+  },
+  {
+   "id": "0859acb6ae",
+   "type": "Striking distance",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "repo_path": "/Desktop/iptv-espana-pro",
+   "repo_content": "MDX content/blog",
+   "keyword": "iptv smarters pro telegram",
+   "page": "",
+   "metric": "GSC pos 5.6 \u00b7 3 clicks \u00b7 12 impr / 28d",
+   "search_volume": null,
+   "gsc": {
+    "clicks": 3,
+    "impressions": 12,
+    "ctr": 0.25,
+    "position": 5.583333333333333
+   },
+   "target_url": "https://iptvesp.com/blog/listas-telegram-iptv-espana",
+   "action": "ENHANCE",
+   "cannibalization_note": "page already ranks this term \u2014 enhance it, never a new URL",
+   "deploy_as": "alghostrader \u00b7 git push origin main \u2192 Vercel auto",
+   "guards": [
+    "title \u2264 60 chars (build fails otherwise)",
+    "no rights-holder / channel / league / broadcaster names",
+    "real hero image (no icon fallback)",
+    "brand or naked-URL anchors only for links"
+   ],
+   "done_when": [
+    "3+ internal links point at the ranking page with varied anchors",
+    "on-query section refreshed + dateModified bumped",
+    "deploy READY + live fetch finds the keyword on the page"
+   ],
+   "priority_score": 0,
+   "effort": "\u2014",
+   "effort_min": 0,
+   "what": "\u201ciptv smarters pro telegram\u201d sits at position 6 with 12 impressions/28d.",
+   "why": "",
+   "why_action": "",
+   "drivers": [],
+   "category": "",
+   "bucket": "",
+   "completed": "2026-09-08",
+   "defect_gone": false,
+   "indexed": false,
+   "new_links": 0,
+   "verify": {
+    "deployed": true,
+    "live": true,
+    "http": 200,
+    "detail": "keyword present + modified on/after 2026-09-08",
+    "checked": "2026-09-08",
+    "verified_at": "2026-09-08"
+   }
+  },
+  {
    "id": "715fb811aa",
    "type": "Content",
    "kind": "Content decay",
@@ -1394,55 +1442,6 @@
     "deployed": true,
     "live": true,
     "detail": "page(s) PASS in GSC URL Inspection",
-    "checked": "2026-09-08",
-    "verified_at": "2026-09-06"
-   }
-  },
-  {
-   "id": "8162a0a994",
-   "type": "Technical",
-   "kind": "Technical fix",
-   "site": "rodaktv.com",
-   "repo_path": "\u26a0 confirm: alghostrader/iptv-polska",
-   "repo_content": "blog/",
-   "keyword": "",
-   "page": "",
-   "metric": "no volume data",
-   "search_volume": null,
-   "gsc": null,
-   "target_url": "https://rodaktv.com/",
-   "action": "FIX",
-   "cannibalization_note": "",
-   "deploy_as": "alghostrader \u00b7 git push origin main \u2192 Vercel auto",
-   "guards": [
-    "title \u2264 60 chars (build fails otherwise)",
-    "no rights-holder / channel / league / broadcaster names",
-    "real hero image (no icon fallback)",
-    "brand or naked-URL anchors only for links"
-   ],
-   "done_when": [
-    "defect fixed in the repo (all flagged pages)",
-    "deploy READY",
-    "live re-check passes (thin pages \u2265 300 words / redirect 308 / zero broken links)"
-   ],
-   "priority_score": 0,
-   "effort": "\u2014",
-   "effort_min": 0,
-   "what": "1. REDIRECT (P1). A host redirect is 307 (temporary). In Vercel -> Settings -> Domains set it to permanent (308). Verify with curl -sI.",
-   "why": "",
-   "why_action": "",
-   "drivers": [],
-   "category": "REDIRECT",
-   "bucket": "",
-   "completed": "2026-09-06",
-   "defect_gone": true,
-   "indexed": false,
-   "new_links": 0,
-   "verify": {
-    "deployed": true,
-    "live": true,
-    "http": 308,
-    "detail": "host redirect is 308",
     "checked": "2026-09-08",
     "verified_at": "2026-09-06"
    }

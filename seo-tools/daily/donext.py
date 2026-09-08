@@ -446,7 +446,7 @@ def build_donext(G, C):
 
     body = f'''
 <div class="dn">
-<p class="lead">One ranked queue — <b>Today</b> and <b>Work</b> merged. Item <b>#1</b> is the next thing to do. A task clears only when it is <b>live-verified</b> (deploy READY + change confirmed on the live URL), never when it is merely committed.</p>
+<p class="lead">One ranked queue — <b>Today</b> and <b>Work</b> merged. Item <b>#1</b> is the next thing to do. A task clears only when it is <b>live-verified</b> (deploy READY + change confirmed on the live URL), never when it is merely committed. <span class="dim">{vercel_line}</span></p>
 <section class="summary" aria-label="Queue summary">
   <div class="tile do"><span class="stripe"></span><div class="k">To do now</div><div class="v num" id="c-do">{len(do_models)}</div><div class="s">≈ <span id="c-est">{est//60}h {est%60:02d}m</span> of work</div></div>
   <div class="tile ship"><span class="stripe"></span><div class="k">Shipped today</div><div class="v num" id="c-ship">{len(shipped_today)}</div><div class="s">all live-verified · <span id="c-ver">{len(verifying)}</span> awaiting live check</div></div>
@@ -487,20 +487,7 @@ def build_donext(G, C):
     <div class="rows">{exc_html}</div>
   </section>
 </div>
-<aside class="dnside" aria-label="Legend and rules">
-  <div class="scard"><h3>“Done” means live</h3>
-    <div class="flow"><span class="p ok"></span> Built <span class="dim">→</span> <span class="p ok"></span> Deployed <span class="dim">→</span> <span class="p acc"></span> Live</div>
-    <p class="dim" style="margin-top:10px">A task auto-clears only after the change is confirmed on the live URL — deploy <b>READY</b> + a live fetch (content: keyword on the page · technical: defect gone · backlink: link present + dofollow). No “Copy status” hand-off: ticks sync by themselves.</p>
-    <p class="dim" style="margin-top:6px">{vercel_line}</p></div>
-  <div class="scard"><h3>Lanes</h3><div class="legend">
-    <div class="li"><span class="sw acc"></span><span><b>Do now</b> — ranked, everything Claude can act on unaided.</span></div>
-    <div class="li"><span class="sw warn"></span><span><b>Needs Jamal</b> — owner-only or blocked; parked, not lost.</span></div>
-    <div class="li"><span class="sw slate"></span><span><b>Monitor</b> — the engine's watch list; don't touch.</span></div>
-    <div class="li"><span class="sw line"></span><span><b>Excluded</b> — out of scope; auto-filed.</span></div></div></div>
-  <div class="scard scope"><h3>Scope filter</h3><p class="dim">Target markets <span class="in">{e(scope_in)}</span>. {e(SCOPE["out_label"])} keywords are <span class="out">auto-excluded</span> before they reach the queue ({len(SCOPE["out_words"])} trigger words).</p></div>
-  <div class="scard"><h3>Backlink rules</h3><ul class="rules"><li>Anchor = brand or naked URL only — never money keywords.</li><li>Signup + CAPTCHA + publish = owner only.</li><li>Ticking a placement on <a href="links">Backlinks</a> stores its live URL — that checklist IS the ledger; decay is re-checked every audit.</li></ul></div>
-  <div class="scard"><h3>Freshness</h3><p class="dim">GSC {e(gsc_when)} · Semrush {e(C.get("SEM_UPD") or "cached")} · live checks {TODAY}</p></div>
-</aside>
+
 </div>
 </div>'''
     return body

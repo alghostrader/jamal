@@ -88,8 +88,8 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "VERIFIED",
-   "live_check": "host redirect is 308"
+   "outcome": "AWAITING VERIFICATION",
+   "live_check": "redirect check failed: HTTPSConnectionPool(host='www.rodaktv.com', port=443): Max r"
   },
   {
    "id": "6f748626cd",
@@ -207,14 +207,14 @@
    },
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "VERIFIED",
+   "outcome": "AWAITING VERIFICATION",
    "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
     "gsc_pos": 5.7,
     "clicks28": 40
    },
-   "live_check": "keyword present + modified on/after 2026-09-06"
+   "live_check": "live URL returned HTTP unreachable"
   },
   {
    "id": "dcbbd6a189",
@@ -445,14 +445,14 @@
    },
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "outcome": "VERIFIED",
    "checkpoint_days": 0,
    "now": {
     "probe_pos": null,
     "gsc_pos": 5.5,
     "clicks28": 4
    },
-   "live_check": "page is live but its modified date is before 2026-09-08"
+   "live_check": "keyword present + modified on/after 2026-09-08"
   },
   {
    "id": "0859acb6ae",
@@ -468,14 +468,14 @@
    },
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
-   "outcome": "AWAITING VERIFICATION",
+   "outcome": "VERIFIED",
    "checkpoint_days": 0,
    "now": {
     "probe_pos": null,
     "gsc_pos": 5.6,
     "clicks28": 3
    },
-   "live_check": "page is live but its modified date is before 2026-09-08"
+   "live_check": "keyword present + modified on/after 2026-09-08"
   },
   {
    "id": "984cc3c4dc",
