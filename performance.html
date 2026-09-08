@@ -335,6 +335,93 @@
   .task.done>div:not(.meta):not(.pcard){text-decoration:line-through}
   .task.done .wdone{color:var(--pos)}
 </style>
+<style>
+/* ===== Do next board (Today + Work merged) — same Organic tokens ===== */
+.navtag{margin-left:auto;font-size:11px;color:#fff;background:var(--acc);border-radius:20px;padding:1px 7px;font-weight:600}
+.dn [hidden]{display:none!important}
+.dn .lead{color:var(--mut);font-size:13px;margin:-2px 0 16px;max-width:70ch}
+.dn .dim{color:var(--mut);font-size:12px}
+.dn .summary{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+.dn .tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;position:relative;overflow:hidden}
+.dn .tile .k{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:600}
+.dn .tile .v{font-size:26px;font-weight:600;margin-top:4px;letter-spacing:-.01em}
+.dn .tile .s{font-size:11.5px;color:var(--faint);margin-top:2px}
+.dn .tile .stripe{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--line)}
+.dn .tile.do .stripe{background:var(--acc)}.dn .tile.do .v{color:var(--acc-dk)}
+.dn .tile.ship .stripe{background:var(--pos)}.dn .tile.ship .v{color:#15803d}
+.dn .tile.hiba .stripe{background:var(--amb)}.dn .tile.hiba .v{color:#b45309}
+.dn .tile.watch .stripe{background:#64748b}.dn .tile.excl .v{color:var(--faint)}
+.dn .dngrid{display:grid;grid-template-columns:minmax(0,1fr) 264px;gap:20px;align-items:start}
+.dn .lanes{display:inline-flex;gap:3px;background:var(--soft);border:1px solid var(--line);padding:3px;border-radius:10px;margin-bottom:14px;flex-wrap:wrap}
+.dn .lane-btn{border:none;background:transparent;color:var(--mut);font:600 12.5px var(--body);padding:7px 12px;border-radius:7px;display:inline-flex;align-items:center;gap:7px;cursor:pointer}
+.dn .lane-btn .c{font-size:11px;background:var(--line);color:var(--ink);border-radius:20px;padding:0 7px;font-weight:600;min-width:18px;text-align:center}
+.dn .lane-btn[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.dn .lane-btn[aria-selected="true"] .c{background:var(--acc);color:#fff}
+.dn .lane-btn.warn[aria-selected="true"] .c{background:var(--amb)}.dn .lane-btn.slate[aria-selected="true"] .c{background:#64748b}
+.dn .panel{display:none}.dn .panel.active{display:block}
+.dn .panelhead,.dn .subhead{display:flex;align-items:baseline;gap:10px;margin:14px 0 10px}
+.dn .panelhead h2,.dn .subhead h2{font-size:14px;font-weight:600;margin:0}
+.dn .note{font-size:12px;color:var(--mut)}
+.dn .toolbar{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;font-size:12px;color:var(--mut)}
+.dn .sel{font:12.5px var(--body);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.dn .stack{display:flex;flex-direction:column;gap:10px}
+.dn .empty{background:var(--soft);border:1px dashed var(--line);border-radius:10px;padding:14px;font-size:13px;color:var(--mut)}
+.dn article.task{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0;margin:0}
+.dn article.task.ship{border-color:#86efac}.dn article.task.blocked{border-color:#fca5a5}.dn article.task.active{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-bg)}
+.dn article.task.done{opacity:.55}
+.dn .chead{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;width:100%;text-align:left;background:transparent;border:none;cursor:pointer;font:inherit;color:inherit;margin:0}
+.dn .rank{width:30px;height:30px;border-radius:8px;background:var(--acc-bg);color:var(--acc-dk);font-weight:700;display:grid;place-items:center;font-size:13px;flex:none}
+.dn .ship .rank{background:var(--pos-bg);color:#15803d}.dn .needs .rank{background:var(--amb-bg);color:#b45309}.dn .blocked .rank{background:var(--neg-bg);color:var(--neg)}
+.dn .ctitle{min-width:0}.dn .row1{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dn .ctitle h3{font-size:14px;font-weight:600;margin:0;letter-spacing:-.005em}
+.dn .badge{font-size:10.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.dn .b-content{background:#f1eafe;color:#7c3aed}.dn .b-striking{background:#e7effe;color:#2563eb}.dn .b-tech{background:#edeff3;color:#5a6577}.dn .b-links{background:#e2f4f1;color:#0e9384}.dn .b-bad{background:var(--neg-bg);color:var(--neg)}
+.dn .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:3px;font-size:12px;color:var(--mut)}
+.dn .meta .site{color:var(--ink);font-weight:600}.dn .meta .sep{width:3px;height:3px;border-radius:50%;background:var(--faint)}
+.dn .cright{display:flex;align-items:center;gap:12px;flex:none}
+.dn .chev{color:var(--faint);transition:transform .18s ease;font-size:16px}.dn .open .chev{transform:rotate(90deg)}
+.dn .track{display:flex;align-items:center}
+.dn .step{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--faint);font-weight:600}
+.dn .step .pip{width:12px;height:12px;border-radius:50%;border:2px solid var(--line);background:var(--card)}
+.dn .step.done{color:#15803d}.dn .step.done .pip{background:var(--pos);border-color:var(--pos)}
+.dn .step.now{color:var(--acc-dk)}.dn .step.now .pip{background:var(--acc);border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-bg)}
+.dn .step.blocked{color:var(--neg)}.dn .step.blocked .pip{background:var(--neg);border-color:var(--neg)}
+.dn .conn{width:18px;height:2px;background:var(--line)}.dn .conn.done{background:var(--pos)}
+.dn .spec{display:none;border-top:1px solid var(--line2);padding:12px 14px 14px}.dn .open .spec{display:block}
+.dn .what{margin:0 0 10px;font-size:13px;color:var(--ink)}
+.dn .worksheet{background:var(--soft);border:1px solid var(--line2);border-radius:9px;padding:10px 12px;font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);overflow-x:auto}
+.dn .worksheet .line{display:flex;gap:10px;padding:2px 0}.dn .worksheet .key{color:var(--faint);min-width:84px;flex:none;user-select:none}.dn .worksheet .val{min-width:0;word-break:break-word}
+.dn .warnflag{color:#b45309;background:var(--amb-bg);border-radius:5px;padding:0 5px;font-family:var(--body)}
+.dn .urlrow{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:12px}.dn .urlrow label{color:var(--mut);flex:none}
+.dn .urlrow input{flex:1;min-width:0;font:12.5px var(--body);border:1px solid var(--line);border-radius:8px;padding:6px 9px}
+.dn .dw{margin:11px 0 0}.dn .dwt{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:600}
+.dn .dw ul{margin:5px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+.dn .dw li{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink)}.dn .dw li .mk{color:var(--pos);font-weight:700;flex:none}.dn .dw li.pending .mk{color:var(--faint)}
+.dn details.why{margin-top:10px;font-size:12.5px}.dn details.why summary{cursor:pointer;color:var(--acc)}.dn details.why ul{margin:6px 0 0;padding-left:18px;color:var(--mut)}
+.dn .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.dn .act{font:600 12.5px var(--body);padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none}
+.dn .act:hover{background:var(--soft)}.dn .act.primary{background:var(--acc);color:#fff;border-color:var(--acc)}.dn .act.primary:hover{background:var(--acc-dk)}
+.dn .rows{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.dn .rrow{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:10px 14px;border-top:1px solid var(--line2)}
+.dn .rrow:first-child{border-top:none}.dn .rrow .score{font:600 12px ui-monospace,Menlo,monospace;color:var(--mut)}
+.dn .rrow .rt{min-width:0}.dn .rrow .rt b{font-weight:600;font-size:13.5px}.dn .rrow .rt .m{font-size:11.5px;color:var(--faint)}.dn .rrow .rt .m .site{color:var(--mut)}
+.dn .ghost{font:600 12px var(--body);color:var(--acc-dk);background:var(--acc-bg);border:none;padding:6px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}.dn .ghost:disabled{color:var(--faint);background:var(--line2);cursor:not-allowed}
+.dn .dnside{display:flex;flex-direction:column;gap:12px;position:sticky;top:70px}
+.dn .scard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.dn .scard h3{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);font-weight:600;margin:0 0 9px}
+.dn .scard p{margin:0;font-size:12px;line-height:1.5}
+.dn .flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:11.5px;color:var(--mut)}.dn .flow .p{width:11px;height:11px;border-radius:50%}.dn .p.ok{background:var(--pos)}.dn .p.acc{background:var(--acc)}
+.dn .legend{display:flex;flex-direction:column;gap:8px}.dn .legend .li{display:flex;gap:9px;align-items:flex-start;font-size:12px}
+.dn .legend .sw{width:11px;height:11px;border-radius:3px;margin-top:3px;flex:none}.dn .sw.acc{background:var(--acc)}.dn .sw.warn{background:var(--amb)}.dn .sw.slate{background:#64748b}.dn .sw.line{background:var(--line)}
+.dn .scope .in{color:#15803d;font-weight:600}.dn .scope .out{color:var(--neg);font-weight:600}
+.dn .rules{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}.dn .rules li{position:relative;padding-left:14px;font-size:12px;line-height:1.45}
+.dn .rules li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--acc)}
+.dn details.earlier{margin-top:14px;font-size:13px}.dn details.earlier summary{cursor:pointer;color:var(--mut)}
+.dn .focus{background:var(--acc-bg);border:1px solid #c7d2fe;border-radius:12px;padding:12px 14px;margin-bottom:12px;font-size:12.5px}
+.dn .focus .fh{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}.dn .focus label{display:flex;gap:8px;align-items:center;padding:3px 0;cursor:pointer}.dn .focus .strike{color:var(--faint);text-decoration:line-through}
+.lpurl{font-size:11.5px;color:var(--acc);margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+@media (max-width:980px){.dn .dngrid{grid-template-columns:1fr}.dn .dnside{position:static}.dn .summary{grid-template-columns:repeat(2,1fr)}.dn .lbl-txt{display:none}.dn .conn{width:10px}}
+</style>
 
 <div id="dashgate" style="position:fixed;inset:0;z-index:99999;background:#fafafa;display:flex;align-items:center;justify-content:center;font-family:'Inter',system-ui,sans-serif">
   <form id="dashgateForm" hidden style="width:320px;max-width:90vw;background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,.05);padding:28px 24px">
@@ -393,11 +480,14 @@ onAuthStateChanged(auth, function(user){
   let pushedLocal = false;
   const fail = function(e){ status('BLOCKED (' + (e.code||'error') + ') — Firestore rules must allow seo_state/{uid}', false); };
   const ok = function(){ status('on · ' + (user.email||''), true); };
+  status('connecting · ' + (user.email||''), true);
   window.seoCloudSave = function(st){ setDoc(ref, { tasks: st, updated_at: Date.now() }, { mergeFields: ["tasks", "updated_at"] }).then(ok).catch(fail); };
   // mergeFields replaces the whole links map (a plain merge only adds keys, so unticking never reached the cloud)
-  window.seoCloudSaveLinks = function(map){ setDoc(ref, { links: map, updated_at: Date.now() }, { mergeFields: ["links", "updated_at"] }).then(ok).catch(fail); };
+  window.seoCloudSaveLinks = function(map, urls){ setDoc(ref, { links: map, link_urls: urls || {}, updated_at: Date.now() }, { mergeFields: ["links", "link_urls", "updated_at"] }).then(ok).catch(fail); };
   onSnapshot(ref, function(snap){
     const d = snap.exists() ? snap.data() : null;
+    ok();
+    if(d && d.link_urls){ Object.keys(d.link_urls).forEach(function(k){ try{ localStorage.setItem('lpu:'+k, d.link_urls[k]); }catch(e){} }); }
     if(d && d.tasks){
       try{ localStorage.setItem(K, JSON.stringify(d.tasks)); }catch(e){}
       window.dispatchEvent(new Event('seo-state-sync')); ok();
@@ -421,7 +511,7 @@ onAuthStateChanged(auth, function(user){
 });
 </script>
 <div class="viz-root"><div class="app">
-<aside class="side"><a class="brand" href="./"><span class="bmark">iP</span><span class="bname">IPTV Portfolio</span></a><nav><div class="navgrp">Execute</div><a href="today" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Today</a><a href="work" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Work</a><a href="links" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15 15 9"/><path d="M11 6.5 12.5 5a4 4 0 0 1 5.7 5.7l-1.5 1.5"/><path d="M13 17.5 11.5 19a4 4 0 0 1-5.7-5.7l1.5-1.5"/></svg>Backlinks</a><div class="navgrp">Monitor</div><a href="./" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>Overview</a><a href="rankings" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>Rankings</a><a href="performance" class="on"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M8 17v-5M13 17V8M18 17v-8"/></svg>Performance</a><a href="content" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>Content</a><a href="technical" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4z"/></svg>Technical</a><a href="authority" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m9 14-1.5 7L12 18l4.5 3L15 14"/></svg>Authority</a><a href="opportunities" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c1 1 1.5 2 1.5 3h5c0-1 .5-2 1.5-3a6 6 0 0 0-4-10z"/></svg>Opportunities</a><div class="navgrp">Business</div><a href="sales" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5"/><path d="M14.4 5.5a5 5 0 1 1-5 8.9"/></svg>Sales</a><a href="clients" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.4a3.2 3.2 0 0 1 0 5.9M17 13.7a5.5 5.5 0 0 1 3.5 5.3"/></svg>Clients</a><a href="replies" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 0-3.1 6.3L21 20l-1.2-3.6A8 8 0 0 0 20 12z"/></svg>Replies</a><div class="navgrp">System</div><a href="plan" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 4 6v14l5-2 6 2 5-2V4l-5 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>Plan</a><a href="settings" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2-1.2L14.2 3H9.8l-.4 2.7a7 7 0 0 0-2 1.2l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2 1.2l.4 2.7h4.4l.4-2.7a7 7 0 0 0 2-1.2l2.3 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>Integrations</a></nav><div class="foot">Audit 2026-09-08 07:35 UTC</div></aside>
+<aside class="side"><a class="brand" href="./"><span class="bmark">iP</span><span class="bname">IPTV Portfolio</span></a><nav><div class="navgrp">Execute</div><a href="today" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Do next<span class="navtag">11</span></a><a href="links" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15 15 9"/><path d="M11 6.5 12.5 5a4 4 0 0 1 5.7 5.7l-1.5 1.5"/><path d="M13 17.5 11.5 19a4 4 0 0 1-5.7-5.7l1.5-1.5"/></svg>Backlinks</a><div class="navgrp">Monitor</div><a href="./" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>Overview</a><a href="rankings" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>Rankings</a><a href="performance" class="on"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M8 17v-5M13 17V8M18 17v-8"/></svg>Performance</a><a href="content" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>Content</a><a href="technical" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4z"/></svg>Technical</a><a href="authority" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m9 14-1.5 7L12 18l4.5 3L15 14"/></svg>Authority</a><a href="opportunities" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c1 1 1.5 2 1.5 3h5c0-1 .5-2 1.5-3a6 6 0 0 0-4-10z"/></svg>Opportunities</a><div class="navgrp">Business</div><a href="sales" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5"/><path d="M14.4 5.5a5 5 0 1 1-5 8.9"/></svg>Sales</a><a href="clients" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.4a3.2 3.2 0 0 1 0 5.9M17 13.7a5.5 5.5 0 0 1 3.5 5.3"/></svg>Clients</a><a href="replies" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 0-3.1 6.3L21 20l-1.2-3.6A8 8 0 0 0 20 12z"/></svg>Replies</a><div class="navgrp">System</div><a href="plan" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 4 6v14l5-2 6 2 5-2V4l-5 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>Plan</a><a href="settings" class=""><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2-1.2L14.2 3H9.8l-.4 2.7a7 7 0 0 0-2 1.2l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2 1.2l.4 2.7h4.4l.4-2.7a7 7 0 0 0 2-1.2l2.3 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>Integrations</a></nav><div class="foot">Audit 2026-09-08</div></aside>
 <div class="main">
 <div class="toph"><span class="crumb">Performance</span><span class="fresh"><span><span class="fdot "></span><b>GSC</b> pulled 2026-09-08</span><span><span class="fdot "></span><b>DataForSEO</b> this audit</span><span><span class="fdot "></span><b>Semrush</b> 2026-09-08</span><span id="syncstate"><span class="fdot off"></span><b>Sync</b> checking…</span></span><details class="siteselect"><summary><span class="dot s1" style="display:none"></span>All websites</summary><div class="sitemenu"><a href="./" class="allrow">All websites<span class="meta">11 sites</span></a><a href="iptvesp"><span class="dot s1"></span>iptvesp.com<span class="meta">Spain · Accelerating</span></a><a href="primeiptv-france"><span class="dot s2"></span>primeiptv-france.com<span class="meta">France · Flagship</span></a><a href="iptvned"><span class="dot s3"></span>iptvned.com<span class="meta">Netherlands · Rebuild</span></a><a href="iptvpix"><span class="dot s4"></span>iptvpix.com<span class="meta">France · Recovering</span></a><a href="smarters-live"><span class="dot s5"></span>smarters-live.com<span class="meta">France · Build</span></a><a href="iptvshqiptar"><span class="dot s6"></span>iptvshqiptar.com<span class="meta">Albania · Baseline</span></a><a href="smartersprofrance-fr"><span class="dot s7"></span>smartersprofrance.fr<span class="meta">France · Satellite</span></a><a href="iptvfranceofficiel-fr"><span class="dot s8"></span>iptvfranceofficiel.fr<span class="meta">France · Satellite</span></a><a href="abonnementiptvofficiel"><span class="dot s9"></span>abonnementiptvofficiel.com<span class="meta">France · Watch</span></a><a href="iptvsegura"><span class="dot s10"></span>iptvsegura.com<span class="meta">Spain · Onboarding</span></a><a href="rodaktv"><span class="dot s11"></span>rodaktv.com<span class="meta">Poland · Launch</span></a></div></details><button class="runbtn" id="runaudit" title="Copies the audit request — paste it to Claude">Run audit</button></div>
 <main><div class="wrap">
