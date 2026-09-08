@@ -1,4 +1,5 @@
 Target: shqip.com (AS22, TOP2, seksioni Teknologji) — kontakt: info@shqip.com / marketing@shqip.com
+Byline / publisher: IPTV Shqiptar
 
 # IPTV në Smart TV për diasporën: udhëzues hap pas hapi për familjet shqiptare
 
