@@ -39,12 +39,17 @@
   "lp-mb2-telegraphtutorialnos-shqip",
   "lp-mb2-telegraphtutorialnos-slive",
   "lp-mb2-telegraphtutorialnos-spf",
+  "lp-medium-esp",
+  "lp-medium-rodak",
   "lp-mediumarticle1persit-esp",
   "lp-mediumarticle1persit-ned",
   "lp-mediumarticle1persit-pix",
   "lp-mediumarticle1persit-prime",
   "lp-mediumarticle1persit-shqip",
-  "lp-mediumarticle1persit-slive"
+  "lp-mediumarticle1persit-slive",
+  "lp-tumblr-prime",
+  "lp-tumblr-rodak",
+  "lp-wordpress-ned"
  ],
  "_synced": "2026-08-03"
 }

@@ -14,7 +14,7 @@
    "checkout",
    "checkout"
   ],
-  "favicon": null,
+  "favicon": 200,
   "www_redirect": "308 -> https://iptvesp.com/"
  },
  "primeiptv-france.com": {
@@ -81,7 +81,7 @@
    "installation"
   ],
   "favicon": 200,
-  "apex": "308 -> https://www.smarters-live.com/",
+  "apex": "err HTTPSConnectionPool(host='smarters-live.",
   "www": "200",
   "www_redirect": "200"
  },
@@ -101,7 +101,7 @@
    "checkout"
   ],
   "favicon": 200,
-  "www_redirect": "err HTTPSConnectionPool(host='www.iptvshqipt"
+  "www_redirect": "308 -> https://iptvshqiptar.com/"
  },
  "smartersprofrance.fr": {
   "pages": 39,

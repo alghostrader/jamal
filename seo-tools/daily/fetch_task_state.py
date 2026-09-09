@@ -83,6 +83,10 @@ try:
         rows = list(csv.DictReader(open(LEDGER, encoding="utf-8")))
         fields = ["site", "platform", "slug", "detail", "follow", "status", "verified", "url", "checked", "http"]
         have = {(r["slug"], r["site"]) for r in rows}
+        # a ticked placement that already has a ledger row but no URL yet gets the URL attached
+        for r in rows:
+            lid = f'lp-{r["slug"]}-{r["site"]}'
+            if not r.get("url") and link_urls.get(lid): r["url"] = link_urls[lid]; added += 1 if False else 0; r["_touched"] = 1
         # only the current target platforms (P1-P3) or ticks that carry a URL — legacy matrix ids from the
         # pre-ledger design are not re-imported as unverified rows
         KNOWN = {"blogger", "wordpress", "medium", "tumblr", "substack", "hotfrog", "cylex", "tupalo", "europages", "infobel",
@@ -96,7 +100,7 @@ try:
             if slug not in KNOWN and not slug.startswith("gp-") and not link_urls.get(lid): continue
             rows.append({"site": key, "platform": slug.title(), "slug": slug, "detail": "ticked on the dashboard", "follow": "",
                          "status": "pending", "verified": "", "url": link_urls.get(lid, ""), "checked": "", "http": ""}); added += 1
-        if added:
+        if added or any(r.pop("_touched", None) for r in rows):
             for r in rows:
                 for f in fields: r.setdefault(f, "")
             with open(LEDGER, "w", encoding="utf-8", newline="") as fh:

@@ -745,6 +745,7 @@ onAuthStateChanged(auth, function(user){
     }
     if(d && d.links){
       // cloud is the truth for the links matrix: set every known checkbox from it
+      try{ Object.keys(d.links).forEach(function(k){ if(d.links[k]) localStorage.setItem('lp:'+k,'1'); }); }catch(e){}
       document.querySelectorAll('input.lpx').forEach(function(cb){
         try{ localStorage.setItem('lp:'+cb.id, d.links[cb.id] ? '1' : '0'); }catch(e){}
       });
@@ -842,7 +843,12 @@ document.querySelectorAll("[data-copy]").forEach(btn=>btn.addEventListener("clic
 LINKS_JS = """<script>
 (function(){
   function applyAll(){ document.querySelectorAll('input.lpx').forEach(function(cb){ cb.checked=cb.dataset.placed==='1'||localStorage.getItem('lp:'+cb.id)==='1'; }); document.querySelectorAll('tr').forEach(count); }
-  function pushCloud(){ if(!window.seoCloudSaveLinks) return; var map={}, urls={}; document.querySelectorAll('input.lpx').forEach(function(cb){ if(cb.checked){ map[cb.id]=1; var u=localStorage.getItem('lpu:'+cb.id); if(u) urls[cb.id]=u; } }); window.seoCloudSaveLinks(map, urls); }
+  function pushCloud(){ if(!window.seoCloudSaveLinks) return; var map={}, urls={};
+    // start from every tick this browser knows (the cloud snapshot writes them all to localStorage), then apply
+    // this page's boxes — a page that shows only a few placements must never wipe the others from the cloud
+    try{ for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(k&&k.indexOf('lp:')===0&&localStorage.getItem(k)==='1') map[k.slice(3)]=1; if(k&&k.indexOf('lpu:')===0&&localStorage.getItem(k)) urls[k.slice(4)]=localStorage.getItem(k); } }catch(e){}
+    document.querySelectorAll('input.lpx').forEach(function(cb){ if(cb.checked){ map[cb.id]=1; var u=null; try{ u=localStorage.getItem('lpu:'+cb.id); }catch(e){} if(u) urls[cb.id]=u; } else { delete map[cb.id]; } });
+    window.seoCloudSaveLinks(map, urls); }
   window.seoLinksPush = pushCloud;
   function showUrl(cb){ var lab=cb.closest('label'); if(!lab) return; var u=''; try{ u=localStorage.getItem('lpu:'+cb.id)||''; }catch(e){}
     var el=lab.querySelector('.lpurl'); if(!el){ el=document.createElement('a'); el.className='lpurl'; el.target='_blank'; el.rel='noopener'; lab.appendChild(el); }
@@ -1702,7 +1708,9 @@ open(os.path.join(OUT, "trends.html"), "w").write(shell("Trends — IPTV Portfol
 # ---------------- Backlinks checklist from the verified ledger ----------------
 import csv as _csv
 LEDGER_PATH = os.path.join(BASE, "backlink_ledger.csv")
-PAUSED_LINKS = {"aio": "spam 58", "slive": "spam 62"}          # +4-pt jump rule: no new links until reviewed
+# +4-pt spam-jump rule: pause until the owner reviews the newest links. Owner reviewed aio + slive on 8 Sep
+# ("Reviewed — resume" ticked on Do next) → un-paused 9 Sep; spam stays a watch alert (aio 58 · slive 62).
+PAUSED_LINKS = {}
 NEXT_P1 = [("blogger", "Blogger blog + 1 post", {"esp"}), ("wordpress", "WordPress.com blog + 1 post", {"pix", "prime"}),
            ("medium", "Medium article (max 2/day)", {"prime", "ned"}), ("tumblr", "Tumblr blog + 1 post", {"aio"}),
            ("substack", "Substack post", {"spf"})]

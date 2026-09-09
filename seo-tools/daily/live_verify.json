@@ -5,7 +5,7 @@
    "live": false,
    "http": 200,
    "detail": "page is live but its modified date is before 2026-09-08",
-   "checked": "2026-09-08"
+   "checked": "2026-09-09"
   },
   "c5fe8d7689": {
    "deployed": false,
@@ -17,7 +17,7 @@
    "deployed": true,
    "live": true,
    "detail": "page(s) PASS in GSC URL Inspection",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-06"
   },
   "98a4408a71": {
@@ -25,20 +25,20 @@
    "live": false,
    "http": 200,
    "detail": "page is live but its modified date is before 2026-09-08",
-   "checked": "2026-09-08"
+   "checked": "2026-09-09"
   },
   "f6e1c07475": {
    "deployed": true,
    "live": false,
    "detail": "5 page(s) still under 300 words live: /checkout?plan=1ekran-3m, /checkout?plan=1ekran-6m, /checkout?plan=1ekran-12m, /checkout?plan=1ekran-24m",
-   "checked": "2026-09-08"
+   "checked": "2026-09-09"
   },
   "8fcbe4f4aa": {
    "deployed": true,
    "live": false,
    "http": 200,
    "detail": "page is live but declares no modified date \u2014 add dateModified / og:updated_time so the change can be verified",
-   "checked": "2026-09-08"
+   "checked": "2026-09-09"
   },
   "b3caca4a55": {
    "deployed": false,
@@ -51,14 +51,14 @@
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-06",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   },
   "1ec40f062e": {
    "deployed": true,
    "live": true,
    "detail": "2 new live placement(s) logged for this site since completion",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   },
   "8162a0a994": {
@@ -66,7 +66,7 @@
    "live": true,
    "http": 308,
    "detail": "host redirect is 308",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-06"
   },
   "dcbbd6a189": {
@@ -82,7 +82,7 @@
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-08",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   },
   "ca8c1fdb3d": {
@@ -90,14 +90,14 @@
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-06",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   },
   "fd497a106a": {
    "deployed": true,
    "live": true,
    "detail": "page(s) PASS in GSC URL Inspection",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-06"
   },
   "f217a61cb1": {
@@ -113,7 +113,7 @@
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-08",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   },
   "dda33ce6cb": {
@@ -121,69 +121,69 @@
    "live": false,
    "http": 200,
    "detail": "page is live but its modified date is before 2026-09-06",
-   "checked": "2026-09-08"
+   "checked": "2026-09-09"
   },
   "0859acb6ae": {
    "deployed": true,
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-08",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   },
   "e91c45e957": {
    "deployed": true,
    "live": false,
    "detail": "5 page(s) still under 300 words live: /checkout?plan=3mois-1ecran, /checkout?plan=6mois-1ecran, /checkout?plan=12mois-1ecran, /checkout?plan=24mois-1ecran",
-   "checked": "2026-09-08"
+   "checked": "2026-09-09"
   },
   "737de905a9": {
    "deployed": true,
    "live": false,
    "http": 200,
    "detail": "page is live but declares no modified date \u2014 add dateModified / og:updated_time so the change can be verified",
-   "checked": "2026-09-08"
+   "checked": "2026-09-09"
   },
   "715fb811aa": {
    "deployed": true,
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-06",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-06"
   },
   "dbb3a9ea15": {
    "deployed": true,
    "live": true,
    "detail": "page(s) PASS in GSC URL Inspection",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-06"
   },
   "29449e289f": {
    "deployed": true,
    "live": true,
    "detail": "page(s) PASS in GSC URL Inspection",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-06"
   },
   "984cc3c4dc": {
    "deployed": true,
    "live": false,
    "detail": "5 page(s) still under 300 words live: /checkout?plan=1pant-3m, /checkout?plan=1pant-6m, /checkout?plan=1pant-12m, /checkout?plan=1pant-24m",
-   "checked": "2026-09-08"
+   "checked": "2026-09-09"
   },
   "7ef248c3f6": {
    "deployed": true,
    "live": false,
    "detail": "5 page(s) still under 300 words live: /afrekenen?plan=3-maanden-1-scherm, /afrekenen?plan=6-maanden-1-scherm, /afrekenen?plan=12-maanden-1-scherm, /afrekenen?plan=24-maanden-1-scherm",
-   "checked": "2026-09-08"
+   "checked": "2026-09-09"
   },
   "7532ac80e4": {
    "deployed": true,
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-08",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   },
   "5b7c04cc72": {
@@ -191,7 +191,7 @@
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-08",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   },
   "42611f0848": {
@@ -199,7 +199,7 @@
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-08",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   },
   "b0afa996c9": {
@@ -207,7 +207,7 @@
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-08",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   },
   "7a02bb1649": {
@@ -215,7 +215,7 @@
    "live": true,
    "http": 200,
    "detail": "keyword present + modified on/after 2026-09-08",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "verified_at": "2026-09-08"
   }
  },
@@ -226,7 +226,7 @@
    "http": 429,
    "logged": true,
    "detail": "placement URL logged; the platform blocks automated checks (HTTP 429) \u2014 counted as placed, not machine-verified",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "url": "https://iptvsmartersguide.tumblr.com/post/827162230469623808"
   },
   "lp-wordpress-ned": {
@@ -235,7 +235,7 @@
    "http": 200,
    "dofollow": true,
    "detail": "link to iptvned.com is live (dofollow)",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "url": "https://iptvpixguide.wordpress.com/2026/09/08/iptv-in-nederland-waar-je-op-moet-letten-voordat-je-betaalt/"
   },
   "lp-medium-esp": {
@@ -244,7 +244,7 @@
    "http": 403,
    "logged": true,
    "detail": "placement URL logged; the platform blocks automated checks (HTTP 403) \u2014 counted as placed, not machine-verified",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "url": "https://medium.com/@j.oughia/c\u00f3mo-saber-si-una-lista-iptv-va-a-aguantar-o-caerse-en-el-peor-momento-4478123785d0"
   },
   "lp-tumblr-prime": {
@@ -253,7 +253,7 @@
    "http": 429,
    "logged": true,
    "detail": "placement URL logged; the platform blocks automated checks (HTTP 429) \u2014 counted as placed, not machine-verified",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "url": "https://iptvsmartersguide.tumblr.com/post/827184258051375104"
   },
   "lp-medium-rodak": {
@@ -262,7 +262,7 @@
    "http": 403,
    "logged": true,
    "detail": "placement URL logged; the platform blocks automated checks (HTTP 403) \u2014 counted as placed, not machine-verified",
-   "checked": "2026-09-08",
+   "checked": "2026-09-09",
    "url": "https://medium.com/@j.oughia/iptv-na-smart-tv-jak-w-kilka-minut-uruchomi\u0107-polsk\u0105-telewizj\u0119-d90c80b93f9d"
   }
  },
