@@ -1,5 +1,5 @@
 {
- "date": "2026-09-09",
+ "date": "2026-09-10",
  "tasks": [
   {
    "id": "1b34668fff",
@@ -7,7 +7,7 @@
    "site": "iptvesp.com",
    "query": "listas iptv telegram",
    "page": "",
-   "what": "\u201clistas iptv telegram\u201d sits at position 4 with 220 impressions/28d.",
+   "what": "\u201clistas iptv telegram\u201d sits at position 4 with 217 impressions/28d.",
    "score": 58,
    "bucket": "today",
    "effort": "Medium",
@@ -19,20 +19,20 @@
    }
   },
   {
-   "id": "ee2bf478f4",
+   "id": "1e0101bfb6",
    "kind": "Striking distance",
-   "site": "iptvsegura.com",
-   "query": "iptv segura",
+   "site": "iptvesp.com",
+   "query": "iptv premium telegram",
    "page": "",
-   "what": "\u201ciptv segura\u201d sits at position 23 with 18 impressions/28d.",
-   "score": 58,
+   "what": "\u201ciptv premium telegram\u201d sits at position 4 with 12 impressions/28d.",
+   "score": 54,
    "bucket": "today",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
-    "probe_pos": 37,
-    "gsc_pos": 23.4,
-    "clicks28": 0
+    "probe_pos": null,
+    "gsc_pos": 4.4,
+    "clicks28": 3
    }
   },
   {
@@ -41,7 +41,7 @@
    "site": "iptvesp.com",
    "query": "",
    "page": "/blog/listas-iptv-espana",
-   "what": "/blog/listas-iptv-espana lost 31 clicks (31 \u2192 0, 28d vs previous).",
+   "what": "/blog/listas-iptv-espana lost 30 clicks (30 \u2192 0, 28d vs previous).",
    "score": 53,
    "bucket": "today",
    "effort": "Medium",
@@ -58,15 +58,15 @@
    "site": "abonnementiptvofficiel.com",
    "query": "meilleur bo\u00eetier iptv 2026",
    "page": "",
-   "what": "\u201cmeilleur bo\u00eetier iptv 2026\u201d sits at position 7 with 224 impressions/28d.",
-   "score": 51,
-   "bucket": "monitor",
+   "what": "\u201cmeilleur bo\u00eetier iptv 2026\u201d sits at position 7 with 237 impressions/28d.",
+   "score": 52,
+   "bucket": "next",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 7.1,
-    "clicks28": 20
+    "gsc_pos": 7.0,
+    "clicks28": 23
    }
   },
   {
@@ -75,7 +75,7 @@
    "site": "iptvesp.com",
    "query": "lista iptv telegram",
    "page": "",
-   "what": "\u201clista iptv telegram\u201d sits at position 5 with 54 impressions/28d.",
+   "what": "\u201clista iptv telegram\u201d sits at position 5 with 53 impressions/28d.",
    "score": 51,
    "bucket": "monitor",
    "effort": "Medium",
@@ -92,15 +92,15 @@
    "site": "iptvesp.com",
    "query": "grupos de telegram iptv gratis",
    "page": "",
-   "what": "\u201cgrupos de telegram iptv gratis\u201d sits at position 5 with 54 impressions/28d.",
+   "what": "\u201cgrupos de telegram iptv gratis\u201d sits at position 5 with 52 impressions/28d.",
    "score": 51,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 5,
-    "clicks28": 7
+    "gsc_pos": 5.0,
+    "clicks28": 6
    }
   },
   {
@@ -143,15 +143,32 @@
    "site": "iptvesp.com",
    "query": "cuentas iptv telegram",
    "page": "",
-   "what": "\u201ccuentas iptv telegram\u201d sits at position 4 with 32 impressions/28d.",
+   "what": "\u201ccuentas iptv telegram\u201d sits at position 4 with 33 impressions/28d.",
    "score": 50,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 4.2,
+    "gsc_pos": 4,
     "clicks28": 9
+   }
+  },
+  {
+   "id": "d704153895",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "iptv gratis telegram",
+   "page": "",
+   "what": "\u201ciptv gratis telegram\u201d sits at position 5 with 40 impressions/28d.",
+   "score": 50,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 5.3,
+    "clicks28": 7
    }
   },
   {
@@ -189,23 +206,6 @@
    }
   },
   {
-   "id": "d704153895",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "query": "iptv gratis telegram",
-   "page": "",
-   "what": "\u201ciptv gratis telegram\u201d sits at position 5 with 38 impressions/28d.",
-   "score": 50,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 5.3,
-    "clicks28": 7
-   }
-  },
-  {
    "id": "63350e4e33",
    "kind": "Striking distance",
    "site": "iptvesp.com",
@@ -228,14 +228,14 @@
    "site": "iptvesp.com",
    "query": "grupos iptv telegram",
    "page": "",
-   "what": "\u201cgrupos iptv telegram\u201d sits at position 4 with 26 impressions/28d.",
+   "what": "\u201cgrupos iptv telegram\u201d sits at position 4 with 28 impressions/28d.",
    "score": 50,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 4.3,
+    "gsc_pos": 4.4,
     "clicks28": 3
    }
   },
@@ -245,14 +245,14 @@
    "site": "iptvesp.com",
    "query": "cuentas de iptv gratis telegram",
    "page": "",
-   "what": "\u201ccuentas de iptv gratis telegram\u201d sits at position 4 with 24 impressions/28d.",
+   "what": "\u201ccuentas de iptv gratis telegram\u201d sits at position 4 with 22 impressions/28d.",
    "score": 50,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 4.5,
+    "gsc_pos": 4.3,
     "clicks28": 2
    }
   },
@@ -262,14 +262,14 @@
    "site": "iptvesp.com",
    "query": "cuentas iptv gratis telegram",
    "page": "",
-   "what": "\u201ccuentas iptv gratis telegram\u201d sits at position 5 with 27 impressions/28d.",
+   "what": "\u201ccuentas iptv gratis telegram\u201d sits at position 4 with 27 impressions/28d.",
    "score": 50,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 4.6,
+    "gsc_pos": 4.4,
     "clicks28": 2
    }
   },
@@ -296,14 +296,31 @@
    "site": "iptvesp.com",
    "query": "canal iptv telegram",
    "page": "",
-   "what": "\u201ccanal iptv telegram\u201d sits at position 4 with 11 impressions/28d.",
+   "what": "\u201ccanal iptv telegram\u201d sits at position 4 with 12 impressions/28d.",
    "score": 50,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 4.1,
+    "gsc_pos": 4.4,
+    "clicks28": 3
+   }
+  },
+  {
+   "id": "bc9b25e3ae",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "grupo iptv telegram",
+   "page": "",
+   "what": "\u201cgrupo iptv telegram\u201d sits at position 5 with 11 impressions/28d.",
+   "score": 50,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 4.6,
     "clicks28": 3
    }
   },
@@ -313,14 +330,14 @@
    "site": "iptvesp.com",
    "query": "lista iptv gratis telegram",
    "page": "",
-   "what": "\u201clista iptv gratis telegram\u201d sits at position 4 with 13 impressions/28d.",
+   "what": "\u201clista iptv gratis telegram\u201d sits at position 4 with 12 impressions/28d.",
    "score": 50,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 4.1,
+    "gsc_pos": 4.2,
     "clicks28": 2
    }
   },
@@ -330,7 +347,7 @@
    "site": "iptvesp.com",
    "query": "lista m3u gratis telegram",
    "page": "",
-   "what": "\u201clista m3u gratis telegram\u201d sits at position 5 with 21 impressions/28d.",
+   "what": "\u201clista m3u gratis telegram\u201d sits at position 5 with 22 impressions/28d.",
    "score": 50,
    "bucket": "monitor",
    "effort": "Medium",
@@ -359,6 +376,40 @@
    }
   },
   {
+   "id": "a97ab66468",
+   "kind": "Striking distance",
+   "site": "iptvsegura.com",
+   "query": "es seguro el iptv",
+   "page": "",
+   "what": "\u201ces seguro el iptv\u201d sits at position 22 with 10 impressions/28d.",
+   "score": 50,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": 41,
+    "gsc_pos": 21.8,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "86025695c6",
+   "kind": "Striking distance",
+   "site": "abonnementiptvofficiel.com",
+   "query": "meilleur boitier iptv avec abonnement",
+   "page": "",
+   "what": "\u201cmeilleur boitier iptv avec abonnement\u201d sits at position 5 with 15 impressions/28d.",
+   "score": 49,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 4.6,
+    "clicks28": 6
+   }
+  },
+  {
    "id": "0f2c53057e",
    "kind": "Striking distance",
    "site": "iptvesp.com",
@@ -376,6 +427,23 @@
    }
   },
   {
+   "id": "df0ae8c4f8",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "lista m3u telegram",
+   "page": "",
+   "what": "\u201clista m3u telegram\u201d sits at position 6 with 15 impressions/28d.",
+   "score": 49,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 5.9,
+    "clicks28": 3
+   }
+  },
+  {
    "id": "4e19ab11a1",
    "kind": "Striking distance",
    "site": "iptvesp.com",
@@ -390,6 +458,23 @@
     "probe_pos": null,
     "gsc_pos": 6.6,
     "clicks28": 3
+   }
+  },
+  {
+   "id": "94b20e7b3e",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "telegram m3u",
+   "page": "",
+   "what": "\u201ctelegram m3u\u201d sits at position 6 with 11 impressions/28d.",
+   "score": 49,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 5.9,
+    "clicks28": 2
    }
   },
   {
@@ -415,7 +500,7 @@
    "site": "iptvesp.com",
    "query": "iptv cuentas gratis telegram",
    "page": "",
-   "what": "\u201ciptv cuentas gratis telegram\u201d sits at position 5 with 13 impressions/28d.",
+   "what": "\u201ciptv cuentas gratis telegram\u201d sits at position 5 with 12 impressions/28d.",
    "score": 49,
    "bucket": "monitor",
    "effort": "Medium",
@@ -424,57 +509,6 @@
     "probe_pos": null,
     "gsc_pos": 5.3,
     "clicks28": 1
-   }
-  },
-  {
-   "id": "eb66eec744",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "query": "listas iptv telegram 2026",
-   "page": "",
-   "what": "\u201clistas iptv telegram 2026\u201d sits at position 7 with 21 impressions/28d.",
-   "score": 49,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 7.1,
-    "clicks28": 5
-   }
-  },
-  {
-   "id": "df0ae8c4f8",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "query": "lista m3u telegram",
-   "page": "",
-   "what": "\u201clista m3u telegram\u201d sits at position 6 with 14 impressions/28d.",
-   "score": 49,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 6.1,
-    "clicks28": 2
-   }
-  },
-  {
-   "id": "94b20e7b3e",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "query": "telegram m3u",
-   "page": "",
-   "what": "\u201ctelegram m3u\u201d sits at position 6 with 10 impressions/28d.",
-   "score": 49,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 6.3,
-    "clicks28": 2
    }
   },
   {
@@ -495,36 +529,19 @@
    }
   },
   {
-   "id": "86025695c6",
-   "kind": "Striking distance",
-   "site": "abonnementiptvofficiel.com",
-   "query": "meilleur boitier iptv avec abonnement",
-   "page": "",
-   "what": "\u201cmeilleur boitier iptv avec abonnement\u201d sits at position 6 with 15 impressions/28d.",
-   "score": 48,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 5.5,
-    "clicks28": 7
-   }
-  },
-  {
    "id": "26677ed653",
    "kind": "Striking distance",
    "site": "smartersprofrance.fr",
    "query": "vpn iptv smarters",
    "page": "",
-   "what": "\u201cvpn iptv smarters\u201d sits at position 6 with 14 impressions/28d.",
+   "what": "\u201cvpn iptv smarters\u201d sits at position 6 with 16 impressions/28d.",
    "score": 48,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 6.1,
+    "gsc_pos": 5.6,
     "clicks28": 2
    }
   },
@@ -534,7 +551,7 @@
    "site": "abonnementiptvofficiel.com",
    "query": "quel boitier pour iptv",
    "page": "",
-   "what": "\u201cquel boitier pour iptv\u201d sits at position 10 with 54 impressions/28d.",
+   "what": "\u201cquel boitier pour iptv\u201d sits at position 10 with 55 impressions/28d.",
    "score": 48,
    "bucket": "monitor",
    "effort": "Medium",
@@ -551,14 +568,31 @@
    "site": "iptvesp.com",
    "query": "iptv listas m3u espa\u00f1ol",
    "page": "",
-   "what": "\u201ciptv listas m3u espa\u00f1ol\u201d sits at position 9 with 23 impressions/28d.",
+   "what": "\u201ciptv listas m3u espa\u00f1ol\u201d sits at position 9 with 22 impressions/28d.",
    "score": 48,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 8.9,
+    "gsc_pos": 9.0,
+    "clicks28": 5
+   }
+  },
+  {
+   "id": "eb66eec744",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "listas iptv telegram 2026",
+   "page": "",
+   "what": "\u201clistas iptv telegram 2026\u201d sits at position 7 with 19 impressions/28d.",
+   "score": 48,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 7.3,
     "clicks28": 5
    }
   },
@@ -597,23 +631,6 @@
    }
   },
   {
-   "id": "bb8b62c163",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "query": "iptv ios",
-   "page": "",
-   "what": "\u201ciptv ios\u201d sits at position 8 with 11 impressions/28d.",
-   "score": 48,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 7.8,
-    "clicks28": 1
-   }
-  },
-  {
    "id": "d1371f0f60",
    "kind": "Striking distance",
    "site": "iptvesp.com",
@@ -628,6 +645,23 @@
     "probe_pos": null,
     "gsc_pos": 7.8,
     "clicks28": 1
+   }
+  },
+  {
+   "id": "f9709ae366",
+   "kind": "Striking distance",
+   "site": "primeiptv-france.com",
+   "query": "primeiptv",
+   "page": "",
+   "what": "\u201cprimeiptv\u201d sits at position 10 with 30 impressions/28d.",
+   "score": 48,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 10.0,
+    "clicks28": 8
    }
   },
   {
@@ -670,7 +704,7 @@
    "site": "primeiptv-france.com",
    "query": "iptv wiki",
    "page": "",
-   "what": "\u201ciptv wiki\u201d sits at position 8 with 13 impressions/28d.",
+   "what": "\u201ciptv wiki\u201d sits at position 8 with 14 impressions/28d.",
    "score": 48,
    "bucket": "monitor",
    "effort": "Medium",
@@ -687,7 +721,7 @@
    "site": "primeiptv-france.com",
    "query": "iptv wikipedia",
    "page": "",
-   "what": "\u201ciptv wikipedia\u201d sits at position 9 with 22 impressions/28d.",
+   "what": "\u201ciptv wikipedia\u201d sits at position 9 with 21 impressions/28d.",
    "score": 48,
    "bucket": "monitor",
    "effort": "Medium",
@@ -716,13 +750,13 @@
    }
   },
   {
-   "id": "7f7ed07610",
+   "id": "bb8b62c163",
    "kind": "Striking distance",
-   "site": "smartersprofrance.fr",
-   "query": "iptv smarters pro fire stick",
+   "site": "iptvesp.com",
+   "query": "iptv ios",
    "page": "",
-   "what": "\u201ciptv smarters pro fire stick\u201d sits at position 8 with 12 impressions/28d.",
-   "score": 47,
+   "what": "\u201ciptv ios\u201d sits at position 8 with 13 impressions/28d.",
+   "score": 48,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
@@ -733,12 +767,46 @@
    }
   },
   {
+   "id": "473c193821",
+   "kind": "Striking distance",
+   "site": "primeiptv-france.com",
+   "query": "iptv netflix",
+   "page": "",
+   "what": "\u201ciptv netflix\u201d sits at position 15 with 71 impressions/28d.",
+   "score": 48,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 15.4,
+    "clicks28": 2
+   }
+  },
+  {
+   "id": "f12e9d51ef",
+   "kind": "Striking distance",
+   "site": "primeiptv-france.com",
+   "query": "c est quoi iptv en france",
+   "page": "",
+   "what": "\u201cc est quoi iptv en france\u201d sits at position 9 with 12 impressions/28d.",
+   "score": 48,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 8.9,
+    "clicks28": 0
+   }
+  },
+  {
    "id": "e252891c77",
    "kind": "Striking distance",
    "site": "abonnementiptvofficiel.com",
    "query": "quel boitier iptv choisir",
    "page": "",
-   "what": "\u201cquel boitier iptv choisir\u201d sits at position 8 with 17 impressions/28d.",
+   "what": "\u201cquel boitier iptv choisir\u201d sits at position 8 with 18 impressions/28d.",
    "score": 47,
    "bucket": "monitor",
    "effort": "Medium",
@@ -789,48 +857,14 @@
    "site": "iptvesp.com",
    "query": "app iptv para iphone",
    "page": "",
-   "what": "\u201capp iptv para iphone\u201d sits at position 9 with 16 impressions/28d.",
+   "what": "\u201capp iptv para iphone\u201d sits at position 9 with 18 impressions/28d.",
    "score": 47,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 9.3,
-    "clicks28": 0
-   }
-  },
-  {
-   "id": "f9709ae366",
-   "kind": "Striking distance",
-   "site": "primeiptv-france.com",
-   "query": "primeiptv",
-   "page": "",
-   "what": "\u201cprimeiptv\u201d sits at position 10 with 28 impressions/28d.",
-   "score": 47,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 10.1,
-    "clicks28": 8
-   }
-  },
-  {
-   "id": "f12e9d51ef",
-   "kind": "Striking distance",
-   "site": "primeiptv-france.com",
-   "query": "c est quoi iptv en france",
-   "page": "",
-   "what": "\u201cc est quoi iptv en france\u201d sits at position 9 with 11 impressions/28d.",
-   "score": 47,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 9.1,
+    "gsc_pos": 9.2,
     "clicks28": 0
    }
   },
@@ -852,6 +886,40 @@
    }
   },
   {
+   "id": "fd206cb2e9",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "iptv listas m3u espa\u00f1a 2026",
+   "page": "",
+   "what": "\u201ciptv listas m3u espa\u00f1a 2026\u201d sits at position 12 with 26 impressions/28d.",
+   "score": 47,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 11.6,
+    "clicks28": 8
+   }
+  },
+  {
+   "id": "5d3cc7c2da",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "iptv para iphone",
+   "page": "",
+   "what": "\u201ciptv para iphone\u201d sits at position 11 with 11 impressions/28d.",
+   "score": 47,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 10.5,
+    "clicks28": 1
+   }
+  },
+  {
    "id": "0b61f08d86",
    "kind": "Striking distance",
    "site": "iptvesp.com",
@@ -869,36 +937,19 @@
    }
   },
   {
-   "id": "473c193821",
-   "kind": "Striking distance",
-   "site": "primeiptv-france.com",
-   "query": "iptv netflix",
-   "page": "",
-   "what": "\u201ciptv netflix\u201d sits at position 15 with 68 impressions/28d.",
-   "score": 47,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 15.4,
-    "clicks28": 2
-   }
-  },
-  {
    "id": "3cdc3f4c9e",
    "kind": "CTR gap",
    "site": "iptvned.com",
    "query": "iptv app fire tv",
    "page": "",
-   "what": "\u201ciptv app fire tv\u201d: position 9, 51 impressions, but CTR 0.0% vs \u22483% expected.",
+   "what": "\u201ciptv app fire tv\u201d: position 9, 52 impressions, but CTR 0.0% vs \u22483% expected.",
    "score": 47,
    "bucket": "monitor",
    "effort": "Quick",
    "effort_min": 15,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 9.3,
+    "gsc_pos": 9.2,
     "clicks28": 0
    }
   },
@@ -920,54 +971,37 @@
    }
   },
   {
+   "id": "7f7ed07610",
+   "kind": "Striking distance",
+   "site": "smartersprofrance.fr",
+   "query": "iptv smarters pro fire stick",
+   "page": "",
+   "what": "\u201ciptv smarters pro fire stick\u201d sits at position 10 with 13 impressions/28d.",
+   "score": 46,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 10.3,
+    "clicks28": 1
+   }
+  },
+  {
    "id": "bcdac0c915",
    "kind": "Striking distance",
    "site": "abonnementiptvofficiel.com",
    "query": "iptv boitier",
    "page": "",
-   "what": "\u201ciptv boitier\u201d sits at position 16 with 52 impressions/28d.",
+   "what": "\u201ciptv boitier\u201d sits at position 15 with 51 impressions/28d.",
    "score": 46,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 16.0,
+    "gsc_pos": 15.5,
     "clicks28": 0
-   }
-  },
-  {
-   "id": "fd206cb2e9",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "query": "iptv listas m3u espa\u00f1a 2026",
-   "page": "",
-   "what": "\u201ciptv listas m3u espa\u00f1a 2026\u201d sits at position 12 with 23 impressions/28d.",
-   "score": 46,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 12.2,
-    "clicks28": 6
-   }
-  },
-  {
-   "id": "b27ce65cb2",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "query": "iptv.app",
-   "page": "",
-   "what": "\u201ciptv.app\u201d sits at position 12 with 14 impressions/28d.",
-   "score": 46,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 12.2,
-    "clicks28": 1
    }
   },
   {
@@ -984,6 +1018,23 @@
    "baseline": {
     "probe_pos": null,
     "gsc_pos": 15.1,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "18a9154b90",
+   "kind": "Striking distance",
+   "site": "iptvesp.com",
+   "query": "app iptv iphone",
+   "page": "",
+   "what": "\u201capp iptv iphone\u201d sits at position 19 with 40 impressions/28d.",
+   "score": 45,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 18.6,
     "clicks28": 0
    }
   },
@@ -1078,14 +1129,14 @@
    "site": "iptvned.com",
    "query": "iptv opgerold",
    "page": "",
-   "what": "\u201ciptv opgerold\u201d sits at position 6 with 44 impressions/28d.",
+   "what": "\u201ciptv opgerold\u201d sits at position 6 with 43 impressions/28d.",
    "score": 44,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 5.7,
+    "gsc_pos": 5.8,
     "clicks28": 2
    }
   },
@@ -1095,14 +1146,14 @@
    "site": "abonnementiptvofficiel.com",
    "query": "vlc iptv",
    "page": "",
-   "what": "\u201cvlc iptv\u201d sits at position 8 with 63 impressions/28d.",
+   "what": "\u201cvlc iptv\u201d sits at position 8 with 67 impressions/28d.",
    "score": 44,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 7.8,
+    "gsc_pos": 7.6,
     "clicks28": 4
    }
   },
@@ -1112,14 +1163,14 @@
    "site": "iptvned.com",
    "query": "iptv opgerold 2026",
    "page": "",
-   "what": "\u201ciptv opgerold 2026\u201d sits at position 5 with 31 impressions/28d.",
+   "what": "\u201ciptv opgerold 2026\u201d sits at position 5 with 32 impressions/28d.",
    "score": 44,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 5.4,
+    "gsc_pos": 5.3,
     "clicks28": 3
    }
   },
@@ -1129,7 +1180,7 @@
    "site": "abonnementiptvofficiel.com",
    "query": "iptv box",
    "page": "",
-   "what": "\u201ciptv box\u201d sits at position 13 with 92 impressions/28d.",
+   "what": "\u201ciptv box\u201d sits at position 13 with 96 impressions/28d.",
    "score": 44,
    "bucket": "monitor",
    "effort": "Medium",
@@ -1175,36 +1226,19 @@
    }
   },
   {
-   "id": "18a9154b90",
-   "kind": "Striking distance",
-   "site": "iptvesp.com",
-   "query": "app iptv iphone",
-   "page": "",
-   "what": "\u201capp iptv iphone\u201d sits at position 19 with 38 impressions/28d.",
-   "score": 44,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 18.9,
-    "clicks28": 0
-   }
-  },
-  {
    "id": "3b7b01922e",
    "kind": "Striking distance",
    "site": "iptvesp.com",
    "query": "app samsung iptv",
    "page": "",
-   "what": "\u201capp samsung iptv\u201d sits at position 16 with 12 impressions/28d.",
+   "what": "\u201capp samsung iptv\u201d sits at position 16 with 13 impressions/28d.",
    "score": 44,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 16.1,
+    "gsc_pos": 16,
     "clicks28": 0
    }
   },
@@ -1231,14 +1265,14 @@
    "site": "iptvned.com",
    "query": "iptv app fire tv",
    "page": "",
-   "what": "\u201ciptv app fire tv\u201d sits at position 9 with 51 impressions/28d.",
+   "what": "\u201ciptv app fire tv\u201d sits at position 9 with 52 impressions/28d.",
    "score": 43,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 9.3,
+    "gsc_pos": 9.2,
     "clicks28": 0
    }
   },
@@ -1248,32 +1282,15 @@
    "site": "iptvshqiptar.com",
    "query": "lista m3u falas",
    "page": "",
-   "what": "\u201clista m3u falas\u201d sits at position 8 with 40 impressions/28d.",
+   "what": "\u201clista m3u falas\u201d sits at position 8 with 41 impressions/28d.",
    "score": 43,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 7.6,
+    "gsc_pos": 7.7,
     "clicks28": 5
-   }
-  },
-  {
-   "id": "757f9a6ff0",
-   "kind": "Striking distance",
-   "site": "smartersprofrance.fr",
-   "query": "iptv smarters pro apk",
-   "page": "",
-   "what": "\u201ciptv smarters pro apk\u201d sits at position 18 with 13 impressions/28d.",
-   "score": 43,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 17.8,
-    "clicks28": 0
    }
   },
   {
@@ -1282,14 +1299,14 @@
    "site": "abonnementiptvofficiel.com",
    "query": "iptv vlc",
    "page": "",
-   "what": "\u201ciptv vlc\u201d sits at position 9 with 59 impressions/28d.",
+   "what": "\u201ciptv vlc\u201d sits at position 9 with 61 impressions/28d.",
    "score": 43,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 9.5,
+    "gsc_pos": 9.4,
     "clicks28": 3
    }
   },
@@ -1299,15 +1316,32 @@
    "site": "abonnementiptvofficiel.com",
    "query": "iptvbox",
    "page": "",
-   "what": "\u201ciptvbox\u201d sits at position 6 with 23 impressions/28d.",
+   "what": "\u201ciptvbox\u201d sits at position 6 with 24 impressions/28d.",
    "score": 43,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 6.3,
+    "gsc_pos": 6.5,
     "clicks28": 1
+   }
+  },
+  {
+   "id": "baeaa1e4d0",
+   "kind": "Striking distance",
+   "site": "abonnementiptvofficiel.com",
+   "query": "box iptv",
+   "page": "",
+   "what": "\u201cbox iptv\u201d sits at position 7 with 25 impressions/28d.",
+   "score": 43,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 6.6,
+    "clicks28": 0
    }
   },
   {
@@ -1342,6 +1376,23 @@
     "probe_pos": null,
     "gsc_pos": 18.2,
     "clicks28": 2
+   }
+  },
+  {
+   "id": "757f9a6ff0",
+   "kind": "Striking distance",
+   "site": "smartersprofrance.fr",
+   "query": "iptv smarters pro apk",
+   "page": "",
+   "what": "\u201ciptv smarters pro apk\u201d sits at position 18 with 14 impressions/28d.",
+   "score": 42,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 18,
+    "clicks28": 0
    }
   },
   {
@@ -1384,49 +1435,15 @@
    "site": "smartersprofrance.fr",
    "query": "telecharger iptv smarter pro apk",
    "page": "",
-   "what": "\u201ctelecharger iptv smarter pro apk\u201d sits at position 8 with 14 impressions/28d.",
+   "what": "\u201ctelecharger iptv smarter pro apk\u201d sits at position 8 with 17 impressions/28d.",
    "score": 42,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 7.6,
+    "gsc_pos": 7.7,
     "clicks28": 1
-   }
-  },
-  {
-   "id": "0dfec70144",
-   "kind": "Striking distance",
-   "site": "abonnementiptvofficiel.com",
-   "query": "iptv vlc media player",
-   "page": "",
-   "what": "\u201ciptv vlc media player\u201d sits at position 7 with 10 impressions/28d.",
-   "score": 42,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 7.1,
-    "clicks28": 1
-   }
-  },
-  {
-   "id": "baeaa1e4d0",
-   "kind": "Striking distance",
-   "site": "abonnementiptvofficiel.com",
-   "query": "box iptv",
-   "page": "",
-   "what": "\u201cbox iptv\u201d sits at position 8 with 26 impressions/28d.",
-   "score": 42,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 8.1,
-    "clicks28": 0
    }
   },
   {
@@ -1441,7 +1458,7 @@
    "effort": "Deep work",
    "effort_min": 90,
    "baseline": {
-    "probe_pos": 42,
+    "probe_pos": 43,
     "gsc_pos": null,
     "clicks28": 0
    }
@@ -1461,6 +1478,23 @@
     "probe_pos": null,
     "gsc_pos": null,
     "clicks28": 0
+   }
+  },
+  {
+   "id": "0dfec70144",
+   "kind": "Striking distance",
+   "site": "abonnementiptvofficiel.com",
+   "query": "iptv vlc media player",
+   "page": "",
+   "what": "\u201ciptv vlc media player\u201d sits at position 9 with 11 impressions/28d.",
+   "score": 41,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 8.9,
+    "clicks28": 1
    }
   },
   {
@@ -1498,12 +1532,12 @@
    }
   },
   {
-   "id": "19d2eb1837",
+   "id": "a5aa473599",
    "kind": "Striking distance",
-   "site": "abonnementiptvofficiel.com",
-   "query": "ip tv box",
+   "site": "iptvshqiptar.com",
+   "query": "tv shqip smart tv lg",
    "page": "",
-   "what": "\u201cip tv box\u201d sits at position 12 with 22 impressions/28d.",
+   "what": "\u201ctv shqip smart tv lg\u201d sits at position 12 with 22 impressions/28d.",
    "score": 41,
    "bucket": "monitor",
    "effort": "Medium",
@@ -1515,12 +1549,46 @@
    }
   },
   {
+   "id": "19d2eb1837",
+   "kind": "Striking distance",
+   "site": "abonnementiptvofficiel.com",
+   "query": "ip tv box",
+   "page": "",
+   "what": "\u201cip tv box\u201d sits at position 12 with 21 impressions/28d.",
+   "score": 41,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": 11.7,
+    "clicks28": 0
+   }
+  },
+  {
+   "id": "ee2bf478f4",
+   "kind": "Striking distance",
+   "site": "iptvsegura.com",
+   "query": "iptv segura",
+   "page": "",
+   "what": "\u201ciptv segura\u201d sits at position 24 with 21 impressions/28d.",
+   "score": 41,
+   "bucket": "monitor",
+   "effort": "Medium",
+   "effort_min": 40,
+   "baseline": {
+    "probe_pos": 32,
+    "gsc_pos": 24.2,
+    "clicks28": 0
+   }
+  },
+  {
    "id": "b638bc05bd",
    "kind": "Striking distance",
    "site": "iptvned.com",
    "query": "iptv uit de lucht gehaald 2026",
    "page": "",
-   "what": "\u201ciptv uit de lucht gehaald 2026\u201d sits at position 11 with 13 impressions/28d.",
+   "what": "\u201ciptv uit de lucht gehaald 2026\u201d sits at position 11 with 14 impressions/28d.",
    "score": 40,
    "bucket": "monitor",
    "effort": "Medium",
@@ -1532,36 +1600,19 @@
    }
   },
   {
-   "id": "a5aa473599",
+   "id": "15ddb0dc6d",
    "kind": "Striking distance",
-   "site": "iptvshqiptar.com",
-   "query": "tv shqip smart tv lg",
+   "site": "iptvned.com",
+   "query": "illegale iptv",
    "page": "",
-   "what": "\u201ctv shqip smart tv lg\u201d sits at position 13 with 22 impressions/28d.",
+   "what": "\u201cillegale iptv\u201d sits at position 13 with 11 impressions/28d.",
    "score": 40,
    "bucket": "monitor",
    "effort": "Medium",
    "effort_min": 40,
    "baseline": {
     "probe_pos": null,
-    "gsc_pos": 12.9,
-    "clicks28": 0
-   }
-  },
-  {
-   "id": "15ddb0dc6d",
-   "kind": "Striking distance",
-   "site": "iptvned.com",
-   "query": "illegale iptv",
-   "page": "",
-   "what": "\u201cillegale iptv\u201d sits at position 15 with 12 impressions/28d.",
-   "score": 39,
-   "bucket": "monitor",
-   "effort": "Medium",
-   "effort_min": 40,
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": 15.2,
+    "gsc_pos": 13.1,
     "clicks28": 0
    }
   },

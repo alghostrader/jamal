@@ -66,7 +66,7 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 3,
+   "checkpoint_days": 4,
    "now": {
     "probe_pos": null,
     "gsc_pos": null,
@@ -123,11 +123,11 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 3,
+   "checkpoint_days": 4,
    "now": {
     "probe_pos": 8,
-    "gsc_pos": 13.7,
-    "clicks28": 11
+    "gsc_pos": 13.2,
+    "clicks28": 12
    },
    "live_check": "page is live but declares no modified date \u2014 add dateModified / og:updated_time so the change can be verified"
   },
@@ -146,11 +146,11 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 Arab/MENA market \u2014 filed under Excluded (owner rule 8 Sep)",
    "outcome": "OUT OF SCOPE",
-   "checkpoint_days": 3,
+   "checkpoint_days": 4,
    "now": {
     "probe_pos": null,
     "gsc_pos": 5.9,
-    "clicks28": 32
+    "clicks28": 33
    }
   },
   {
@@ -185,10 +185,10 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 3,
+   "checkpoint_days": 4,
    "now": {
-    "probe_pos": 28,
-    "gsc_pos": 21.6,
+    "probe_pos": 23,
+    "gsc_pos": 20.9,
     "clicks28": 5
    },
    "live_check": "page is live but declares no modified date \u2014 add dateModified / og:updated_time so the change can be verified"
@@ -231,11 +231,11 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 Arab/MENA market \u2014 filed under Excluded (owner rule 8 Sep)",
    "outcome": "OUT OF SCOPE",
-   "checkpoint_days": 3,
+   "checkpoint_days": 4,
    "now": {
     "probe_pos": null,
     "gsc_pos": 6.0,
-    "clicks28": 9
+    "clicks28": 8
    }
   },
   {
@@ -253,7 +253,7 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 Arab/MENA market \u2014 filed under Excluded (owner rule 8 Sep)",
    "outcome": "OUT OF SCOPE",
-   "checkpoint_days": 3,
+   "checkpoint_days": 4,
    "now": {
     "probe_pos": null,
     "gsc_pos": 7.0,
@@ -315,7 +315,7 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 1,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
     "gsc_pos": 13.2,
@@ -338,10 +338,10 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "AWAITING VERIFICATION",
-   "checkpoint_days": 1,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": 6,
-    "gsc_pos": 9.9,
+    "gsc_pos": 9.6,
     "clicks28": 1
    },
    "live_check": "page is live but its modified date is before 2026-09-08"
@@ -378,7 +378,7 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard) \u00b7 Arab/MENA market \u2014 filed under Excluded (owner rule 8 Sep)",
    "outcome": "OUT OF SCOPE",
-   "checkpoint_days": 1,
+   "checkpoint_days": 2,
    "now": {
     "probe_pos": null,
     "gsc_pos": 7.5,
@@ -771,12 +771,12 @@
    "outcome": "AWAITING VERIFICATION"
   },
   {
-   "id": "b443b33f42",
+   "id": "627326bf4c",
    "kind": "Technical fix",
    "site": "",
    "query": "",
    "page": "",
-   "what": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: afrekenen, afrekenen, afrekenen, ",
+   "what": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, che",
    "baseline": {
     "probe_pos": null,
     "gsc_pos": null,
