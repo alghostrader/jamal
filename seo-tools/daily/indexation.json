@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-10",
+ "generated": "2026-09-11",
  "sites": {
   "iptvesp.com": {
    "/": {
@@ -39,7 +39,7 @@
     "verdict": "PASS",
     "canonical_google": "https://iptvned.com/",
     "canonical_user": "https://iptvned.com/",
-    "last_crawl": "2026-09-06T06:27:43Z"
+    "last_crawl": "2026-09-11T03:39:02Z"
    },
    "/abonnementen": {
     "state": "Submitted and indexed",
@@ -105,7 +105,7 @@
     "verdict": "PASS",
     "canonical_google": "https://iptvfranceofficiel.fr/",
     "canonical_user": "https://iptvfranceofficiel.fr/",
-    "last_crawl": "2026-08-30T10:18:18Z"
+    "last_crawl": "2026-09-10T14:06:40Z"
    },
    "/iptv-premium": {
     "state": "Submitted and indexed",

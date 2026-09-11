@@ -316,6 +316,12 @@ def build_donext(G, C):
                           meta=" · ".join(p_["name"].split(" (")[0] for p_ in _pl[:6]),
                           lines=[(p_["name"].split(" (")[0], f'{p_["url"]} — {p_["cost"]} · {p_["how"]}') for p_ in _pl],
                           cta="Accounts created"))
+    _stale = [ABBR[d_] for d_ in ALL if (SEM.get(d_) or {}).get("date") and (SEM.get(d_) or {}).get("date") < TODAY and "exhausted" in ((SEM.get(d_) or {}).get("ok_delta") or "")]
+    if _stale:
+        needs.append(dict(id=f"owner_semrush_units_{TODAY}", badge="Owner", title=f"Semrush API units are at zero — top up so authority readings refresh ({len(_stale)} sites on yesterday's data)",
+                          meta="sites on the last reading: " + ", ".join(_stale), link="https://www.semrush.com/kb/1235-api-units",
+                          lines=[("why", "the Authority page and the referring-domain deltas stay frozen for these sites until the API has units again"),
+                                 ("how", "Semrush → Subscription info → API units → add units; the next audit refreshes all 11 sites")], cta="Units added"))
     wk = _dt.date.today().isocalendar()[1]
     needs.append(dict(id=f"owner_sales_w{wk}", badge="Owner", title="Send this week's sales numbers per site", meta="feeds revenue-weighted prioritisation",
                       lines=[("why", "so the queue ranks by € earned, not only search volume"), ("format", "site · new subs · renewals · revenue — a WhatsApp line per site is enough")], cta="Mark sent"))
