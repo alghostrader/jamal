@@ -1,19 +1,19 @@
 {
- "_stamp": "2026-09-10 06:35 UTC",
+ "_stamp": "2026-09-11 04:34 UTC",
  "sites": {
   "iptvesp.com": {
-   "clicks7d": 512,
-   "sem_rd": 146,
+   "clicks7d": 559,
+   "sem_rd": 149,
    "dfs_rd": 42,
    "top100": 43,
    "pages": 66,
    "positions": {
     "iptv espa\u00f1a": null,
     "listas iptv": null,
-    "mejor iptv espa\u00f1a": 41,
+    "mejor iptv espa\u00f1a": 42,
     "iptv smarters pro": null,
     "listas iptv espa\u00f1a telegram": 1,
-    "proveedor iptv": 43
+    "proveedor iptv": 39
    }
   },
   "primeiptv-france.com": {
@@ -48,7 +48,7 @@
   },
   "iptvpix.com": {
    "clicks7d": 0,
-   "sem_rd": 147,
+   "sem_rd": 150,
    "dfs_rd": 40,
    "top100": null,
    "pages": 58,
@@ -62,8 +62,8 @@
   },
   "smarters-live.com": {
    "clicks7d": 0,
-   "sem_rd": 63,
-   "dfs_rd": 13,
+   "sem_rd": 65,
+   "dfs_rd": 14,
    "top100": 1,
    "pages": 52,
    "positions": {
@@ -75,7 +75,7 @@
   },
   "iptvshqiptar.com": {
    "clicks7d": 13,
-   "sem_rd": 56,
+   "sem_rd": 57,
    "dfs_rd": 7,
    "top100": null,
    "pages": 21,
@@ -83,23 +83,23 @@
     "iptv shqiptare": null,
     "iptv smarters pro": null,
     "iptv shqip": null,
-    "iptv shqiptar": 6,
+    "iptv shqiptar": 7,
     "tv shqip live": null,
     "iptv per smart tv": null,
     "aplikacion per iptv": null
    }
   },
   "smartersprofrance.fr": {
-   "clicks7d": 77,
+   "clicks7d": 89,
    "sem_rd": 4,
    "dfs_rd": null,
    "top100": 31,
    "pages": 39,
    "positions": {
     "iptv smarters": null,
-    "configuration iptv smarters": null,
+    "configuration iptv smarters": 40,
     "smarters player lite": null,
-    "iptv smarters pro firestick": 41,
+    "iptv smarters pro firestick": 42,
     "smarters player lite apk": null
    }
   },
@@ -118,17 +118,17 @@
    }
   },
   "abonnementiptvofficiel.com": {
-   "clicks7d": 86,
+   "clicks7d": 100,
    "sem_rd": 95,
    "dfs_rd": 14,
    "top100": 18,
    "pages": 44,
    "positions": {
-    "boitier iptv": 23,
+    "boitier iptv": 18,
     "test iptv gratuit": null,
     "iptv pas cher": null,
-    "essai iptv 7 jours": 41,
-    "meilleur boitier iptv": 8,
+    "essai iptv 7 jours": 42,
+    "meilleur boitier iptv": 7,
     "iptv moins cher": null,
     "code promo iptv": null,
     "iptv promo": null
@@ -141,28 +141,28 @@
    "top100": null,
    "pages": 33,
    "positions": {
-    "iptv segura": 32,
-    "estafas iptv": 18,
+    "iptv segura": 34,
+    "estafas iptv": 20,
     "iptv legal espa\u00f1a": 52,
-    "es seguro el iptv": 41,
+    "es seguro el iptv": 42,
     "que es una lista m3u": 59,
-    "iptv fire tv stick": 57
+    "iptv fire tv stick": 58
    }
   },
   "rodaktv.com": {
-   "clicks7d": 13,
-   "sem_rd": 4,
+   "clicks7d": 16,
+   "sem_rd": 8,
    "dfs_rd": null,
    "top100": null,
    "pages": 42,
    "positions": {
     "iptv polska": null,
     "polska telewizja w uk": null,
-    "polska telewizja w niemczech": 42,
+    "polska telewizja w niemczech": 44,
     "iptv abonament": 28,
-    "test iptv": 32,
-    "iptv opinie": 46,
-    "polska telewizja za granica": 91,
+    "test iptv": 29,
+    "iptv opinie": 47,
+    "polska telewizja za granica": 86,
     "polskie kanaly telegram": 28,
     "smart iptv": null
    }
