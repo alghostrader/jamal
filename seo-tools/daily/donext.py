@@ -28,10 +28,13 @@ def out_of_scope(q):
 
 TYPE_OF = {"Content gap": "Content", "Content decay": "Content", "Striking distance": "Striking distance",
            "CTR gap": "Striking distance", "Rank recovery": "Striking distance", "Technical fix": "Technical",
-           "Indexation": "Technical", "Authority gap": "Backlink", "Backlink": "Backlink"}
+           "Indexation": "Technical", "Authority gap": "Backlink", "Backlink": "Backlink",
+           "Compliance": "Compliance", "Cannibalisation": "Cannibalisation", "Footprint": "Footprint"}
 ACTION_OF = {"Content gap": "CREATE", "Content decay": "ENHANCE", "Striking distance": "ENHANCE", "CTR gap": "ENHANCE",
-             "Rank recovery": "ENHANCE", "Technical fix": "FIX", "Indexation": "FIX", "Authority gap": "PLACE", "Backlink": "PLACE"}
-BADGE = {"Content": "b-content", "Striking distance": "b-striking", "Technical": "b-tech", "Backlink": "b-links", "Owner": "b-tech", "Blocked": "b-bad"}
+             "Rank recovery": "ENHANCE", "Technical fix": "FIX", "Indexation": "FIX", "Authority gap": "PLACE", "Backlink": "PLACE",
+             "Compliance": "FIX", "Cannibalisation": "FIX", "Footprint": "FIX"}
+BADGE = {"Content": "b-content", "Striking distance": "b-striking", "Technical": "b-tech", "Backlink": "b-links", "Owner": "b-tech", "Blocked": "b-bad",
+         "Compliance": "b-bad", "Cannibalisation": "b-warn", "Footprint": "b-tech"}
 
 
 def slugify(s):
@@ -137,6 +140,12 @@ def build_donext(G, C):
             return ["defect fixed in the repo (all flagged pages)", "deploy READY", "live re-check passes (thin pages ≥ 300 words / redirect 308 / zero broken links)"]
         if kind == "Indexation":
             return ["indexing requested in GSC", "canonical + robots checked", "URL Inspection = PASS"]
+        if kind == "Compliance":
+            return ["every flagged term removed or rewritten (title, meta, H1, body, alt)", "deploy READY", "next audit's compliance scan finds zero hits on this site"]
+        if kind == "Cannibalisation":
+            return ["the term is out of the non-owner page's title and H1", "one contextual link to the owner's page for that intent", "next audit: the non-owner site no longer appears in the top 50 for the term (GSC, may lag 2–4 weeks)"]
+        if kind == "Footprint":
+            return ["reciprocal links removed or nofollowed in one direction / duplicated pages rewritten", "deploy READY", "next audit's footprint scan no longer lists the pair"]
         return ["post published with a brand or naked-URL anchor", "live URL logged on the Backlinks page (that list is the ledger)", "live fetch: link present + dofollow"]
 
     # ─── task model ───
@@ -168,6 +177,12 @@ def build_donext(G, C):
             url = f"https://{CANON[s]}{t.get('page') or ''}"
         elif kind == "Authority gap":
             url = f"https://{CANON[s]}{t.get('page') or MONEY.get(s, '/')}"; note = "links, not content — content alone will not close this gap"
+        elif kind == "Compliance":
+            url = f"https://{CANON[s]}{t.get('page') or '/'}"; note = "legal floor — same day; the scan lists every page"
+        elif kind == "Cannibalisation":
+            url = f"https://{CANON[s]}{t.get('page') or '/'}"; note = f"owner of the term: {t.get('owner', '')} — link to it, never a new URL"
+        elif kind == "Footprint":
+            url = f"https://{CANON[s]}/"; note = "reduce the network pattern; never add cross-links between owned sites"
         if cs.get("url"): url = cs["url"]  # owner-set live URL wins
         cat = C["tech_cat"](str(t.get("what") or "")) if kind == "Technical fix" else ""
         m = dict(id=t["id"], type=typ, kind=kind, site=s, repo_path=rp.get("repo", "—"), repo_content=rp.get("content", ""),
@@ -178,7 +193,7 @@ def build_donext(G, C):
                  priority_score=t.get("score", 0), effort=t.get("effort", "Medium"), effort_min=t.get("effort_min", 40),
                  what=t.get("what", ""), why=t.get("why", ""), why_action=t.get("action", ""), drivers=t.get("drivers", []),
                  category=cat, bucket=t.get("bucket", ""), completed=cs.get("completed"),
-                 defect_gone=(kind == "Technical fix" and t["id"] not in open_ids),
+                 defect_gone=((kind in ("Technical fix", "Compliance", "Footprint", "Cannibalisation")) and t["id"] not in open_ids),
                  indexed=(kind == "Indexation" and all((s, p_) not in insp_open for p_ in (paths_in(t.get("what")) or [t.get("page") or ""]))),
                  new_links=(new_links_since(s, cs.get("completed")) if kind == "Authority gap" else 0))
         return m
@@ -224,8 +239,10 @@ def build_donext(G, C):
     def st_of(tid): return (cloud_tasks.get(tid) or {}) if isinstance(cloud_tasks.get(tid), dict) else {}
     live_ids = {tid for tid, r in (cache.get("tasks") or {}).items() if r.get("live")}
     # Do now = today + next engine tasks that are Claude-actionable and not dismissed/deferred/completed
-    do_src = [t for t in T_TODAY + T_NEXT if st_of(t["id"]).get("state") not in ("completed", "dismissed", "deferred")]
+    do_src = [t for t in T_TODAY if st_of(t["id"]).get("state") not in ("completed", "dismissed", "deferred")]
     do_models = [m for m in (model(t) for t in do_src) if m]
+    next_src = [t for t in T_NEXT if st_of(t["id"]).get("state") not in ("completed", "dismissed", "deferred")]
+    next_models = [m for m in (model(t) for t in next_src) if m]
     # backlinks: the ledger's Do-next placements (P1) become ranked cards too
     G["ledger_checklist"]()
     for key, pid, label, pr, own in getattr(G["ledger_checklist"], "donext", []):
@@ -274,11 +291,11 @@ def build_donext(G, C):
             break   # one outreach card per site in the queue; the rest are on the Backlinks page
     bl = [m for m in do_models if m["type"] == "Backlink"]
     for m in bl[2:]: do_models.remove(m)   # the rest stay on the Backlinks page
-    do_models += outreach[:3]
-    if sum(1 for m in do_models if m["type"] != "Backlink") < 3:
+    do_models += outreach[:2]
+    if sum(1 for m in do_models if m["type"] not in ("Backlink", "Compliance")) < 3:
         seen = {m["id"] for m in do_models}
-        for t in sorted(T_MONITOR, key=lambda t: -t["score"]):
-            if sum(1 for m in do_models if m["type"] != "Backlink") >= 3: break
+        for t in sorted(T_NEXT + T_MONITOR, key=lambda t: -t["score"]):
+            if sum(1 for m in do_models if m["type"] not in ("Backlink", "Compliance")) >= 3: break
             if t["id"] in seen or t.get("improving") or st_of(t["id"]).get("state") in ("completed", "dismissed", "deferred"): continue
             m = model(t)
             if m: m["why_action"] = (m.get("why_action") or "") + " (backfilled from Monitor: the queue was short)"; do_models.append(m); seen.add(t["id"])
@@ -293,7 +310,9 @@ def build_donext(G, C):
     shipped_today = [m for m in shipped if m["verify"].get("verified_at") == TODAY]
     shipped_earlier = [m for m in shipped if m["verify"].get("verified_at") != TODAY]
     # promoted-from-monitor candidates rendered hidden (state decides visibility, like Today did)
-    promo_models = [m for m in (model(t) for t in T_MONITOR[:12] if t["id"] not in {x["id"] for x in do_models}) if m]
+    _in_do = {x["id"] for x in do_models}
+    next_models = [m for m in next_models if m["id"] not in _in_do]
+    promo_models = next_models + [m for m in (model(t) for t in T_MONITOR[:12] if t["id"] not in _in_do) if m]
 
     # ─── Needs Jamal ───
     needs = []
@@ -498,6 +517,7 @@ def build_donext(G, C):
     ship_html = "".join(card(m, None, "completed", m["verify"], shipped_=True) for m in shipped_today)
     earlier_html = "".join(card(m, None, "completed", m["verify"], shipped_=True) for m in shipped_earlier)
     needs_html = "".join(needs_card(n) for n in needs)
+    next_html = "".join(rrow(m) for m in next_models) or '<div class="rrow"><span class="rt">Nothing deferred.</span></div>'
     mon_html = "".join(rrow(m) for m in (model(t) for t in T_MONITOR) if m) or '<div class="rrow"><span class="rt">Nothing on watch.</span></div>'
     exc_html = "".join(rrow(x, "excluded") for x in excluded) or '<div class="rrow"><span class="rt">Nothing excluded.</span></div>'
     gsc_when = (C.get("GSCD") or {}).get("generated", "") or TODAY
@@ -533,6 +553,7 @@ def build_donext(G, C):
     <div class="stack" id="verifying">{ver_html}</div>
     <div class="subhead" id="park-head" hidden><h2>Parked — deferred / dismissed</h2><span class="note">nothing is terminal: restore any of them</span></div>
     <div class="stack" id="parked"></div>
+    <details class="earlier" {"" if next_models else "hidden"} style="margin-top:14px"><summary>Next — {len(next_models)} deferred, not forgotten (score ≥ 52) · promote one to Do now if it out-scores the queue</summary><div class="rows" id="nextlist" style="margin-top:10px">{next_html}</div></details>
     <details class="earlier" {"" if shipped_earlier else "hidden"}><summary>Shipped earlier — {len(shipped_earlier)} live-verified</summary><div class="stack" style="margin-top:10px">{earlier_html}</div></details>
   </section>
   <section class="panel needs" id="p-needs" role="tabpanel" hidden>
@@ -597,6 +618,7 @@ DONEXT_JS = r"""<script>
   var ph=document.getElementById('park-head'); if(ph) ph.hidden=!park;
   var shipToday=0; S.querySelectorAll('article.task').forEach(function(c){ if(!c.hidden) shipToday++; });
   var needsN=0; document.querySelectorAll('#needs article.task').forEach(function(c){ if(!c.classList.contains('done')) needsN++; });
+  document.querySelectorAll('#nextlist .rrow[data-tid]').forEach(function(r){ var s=st[r.dataset.tid]||{}; var gone=(s.state==='promoted'||s.state==='active'||s.state==='completed'); r.hidden=gone; var b=r.querySelector('.t-promote'); if(b){ b.disabled=gone; b.textContent=gone?'On your list':'Add to Do now'; } });
   var monN=0; document.querySelectorAll('#monitor .rrow[data-tid]').forEach(function(r){ var s=st[r.dataset.tid]||{}; var gone=(s.state==='promoted'||s.state==='active'||s.state==='completed'); r.hidden=gone; if(!gone) monN++;
     var b=r.querySelector('.t-promote'); if(b){ b.disabled=gone; b.textContent=gone?'On your list':'Add to Do now'; } });
   function txt(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; }

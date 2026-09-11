@@ -29,7 +29,7 @@ Console service account) must be re-supplied by the owner after a recycle.
    and every claim from the owner's fix reports verified or not (verify independently, live).
 6. **Content intel** — rebuild coverage/gaps with the cannibalization guards (sibling
    ownership, page hints, lane reservation). Recompute next-article prompts.
-7. **Regenerate EVERY page** — Overview, **Do next** (`/today` — Today + Work merged on 8 Sep:
+7. **Regenerate EVERY page** — Overview, Sites, Pages (registry), Budget, **Do next** (`/today` — Today + Work merged on 8 Sep:
    ONE ranked queue, lanes Do now / Needs Jamal / Monitor / Excluded; `/work` redirects there),
    Backlinks (`/links`, `/backlinks` redirects), Performance, Rankings (postures), Content,
    Technical, Authority, Opportunities, Integrations, all site pages.
@@ -50,6 +50,18 @@ Console service account) must be re-supplied by the owner after a recycle.
    "TASK STATUS v2" blob is only a fallback if the reader fails. Technical fixes
    auto-verify when the defect disappears from the fresh crawl.
 8. **History** — append authority + keyword-position history points.
+   **Revenue + budget** — `fetch_revenue.py` (owner-entered sales from the Sales app's Firestore
+   `trackers`, aggregated per site, test rows excluded, no client data ever copied) and
+   `fetch_budget.py` (DataForSEO balance + calls per audit). Source label on every revenue figure:
+   "owner-entered (Sales app)". Cross-site attribution is UNAVAILABLE and never estimated.
+   **Compliance is the legal floor** — `compliance_terms.json` (rights-holders, leagues, legality
+   claims, geo-circumvention) is scanned over every crawled page by `os_measure.py`; every hit is a
+   same-day incident at the top of Do next, above all growth work. Never soften the list to clear a task.
+   **Ownership decisions (11 Sep, owner delegated)** — `keyword_owners.json`: esp owns the ES
+   Telegram/M3U cluster (segura links to it, never competes); prime owns the FR head terms
+   (aio's boîtier page links those terms to prime); lanes as before. `tiers.json`: tier 1 esp, aio,
+   prime, rodak · tier 2 ned, segura, spf, shqip · tier 3 pix, slive, ifo.
+   **Thin pages**: noindex pages (checkout, cart) are never thin-content defects (rule fixed 11 Sep).
    **Footprint + cannibalisation** — run `os_measure.py` (546 live pages: reciprocal links between owned
    sites, shared templates, near-duplicate copy, analytics IDs, hosting; same-market queries where two
    owned sites both rank in GSC). Feeds the Authority risk register and the Rankings cannibalisation table.

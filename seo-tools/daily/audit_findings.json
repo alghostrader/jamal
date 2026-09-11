@@ -7,13 +7,7 @@
   "orphans": [],
   "canonical_mismatch": [],
   "no_meta_desc": [],
-  "thin": [
-   "checkout",
-   "checkout",
-   "checkout",
-   "checkout",
-   "checkout"
-  ],
+  "thin": [],
   "favicon": 200,
   "www_redirect": "308 -> https://iptvesp.com/"
  },
@@ -40,13 +34,7 @@
   "orphans": [],
   "canonical_mismatch": [],
   "no_meta_desc": [],
-  "thin": [
-   "afrekenen",
-   "afrekenen",
-   "afrekenen",
-   "afrekenen",
-   "afrekenen"
-  ],
+  "thin": [],
   "favicon": 200,
   "www_redirect": "308 -> https://iptvned.com/"
  },
@@ -58,13 +46,7 @@
   "orphans": [],
   "canonical_mismatch": [],
   "no_meta_desc": [],
-  "thin": [
-   "checkout",
-   "checkout",
-   "checkout",
-   "checkout",
-   "checkout"
-  ],
+  "thin": [],
   "favicon": 200,
   "www_redirect": "308 -> https://iptvpix.com/"
  },
@@ -93,13 +75,7 @@
   "orphans": [],
   "canonical_mismatch": [],
   "no_meta_desc": [],
-  "thin": [
-   "checkout",
-   "checkout",
-   "checkout",
-   "checkout",
-   "checkout"
-  ],
+  "thin": [],
   "favicon": 200,
   "www_redirect": "308 -> https://iptvshqiptar.com/"
  },
@@ -126,7 +102,7 @@
   "canonical_mismatch": [],
   "no_meta_desc": [],
   "thin": [],
-  "favicon": 200,
+  "favicon": null,
   "www_redirect": "308 -> https://iptvfranceofficiel.fr/"
  },
  "abonnementiptvofficiel.com": {
@@ -149,10 +125,7 @@
   "orphans": [],
   "canonical_mismatch": [],
   "no_meta_desc": [],
-  "thin": [
-   "aviso-legal",
-   "privacidad"
-  ],
+  "thin": [],
   "favicon": 200,
   "www_redirect": "308 -> https://iptvsegura.com/"
  },

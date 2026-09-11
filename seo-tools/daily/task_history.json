@@ -35,23 +35,6 @@
    "live_check": "page(s) PASS in GSC URL Inspection"
   },
   {
-   "id": "e91c45e957",
-   "kind": "Technical fix",
-   "site": "iptvpix.com",
-   "query": "",
-   "page": "",
-   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   },
-   "completed": "2026-09-06",
-   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect still present in this audit's crawl",
-   "outcome": "AWAITING VERIFICATION",
-   "live_check": "5 page(s) still under 300 words live: /checkout?plan=3mois-1ecran, /checkout?plan=6mois-1ecran, /checkout?plan=12mois-1ecran, /checkout?plan=24mois-1ecran"
-  },
-  {
    "id": "dda33ce6cb",
    "kind": "Content gap",
    "site": "iptvned.com",
@@ -72,7 +55,12 @@
     "gsc_pos": null,
     "clicks28": 0
    },
-   "live_check": "page is live but its modified date is before 2026-09-06"
+   "live_check": "page is live but its modified date is before 2026-09-06",
+   "checkpoint": 0,
+   "concurrent": [
+    "Technical fix:  (2026-09-11)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "8162a0a994",
@@ -129,7 +117,12 @@
     "gsc_pos": 12.6,
     "clicks28": 14
    },
-   "live_check": "page is live but declares no modified date \u2014 add dateModified / og:updated_time so the change can be verified"
+   "live_check": "page is live but declares no modified date \u2014 add dateModified / og:updated_time so the change can be verified",
+   "checkpoint": 0,
+   "concurrent": [
+    "Striking distance: boitier iptv (2026-09-06)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "f217a61cb1",
@@ -151,7 +144,14 @@
     "probe_pos": null,
     "gsc_pos": 5.8,
     "clicks28": 33
-   }
+   },
+   "checkpoint": 0,
+   "concurrent": [
+    "Striking distance: abonnement iptv alg\u00e9rie (2026-09-06)",
+    "Striking distance: prix abonnement iptv alg\u00e9rie (2026-09-06)",
+    "Striking distance: iptv alg\u00e9rie prix (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "715fb811aa",
@@ -191,7 +191,12 @@
     "gsc_pos": 20.3,
     "clicks28": 5
    },
-   "live_check": "page is live but declares no modified date \u2014 add dateModified / og:updated_time so the change can be verified"
+   "live_check": "page is live but declares no modified date \u2014 add dateModified / og:updated_time so the change can be verified",
+   "checkpoint": 0,
+   "concurrent": [
+    "Striking distance: meilleur boitier iptv (2026-09-06)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "70f507b6f5",
@@ -208,13 +213,23 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 2,
+   "checkpoint_days": 5,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 5.7,
-    "clicks28": 40
+    "gsc_pos": 5.2,
+    "clicks28": 57
    },
-   "live_check": "keyword present + modified on/after 2026-09-06"
+   "live_check": "keyword present + modified on/after 2026-09-06",
+   "checkpoint": 0,
+   "concurrent": [
+    "Content decay: /blog/iptv-espana-telegram (2026-09-06)",
+    "Striking distance: telegram iptv (2026-09-06)",
+    "Striking distance: listas iptv premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters pro telegram (2026-09-08)",
+    "Striking distance: lista m3u premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters telegram (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "dcbbd6a189",
@@ -236,7 +251,14 @@
     "probe_pos": null,
     "gsc_pos": 6.1,
     "clicks28": 7
-   }
+   },
+   "checkpoint": 0,
+   "concurrent": [
+    "Striking distance: iptv algerie (2026-09-06)",
+    "Striking distance: prix abonnement iptv alg\u00e9rie (2026-09-06)",
+    "Striking distance: iptv alg\u00e9rie prix (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "c5fe8d7689",
@@ -258,7 +280,14 @@
     "probe_pos": null,
     "gsc_pos": 7.1,
     "clicks28": 3
-   }
+   },
+   "checkpoint": 0,
+   "concurrent": [
+    "Striking distance: iptv algerie (2026-09-06)",
+    "Striking distance: abonnement iptv alg\u00e9rie (2026-09-06)",
+    "Striking distance: iptv alg\u00e9rie prix (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "ca8c1fdb3d",
@@ -275,13 +304,23 @@
    "completed": "2026-09-06",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 2,
+   "checkpoint_days": 5,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 4.5,
-    "clicks28": 30
+    "gsc_pos": 4.4,
+    "clicks28": 36
    },
-   "live_check": "keyword present + modified on/after 2026-09-06"
+   "live_check": "keyword present + modified on/after 2026-09-06",
+   "checkpoint": 0,
+   "concurrent": [
+    "Content decay: /blog/iptv-espana-telegram (2026-09-06)",
+    "Striking distance: listas m3u telegram (2026-09-06)",
+    "Striking distance: listas iptv premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters pro telegram (2026-09-08)",
+    "Striking distance: lista m3u premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters telegram (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "fd497a106a",
@@ -321,7 +360,13 @@
     "gsc_pos": 13.2,
     "clicks28": 1
    },
-   "live_check": "page is live but its modified date is before 2026-09-08"
+   "live_check": "page is live but its modified date is before 2026-09-08",
+   "checkpoint": 0,
+   "concurrent": [
+    "Striking distance: iptv shqiptar (2026-09-08)",
+    "Technical fix:  (2026-09-11)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "98a4408a71",
@@ -344,24 +389,13 @@
     "gsc_pos": 9.5,
     "clicks28": 1
    },
-   "live_check": "page is live but its modified date is before 2026-09-08"
-  },
-  {
-   "id": "f6e1c07475",
-   "kind": "Technical fix",
-   "site": "iptvshqiptar.com",
-   "query": "",
-   "page": "",
-   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   },
-   "completed": "2026-09-08",
-   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect still present in this audit's crawl",
-   "outcome": "AWAITING VERIFICATION",
-   "live_check": "5 page(s) still under 300 words live: /checkout?plan=1ekran-3m, /checkout?plan=1ekran-6m, /checkout?plan=1ekran-12m, /checkout?plan=1ekran-24m"
+   "live_check": "page is live but its modified date is before 2026-09-08",
+   "checkpoint": 0,
+   "concurrent": [
+    "Striking distance: iptv shqiptare (2026-09-08)",
+    "Technical fix:  (2026-09-11)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "b3caca4a55",
@@ -383,7 +417,14 @@
     "probe_pos": null,
     "gsc_pos": 7.4,
     "clicks28": 2
-   }
+   },
+   "checkpoint": 0,
+   "concurrent": [
+    "Striking distance: iptv algerie (2026-09-06)",
+    "Striking distance: abonnement iptv alg\u00e9rie (2026-09-06)",
+    "Striking distance: prix abonnement iptv alg\u00e9rie (2026-09-06)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "1ec40f062e",
@@ -400,13 +441,21 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 0,
+   "checkpoint_days": 3,
    "now": {
     "probe_pos": null,
     "gsc_pos": null,
     "clicks28": 0
    },
-   "live_check": "2 new live placement(s) logged for this site since completion"
+   "live_check": "2 new live placement(s) logged for this site since completion",
+   "checkpoint": 0,
+   "concurrent": [
+    "Indexation: /abonament (2026-09-06)",
+    "Technical fix:  (2026-09-06)",
+    "Indexation: /polska-telewizja-za-granica (2026-09-06)",
+    "Indexation: /test-iptv (2026-09-06)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "53045dba08",
@@ -423,13 +472,16 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 0,
+   "checkpoint_days": 3,
    "now": {
     "probe_pos": null,
     "gsc_pos": null,
     "clicks28": 0
    },
-   "live_check": "keyword present + modified on/after 2026-09-08"
+   "live_check": "keyword present + modified on/after 2026-09-08",
+   "checkpoint": 0,
+   "concurrent": [],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "ddd984ebb5",
@@ -446,13 +498,23 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 0,
+   "checkpoint_days": 3,
    "now": {
     "probe_pos": null,
     "gsc_pos": 5.5,
     "clicks28": 4
    },
-   "live_check": "keyword present + modified on/after 2026-09-08"
+   "live_check": "keyword present + modified on/after 2026-09-08",
+   "checkpoint": 0,
+   "concurrent": [
+    "Content decay: /blog/iptv-espana-telegram (2026-09-06)",
+    "Striking distance: listas m3u telegram (2026-09-06)",
+    "Striking distance: telegram iptv (2026-09-06)",
+    "Striking distance: iptv smarters pro telegram (2026-09-08)",
+    "Striking distance: lista m3u premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters telegram (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "0859acb6ae",
@@ -469,47 +531,23 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 0,
+   "checkpoint_days": 3,
    "now": {
     "probe_pos": null,
     "gsc_pos": 5.6,
     "clicks28": 3
    },
-   "live_check": "keyword present + modified on/after 2026-09-08"
-  },
-  {
-   "id": "984cc3c4dc",
-   "kind": "Technical fix",
-   "site": "iptvesp.com",
-   "query": "",
-   "page": "",
-   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   },
-   "completed": "2026-09-08",
-   "how": "auto-verified: the defect is gone from this audit's crawl \u00b7 defect still present in this audit's crawl",
-   "outcome": "AWAITING VERIFICATION",
-   "live_check": "5 page(s) still under 300 words live: /checkout?plan=1pant-3m, /checkout?plan=1pant-6m, /checkout?plan=1pant-12m, /checkout?plan=1pant-24m"
-  },
-  {
-   "id": "7ef248c3f6",
-   "kind": "Technical fix",
-   "site": "iptvned.com",
-   "query": "",
-   "page": "",
-   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: afrekenen, afrekenen, afrekenen, afrekenen, afrekenen.\n   Expand each to answer its query properly, or consolidate/noindex if they se",
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   },
-   "completed": "2026-09-08",
-   "how": "auto-verified: the defect is gone from this audit's crawl \u00b7 defect still present in this audit's crawl",
-   "outcome": "AWAITING VERIFICATION",
-   "live_check": "5 page(s) still under 300 words live: /afrekenen?plan=3-maanden-1-scherm, /afrekenen?plan=6-maanden-1-scherm, /afrekenen?plan=12-maanden-1-scherm, /afrekenen?plan=24-maanden-1-scherm"
+   "live_check": "keyword present + modified on/after 2026-09-08",
+   "checkpoint": 0,
+   "concurrent": [
+    "Content decay: /blog/iptv-espana-telegram (2026-09-06)",
+    "Striking distance: listas m3u telegram (2026-09-06)",
+    "Striking distance: telegram iptv (2026-09-06)",
+    "Striking distance: listas iptv premium telegram (2026-09-08)",
+    "Striking distance: lista m3u premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters telegram (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "lp-wordpress-ned",
@@ -558,13 +596,23 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 0,
+   "checkpoint_days": 3,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 11.9,
-    "clicks28": 3
+    "gsc_pos": 10.6,
+    "clicks28": 4
    },
-   "live_check": "keyword present + modified on/after 2026-09-08"
+   "live_check": "keyword present + modified on/after 2026-09-08",
+   "checkpoint": 0,
+   "concurrent": [
+    "Content decay: /blog/iptv-espana-telegram (2026-09-06)",
+    "Striking distance: listas m3u telegram (2026-09-06)",
+    "Striking distance: telegram iptv (2026-09-06)",
+    "Striking distance: listas iptv premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters pro telegram (2026-09-08)",
+    "Striking distance: iptv smarters telegram (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "owner_sales_w37",
@@ -645,13 +693,18 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 0,
+   "checkpoint_days": 3,
    "now": {
-    "probe_pos": 32,
-    "gsc_pos": 17.9,
+    "probe_pos": 20,
+    "gsc_pos": 18.2,
     "clicks28": 1
    },
-   "live_check": "keyword present + modified on/after 2026-09-08"
+   "live_check": "keyword present + modified on/after 2026-09-08",
+   "checkpoint": 0,
+   "concurrent": [
+    "Indexation: /planes (2026-09-06)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "42611f0848",
@@ -668,13 +721,23 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 0,
+   "checkpoint_days": 3,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 8.2,
+    "gsc_pos": 7.7,
     "clicks28": 1
    },
-   "live_check": "keyword present + modified on/after 2026-09-08"
+   "live_check": "keyword present + modified on/after 2026-09-08",
+   "checkpoint": 0,
+   "concurrent": [
+    "Content decay: /blog/iptv-espana-telegram (2026-09-06)",
+    "Striking distance: listas m3u telegram (2026-09-06)",
+    "Striking distance: telegram iptv (2026-09-06)",
+    "Striking distance: listas iptv premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters pro telegram (2026-09-08)",
+    "Striking distance: lista m3u premium telegram (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "b0afa996c9",
@@ -691,13 +754,23 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 0,
+   "checkpoint_days": 3,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 4.2,
-    "clicks28": 20
+    "gsc_pos": 3.4,
+    "clicks28": 23
    },
-   "live_check": "keyword present + modified on/after 2026-09-08"
+   "live_check": "keyword present + modified on/after 2026-09-08",
+   "checkpoint": 0,
+   "concurrent": [
+    "Content decay: /blog/iptv-espana-telegram (2026-09-06)",
+    "Striking distance: listas m3u telegram (2026-09-06)",
+    "Striking distance: telegram iptv (2026-09-06)",
+    "Striking distance: listas iptv premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters pro telegram (2026-09-08)",
+    "Striking distance: lista m3u premium telegram (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "lp-medium-esp",
@@ -746,13 +819,23 @@
    "completed": "2026-09-08",
    "how": "marked done by the owner (synced from the dashboard)",
    "outcome": "VERIFIED",
-   "checkpoint_days": 0,
+   "checkpoint_days": 3,
    "now": {
     "probe_pos": null,
-    "gsc_pos": 4.0,
-    "clicks28": 10
+    "gsc_pos": 4.4,
+    "clicks28": 5
    },
-   "live_check": "keyword present + modified on/after 2026-09-08"
+   "live_check": "keyword present + modified on/after 2026-09-08",
+   "checkpoint": 0,
+   "concurrent": [
+    "Content decay: /blog/iptv-espana-telegram (2026-09-06)",
+    "Striking distance: listas m3u telegram (2026-09-06)",
+    "Striking distance: telegram iptv (2026-09-06)",
+    "Striking distance: listas iptv premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters pro telegram (2026-09-08)",
+    "Striking distance: lista m3u premium telegram (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
    "id": "owner_links_review_slive",
@@ -791,15 +874,93 @@
     "gsc_pos": 4.1,
     "clicks28": 55
    },
-   "live_check": "keyword present + modified on/after 2026-09-10"
+   "live_check": "keyword present + modified on/after 2026-09-10",
+   "checkpoint": 0,
+   "concurrent": [
+    "Content decay: /blog/iptv-espana-telegram (2026-09-06)",
+    "Striking distance: listas m3u telegram (2026-09-06)",
+    "Striking distance: telegram iptv (2026-09-06)",
+    "Striking distance: listas iptv premium telegram (2026-09-08)",
+    "Striking distance: iptv smarters pro telegram (2026-09-08)",
+    "Striking distance: lista m3u premium telegram (2026-09-08)"
+   ],
+   "movement": "AWAITING_HISTORY"
   },
   {
-   "id": "627326bf4c",
+   "id": "b91c10424f",
+   "kind": "Technical fix",
+   "site": "iptvesp.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-11",
+   "how": "reclassified 11 Sep: the flagged checkout pages are noindex \u2014 a page Google is told not to index is not a thin-content defect. Not a fix, a corrected rule.",
+   "outcome": "VERIFIED",
+   "live_check": "no thin pages left in the crawl"
+  },
+  {
+   "id": "5b7bf2303d",
+   "kind": "Technical fix",
+   "site": "iptvned.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: afrekenen, afrekenen, afrekenen, afrekenen, afrekenen.\n   Expand each to answer its query properly, or consolidate/noindex if they se",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-11",
+   "how": "reclassified 11 Sep: the flagged checkout pages are noindex \u2014 a page Google is told not to index is not a thin-content defect. Not a fix, a corrected rule.",
+   "outcome": "VERIFIED",
+   "live_check": "no thin pages left in the crawl"
+  },
+  {
+   "id": "db10ebae21",
+   "kind": "Technical fix",
+   "site": "iptvpix.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-11",
+   "how": "reclassified 11 Sep: the flagged checkout pages are noindex \u2014 a page Google is told not to index is not a thin-content defect. Not a fix, a corrected rule.",
+   "outcome": "VERIFIED",
+   "live_check": "no thin pages left in the crawl"
+  },
+  {
+   "id": "bead5883ac",
+   "kind": "Technical fix",
+   "site": "iptvshqiptar.com",
+   "query": "",
+   "page": "",
+   "what": "1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.\n   Expand each to answer its query properly, or consolidate/noindex if they serve n",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-11",
+   "how": "reclassified 11 Sep: the flagged checkout pages are noindex \u2014 a page Google is told not to index is not a thin-content defect. Not a fix, a corrected rule.",
+   "outcome": "VERIFIED",
+   "live_check": "no thin pages left in the crawl"
+  },
+  {
+   "id": "b443b33f42",
    "kind": "Technical fix",
    "site": "",
    "query": "",
    "page": "",
-   "what": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, che",
+   "what": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: afrekenen, afrekenen, afrekenen, ",
    "baseline": {
     "probe_pos": null,
     "gsc_pos": null,

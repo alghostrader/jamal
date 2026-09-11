@@ -138,7 +138,7 @@ def check_content(t):
 
 def check_thin(t, crawl_pages):
     """THIN PAGES: refetch the pages the crawl flagged (<300 words) and recount live."""
-    urls = [p["url"] for p in crawl_pages if (p.get("word_count") or 0) < 300 and p.get("status") == 200][:8]
+    urls = [p["url"] for p in crawl_pages if (p.get("word_count") or 0) < 300 and str(p.get("status")) == "200" and "noindex" not in str(p.get("meta_robots") or "").lower()][:8]
     if not urls:
         return dict(deployed=True, live=True, detail="no thin pages left in the crawl")
     still = []
@@ -188,6 +188,22 @@ def verify_tasks(tasks, crawl_by_site, canon, vercel=None):
         kind = t.get("kind") or t.get("type")
         if kind == "Backlink":
             r = check_backlink(t)
+        elif kind in ("Compliance", "Footprint"):
+            ok = bool(t.get("defect_gone"))
+            r = dict(deployed=ok, live=ok, detail=("scan no longer flags this site/pair" if ok else "still flagged by this audit's scan — the change is not live yet or not complete"))
+        elif kind == "Cannibalisation":
+            ok = bool(t.get("defect_gone"))
+            if ok: r = dict(deployed=True, live=True, detail="the non-owner site no longer ranks on the owner's term (GSC)")
+            else:
+                st, html, _ = fetch(t.get("target_url") or "")
+                kw = t.get("keyword") or ""
+                if st == 200 and kw:
+                    soup = BeautifulSoup(html, "lxml"); head = norm((soup.title.string if soup.title and soup.title.string else "") + " " + " ".join(h.get_text(" ", strip=True) for h in soup.find_all("h1")))
+                    words = [w for w in norm(kw).split() if len(w) > 2 and w not in ("iptv",)]
+                    gone = bool(words) and not all(w in head for w in words)
+                    r = dict(deployed=True, live=False, http=200, detail=("term is out of the title/H1 — GSC overlap still present, re-checked every audit (lags 2–4 weeks)" if gone else f"“{kw}” is still in the title or H1 of the offending page"))
+                else:
+                    r = dict(deployed=False, live=False, http=st, detail=f"offending page returned HTTP {st or 'unreachable'}")
         elif kind == "Authority gap":
             n = t.get("new_links") or 0
             r = dict(deployed=n > 0, live=n > 0, detail=(f"{n} new live placement(s) logged for this site since completion" if n else "no new live placement logged for this site since completion (tick it on Backlinks with its URL)"))

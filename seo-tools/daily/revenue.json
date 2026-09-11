@@ -1,0 +1,32 @@
+{
+ "fetched": "2026-09-11",
+ "ok": true,
+ "source": "owner-entered (Sales app, Firestore trackers)",
+ "attribution": "unavailable",
+ "rows_read": 5,
+ "unmapped_site_keys": {},
+ "by_site": {
+  "iptvesp.com": {
+   "sales_7d": 0,
+   "revenue_7d": 0.0,
+   "sales_28d": 2,
+   "revenue_28d": 118.0,
+   "sales_all": 3,
+   "revenue_all": 177.0,
+   "last_sale": "2026-08-16",
+   "unmapped": 0
+  },
+  "primeiptv-france.com": {
+   "sales_7d": 0,
+   "revenue_7d": 0.0,
+   "sales_28d": 0,
+   "revenue_28d": 0.0,
+   "sales_all": 1,
+   "revenue_all": 49.0,
+   "last_sale": "2026-05-10",
+   "unmapped": 0
+  }
+ },
+ "sites_with_sales": 2,
+ "sites_total": 11
+}

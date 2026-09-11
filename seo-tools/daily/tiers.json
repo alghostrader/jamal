@@ -1,0 +1,9 @@
+{
+ "_note": "Site tiers drive the priority engine's strategic weight and the attention split. Decided 11 Sep from 28-day clicks, rankings and role. Tier 1 = revenue/growth engines, tier 2 = growing or strategic, tier 3 = satellites (feed links, no head-term ambition until authority exists).",
+ "tiers": {
+  "iptvesp.com": 1, "abonnementiptvofficiel.com": 1, "primeiptv-france.com": 1, "rodaktv.com": 1,
+  "iptvned.com": 2, "iptvsegura.com": 2, "smartersprofrance.fr": 2, "iptvshqiptar.com": 2,
+  "iptvpix.com": 3, "smarters-live.com": 3, "iptvfranceofficiel.fr": 3
+ },
+ "weights": {"1": 20, "2": 12, "3": 6}
+}

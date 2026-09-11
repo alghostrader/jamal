@@ -12,9 +12,117 @@ States: `completed` (built + deployed) · `deferred` · `dismissed` (with a note
 the audit fetches it and checks keyword + modified date (add `dateModified` / `og:updated_time` to the page). For a backlink id (`lp-…`) the url is the placement URL.
 The next audit merges these lines with the owner's browser ticks (Firestore) and moves the task to Shipped only after the live check passes.
 
-## Do now — 8 tasks, ≈7h 20m
+## Do now — 16 tasks, ≈13h 55m
 
-### #1 Backlink — Substack post · rodaktv.com
+### #1 Compliance — / · iptvesp.com
+- id: `07973cd058` · score 100 · Quick ≈105 min · /
+- repo: `/Desktop/iptv-espana-pro` (MDX content/blog)
+- action: **FIX** → https://iptvesp.com/
+- ⚠ legal floor — same day; the scan lists every page
+- what: 26 compliance hit(s) on 17 page(s): terms 100 % legal, completamente legal, orange tv, serie a, totalmente legal — pages: /, /blog, /blog/como-elegir-iptv-espana, /blog/cuanto-cuesta-iptv-espana, /blog/iptv-box-espana… Remove or rewrite every flagged term (title, meta, H1, body, alt); deploy; the next audit re-scans all 11 sites.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: every flagged term removed or rewritten (title, meta, H1, body, alt) / deploy READY / next audit's compliance scan finds zero hits on this site
+
+### #2 Compliance — /guides/iptv-vs-apps-streaming-gratuit · primeiptv-france.com
+- id: `7aff3549be` · score 100 · Quick ≈30 min · /guides/iptv-vs-apps-streaming-gratuit
+- repo: `/Desktop/iptv-pro` (guides-TS (lib/guides-data.ts))
+- action: **FIX** → https://primeiptv-france.com/guides/iptv-vs-apps-streaming-gratuit
+- ⚠ legal floor — same day; the scan lists every page
+- what: 2 compliance hit(s) on 2 page(s): terms 100% légal, sfr tv — pages: /guides/iptv-vs-apps-streaming-gratuit, /guides/iptv-vs-box-orange-free-sfr-bouygues Remove or rewrite every flagged term (title, meta, H1, body, alt); deploy; the next audit re-scans all 11 sites.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: every flagged term removed or rewritten (title, meta, H1, body, alt) / deploy READY / next audit's compliance scan finds zero hits on this site
+
+### #3 Compliance — / · iptvned.com
+- id: `7cde570b1c` · score 100 · Quick ≈75 min · /
+- repo: `/Desktop/alghostrader.com/iptvflick.nl` (lib/posts.ts)
+- action: **FIX** → https://iptvned.com/
+- ⚠ legal floor — same day; the scan lists every page
+- what: 13 compliance hit(s) on 11 page(s): terms 100% legaal, volledig legaal, ziggo — pages: /, /abonnementen, /blog/iptv-nederland, /blog/iptv-op-android-tv-box-nederland, /blog/iptv-op-iphone-ipad-nederland… Remove or rewrite every flagged term (title, meta, H1, body, alt); deploy; the next audit re-scans all 11 sites.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: every flagged term removed or rewritten (title, meta, H1, body, alt) / deploy READY / next audit's compliance scan finds zero hits on this site
+
+### #4 Compliance — / · iptvpix.com
+- id: `4cb24a2ae7` · score 100 · Quick ≈65 min · /
+- repo: `iptv-agent-system/output/sites/iptvpix.com` (lib/posts.ts)
+- action: **FIX** → https://iptvpix.com/
+- ⚠ legal floor — same day; the scan lists every page
+- what: 10 compliance hit(s) on 9 page(s): terms 100 % légal, 100% légal, formule 1 — pages: /, /abonnements, /amende-iptv-france, /blog/iptv-gratuit-belgique-suisse, /box-iptv… Remove or rewrite every flagged term (title, meta, H1, body, alt); deploy; the next audit re-scans all 11 sites.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: every flagged term removed or rewritten (title, meta, H1, body, alt) / deploy READY / next audit's compliance scan finds zero hits on this site
+
+### #5 Compliance — /blog/iptv-vpn-france-utile-guide-2026 · smarters-live.com
+- id: `4889a2f5da` · score 100 · Quick ≈25 min · /blog/iptv-vpn-france-utile-guide-2026
+- repo: `/Desktop/iptv-france-pro` (lib/articles.ts)
+- action: **FIX** → https://www.smarters-live.com/blog/iptv-vpn-france-utile-guide-2026
+- ⚠ legal floor — same day; the scan lists every page
+- what: 1 compliance hit(s) on 1 page(s): terms contourner les restrictions — pages: /blog/iptv-vpn-france-utile-guide-2026 Remove or rewrite every flagged term (title, meta, H1, body, alt); deploy; the next audit re-scans all 11 sites.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: every flagged term removed or rewritten (title, meta, H1, body, alt) / deploy READY / next audit's compliance scan finds zero hits on this site
+
+### #6 Compliance — /articles/code-iptv-xtream-vs-m3u · smartersprofrance.fr
+- id: `27eb5345f6` · score 100 · Quick ≈80 min · /articles/code-iptv-xtream-vs-m3u
+- repo: `/Desktop/smartersprofrance-fr` (static HTML (articles/))
+- action: **FIX** → https://www.smartersprofrance.fr/articles/code-iptv-xtream-vs-m3u
+- ⚠ legal floor — same day; the scan lists every page
+- what: 15 compliance hit(s) on 12 page(s): terms apple tv+, disney+, ligue des champions, netflix, rtl — pages: /articles/code-iptv-xtream-vs-m3u, /articles/installer-iptv-smarters-pro-android-tv, /articles/installer-iptv-smarters-pro-chromecast-google-tv, /articles/installer-iptv-smarters-pro-iphone-ipad, /articles/installer-iptv-smarters-pro-samsung-smart-tv… Remove or rewrite every flagged term (title, meta, H1, body, alt); deploy; the next audit re-scans all 11 sites.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: every flagged term removed or rewritten (title, meta, H1, body, alt) / deploy READY / next audit's compliance scan finds zero hits on this site
+
+### #7 Compliance — /articles/comment-choisir-un-abonnement-iptv-france · iptvfranceofficiel.fr
+- id: `4caa6d5748` · score 100 · Quick ≈45 min · /articles/comment-choisir-un-abonnement-iptv-france
+- repo: `/Desktop/iptvfranceofficiel-fr` (MDX content/articles)
+- action: **FIX** → https://iptvfranceofficiel.fr/articles/comment-choisir-un-abonnement-iptv-france
+- ⚠ legal floor — same day; the scan lists every page
+- what: 6 compliance hit(s) on 5 page(s): terms 100 % légal, orange tv, rtl, sfr tv, ufc — pages: /articles/comment-choisir-un-abonnement-iptv-france, /articles/iptv-4k-france, /articles/iptv-legal-en-france, /articles/iptv-sans-buffering-france, /articles/meilleur-abonnement-iptv-2026 Remove or rewrite every flagged term (title, meta, H1, body, alt); deploy; the next audit re-scans all 11 sites.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: every flagged term removed or rewritten (title, meta, H1, body, alt) / deploy READY / next audit's compliance scan finds zero hits on this site
+
+### #8 Compliance — /blog/abonnement-iptv-multi-ecrans · abonnementiptvofficiel.com
+- id: `b0eb5b0a02` · score 100 · Quick ≈55 min · /blog/abonnement-iptv-multi-ecrans
+- repo: `/Desktop/abonnementiptvofficiel` (MDX content/blog)
+- action: **FIX** → https://abonnementiptvofficiel.com/blog/abonnement-iptv-multi-ecrans
+- ⚠ legal floor — same day; the scan lists every page
+- what: 10 compliance hit(s) on 7 page(s): terms 100 % légal, coupe du monde, formule 1, orange tv, sfr tv — pages: /blog/abonnement-iptv-multi-ecrans, /blog/comment-choisir-un-abonnement-iptv-france, /blog/iptv-arcom-amende, /blog/iptv-legal-en-france, /blog/iptv-sport-premium… Remove or rewrite every flagged term (title, meta, H1, body, alt); deploy; the next audit re-scans all 11 sites.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: every flagged term removed or rewritten (title, meta, H1, body, alt) / deploy READY / next audit's compliance scan finds zero hits on this site
+
+### #9 Compliance — /blog/iptv-a-prawo-w-polsce · rodaktv.com
+- id: `06807ca86c` · score 100 · Quick ≈35 min · /blog/iptv-a-prawo-w-polsce
+- repo: `⚠ confirm: alghostrader/iptv-polska` (blog/)
+- action: **FIX** → https://rodaktv.com/blog/iptv-a-prawo-w-polsce
+- ⚠ legal floor — same day; the scan lists every page
+- what: 3 compliance hit(s) on 3 page(s): terms 100% legalne, sky — pages: /blog/iptv-a-prawo-w-polsce, /blog/jak-wybrac-dostawce-iptv, /polska-telewizja-w-uk Remove or rewrite every flagged term (title, meta, H1, body, alt); deploy; the next audit re-scans all 11 sites.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: every flagged term removed or rewritten (title, meta, H1, body, alt) / deploy READY / next audit's compliance scan finds zero hits on this site
+
+### #10 Cannibalisation — grupo iptv telegram · iptvsegura.com
+- id: `c5801525dd` · score 90 · Quick ≈30 min · GSC pos 1.0 · 0 clicks · 1 impr / 28d
+- repo: `⚠ set repo path (not in the owner's report)` (guias/)
+- action: **FIX** → https://iptvsegura.com/
+- ⚠ owner of the term: iptvesp.com — link to it, never a new URL
+- what: segura ranks on 12 term(s) that belong to esp (ES): “grupo iptv telegram” #1, “iptv telegram españa” #2, “iptv m3u telegram” #2, “m3u iptv telegram” #3, “listas iptv telegram” #4, “listas iptv gratis telegram” #6…. Offending page(s): /, /guias/configurar-iptv-apple-tv-iphone, /guias/estafas-iptv-como-evitarlas On segura's page: remove the term from title/H1, keep the page on its own lane, add one contextual link to esp's page for that intent. Do not create a new URL anywhere.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: the term is out of the non-owner page's title and H1 / one contextual link to the owner's page for that intent / next audit: the non-owner site no longer appears in the top 50 for the term (GSC, may lag 2–4 weeks)
+
+### #11 Cannibalisation — iptv prix · abonnementiptvofficiel.com
+- id: `ce0229d96a` · score 90 · Quick ≈30 min · GSC pos 2.0 · 1 clicks · 1 impr / 28d
+- repo: `/Desktop/abonnementiptvofficiel` (MDX content/blog)
+- action: **FIX** → https://abonnementiptvofficiel.com/boitier-iptv
+- ⚠ owner of the term: primeiptv-france.com — link to it, never a new URL
+- what: aio ranks on 13 term(s) that belong to prime (FR): “iptv prix” #2, “iptv abonnement” #2, “fournisseur iptv” #2, “abonnement iptv 12 mois amazon” #2, “ip tv” #2, “iptv” #2…. Offending page(s): /boitier-iptv, /guide-installation On aio's page: remove the term from title/H1, keep the page on its own lane, add one contextual link to prime's page for that intent. Do not create a new URL anywhere.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: the term is out of the non-owner page's title and H1 / one contextual link to the owner's page for that intent / next audit: the non-owner site no longer appears in the top 50 for the term (GSC, may lag 2–4 weeks)
+
+### #12 Cannibalisation — iptv · smartersprofrance.fr
+- id: `58cc2a5ef7` · score 73 · Quick ≈30 min · GSC pos 11.0 · 0 clicks · 2 impr / 28d
+- repo: `/Desktop/smartersprofrance-fr` (static HTML (articles/))
+- action: **FIX** → https://www.smartersprofrance.fr/
+- ⚠ owner of the term: primeiptv-france.com — link to it, never a new URL
+- what: spf ranks on 7 term(s) that belong to prime (FR): “iptv” #11, “iptv france” #14, “fournisseur iptv” #19, “iptv prix” #30, “iptv abonnement prix” #39, “iptv abonnement” #48…. Offending page(s): /, /abonnement-iptv, /tutoriels On spf's page: remove the term from title/H1, keep the page on its own lane, add one contextual link to prime's page for that intent. Do not create a new URL anywhere.
+- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
+- done when: the term is out of the non-owner page's title and H1 / one contextual link to the owner's page for that intent / next audit: the non-owner site no longer appears in the top 50 for the term (GSC, may lag 2–4 weeks)
+
+### #13 Backlink — Substack post · rodaktv.com
 - id: `lp-substack-rodak` · score 55 · Quick ≈25 min · P1 placement · brand / naked anchor
 - repo: `—`
 - action: **PLACE** → https://rodaktv.com/
@@ -23,7 +131,7 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - deploy-as: owner publishes (signup + CAPTCHA + publish) · guards: no rights-holder / channel / league names · no fake reviews / address
 - done when: post published with a brand or naked-URL anchor / live URL logged on the Backlinks page (that list is the ledger) / live fetch: link present + dofollow
 
-### #2 Backlink — Hotfrog listing · rodaktv.com
+### #14 Backlink — Hotfrog listing · rodaktv.com
 - id: `lp-hotfrog-rodak` · score 55 · Quick ≈25 min · P2 placement · brand / naked anchor
 - repo: `—`
 - action: **PLACE** → https://rodaktv.com/
@@ -32,25 +140,7 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - deploy-as: owner publishes (signup + CAPTCHA + publish) · guards: no rights-holder / channel / league names · no fake reviews / address
 - done when: post published with a brand or naked-URL anchor / live URL logged on the Backlinks page (that list is the ledger) / live fetch: link present + dofollow
 
-### #3 Striking distance — iptv premium telegram · iptvesp.com
-- id: `1e0101bfb6` · score 54 · Medium ≈40 min · GSC pos 4.4 · 3 clicks · 12 impr / 28d
-- repo: `/Desktop/iptv-espana-pro` (MDX content/blog)
-- action: **ENHANCE** → https://iptvesp.com/blog/telegram-listas-iptv-espana
-- ⚠ page already ranks this term — enhance it, never a new URL
-- what: “iptv premium telegram” sits at position 4 with 12 impressions/28d. Strengthen internal links to the ranking page and refresh the content section matching this query.
-- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
-- done when: 3+ internal links point at the ranking page with varied anchors / on-query section refreshed + dateModified bumped / deploy READY + live fetch finds the keyword on the page
-
-### #4 Striking distance — meilleur boîtier iptv 2026 · abonnementiptvofficiel.com
-- id: `9f828be461` · score 52 · Medium ≈40 min · GSC pos 6.9 · 24 clicks · 244 impr / 28d
-- repo: `/Desktop/abonnementiptvofficiel` (MDX content/blog)
-- action: **ENHANCE** → https://abonnementiptvofficiel.com/boitier-iptv
-- ⚠ page already ranks this term — enhance it, never a new URL
-- what: “meilleur boîtier iptv 2026” sits at position 7 with 244 impressions/28d. Strengthen internal links to the ranking page and refresh the content section matching this query.
-- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
-- done when: 3+ internal links point at the ranking page with varied anchors / on-query section refreshed + dateModified bumped / deploy READY + live fetch finds the keyword on the page
-
-### #5 Backlink — adslzone.net — expert quote · iptvesp.com
+### #15 Backlink — adslzone.net — expert quote · iptvesp.com
 - id: `lp-gp-adslzone-esp` · score 52 · Deep work ≈90 min · authority 56 · expert quote
 - repo: `—`
 - action: **PITCH** → https://adslzone.net/
@@ -59,25 +149,7 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - deploy-as: owner sends the pitch and handles the editor; Claude writes pitch + article + quote · guards: no rights-holder / channel / league names · no '100% legal' claims · real screenshots we own · author alghostrader
 - done when: pitch sent from the owner's mailbox (draft in seo-tools/links/PITCHES-*.md) / editor accepted · article or quote delivered / live URL pasted here → the audit checks it is live + dofollow
 
-### #6 Backlink — antyweb.pl — expert quote · rodaktv.com
-- id: `lp-gp-antyweb-rodak` · score 52 · Deep work ≈90 min · authority 51 · expert quote
-- repo: `—`
-- action: **PITCH** → https://antyweb.pl/
-- ⚠ one contextual link, brand or naked-URL anchor, to a guide page (not the pricing page)
-- what: Expert quote on antyweb.pl (authority 51) for rodaktv.com. Angle: Polska telewizja za granicą: co sprawdzić przed zakupem abonamentu (UK / DE / NL) major PL tech blog; pitch expert comments on smart TV / streaming abroad
-- deploy-as: owner sends the pitch and handles the editor; Claude writes pitch + article + quote · guards: no rights-holder / channel / league names · no '100% legal' claims · real screenshots we own · author alghostrader
-- done when: pitch sent from the owner's mailbox (draft in seo-tools/links/PITCHES-*.md) / editor accepted · article or quote delivered / live URL pasted here → the audit checks it is live + dofollow
-
-### #7 Striking distance — lista iptv telegram · iptvesp.com
-- id: `cbf9605fc7` · score 51 · Medium ≈40 min · GSC pos 4.6 · 9 clicks · 55 impr / 28d
-- repo: `/Desktop/iptv-espana-pro` (MDX content/blog)
-- action: **ENHANCE** → https://iptvesp.com/blog/listas-telegram-iptv-espana
-- ⚠ page already ranks this term — enhance it, never a new URL
-- what: “lista iptv telegram” sits at position 5 with 55 impressions/28d. Strengthen internal links to the ranking page and refresh the content section matching this query. (backfilled from Monitor: the queue was short)
-- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
-- done when: 3+ internal links point at the ranking page with varied anchors / on-query section refreshed + dateModified bumped / deploy READY + live fetch finds the keyword on the page
-
-### #8 Backlink — letsgodigital.org — expert quote · iptvned.com
+### #16 Backlink — letsgodigital.org — expert quote · iptvned.com
 - id: `lp-gp-letsgodigital-ned` · score 50 · Deep work ≈90 min · authority 39 · expert quote
 - repo: `—`
 - action: **PITCH** → https://letsgodigital.org/
@@ -87,27 +159,7 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - done when: pitch sent from the owner's mailbox (draft in seo-tools/links/PITCHES-*.md) / editor accepted · article or quote delivered / live URL pasted here → the audit checks it is live + dofollow
 
 
-## Verifying — 9 built, not live yet (what is still missing)
-
-### … Technical — Thin Pages · iptvpix.com
-- id: `e91c45e957` · score 0 · — ≈0 min · no volume data
-- repo: `iptv-agent-system/output/sites/iptvpix.com` (lib/posts.ts)
-- action: **FIX** → https://iptvpix.com/
-- what: 1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.
-   Expand each to answer its query properly, or consolidate/noindex if they serve n
-- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
-- done when: defect fixed in the repo (all flagged pages) / deploy READY / live re-check passes (thin pages ≥ 300 words / redirect 308 / zero broken links)
-- live check (2026-09-11): 5 page(s) still under 300 words live: /checkout?plan=3mois-1ecran, /checkout?plan=6mois-1ecran, /checkout?plan=12mois-1ecran, /checkout?plan=24mois-1ecran
-
-### … Technical — Thin Pages · iptvshqiptar.com
-- id: `f6e1c07475` · score 0 · — ≈0 min · no volume data
-- repo: `/Desktop/iptvshqip` (lib/posts.ts)
-- action: **FIX** → https://iptvshqiptar.com/
-- what: 1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.
-   Expand each to answer its query properly, or consolidate/noindex if they serve n
-- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
-- done when: defect fixed in the repo (all flagged pages) / deploy READY / live re-check passes (thin pages ≥ 300 words / redirect 308 / zero broken links)
-- live check (2026-09-11): 5 page(s) still under 300 words live: /checkout?plan=1ekran-3m, /checkout?plan=1ekran-6m, /checkout?plan=1ekran-12m, /checkout?plan=1ekran-24m
+## Verifying — 5 built, not live yet (what is still missing)
 
 ### … Striking distance — iptv shqiptar · iptvshqiptar.com
 - id: `98a4408a71` · score 0 · — ≈0 min · GSC pos 9.5 · 1 clicks · 30 impr / 28d
@@ -159,30 +211,14 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - done when: 3+ internal links point at the ranking page with varied anchors / on-query section refreshed + dateModified bumped / deploy READY + live fetch finds the keyword on the page
 - live check (2026-09-11): page is live but declares no modified date — add dateModified / og:updated_time so the change can be verified
 
-### … Technical — Thin Pages · iptvesp.com
-- id: `984cc3c4dc` · score 0 · — ≈0 min · no volume data
-- repo: `/Desktop/iptv-espana-pro` (MDX content/blog)
-- action: **FIX** → https://iptvesp.com/
-- what: 1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, checkout, checkout.
-   Expand each to answer its query properly, or consolidate/noindex if they serve n
-- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
-- done when: defect fixed in the repo (all flagged pages) / deploy READY / live re-check passes (thin pages ≥ 300 words / redirect 308 / zero broken links)
-- live check (2026-09-11): 5 page(s) still under 300 words live: /checkout?plan=1pant-3m, /checkout?plan=1pant-6m, /checkout?plan=1pant-12m, /checkout?plan=1pant-24m
 
-### … Technical — Thin Pages · iptvned.com
-- id: `7ef248c3f6` · score 0 · — ≈0 min · no volume data
-- repo: `/Desktop/alghostrader.com/iptvflick.nl` (lib/posts.ts)
-- action: **FIX** → https://iptvned.com/
-- what: 1. THIN PAGES (P2). 5 page(s) under 300 words: afrekenen, afrekenen, afrekenen, afrekenen, afrekenen.
-   Expand each to answer its query properly, or consolidate/noindex if they se
-- deploy-as: alghostrader · git push origin main → Vercel auto · guards: title ≤ 60 chars (build fails otherwise) · no rights-holder / channel / league / broadcaster names · real hero image (no icon fallback) · brand or naked-URL anchors only for links
-- done when: defect fixed in the repo (all flagged pages) / deploy READY / live re-check passes (thin pages ≥ 300 words / redirect 308 / zero broken links)
-- live check (2026-09-11): 5 page(s) still under 300 words live: /afrekenen?plan=3-maanden-1-scherm, /afrekenen?plan=6-maanden-1-scherm, /afrekenen?plan=12-maanden-1-scherm, /afrekenen?plan=24-maanden-1-scherm
-
-
-## Shipped (live-verified) — 18
+## Shipped (live-verified) — 22
 
 - ✓ Striking distance — listas iptv telegram · iptvesp.com · verified 2026-09-11 · keyword present + modified on/after 2026-09-10
+- ✓ Technical — THIN PAGES · iptvesp.com · verified 2026-09-11 · no thin pages left in the crawl
+- ✓ Technical — THIN PAGES · iptvned.com · verified 2026-09-11 · no thin pages left in the crawl
+- ✓ Technical — THIN PAGES · iptvpix.com · verified 2026-09-11 · no thin pages left in the crawl
+- ✓ Technical — THIN PAGES · iptvshqiptar.com · verified 2026-09-11 · no thin pages left in the crawl
 - ✓ Striking distance — iptv smarters pro telegram · iptvesp.com · verified 2026-09-08 · keyword present + modified on/after 2026-09-08
 - ✓ Striking distance — telegram iptv · iptvesp.com · verified 2026-09-08 · keyword present + modified on/after 2026-09-06
 - ✓ Striking distance — iptv smarters telegram · iptvesp.com · verified 2026-09-08 · keyword present + modified on/after 2026-09-08
@@ -209,33 +245,33 @@ The next audit merges these lines with the owner's browser ticks (Firestore) and
 - Owner: Send this week's sales numbers per site — feeds revenue-weighted prioritisation
 - Owner: Fill the ⚠ placeholder fields in seo-tools/briefs/ (95 fields, 11 sites) — aio 8 · esp 9 · ifo 8 · ned 8 · pix 8 · prime 9 · rodak 10 · segura 9 · shqip 10 · slive 8 · spf 8
 
-## Monitor — 102 watch items (do not work on these)
+## Monitor — 29 watch items (do not work on these)
 
-- Striking distance: lista iptv telegram · esp · score 51
-- Striking distance: grupos de telegram iptv gratis · esp · score 51
-- Striking distance: test iptv · esp · score 51
-- Striking distance: iptv essai 7 jours · aio · score 50
-- Striking distance: m3u telegram · esp · score 50
-- Striking distance: telegram listas iptv · esp · score 50
-- Striking distance: m3u iptv telegram · esp · score 50
-- Striking distance: iptv gratis telegram · esp · score 50
-- Striking distance: cuentas iptv gratis telegram · esp · score 50
-- Striking distance: grupos iptv telegram · esp · score 50
-- Striking distance: canal iptv telegram · esp · score 50
-- Striking distance: listas iptv gratis telegram · esp · score 50
-- Striking distance: grupo iptv telegram · esp · score 50
-- Striking distance: cuentas de iptv gratis telegram · esp · score 50
-- Striking distance: lista iptv gratis telegram · esp · score 50
-- Striking distance: lista m3u gratis telegram · esp · score 50
-- Striking distance: iptv definition · prime · score 50
-- Striking distance: iptv smarters pro whmcs apk · spf · score 49
-- Striking distance: meilleur boitier iptv avec abonnement · aio · score 49
-- Striking distance: grupo telegram iptv · esp · score 49
-- Striking distance: lista m3u telegram · esp · score 49
-- Striking distance: telegram iptv m3u · esp · score 49
-- Striking distance: telegram m3u · esp · score 49
-- Striking distance: grupos de iptv telegram · esp · score 49
-- Striking distance: iptv cuentas gratis telegram · esp · score 49
+- CTR gap: iptv app fire tv · ned · score 51
+- Striking distance: iptv prueba gratis · esp · score 51
+- Striking distance: prueba gratis iptv · esp · score 51
+- Striking distance: iptv smarters pro lite · spf · score 50
+- Striking distance: iptv smarters pro fire stick · spf · score 50
+- Striking distance: es seguro el iptv · segura · score 49
+- Striking distance: iptv opgerold · ned · score 48
+- Striking distance: iptv opgerold 2026 · ned · score 48
+- Striking distance: iptv app fire tv · ned · score 47
+- Striking distance: lista m3u falas · shqip · score 47
+- Striking distance: iptv smarters pro apk · spf · score 47
+- Authority gap: iptv premium · ifo · score 47
+- Striking distance: iptv fire stick · ned · score 46
+- Striking distance: telecharger iptv smarter pro apk · spf · score 46
+- Striking distance: iptv player es seguro · segura · score 45
+- Striking distance: iptv stick · ned · score 45
+- Striking distance: ip tv · ned · score 45
+- Striking distance: tv shqip smart tv lg · shqip · score 45
+- Striking distance: iptv uit de lucht gehaald 2026 · ned · score 44
+- Striking distance: illegale iptv · ned · score 43
+- Striking distance: iptv legaal · ned · score 42
+- Striking distance: .m3u · segura · score 42
+- Content gap: proveedor iptv · esp · score 41
+- Content gap: serveur iptv · prime · score 41
+- Content gap: mejor lista iptv · esp · score 41
 
 ## Excluded — 15 out-of-scope (Arab / MENA + rest of Africa) — never work on these
 

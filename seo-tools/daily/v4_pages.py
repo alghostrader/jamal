@@ -39,6 +39,23 @@ def build_all(G):
     KT, SEM, D, F, CT, HIST = G["KT"], G["SEM"], G["D"], G["F"], G["CT"], G["HIST"]
     GSCD, INDEX, DFS_DOWN = G["GSCD"], G["INDEX"], G["DFS_DOWN"]
     STAMP_TXT, SEM_UPD, POS_SRC = G["STAMP_TXT"], G["SEM_UPD"], G["POS_SRC"]
+    import os as _os0, json as _J0, re as _re0
+    _BASE0 = _os0.path.dirname(_os0.path.abspath(__file__))
+    def _load0(n, d):
+        try: return _J0.load(open(_os0.path.join(_BASE0, n)))
+        except Exception: return d
+    OSM0 = _load0("os_audit_measurements.json", {})
+    OWNERS = _load0("keyword_owners.json", {"rules": []})
+    TIERS = _load0("tiers.json", {"tiers": {}, "weights": {"1": 20, "2": 12, "3": 6}})
+    REV = _load0("revenue.json", {})
+    MARKET_OF = {"iptvesp.com": "ES", "iptvsegura.com": "ES", "primeiptv-france.com": "FR", "abonnementiptvofficiel.com": "FR", "smartersprofrance.fr": "FR",
+                 "smarters-live.com": "FR", "iptvpix.com": "FR", "iptvfranceofficiel.fr": "FR", "iptvned.com": "NL", "iptvshqiptar.com": "AL", "rodaktv.com": "PL"}
+    def term_owner(market, q):
+        for r in OWNERS.get("rules", []):
+            if r["market"] == market and _re0.search(r["pattern"], (q or "").lower()): return r["owner"], r.get("reason", "")
+        return None, ""
+    def tier_of(s_): return int(TIERS.get("tiers", {}).get(s_, 3))
+    def tier_w(s_): return int(TIERS.get("weights", {}).get(str(tier_of(s_)), 6))
     MONEY, CTRY, LANG, NSITES = G["MONEY"], G["CTRY"], G["LANG"], G["NSITES"]
     icon, shell, spark, COPY_JS = G["icon"], G["shell"], G["spark"], G["COPY_JS"]
     dfs_of, daily_of, nrank = G["dfs_of"], G["daily_of"], G["nrank"]
@@ -462,7 +479,7 @@ def build_all(G):
             worsening = bool(op and np_ and np_ > op + 2) or kind == "Content decay"
             improving = bool(op and np_ and np_ < op - 1)
             impact = min(40, int(o["score"] * 0.45))
-            strategic = 20 if (r or (o["page"] and o["page"] in (MONEY.get(s), "/"))) else (12 if s in ("iptvesp.com", "primeiptv-france.com", "rodaktv.com") else 8)
+            strategic = 20 if (r or (o["page"] and o["page"] in (MONEY.get(s), "/"))) else tier_w(s)
             urgency = 25 if kind == "Indexation" else (22 if worsening else (12 if kind in ("Striking distance", "CTR gap") else 8))
             if improving: urgency = 4  # already moving without intervention — protect attention
             prob = 14 if kind in ("Indexation", "CTR gap") else (12 if kind == "Striking distance" else (10 if kind == "Content decay" else 8))
@@ -495,6 +512,59 @@ def build_all(G):
                                   drivers=(["P1 defect"] if p1 else ["P2 defect"]) + ["low effort", "verified automatically by the next audit"],
                                   effort="Quick", effort_min=20, improving=False, worsening=False,
                                   baseline={"probe_pos": None, "gsc_pos": None, "clicks28": 0}))
+        # 2b. COMPLIANCE — the legal floor. Every hit is an incident: top of the queue, same day, never a backlog item.
+        hits_by_site = {}
+        for h in OSM0.get("compliance_hits", []):
+            hits_by_site.setdefault(h["site"], []).append(h)
+        for s, hs in hits_by_site.items():
+            pages_ = sorted({h["url"].replace("https://", "").replace("http://", "").split("/", 1)[-1] for h in hs})
+            terms_ = sorted({h["term"] for h in hs})
+            tasks.append(dict(id=tid("Compliance", s, "hits"), kind="Compliance", site=s, query="", page=("/" + pages_[0]) if pages_ else "/",
+                              what=f'{len(hs)} compliance hit(s) on {len(pages_)} page(s): terms {", ".join(terms_[:6])}{"…" if len(terms_) > 6 else ""} — pages: ' + ", ".join("/" + p for p in pages_[:5]) + ("…" if len(pages_) > 5 else ""),
+                              why="Standing rule: no rights-holder, channel, league, broadcaster or SVOD names; no legality guarantees; no geo-circumvention claims. A breach is a legal exposure, not a growth trade-off.",
+                              upside="Removes a same-day legal risk.", action="Remove or rewrite every flagged term (title, meta, H1, body, alt); deploy; the next audit re-scans all 11 sites.",
+                              src="compliance scan (compliance_terms.json) over every crawled page", score=100, drivers=["legal floor — outranks all growth work"],
+                              effort="Quick", effort_min=20 + 5 * len(pages_), improving=False, worsening=True,
+                              baseline={"probe_pos": None, "gsc_pos": None, "clicks28": 0}, pages_all=["/" + p for p in pages_], terms=terms_))
+        # 2c. CANNIBALISATION — same market, a non-owner site ranks in the top 50 for a term the owner rules assign elsewhere
+        conf = {}
+        for c in OSM0.get("cannibalisation_same_market", []):
+            owner, reason = term_owner(c["market"], c["query"])
+            if not owner: continue
+            demand = sum(r_[2] for r_ in c["sites"])   # impressions at stake = every owned site's impressions on the term
+            for s_, pos_, imp_, url_ in c["sites"]:
+                if s_ == owner or out_of_scope(c["query"]): continue
+                k = (s_, owner)
+                conf.setdefault(k, {"queries": [], "impr": 0, "urls": set(), "reason": reason})
+                conf[k]["queries"].append((c["query"], pos_, imp_)); conf[k]["impr"] += demand
+                bare = url_.replace("https://", "").replace("http://", "")
+                conf[k]["urls"].add(bare.split("/", 1)[1] if "/" in bare else "")
+        for (s_, owner), v in conf.items():
+            qs = sorted(v["queries"], key=lambda x: x[1])
+            page_ = "/" + sorted(v["urls"], key=len)[0] if v["urls"] else "/"
+            tasks.append(dict(id=tid("Cannibalisation", s_, owner), kind="Cannibalisation", site=s_, query=qs[0][0], page=page_,
+                              what=f'{ABBR[s_]} ranks on {len(qs)} term(s) that belong to {ABBR[owner]} ({MARKET_OF.get(s_)}): ' + ", ".join(f'“{q}” #{p_:.0f}' for q, p_, _ in qs[:6]) + ("…" if len(qs) > 6 else "") + '. Offending page(s): ' + ", ".join("/" + u for u in sorted(v["urls"])[:3]),
+                              why=v["reason"] or "One keyword, one page, one site per market.", upside="Consolidates the term on the owner's page instead of splitting authority across two owned URLs.",
+                              action=f"On {ABBR[s_]}'s page: remove the term from title/H1, keep the page on its own lane, add one contextual link to {ABBR[owner]}'s page for that intent. Do not create a new URL anywhere.",
+                              src="Search Console same-market overlap + keyword_owners.json", score=min(95, 60 + min(30, v["impr"] // 10)), drivers=["cannibalisation conflict", f'{v["impr"]} impressions in play'],
+                              effort="Quick", effort_min=30, improving=False, worsening=False, baseline=kw_baseline(s_, qs[0][0]), owner=owner, queries=[q for q, _, _ in qs]))
+        # 2d. FOOTPRINT — reciprocal links between owned sites and cloned copy across sites
+        xl = {(x["from"], x["to"]): x["count"] for x in OSM0.get("cross_links", [])}
+        for (a, b) in sorted({tuple(sorted((a, b))) for (a, b) in xl if (b, a) in xl}):
+            tasks.append(dict(id=tid("Footprint", a, b), kind="Footprint", site=a, query="", page="/",
+                              what=f'Reciprocal links between {ABBR[a]} and {ABBR[b]} ({xl[(a,b)]} + {xl[(b,a)]} links).',
+                              why="Owned sites linking each other both ways, on shared templates, is the link-network pattern. Keep at most one direction, and only where a reader benefits.",
+                              upside="Reduces the network footprint of the FR cluster.", action=f"Remove the {ABBR[b]} → {ABBR[a]} links (or make them nofollow); keep {ABBR[a]} → {ABBR[b]} only where it is editorial.",
+                              src="os_measure.py cross-link scan", score=70, drivers=["footprint risk", "reciprocal owned links"], effort="Quick", effort_min=25,
+                              improving=False, worsening=False, baseline={"probe_pos": None, "gsc_pos": None, "clicks28": 0}, pair=[a, b]))
+        for d_ in OSM0.get("near_duplicate_pairs_ge_0_5", []):
+            a, b = d_["sites"]
+            tasks.append(dict(id=tid("Footprint", "dup", f"{a}|{b}"), kind="Footprint", site=b, query="", page="/",
+                              what=f'{d_["pairs"]} near-duplicate page pair(s) between {ABBR[a]} and {ABBR[b]} (body text ≥ 50% identical).',
+                              why="Cloned copy across owned sites is both a duplicate-content and a footprint signal.", upside="Each site says the same thing in its own words, or one canonical version exists.",
+                              action=f"Rewrite the duplicated pages on {ABBR[b]} in their own words (legal pages included), or consolidate to one site and link.",
+                              src="os_measure.py shingle comparison", score=64, drivers=["duplicate copy across sites"], effort="Medium", effort_min=60,
+                              improving=False, worsening=False, baseline={"probe_pos": None, "gsc_pos": None, "clicks28": 0}, pair=[a, b]))
         # 3. strategic rank losses (recovery tasks)
         for s in ALL:
             for r in KT.get(s, []):
@@ -553,8 +623,9 @@ def build_all(G):
             if t["improving"]:
                 t["bucket"] = "monitor"; t["posture_note"] = "Already improving without intervention — no action recommended yet."
                 monitor_.append(t); continue
-            crowded = site_n.get(t["site"], 0) >= 2 or kind_n.get(t["kind"], 0) >= 2
-            if t["score"] >= 72 and len(today_) < 5 and not crowded:
+            crowded = (site_n.get(t["site"], 0) >= 2 or kind_n.get(t["kind"], 0) >= 2) and t["kind"] != "Compliance"
+            n_scored = sum(1 for x in today_ if x["kind"] != "Compliance")
+            if t["kind"] == "Compliance" or (t["score"] >= 72 and n_scored < 5 and not crowded):
                 t["bucket"] = "today"; today_.append(t)
                 site_n[t["site"]] = site_n.get(t["site"], 0) + 1
                 kind_n[t["kind"]] = kind_n.get(t["kind"], 0) + 1
@@ -571,7 +642,7 @@ def build_all(G):
                 t["bucket"] = "backlog"; t["posture_note"] = "Low priority: too far from page 1 relative to the effort."
                 backlog_.append(t)
         # quiet day: fill up to 3 from the top of Next (diversity caps still apply) so the plan is never empty
-        while len(today_) < 3 and next_:
+        while sum(1 for x in today_ if x["kind"] != "Compliance") < 3 and next_:
             pick = None
             for t in next_:
                 if site_n.get(t["site"], 0) < 3 and kind_n.get(t["kind"], 0) < 3:
@@ -706,16 +777,26 @@ def build_all(G):
         elif c.get("kind") == "Indexation" and c.get("outcome") == "AWAITING VERIFICATION" and c["id"] not in open_ids:
             c["outcome"] = "VERIFIED"; c["how"] += " · page(s) now PASS in URL Inspection"
     # verification checkpoints for completed tasks with a keyword baseline
+    # Outcome engine: re-measure at 7 / 14 / 28 / 56 days against the baseline taken at completion.
+    # A move of fewer than 5 positions is noise. Verdicts record what MOVED, never what caused it; every record lists
+    # the other completed actions on the same site in the same window.
+    CHECKPOINTS = (7, 14, 28, 56); NOISE = 5
     for c in THIST["completed"]:
-        if c.get("outcome") == "VERIFIED" or not c.get("query"): continue
+        if not c.get("query"): continue
         days = (_dt.date.today() - _dt.date.fromisoformat(c["completed"])).days if c.get("completed") else 0
         cur_b = kw_baseline(c["site"], c["query"])
-        c["checkpoint_days"] = days
-        c["now"] = cur_b
+        c["checkpoint_days"] = days; c["now"] = cur_b
+        c["checkpoint"] = max([d for d in CHECKPOINTS if days >= d] or [0])
         b = c.get("baseline") or {}
-        if days >= 7 and b.get("probe_pos") and cur_b.get("probe_pos"):
-            c["outcome"] = ("POSITIVE" if cur_b["probe_pos"] < b["probe_pos"]
-                            else "NO IMPACT YET" if cur_b["probe_pos"] == b["probe_pos"] else "NEGATIVE SO FAR")
+        c["concurrent"] = [f'{o.get("kind")}: {o.get("query") or o.get("page") or ""} ({o.get("completed")})' for o in THIST["completed"]
+                           if o is not c and o.get("site") == c.get("site") and o.get("completed") and c.get("completed")
+                           and abs((_dt.date.fromisoformat(o["completed"]) - _dt.date.fromisoformat(c["completed"])).days) <= 28][:6]
+        if c["checkpoint"] == 0: c["movement"] = "AWAITING_HISTORY"; continue
+        if not (b.get("probe_pos") and cur_b.get("probe_pos")):
+            c["movement"] = "INSUFFICIENT_DATA"; c["movement_note"] = "no baseline or no current position — not measurable"; continue
+        delta = b["probe_pos"] - cur_b["probe_pos"]
+        c["movement"] = "POSITIVE_MOVEMENT" if delta >= NOISE else "NEGATIVE_MOVEMENT" if delta <= -NOISE else "NO_CLEAR_CHANGE"
+        c["movement_note"] = f'#{b["probe_pos"]} → #{cur_b["probe_pos"]} at {c["checkpoint"]}d (moves under {NOISE} places are noise). Records what moved, not what caused it' + (f'; {len(c["concurrent"])} other action(s) touched this site in the window' if c["concurrent"] else "") + "."
     J.dump(THIST, open(HIST_PATH, "w"), indent=1)
     J.dump({"date": TODAY_STR, "tasks": [{k: t.get(k) for k in
             ("id", "kind", "site", "query", "page", "what", "score", "bucket", "effort", "effort_min", "baseline")}
@@ -755,8 +836,9 @@ def build_all(G):
         kpis = (
             kpi("Clicks · 7 days", f"{wk:,}", dfmt(dwk) + ' <span class="stmeta">vs prev 7d</span>',
                 "GSC clicks, all sites, last 7 recorded days vs the 7 before.")
-            + kpi("Revenue · 28d", "—", '<span class="flat">open /sales on this device</span>',
-                  "TOTAL sales from the sales app (this device). Not organic-attributed.", vid="kpi-revenue")
+            + kpi("Revenue · 28d", (f'€ {sum(v["revenue_28d"] for v in (REV.get("by_site") or {}).values()):,.0f}' if REV.get("ok") else "Not connected"),
+                  (f'<span class="flat">{sum(v["sales_28d"] for v in (REV.get("by_site") or {}).values())} sale(s) · {len(REV.get("by_site") or {})} of {NSITES} sites</span>' if REV.get("ok") else '<span class="flat">Sales app read failed</span>'),
+                  "owner-entered (Sales app). Attribution unavailable — not organic-attributed.", vid="kpi-revenue")
             + kpi("Top-10 strategic", str(top10_now), dfmt(top10_now - top10_prev, unit="") + ' <span class="stmeta">vs last audit</span>',
                   "Strategic tracked keywords at position ≤10 in live probes.")
             + kpi("Sites growing", f'{growing}<small> / {NSITES}</small>',
@@ -901,7 +983,18 @@ def build_all(G):
             ch_parts2.append(f'<div class="chg {c["kind"]}"><span class="cico">{ico}</span>'
                              f'<div class="cbody">{e(c["text"])}{meta_h}{hypo_h}</div></div>')
         chfeed = "".join(ch_parts2) or '<div class="empty">No meaningful changes between the last two windows.</div>'
-        return (f'<div class="pagehead"><h1>Performance</h1><p class="sub">Search Console analytics · complete windows {range_note} · top 250 queries/pages per site</p></div>'
+        rv = REV.get("by_site") or {}
+        rv_rows = "".join(f'<tr><td><span class="dot s{ALL.index(s_)+1}"></span> {s_}</td><td class="num">{rv[s_]["sales_28d"]}</td><td class="num">€ {rv[s_]["revenue_28d"]:,.0f}</td><td class="num">{rv[s_]["sales_7d"]}</td><td class="stmeta">{e(rv[s_]["last_sale"] or "—")}</td></tr>'
+                          for s_ in ALL if s_ in rv) or '<tr><td colspan="5" class="stmeta">No data — the Sales app has no paid sale recorded for any site in this window.</td></tr>'
+        rv_tot = sum(v["revenue_28d"] for v in rv.values()); rv_n = sum(v["sales_28d"] for v in rv.values())
+        rv_src = (f'owner-entered (Sales app) · {len(rv)} of {NSITES} sites with sales · pulled {e(REV.get("fetched", ""))}' if REV.get("ok") else "Not connected — the Sales app read failed on this audit")
+        rev_card = (f'<div class="card" style="margin-bottom:16px"><div class="chead"><h2>Revenue &amp; conversion</h2><span class="stmeta">{rv_src}</span></div>'
+                    f'<div class="grid g3" style="margin:0 0 10px"><div><div class="stmeta">Revenue · 28d</div><div style="font-size:22px;font-weight:600">€ {rv_tot:,.0f}</div><div class="stmeta">{rv_n} paid sale(s) · attribution unavailable</div></div>'
+                    f'<div><div class="stmeta">Sessions</div><div style="font-size:22px;font-weight:600">Not connected</div><div class="stmeta">GA4 is on 4 of 11 sites and not read — connect: one GA4 property per site + Viewer for the service account</div></div>'
+                    f'<div><div class="stmeta">Conversion rate</div><div style="font-size:22px;font-weight:600">Not connected</div><div class="stmeta">needs sessions; sales ÷ GSC clicks would mix sources and is not shown</div></div></div>'
+                    f'<div class="overflow"><table><thead><tr><th>site</th><th>sales 28d</th><th>revenue 28d</th><th>sales 7d</th><th>last sale</th></tr></thead><tbody>{rv_rows}</tbody></table></div>'
+                    f'<div class="stmeta" style="margin-top:8px">A sale is credited to the site the owner recorded it on. Cross-site attribution is <b>unavailable</b> (no shared analytics); nothing here is estimated. Test rows are excluded.</div></div>')
+        return (f'<div class="pagehead"><h1>Performance</h1><p class="sub">Search Console analytics · complete windows {range_note} · top 250 queries/pages per site · {NSITES} of {NSITES} sites reporting (GSC)</p></div>{rev_card}'
                 f'<div class="card" style="margin-bottom:16px"><div class="chead"><h2>What changed</h2>'
                 f'<span class="stmeta">28d vs previous 28d · hypotheses labeled as hypotheses</span></div>{chfeed}</div>'
                 f'<div class="card" style="margin-bottom:16px"><div class="chead"><h2>Traffic — 90 days, all sites</h2>'
@@ -954,8 +1047,9 @@ def build_all(G):
         if not cs: return '<div class="empty">No same-market query has two owned sites in the top 50.</div>'
         trs = ""
         for c in cs[:30]:
-            owner = c["sites"][0]; best = max(c["sites"], key=lambda r: r[2])
-            note = "" if owner[0] == best[0] else f"{ABBR.get(best[0])} earns the impressions ({best[2]}) — it should own the term"
+            own_, why_ = term_owner(c["market"], c["query"])
+            offenders = [ABBR.get(r[0]) for r in c["sites"] if r[0] != own_]
+            note = (f'owner: {ABBR.get(own_)} — {", ".join(offenders)} must link to it, not compete' if own_ else "no owner rule — add one in keyword_owners.json")
             trs += (f'<tr><td>{e(c["query"])}</td><td>{e(c["market"])}</td><td>' + "<br>".join(f'<span class="dot s{ALL.index(s_)+1}"></span> {ABBR.get(s_)} #{p} · {i} impr · <span class="stmeta">{e(u.replace("https://","").replace("http://","")[:48])}</span>' for s_, p, i, u in c["sites"]) + f'</td><td class="stmeta">{e(note)}</td></tr>')
         return (f'<div class="overflow"><table><thead><tr><th>query</th><th>market</th><th>owned sites in the top 50 (GSC, 28d)</th><th>decision</th></tr></thead><tbody>{trs}</tbody></table></div>')
 
@@ -1250,6 +1344,9 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
 
     # ---------- TODAY (execution mode) ----------
     STEPS = {
+        "Compliance": ["Open every flagged page (list on the card)", "Remove or rewrite each flagged term in title, meta, H1, body, alt", "Deploy the same day", "Next audit re-scans all 11 sites"],
+        "Cannibalisation": ["Open the non-owner page", "Take the term out of its title and H1; keep the page on its own lane", "Add one contextual link to the owner's page for that intent", "Never create a new URL for the term"],
+        "Footprint": ["Find the cross-links / duplicated pages listed on the card", "Remove one direction or add rel=nofollow; rewrite cloned copy in the site's own words", "Deploy", "Next audit re-measures the footprint"],
         "Striking distance": ["Open the ranking page and its GSC queries", "Strengthen the section matching the query",
                               "Add 2 internal links with the query as anchor", "Re-check position after 7 days"],
         "CTR gap": ["Rewrite title (keyword first + differentiator)", "Rewrite meta description", "Publish", "Watch CTR for 7 days"],
@@ -1271,6 +1368,92 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
     DONEXT_BODY = _dn.build_donext(G, C)
     J.dump(THIST, open(HIST_PATH, "w"), indent=1)   # donext updates outcomes with the live checks
 
+    # ---------- SITES (index) · PAGES (registry) · BUDGET (measured spend) — reference layout: Portfolio / Operations / System ----------
+    BUD = _load0("budget.json", {})
+    INDEXD = G.get("INDEX") or {}
+    def build_sites():
+        cards = ""
+        rv = REV.get("by_site") or {}
+        for s in ALL:
+            v_ = SPOST[s]; sm = SEM.get(s) or {}
+            checks = _sc._health(s, F); ok = sum(1 for _, o in checks if o)
+            insp = [(p, vv) for (ss, p, vv) in insp_all if ss == s]; ipass = sum(1 for _, vv in insp if vv.get("verdict") == "PASS")
+            n10 = sum(1 for r in KT.get(s, []) if r.get("pos") and r["pos"] <= 10); nrk = sum(1 for r in KT.get(s, []) if r.get("pos"))
+            t28 = (tot(s, "28") or {}).get("clicks", 0) if isinstance(tot(s, "28"), dict) else (tot(s, "28") or 0)
+            p28 = (tot(s, "28", "prev") or {}).get("clicks", 0) if isinstance(tot(s, "28", "prev"), dict) else (tot(s, "28", "prev") or 0)
+            ga = "GA4 tag present (not read)" if s in (OSM0.get("analytics_ids") or {}) else "no analytics tag"
+            semd = sm.get("date") or "—"; semstale = " (stale)" if semd and semd < TODAY_STR else ""
+            rev = rv.get(s)
+            rev_txt = (f'€ {rev["revenue_28d"]:,.0f} · {rev["sales_28d"]} sale(s)' if rev else "No data")
+            dfs_ok = (D["sites"].get(s, {}).get("dfs") or {}).get("ref_domains") is not None
+            integ = f'GSC ✓ · DFS {"✓" if dfs_ok else "no index row"} · Semrush {e(semd)}{semstale} · {ga}'
+            rd = sm.get("ref_domains") if sm.get("ref_domains") is not None else "—"
+            cards += (f'<div class="card"><div class="chead" style="margin-bottom:6px"><div style="display:flex;align-items:center;gap:9px"><span class="dot s{ALL.index(s)+1}"></span>'
+                      f'<h2><a href="{G["SLUG"][s]}">{s}</a></h2>{post_pill(v_["posture"])}<span class="tag neu">tier {tier_of(s)}</span></div>'
+                      f'<span class="stmeta">{e(MARKET_OF.get(s, ""))}</span></div>'
+                      f'<p class="narr" style="margin:0 0 8px">{e(v_.get("why", ""))}</p>'
+                      f'<div class="stmeta">clicks 28d <b>{t28:,}</b> (prev {p28:,}) · top-10 <b>{n10}</b> · ranking <b>{nrk}/{len(KT.get(s, []))}</b> · ref.dom <b>{rd}</b> · health <b>{ok}/{len(checks)}</b> · indexed <b>{ipass}/{len(insp)}</b> · revenue 28d <b>{e(rev_txt)}</b> <span class="stmeta">(owner-entered)</span></div>'
+                      f'<div class="stmeta" style="margin-top:4px">{integ}</div></div>')
+        return (f'<div class="pagehead"><h1>Sites</h1><p class="sub">One card per site: posture and why, tier, KPIs with their source, integration status. Postures: FOCUS / RECOVER / PUSH / MAINTAIN / MONITOR — most sites are MONITOR at any moment, and that is correct for one person.</p></div>'
+                f'<div class="stack" style="gap:12px">{cards}</div>')
+
+    def build_pages():
+        rows = []; nsite = {}
+        for s in ALL:
+            try: cr = J.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), f"d_{ABBR[s]}", "crawl.json")))
+            except Exception: continue
+            pg = GS.get(s, {}).get("pages", {}).get("cur", {}); ix = (INDEXD.get("sites", {}) or {}).get(s, {}) or {}
+            for p_ in cr.get("pages", [])[:130]:
+                if str(p_.get("status")) != "200" or "?" in p_["url"]: continue
+                bare = p_["url"].replace("https://", "").replace("http://", ""); path = "/" + bare.split("/", 1)[1] if "/" in bare else "/"
+                g = pg.get(p_["url"]) or pg.get(p_["url"].rstrip("/")) or {}
+                noidx = "noindex" in str(p_.get("meta_robots") or "").lower()
+                verdict = (ix.get(path) or {}).get("verdict")
+                rows.append((s, path, int(p_.get("word_count") or 0), len(p_.get("title") or ""), noidx, g.get("clicks"), g.get("impressions"), g.get("position"), verdict))
+                nsite[s] = nsite.get(s, 0) + 1
+        rows.sort(key=lambda r: (-(r[5] or 0), r[0], r[1]))
+        trs = ""
+        for s, path, words, tl, noidx, cl, im, pos, verdict in rows:
+            if noidx: vtxt = "noindex (by design)"
+            elif verdict: vtxt = f'<span class="tag {"pos" if verdict == "PASS" else "neg"}">{e(verdict)}</span>'
+            else: vtxt = '<span class="stmeta">not inspected</span>'
+            cl_txt = str(cl) if cl is not None else '<span class="stmeta">no data</span>'
+            pos_txt = f"{pos:.1f}" if pos else "—"
+            trs += (f'<tr data-site="{e(s)}"><td><span class="dot s{ALL.index(s)+1}"></span> {ABBR[s]}</td><td><a href="https://{G["CANON"][s]}{e(path)}" target="_blank" rel="noopener">{e(path)}</a></td>'
+                    f'<td data-v="{words}">{words}</td><td data-v="{tl}" class="{"neg" if tl > 60 else ""}">{tl}</td>'
+                    f'<td data-v="{cl or 0}">{cl_txt}</td><td data-v="{im or 0}">{im if im is not None else "—"}</td><td data-v="{pos or 999}">{pos_txt}</td><td>{vtxt}</td></tr>')
+        opts = "".join(f'<option value="{e(s)}">{e(s)} ({nsite.get(s, 0)})</option>' for s in ALL)
+        js = """<script>(function(){var f=document.getElementById('pgsite');if(!f)return;function ap(){var v=f.value;document.querySelectorAll('tr[data-site]').forEach(function(tr){tr.style.display=(!v||tr.dataset.site===v)?'':'none';});try{localStorage.setItem('pages_site',v);}catch(e){}}
+try{f.value=localStorage.getItem('pages_site')||'';}catch(e){} f.addEventListener('change',ap);ap();})();</script>"""
+        gsc_when = (GSCD or {}).get("generated", "")
+        return (f'<div class="pagehead"><h1>Pages</h1><p class="sub">Every crawled, indexable URL — {len(rows)} pages on {len(nsite)} sites — with its measured performance (GSC 28d, as of {e(gsc_when)}) and its indexation verdict (URL Inspection, priority pages only). '
+                f'"no data" = Search Console has no row for the page in the window. Registry = the live crawl, re-synced with every sitemap each audit.</p></div>'
+                f'<div class="card flush"><div class="chead"><h2>Registry</h2><span class="stmeta"><label>Site </label><select id="pgsite" class="sel"><option value="">All websites</option>{opts}</select></span></div>'
+                f'<div class="overflow"><table><thead><tr><th>site</th><th>path</th><th class="sortable">words</th><th class="sortable">title len</th><th class="sortable">clicks 28d</th><th class="sortable">impr 28d</th><th class="sortable">GSC pos</th><th>indexation</th></tr></thead><tbody>{trs}</tbody></table></div></div>' + js)
+
+    def build_budget():
+        d = BUD.get("dfs") or {}; calls = BUD.get("calls_per_audit") or {}; hist = BUD.get("history") or []
+        if len(hist) >= 2:
+            a, b = hist[-2], hist[-1]; dd = a["dfs_balance_usd"] - b["dfs_balance_usd"]
+            draw = f'measured drawdown since {e(a["date"])}: <b>$ {dd:,.2f}</b>'
+        else:
+            draw = "Awaiting history — the per-audit cost is measured from the balance drawdown between two audits; the first point was recorded today."
+        bal_txt = ("$ " + format(float(d["balance_usd"]), ",.2f")) if d.get("balance_usd") is not None else "Not connected"
+        spent_txt = e(str(d.get("spent_total_usd", "—")))
+        sem_units = str((BUD.get("semrush") or {}).get("units", "")); sem_state = "Exhausted" if "exhausted" in sem_units else "Available"
+        sem_last = e(str((BUD.get("semrush") or {}).get("last_full_pull", "")))
+        tier1_kw = sum(len(KT.get(x, [])) for x in ALL if tier_of(x) == 1)
+        rows = "".join(f'<tr><td>{e(k.replace("_", " "))}</td><td>{e(str(v))}</td></tr>' for k, v in calls.items())
+        htr = "".join(f'<tr><td>{e(h["date"])}</td><td>$ {h["dfs_balance_usd"]:,.2f}</td><td>$ {h["dfs_spent_total_usd"]:,.0f}</td></tr>' for h in hist[-14:]) or '<tr><td colspan="3" class="stmeta">Awaiting history</td></tr>'
+        return (f'<div class="pagehead"><h1>Budget</h1><p class="sub">Measured spend only. Prices that an API does not return read "not measured".</p></div>'
+                f'<div class="grid g3" style="margin-bottom:16px">'
+                f'<div class="card"><div class="stmeta">DataForSEO balance</div><div style="font-size:24px;font-weight:600">{bal_txt}</div><div class="stmeta">spent to date $ {spent_txt} · appendix/user_data · {e(BUD.get("fetched", ""))}</div></div>'
+                f'<div class="card"><div class="stmeta">Semrush API units</div><div style="font-size:24px;font-weight:600">{sem_state}</div><div class="stmeta">{e(sem_units)} · last full pull {sem_last}</div></div>'
+                f'<div class="card"><div class="stmeta">Hosting · Search Console · Firestore</div><div style="font-size:24px;font-weight:600">$ 0</div><div class="stmeta">Vercel hobby, GSC and URL Inspection are free; Firestore reads are within the free tier</div></div></div>'
+                f'<div class="grid g2"><div class="card flush"><div class="chead"><h2>API calls per audit</h2><span class="stmeta">what one full audit costs in requests</span></div><div class="overflow"><table><thead><tr><th>source</th><th>calls</th></tr></thead><tbody>{rows}</tbody></table></div>'
+                f'<div class="stmeta" style="padding:10px 14px">Rank tracking runs on live SERP probes for all 67 targets daily; tier 1 sites (esp, aio, prime, rodak) carry {tier1_kw} of them. Per-call prices are not returned by the API — {draw}</div></div>'
+                f'<div class="card flush"><div class="chead"><h2>DataForSEO balance history</h2><span class="stmeta">one point per audit</span></div><div class="overflow"><table><thead><tr><th>date</th><th>balance</th><th>spent total</th></tr></thead><tbody>{htr}</tbody></table></div></div></div>')
+
     # ---------- write ----------
     JS = CHART_JS + TABLE_JS + PERIOD_JS
     pages = [
@@ -1283,6 +1466,9 @@ Strategic positions come from live DataForSEO probes at audit time; Semrush numb
         ("authority.html", "Authority — IPTV Portfolio", build_authority(), "authority", TABLE_JS),
         ("opportunities.html", "Opportunities — IPTV Portfolio", build_opportunities(), "opportunities", ""),
         ("settings.html", "Integrations — IPTV Portfolio", build_settings_v4(), "settings", ""),
+        ("sites.html", "Sites — IPTV Portfolio", build_sites(), "sites", ""),
+        ("pages.html", "Pages — IPTV Portfolio", build_pages(), "pages", TABLE_JS),
+        ("budget.html", "Budget — IPTV Portfolio", build_budget(), "budget", ""),
     ]
     for fn, title, body, cur_, js in pages:
         open(os.path.join(OUT, fn), "w").write(shell(title, body, cur=cur_, extra_js=js))

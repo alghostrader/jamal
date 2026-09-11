@@ -612,14 +612,15 @@ SEM_UPD = SEM.get("_updated", "") if isinstance(SEM, dict) else ""
 
 def sidebar(cur):
     groups = [
-        ("Execute", [("today", "Do next", "today", "zap"), ("links", "Backlinks", "links", "link")]),
-        ("Monitor", [("./", "Overview", None, "home"), ("rankings", "Rankings", "rankings", "target"),
-                     ("performance", "Performance", "performance", "chart"), ("content", "Content", "content", "file"),
-                     ("technical", "Technical", "technical", "wrench"), ("authority", "Authority", "authority", "award"),
-                     ("opportunities", "Opportunities", "opportunities", "bulb")]),
+        ("Portfolio", [("./", "Overview", None, "home"), ("today", "Do next", "today", "zap"), ("sites", "Sites", "sites", "globe"),
+                       ("rankings", "Rankings", "rankings", "target"), ("pages", "Pages", "pages", "file"),
+                       ("performance", "Performance", "performance", "chart"), ("authority", "Authority", "authority", "award"),
+                       ("content", "Content", "content", "file"), ("technical", "Technical", "technical", "wrench"),
+                       ("opportunities", "Opportunities", "opportunities", "bulb")]),
+        ("Operations", [("links", "Backlinks", "links", "link"), ("budget", "Budget", "budget", "coins")]),
         ("Business", [("sales", "Sales", "sales", "coins"), ("clients", "Clients", "clients", "users"),
                       ("replies", "Replies", "replies", "chat")]),
-        ("System", [("plan", "Plan", "plan", "map"), ("settings", "Integrations", "settings", "gear")]),
+        ("System", [("settings", "Integrations", "settings", "gear"), ("plan", "Plan", "plan", "map")]),
     ]
     out = ""
     for label, items in groups:

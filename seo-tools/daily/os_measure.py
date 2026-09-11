@@ -81,10 +81,35 @@ for d,x in g.items():
         if v["position"]<=50: q_sites[q].append((d,round(v["position"],1),v["impressions"],x.get("qpage",{}).get(q,"")))
 cann=[{"query":q,"sites":sorted(v,key=lambda t:t[1])} for q,v in q_sites.items() if len({d for d,*_ in v})>=2]
 cann.sort(key=lambda c:-sum(t[2] for t in c["sites"]))
-out={"pages_fetched":len(pages),"ips":ips,"analytics_ids":{d:sorted(v) for d,v in ids_by_site.items()},"shared_analytics_ids":shared_ids,
+# same-market conflicts only (a NL site and an ES site ranking on the same English query is not cannibalisation)
+MK={"iptvesp.com":"ES","iptvsegura.com":"ES","primeiptv-france.com":"FR","abonnementiptvofficiel.com":"FR","smartersprofrance.fr":"FR","smarters-live.com":"FR","iptvpix.com":"FR","iptvfranceofficiel.fr":"FR","iptvned.com":"NL","iptvshqiptar.com":"AL","rodaktv.com":"PL"}
+same=[]
+for c in cann:
+    by=collections.defaultdict(list)
+    for s_,p_,i_,u_ in c["sites"]: by[MK.get(s_,"?")].append((s_,p_,i_,u_))
+    for mk,rows_ in by.items():
+        if len({r[0] for r in rows_})>=2: same.append({"query":c["query"],"market":mk,"sites":sorted(rows_,key=lambda r:r[1])})
+same.sort(key=lambda c:-sum(r[2] for r in c["sites"]))
+# compliance scan: whole-word, case-insensitive, over title + meta + h1 + body text (the legal floor)
+CT=json.load(open("compliance_terms.json")); hits=[]
+terms=[(t,cat) for cat in ("rights_holders","leagues_events","legality_claims","geo_circumvention") for t in CT[cat]]
+pats=[(re.compile(r"(?<![\w+])"+re.escape(t.lower())+r"(?![\w])"),t,cat) for t,cat in terms]
+for u,(d,html) in pages.items():
+    s=BeautifulSoup(html,"lxml"); fields={"title":(s.title.string if s.title and s.title.string else ""),
+        "meta":" ".join(m.get("content","") for m in s.find_all("meta",attrs={"name":"description"})),
+        "h1":" ".join(h.get_text(" ",strip=True) for h in s.find_all("h1")),
+        "alt":" ".join(i.get("alt","") for i in s.find_all("img")),
+        "body":text_of(html)}
+    for f,txt in fields.items():
+        low=(txt or "").lower()
+        for pat,t,cat in pats:
+            if pat.search(low): hits.append({"site":d,"url":u,"term":t,"category":cat,"field":f})
+by_site=collections.Counter(h["site"] for h in hits)
+print("compliance hits:",len(hits),dict(by_site)); [print(" ",h["site"],h["field"],h["term"],h["url"][-50:]) for h in hits[:25]]
+out={"pages_fetched":len(pages),"compliance_hits":hits,"compliance_terms_count":len(terms),"ips":ips,"analytics_ids":{d:sorted(v) for d,v in ids_by_site.items()},"shared_analytics_ids":shared_ids,
      "cross_links":[{"from":a,"to":b,"count":n} for (a,b),n in sorted(xlinks.items(),key=lambda x:-x[1])],
      "template_similarity":[{"sites":[a,b],"class_jaccard":j} for j,a,b in tpairs],
      "near_duplicate_best_pair":dups,"near_duplicate_pairs_ge_0_5":[{"sites":[a,b],"pairs":n} for (a,b),n in pair_counts.most_common()],
-     "cannibalisation":cann}
+     "cannibalisation":cann,"cannibalisation_same_market":same}
 json.dump(out,open("os_audit_measurements.json","w"),indent=1,ensure_ascii=False)
 print("ips",ips); print("shared ids",shared_ids); print("xlinks",out["cross_links"][:12]); print("templates",tpairs[:8]); print("dups",dups[:8]); print("dup pairs>=.5",out["near_duplicate_pairs_ge_0_5"][:8]); print("cannibalised queries",len(cann)); [print(" ",c["query"],c["sites"]) for c in cann[:15]]

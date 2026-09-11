@@ -1,0 +1,16 @@
+{
+ "_note": "Which site owns which term family per market. Decided by the audit 11 Sep 2026 from Search Console evidence (owner said: you decide). A same-market query where a NON-owner site ranks in the top 50 is a cannibalisation conflict → task on the non-owner page. Edit the patterns to change a decision.",
+ "rules": [
+  {"market": "ES", "pattern": "telegram|m3u|lista", "owner": "iptvesp.com", "reason": "esp earns hundreds of impressions on the Telegram/M3U cluster; segura's lane is safety/estafas/legal, never lists (lane rule)."},
+  {"market": "ES", "pattern": "estafa|seguro|segura|legal|riesgo", "owner": "iptvsegura.com", "reason": "safety / trust lane"},
+  {"market": "ES", "pattern": ".", "owner": "iptvesp.com", "reason": "ES head terms and everything else in Spanish"},
+  {"market": "FR", "pattern": "boitier|boîtier|box|essai|test iptv|gratuit|pas cher|promo|moins cher", "owner": "abonnementiptvofficiel.com", "reason": "trial / deals / boîtier lane"},
+  {"market": "FR", "pattern": "smarters|configuration|installer|firestick", "owner": "smartersprofrance.fr", "reason": "Smarters install/config lane"},
+  {"market": "FR", "pattern": "application|app iptv|erreur", "owner": "smarters-live.com", "reason": "application / Smarters Pro FR lane"},
+  {"market": "FR", "pattern": "premium|hdr|4k|8k|full hd", "owner": "iptvfranceofficiel.fr", "reason": "premium / HDR lane"},
+  {"market": "FR", "pattern": ".", "owner": "primeiptv-france.com", "reason": "FR head terms (abonnement iptv, iptv france, fournisseur, prix, 12 mois) — prime is the FR money site; aio's boîtier page must link these terms to prime, not compete."},
+  {"market": "NL", "pattern": ".", "owner": "iptvned.com", "reason": "only NL site"},
+  {"market": "PL", "pattern": ".", "owner": "rodaktv.com", "reason": "only PL site"},
+  {"market": "AL", "pattern": ".", "owner": "iptvshqiptar.com", "reason": "only AL site"}
+ ]
+}

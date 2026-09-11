@@ -51,10 +51,12 @@ python3 refresh_kt_positions.py        # live SERP position for every target
 python3 fetch_gsc_details.py           # query/page/device/country, 28d vs prev
 python3 inspect_urls.py                # URL Inspection for priority pages
 python3 fetch_task_state.py            # owner's synced ticks from Firestore → cloud_state.json
+python3 fetch_revenue.py               # owner-entered sales (Sales app, Firestore trackers) → revenue.json, aggregated per site
+python3 fetch_budget.py                # DataForSEO balance + calls per audit → budget.json (+ balance history)
 python3 build_findings.py
 python3 build_content_kw.py && python3 build_content.py
 python3 history.py
-python3 os_measure.py                  # cross-site duplication, footprint, cannibalisation → os_audit_measurements.json
+python3 os_measure.py                  # 546 live pages: duplication, footprint, cannibalisation, COMPLIANCE scan → os_audit_measurements.json
 DASH_STAMP="$(date -u '+%Y-%m-%d %H:%M UTC')" python3 generate_v3.py
 ```
 
@@ -62,6 +64,14 @@ DASH_STAMP="$(date -u '+%Y-%m-%d %H:%M UTC')" python3 generate_v3.py
 owner marked built is fetched live; it only moves to "Shipped" when the change is confirmed on
 the URL. Results are cached in `live_verify.json`; the board's data model is `donext.json`.
 `/today` = Do next, `/work` redirects there, `/links` = Backlinks (`/backlinks` redirects).
+Navigation (11 Sep, reference layout): Portfolio (Overview, Do next, Sites, Rankings, Pages, Performance,
+Authority, Content, Technical, Opportunities) · Operations (Backlinks, Budget) · Business (sales app) ·
+System (Integrations, Plan). Decision files: `keyword_owners.json` (which site owns which term family per
+market), `tiers.json` (site tiers → engine weight), `compliance_terms.json` (the legal floor: a hit is a
+same-day incident at the top of Do next). Vocabulary for missing data: No data · Not connected · Awaiting
+history · Attribution unavailable · Not measurable. Outcome engine: 7/14/28/56-day checkpoints, moves under
+5 positions are noise, verdicts POSITIVE_MOVEMENT / NEGATIVE_MOVEMENT / NO_CLEAR_CHANGE / INSUFFICIENT_DATA,
+each with the concurrent actions on the same site.
 
 **Sessions without a browser (the iptv coding session):** the generator also writes
 `daily/DO-NEXT.md` — copy it to `seo-tools/DO-NEXT.md` when committing. It is the same

@@ -1,48 +1,653 @@
 {
- "pages_fetched": 546,
+ "pages_fetched": 543,
+ "compliance_hits": [
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/",
+   "term": "totalmente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/como-elegir-iptv-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "alt"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/como-elegir-iptv-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/legalidad-iptv-espana",
+   "term": "totalmente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "alt"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-smart-tv-samsung-espana",
+   "term": "serie a",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-espana-fire-tv-stick-4k-max-2026",
+   "term": "completamente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/cuanto-cuesta-iptv-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "alt"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/cuanto-cuesta-iptv-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-vodafone-orange-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "title"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-vodafone-orange-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "meta"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-vodafone-orange-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "h1"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-vodafone-orange-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "alt"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-vodafone-orange-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-box-espana",
+   "term": "totalmente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-iphone-ipad-espana",
+   "term": "completamente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-deportes-motor-espana",
+   "term": "completamente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-motociclismo-espana",
+   "term": "completamente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/vpn-para-iptv-espana",
+   "term": "100 % legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/vpn-para-iptv-espana",
+   "term": "completamente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-vs-plataformas-premium-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "alt"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-vs-plataformas-premium-espana",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-en-pc-windows-espana",
+   "term": "completamente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-roku-espana",
+   "term": "completamente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvesp.com",
+   "url": "https://iptvesp.com/blog/iptv-kodi-espana",
+   "term": "totalmente legal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "primeiptv-france.com",
+   "url": "https://primeiptv-france.com/guides/iptv-vs-box-orange-free-sfr-bouygues",
+   "term": "sfr tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "primeiptv-france.com",
+   "url": "https://primeiptv-france.com/guides/iptv-vs-apps-streaming-gratuit",
+   "term": "100% légal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/abonnementen",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/iptv-legaal-nederland",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/blog/iptv-providers-nederland",
+   "term": "100% legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/blog/iptv-providers-nederland",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/blog/iptv-op-iphone-ipad-nederland",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/blog/iptv-op-lg-smart-tv-nederland",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/blog/iptv-op-samsung-smart-tv",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/blog/iptv-nederland",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/blog/iptv-streaming-alternatief-nederland",
+   "term": "ziggo",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/blog/iptv-streaming-alternatief-nederland",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/blog/iptv-op-pc-windows-mac",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvned.com",
+   "url": "https://iptvned.com/blog/iptv-op-android-tv-box-nederland",
+   "term": "volledig legaal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvpix.com",
+   "url": "https://iptvpix.com/",
+   "term": "formule 1",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "iptvpix.com",
+   "url": "https://iptvpix.com/",
+   "term": "100 % légal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvpix.com",
+   "url": "https://iptvpix.com/abonnements",
+   "term": "formule 1",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "iptvpix.com",
+   "url": "https://iptvpix.com/test-iptv-gratuit",
+   "term": "formule 1",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "iptvpix.com",
+   "url": "https://iptvpix.com/iptv-legal-france",
+   "term": "100% légal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvpix.com",
+   "url": "https://iptvpix.com/amende-iptv-france",
+   "term": "100 % légal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvpix.com",
+   "url": "https://iptvpix.com/iptv-acheter",
+   "term": "formule 1",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "iptvpix.com",
+   "url": "https://iptvpix.com/box-iptv",
+   "term": "formule 1",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "iptvpix.com",
+   "url": "https://iptvpix.com/france-iptv-m3u",
+   "term": "100% légal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvpix.com",
+   "url": "https://iptvpix.com/blog/iptv-gratuit-belgique-suisse",
+   "term": "formule 1",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "smarters-live.com",
+   "url": "https://www.smarters-live.com/blog/iptv-vpn-france-utile-guide-2026",
+   "term": "contourner les restrictions",
+   "category": "geo_circumvention",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/iptv-premium",
+   "term": "rtl",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/code-iptv-xtream-vs-m3u",
+   "term": "netflix",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/iptv-smarters-pro-vpn-france",
+   "term": "netflix",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/installer-iptv-smarters-pro-samsung-smart-tv",
+   "term": "netflix",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/installer-iptv-smarters-pro-android-tv",
+   "term": "netflix",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/installer-iptv-smarters-pro-android-tv",
+   "term": "disney+",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/iptv-4k-france-bande-passante",
+   "term": "netflix",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/iptv-boitier-vs-cle-vs-smart-tv",
+   "term": "netflix",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/installer-iptv-smarters-pro-chromecast-google-tv",
+   "term": "netflix",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/installer-iptv-smarters-pro-chromecast-google-tv",
+   "term": "disney+",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/installer-iptv-smarters-pro-chromecast-google-tv",
+   "term": "apple tv+",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/installer-iptv-smarters-pro-iphone-ipad",
+   "term": "ligue des champions",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/installer-iptv-smarters-pro-windows-mac",
+   "term": "netflix",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/iptv-smarters-pro-alternative-samsung-smart-tv",
+   "term": "netflix",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "smartersprofrance.fr",
+   "url": "https://www.smartersprofrance.fr/articles/iptv-smarters-pro-est-il-payant",
+   "term": "netflix",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "iptvfranceofficiel.fr",
+   "url": "https://iptvfranceofficiel.fr/articles/meilleur-abonnement-iptv-2026",
+   "term": "rtl",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "iptvfranceofficiel.fr",
+   "url": "https://iptvfranceofficiel.fr/articles/comment-choisir-un-abonnement-iptv-france",
+   "term": "100 % légal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "iptvfranceofficiel.fr",
+   "url": "https://iptvfranceofficiel.fr/articles/iptv-4k-france",
+   "term": "ufc",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "iptvfranceofficiel.fr",
+   "url": "https://iptvfranceofficiel.fr/articles/iptv-sans-buffering-france",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "iptvfranceofficiel.fr",
+   "url": "https://iptvfranceofficiel.fr/articles/iptv-legal-en-france",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "iptvfranceofficiel.fr",
+   "url": "https://iptvfranceofficiel.fr/articles/iptv-legal-en-france",
+   "term": "sfr tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "abonnementiptvofficiel.com",
+   "url": "https://abonnementiptvofficiel.com/iptv-france",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "abonnementiptvofficiel.com",
+   "url": "https://abonnementiptvofficiel.com/iptv-france",
+   "term": "sfr tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "abonnementiptvofficiel.com",
+   "url": "https://abonnementiptvofficiel.com/blog/meilleur-abonnement-iptv-2026",
+   "term": "100 % légal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "abonnementiptvofficiel.com",
+   "url": "https://abonnementiptvofficiel.com/blog/iptv-arcom-amende",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "abonnementiptvofficiel.com",
+   "url": "https://abonnementiptvofficiel.com/blog/iptv-arcom-amende",
+   "term": "sfr tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "abonnementiptvofficiel.com",
+   "url": "https://abonnementiptvofficiel.com/blog/abonnement-iptv-multi-ecrans",
+   "term": "formule 1",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "abonnementiptvofficiel.com",
+   "url": "https://abonnementiptvofficiel.com/blog/comment-choisir-un-abonnement-iptv-france",
+   "term": "100 % légal",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "abonnementiptvofficiel.com",
+   "url": "https://abonnementiptvofficiel.com/blog/iptv-legal-en-france",
+   "term": "orange tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "abonnementiptvofficiel.com",
+   "url": "https://abonnementiptvofficiel.com/blog/iptv-legal-en-france",
+   "term": "sfr tv",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "abonnementiptvofficiel.com",
+   "url": "https://abonnementiptvofficiel.com/blog/iptv-sport-premium",
+   "term": "coupe du monde",
+   "category": "leagues_events",
+   "field": "body"
+  },
+  {
+   "site": "rodaktv.com",
+   "url": "https://rodaktv.com/polska-telewizja-w-uk",
+   "term": "sky",
+   "category": "rights_holders",
+   "field": "body"
+  },
+  {
+   "site": "rodaktv.com",
+   "url": "https://rodaktv.com/blog/iptv-a-prawo-w-polsce",
+   "term": "100% legalne",
+   "category": "legality_claims",
+   "field": "body"
+  },
+  {
+   "site": "rodaktv.com",
+   "url": "https://rodaktv.com/blog/jak-wybrac-dostawce-iptv",
+   "term": "100% legalne",
+   "category": "legality_claims",
+   "field": "body"
+  }
+ ],
+ "compliance_terms_count": 84,
  "ips": {
   "iptvesp.com": [
-   "216.150.1.1",
-   "216.150.1.65"
-  ],
-  "primeiptv-france.com": [
-   "216.150.1.65",
-   "216.150.16.193"
-  ],
-  "iptvned.com": [
    "216.150.1.129",
    "216.150.1.193"
   ],
-  "iptvpix.com": [
-   "216.150.1.129",
+  "primeiptv-france.com": [
+   "216.150.1.1",
+   "216.150.1.129"
+  ],
+  "iptvned.com": [
+   "216.150.1.1",
    "216.150.16.193"
+  ],
+  "iptvpix.com": [
+   "216.150.1.193",
+   "216.150.1.65"
   ],
   "smarters-live.com": [
    "216.198.79.1"
   ],
   "iptvshqiptar.com": [
    "216.150.1.129",
-   "216.150.16.193"
+   "216.150.16.129"
   ],
   "smartersprofrance.fr": [
-   "216.150.1.129",
-   "216.150.1.193"
+   "216.150.1.193",
+   "216.150.1.65"
   ],
   "iptvfranceofficiel.fr": [
-   "216.150.1.65",
-   "216.150.16.193"
+   "216.150.1.1",
+   "216.150.16.1"
   ],
   "abonnementiptvofficiel.com": [
-   "216.150.1.65",
-   "216.150.16.193"
+   "216.150.1.1",
+   "216.150.1.65"
   ],
   "iptvsegura.com": [
-   "216.150.1.129",
+   "216.150.1.65",
    "216.150.16.129"
   ],
   "rodaktv.com": [
    "216.150.1.1",
-   "216.150.1.65"
+   "216.150.16.193"
   ]
  },
  "analytics_ids": {
@@ -82,11 +687,6 @@
    "count": 2
   },
   {
-   "from": "smartersprofrance.fr",
-   "to": "iptvpix.com",
-   "count": 2
-  },
-  {
    "from": "iptvfranceofficiel.fr",
    "to": "abonnementiptvofficiel.com",
    "count": 2
@@ -104,6 +704,11 @@
   {
    "from": "iptvpix.com",
    "to": "smartersprofrance.fr",
+   "count": 1
+  },
+  {
+   "from": "smartersprofrance.fr",
+   "to": "iptvpix.com",
    "count": 1
   },
   {
@@ -544,7 +1149,7 @@
     "iptvfranceofficiel.fr",
     "abonnementiptvofficiel.com"
    ],
-   "pairs": 5
+   "pairs": 4
   }
  ],
  "cannibalisation": [

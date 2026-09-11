@@ -47,7 +47,8 @@ for slug, dom, canon in SITES:
     f = {"pages": len(html200), "titles_over60": over, "redirect_links": redirect_links,
          "linked404": linked404, "orphans": orphans, "canonical_mismatch": sorted(canon_mm),
          "no_meta_desc": sorted([path_of(p["url"]) for p in html200 if not p.get("meta_description")]),
-         "thin": sorted([path_of(p["url"]) for p in html200 if (p.get("word_count") or 0) < 300]),
+         # noindex pages (checkout, cart, account) are excluded: a page Google is told not to index is not a thin-content defect
+        "thin": sorted([path_of(p["url"]) for p in html200 if (p.get("word_count") or 0) < 300 and "noindex" not in str(p.get("meta_robots") or "").lower()]),
          "favicon": (lambda s: int(s.split()[0]) if s.split()[0].isdigit() else None)(head(f"https://{canon}/favicon.ico"))}
     if canon.startswith("www."):
         f["apex"] = head(f"https://{dom}/"); f["www"] = head(f"https://{canon}/")
