@@ -50,6 +50,9 @@ Console service account) must be re-supplied by the owner after a recycle.
    "TASK STATUS v2" blob is only a fallback if the reader fails. Technical fixes
    auto-verify when the defect disappears from the fresh crawl.
 8. **History** — append authority + keyword-position history points.
+   **Footprint + cannibalisation** — run `os_measure.py` (546 live pages: reciprocal links between owned
+   sites, shared templates, near-duplicate copy, analytics IDs, hosting; same-market queries where two
+   owned sites both rank in GSC). Feeds the Authority risk register and the Rankings cannibalisation table.
 9. **Deploy** — dashboard branch, pipeline marker, verify the marker live on
    iptv.alghostrader.com before reporting done.
 10. **Report** — lead with what changed / what was verified / any alarm, then next tasks.

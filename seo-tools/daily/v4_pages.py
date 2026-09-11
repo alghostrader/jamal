@@ -923,6 +923,42 @@ def build_all(G):
                 f'<div class="card"><h2>Countries</h2><p class="sub" style="margin-bottom:8px">clicks, 28d — diaspora shows up here</p>{chtml or "<div class=empty>No country data.</div>"}</div></div>')
 
     # ---------- RANKINGS ----------
+    try:
+        OSM = J.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "os_audit_measurements.json")))
+    except Exception:
+        OSM = {}
+    def footprint_html():
+        if not OSM: return '<div class="empty">Not measured yet — run os_measure.py in the audit.</div>'
+        xl = OSM.get("cross_links", []); pairs = {(x["from"], x["to"]): x["count"] for x in xl}
+        recip = sorted({tuple(sorted((a, b))) for (a, b) in pairs if (b, a) in pairs})
+        tp = [t for t in OSM.get("template_similarity", []) if t["class_jaccard"] >= 0.6]
+        dp = OSM.get("near_duplicate_pairs_ge_0_5", [])
+        shared = OSM.get("shared_analytics_ids", {})
+        ips = OSM.get("ips", {}); ranges = {}
+        for d_, v in ips.items():
+            for ip in v: ranges.setdefault(".".join(ip.split(".")[:3]), set()).add(ABBR.get(d_, d_))
+        rows = []
+        def row(sev, what, ev): rows.append(f'<div class="alertrow"><span class="sev {sev}">{"HIGH" if sev=="high" else "MED" if sev=="med" else "LOW"}</span><div><b>{e(what)}</b><div class="stmeta">{e(ev)}</div></div></div>')
+        if recip: row("high", f"{len(recip)} reciprocal link pair(s) between owned sites", " · ".join(f"{ABBR.get(a,a)} ↔ {ABBR.get(b,b)} ({pairs[(a,b)]}+{pairs[(b,a)]} links)" for a, b in recip))
+        one = [(a, b, n) for (a, b), n in pairs.items() if (b, a) not in pairs]
+        if one: row("med", f"{len(one)} one-way link(s) between owned sites", " · ".join(f"{ABBR.get(a,a)} → {ABBR.get(b,b)} ({n})" for a, b, n in sorted(one, key=lambda x: -x[2])[:6]))
+        if dp: row("high" if any(x["pairs"] >= 3 for x in dp) else "med", "near-duplicate pages across sites (Jaccard ≥ 0.5)", " · ".join(f'{ABBR.get(x["sites"][0])} / {ABBR.get(x["sites"][1])}: {x["pairs"]} page pair(s)' for x in dp))
+        if tp: row("med", f"{len(tp)} site pair(s) on the same template", " · ".join(f'{ABBR.get(t["sites"][0])} / {ABBR.get(t["sites"][1])} {t["class_jaccard"]:.2f}' for t in tp))
+        row("low" if not shared else "high", "shared analytics IDs: " + ("none" if not shared else ", ".join(shared)), f'{len(OSM.get("analytics_ids", {}))} of {len(ALL)} sites carry a GA4 tag; {len(ALL) - len(OSM.get("analytics_ids", {}))} have no analytics at all')
+        row("low", "hosting: all sites on Vercel anycast ranges", " · ".join(f'{k}.x: {", ".join(sorted(v))}' for k, v in sorted(ranges.items(), key=lambda kv: -len(kv[1]))[:4]))
+        row("low", "registrant / WHOIS", "not checked in this audit")
+        return "".join(rows) + f'<div class="stmeta" style="margin-top:8px">measured on {OSM.get("pages_fetched", "?")} live pages · re-measured every audit · evidence in seo-tools/daily/os_audit_measurements.json</div>'
+    def cannibal_html():
+        cs = (OSM or {}).get("cannibalisation_same_market", [])
+        if not OSM: return '<div class="empty">Not measured yet.</div>'
+        if not cs: return '<div class="empty">No same-market query has two owned sites in the top 50.</div>'
+        trs = ""
+        for c in cs[:30]:
+            owner = c["sites"][0]; best = max(c["sites"], key=lambda r: r[2])
+            note = "" if owner[0] == best[0] else f"{ABBR.get(best[0])} earns the impressions ({best[2]}) — it should own the term"
+            trs += (f'<tr><td>{e(c["query"])}</td><td>{e(c["market"])}</td><td>' + "<br>".join(f'<span class="dot s{ALL.index(s_)+1}"></span> {ABBR.get(s_)} #{p} · {i} impr · <span class="stmeta">{e(u.replace("https://","").replace("http://","")[:48])}</span>' for s_, p, i, u in c["sites"]) + f'</td><td class="stmeta">{e(note)}</td></tr>')
+        return (f'<div class="overflow"><table><thead><tr><th>query</th><th>market</th><th>owned sites in the top 50 (GSC, 28d)</th><th>decision</th></tr></thead><tbody>{trs}</tbody></table></div>')
+
     def build_rankings():
         by_q = {}
         for t in TASKS:
@@ -999,6 +1035,8 @@ document.querySelectorAll('.rkrow').forEach(function(tr){
                 f'<th class="sortable">Δ audit</th><th class="sortable">Δ 28d GSC</th><th class="sortable">GSC pos</th>'
                 f'<th class="sortable">vol/mo</th><th>intent</th><th>posture</th><th class="sortable">priority</th></tr></thead>'
                 f'<tbody>{rows}</tbody></table></div></div>'
+                f'<div class="card flush" style="margin-bottom:16px"><div class="chead"><h2>Cannibalisation — same market, two owned sites in the top 50</h2>'
+                f'<span class="stmeta">{len((OSM or {}).get("cannibalisation_same_market", []))} queries · Search Console real-user positions · one keyword, one page, one site per market</span></div>{cannibal_html()}</div>'
                 f'<div class="card flush"><div class="chead"><h2>Index footprints per site</h2>'
                 f'<span class="stmeta">DataForSEO top-100 (live) vs Semrush organic (owner-verified) — different crawlers, never merged</span></div>'
                 f'<div class="overflow"><table><thead><tr><th>site</th><th class="sortable">DFS top-100</th><th>trend</th>'
@@ -1134,7 +1172,8 @@ document.querySelectorAll('.rkrow').forEach(function(tr){
                 f'<th class="sortable">DFS ref.dom</th><th>DFS trend</th><th>velocity</th><th class="sortable">DFS spam</th></tr></thead>'
                 f'<tbody>{rows}</tbody></table></div></div>'
                 f'<div class="grid g2"><div class="card"><h2>Link risk</h2>{riskhtml}</div>'
-                f'<div class="card"><h2>Quality over quantity</h2><p class="narr">Placement counts are an execution log, '
+                f'<div class="card"><h2>Footprint risk register</h2>{footprint_html()}</div></div>'
+                f'<div class="grid g2" style="margin-top:16px"><div class="card"><h2>Quality over quantity</h2><p class="narr">Placement counts are an execution log, '
                 f'not an SEO KPI — what moves rankings is referring domains that Google trusts, pointed at strategic pages. '
                 f'The operational checklist (platform-by-platform) lives in the '
                 f'<a href="links">link execution workflow</a>; anchor distribution and new/lost domain detail can be pulled '

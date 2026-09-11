@@ -1,0 +1,2043 @@
+{
+ "pages_fetched": 546,
+ "ips": {
+  "iptvesp.com": [
+   "216.150.1.1",
+   "216.150.1.65"
+  ],
+  "primeiptv-france.com": [
+   "216.150.1.65",
+   "216.150.16.193"
+  ],
+  "iptvned.com": [
+   "216.150.1.129",
+   "216.150.1.193"
+  ],
+  "iptvpix.com": [
+   "216.150.1.129",
+   "216.150.16.193"
+  ],
+  "smarters-live.com": [
+   "216.198.79.1"
+  ],
+  "iptvshqiptar.com": [
+   "216.150.1.129",
+   "216.150.16.193"
+  ],
+  "smartersprofrance.fr": [
+   "216.150.1.129",
+   "216.150.1.193"
+  ],
+  "iptvfranceofficiel.fr": [
+   "216.150.1.65",
+   "216.150.16.193"
+  ],
+  "abonnementiptvofficiel.com": [
+   "216.150.1.65",
+   "216.150.16.193"
+  ],
+  "iptvsegura.com": [
+   "216.150.1.129",
+   "216.150.16.129"
+  ],
+  "rodaktv.com": [
+   "216.150.1.1",
+   "216.150.1.65"
+  ]
+ },
+ "analytics_ids": {
+  "iptvesp.com": [
+   "G-VVXEXJH3DG"
+  ],
+  "primeiptv-france.com": [
+   "G-DYFF4H8X6N"
+  ],
+  "smarters-live.com": [
+   "G-EDM0L2RYCT"
+  ],
+  "iptvfranceofficiel.fr": [
+   "G-KRXS9T07H4"
+  ]
+ },
+ "shared_analytics_ids": {},
+ "cross_links": [
+  {
+   "from": "smarters-live.com",
+   "to": "primeiptv-france.com",
+   "count": 11
+  },
+  {
+   "from": "primeiptv-france.com",
+   "to": "iptvfranceofficiel.fr",
+   "count": 4
+  },
+  {
+   "from": "abonnementiptvofficiel.com",
+   "to": "smartersprofrance.fr",
+   "count": 3
+  },
+  {
+   "from": "iptvpix.com",
+   "to": "primeiptv-france.com",
+   "count": 2
+  },
+  {
+   "from": "smartersprofrance.fr",
+   "to": "iptvpix.com",
+   "count": 2
+  },
+  {
+   "from": "iptvfranceofficiel.fr",
+   "to": "abonnementiptvofficiel.com",
+   "count": 2
+  },
+  {
+   "from": "primeiptv-france.com",
+   "to": "smartersprofrance.fr",
+   "count": 1
+  },
+  {
+   "from": "iptvpix.com",
+   "to": "iptvfranceofficiel.fr",
+   "count": 1
+  },
+  {
+   "from": "iptvpix.com",
+   "to": "smartersprofrance.fr",
+   "count": 1
+  },
+  {
+   "from": "smartersprofrance.fr",
+   "to": "abonnementiptvofficiel.com",
+   "count": 1
+  },
+  {
+   "from": "iptvfranceofficiel.fr",
+   "to": "smartersprofrance.fr",
+   "count": 1
+  },
+  {
+   "from": "abonnementiptvofficiel.com",
+   "to": "iptvfranceofficiel.fr",
+   "count": 1
+  }
+ ],
+ "template_similarity": [
+  {
+   "sites": [
+    "iptvned.com",
+    "iptvpix.com"
+   ],
+   "class_jaccard": 0.95
+  },
+  {
+   "sites": [
+    "iptvfranceofficiel.fr",
+    "abonnementiptvofficiel.com"
+   ],
+   "class_jaccard": 0.93
+  },
+  {
+   "sites": [
+    "iptvpix.com",
+    "iptvshqiptar.com"
+   ],
+   "class_jaccard": 0.69
+  },
+  {
+   "sites": [
+    "iptvned.com",
+    "iptvshqiptar.com"
+   ],
+   "class_jaccard": 0.68
+  },
+  {
+   "sites": [
+    "iptvesp.com",
+    "iptvpix.com"
+   ],
+   "class_jaccard": 0.34
+  },
+  {
+   "sites": [
+    "iptvesp.com",
+    "iptvned.com"
+   ],
+   "class_jaccard": 0.34
+  },
+  {
+   "sites": [
+    "iptvesp.com",
+    "iptvshqiptar.com"
+   ],
+   "class_jaccard": 0.33
+  },
+  {
+   "sites": [
+    "primeiptv-france.com",
+    "smarters-live.com"
+   ],
+   "class_jaccard": 0.32
+  },
+  {
+   "sites": [
+    "iptvpix.com",
+    "abonnementiptvofficiel.com"
+   ],
+   "class_jaccard": 0.29
+  },
+  {
+   "sites": [
+    "iptvned.com",
+    "abonnementiptvofficiel.com"
+   ],
+   "class_jaccard": 0.29
+  },
+  {
+   "sites": [
+    "iptvshqiptar.com",
+    "abonnementiptvofficiel.com"
+   ],
+   "class_jaccard": 0.28
+  },
+  {
+   "sites": [
+    "iptvpix.com",
+    "iptvfranceofficiel.fr"
+   ],
+   "class_jaccard": 0.28
+  },
+  {
+   "sites": [
+    "iptvned.com",
+    "iptvfranceofficiel.fr"
+   ],
+   "class_jaccard": 0.28
+  },
+  {
+   "sites": [
+    "iptvshqiptar.com",
+    "iptvfranceofficiel.fr"
+   ],
+   "class_jaccard": 0.26
+  },
+  {
+   "sites": [
+    "primeiptv-france.com",
+    "abonnementiptvofficiel.com"
+   ],
+   "class_jaccard": 0.25
+  },
+  {
+   "sites": [
+    "iptvfranceofficiel.fr",
+    "rodaktv.com"
+   ],
+   "class_jaccard": 0.25
+  },
+  {
+   "sites": [
+    "iptvesp.com",
+    "abonnementiptvofficiel.com"
+   ],
+   "class_jaccard": 0.25
+  },
+  {
+   "sites": [
+    "abonnementiptvofficiel.com",
+    "rodaktv.com"
+   ],
+   "class_jaccard": 0.25
+  },
+  {
+   "sites": [
+    "primeiptv-france.com",
+    "iptvfranceofficiel.fr"
+   ],
+   "class_jaccard": 0.24
+  },
+  {
+   "sites": [
+    "iptvesp.com",
+    "iptvfranceofficiel.fr"
+   ],
+   "class_jaccard": 0.24
+  },
+  {
+   "sites": [
+    "iptvesp.com",
+    "smarters-live.com"
+   ],
+   "class_jaccard": 0.23
+  },
+  {
+   "sites": [
+    "iptvshqiptar.com",
+    "rodaktv.com"
+   ],
+   "class_jaccard": 0.22
+  },
+  {
+   "sites": [
+    "iptvesp.com",
+    "iptvsegura.com"
+   ],
+   "class_jaccard": 0.22
+  },
+  {
+   "sites": [
+    "primeiptv-france.com",
+    "iptvpix.com"
+   ],
+   "class_jaccard": 0.21
+  },
+  {
+   "sites": [
+    "primeiptv-france.com",
+    "iptvned.com"
+   ],
+   "class_jaccard": 0.21
+  },
+  {
+   "sites": [
+    "iptvshqiptar.com",
+    "iptvsegura.com"
+   ],
+   "class_jaccard": 0.21
+  },
+  {
+   "sites": [
+    "iptvsegura.com",
+    "rodaktv.com"
+   ],
+   "class_jaccard": 0.21
+  },
+  {
+   "sites": [
+    "iptvpix.com",
+    "rodaktv.com"
+   ],
+   "class_jaccard": 0.21
+  },
+  {
+   "sites": [
+    "iptvned.com",
+    "rodaktv.com"
+   ],
+   "class_jaccard": 0.21
+  },
+  {
+   "sites": [
+    "smarters-live.com",
+    "abonnementiptvofficiel.com"
+   ],
+   "class_jaccard": 0.2
+  },
+  {
+   "sites": [
+    "iptvesp.com",
+    "rodaktv.com"
+   ],
+   "class_jaccard": 0.2
+  },
+  {
+   "sites": [
+    "iptvesp.com",
+    "primeiptv-france.com"
+   ],
+   "class_jaccard": 0.2
+  },
+  {
+   "sites": [
+    "smarters-live.com",
+    "iptvfranceofficiel.fr"
+   ],
+   "class_jaccard": 0.19
+  },
+  {
+   "sites": [
+    "iptvpix.com",
+    "smarters-live.com"
+   ],
+   "class_jaccard": 0.19
+  },
+  {
+   "sites": [
+    "iptvpix.com",
+    "iptvsegura.com"
+   ],
+   "class_jaccard": 0.19
+  },
+  {
+   "sites": [
+    "iptvned.com",
+    "smarters-live.com"
+   ],
+   "class_jaccard": 0.19
+  },
+  {
+   "sites": [
+    "iptvned.com",
+    "iptvsegura.com"
+   ],
+   "class_jaccard": 0.19
+  },
+  {
+   "sites": [
+    "iptvfranceofficiel.fr",
+    "iptvsegura.com"
+   ],
+   "class_jaccard": 0.19
+  },
+  {
+   "sites": [
+    "primeiptv-france.com",
+    "iptvshqiptar.com"
+   ],
+   "class_jaccard": 0.18
+  },
+  {
+   "sites": [
+    "abonnementiptvofficiel.com",
+    "iptvsegura.com"
+   ],
+   "class_jaccard": 0.18
+  },
+  {
+   "sites": [
+    "smarters-live.com",
+    "iptvshqiptar.com"
+   ],
+   "class_jaccard": 0.17
+  },
+  {
+   "sites": [
+    "primeiptv-france.com",
+    "rodaktv.com"
+   ],
+   "class_jaccard": 0.16
+  },
+  {
+   "sites": [
+    "smarters-live.com",
+    "iptvsegura.com"
+   ],
+   "class_jaccard": 0.15
+  },
+  {
+   "sites": [
+    "smarters-live.com",
+    "rodaktv.com"
+   ],
+   "class_jaccard": 0.14
+  },
+  {
+   "sites": [
+    "primeiptv-france.com",
+    "iptvsegura.com"
+   ],
+   "class_jaccard": 0.14
+  },
+  {
+   "sites": [
+    "smartersprofrance.fr",
+    "rodaktv.com"
+   ],
+   "class_jaccard": 0.03
+  },
+  {
+   "sites": [
+    "smartersprofrance.fr",
+    "iptvsegura.com"
+   ],
+   "class_jaccard": 0.02
+  },
+  {
+   "sites": [
+    "smartersprofrance.fr",
+    "iptvfranceofficiel.fr"
+   ],
+   "class_jaccard": 0.02
+  },
+  {
+   "sites": [
+    "smartersprofrance.fr",
+    "abonnementiptvofficiel.com"
+   ],
+   "class_jaccard": 0.02
+  },
+  {
+   "sites": [
+    "iptvshqiptar.com",
+    "smartersprofrance.fr"
+   ],
+   "class_jaccard": 0.01
+  },
+  {
+   "sites": [
+    "iptvpix.com",
+    "smartersprofrance.fr"
+   ],
+   "class_jaccard": 0.01
+  },
+  {
+   "sites": [
+    "iptvned.com",
+    "smartersprofrance.fr"
+   ],
+   "class_jaccard": 0.01
+  },
+  {
+   "sites": [
+    "iptvesp.com",
+    "smartersprofrance.fr"
+   ],
+   "class_jaccard": 0.01
+  },
+  {
+   "sites": [
+    "smarters-live.com",
+    "smartersprofrance.fr"
+   ],
+   "class_jaccard": 0.0
+  },
+  {
+   "sites": [
+    "primeiptv-france.com",
+    "smartersprofrance.fr"
+   ],
+   "class_jaccard": 0.0
+  }
+ ],
+ "near_duplicate_best_pair": [
+  {
+   "sites": [
+    "iptvfranceofficiel.fr",
+    "abonnementiptvofficiel.com"
+   ],
+   "jaccard": 0.92,
+   "page_a": "https://iptvfranceofficiel.fr/politique-de-remboursement",
+   "page_b": "https://abonnementiptvofficiel.com/politique-de-remboursement"
+  },
+  {
+   "sites": [
+    "smartersprofrance.fr",
+    "iptvfranceofficiel.fr"
+   ],
+   "jaccard": 0.39,
+   "page_a": "https://www.smartersprofrance.fr/a-propos",
+   "page_b": "https://iptvfranceofficiel.fr/a-propos"
+  },
+  {
+   "sites": [
+    "smartersprofrance.fr",
+    "abonnementiptvofficiel.com"
+   ],
+   "jaccard": 0.37,
+   "page_a": "https://www.smartersprofrance.fr/a-propos",
+   "page_b": "https://abonnementiptvofficiel.com/a-propos"
+  }
+ ],
+ "near_duplicate_pairs_ge_0_5": [
+  {
+   "sites": [
+    "iptvfranceofficiel.fr",
+    "abonnementiptvofficiel.com"
+   ],
+   "pairs": 5
+  }
+ ],
+ "cannibalisation": [
+  {
+   "query": "iptv telegram",
+   "sites": [
+    [
+     "iptvesp.com",
+     3.2,
+     538,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     16,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ]
+   ]
+  },
+  {
+   "query": "listas iptv telegram",
+   "sites": [
+    [
+     "iptvsegura.com",
+     4,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ],
+    [
+     "iptvesp.com",
+     4.1,
+     217,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ]
+   ]
+  },
+  {
+   "query": "telegram iptv",
+   "sites": [
+    [
+     "iptvesp.com",
+     4.4,
+     189,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     16,
+     3,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ]
+   ]
+  },
+  {
+   "query": "ip tv",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2.4,
+     7,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "iptvned.com",
+     10.2,
+     13,
+     "https://iptvned.com/iptv-legaal-nederland"
+    ],
+    [
+     "primeiptv-france.com",
+     37.8,
+     101,
+     "https://primeiptv-france.com/guides/qu-est-ce-que-l-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "abonnement iptv 12 mois",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     5,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     30.3,
+     98,
+     "https://primeiptv-france.com/abonnement-12-mois"
+    ]
+   ]
+  },
+  {
+   "query": "telegram iptv españa",
+   "sites": [
+    [
+     "iptvesp.com",
+     1.6,
+     87,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     20,
+     1,
+     "http://iptvsegura.com/"
+    ]
+   ]
+  },
+  {
+   "query": "iptv iphone",
+   "sites": [
+    [
+     "primeiptv-france.com",
+     17,
+     1,
+     "https://primeiptv-france.com/installation/iphone-ios"
+    ],
+    [
+     "iptvesp.com",
+     23.6,
+     57,
+     "https://iptvesp.com/blog/iptv-iphone-ipad-espana"
+    ],
+    [
+     "iptvsegura.com",
+     41.5,
+     8,
+     "https://iptvsegura.com/guias/configurar-iptv-apple-tv-iphone"
+    ]
+   ]
+  },
+  {
+   "query": "iptv pro",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     3,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     48.8,
+     61,
+     "https://www.smartersprofrance.fr/"
+    ]
+   ]
+  },
+  {
+   "query": "iptv app fire tv",
+   "sites": [
+    [
+     "iptvned.com",
+     9.0,
+     53,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     48.5,
+     6,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  },
+  {
+   "query": "iptv telegram españa",
+   "sites": [
+    [
+     "iptvesp.com",
+     1.7,
+     55,
+     "https://iptvesp.com/blog/telegram-listas-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     2,
+     1,
+     "https://iptvsegura.com/guias/estafas-iptv-como-evitarlas"
+    ]
+   ]
+  },
+  {
+   "query": "m3u iptv telegram",
+   "sites": [
+    [
+     "iptvsegura.com",
+     3,
+     1,
+     "https://iptvsegura.com/"
+    ],
+    [
+     "iptvesp.com",
+     5.3,
+     41,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ]
+   ]
+  },
+  {
+   "query": "iptv",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2.4,
+     22,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     11,
+     2,
+     "https://www.smartersprofrance.fr/tutoriels"
+    ],
+    [
+     "iptvesp.com",
+     16.2,
+     13,
+     "https://iptvesp.com/blog/aplicacion-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "iptv fire tv stick",
+   "sites": [
+    [
+     "iptvned.com",
+     7.3,
+     9,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     43.9,
+     28,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  },
+  {
+   "query": "iptv stick",
+   "sites": [
+    [
+     "iptvned.com",
+     11.6,
+     33,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     42,
+     1,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  },
+  {
+   "query": "smart iptv",
+   "sites": [
+    [
+     "rodaktv.com",
+     11,
+     1,
+     "https://rodaktv.com/blog/smart-iptv-aktywacja"
+    ],
+    [
+     "iptvesp.com",
+     11.4,
+     30,
+     "https://iptvesp.com/blog/smart-iptv-espana"
+    ]
+   ]
+  },
+  {
+   "query": "iptv fire tv",
+   "sites": [
+    [
+     "iptvned.com",
+     4.7,
+     3,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     44.2,
+     25,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  },
+  {
+   "query": "iptv m3u",
+   "sites": [
+    [
+     "iptvsegura.com",
+     25.6,
+     27,
+     "https://iptvsegura.com/guias/que-es-lista-m3u"
+    ],
+    [
+     "rodaktv.com",
+     44,
+     1,
+     "https://rodaktv.com/blog/lista-m3u-polska"
+    ]
+   ]
+  },
+  {
+   "query": "listas iptv gratis telegram",
+   "sites": [
+    [
+     "iptvesp.com",
+     5.6,
+     23,
+     "https://iptvesp.com/blog/telegram-listas-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     6,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ]
+   ]
+  },
+  {
+   "query": "m3u iptv",
+   "sites": [
+    [
+     "iptvsegura.com",
+     25.5,
+     18,
+     "https://iptvsegura.com/guias/que-es-lista-m3u"
+    ],
+    [
+     "rodaktv.com",
+     37.8,
+     5,
+     "https://rodaktv.com/blog/lista-m3u-polska"
+    ]
+   ]
+  },
+  {
+   "query": "iptv abonnement 12 mois",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     3,
+     2,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     43.9,
+     18,
+     "https://primeiptv-france.com/abonnement-12-mois"
+    ]
+   ]
+  },
+  {
+   "query": "mejor iptv españa 2026",
+   "sites": [
+    [
+     "iptvesp.com",
+     34.5,
+     16,
+     "https://iptvesp.com/blog/guia-elegir-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     39,
+     2,
+     "https://iptvsegura.com/guias/mejor-iptv-segura-espana-2026"
+    ]
+   ]
+  },
+  {
+   "query": "app iptv",
+   "sites": [
+    [
+     "iptvesp.com",
+     15.1,
+     13,
+     "https://iptvesp.com/blog/aplicacion-iptv"
+    ],
+    [
+     "iptvned.com",
+     43,
+     3,
+     "https://iptvned.com/blog/iptv-app"
+    ],
+    [
+     "primeiptv-france.com",
+     45,
+     2,
+     "https://primeiptv-france.com/application"
+    ]
+   ]
+  },
+  {
+   "query": "test iptv",
+   "sites": [
+    [
+     "iptvesp.com",
+     13.2,
+     12,
+     "https://iptvesp.com/blog/prueba-iptv-gratis"
+    ],
+    [
+     "rodaktv.com",
+     24.5,
+     4,
+     "https://rodaktv.com/test-iptv"
+    ],
+    [
+     "iptvfranceofficiel.fr",
+     38,
+     1,
+     "https://iptvfranceofficiel.fr/test-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "iptv prix",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     30.5,
+     15,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     44,
+     1,
+     "https://primeiptv-france.com/iptv/algerie"
+    ]
+   ]
+  },
+  {
+   "query": "iptv france",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2.4,
+     10,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     14.3,
+     7,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "xtream codes",
+   "sites": [
+    [
+     "rodaktv.com",
+     2,
+     1,
+     "https://rodaktv.com/blog/kod-iptv"
+    ],
+    [
+     "iptvsegura.com",
+     46.5,
+     14,
+     "https://iptvsegura.com/guias/xtream-codes-que-es"
+    ]
+   ]
+  },
+  {
+   "query": "iptv m3u telegram",
+   "sites": [
+    [
+     "iptvsegura.com",
+     2,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ],
+    [
+     "iptvesp.com",
+     6.3,
+     13,
+     "https://iptvesp.com/blog/telegram-listas-iptv-espana"
+    ]
+   ]
+  },
+  {
+   "query": "iptv fire stick",
+   "sites": [
+    [
+     "iptvned.com",
+     6.6,
+     11,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     48.5,
+     2,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  },
+  {
+   "query": "grupo iptv telegram",
+   "sites": [
+    [
+     "iptvsegura.com",
+     1,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ],
+    [
+     "iptvesp.com",
+     4.6,
+     11,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ]
+   ]
+  },
+  {
+   "query": "telegram m3u",
+   "sites": [
+    [
+     "iptvesp.com",
+     5.9,
+     11,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     25,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ]
+   ]
+  },
+  {
+   "query": "firestick iptv",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     3,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "iptvned.com",
+     9,
+     9,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ]
+   ]
+  },
+  {
+   "query": "iptv app",
+   "sites": [
+    [
+     "iptvned.com",
+     44.9,
+     8,
+     "https://iptvned.com/blog/iptv-app"
+    ],
+    [
+     "primeiptv-france.com",
+     48,
+     1,
+     "https://primeiptv-france.com/application"
+    ]
+   ]
+  },
+  {
+   "query": "iptv en apple tv",
+   "sites": [
+    [
+     "primeiptv-france.com",
+     38,
+     1,
+     "https://primeiptv-france.com/installation/apple-tv"
+    ],
+    [
+     "iptvsegura.com",
+     49.2,
+     8,
+     "https://iptvsegura.com/guias/configurar-iptv-apple-tv-iphone"
+    ]
+   ]
+  },
+  {
+   "query": "fire tv stick iptv",
+   "sites": [
+    [
+     "iptvned.com",
+     4,
+     5,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     47.2,
+     4,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  },
+  {
+   "query": "amazon fire tv stick iptv",
+   "sites": [
+    [
+     "smartersprofrance.fr",
+     7,
+     1,
+     "https://www.smartersprofrance.fr/articles/installer-iptv-smarters-pro-fire-tv-stick"
+    ],
+    [
+     "iptvned.com",
+     7.2,
+     5,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     45,
+     1,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  },
+  {
+   "query": "iptv apps",
+   "sites": [
+    [
+     "iptvned.com",
+     43.3,
+     6,
+     "https://iptvned.com/blog/iptv-app"
+    ],
+    [
+     "smarters-live.com",
+     44,
+     1,
+     "https://www.smarters-live.com/application-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "iptv abonnement",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     47.7,
+     6,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "fournisseur iptv",
+   "sites": [
+    [
+     "primeiptv-france.com",
+     2,
+     2,
+     "https://primeiptv-france.com/iptv/algerie"
+    ],
+    [
+     "abonnementiptvofficiel.com",
+     2,
+     2,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     19,
+     1,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "ip tv abonnement",
+   "sites": [
+    [
+     "smartersprofrance.fr",
+     2.5,
+     4,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ],
+    [
+     "iptvned.com",
+     6,
+     1,
+     "https://iptvned.com/iptv-legaal-nederland"
+    ]
+   ]
+  },
+  {
+   "query": "iptv amazon fire stick",
+   "sites": [
+    [
+     "iptvned.com",
+     8.2,
+     4,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     45,
+     1,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  },
+  {
+   "query": "abonnement iptv 12 mois amazon",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2,
+     2,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     41,
+     2,
+     "https://primeiptv-france.com/abonnement-12-mois"
+    ]
+   ]
+  },
+  {
+   "query": "ip tv app",
+   "sites": [
+    [
+     "iptvned.com",
+     25,
+     2,
+     "https://iptvned.com/blog/iptv-app"
+    ],
+    [
+     "primeiptv-france.com",
+     40,
+     1,
+     "https://primeiptv-france.com/application"
+    ],
+    [
+     "smarters-live.com",
+     42,
+     1,
+     "https://www.smarters-live.com/application-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "iptv abonnement 12 mois prix",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     3,
+     2,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     31.5,
+     2,
+     "https://primeiptv-france.com/abonnement-12-mois"
+    ]
+   ]
+  },
+  {
+   "query": "iptv abonnement prix",
+   "sites": [
+    [
+     "primeiptv-france.com",
+     30,
+     1,
+     "https://primeiptv-france.com/tarifs"
+    ],
+    [
+     "smartersprofrance.fr",
+     39,
+     3,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "abonnement iptv box",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     10,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     39,
+     3,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "amazon fire stick iptv",
+   "sites": [
+    [
+     "iptvned.com",
+     6,
+     2,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     48,
+     1,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  },
+  {
+   "query": "iptv app fire stick",
+   "sites": [
+    [
+     "iptvned.com",
+     11,
+     2,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     43,
+     1,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  },
+  {
+   "query": "iptv installation",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     38.5,
+     2,
+     "https://abonnementiptvofficiel.com/guide-installation"
+    ],
+    [
+     "smarters-live.com",
+     50,
+     1,
+     "https://www.smarters-live.com/installation"
+    ]
+   ]
+  },
+  {
+   "query": "boitier iptv abonnement",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     8.5,
+     2,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     50,
+     1,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "tivimate",
+   "sites": [
+    [
+     "iptvsegura.com",
+     30.5,
+     2,
+     "https://iptvsegura.com/guias/tivimate-espana"
+    ],
+    [
+     "rodaktv.com",
+     44,
+     1,
+     "https://rodaktv.com/blog/tivimate-jak-skonfigurowac"
+    ]
+   ]
+  },
+  {
+   "query": "iptv par satellite",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     4,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     50,
+     1,
+     "https://primeiptv-france.com/guides/qu-est-ce-que-l-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "fire tv stick",
+   "sites": [
+    [
+     "smartersprofrance.fr",
+     2,
+     1,
+     "https://www.smartersprofrance.fr/articles/installer-iptv-smarters-pro-fire-tv-stick"
+    ],
+    [
+     "iptvned.com",
+     6,
+     1,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ]
+   ]
+  },
+  {
+   "query": "iptv on fire tv stick",
+   "sites": [
+    [
+     "iptvned.com",
+     5,
+     1,
+     "https://iptvned.com/blog/iptv-firestick-nederland"
+    ],
+    [
+     "iptvsegura.com",
+     47,
+     1,
+     "https://iptvsegura.com/guias/iptv-fire-tv-stick"
+    ]
+   ]
+  }
+ ],
+ "cannibalisation_same_market": [
+  {
+   "query": "iptv telegram",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvesp.com",
+     3.2,
+     538,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     16,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ]
+   ]
+  },
+  {
+   "query": "listas iptv telegram",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvsegura.com",
+     4,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ],
+    [
+     "iptvesp.com",
+     4.1,
+     217,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ]
+   ]
+  },
+  {
+   "query": "telegram iptv",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvesp.com",
+     4.4,
+     189,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     16,
+     3,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ]
+   ]
+  },
+  {
+   "query": "ip tv",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2.4,
+     7,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     37.8,
+     101,
+     "https://primeiptv-france.com/guides/qu-est-ce-que-l-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "abonnement iptv 12 mois",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     5,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     30.3,
+     98,
+     "https://primeiptv-france.com/abonnement-12-mois"
+    ]
+   ]
+  },
+  {
+   "query": "telegram iptv españa",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvesp.com",
+     1.6,
+     87,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     20,
+     1,
+     "http://iptvsegura.com/"
+    ]
+   ]
+  },
+  {
+   "query": "iptv iphone",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvesp.com",
+     23.6,
+     57,
+     "https://iptvesp.com/blog/iptv-iphone-ipad-espana"
+    ],
+    [
+     "iptvsegura.com",
+     41.5,
+     8,
+     "https://iptvsegura.com/guias/configurar-iptv-apple-tv-iphone"
+    ]
+   ]
+  },
+  {
+   "query": "iptv pro",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     3,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     48.8,
+     61,
+     "https://www.smartersprofrance.fr/"
+    ]
+   ]
+  },
+  {
+   "query": "iptv telegram españa",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvesp.com",
+     1.7,
+     55,
+     "https://iptvesp.com/blog/telegram-listas-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     2,
+     1,
+     "https://iptvsegura.com/guias/estafas-iptv-como-evitarlas"
+    ]
+   ]
+  },
+  {
+   "query": "m3u iptv telegram",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvsegura.com",
+     3,
+     1,
+     "https://iptvsegura.com/"
+    ],
+    [
+     "iptvesp.com",
+     5.3,
+     41,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ]
+   ]
+  },
+  {
+   "query": "iptv",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2.4,
+     22,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     11,
+     2,
+     "https://www.smartersprofrance.fr/tutoriels"
+    ]
+   ]
+  },
+  {
+   "query": "listas iptv gratis telegram",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvesp.com",
+     5.6,
+     23,
+     "https://iptvesp.com/blog/telegram-listas-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     6,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ]
+   ]
+  },
+  {
+   "query": "iptv abonnement 12 mois",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     3,
+     2,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     43.9,
+     18,
+     "https://primeiptv-france.com/abonnement-12-mois"
+    ]
+   ]
+  },
+  {
+   "query": "mejor iptv españa 2026",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvesp.com",
+     34.5,
+     16,
+     "https://iptvesp.com/blog/guia-elegir-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     39,
+     2,
+     "https://iptvsegura.com/guias/mejor-iptv-segura-espana-2026"
+    ]
+   ]
+  },
+  {
+   "query": "iptv prix",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     30.5,
+     15,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     44,
+     1,
+     "https://primeiptv-france.com/iptv/algerie"
+    ]
+   ]
+  },
+  {
+   "query": "iptv france",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2.4,
+     10,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     14.3,
+     7,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "iptv m3u telegram",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvsegura.com",
+     2,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ],
+    [
+     "iptvesp.com",
+     6.3,
+     13,
+     "https://iptvesp.com/blog/telegram-listas-iptv-espana"
+    ]
+   ]
+  },
+  {
+   "query": "grupo iptv telegram",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvsegura.com",
+     1,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ],
+    [
+     "iptvesp.com",
+     4.6,
+     11,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ]
+   ]
+  },
+  {
+   "query": "telegram m3u",
+   "market": "ES",
+   "sites": [
+    [
+     "iptvesp.com",
+     5.9,
+     11,
+     "https://iptvesp.com/blog/listas-telegram-iptv-espana"
+    ],
+    [
+     "iptvsegura.com",
+     25,
+     1,
+     "https://iptvsegura.com/guias/iptv-telegram-riesgos"
+    ]
+   ]
+  },
+  {
+   "query": "iptv abonnement",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     47.7,
+     6,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "fournisseur iptv",
+   "market": "FR",
+   "sites": [
+    [
+     "primeiptv-france.com",
+     2,
+     2,
+     "https://primeiptv-france.com/iptv/algerie"
+    ],
+    [
+     "abonnementiptvofficiel.com",
+     2,
+     2,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     19,
+     1,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "abonnement iptv 12 mois amazon",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     2,
+     2,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     41,
+     2,
+     "https://primeiptv-france.com/abonnement-12-mois"
+    ]
+   ]
+  },
+  {
+   "query": "iptv abonnement 12 mois prix",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     3,
+     2,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     31.5,
+     2,
+     "https://primeiptv-france.com/abonnement-12-mois"
+    ]
+   ]
+  },
+  {
+   "query": "iptv abonnement prix",
+   "market": "FR",
+   "sites": [
+    [
+     "primeiptv-france.com",
+     30,
+     1,
+     "https://primeiptv-france.com/tarifs"
+    ],
+    [
+     "smartersprofrance.fr",
+     39,
+     3,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "abonnement iptv box",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     10,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     39,
+     3,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "iptv installation",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     38.5,
+     2,
+     "https://abonnementiptvofficiel.com/guide-installation"
+    ],
+    [
+     "smarters-live.com",
+     50,
+     1,
+     "https://www.smarters-live.com/installation"
+    ]
+   ]
+  },
+  {
+   "query": "boitier iptv abonnement",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     8.5,
+     2,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "smartersprofrance.fr",
+     50,
+     1,
+     "https://www.smartersprofrance.fr/abonnement-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "ip tv app",
+   "market": "FR",
+   "sites": [
+    [
+     "primeiptv-france.com",
+     40,
+     1,
+     "https://primeiptv-france.com/application"
+    ],
+    [
+     "smarters-live.com",
+     42,
+     1,
+     "https://www.smarters-live.com/application-iptv"
+    ]
+   ]
+  },
+  {
+   "query": "iptv par satellite",
+   "market": "FR",
+   "sites": [
+    [
+     "abonnementiptvofficiel.com",
+     4,
+     1,
+     "https://abonnementiptvofficiel.com/boitier-iptv"
+    ],
+    [
+     "primeiptv-france.com",
+     50,
+     1,
+     "https://primeiptv-france.com/guides/qu-est-ce-que-l-iptv"
+    ]
+   ]
+  }
+ ]
+}

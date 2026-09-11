@@ -54,6 +54,7 @@ python3 fetch_task_state.py            # owner's synced ticks from Firestore →
 python3 build_findings.py
 python3 build_content_kw.py && python3 build_content.py
 python3 history.py
+python3 os_measure.py                  # cross-site duplication, footprint, cannibalisation → os_audit_measurements.json
 DASH_STAMP="$(date -u '+%Y-%m-%d %H:%M UTC')" python3 generate_v3.py
 ```
 

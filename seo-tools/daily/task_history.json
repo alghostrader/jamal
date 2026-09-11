@@ -771,22 +771,6 @@
    "outcome": "AWAITING VERIFICATION"
   },
   {
-   "id": "b443b33f42",
-   "kind": "Technical fix",
-   "site": "",
-   "query": "",
-   "page": "",
-   "what": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: afrekenen, afrekenen, afrekenen, ",
-   "baseline": {
-    "probe_pos": null,
-    "gsc_pos": null,
-    "clicks28": 0
-   },
-   "completed": "2026-09-08",
-   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
-   "outcome": "VERIFIED"
-  },
-  {
    "id": "1b34668fff",
    "kind": "Striking distance",
    "site": "iptvesp.com",
@@ -808,6 +792,22 @@
     "clicks28": 55
    },
    "live_check": "keyword present + modified on/after 2026-09-10"
+  },
+  {
+   "id": "627326bf4c",
+   "kind": "Technical fix",
+   "site": "",
+   "query": "",
+   "page": "",
+   "what": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: checkout, checkout, checkout, che",
+   "baseline": {
+    "probe_pos": null,
+    "gsc_pos": null,
+    "clicks28": 0
+   },
+   "completed": "2026-09-08",
+   "how": "marked done by the owner (synced from the dashboard) \u00b7 defect gone from this audit's crawl",
+   "outcome": "VERIFIED"
   }
  ]
 }
