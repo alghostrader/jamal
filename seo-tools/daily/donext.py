@@ -312,7 +312,8 @@ def build_donext(G, C):
     # promoted-from-monitor candidates rendered hidden (state decides visibility, like Today did)
     _in_do = {x["id"] for x in do_models}
     next_models = [m for m in next_models if m["id"] not in _in_do]
-    promo_models = next_models + [m for m in (model(t) for t in T_MONITOR[:12] if t["id"] not in _in_do) if m]
+    # hidden promotable cards: the top 25 of Next + top 12 of Monitor (keeps the page light; the Next list itself shows every deferred task)
+    promo_models = next_models[:25] + [m for m in (model(t) for t in T_MONITOR[:12] if t["id"] not in _in_do) if m]
 
     # ─── Needs Jamal ───
     needs = []

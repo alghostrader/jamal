@@ -955,12 +955,12 @@
    "live_check": "no thin pages left in the crawl"
   },
   {
-   "id": "b443b33f42",
+   "id": "f6e1c07475",
    "kind": "Technical fix",
    "site": "",
    "query": "",
    "page": "",
-   "what": "FIX: 1. THIN PAGES (P2). 6 page(s) under 300 words: afrekenen, afrekenen, afrekenen, ",
+   "what": "FIX: 1. THIN PAGES (P2). 5 page(s) under 300 words: checkout, checkout, checkout, che",
    "baseline": {
     "probe_pos": null,
     "gsc_pos": null,
